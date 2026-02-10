@@ -1,0 +1,15 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{print.module_tree}
+\alias{print.module_tree}
+\title{Print Module Tree}
+\usage{
+\method{print}{module_tree}(x, ...)
+}
+\arguments{
+\item{x}{A module_tree from discover_modules()}
+
+\item{...}{Ignored}
+}
+\description{
+Print Module Tree
+}

@@ -1,0 +1,19 @@
+# R build artifacts
+src/*.o
+src/*.so
+src/*.dll
+src/Makevars
+*.Rcheck/
+*.tar.gz
+
+# RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store

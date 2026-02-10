@@ -1,0 +1,18 @@
+Package: Rtorch
+Type: Package
+Title: High-Performance R Bindings to libtorch
+Version: 0.1.0
+Authors@R: person("Troy", "Hernandez", role = c("aut", "cre"),
+                   email = "troy@cornball.ai")
+Description: Direct R bindings to libtorch with minimal overhead. Provides a
+    torch-compatible API that eliminates intermediate layers (Rcpp, lantern,
+    R7 dispatch) for maximum performance on tensor operations. Includes an
+    expression compiler that optimizes R torch code into fused SIMD kernels.
+License: MIT + file LICENSE
+URL: https://github.com/cornball-ai/Rtorch
+BugReports: https://github.com/cornball-ai/Rtorch/issues
+Depends: R (>= 4.1.0)
+Suggests: torch, tinytest, digest, ariel
+VignetteBuilder: simplermarkdown
+NeedsCompilation: yes
+SystemRequirements: libtorch (reuses installed torch package)

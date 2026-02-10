@@ -1,0 +1,13 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{nnf_relu}
+\alias{nnf_relu}
+\title{ReLU activation (functional)}
+\usage{
+nnf_relu(input)
+}
+\arguments{
+\item{input}{A torch_tensor.}
+}
+\description{
+ReLU activation (functional)
+}

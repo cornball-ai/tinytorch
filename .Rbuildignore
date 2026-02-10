@@ -1,0 +1,7 @@
+^CLAUDE\.md$
+^\.claude$
+^\.github$
+^bench$
+^LICENSE\.md$
+^.*\.Rproj$
+^\.Rproj\.user$

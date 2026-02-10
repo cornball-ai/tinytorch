@@ -1,0 +1,20 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{nn_linear}
+\alias{nn_linear}
+\title{Linear layer}
+\usage{
+nn_linear(in_features, out_features, bias = TRUE)
+}
+\arguments{
+\item{in_features}{Integer, size of each input sample.}
+
+\item{out_features}{Integer, size of each output sample.}
+
+\item{bias}{Logical, whether to include a bias term.}
+}
+\value{
+An nn_module instance.
+}
+\description{
+Linear layer
+}

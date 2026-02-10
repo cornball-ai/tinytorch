@@ -1,0 +1,20 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_tensor}
+\alias{torch_tensor}
+\title{Create a tensor from R data}
+\usage{
+torch_tensor(data, dtype = NULL, device = NULL)
+}
+\arguments{
+\item{data}{An R numeric, integer, or logical vector/matrix/array.}
+
+\item{dtype}{Optional torch dtype (e.g. torch_float).}
+
+\item{device}{Ignored for now (CPU only).}
+}
+\value{
+A torch_tensor object.
+}
+\description{
+Create a tensor from R data
+}

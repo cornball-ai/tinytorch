@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Find torch package installation
+TORCH_HOME=$(Rscript -e "cat(system.file(package='torch'))")
+
+if [ -z "$TORCH_HOME" ] || [ "$TORCH_HOME" = "" ]; then
+  echo "ERROR: torch package not installed. Install it first:"
+  echo '  install.packages("torch")'
+  exit 1
+fi
+
+TORCH_INCLUDE="${TORCH_HOME}/include"
+TORCH_LIB="${TORCH_HOME}/lib"
+
+if [ ! -d "$TORCH_INCLUDE/torch" ]; then
+  echo "ERROR: libtorch headers not found at $TORCH_INCLUDE/torch"
+  echo "Make sure torch is installed with libtorch binaries."
+  exit 1
+fi
+
+if [ ! -f "$TORCH_LIB/libtorch.so" ] && [ ! -f "$TORCH_LIB/libtorch.dylib" ]; then
+  echo "ERROR: libtorch shared library not found in $TORCH_LIB"
+  exit 1
+fi
+
+echo "Found libtorch:"
+echo "  Headers: $TORCH_INCLUDE"
+echo "  Libraries: $TORCH_LIB"
+
+# Generate Makevars from template
+sed \
+  -e "s|@TORCH_INCLUDE@|${TORCH_INCLUDE}|g" \
+  -e "s|@TORCH_LIB@|${TORCH_LIB}|g" \
+  src/Makevars.in > src/Makevars
+
+echo "Generated src/Makevars"
