@@ -288,30 +288,45 @@ extern "C" SEXP C_torch_linspace(SEXP start_sexp, SEXP end_sexp,
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_ones_like(SEXP self) {
+extern "C" SEXP C_torch_ones_like(SEXP self, SEXP dtype_sexp) {
     try {
         auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(at::ones_like(*a)));
+        if (Rf_isNull(dtype_sexp)) {
+            return make_tensor_sexp(new at::Tensor(at::ones_like(*a)));
+        } else {
+            auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
+            return make_tensor_sexp(new at::Tensor(at::ones_like(*a, at::TensorOptions().dtype(dt))));
+        }
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_zeros_like(SEXP self) {
+extern "C" SEXP C_torch_zeros_like(SEXP self, SEXP dtype_sexp) {
     try {
         auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(at::zeros_like(*a)));
+        if (Rf_isNull(dtype_sexp)) {
+            return make_tensor_sexp(new at::Tensor(at::zeros_like(*a)));
+        } else {
+            auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
+            return make_tensor_sexp(new at::Tensor(at::zeros_like(*a, at::TensorOptions().dtype(dt))));
+        }
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_randn_like(SEXP self) {
+extern "C" SEXP C_torch_randn_like(SEXP self, SEXP dtype_sexp) {
     try {
         auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(at::randn_like(*a)));
+        if (Rf_isNull(dtype_sexp)) {
+            return make_tensor_sexp(new at::Tensor(at::randn_like(*a)));
+        } else {
+            auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
+            return make_tensor_sexp(new at::Tensor(at::randn_like(*a, at::TensorOptions().dtype(dt))));
+        }
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }
@@ -354,7 +369,9 @@ extern "C" SEXP C_torch_gather(SEXP self, SEXP dim_sexp, SEXP index) {
         auto* idx = get_tensor_ptr(index);
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(a->gather(dim, *idx)));
+        // Convert 1-indexed R indices to 0-indexed ATen indices
+        auto idx0 = idx->sub(1);
+        return make_tensor_sexp(new at::Tensor(a->gather(dim, idx0)));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }

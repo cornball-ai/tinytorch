@@ -12,9 +12,9 @@ extern "C" SEXP C_torch_tensor_from_buffer(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_arange(SEXP, SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_full(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_linspace(SEXP, SEXP, SEXP, SEXP);
-extern "C" SEXP C_torch_ones_like(SEXP);
-extern "C" SEXP C_torch_zeros_like(SEXP);
-extern "C" SEXP C_torch_randn_like(SEXP);
+extern "C" SEXP C_torch_ones_like(SEXP, SEXP);
+extern "C" SEXP C_torch_zeros_like(SEXP, SEXP);
+extern "C" SEXP C_torch_randn_like(SEXP, SEXP);
 
 // Forward declarations - arithmetic ops
 extern "C" SEXP C_torch_add(SEXP, SEXP, SEXP);
@@ -22,6 +22,7 @@ extern "C" SEXP C_torch_sub(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_mul(SEXP, SEXP);
 extern "C" SEXP C_torch_div(SEXP, SEXP);
 extern "C" SEXP C_torch_neg(SEXP);
+extern "C" SEXP C_torch_logical_not(SEXP);
 
 // Scalar arithmetic
 extern "C" SEXP C_torch_add_scalar(SEXP, SEXP);
@@ -69,6 +70,7 @@ extern "C" SEXP C_torch_detach(SEXP);
 // Forward declarations - binary ops
 extern "C" SEXP C_torch_pow(SEXP, SEXP);
 extern "C" SEXP C_torch_pow_scalar(SEXP, SEXP);
+extern "C" SEXP C_torch_scalar_pow(SEXP, SEXP);
 extern "C" SEXP C_torch_remainder(SEXP, SEXP);
 extern "C" SEXP C_torch_remainder_scalar(SEXP, SEXP);
 extern "C" SEXP C_torch_floor_divide(SEXP, SEXP);
@@ -111,7 +113,7 @@ extern "C" SEXP C_torch_multinomial(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_outer(SEXP, SEXP);
 extern "C" SEXP C_torch_triu(SEXP, SEXP);
 extern "C" SEXP C_torch_norm(SEXP, SEXP, SEXP, SEXP);
-extern "C" SEXP C_torch_std(SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_std(SEXP, SEXP, SEXP, SEXP);
 
 // Forward declarations - complex & signal processing
 extern "C" SEXP C_torch_complex(SEXP, SEXP);
@@ -142,7 +144,7 @@ extern "C" SEXP C_torch_scatter_(SEXP, SEXP, SEXP, SEXP);
 
 // Forward declarations - NN functions
 extern "C" SEXP C_nnf_silu(SEXP);
-extern "C" SEXP C_nnf_gelu(SEXP);
+extern "C" SEXP C_nnf_gelu(SEXP, SEXP);
 extern "C" SEXP C_nnf_leaky_relu(SEXP, SEXP);
 extern "C" SEXP C_nnf_elu(SEXP, SEXP);
 extern "C" SEXP C_nnf_softmax(SEXP, SEXP);
@@ -160,6 +162,7 @@ extern "C" SEXP C_nnf_interpolate(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern "C" SEXP C_nnf_avg_pool1d(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern "C" SEXP C_nnf_softplus(SEXP, SEXP, SEXP);
 extern "C" SEXP C_nnf_normalize(SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_sdpa(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
 // Forward declarations - fused kernels
 extern "C" SEXP cpp_fused_relu(SEXP);
@@ -199,9 +202,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_torch_arange",      (DL_FUNC) &C_torch_arange,      4},
     {"C_torch_full",        (DL_FUNC) &C_torch_full,        3},
     {"C_torch_linspace",    (DL_FUNC) &C_torch_linspace,    4},
-    {"C_torch_ones_like",   (DL_FUNC) &C_torch_ones_like,   1},
-    {"C_torch_zeros_like",  (DL_FUNC) &C_torch_zeros_like,  1},
-    {"C_torch_randn_like",  (DL_FUNC) &C_torch_randn_like,  1},
+    {"C_torch_ones_like",   (DL_FUNC) &C_torch_ones_like,   2},
+    {"C_torch_zeros_like",  (DL_FUNC) &C_torch_zeros_like,  2},
+    {"C_torch_randn_like",  (DL_FUNC) &C_torch_randn_like,  2},
 
     // Arithmetic
     {"C_torch_add",         (DL_FUNC) &C_torch_add,         3},
@@ -209,6 +212,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_torch_mul",         (DL_FUNC) &C_torch_mul,         2},
     {"C_torch_div",         (DL_FUNC) &C_torch_div,         2},
     {"C_torch_neg",         (DL_FUNC) &C_torch_neg,         1},
+    {"C_torch_logical_not", (DL_FUNC) &C_torch_logical_not, 1},
 
     // Scalar arithmetic
     {"C_torch_add_scalar",  (DL_FUNC) &C_torch_add_scalar,  2},
@@ -256,6 +260,7 @@ static const R_CallMethodDef CallEntries[] = {
     // Binary ops
     {"C_torch_pow",                 (DL_FUNC) &C_torch_pow,                 2},
     {"C_torch_pow_scalar",          (DL_FUNC) &C_torch_pow_scalar,          2},
+    {"C_torch_scalar_pow",          (DL_FUNC) &C_torch_scalar_pow,          2},
     {"C_torch_remainder",           (DL_FUNC) &C_torch_remainder,           2},
     {"C_torch_remainder_scalar",    (DL_FUNC) &C_torch_remainder_scalar,    2},
     {"C_torch_floor_divide",        (DL_FUNC) &C_torch_floor_divide,        2},
@@ -298,7 +303,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_torch_outer",           (DL_FUNC) &C_torch_outer,           2},
     {"C_torch_triu",            (DL_FUNC) &C_torch_triu,            2},
     {"C_torch_norm",            (DL_FUNC) &C_torch_norm,            4},
-    {"C_torch_std",             (DL_FUNC) &C_torch_std,             3},
+    {"C_torch_std",             (DL_FUNC) &C_torch_std,             4},
 
     // Complex & signal processing
     {"C_torch_complex",         (DL_FUNC) &C_torch_complex,         2},
@@ -329,7 +334,7 @@ static const R_CallMethodDef CallEntries[] = {
 
     // NN functions
     {"C_nnf_silu",              (DL_FUNC) &C_nnf_silu,              1},
-    {"C_nnf_gelu",              (DL_FUNC) &C_nnf_gelu,              1},
+    {"C_nnf_gelu",              (DL_FUNC) &C_nnf_gelu,              2},
     {"C_nnf_leaky_relu",        (DL_FUNC) &C_nnf_leaky_relu,        2},
     {"C_nnf_elu",               (DL_FUNC) &C_nnf_elu,               2},
     {"C_nnf_softmax",           (DL_FUNC) &C_nnf_softmax,           2},
@@ -347,6 +352,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_nnf_avg_pool1d",        (DL_FUNC) &C_nnf_avg_pool1d,        6},
     {"C_nnf_softplus",          (DL_FUNC) &C_nnf_softplus,          3},
     {"C_nnf_normalize",         (DL_FUNC) &C_nnf_normalize,         4},
+    {"C_torch_sdpa",            (DL_FUNC) &C_torch_sdpa,            6},
 
     // Indexing
     {"C_torch_index",           (DL_FUNC) &C_torch_index,           3},

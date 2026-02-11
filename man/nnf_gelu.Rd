@@ -4,7 +4,7 @@
 \alias{torch_gelu}
 \title{GELU activation}
 \usage{
-nnf_gelu(self)
+nnf_gelu(self, approximate = "none")
 
 torch_gelu(self)
 }

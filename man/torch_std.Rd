@@ -3,7 +3,7 @@
 \alias{torch_std}
 \title{Standard deviation of a tensor}
 \usage{
-torch_std(self, dim = NULL, keepdim = FALSE)
+torch_std(self, dim = NULL, keepdim = FALSE, unbiased = TRUE)
 }
 \arguments{
 \item{self}{A torch_tensor.}

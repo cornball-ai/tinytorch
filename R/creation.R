@@ -140,26 +140,29 @@ torch_linspace <- function(start, end, steps = 100L, dtype = NULL, device = NULL
 
 #' Create a tensor of ones with same shape/dtype as input
 #' @param self A torch_tensor.
+#' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
-torch_ones_like <- function(self) {
-  .Call(C_torch_ones_like, self)
+torch_ones_like <- function(self, dtype = NULL) {
+  .Call(C_torch_ones_like, self, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Create a tensor of zeros with same shape/dtype as input
 #' @param self A torch_tensor.
+#' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
-torch_zeros_like <- function(self) {
-  .Call(C_torch_zeros_like, self)
+torch_zeros_like <- function(self, dtype = NULL) {
+  .Call(C_torch_zeros_like, self, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Create a tensor of random normal values with same shape/dtype as input
 #' @param self A torch_tensor.
+#' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
-torch_randn_like <- function(self) {
-  .Call(C_torch_randn_like, self)
+torch_randn_like <- function(self, dtype = NULL) {
+  .Call(C_torch_randn_like, self, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Concatenate tensors along a dimension
@@ -275,8 +278,8 @@ torch_norm <- function(self, p = 2, dim = NULL, keepdim = FALSE) {
 #' @param keepdim Whether to keep the reduced dimension.
 #' @return A torch_tensor.
 #' @export
-torch_std <- function(self, dim = NULL, keepdim = FALSE) {
-  .Call(C_torch_std, self, dim, as.logical(keepdim))
+torch_std <- function(self, dim = NULL, keepdim = FALSE, unbiased = TRUE) {
+  .Call(C_torch_std, self, dim, as.logical(keepdim), as.logical(unbiased))
 }
 
 # ---- Complex & signal processing ----

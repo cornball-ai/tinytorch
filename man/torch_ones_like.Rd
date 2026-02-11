@@ -3,10 +3,12 @@
 \alias{torch_ones_like}
 \title{Create a tensor of ones with same shape/dtype as input}
 \usage{
-torch_ones_like(self)
+torch_ones_like(self, dtype = NULL)
 }
 \arguments{
 \item{self}{A torch_tensor.}
+
+\item{dtype}{Optional dtype override.}
 }
 \value{
 A torch_tensor.

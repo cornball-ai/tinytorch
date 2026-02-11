@@ -3,10 +3,12 @@
 \alias{torch_zeros_like}
 \title{Create a tensor of zeros with same shape/dtype as input}
 \usage{
-torch_zeros_like(self)
+torch_zeros_like(self, dtype = NULL)
 }
 \arguments{
 \item{self}{A torch_tensor.}
+
+\item{dtype}{Optional dtype override.}
 }
 \value{
 A torch_tensor.

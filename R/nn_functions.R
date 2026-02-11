@@ -74,8 +74,8 @@ nnf_silu <- function(self) {
 #' nnf_gelu(torch_randn(c(2, 3)))
 #' }
 #' @export
-nnf_gelu <- function(self) {
-  .Call(C_nnf_gelu, self)
+nnf_gelu <- function(self, approximate = "none") {
+  .Call(C_nnf_gelu, self, approximate)
 }
 
 #' Leaky ReLU activation
@@ -255,9 +255,14 @@ torch_floor <- function(self) .Call(C_torch_floor, self)
 
 #' @export
 torch_pow <- function(self, exponent) {
-  if (is.numeric(exponent) && !inherits(exponent, "torch_tensor")) {
+  if (!inherits(self, "torch_tensor") && inherits(exponent, "torch_tensor")) {
+    # scalar ^ tensor
+    .Call(C_torch_scalar_pow, self, exponent)
+  } else if (is.numeric(exponent) && !inherits(exponent, "torch_tensor")) {
+    # tensor ^ scalar
     .Call(C_torch_pow_scalar, self, exponent)
   } else {
+    # tensor ^ tensor
     .Call(C_torch_pow, self, exponent)
   }
 }
@@ -343,4 +348,23 @@ with_no_grad <- function(code) code
 with_autocast <- function(device_type = "cpu", dtype = NULL,
                           enabled = TRUE, code) {
   code
+}
+
+#' Scaled Dot-Product Attention
+#' @param query Query tensor (batch, heads, seq_q, head_dim).
+#' @param key Key tensor (batch, heads, seq_k, head_dim).
+#' @param value Value tensor (batch, heads, seq_k, head_dim).
+#' @param attn_mask Optional attention mask tensor.
+#' @param dropout_p Dropout probability (default 0).
+#' @param is_causal Whether to apply causal masking (default FALSE).
+#' @return Output tensor.
+#' @export
+torch_scaled_dot_product_attention <- function(query, key, value,
+                                               attn_mask = NULL,
+                                               dropout_p = 0.0,
+                                               is_causal = FALSE) {
+  # Handle list() sentinel (chatterbox passes list() for "no mask")
+  if (is.list(attn_mask) && length(attn_mask) == 0) attn_mask <- NULL
+  .Call(C_torch_sdpa, query, key, value, attn_mask,
+        as.double(dropout_p), as.logical(is_causal))
 }

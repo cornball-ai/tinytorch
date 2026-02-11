@@ -100,8 +100,23 @@ nn_module <- function(classname = NULL, ...) {
       }
     }
 
-    # Update parameters snapshot after initialize + auto-register
-    self$parameters <- private$parameters_
+    # Build recursive parameters list (own + sub-modules)
+    collect_params <- function(mod_env) {
+      priv <- mod_env$.__enclos_env__$private
+      params <- priv$parameters_
+      for (nm in names(priv$modules_)) {
+        sub_mod <- priv$modules_[[nm]]
+        sub_env <- attr(sub_mod, ".module_env")
+        if (!is.null(sub_env)) {
+          sub_params <- collect_params(sub_env)
+          for (pnm in names(sub_params)) {
+            params[[paste0(nm, ".", pnm)]] <- sub_params[[pnm]]
+          }
+        }
+      }
+      params
+    }
+    self$parameters <- collect_params(self)
 
     # Make module callable: m(x) calls m$forward(x)
     # Wrap in a function that dispatches to forward

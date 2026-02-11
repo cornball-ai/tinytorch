@@ -58,6 +58,16 @@ extern "C" SEXP C_torch_neg(SEXP self) {
     return R_NilValue;
 }
 
+extern "C" SEXP C_torch_logical_not(SEXP self) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        return make_tensor_sexp(new at::Tensor(a->logical_not()));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
 // ---- Scalar arithmetic (tensor op scalar) ----
 
 extern "C" SEXP C_torch_add_scalar(SEXP self, SEXP scalar) {
@@ -461,6 +471,17 @@ extern "C" SEXP C_torch_pow_scalar(SEXP self, SEXP scalar) {
     return R_NilValue;
 }
 
+// scalar ^ tensor
+extern "C" SEXP C_torch_scalar_pow(SEXP scalar, SEXP exponent) {
+    try {
+        auto* b = get_tensor_ptr(exponent);
+        return make_tensor_sexp(new at::Tensor(at::pow(sexp_to_scalar(scalar), *b)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
 extern "C" SEXP C_torch_remainder(SEXP self, SEXP other) {
     try {
         auto* a = get_tensor_ptr(self);
@@ -775,9 +796,11 @@ extern "C" SEXP C_torch_sort(SEXP self, SEXP dim_sexp, SEXP descending_sexp) {
         bool descending = Rf_asLogical(descending_sexp);
         auto result = a->sort(dim, descending);
         // Return as R list with $values and $indices
+        // Convert indices to 1-indexed (R convention, matching torch R package)
+        auto indices = std::get<1>(result).add(1);
         SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
         SET_VECTOR_ELT(out, 0, make_tensor_sexp(new at::Tensor(std::get<0>(result))));
-        SET_VECTOR_ELT(out, 1, make_tensor_sexp(new at::Tensor(std::get<1>(result))));
+        SET_VECTOR_ELT(out, 1, make_tensor_sexp(new at::Tensor(indices)));
         SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
         SET_STRING_ELT(names, 0, Rf_mkChar("values"));
         SET_STRING_ELT(names, 1, Rf_mkChar("indices"));
@@ -835,8 +858,9 @@ extern "C" SEXP C_torch_multinomial(SEXP self, SEXP num_samples_sexp,
         auto* a = get_tensor_ptr(self);
         int64_t num_samples = static_cast<int64_t>(Rf_asInteger(num_samples_sexp));
         bool replacement = Rf_asLogical(replacement_sexp);
+        // Convert to 1-indexed (R convention, matching torch R package)
         return make_tensor_sexp(new at::Tensor(
-            a->multinomial(num_samples, replacement)));
+            a->multinomial(num_samples, replacement).add(1)));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }
@@ -883,16 +907,20 @@ extern "C" SEXP C_torch_norm(SEXP self, SEXP p_sexp, SEXP dim_sexp,
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_std(SEXP self, SEXP dim_sexp, SEXP keepdim_sexp) {
+extern "C" SEXP C_torch_std(SEXP self, SEXP dim_sexp, SEXP keepdim_sexp,
+                            SEXP correction_sexp) {
     try {
         auto* a = get_tensor_ptr(self);
         bool keepdim = Rf_asLogical(keepdim_sexp);
+        bool unbiased = Rf_isNull(correction_sexp) ? true :
+                        (Rf_asLogical(correction_sexp) != 0);
         if (Rf_isNull(dim_sexp)) {
-            return make_tensor_sexp(new at::Tensor(a->std()));
+            return make_tensor_sexp(new at::Tensor(a->std(unbiased)));
         }
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(a->std(dim, keepdim)));
+        return make_tensor_sexp(new at::Tensor(
+            a->std({dim}, unbiased, keepdim)));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }

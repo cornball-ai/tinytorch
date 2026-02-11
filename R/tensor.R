@@ -220,8 +220,12 @@ torch_sigmoid <- function(self) {
   .Call(C_torch_contiguous, self)
 }
 
-.tensor_methods$to <- function(self, dtype) {
-  .Call(C_torch_to_dtype, self, unclass(dtype))
+.tensor_methods$to <- function(self, dtype = NULL, device = NULL) {
+  if (!is.null(dtype)) {
+    .Call(C_torch_to_dtype, self, unclass(dtype))
+  } else {
+    self  # device is a no-op (CPU only)
+  }
 }
 
 .tensor_methods$item <- function(self) {
@@ -377,8 +381,8 @@ torch_sigmoid <- function(self) {
 }
 
 # Standard deviation
-.tensor_methods$std <- function(self, dim = NULL, keepdim = FALSE) {
-  .Call(C_torch_std, self, dim, as.logical(keepdim))
+.tensor_methods$std <- function(self, dim = NULL, keepdim = FALSE, unbiased = TRUE) {
+  .Call(C_torch_std, self, dim, as.logical(keepdim), as.logical(unbiased))
 }
 
 # Repeat (tile) tensor
@@ -521,7 +525,8 @@ torch_sigmoid <- function(self) {
 }
 
 .tensor_properties$device <- function(self) {
-  .Call(C_tensor_device, self)
+  dev <- .Call(C_tensor_device, self)
+  structure(list(type = dev), class = "torch_device")
 }
 
 .tensor_properties$ndim <- function(self) {
@@ -578,10 +583,20 @@ print.torch_tensor <- function(x, ...) {
   if (!inherits(e1, "torch_tensor")) {
     .Call(C_torch_add_scalar, e2, e1)  # scalar + tensor = tensor + scalar
   } else if (inherits(e2, "torch_tensor")) {
-    .Call(C_torch_add, e1, e2, 1)
+    .Call(C_torch_add, e1, e2, 1L)
   } else {
     .Call(C_torch_add_scalar, e1, e2)
   }
+}
+
+#' @export
+`!.torch_tensor` <- function(x) {
+  .Call(C_torch_logical_not, x)
+}
+
+#' @export
+length.torch_tensor <- function(x) {
+  .Call(C_tensor_numel, x)
 }
 
 #' @export
@@ -591,7 +606,7 @@ print.torch_tensor <- function(x, ...) {
     # scalar - tensor = -(tensor - scalar)
     .Call(C_torch_neg, .Call(C_torch_sub_scalar, e2, e1))
   } else if (inherits(e2, "torch_tensor")) {
-    .Call(C_torch_sub, e1, e2, 1)
+    .Call(C_torch_sub, e1, e2, 1L)
   } else {
     .Call(C_torch_sub_scalar, e1, e2)
   }

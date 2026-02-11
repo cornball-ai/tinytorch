@@ -12,10 +12,12 @@ extern "C" SEXP C_nnf_silu(SEXP self) {
     return R_NilValue;
 }
 
-extern "C" SEXP C_nnf_gelu(SEXP self) {
+extern "C" SEXP C_nnf_gelu(SEXP self, SEXP approximate_sexp) {
     try {
         auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(at::gelu(*a)));
+        std::string approx = Rf_isNull(approximate_sexp) ? "none" :
+                             std::string(CHAR(STRING_ELT(approximate_sexp, 0)));
+        return make_tensor_sexp(new at::Tensor(at::gelu(*a, approx)));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }
@@ -142,7 +144,9 @@ extern "C" SEXP C_torch_embedding(SEXP weight, SEXP indices) {
     try {
         auto* w = get_tensor_ptr(weight);
         auto* idx = get_tensor_ptr(indices);
-        return make_tensor_sexp(new at::Tensor(at::embedding(*w, *idx)));
+        // Convert 1-indexed R indices to 0-indexed ATen indices
+        auto idx0 = idx->sub(1);
+        return make_tensor_sexp(new at::Tensor(at::embedding(*w, idx0)));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }
@@ -289,16 +293,14 @@ extern "C" SEXP C_torch_lstm(SEXP input, SEXP hx_sexp, SEXP params_sexp,
                                num_layers, dropout, training, bidirectional,
                                batch_first);
 
-        // Return list(output, h_n, c_n)
-        SEXP out = PROTECT(Rf_allocVector(VECSXP, 3));
+        // Return list(output, list(h_n, c_n)) to match torch R package
+        SEXP hidden = PROTECT(Rf_allocVector(VECSXP, 2));
+        SET_VECTOR_ELT(hidden, 0, make_tensor_sexp(new at::Tensor(std::get<1>(result))));
+        SET_VECTOR_ELT(hidden, 1, make_tensor_sexp(new at::Tensor(std::get<2>(result))));
+
+        SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
         SET_VECTOR_ELT(out, 0, make_tensor_sexp(new at::Tensor(std::get<0>(result))));
-        SET_VECTOR_ELT(out, 1, make_tensor_sexp(new at::Tensor(std::get<1>(result))));
-        SET_VECTOR_ELT(out, 2, make_tensor_sexp(new at::Tensor(std::get<2>(result))));
-        SEXP names = PROTECT(Rf_allocVector(STRSXP, 3));
-        SET_STRING_ELT(names, 0, Rf_mkChar("output"));
-        SET_STRING_ELT(names, 1, Rf_mkChar("h_n"));
-        SET_STRING_ELT(names, 2, Rf_mkChar("c_n"));
-        Rf_setAttrib(out, R_NamesSymbol, names);
+        SET_VECTOR_ELT(out, 1, hidden);
         UNPROTECT(2);
         return out;
     } catch (const std::exception& e) {
@@ -451,6 +453,32 @@ extern "C" SEXP C_nnf_normalize(SEXP input, SEXP p_sexp, SEXP dim_sexp,
         auto norm = inp->norm(p, dim, /*keepdim=*/true);
         auto clamped = at::clamp_min(norm, eps);
         return make_tensor_sexp(new at::Tensor(inp->div(clamped)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+// ---- Scaled Dot-Product Attention ----
+
+extern "C" SEXP C_torch_sdpa(SEXP query, SEXP key, SEXP value,
+                              SEXP attn_mask_sexp, SEXP dropout_sexp,
+                              SEXP is_causal_sexp) {
+    try {
+        auto* q = get_tensor_ptr(query);
+        auto* k = get_tensor_ptr(key);
+        auto* v = get_tensor_ptr(value);
+        double dropout_p = Rf_asReal(dropout_sexp);
+        bool is_causal = Rf_asLogical(is_causal_sexp);
+
+        c10::optional<at::Tensor> attn_mask;
+        if (!Rf_isNull(attn_mask_sexp) && TYPEOF(attn_mask_sexp) == EXTPTRSXP) {
+            attn_mask = *get_tensor_ptr(attn_mask_sexp);
+        }
+
+        auto result = at::scaled_dot_product_attention(
+            *q, *k, *v, attn_mask, dropout_p, is_causal);
+        return make_tensor_sexp(new at::Tensor(result));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
     }
