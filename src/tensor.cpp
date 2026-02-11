@@ -88,12 +88,18 @@ extern "C" SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp) {
         SEXP dim = Rf_getAttrib(data, R_DimSymbol);
         if (!Rf_isNull(dim)) {
             auto dims = sexp_to_int_vec(dim);
-            // R stores column-major; reverse dims for row-major interpretation
-            // Actually, we need to match torch's convention:
-            // R matrix dim = c(nrow, ncol), stored column-major
-            // We reshape to (nrow, ncol) and the data is column-major
-            // So we need to reshape then transpose for matrices
-            t = t.reshape(at::IntArrayRef(dims.data(), dims.size()));
+            int ndim = dims.size();
+            // R stores column-major (Fortran order), torch uses row-major (C order).
+            // To convert: reshape with reversed dims, then permute to restore order.
+            // Example: R matrix (2,3) stored as [col1, col2, col3] in memory.
+            // Reshape as (3,2) reads cols as rows, then transpose gives (2,3) correct.
+            std::vector<int64_t> rev_dims(dims.rbegin(), dims.rend());
+            t = t.reshape(at::IntArrayRef(rev_dims.data(), rev_dims.size()));
+            if (ndim > 1) {
+                std::vector<int64_t> perm(ndim);
+                for (int i = 0; i < ndim; i++) perm[i] = ndim - 1 - i;
+                t = t.permute(at::IntArrayRef(perm.data(), perm.size())).contiguous();
+            }
         }
 
         if (dtype.has_value()) {

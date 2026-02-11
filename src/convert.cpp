@@ -4,8 +4,8 @@ extern "C" SEXP C_as_array(SEXP self) {
     try {
         auto* t = get_tensor_ptr(self);
 
-        // Move to CPU and make contiguous
-        at::Tensor cpu_t = t->to(at::kCPU).contiguous();
+        // Move to CPU
+        at::Tensor cpu_t = t->to(at::kCPU);
 
         // Convert to double for R
         if (cpu_t.scalar_type() != at::kDouble) {
@@ -15,15 +15,26 @@ extern "C" SEXP C_as_array(SEXP self) {
         int64_t numel = cpu_t.numel();
         int ndim = cpu_t.dim();
 
+        // For multi-dimensional tensors, permute to column-major (R/Fortran order)
+        // before copying data. Reverse dimension order so contiguous memory
+        // matches R's column-major layout.
+        if (ndim > 1) {
+            std::vector<int64_t> perm(ndim);
+            for (int i = 0; i < ndim; i++) perm[i] = ndim - 1 - i;
+            cpu_t = cpu_t.permute(at::IntArrayRef(perm.data(), perm.size())).contiguous();
+        } else {
+            cpu_t = cpu_t.contiguous();
+        }
+
         // Create R vector
         SEXP result = PROTECT(Rf_allocVector(REALSXP, numel));
         double* out = REAL(result);
         double* src = cpu_t.data_ptr<double>();
         std::memcpy(out, src, numel * sizeof(double));
 
-        // Set dim attribute if multi-dimensional
+        // Set dim attribute if multi-dimensional (use original sizes, not permuted)
         if (ndim > 1) {
-            auto sizes = cpu_t.sizes();
+            auto sizes = t->sizes();
             SEXP dim = PROTECT(Rf_allocVector(INTSXP, ndim));
             int* pdim = INTEGER(dim);
             for (int i = 0; i < ndim; i++) {

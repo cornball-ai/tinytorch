@@ -595,6 +595,16 @@ print.torch_tensor <- function(x, ...) {
 }
 
 #' @export
+length.nn_buffer <- function(x) {
+  .Call(C_tensor_numel, x)
+}
+
+#' @export
+length.nn_parameter <- function(x) {
+  .Call(C_tensor_numel, x)
+}
+
+#' @export
 length.torch_tensor <- function(x) {
   .Call(C_tensor_numel, x)
 }
