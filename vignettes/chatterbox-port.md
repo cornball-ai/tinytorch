@@ -202,3 +202,73 @@ index specs to C++.
 `@useDynLib`. The `useDynLib(Rtorch, .registration = TRUE)` line and
 manual S3 registrations (`[`, `[<-`, `[[`) must be re-added after each
 `document()` call. This is a known limitation to be addressed in tinyrox.
+
+Rtorch: CUDA Device Support
+----------------------------
+
+The port required full CUDA support in Rtorch. All tensor creation
+functions (`torch_zeros`, `torch_ones`, `torch_randn`, `torch_empty`,
+`torch_full`, `torch_arange`, `torch_linspace`, `torch_hann_window`,
+`torch_tensor`, `torch_tensor_from_buffer`) now accept a `device=`
+parameter.
+
+### Library Loading
+
+CUDA libraries are conditionally linked. `Makevars.in` uses
+`-Wl,--no-as-needed -ltorch_cuda -lc10_cuda` to force the libraries
+into `DT_NEEDED`, since the linker would otherwise drop them (no
+symbols are directly referenced from R code). The `configure` script
+detects CUDA presence and sets this up automatically.
+
+### nn_module$to(device, dtype)
+
+Recursive device/dtype transfer for `nn_module`:
+
+- Walks `private$parameters_`, `private$buffers_`, `private$modules_`
+- Updates both the private lists and `self[[nm]]` references
+- Preserves `nn_parameter` / `nn_buffer` class tags
+
+### Scalar-First Operators on CUDA
+
+S3 operators that handle `scalar op tensor` (e.g., `1.0 - x`) create
+a temporary scalar tensor. These must be placed on the same device as
+the tensor operand:
+
+```r
+# In Ops.torch_tensor
+device <- .Call(C_tensor_device, e2)
+temp <- torch_tensor(e1, dtype = ..., device = device)
+```
+
+### Memory Management
+
+Two new functions expose libtorch's CUDA caching allocator:
+
+- `cuda_mem_info()` -- free and total device memory (driver level)
+- `cuda_memory_stats()` -- per-process allocated/reserved bytes
+  (caching allocator level)
+- `cuda_empty_cache()` -- release cached blocks back to the driver
+
+These were essential for profiling Chatterbox's ~3 GB model on GPU.
+
+Results
+-------
+
+With these changes, the full Chatterbox TTS pipeline (798M parameters)
+runs on CUDA via Rtorch. The port validates component-by-component
+against the Python reference implementation:
+
+| Component             | Max Difference |
+|-----------------------|---------------|
+| Mel Spectrogram       | < 0.000001    |
+| Voice Encoder         | < 0.000256    |
+| S3 Tokenizer          | 100% match    |
+| T3 Conditioning       | < 0.000002    |
+| T3 Llama Backbone     | < 0.00003     |
+| CAMPPlus Speaker Enc  | < 0.001471    |
+| Conformer Encoder     | < 0.0004      |
+| CFM Decoder           | < 0.028       |
+| HiFi-GAN Vocoder      | < 0.026       |
+
+Chatterbox is the largest application ported to Rtorch to date,
+covering 521 `Rtorch::` call sites across ~5000 lines of R code.
