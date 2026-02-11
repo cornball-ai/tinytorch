@@ -3,15 +3,15 @@
 // Forward declarations - tensor creation
 extern "C" SEXP C_torch_tensor(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_tensor_raw(SEXP, SEXP, SEXP);
-extern "C" SEXP C_torch_zeros(SEXP, SEXP);
-extern "C" SEXP C_torch_ones(SEXP, SEXP);
-extern "C" SEXP C_torch_randn(SEXP, SEXP);
+extern "C" SEXP C_torch_zeros(SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_ones(SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_randn(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_empty_like(SEXP);
-extern "C" SEXP C_torch_empty(SEXP, SEXP);
-extern "C" SEXP C_torch_tensor_from_buffer(SEXP, SEXP, SEXP);
-extern "C" SEXP C_torch_arange(SEXP, SEXP, SEXP, SEXP);
-extern "C" SEXP C_torch_full(SEXP, SEXP, SEXP);
-extern "C" SEXP C_torch_linspace(SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_empty(SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_tensor_from_buffer(SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_arange(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_full(SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_linspace(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_ones_like(SEXP, SEXP);
 extern "C" SEXP C_torch_zeros_like(SEXP, SEXP);
 extern "C" SEXP C_torch_randn_like(SEXP, SEXP);
@@ -123,7 +123,7 @@ extern "C" SEXP C_torch_polar(SEXP, SEXP);
 extern "C" SEXP C_torch_view_as_real(SEXP);
 extern "C" SEXP C_torch_stft(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_istft(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern "C" SEXP C_torch_hann_window(SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_hann_window(SEXP, SEXP, SEXP, SEXP);
 
 // Forward declarations - tensor methods
 extern "C" SEXP C_torch_permute(SEXP, SEXP);
@@ -189,19 +189,26 @@ extern "C" SEXP C_tensor_numel(SEXP);
 extern "C" SEXP C_tensor_requires_grad(SEXP);
 extern "C" SEXP C_tensor_print(SEXP);
 
+// Forward declarations - device transfer & CUDA
+extern "C" SEXP C_tensor_to_device(SEXP, SEXP);
+extern "C" SEXP C_tensor_to_dtype_device(SEXP, SEXP, SEXP);
+extern "C" SEXP C_cuda_is_available();
+extern "C" SEXP C_cuda_device_count();
+extern "C" SEXP C_cuda_empty_cache();
+
 static const R_CallMethodDef CallEntries[] = {
     // Creation
     {"C_torch_tensor",      (DL_FUNC) &C_torch_tensor,      3},
     {"C_torch_tensor_raw",  (DL_FUNC) &C_torch_tensor_raw,  3},
-    {"C_torch_zeros",       (DL_FUNC) &C_torch_zeros,       2},
-    {"C_torch_ones",        (DL_FUNC) &C_torch_ones,        2},
-    {"C_torch_randn",       (DL_FUNC) &C_torch_randn,       2},
+    {"C_torch_zeros",       (DL_FUNC) &C_torch_zeros,       3},
+    {"C_torch_ones",        (DL_FUNC) &C_torch_ones,        3},
+    {"C_torch_randn",       (DL_FUNC) &C_torch_randn,       3},
     {"C_torch_empty_like",  (DL_FUNC) &C_torch_empty_like,  1},
-    {"C_torch_empty",       (DL_FUNC) &C_torch_empty,       2},
-    {"C_torch_tensor_from_buffer", (DL_FUNC) &C_torch_tensor_from_buffer, 3},
-    {"C_torch_arange",      (DL_FUNC) &C_torch_arange,      4},
-    {"C_torch_full",        (DL_FUNC) &C_torch_full,        3},
-    {"C_torch_linspace",    (DL_FUNC) &C_torch_linspace,    4},
+    {"C_torch_empty",       (DL_FUNC) &C_torch_empty,       3},
+    {"C_torch_tensor_from_buffer", (DL_FUNC) &C_torch_tensor_from_buffer, 4},
+    {"C_torch_arange",      (DL_FUNC) &C_torch_arange,      5},
+    {"C_torch_full",        (DL_FUNC) &C_torch_full,        4},
+    {"C_torch_linspace",    (DL_FUNC) &C_torch_linspace,    5},
     {"C_torch_ones_like",   (DL_FUNC) &C_torch_ones_like,   2},
     {"C_torch_zeros_like",  (DL_FUNC) &C_torch_zeros_like,  2},
     {"C_torch_randn_like",  (DL_FUNC) &C_torch_randn_like,  2},
@@ -313,7 +320,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_torch_view_as_real",    (DL_FUNC) &C_torch_view_as_real,    1},
     {"C_torch_stft",            (DL_FUNC) &C_torch_stft,            9},
     {"C_torch_istft",           (DL_FUNC) &C_torch_istft,           10},
-    {"C_torch_hann_window",     (DL_FUNC) &C_torch_hann_window,     3},
+    {"C_torch_hann_window",     (DL_FUNC) &C_torch_hann_window,     4},
 
     // Tensor methods
     {"C_torch_permute",             (DL_FUNC) &C_torch_permute,             2},
@@ -378,6 +385,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_tensor_numel",          (DL_FUNC) &C_tensor_numel,          1},
     {"C_tensor_requires_grad",  (DL_FUNC) &C_tensor_requires_grad,  1},
     {"C_tensor_print",          (DL_FUNC) &C_tensor_print,          1},
+
+    // Device transfer & CUDA
+    {"C_tensor_to_device",      (DL_FUNC) &C_tensor_to_device,      2},
+    {"C_tensor_to_dtype_device", (DL_FUNC) &C_tensor_to_dtype_device, 3},
+    {"C_cuda_is_available",     (DL_FUNC) &C_cuda_is_available,     0},
+    {"C_cuda_device_count",     (DL_FUNC) &C_cuda_device_count,     0},
+    {"C_cuda_empty_cache",      (DL_FUNC) &C_cuda_empty_cache,      0},
 
     {NULL, NULL, 0}
 };

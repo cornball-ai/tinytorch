@@ -61,8 +61,60 @@ nn_module <- function(classname = NULL, ...) {
     self$eval <- function() { self$training <- FALSE; invisible(self) }
     self$train <- function(mode = TRUE) { self$training <- mode; invisible(self) }
 
-    # Device transfer (no-op, CPU only)
-    self$to <- function(device = NULL, dtype = NULL) invisible(self)
+    # Device/dtype transfer (recursive over parameters, buffers, sub-modules)
+    self$to <- function(device = NULL, dtype = NULL) {
+      # Transfer own parameters
+      for (nm in names(private$parameters_)) {
+        p <- private$parameters_[[nm]]
+        if (inherits(p, "torch_tensor")) {
+          p_new <- p
+          if (!is.null(dtype) && !is.null(device)) {
+            p_new <- .Call(C_tensor_to_dtype_device, p, unclass(dtype), as.character(device))
+          } else if (!is.null(device)) {
+            p_new <- .Call(C_tensor_to_device, p, as.character(device))
+          } else if (!is.null(dtype)) {
+            p_new <- .Call(C_torch_to_dtype, p, unclass(dtype))
+          }
+          cls <- class(p)
+          class(p_new) <- cls
+          private$parameters_[[nm]] <- p_new
+          self[[nm]] <- p_new
+        }
+      }
+      # Transfer own buffers
+      for (nm in names(private$buffers_)) {
+        b <- private$buffers_[[nm]]
+        if (inherits(b, "torch_tensor")) {
+          b_new <- b
+          if (!is.null(dtype) && !is.null(device)) {
+            b_new <- .Call(C_tensor_to_dtype_device, b, unclass(dtype), as.character(device))
+          } else if (!is.null(device)) {
+            b_new <- .Call(C_tensor_to_device, b, as.character(device))
+          } else if (!is.null(dtype)) {
+            b_new <- .Call(C_torch_to_dtype, b, unclass(dtype))
+          }
+          cls <- class(b)
+          class(b_new) <- cls
+          private$buffers_[[nm]] <- b_new
+          self[[nm]] <- b_new
+        }
+      }
+      # Recurse into sub-modules
+      for (nm in names(private$modules_)) {
+        sub <- private$modules_[[nm]]
+        # Handle both callable (with .module_env attr) and raw environment modules
+        sub_env <- attr(sub, ".module_env")
+        if (is.null(sub_env) && is.environment(sub) && !is.null(sub$to)) {
+          sub_env <- sub
+        }
+        if (!is.null(sub_env) && !is.null(sub_env$to)) {
+          sub_env$to(device = device, dtype = dtype)
+        }
+      }
+      # Rebuild the parameters snapshot so $parameters reflects the new device/dtype
+      self$parameters <- collect_params(self)
+      invisible(self)
+    }
 
     # Parameters accessor (returns named list of registered parameters)
     # Note: this is a snapshot; re-access for live view
@@ -106,7 +158,12 @@ nn_module <- function(classname = NULL, ...) {
       params <- priv$parameters_
       for (nm in names(priv$modules_)) {
         sub_mod <- priv$modules_[[nm]]
+        # Handle both callable (with .module_env attr) and raw environment modules
         sub_env <- attr(sub_mod, ".module_env")
+        if (is.null(sub_env) && is.environment(sub_mod) &&
+            !is.null(sub_mod$`.__enclos_env__`$private)) {
+          sub_env <- sub_mod
+        }
         if (!is.null(sub_env)) {
           sub_params <- collect_params(sub_env)
           for (pnm in names(sub_params)) {
@@ -145,6 +202,23 @@ nn_module <- function(classname = NULL, ...) {
 `$<-.nn_module` <- function(x, name, value) {
   env <- attr(x, ".module_env")
   env[[name]] <- value
+  # Auto-register sub-modules and parameters assigned after init
+  priv <- env$`.__enclos_env__`$private
+  # Check for nn_module callable or raw module environment (from $to() return)
+  is_mod <- inherits(value, "nn_module") ||
+    (is.environment(value) && !is.null(value$`.__enclos_env__`$private$modules_))
+  if (is_mod) {
+    priv$modules_[[name]] <- value
+  } else if (inherits(value, "nn_parameter")) {
+    priv$parameters_[[name]] <- value
+  } else if (inherits(value, "nn_buffer")) {
+    priv$buffers_[[name]] <- value
+  } else if (is.null(value)) {
+    # Allow setting to NULL (remove registration)
+    priv$modules_[[name]] <- NULL
+    priv$parameters_[[name]] <- NULL
+    priv$buffers_[[name]] <- NULL
+  }
   x
 }
 

@@ -13,7 +13,8 @@
 torch_tensor <- function(data, dtype = NULL, device = NULL) {
   if (inherits(data, "torch_tensor")) return(data)
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
-  .Call(C_torch_tensor, data, dtype_code, device)
+  device_str <- if (!is.null(device)) as.character(device) else NULL
+  .Call(C_torch_tensor, data, dtype_code, device_str)
 }
 
 #' Create a tensor of zeros
@@ -28,7 +29,8 @@ torch_tensor <- function(data, dtype = NULL, device = NULL) {
 torch_zeros <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
-  .Call(C_torch_zeros, size, dtype_code)
+  device_str <- if (!is.null(device)) as.character(device) else NULL
+  .Call(C_torch_zeros, size, dtype_code, device_str)
 }
 
 #' Create a tensor of ones
@@ -43,7 +45,8 @@ torch_zeros <- function(..., dtype = NULL, device = NULL) {
 torch_ones <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
-  .Call(C_torch_ones, size, dtype_code)
+  device_str <- if (!is.null(device)) as.character(device) else NULL
+  .Call(C_torch_ones, size, dtype_code, device_str)
 }
 
 #' Create a tensor with random normal values
@@ -58,7 +61,8 @@ torch_ones <- function(..., dtype = NULL, device = NULL) {
 torch_randn <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
-  .Call(C_torch_randn, size, dtype_code)
+  device_str <- if (!is.null(device)) as.character(device) else NULL
+  .Call(C_torch_randn, size, dtype_code, device_str)
 }
 
 #' Create an uninitialized tensor with same shape/dtype as input
@@ -85,7 +89,8 @@ torch_empty_like <- function(self) {
 torch_empty <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
-  .Call(C_torch_empty, size, dtype_code)
+  device_str <- if (!is.null(device)) as.character(device) else NULL
+  .Call(C_torch_empty, size, dtype_code, device_str)
 }
 
 #' Create a tensor from raw bytes buffer
@@ -94,8 +99,9 @@ torch_empty <- function(..., dtype = NULL, device = NULL) {
 #' @param dtype A torch_dtype.
 #' @return A torch_tensor.
 #' @export
-torch_tensor_from_buffer <- function(raw, shape, dtype) {
-  .Call(C_torch_tensor_from_buffer, raw, as.integer(shape), unclass(dtype))
+torch_tensor_from_buffer <- function(raw, shape, dtype, device = NULL) {
+  device_str <- if (!is.null(device)) as.character(device) else NULL
+  .Call(C_torch_tensor_from_buffer, raw, as.integer(shape), unclass(dtype), device_str)
 }
 
 #' Create a tensor with evenly spaced values
@@ -108,8 +114,9 @@ torch_tensor_from_buffer <- function(raw, shape, dtype) {
 #' @export
 torch_arange <- function(start, end, step = 1L, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
+  device_str <- if (!is.null(device)) as.character(device) else NULL
   .Call(C_torch_arange, as.double(start), as.double(end),
-        as.double(step), dtype_code)
+        as.double(step), dtype_code, device_str)
 }
 
 #' Create a tensor filled with a scalar value
@@ -121,7 +128,8 @@ torch_arange <- function(start, end, step = 1L, dtype = NULL, device = NULL) {
 #' @export
 torch_full <- function(size, fill_value, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
-  .Call(C_torch_full, as.integer(size), as.double(fill_value), dtype_code)
+  device_str <- if (!is.null(device)) as.character(device) else NULL
+  .Call(C_torch_full, as.integer(size), as.double(fill_value), dtype_code, device_str)
 }
 
 #' Create a tensor with evenly spaced values between start and end
@@ -134,8 +142,9 @@ torch_full <- function(size, fill_value, dtype = NULL, device = NULL) {
 #' @export
 torch_linspace <- function(start, end, steps = 100L, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
+  device_str <- if (!is.null(device)) as.character(device) else NULL
   .Call(C_torch_linspace, as.double(start), as.double(end),
-        as.integer(steps), dtype_code)
+        as.integer(steps), dtype_code, device_str)
 }
 
 #' Create a tensor of ones with same shape/dtype as input
@@ -384,8 +393,9 @@ torch_istft <- function(input, n_fft, hop_length = NULL, win_length = NULL,
 torch_hann_window <- function(window_length, periodic = TRUE,
                               dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
+  device_str <- if (!is.null(device)) as.character(device) else NULL
   .Call(C_torch_hann_window, as.integer(window_length),
-        as.logical(periodic), dtype_code)
+        as.logical(periodic), dtype_code, device_str)
 }
 
 #' Check if two tensors are element-wise close

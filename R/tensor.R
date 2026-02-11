@@ -221,10 +221,18 @@ torch_sigmoid <- function(self) {
 }
 
 .tensor_methods$to <- function(self, dtype = NULL, device = NULL) {
-  if (!is.null(dtype)) {
+  has_dtype <- !is.null(dtype)
+  has_device <- !is.null(device)
+  if (has_dtype && has_device) {
+    device_str <- as.character(device)
+    .Call(C_tensor_to_dtype_device, self, unclass(dtype), device_str)
+  } else if (has_dtype) {
     .Call(C_torch_to_dtype, self, unclass(dtype))
+  } else if (has_device) {
+    device_str <- as.character(device)
+    .Call(C_tensor_to_device, self, device_str)
   } else {
-    self  # device is a no-op (CPU only)
+    self
   }
 }
 
@@ -319,9 +327,8 @@ torch_sigmoid <- function(self) {
   invisible(self)
 }
 
-# No-ops for CPU-only (return self unchanged)
-.tensor_methods$cpu <- function(self) self
-.tensor_methods$cuda <- function(self, ...) self
+.tensor_methods$cpu <- function(self) .Call(C_tensor_to_device, self, "cpu")
+.tensor_methods$cuda <- function(self, device = "cuda") .Call(C_tensor_to_device, self, as.character(device))
 .tensor_methods$float <- function(self) .Call(C_torch_to_dtype, self, 6L)  # torch_float32
 .tensor_methods$half <- function(self) .Call(C_torch_to_dtype, self, 5L)  # torch_float16
 .tensor_methods$long <- function(self) .Call(C_torch_to_dtype, self, 4L)  # torch_int64
@@ -538,7 +545,7 @@ torch_sigmoid <- function(self) {
 }
 
 .tensor_properties$is_cuda <- function(self) {
-  FALSE
+  grepl("^cuda", .Call(C_tensor_device, self))
 }
 
 # ---- $ dispatch ----
@@ -636,8 +643,8 @@ length.torch_tensor <- function(x) {
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
-    # scalar / tensor: convert scalar to tensor
-    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    # scalar / tensor: convert scalar to tensor on same device
+    e1 <- torch_tensor(e1, dtype = e2$dtype, device = .Call(C_tensor_device, e2))
     .Call(C_torch_div, e1, e2)
   } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_div, e1, e2)
@@ -649,8 +656,8 @@ length.torch_tensor <- function(x) {
 #' @export
 `^.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
-    # scalar ^ tensor: convert scalar to tensor
-    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    # scalar ^ tensor: convert scalar to tensor on same device
+    e1 <- torch_tensor(e1, dtype = e2$dtype, device = .Call(C_tensor_device, e2))
     .Call(C_torch_pow, e1, e2)
   } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_pow, e1, e2)
@@ -662,7 +669,7 @@ length.torch_tensor <- function(x) {
 #' @export
 `%%.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
-    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    e1 <- torch_tensor(e1, dtype = e2$dtype, device = .Call(C_tensor_device, e2))
     .Call(C_torch_remainder, e1, e2)
   } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_remainder, e1, e2)
@@ -674,7 +681,7 @@ length.torch_tensor <- function(x) {
 #' @export
 `%/%.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
-    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    e1 <- torch_tensor(e1, dtype = e2$dtype, device = .Call(C_tensor_device, e2))
     .Call(C_torch_floor_divide, e1, e2)
   } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_floor_divide, e1, e2)

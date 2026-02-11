@@ -337,6 +337,25 @@ nnf_tanh <- function(input) .Call(C_torch_tanh, input)
 #' @export
 with_no_grad <- function(code) code
 
+# ---- CUDA utilities ----
+
+#' Check if CUDA is available
+#' @return Logical scalar.
+#' @export
+cuda_is_available <- function() .Call(C_cuda_is_available)
+
+#' Get number of CUDA devices
+#' @return Integer scalar.
+#' @export
+cuda_device_count <- function() .Call(C_cuda_device_count)
+
+#' Release cached CUDA memory
+#'
+#' Releases all unoccupied cached memory held by the CUDA allocator
+#' so that it can be used by other GPU applications.
+#' @export
+cuda_empty_cache <- function() invisible(.Call(C_cuda_empty_cache))
+
 #' No-op autocast context manager
 #'
 #' Since Rtorch is CPU-only, autocast is a no-op.

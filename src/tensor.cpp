@@ -1,4 +1,5 @@
 #include "Rtorch.h"
+#include <dlfcn.h>
 
 // ---- Tensor finalizer ----
 
@@ -61,6 +62,13 @@ std::vector<int64_t> sexp_to_int_vec(SEXP x) {
     return out;
 }
 
+// ---- Device helper ----
+
+at::Device sexp_to_device(SEXP device_sexp) {
+    if (Rf_isNull(device_sexp)) return at::Device(at::kCPU);
+    return at::Device(std::string(CHAR(STRING_ELT(device_sexp, 0))));
+}
+
 // ---- Creation functions ----
 
 extern "C" SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp) {
@@ -106,6 +114,10 @@ extern "C" SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp) {
             t = t.to(dtype.value());
         }
 
+        if (!Rf_isNull(device_sexp)) {
+            t = t.to(sexp_to_device(device_sexp));
+        }
+
         return make_tensor_sexp(new at::Tensor(t));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
@@ -145,12 +157,13 @@ extern "C" SEXP C_torch_tensor_raw(SEXP data, SEXP dim_sexp, SEXP dtype_sexp) {
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_zeros(SEXP size_sexp, SEXP dtype_sexp) {
+extern "C" SEXP C_torch_zeros(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
     try {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::zeros(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
     } catch (const std::exception& e) {
@@ -159,12 +172,13 @@ extern "C" SEXP C_torch_zeros(SEXP size_sexp, SEXP dtype_sexp) {
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_ones(SEXP size_sexp, SEXP dtype_sexp) {
+extern "C" SEXP C_torch_ones(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
     try {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::ones(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
     } catch (const std::exception& e) {
@@ -173,12 +187,13 @@ extern "C" SEXP C_torch_ones(SEXP size_sexp, SEXP dtype_sexp) {
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_randn(SEXP size_sexp, SEXP dtype_sexp) {
+extern "C" SEXP C_torch_randn(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
     try {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::randn(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
     } catch (const std::exception& e) {
@@ -197,12 +212,13 @@ extern "C" SEXP C_torch_empty_like(SEXP self) {
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_empty(SEXP size_sexp, SEXP dtype_sexp) {
+extern "C" SEXP C_torch_empty(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
     try {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::empty(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
     } catch (const std::exception& e) {
@@ -214,7 +230,7 @@ extern "C" SEXP C_torch_empty(SEXP size_sexp, SEXP dtype_sexp) {
 // ---- Create tensor from raw bytes ----
 
 extern "C" SEXP C_torch_tensor_from_buffer(SEXP raw_sexp, SEXP shape_sexp,
-                                            SEXP dtype_sexp) {
+                                            SEXP dtype_sexp, SEXP device_sexp) {
     try {
         R_xlen_t nbytes = Rf_xlength(raw_sexp);
         void* data = RAW(raw_sexp);
@@ -231,6 +247,10 @@ extern "C" SEXP C_torch_tensor_from_buffer(SEXP raw_sexp, SEXP shape_sexp,
             opts
         ).clone();  // clone to own the data
 
+        if (!Rf_isNull(device_sexp)) {
+            t = t.to(sexp_to_device(device_sexp));
+        }
+
         return make_tensor_sexp(new at::Tensor(t));
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
@@ -241,7 +261,8 @@ extern "C" SEXP C_torch_tensor_from_buffer(SEXP raw_sexp, SEXP shape_sexp,
 // ---- New creation functions ----
 
 extern "C" SEXP C_torch_arange(SEXP start_sexp, SEXP end_sexp,
-                                SEXP step_sexp, SEXP dtype_sexp) {
+                                SEXP step_sexp, SEXP dtype_sexp,
+                                SEXP device_sexp) {
     try {
         double start = Rf_asReal(start_sexp);
         double end = Rf_asReal(end_sexp);
@@ -254,6 +275,7 @@ extern "C" SEXP C_torch_arange(SEXP start_sexp, SEXP end_sexp,
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         return make_tensor_sexp(new at::Tensor(
             torch::arange(start, end, step, opts)));
     } catch (const std::exception& e) {
@@ -262,13 +284,15 @@ extern "C" SEXP C_torch_arange(SEXP start_sexp, SEXP end_sexp,
     return R_NilValue;
 }
 
-extern "C" SEXP C_torch_full(SEXP size_sexp, SEXP fill_sexp, SEXP dtype_sexp) {
+extern "C" SEXP C_torch_full(SEXP size_sexp, SEXP fill_sexp, SEXP dtype_sexp,
+                              SEXP device_sexp) {
     try {
         auto size = sexp_to_int_vec(size_sexp);
         double fill = Rf_asReal(fill_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         return make_tensor_sexp(new at::Tensor(
             torch::full(at::IntArrayRef(size.data(), size.size()), fill, opts)));
     } catch (const std::exception& e) {
@@ -278,7 +302,8 @@ extern "C" SEXP C_torch_full(SEXP size_sexp, SEXP fill_sexp, SEXP dtype_sexp) {
 }
 
 extern "C" SEXP C_torch_linspace(SEXP start_sexp, SEXP end_sexp,
-                                  SEXP steps_sexp, SEXP dtype_sexp) {
+                                  SEXP steps_sexp, SEXP dtype_sexp,
+                                  SEXP device_sexp) {
     try {
         double start = Rf_asReal(start_sexp);
         double end = Rf_asReal(end_sexp);
@@ -286,6 +311,7 @@ extern "C" SEXP C_torch_linspace(SEXP start_sexp, SEXP end_sexp,
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         return make_tensor_sexp(new at::Tensor(
             torch::linspace(start, end, steps, opts)));
     } catch (const std::exception& e) {
@@ -541,6 +567,60 @@ extern "C" SEXP C_torch_scatter_(SEXP self, SEXP dim_sexp, SEXP index, SEXP src)
         return self;
     } catch (const std::exception& e) {
         Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+// ---- Device transfer functions ----
+
+extern "C" SEXP C_tensor_to_device(SEXP self, SEXP device_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        return make_tensor_sexp(new at::Tensor(a->to(sexp_to_device(device_sexp))));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_tensor_to_dtype_device(SEXP self, SEXP dtype_sexp,
+                                          SEXP device_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        auto dtype = sexp_to_dtype(dtype_sexp);
+        auto device = sexp_to_device(device_sexp);
+        if (dtype.has_value()) {
+            return make_tensor_sexp(new at::Tensor(
+                a->to(device, dtype.value())));
+        } else {
+            return make_tensor_sexp(new at::Tensor(a->to(device)));
+        }
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_cuda_is_available() {
+    return Rf_ScalarLogical(torch::cuda::is_available());
+}
+
+extern "C" SEXP C_cuda_device_count() {
+    return Rf_ScalarInteger(static_cast<int>(torch::cuda::device_count()));
+}
+
+extern "C" SEXP C_cuda_empty_cache() {
+    if (!torch::cuda::is_available()) return R_NilValue;
+
+    // Find emptyCache via dlsym since we don't have CUDA SDK headers.
+    // Symbol: c10::cuda::CUDACachingAllocator::emptyCache(std::pair<size_t,size_t>)
+    using EmptyCacheFn = void(*)(std::pair<unsigned long long, unsigned long long>);
+    void* sym = dlsym(RTLD_DEFAULT,
+        "_ZN3c104cuda20CUDACachingAllocator10emptyCacheESt4pairIyyE");
+    if (sym) {
+        auto fn = reinterpret_cast<EmptyCacheFn>(sym);
+        int n = static_cast<int>(torch::cuda::device_count());
+        fn(std::make_pair(0ULL, static_cast<unsigned long long>(n)));
     }
     return R_NilValue;
 }

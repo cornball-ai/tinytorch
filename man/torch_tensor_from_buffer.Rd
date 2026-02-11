@@ -3,7 +3,7 @@
 \alias{torch_tensor_from_buffer}
 \title{Create a tensor from raw bytes buffer}
 \usage{
-torch_tensor_from_buffer(raw, shape, dtype)
+torch_tensor_from_buffer(raw, shape, dtype, device = NULL)
 }
 \arguments{
 \item{raw}{Raw vector of bytes.}

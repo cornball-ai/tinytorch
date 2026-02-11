@@ -1057,13 +1057,14 @@ extern "C" SEXP C_torch_istft(SEXP input, SEXP n_fft_sexp, SEXP hop_sexp,
 }
 
 extern "C" SEXP C_torch_hann_window(SEXP length_sexp, SEXP periodic_sexp,
-                                     SEXP dtype_sexp) {
+                                     SEXP dtype_sexp, SEXP device_sexp) {
     try {
         int64_t length = static_cast<int64_t>(Rf_asInteger(length_sexp));
         bool periodic = Rf_asLogical(periodic_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
         if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         return make_tensor_sexp(new at::Tensor(
             torch::hann_window(length, periodic, opts)));
     } catch (const std::exception& e) {

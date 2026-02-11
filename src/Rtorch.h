@@ -27,4 +27,7 @@ c10::optional<at::ScalarType> sexp_to_dtype(SEXP dtype);
 // Convert R integer/numeric vector to IntArrayRef (caller owns storage)
 std::vector<int64_t> sexp_to_int_vec(SEXP x);
 
+// Convert R string SEXP to at::Device (NULL → CPU)
+at::Device sexp_to_device(SEXP device_sexp);
+
 #endif // RTORCH_H
