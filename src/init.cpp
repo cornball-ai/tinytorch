@@ -195,6 +195,8 @@ extern "C" SEXP C_tensor_to_dtype_device(SEXP, SEXP, SEXP);
 extern "C" SEXP C_cuda_is_available();
 extern "C" SEXP C_cuda_device_count();
 extern "C" SEXP C_cuda_empty_cache();
+extern "C" SEXP C_cuda_mem_info();
+extern "C" SEXP C_cuda_memory_stats();
 
 static const R_CallMethodDef CallEntries[] = {
     // Creation
@@ -392,6 +394,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_cuda_is_available",     (DL_FUNC) &C_cuda_is_available,     0},
     {"C_cuda_device_count",     (DL_FUNC) &C_cuda_device_count,     0},
     {"C_cuda_empty_cache",      (DL_FUNC) &C_cuda_empty_cache,      0},
+    {"C_cuda_mem_info",         (DL_FUNC) &C_cuda_mem_info,         0},
+    {"C_cuda_memory_stats",     (DL_FUNC) &C_cuda_memory_stats,     0},
 
     {NULL, NULL, 0}
 };

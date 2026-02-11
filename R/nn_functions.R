@@ -356,6 +356,34 @@ cuda_device_count <- function() .Call(C_cuda_device_count)
 #' @export
 cuda_empty_cache <- function() invisible(.Call(C_cuda_empty_cache))
 
+#' CUDA memory info
+#'
+#' Returns free and total GPU memory in bytes for the current device,
+#' as reported by the CUDA runtime (cudaMemGetInfo).
+#' @return Named numeric vector with elements "free" and "total".
+#' @export
+cuda_mem_info <- function() {
+    x <- .Call(C_cuda_mem_info)
+    if (length(x) == 0) return(c(free = 0, total = 0))
+    c(free = x[1], total = x[2])
+}
+
+#' CUDA memory statistics from libtorch caching allocator
+#'
+#' Returns allocated and reserved memory in bytes. "Allocated" is memory
+#' actively used by tensors. "Reserved" is total memory held by the
+#' caching allocator (allocated + cached free blocks).
+#' @return Named numeric vector: allocated_current, allocated_peak,
+#'   reserved_current, reserved_peak.
+#' @export
+cuda_memory_stats <- function() {
+    x <- .Call(C_cuda_memory_stats)
+    if (length(x) == 0) return(c(allocated_current = 0, allocated_peak = 0,
+                                  reserved_current = 0, reserved_peak = 0))
+    c(allocated_current = x[1], allocated_peak = x[2],
+      reserved_current = x[3], reserved_peak = x[4])
+}
+
 #' No-op autocast context manager
 #'
 #' Since Rtorch is CPU-only, autocast is a no-op.

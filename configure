@@ -29,10 +29,25 @@ echo "  Libraries: $TORCH_LIB"
 
 # Detect CUDA support
 CUDA_LIBS=""
+CUDA_CPPFLAGS=""
 if [ -f "$TORCH_LIB/libtorch_cuda.so" ] || [ -f "$TORCH_LIB/libtorch_cuda.dylib" ]; then
   # --no-as-needed forces the library into DT_NEEDED even without direct symbol refs.
   # libtorch_cuda registers CUDA dispatch keys via static constructors at load time.
   CUDA_LIBS="-Wl,--no-as-needed -ltorch_cuda -lc10_cuda -Wl,--as-needed"
+
+  # Find CUDA SDK headers (needed for CUDACachingAllocator.h -> cuda_runtime_api.h)
+  for cuda_dir in /usr/local/cuda /usr/local/cuda-12 /usr/local/cuda-12.8; do
+    if [ -f "$cuda_dir/include/cuda_runtime_api.h" ]; then
+      CUDA_CPPFLAGS="-I${cuda_dir}/include -DRTORCH_CUDA"
+      echo "  CUDA SDK: $cuda_dir/include"
+      break
+    fi
+  done
+  if [ -z "$CUDA_CPPFLAGS" ]; then
+    # No CUDA SDK headers, use dlsym fallback
+    CUDA_CPPFLAGS="-DRTORCH_CUDA -DRTORCH_CUDA_NO_SDK"
+    echo "  CUDA SDK: not found (using dlsym fallback)"
+  fi
   echo "  CUDA: enabled"
 else
   echo "  CUDA: not available (CPU only)"
@@ -43,6 +58,7 @@ sed \
   -e "s|@TORCH_INCLUDE@|${TORCH_INCLUDE}|g" \
   -e "s|@TORCH_LIB@|${TORCH_LIB}|g" \
   -e "s|@CUDA_LIBS@|${CUDA_LIBS}|g" \
+  -e "s|@CUDA_CPPFLAGS@|${CUDA_CPPFLAGS}|g" \
   src/Makevars.in > src/Makevars
 
 echo "Generated src/Makevars"

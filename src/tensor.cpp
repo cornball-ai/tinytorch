@@ -1,5 +1,4 @@
 #include "Rtorch.h"
-#include <dlfcn.h>
 
 // ---- Tensor finalizer ----
 
@@ -609,18 +608,68 @@ extern "C" SEXP C_cuda_device_count() {
     return Rf_ScalarInteger(static_cast<int>(torch::cuda::device_count()));
 }
 
+// ---- CUDA memory management ----
+
+#ifdef RTORCH_CUDA
+#ifndef RTORCH_CUDA_NO_SDK
+#include <c10/cuda/CUDACachingAllocator.h>
+#include <cuda_runtime_api.h>
+#endif
+#endif
+
 extern "C" SEXP C_cuda_empty_cache() {
     if (!torch::cuda::is_available()) return R_NilValue;
-
-    // Find emptyCache via dlsym since we don't have CUDA SDK headers.
-    // Symbol: c10::cuda::CUDACachingAllocator::emptyCache(std::pair<size_t,size_t>)
-    using EmptyCacheFn = void(*)(std::pair<unsigned long long, unsigned long long>);
-    void* sym = dlsym(RTLD_DEFAULT,
-        "_ZN3c104cuda20CUDACachingAllocator10emptyCacheESt4pairIyyE");
-    if (sym) {
-        auto fn = reinterpret_cast<EmptyCacheFn>(sym);
-        int n = static_cast<int>(torch::cuda::device_count());
-        fn(std::make_pair(0ULL, static_cast<unsigned long long>(n)));
-    }
+#if defined(RTORCH_CUDA) && !defined(RTORCH_CUDA_NO_SDK)
+    c10::cuda::CUDACachingAllocator::emptyCache();
+#endif
     return R_NilValue;
+}
+
+// Return c(free, total) in bytes for the current CUDA device
+extern "C" SEXP C_cuda_mem_info() {
+    if (!torch::cuda::is_available()) {
+        return Rf_allocVector(REALSXP, 0);
+    }
+#if defined(RTORCH_CUDA) && !defined(RTORCH_CUDA_NO_SDK)
+    size_t free_bytes = 0, total_bytes = 0;
+    cudaError_t err = cudaMemGetInfo(&free_bytes, &total_bytes);
+    if (err != cudaSuccess) Rf_error("cudaMemGetInfo failed: %s", cudaGetErrorString(err));
+
+    SEXP result = PROTECT(Rf_allocVector(REALSXP, 2));
+    REAL(result)[0] = static_cast<double>(free_bytes);
+    REAL(result)[1] = static_cast<double>(total_bytes);
+    UNPROTECT(1);
+    return result;
+#else
+    Rf_error("cuda_mem_info requires CUDA SDK headers at build time");
+    return R_NilValue;
+#endif
+}
+
+// Return c(allocated, reserved) in bytes from libtorch's caching allocator
+extern "C" SEXP C_cuda_memory_stats() {
+    if (!torch::cuda::is_available()) {
+        return Rf_allocVector(REALSXP, 0);
+    }
+#if defined(RTORCH_CUDA) && !defined(RTORCH_CUDA_NO_SDK)
+    try {
+        auto stats = c10::cuda::CUDACachingAllocator::getDeviceStats(0);
+        SEXP result = PROTECT(Rf_allocVector(REALSXP, 4));
+        REAL(result)[0] = static_cast<double>(stats.allocated_bytes[0].current);
+        REAL(result)[1] = static_cast<double>(stats.allocated_bytes[0].peak);
+        REAL(result)[2] = static_cast<double>(stats.reserved_bytes[0].current);
+        REAL(result)[3] = static_cast<double>(stats.reserved_bytes[0].peak);
+        UNPROTECT(1);
+        return result;
+    } catch (const std::exception& e) {
+        // Allocator not yet initialized — return zeros
+        SEXP result = PROTECT(Rf_allocVector(REALSXP, 4));
+        REAL(result)[0] = REAL(result)[1] = REAL(result)[2] = REAL(result)[3] = 0.0;
+        UNPROTECT(1);
+        return result;
+    }
+#else
+    Rf_error("cuda_memory_stats requires CUDA SDK headers at build time");
+    return R_NilValue;
+#endif
 }
