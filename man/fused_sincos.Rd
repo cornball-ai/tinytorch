@@ -14,3 +14,8 @@ A list with sin and cos tensors (float32).
 \description{
 Fused sin and cos
 }
+\examples{
+\donttest{
+fused_sincos(torch_randn(c(2, 3)))
+}
+}

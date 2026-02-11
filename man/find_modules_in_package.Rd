@@ -15,3 +15,8 @@ A data.frame with columns: name, file, exported
 Searches a package's R source files for nn_module definitions.
 Works on both installed packages and local source directories.
 }
+\examples{
+\donttest{
+find_modules_in_package("Rtorch")
+}
+}

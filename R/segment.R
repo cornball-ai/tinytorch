@@ -12,6 +12,9 @@
 #' @param expr An R expression (typically a block `{...}`)
 #' @return A list of segments, each with `type` ("graph" or "r_code")
 #'   and `statements` (list of expressions)
+#' @examples
+#' segs <- segment_expr(quote({ y <- x$relu(); print(y) }))
+#' length(segs)
 #' @export
 segment_expr <- function(expr) {
   walked <- walk_expr(expr)
@@ -69,6 +72,8 @@ segment_expr <- function(expr) {
 #'
 #' @param expr An R expression
 #' @return A data.frame with segment info
+#' @examples
+#' analyze_segments(quote({ y <- x$relu(); print(y) }))
 #' @export
 analyze_segments <- function(expr) {
   segments <- segment_expr(expr)
@@ -117,26 +122,28 @@ execute_segmented <- function(expr, env, compile = FALSE) {
 #'
 #' @param expr An R expression
 #' @return Invisibly returns the segments
+#' @examples
+#' print_segments(quote({ y <- x$relu(); print(y) }))
 #' @export
 print_segments <- function(expr) {
   segments <- segment_expr(expr)
 
-  cat(sprintf("Expression segments: %d\n", length(segments)))
-  cat(paste(rep("-", 40), collapse = ""), "\n")
+  message(sprintf("Expression segments: %d", length(segments)))
+  message(paste(rep("-", 40), collapse = ""))
 
   for (i in seq_along(segments)) {
     seg <- segments[[i]]
     type_label <- if (seg$type == "graph") "[GRAPH]" else "[R CODE]"
 
-    cat(sprintf("\nSegment %d %s (%d statement%s):\n",
-                i, type_label,
-                length(seg$statements),
-                if (length(seg$statements) == 1) "" else "s"))
+    message(sprintf("\nSegment %d %s (%d statement%s):",
+                    i, type_label,
+                    length(seg$statements),
+                    if (length(seg$statements) == 1) "" else "s"))
 
     for (stmt in seg$statements) {
       lines <- deparse(stmt)
       for (line in lines) {
-        cat(sprintf("  %s\n", line))
+        message(sprintf("  %s", line))
       }
     }
   }

@@ -8,3 +8,6 @@ gpu_kernel_clear()
 \description{
 Clear GPU kernel cache
 }
+\examples{
+gpu_kernel_clear()
+}

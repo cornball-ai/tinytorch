@@ -15,3 +15,10 @@ torch_sum(self, dim = NULL, keepdim = FALSE)
 \description{
 Sum of tensor elements
 }
+\examples{
+\donttest{
+x <- torch_randn(c(2, 3))
+torch_sum(x)
+torch_sum(x, dim = 1)
+}
+}

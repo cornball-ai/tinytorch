@@ -11,3 +11,8 @@ torch_sin(self)
 \description{
 Compute sin of tensor
 }
+\examples{
+\donttest{
+torch_sin(torch_tensor(c(0, 3.14159 / 2)))
+}
+}

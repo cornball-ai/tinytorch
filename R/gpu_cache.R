@@ -10,6 +10,8 @@
 #' @param ir_hash Character hash of IR graph structure
 #' @param sm_version Integer CUDA compute capability (e.g., 86 for sm_86)
 #' @return Cached PTX string or NULL if not found
+#' @examples
+#' gpu_kernel_get("abc123", 86)
 #' @export
 gpu_kernel_get <- function(ir_hash, sm_version) {
   cache_key <- paste0(ir_hash, "_", sm_version)
@@ -21,6 +23,8 @@ gpu_kernel_get <- function(ir_hash, sm_version) {
 #' @param ir_hash Character hash of IR graph structure
 #' @param sm_version Integer CUDA compute capability
 #' @param ptx Character PTX assembly code
+#' @examples
+#' gpu_kernel_set("abc123", 86, "// ptx code")
 #' @export
 gpu_kernel_set <- function(ir_hash, sm_version, ptx) {
   cache_key <- paste0(ir_hash, "_", sm_version)
@@ -30,6 +34,8 @@ gpu_kernel_set <- function(ir_hash, sm_version, ptx) {
 
 #' Clear GPU kernel cache
 #'
+#' @examples
+#' gpu_kernel_clear()
 #' @export
 gpu_kernel_clear <- function() {
   rm(list = ls(.gpu_kernel_cache), envir = .gpu_kernel_cache)
@@ -39,6 +45,8 @@ gpu_kernel_clear <- function() {
 #' Get cache statistics
 #'
 #' @return Named list with cache stats
+#' @examples
+#' gpu_kernel_stats()
 #' @export
 gpu_kernel_stats <- function() {
   list(
@@ -53,6 +61,13 @@ gpu_kernel_stats <- function() {
 #'
 #' @param graph IR graph object
 #' @return Character hash string
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' compute_ir_hash(g)
+#' }
 #' @export
 compute_ir_hash <- function(graph) {
   # Build structural fingerprint: node ops + connections

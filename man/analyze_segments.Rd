@@ -14,3 +14,6 @@ A data.frame with segment info
 \description{
 Provides a summary of how an expression would be segmented.
 }
+\examples{
+analyze_segments(quote({ y <- x$relu(); print(y) }))
+}

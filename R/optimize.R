@@ -100,6 +100,13 @@
 #'
 #' @param graph An ir_graph
 #' @return A new ir_graph with constants folded
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' constant_fold(g)
+#' }
 #' @export
 constant_fold <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -138,6 +145,13 @@ constant_fold <- function(graph) {
 #'
 #' @param graph An ir_graph
 #' @return A new ir_graph with dead nodes removed
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' dead_code_eliminate(g)
+#' }
 #' @export
 dead_code_eliminate <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -170,6 +184,13 @@ dead_code_eliminate <- function(graph) {
 #'
 #' @param graph An ir_graph
 #' @return A new ir_graph with duplicate expressions eliminated
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' common_subexpr_eliminate(g)
+#' }
 #' @export
 common_subexpr_eliminate <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -223,6 +244,13 @@ common_subexpr_eliminate <- function(graph) {
 #'
 #' @param graph An ir_graph
 #' @return A new ir_graph with algebraic simplifications applied
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$mul(torch_tensor(1.0))))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' algebraic_simplify(g)
+#' }
 #' @export
 algebraic_simplify <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -336,6 +364,13 @@ algebraic_simplify <- function(graph) {
 #'
 #' @param graph An ir_graph
 #' @return A new ir_graph with decomposed ops
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' decompose_high_level_ops(g)
+#' }
 #' @export
 decompose_high_level_ops <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -420,6 +455,13 @@ decompose_high_level_ops <- function(graph) {
 #'
 #' @param graph An ir_graph
 #' @return A new ir_graph with fusion_group annotations
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()$sigmoid()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' fusion_annotate(g)
+#' }
 #' @export
 fusion_annotate <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -596,6 +638,13 @@ detect_matmul_epilogues <- function(graph) {
 #' @param graph An ir_graph
 #' @param passes List of pass functions. If NULL, uses default pipeline.
 #' @return An optimized ir_graph
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()$sigmoid()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' optimize_graph(g)
+#' }
 #' @export
 optimize_graph <- function(graph, passes = NULL) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)

@@ -15,3 +15,11 @@ A new ir_graph with dead nodes removed
 Remove nodes whose outputs are never consumed.
 Walks backward from outputs to find reachable nodes.
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+dead_code_eliminate(g)
+}
+}

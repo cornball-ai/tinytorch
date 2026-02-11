@@ -322,6 +322,10 @@ compile_fused_kernel <- function(ops, dtype = "float") {
 #' @param tensor Input torch tensor
 #' @param ops Character vector of operations
 #' @return Output torch tensor
+#' @examples
+#' \donttest{
+#' fused_ops(torch_randn(c(2, 3)), c("relu", "sigmoid"))
+#' }
 #' @export
 fused_ops <- function(tensor, ops) {
   if (!inherits(tensor, "torch_tensor")) {
@@ -365,6 +369,8 @@ fused_ops <- function(tensor, ops) {
 #' Clear Codegen Cache
 #'
 #' @return Number of kernels cleared
+#' @examples
+#' clear_codegen_cache()
 #' @export
 clear_codegen_cache <- function() {
   n <- length(ls(.codegen_cache))
@@ -376,6 +382,8 @@ clear_codegen_cache <- function() {
 #' Get Codegen Cache Stats
 #'
 #' @return List with cache size and keys
+#' @examples
+#' codegen_cache_stats()
 #' @export
 codegen_cache_stats <- function() {
   list(
@@ -447,6 +455,13 @@ get_fusion_groups <- function(graph) {
 #' @param func_name Optional function name (auto-generated if NULL)
 #' @return List with code, func_name, n_inputs, external_input_ids,
 #'   output_id, group_node_ids, dtype. NULL if group has unsupported ops.
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()$sigmoid()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- fusion_annotate(lower_to_ir(stmts, e))
+#' emit_fused_cpu_kernel(g, 1L)
+#' }
 #' @export
 emit_fused_cpu_kernel <- function(graph, group_id, func_name = NULL) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -795,6 +810,8 @@ compile_fusion_group <- function(graph, group_id) {
 #' and clears the in-memory registry.
 #'
 #' @return Number of cached kernels cleared (invisibly)
+#' @examples
+#' clear_kernel_cache()
 #' @export
 clear_kernel_cache <- function() {
   # Clear in-memory registry
@@ -818,6 +835,8 @@ clear_kernel_cache <- function() {
 #' Get Kernel Cache Statistics
 #'
 #' @return List with n_memory (in-memory), n_disk (on disk), cache_dir
+#' @examples
+#' kernel_cache_stats()
 #' @export
 kernel_cache_stats <- function() {
   cache_dir <- .kernel_cache_dir()
@@ -1100,6 +1119,8 @@ compile_matmul_epilogue_gpu <- function(pattern_info,
 #' Clear GPU Kernel Cache
 #'
 #' @return Number of entries cleared (invisibly)
+#' @examples
+#' clear_gpu_kernel_cache()
 #' @export
 clear_gpu_kernel_cache <- function() {
   nms <- ls(.gpu_kernel_cache)

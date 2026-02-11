@@ -5,6 +5,9 @@
 \usage{
 .find_modules_runtime(pkg_name)
 }
+\arguments{
+\item{pkg_name}{Package name string.}
+}
 \description{
 Find nn_modules at Runtime in an Installed Package
 }

@@ -11,3 +11,9 @@ An nn_module instance.
 \description{
 ReLU activation module
 }
+\examples{
+\donttest{
+m <- nn_relu()
+m(torch_randn(c(2, 3)))
+}
+}

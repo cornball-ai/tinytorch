@@ -14,3 +14,8 @@ A new torch tensor (float32).
 \description{
 Fused GELU activation
 }
+\examples{
+\donttest{
+fused_gelu(torch_randn(c(2, 3)))
+}
+}

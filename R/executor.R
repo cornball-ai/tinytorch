@@ -575,9 +575,17 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
 #'   shape inference and fusion compilation)
 #' @param optimize Logical, run optimization passes (default TRUE)
 #' @param fuse Logical, compile fusion groups to kernels (default TRUE)
+#' @param fuse_matmul_epilogues Logical, fuse matmul+bias+activation on GPU (default FALSE)
 #' @param backend Character: "auto", "gpu", or "cpu". "auto" detects
 #'   from input tensors and ariel availability.
 #' @return A \code{prepared_graph} object
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' pg <- prepare_graph(g, list(x = torch_randn(c(2, 3))))
+#' }
 #' @export
 prepare_graph <- function(graph, example_inputs, optimize = TRUE, fuse = TRUE,
                            fuse_matmul_epilogues = FALSE, backend = "auto") {
@@ -745,6 +753,14 @@ prepare_graph <- function(graph, example_inputs, optimize = TRUE, fuse = TRUE,
 #' @param inputs Named list of input torch_tensors
 #' @param verbose Logical, print execution info
 #' @return A torch_tensor (or list of tensors for multi-output graphs)
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' pg <- prepare_graph(g, list(x = torch_randn(c(2, 3))))
+#' execute_prepared(pg, list(x = torch_randn(c(2, 3))))
+#' }
 #' @export
 execute_prepared <- function(prepared, inputs, verbose = FALSE) {
   if (!inherits(prepared, "prepared_graph")) {
@@ -798,16 +814,16 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
       result <- tryCatch(
         do.call(k$call_fn, ext_inputs),
         error = function(e) {
-          if (verbose) cat(sprintf("  Matmul epilogue failed: %s\n",
-                                    conditionMessage(e)))
+          if (verbose) message(sprintf("  Matmul epilogue failed: %s",
+                                       conditionMessage(e)))
           NULL
         }
       )
       if (!is.null(result)) {
         values[[as.character(k$output_id)]] <- result
         if (verbose) {
-          cat(sprintf("  Matmul+bias+%s fused (GPU)\n",
-                      paste(k$epilogue_ops %||% "none", collapse = "+")))
+          message(sprintf("  Matmul+bias+%s fused (GPU)",
+                          paste(k$epilogue_ops %||% "none", collapse = "+")))
         }
         next
       }
@@ -828,7 +844,7 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
             # GPU kernels return torch_tensor directly; CPU returns raw pointer
             if (is_gpu_kernel) raw else .wrap_result_tensor(raw)
           }, error = function(e) {
-            if (verbose) cat(sprintf("  Fusion failed: %s\n", conditionMessage(e)))
+            if (verbose) message(sprintf("  Fusion failed: %s", conditionMessage(e)))
             NULL
           })
 
@@ -836,8 +852,8 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
             values[[as.character(k$output_id)]] <- result
             if (verbose) {
               tag <- if (is_gpu_kernel) "GPU" else "CPU"
-              cat(sprintf("  Fused group %d: %d ops -> 1 %s kernel\n",
-                          gid, length(k$group_node_ids), tag))
+              message(sprintf("  Fused group %d: %d ops -> 1 %s kernel",
+                              gid, length(k$group_node_ids), tag))
             }
             next
           }
@@ -874,7 +890,7 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
 
     # Check all inputs are available
     if (any(vapply(inp_tensors, is.null, logical(1)))) {
-      if (verbose) cat(sprintf("  Skip %%%d (%s): missing inputs\n", id, node$op))
+      if (verbose) message(sprintf("  Skip %%%d (%s): missing inputs", id, node$op))
       next
     }
 
@@ -882,15 +898,15 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
     result <- tryCatch(
       dispatch_torch_op(node$op, inp_tensors, node$attrs),
       error = function(e) {
-        if (verbose) cat(sprintf("  Error %%%d (%s): %s\n",
-                                 id, node$op, conditionMessage(e)))
+        if (verbose) message(sprintf("  Error %%%d (%s): %s",
+                                    id, node$op, conditionMessage(e)))
         NULL
       }
     )
     values[[id_str]] <- result
 
     if (verbose) {
-      cat(sprintf("  %%%d = %s\n", id, node$op))
+      message(sprintf("  %%%d = %s", id, node$op))
     }
   }
 
@@ -921,10 +937,18 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
 #' @param inputs Named list of input torch_tensors
 #' @param optimize Logical, run optimization passes (default TRUE)
 #' @param fuse Logical, compile fusion groups to kernels (default TRUE)
+#' @param fuse_matmul_epilogues Logical, fuse matmul+bias+activation on GPU (default FALSE)
 #' @param backend Character: "auto", "gpu", or "cpu". "auto" detects
 #'   from input tensors and ariel availability.
 #' @param verbose Logical, print execution info
 #' @return A torch_tensor (or list of tensors for multi-output graphs)
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' execute_optimized(g, list(x = torch_randn(c(2, 3))))
+#' }
 #' @export
 execute_optimized <- function(graph, inputs, optimize = TRUE, fuse = TRUE,
                               fuse_matmul_epilogues = FALSE,
@@ -979,9 +1003,9 @@ execute_optimized <- function(graph, inputs, optimize = TRUE, fuse = TRUE,
                                fuse_matmul_epilogues = fuse_matmul_epilogues,
                                backend = resolved_backend)
     .exec_cache[[cache_key]] <- prepared
-    if (verbose) cat("Cache miss: prepared and cached graph\n")
+    if (verbose) message("Cache miss: prepared and cached graph")
   } else {
-    if (verbose) cat("Cache hit: using prepared graph\n")
+    if (verbose) message("Cache hit: using prepared graph")
   }
 
   execute_prepared(prepared, inputs, verbose = verbose)
@@ -994,6 +1018,8 @@ execute_optimized <- function(graph, inputs, optimize = TRUE, fuse = TRUE,
 #' \code{execute_optimized()}.
 #'
 #' @return Integer, number of entries cleared (invisibly)
+#' @examples
+#' clear_exec_cache()
 #' @export
 clear_exec_cache <- function() {
   nms <- ls(.exec_cache)
@@ -1009,6 +1035,8 @@ clear_exec_cache <- function() {
 #' \code{execute_optimized()}.
 #'
 #' @return A list with \code{n_cached} (number of cached prepared graphs)
+#' @examples
+#' exec_cache_stats()
 #' @export
 exec_cache_stats <- function() {
   list(n_cached = length(ls(.exec_cache)))

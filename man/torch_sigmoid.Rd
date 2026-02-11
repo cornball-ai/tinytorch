@@ -5,6 +5,15 @@
 \usage{
 torch_sigmoid(self)
 }
+\arguments{
+\item{self}{A torch_tensor.}
+}
 \description{
 Sigmoid activation (namespace-level)
+}
+\examples{
+\donttest{
+x <- torch_randn(c(2, 3))
+torch_sigmoid(x)
+}
 }

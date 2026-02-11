@@ -11,3 +11,11 @@ with_no_grad(code)
 \description{
 Since Rtorch has no autograd, this simply evaluates the expression.
 }
+\examples{
+\donttest{
+with_no_grad({
+  x <- torch_randn(c(2, 3))
+  torch_relu(x)
+})
+}
+}

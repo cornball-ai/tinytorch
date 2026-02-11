@@ -18,3 +18,12 @@ Takes a graph-safe segment's statements (raw R expressions) plus
 the evaluation environment. Walks each statement recursively,
 emitting IR nodes.
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env()
+e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+print(g)
+}
+}

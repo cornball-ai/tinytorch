@@ -86,6 +86,11 @@ compile <- function(obj, ..., path = NULL,
 #'
 #' @return A \code{compiled_module} object.
 #'
+#' @examples
+#' \dontrun{
+#' loaded <- load_compiled("/tmp/model.torchlang")
+#' }
+#'
 #' @export
 load_compiled <- function(path) {
   if (!dir.exists(path)) {
@@ -167,6 +172,12 @@ load_compiled <- function(path) {
 #' @param x A \code{compiled_module}
 #' @param ... Ignored
 #' @return Invisibly returns \code{x}
+#' @examples
+#' \donttest{
+#' m <- nn_linear(3, 2)
+#' cm <- compile(m, input = torch_randn(c(1, 3)))
+#' print(cm)
+#' }
 #' @export
 print.compiled_module <- function(x, ...) {
   cls <- x$meta$class %||% "unknown"

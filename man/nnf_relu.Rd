@@ -11,3 +11,8 @@ nnf_relu(input)
 \description{
 ReLU activation (functional)
 }
+\examples{
+\donttest{
+nnf_relu(torch_tensor(c(-1, 0, 1)))
+}
+}

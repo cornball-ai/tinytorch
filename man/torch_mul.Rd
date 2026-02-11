@@ -5,6 +5,17 @@
 \usage{
 torch_mul(self, other)
 }
+\arguments{
+\item{self}{A torch_tensor.}
+
+\item{other}{A torch_tensor or scalar.}
+}
 \description{
 Multiply two tensors element-wise
+}
+\examples{
+\donttest{
+a <- torch_randn(c(2, 3))
+torch_mul(a, 2.0)
+}
 }

@@ -16,3 +16,8 @@ Output torch tensor
 \description{
 Execute Fused Operation Chain
 }
+\examples{
+\donttest{
+fused_ops(torch_randn(c(2, 3)), c("relu", "sigmoid"))
+}
+}

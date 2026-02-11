@@ -11,3 +11,8 @@ Character vector of package names
 \description{
 Searches installed R packages for those that import or depend on torch.
 }
+\examples{
+\donttest{
+find_torch_packages()
+}
+}

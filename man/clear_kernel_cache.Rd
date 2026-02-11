@@ -12,3 +12,6 @@ Number of cached kernels cleared (invisibly)
 Removes all compiled kernel shared libraries from the disk cache
 and clears the in-memory registry.
 }
+\examples{
+clear_kernel_cache()
+}

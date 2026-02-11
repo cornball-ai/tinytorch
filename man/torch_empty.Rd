@@ -15,3 +15,8 @@ torch_empty(..., dtype = NULL, device = NULL)
 \description{
 Create an uninitialized tensor
 }
+\examples{
+\donttest{
+torch_empty(c(2, 3))
+}
+}

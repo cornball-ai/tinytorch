@@ -4,36 +4,81 @@
 #' @param self A torch_tensor.
 #' @param other A torch_tensor.
 #' @param alpha Scalar multiplier for other (default 1).
+#' @examples
+#' \donttest{
+#' a <- torch_ones(c(2, 3))
+#' b <- torch_ones(c(2, 3))
+#' torch_add(a, b)
+#' }
 #' @export
 torch_add <- function(self, other, alpha = 1) {
   .Call(C_torch_add, self, other, alpha)
 }
 
 #' Subtract two tensors
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param alpha Scalar multiplier for other (default 1).
+#' @examples
+#' \donttest{
+#' a <- torch_ones(c(2, 3))
+#' b <- torch_ones(c(2, 3))
+#' torch_sub(a, b)
+#' }
 #' @export
 torch_sub <- function(self, other, alpha = 1) {
   .Call(C_torch_sub, self, other, alpha)
 }
 
 #' Multiply two tensors element-wise
+#' @param self A torch_tensor.
+#' @param other A torch_tensor or scalar.
+#' @examples
+#' \donttest{
+#' a <- torch_randn(c(2, 3))
+#' torch_mul(a, 2.0)
+#' }
 #' @export
 torch_mul <- function(self, other) {
   .Call(C_torch_mul, self, other)
 }
 
 #' Divide two tensors element-wise
+#' @param self A torch_tensor.
+#' @param other A torch_tensor or scalar.
+#' @examples
+#' \donttest{
+#' a <- torch_randn(c(2, 3))
+#' torch_div(a, 2.0)
+#' }
 #' @export
 torch_div <- function(self, other) {
   .Call(C_torch_div, self, other)
 }
 
 #' Matrix multiplication
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @examples
+#' \donttest{
+#' a <- torch_randn(c(2, 3))
+#' b <- torch_randn(c(3, 4))
+#' torch_matmul(a, b)
+#' }
 #' @export
 torch_matmul <- function(self, other) {
   .Call(C_torch_matmul, self, other)
 }
 
 #' Matrix-matrix multiplication (2D only)
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @examples
+#' \donttest{
+#' a <- torch_randn(c(2, 3))
+#' b <- torch_randn(c(3, 4))
+#' torch_mm(a, b)
+#' }
 #' @export
 torch_mm <- function(self, other) {
   .Call(C_torch_mm, self, other)
@@ -43,18 +88,39 @@ torch_mm <- function(self, other) {
 #' @param self A torch_tensor.
 #' @param dim Optional dimension to reduce (1-based).
 #' @param keepdim Whether to keep the reduced dimension.
+#' @examples
+#' \donttest{
+#' x <- torch_randn(c(2, 3))
+#' torch_sum(x)
+#' torch_sum(x, dim = 1)
+#' }
 #' @export
 torch_sum <- function(self, dim = NULL, keepdim = FALSE) {
   .Call(C_torch_sum, self, dim, keepdim)
 }
 
 #' Mean of tensor elements
+#' @param self A torch_tensor.
+#' @param dim Optional dimension to reduce (1-based).
+#' @param keepdim Whether to keep the reduced dimension.
+#' @examples
+#' \donttest{
+#' x <- torch_randn(c(2, 3))
+#' torch_mean(x)
+#' torch_mean(x, dim = 1)
+#' }
 #' @export
 torch_mean <- function(self, dim = NULL, keepdim = FALSE) {
   .Call(C_torch_mean, self, dim, keepdim)
 }
 
 #' Sigmoid activation (namespace-level)
+#' @param self A torch_tensor.
+#' @examples
+#' \donttest{
+#' x <- torch_randn(c(2, 3))
+#' torch_sigmoid(x)
+#' }
 #' @export
 torch_sigmoid <- function(self) {
   .Call(C_torch_sigmoid, self)
@@ -251,6 +317,102 @@ torch_sigmoid <- function(self) {
 
 # No-ops for CPU-only (return self unchanged)
 .tensor_methods$cpu <- function(self) self
+.tensor_methods$cuda <- function(self, ...) self
+.tensor_methods$float <- function(self) .Call(C_torch_to_dtype, self, 6L)  # torch_float32
+.tensor_methods$half <- function(self) .Call(C_torch_to_dtype, self, 5L)  # torch_float16
+.tensor_methods$long <- function(self) .Call(C_torch_to_dtype, self, 4L)  # torch_int64
+
+# Permute dimensions
+.tensor_methods$permute <- function(self, dims) {
+  .Call(C_torch_permute, self, as.integer(dims))
+}
+
+# Expand to larger size
+.tensor_methods$expand <- function(self, size) {
+  .Call(C_torch_expand, self, as.integer(size))
+}
+
+# Gather elements along a dimension
+.tensor_methods$gather <- function(self, dim, index) {
+  .Call(C_torch_gather, self, as.integer(dim), index)
+}
+
+# Masked fill
+.tensor_methods$masked_fill <- function(self, mask, value) {
+  .Call(C_torch_masked_fill, self, mask, as.double(value))
+}
+
+.tensor_methods$masked_fill_ <- function(self, mask, value) {
+  .Call(C_torch_masked_fill_, self, mask, as.double(value))
+}
+
+# Copy from another tensor (in-place)
+.tensor_methods$copy_ <- function(self, src) {
+  .Call(C_torch_copy_, self, src)
+}
+
+# Norm
+.tensor_methods$norm <- function(self, p = 2, dim = NULL, keepdim = FALSE) {
+  .Call(C_torch_norm, self, as.double(p), dim, as.logical(keepdim))
+}
+
+# Fill with normal random values (in-place)
+.tensor_methods$normal_ <- function(self, mean = 0, std = 1) {
+  .Call(C_torch_normal_, self, as.double(mean), as.double(std))
+}
+
+# Fill with uniform random values (in-place)
+.tensor_methods$uniform_ <- function(self, from = 0, to = 1) {
+  .Call(C_torch_uniform_, self, as.double(from), as.double(to))
+}
+
+# Fill with zeros (in-place)
+.tensor_methods$zero_ <- function(self) {
+  .Call(C_torch_zero_, self)
+}
+
+# Fill with a scalar (in-place)
+.tensor_methods$fill_ <- function(self, value) {
+  .Call(C_torch_fill_, self, as.double(value))
+}
+
+# Standard deviation
+.tensor_methods$std <- function(self, dim = NULL, keepdim = FALSE) {
+  .Call(C_torch_std, self, dim, as.logical(keepdim))
+}
+
+# Repeat (tile) tensor
+.tensor_methods$repeat_interleave <- function(self, repeats, dim = NULL) {
+  .Call(C_torch_repeat_interleave, self, as.integer(repeats), dim)
+}
+
+# repeat (numpy-style tile)
+.tensor_methods[["repeat"]] <- function(self, sizes) {
+  .Call(C_torch_repeat, self, as.integer(sizes))
+}
+
+# Convert to R list
+.tensor_methods$tolist <- function(self) {
+  as.list(as.numeric(.Call(C_as_array, self)))
+}
+
+# Indexing support
+.tensor_methods$index_select <- function(self, dim, index) {
+  .Call(C_torch_index_select, self, as.integer(dim), index)
+}
+
+# Narrow (slice along dimension)
+.tensor_methods$narrow <- function(self, dim, start, length) {
+  .Call(C_torch_narrow, self, as.integer(dim), as.integer(start), as.integer(length))
+}
+
+# Scatter
+.tensor_methods$scatter_ <- function(self, dim, index, src) {
+  .Call(C_torch_scatter_, self, as.integer(dim), index, src)
+}
+
+# Data property (no-op, returns self since no autograd)
+.tensor_properties$data <- function(self) self
 
 # Binary methods
 .tensor_methods$pow <- function(self, other) {
@@ -392,6 +554,11 @@ torch_sigmoid <- function(self) {
 
 # ---- print ----
 
+#' @examples
+#' \donttest{
+#' x <- torch_randn(c(2, 3))
+#' print(x)
+#' }
 #' @export
 print.torch_tensor <- function(x, ...) {
   .Call(C_tensor_print, x)
@@ -408,7 +575,9 @@ print.torch_tensor <- function(x, ...) {
 #' @export
 `+.torch_tensor` <- function(e1, e2) {
   if (missing(e2)) return(e1)
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_add_scalar, e2, e1)  # scalar + tensor = tensor + scalar
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_add, e1, e2, 1)
   } else {
     .Call(C_torch_add_scalar, e1, e2)
@@ -418,7 +587,10 @@ print.torch_tensor <- function(x, ...) {
 #' @export
 `-.torch_tensor` <- function(e1, e2) {
   if (missing(e2)) return(.Call(C_torch_neg, e1))
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    # scalar - tensor = -(tensor - scalar)
+    .Call(C_torch_neg, .Call(C_torch_sub_scalar, e2, e1))
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_sub, e1, e2, 1)
   } else {
     .Call(C_torch_sub_scalar, e1, e2)
@@ -427,7 +599,9 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `*.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_mul_scalar, e2, e1)  # scalar * tensor = tensor * scalar
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_mul, e1, e2)
   } else {
     .Call(C_torch_mul_scalar, e1, e2)
@@ -436,7 +610,11 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    # scalar / tensor: convert scalar to tensor
+    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    .Call(C_torch_div, e1, e2)
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_div, e1, e2)
   } else {
     .Call(C_torch_div_scalar, e1, e2)
@@ -445,7 +623,11 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `^.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    # scalar ^ tensor: convert scalar to tensor
+    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    .Call(C_torch_pow, e1, e2)
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_pow, e1, e2)
   } else {
     .Call(C_torch_pow_scalar, e1, e2)
@@ -454,7 +636,10 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `%%.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    .Call(C_torch_remainder, e1, e2)
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_remainder, e1, e2)
   } else {
     .Call(C_torch_remainder_scalar, e1, e2)
@@ -463,7 +648,10 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `%/%.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    e1 <- torch_tensor(e1, dtype = e2$dtype)
+    .Call(C_torch_floor_divide, e1, e2)
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_floor_divide, e1, e2)
   } else {
     .Call(C_torch_floor_divide_scalar, e1, e2)
@@ -472,7 +660,9 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `==.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_eq_scalar, e2, e1)
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_eq, e1, e2)
   } else {
     .Call(C_torch_eq_scalar, e1, e2)
@@ -481,7 +671,9 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `!=.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_ne_scalar, e2, e1)
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_ne, e1, e2)
   } else {
     .Call(C_torch_ne_scalar, e1, e2)
@@ -490,7 +682,9 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `<.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_gt_scalar, e2, e1)  # scalar < tensor = tensor > scalar
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_lt, e1, e2)
   } else {
     .Call(C_torch_lt_scalar, e1, e2)
@@ -499,7 +693,9 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `<=.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_ge_scalar, e2, e1)  # scalar <= tensor = tensor >= scalar
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_le, e1, e2)
   } else {
     .Call(C_torch_le_scalar, e1, e2)
@@ -508,7 +704,9 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `>.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_lt_scalar, e2, e1)  # scalar > tensor = tensor < scalar
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_gt, e1, e2)
   } else {
     .Call(C_torch_gt_scalar, e1, e2)
@@ -517,9 +715,49 @@ print.torch_tensor <- function(x, ...) {
 
 #' @export
 `>=.torch_tensor` <- function(e1, e2) {
-  if (inherits(e2, "torch_tensor")) {
+  if (!inherits(e1, "torch_tensor")) {
+    .Call(C_torch_le_scalar, e2, e1)  # scalar >= tensor = tensor <= scalar
+  } else if (inherits(e2, "torch_tensor")) {
     .Call(C_torch_ge, e1, e2)
   } else {
     .Call(C_torch_ge_scalar, e1, e2)
   }
+}
+
+# ---- [ indexing ----
+
+#' @export
+`[.torch_tensor` <- function(x, ..., drop = TRUE) {
+  cl <- match.call(expand.dots = FALSE)
+  args <- cl$...
+
+  indices <- vector("list", length(args))
+  for (i in seq_along(args)) {
+    if (identical(args[[i]], quote(expr = ))) {
+      # Missing argument = select all along this dimension
+      indices[[i]] <- NULL
+    } else {
+      indices[[i]] <- eval(args[[i]], parent.frame())
+    }
+  }
+
+  .Call(C_torch_index, x, indices, as.logical(drop))
+}
+
+#' @export
+`[<-.torch_tensor` <- function(x, ..., value) {
+  cl <- match.call(expand.dots = FALSE)
+  args <- cl$...
+
+  indices <- vector("list", length(args))
+  for (i in seq_along(args)) {
+    if (identical(args[[i]], quote(expr = ))) {
+      indices[[i]] <- NULL
+    } else {
+      indices[[i]] <- eval(args[[i]], parent.frame())
+    }
+  }
+
+  .Call(C_torch_index_put, x, indices, value)
+  x
 }

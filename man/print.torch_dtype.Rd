@@ -13,3 +13,6 @@
 \description{
 Print a torch_dtype
 }
+\examples{
+print(torch_float32)
+}

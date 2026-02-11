@@ -16,3 +16,9 @@ Loads a previously saved \code{.torchlang} artifact from disk,
 rebuilds kernels from the IR, and returns a callable
 \code{compiled_module}.
 }
+\examples{
+\dontrun{
+loaded <- load_compiled("/tmp/model.torchlang")
+}
+
+}

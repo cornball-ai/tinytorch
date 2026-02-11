@@ -11,6 +11,8 @@
 #' @param shape_a Integer vector
 #' @param shape_b Integer vector
 #' @return Integer vector of broadcast shape, or NULL if incompatible
+#' @examples
+#' broadcast_shapes(c(2, 1), c(1, 3))
 #' @export
 broadcast_shapes <- function(shape_a, shape_b) {
   if (is.null(shape_a) || is.null(shape_b)) return(NULL)
@@ -52,6 +54,13 @@ broadcast_shapes <- function(shape_a, shape_b) {
 #' @param input_shapes Named list mapping input names to integer vectors
 #' @param input_dtypes Optional named list mapping input names to dtype strings
 #' @return A new ir_graph with shape/dtype annotations
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' infer_shapes(g, list(x = c(2L, 3L)))
+#' }
 #' @export
 infer_shapes <- function(graph, input_shapes, input_dtypes = NULL) {
   if (!inherits(graph, "ir_graph")) {
@@ -424,6 +433,13 @@ infer_shapes <- function(graph, input_shapes, input_dtypes = NULL) {
 #'
 #' @param graph An ir_graph
 #' @return Named list of node_id (as character) to last_use_id (integer or Inf)
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' analyze_liveness(g)
+#' }
 #' @export
 analyze_liveness <- function(graph) {
   if (!inherits(graph, "ir_graph")) {
@@ -461,6 +477,13 @@ analyze_liveness <- function(graph) {
 #'
 #' @param graph An ir_graph
 #' @return Named list of node_id (as character) to integer vector of dependency IDs
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' analyze_deps(g)
+#' }
 #' @export
 analyze_deps <- function(graph) {
   if (!inherits(graph, "ir_graph")) {

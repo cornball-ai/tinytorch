@@ -15,3 +15,11 @@ A new ir_graph with constants folded
 If all inputs to a node are constants, evaluate at compile time
 and replace the node with a constant.
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+constant_fold(g)
+}
+}

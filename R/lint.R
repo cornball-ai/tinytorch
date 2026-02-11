@@ -34,37 +34,30 @@ torch_lint <- function(expr, suggest = TRUE) {
   n_statements <- if (walked$type == "block") walked$n_statements else 1L
 
   # Build report
-  cat("\n")
-  cat(rule("torchlang lint report"))
-  cat("\n\n")
+  message("")
+  message(rule("torchlang lint report"))
+  message("")
 
   # Summary
   if (n_breaks == 0) {
-    cat(success("No graph breaks detected"))
-    cat("\n")
-    cat(info(sprintf("Expression is fully compilable (%d statement%s)",
-                     n_statements, if (n_statements == 1) "" else "s")))
-    cat("\n")
+    message(success("No graph breaks detected"))
+    message(info(sprintf("Expression is fully compilable (%d statement%s)",
+                         n_statements, if (n_statements == 1) "" else "s")))
   } else {
-    cat(warning_msg(sprintf("Found %d graph break%s",
-                            n_breaks, if (n_breaks == 1) "" else "s")))
-    cat("\n")
-    cat(info(sprintf("Expression will be split into %d segment%s (%d compilable)",
-                     n_segments, if (n_segments == 1) "" else "s", n_graph_segments)))
-    cat("\n")
+    message(warning_msg(sprintf("Found %d graph break%s",
+                                n_breaks, if (n_breaks == 1) "" else "s")))
+    message(info(sprintf("Expression will be split into %d segment%s (%d compilable)",
+                         n_segments, if (n_segments == 1) "" else "s", n_graph_segments)))
   }
 
   # Detail each break
 
   if (n_breaks > 0) {
-    cat("\n")
-    cat(header("Graph breaks"))
-    cat("\n")
+    message("")
+    message(header("Graph breaks"))
 
     for (i in seq_along(breaks)) {
       b <- breaks[[i]]
-      cat(sprintf("\n  %d. ", i))
-      cat(emphasis(b$detail))
 
       # Type-specific message
       msg <- switch(b$type,
@@ -73,14 +66,13 @@ torch_lint <- function(expr, suggest = TRUE) {
         "function_call" = " - unknown function (not a torch op)",
         " - causes graph break"
       )
-      cat(dim_text(msg))
-      cat("\n")
+      message(sprintf("\n  %d. %s%s", i, emphasis(b$detail), dim_text(msg)))
 
       # Suggestion
       if (suggest) {
         suggestion <- get_suggestion(b)
         if (!is.null(suggestion)) {
-          cat(sprintf("     %s %s\n", arrow(), suggestion))
+          message(sprintf("     %s %s", arrow(), suggestion))
         }
       }
     }
@@ -88,31 +80,30 @@ torch_lint <- function(expr, suggest = TRUE) {
 
   # Segment visualization
   if (n_segments > 1) {
-    cat("\n")
-    cat(header("Segment structure"))
-    cat("\n\n")
+    message("")
+    message(header("Segment structure"))
+    message("")
 
     for (i in seq_along(segments)) {
       seg <- segments[[i]]
       if (seg$type == "graph") {
-        cat(sprintf("  %s Segment %d: %d statement%s %s\n",
-                    graph_icon(), i,
-                    length(seg$statements),
-                    if (length(seg$statements) == 1) "" else "s",
-                    dim_text("[compilable]")))
+        message(sprintf("  %s Segment %d: %d statement%s %s",
+                        graph_icon(), i,
+                        length(seg$statements),
+                        if (length(seg$statements) == 1) "" else "s",
+                        dim_text("[compilable]")))
       } else {
-        cat(sprintf("  %s Segment %d: %d statement%s %s\n",
-                    break_icon(), i,
-                    length(seg$statements),
-                    if (length(seg$statements) == 1) "" else "s",
-                    dim_text("[R code]")))
+        message(sprintf("  %s Segment %d: %d statement%s %s",
+                        break_icon(), i,
+                        length(seg$statements),
+                        if (length(seg$statements) == 1) "" else "s",
+                        dim_text("[R code]")))
       }
     }
   }
 
-  cat("\n")
-  cat(rule())
-  cat("\n")
+  message("")
+  message(rule())
 
   # Return results invisibly
   invisible(list(

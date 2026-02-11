@@ -52,6 +52,8 @@ cache_set <- function(key, traced_fn) {
 #' Removes all cached traced functions.
 #'
 #' @return Invisibly returns the number of items cleared
+#' @examples
+#' clear_cache()
 #' @export
 clear_cache <- function() {
   n <- length(ls(.torchlang_cache))
@@ -63,6 +65,8 @@ clear_cache <- function() {
 #' Get Cache Statistics
 #'
 #' @return List with cache size and keys
+#' @examples
+#' cache_stats()
 #' @export
 cache_stats <- function() {
   keys <- ls(.torchlang_cache)

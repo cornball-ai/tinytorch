@@ -11,3 +11,8 @@ torch_tanh(self)
 \description{
 Compute tanh of tensor
 }
+\examples{
+\donttest{
+torch_tanh(torch_randn(c(2, 3)))
+}
+}

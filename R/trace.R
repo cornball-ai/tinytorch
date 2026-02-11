@@ -290,6 +290,11 @@ try_resolve_static <- function(expr, known_values) {
 #' @return A list with: statements (list of rewritten exprs),
 #'   params (named list of parameter tensors),
 #'   graph_breaks (list of break descriptions)
+#' @examples
+#' \donttest{
+#' m <- nn_linear(3, 2)
+#' expand_module(m, arg_exprs = list(input = as.symbol("input")))
+#' }
 #' @export
 expand_module <- function(module, arg_exprs = list(), prefix = "",
                           depth = 0L, max_depth = 10L) {
@@ -885,6 +890,12 @@ inline_statements <- function(statements) {
 #'   \item{params}{Named list of parameter tensors}
 #'   \item{graph_breaks}{List of graph break descriptions}
 #'   \item{ir}{The IR graph (if no graph breaks), or NULL}
+#' @examples
+#' \donttest{
+#' m <- nn_linear(3, 2)
+#' traced <- trace_module(m, input = torch_randn(c(1, 3)))
+#' traced$fn(input = torch_randn(c(1, 3)))
+#' }
 #' @export
 trace_module <- function(module, ..., .optimize = TRUE, .fuse = FALSE,
                          .backend = "auto", .verbose = FALSE) {
@@ -901,21 +912,21 @@ trace_module <- function(module, ..., .optimize = TRUE, .fuse = FALSE,
   names(arg_exprs) <- names(example_inputs)
 
   if (.verbose) {
-    cat("Expanding module forward()...\n")
+    message("Expanding module forward()...")
   }
 
   # Expand the module
   expanded <- expand_module(module, arg_exprs = arg_exprs)
 
   if (.verbose) {
-    cat(sprintf("  %d statement(s), %d parameter(s), %d graph break(s)\n",
-                length(expanded$statements),
-                length(expanded$params),
-                length(expanded$graph_breaks)))
+    message(sprintf("  %d statement(s), %d parameter(s), %d graph break(s)",
+                    length(expanded$statements),
+                    length(expanded$params),
+                    length(expanded$graph_breaks)))
     if (length(expanded$graph_breaks) > 0) {
-      cat("  Graph breaks:\n")
+      message("  Graph breaks:")
       for (gb in expanded$graph_breaks) {
-        cat(sprintf("    - %s\n", gb$reason))
+        message(sprintf("    - %s", gb$reason))
       }
     }
   }
@@ -934,7 +945,7 @@ trace_module <- function(module, ..., .optimize = TRUE, .fuse = FALSE,
       }
       g
     }, error = function(e) {
-      if (.verbose) cat(sprintf("  IR lowering failed: %s\n", conditionMessage(e)))
+      if (.verbose) message(sprintf("  IR lowering failed: %s", conditionMessage(e)))
       NULL
     })
 
@@ -1147,6 +1158,12 @@ make_traced_fn <- function(statements, params, input_names,
 #' @param x A traced_module
 #' @param ... Ignored
 #' @return Invisibly returns x
+#' @examples
+#' \donttest{
+#' m <- nn_linear(3, 2)
+#' traced <- trace_module(m, input = torch_randn(c(1, 3)))
+#' print(traced)
+#' }
 #' @export
 print.traced_module <- function(x, ...) {
   cat("Traced nn_module\n")

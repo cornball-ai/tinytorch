@@ -11,3 +11,8 @@ torch_cos(self)
 \description{
 Compute cos of tensor
 }
+\examples{
+\donttest{
+torch_cos(torch_tensor(c(0, 3.14159)))
+}
+}

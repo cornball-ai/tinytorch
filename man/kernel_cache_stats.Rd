@@ -11,3 +11,6 @@ List with n_memory (in-memory), n_disk (on disk), cache_dir
 \description{
 Get Kernel Cache Statistics
 }
+\examples{
+kernel_cache_stats()
+}

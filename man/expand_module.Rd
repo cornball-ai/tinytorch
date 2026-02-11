@@ -35,3 +35,9 @@ Recursively rewrites the AST of a module's forward method:
 - static if/else -> resolved branch
 - nn_sequential for loop -> unrolled
 }
+\examples{
+\donttest{
+m <- nn_linear(3, 2)
+expand_module(m, arg_exprs = list(input = as.symbol("input")))
+}
+}

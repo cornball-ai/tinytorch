@@ -15,3 +15,8 @@ torch_ones(..., dtype = NULL, device = NULL)
 \description{
 Create a tensor of ones
 }
+\examples{
+\donttest{
+torch_ones(c(2, 3))
+}
+}

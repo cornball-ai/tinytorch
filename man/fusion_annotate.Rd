@@ -16,3 +16,11 @@ Identifies maximal fuseable subgraphs: contiguous chains of
 elementwise operations where each intermediate result has
 exactly one consumer. Annotates nodes with a \code{fusion_group} ID.
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()$sigmoid()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+fusion_annotate(g)
+}
+}

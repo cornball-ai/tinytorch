@@ -198,6 +198,9 @@ classify_node <- function(expr) {
 #' @param expr An R expression
 #' @param depth Current recursion depth (for debugging)
 #' @return A nested list representing the classified AST
+#' @examples
+#' walked <- walk_expr(quote(y <- x$matmul(w)))
+#' walked$type
 #' @export
 walk_expr <- function(expr, depth = 0L) {
   node <- classify_node(expr)
@@ -252,6 +255,9 @@ walk_expr <- function(expr, depth = 0L) {
 #'
 #' @param expr An R expression or a walked node tree
 #' @return Logical, TRUE if entirely graph-safe
+#' @examples
+#' is_graph_safe(quote(y <- x$matmul(w)))
+#' is_graph_safe(quote(print(x)))
 #' @export
 is_graph_safe <- function(expr) {
   # If it's a raw expression, walk it first
@@ -305,7 +311,9 @@ is_graph_safe <- function(expr) {
 #' Identifies nodes that cause graph breaks.
 #'
 #' @param expr An R expression
-#' @return A list of graph-breaking nodes with their locations
+#' @return A list of graph-breaking nodes with their details
+#' @examples
+#' find_graph_breaks(quote({ y <- x$relu(); print(y) }))
 #' @export
 find_graph_breaks <- function(expr) {
   if (!is.list(expr) || is.null(expr$type)) {

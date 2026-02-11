@@ -12,6 +12,10 @@
 #' Fused relu
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
+#' @examples
+#' \donttest{
+#' fused_relu(torch_randn(c(2, 3)))
+#' }
 #' @export
 fused_relu <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
@@ -21,6 +25,10 @@ fused_relu <- function(x) {
 #' Fused relu + sigmoid
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
+#' @examples
+#' \donttest{
+#' fused_relu_sigmoid(torch_randn(c(2, 3)))
+#' }
 #' @export
 fused_relu_sigmoid <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
@@ -30,6 +38,10 @@ fused_relu_sigmoid <- function(x) {
 #' Fused relu + sigmoid + tanh
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
+#' @examples
+#' \donttest{
+#' fused_relu_sigmoid_tanh(torch_randn(c(2, 3)))
+#' }
 #' @export
 fused_relu_sigmoid_tanh <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
@@ -39,6 +51,10 @@ fused_relu_sigmoid_tanh <- function(x) {
 #' Fused SiLU (Swish): x * sigmoid(x)
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
+#' @examples
+#' \donttest{
+#' fused_silu(torch_randn(c(2, 3)))
+#' }
 #' @export
 fused_silu <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
@@ -48,6 +64,10 @@ fused_silu <- function(x) {
 #' Fused GELU activation
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
+#' @examples
+#' \donttest{
+#' fused_gelu(torch_randn(c(2, 3)))
+#' }
 #' @export
 fused_gelu <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
@@ -57,6 +77,10 @@ fused_gelu <- function(x) {
 #' Fused sin and cos
 #' @param x A torch tensor.
 #' @return A list with sin and cos tensors (float32).
+#' @examples
+#' \donttest{
+#' fused_sincos(torch_randn(c(2, 3)))
+#' }
 #' @export
 fused_sincos <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
@@ -71,6 +95,10 @@ fused_sincos <- function(x) {
 #' @param x A torch tensor.
 #' @param cap Scalar capping value.
 #' @return A new torch tensor (float32).
+#' @examples
+#' \donttest{
+#' fused_softcap(torch_randn(c(2, 3)), 30.0)
+#' }
 #' @export
 fused_softcap <- function(x, cap) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
@@ -82,6 +110,12 @@ fused_softcap <- function(x, cap) {
 #' @param weight Weight tensor (same size as last dim of x).
 #' @param eps Small constant for numerical stability.
 #' @return A new torch tensor (float32).
+#' @examples
+#' \donttest{
+#' x <- torch_randn(c(2, 4))
+#' w <- torch_ones(c(4))
+#' fused_rmsnorm(x, w)
+#' }
 #' @export
 fused_rmsnorm <- function(x, weight, eps = 1e-6) {
   if (!inherits(x, "torch_tensor") || !inherits(weight, "torch_tensor"))

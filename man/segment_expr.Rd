@@ -20,3 +20,7 @@ Takes a block expression and splits it into segments:
 - "graph" segments contain consecutive graph-safe statements
 - "r_code" segments contain graph-breaking statements
 }
+\examples{
+segs <- segment_expr(quote({ y <- x$relu(); print(y) }))
+length(segs)
+}

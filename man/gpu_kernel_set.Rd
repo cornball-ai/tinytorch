@@ -15,3 +15,6 @@ gpu_kernel_set(ir_hash, sm_version, ptx)
 \description{
 Set cached GPU kernel
 }
+\examples{
+gpu_kernel_set("abc123", 86, "// ptx code")
+}

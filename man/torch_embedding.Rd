@@ -5,6 +5,18 @@
 \usage{
 torch_embedding(weight, indices)
 }
+\arguments{
+\item{weight}{Embedding matrix tensor.}
+
+\item{indices}{Integer tensor of indices.}
+}
 \description{
 Embedding lookup
+}
+\examples{
+\donttest{
+emb <- torch_randn(c(10, 4))
+idx <- torch_tensor(c(1L, 3L, 5L))
+torch_embedding(emb, idx)
+}
 }

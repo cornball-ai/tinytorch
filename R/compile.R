@@ -10,6 +10,8 @@
 #'
 #' @param expr An R expression
 #' @return A list with `reads` and `writes` character vectors
+#' @examples
+#' analyze_variables(quote(y <- x$matmul(w)))
 #' @export
 analyze_variables <- function(expr) {
   reads <- character()
@@ -240,14 +242,21 @@ compile_segment <- function(statements, env) {
 #' @param fuse Logical, whether to try fused kernel dispatch
 #' @param verbose Logical, whether to print compilation info
 #' @return The result of the expression
+#' @examples
+#' \donttest{
+#' x <- torch_randn(c(2, 3))
+#' env <- new.env()
+#' env$x <- x
+#' execute_compiled(quote(x$relu()), env)
+#' }
 #' @export
 execute_compiled <- function(expr, env, compile = TRUE, fuse = TRUE,
                              verbose = FALSE) {
   segments <- segment_expr(expr)
 
   if (verbose) {
-    cat(sprintf("Executing %d segment(s), fuse=%s, compile=%s\n",
-                length(segments), fuse, compile))
+    message(sprintf("Executing %d segment(s), fuse=%s, compile=%s",
+                    length(segments), fuse, compile))
   }
 
   # Create mutable environment for execution
@@ -260,8 +269,8 @@ execute_compiled <- function(expr, env, compile = TRUE, fuse = TRUE,
 
     if (seg$type == "graph") {
 
-      if (verbose) cat(sprintf("  Segment %d [GRAPH]: %d statement(s)\n",
-                               i, length(seg$statements)))
+      if (verbose) message(sprintf("  Segment %d [GRAPH]: %d statement(s)",
+                                    i, length(seg$statements)))
 
       # Build IR for this segment (does not change execution yet)
       ir <- tryCatch(
@@ -282,9 +291,9 @@ execute_compiled <- function(expr, env, compile = TRUE, fuse = TRUE,
         if (length(ir_shapes) > 0) {
           ir <- tryCatch(infer_shapes(ir, ir_shapes), error = function(e) ir)
         }
-        cat("  IR:\n")
+        message("  IR:")
         ir_lines <- capture.output(print(ir))
-        for (ln in ir_lines) cat("    ", ln, "\n")
+        for (ln in ir_lines) message("    ", ln)
       }
 
       # Process statements: try fusion first, then compile, then eval
@@ -319,21 +328,21 @@ execute_compiled <- function(expr, env, compile = TRUE, fuse = TRUE,
 
             if (verbose) {
               cache_status <- if (isTRUE(compiled$cache_hit)) "CACHED" else "traced"
-              cat(sprintf("    COMPILED: %s, %d tensor inputs\n",
-                          cache_status, length(compiled$tensor_inputs)))
+              message(sprintf("    COMPILED: %s, %d tensor inputs",
+                              cache_status, length(compiled$tensor_inputs)))
             }
             break  # Whole segment handled by jit_trace
           }
         }
 
         # Fallback: direct execution
-        if (verbose) cat(sprintf("    EVAL: statement %d\n", j))
+        if (verbose) message(sprintf("    EVAL: statement %d", j))
         result <- eval(stmt, envir = exec_env)
       }
 
     } else {
       # R code segment - direct execution
-      if (verbose) cat(sprintf("  Segment %d [R]: direct execution\n", i))
+      if (verbose) message(sprintf("  Segment %d [R]: direct execution", i))
       for (stmt in seg$statements) {
         result <- eval(stmt, envir = exec_env)
       }

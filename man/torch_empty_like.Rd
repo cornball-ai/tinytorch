@@ -11,3 +11,9 @@ torch_empty_like(self)
 \description{
 Create an uninitialized tensor with same shape/dtype as input
 }
+\examples{
+\donttest{
+x <- torch_randn(c(2, 3))
+torch_empty_like(x)
+}
+}

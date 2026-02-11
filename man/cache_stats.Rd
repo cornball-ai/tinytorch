@@ -11,3 +11,6 @@ List with cache size and keys
 \description{
 Get Cache Statistics
 }
+\examples{
+cache_stats()
+}

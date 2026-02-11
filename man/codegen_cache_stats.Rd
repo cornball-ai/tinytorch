@@ -11,3 +11,6 @@ List with cache size and keys
 \description{
 Get Codegen Cache Stats
 }
+\examples{
+codegen_cache_stats()
+}

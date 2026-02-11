@@ -12,3 +12,6 @@ A list with \code{n_cached} (number of cached prepared graphs)
 Returns information about the auto-cache used by
 \code{execute_optimized()}.
 }
+\examples{
+exec_cache_stats()
+}

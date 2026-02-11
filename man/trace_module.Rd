@@ -7,7 +7,7 @@ trace_module(
   module,
   ...,
   .optimize = TRUE,
-  .fuse = TRUE,
+  .fuse = FALSE,
   .backend = "auto",
   .verbose = FALSE
 )
@@ -38,4 +38,11 @@ A list with:
 Expands a module's forward() body via recursive AST rewriting,
 resolves parameters and sub-modules, and optionally optimizes
 through the IR pipeline.
+}
+\examples{
+\donttest{
+m <- nn_linear(3, 2)
+traced <- trace_module(m, input = torch_randn(c(1, 3)))
+traced$fn(input = torch_randn(c(1, 3)))
+}
 }

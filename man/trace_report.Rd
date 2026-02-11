@@ -37,3 +37,9 @@ Takes a module tree from discover_modules() and attempts trace_module()
 on each sub-module. Reports graph breaks, correctness, and which modules
 are candidates for optimization.
 }
+\examples{
+\donttest{
+m <- nn_sequential(nn_linear(10, 5), nn_relu())
+trace_report(m, list(input = torch_randn(c(1, 10))))
+}
+}

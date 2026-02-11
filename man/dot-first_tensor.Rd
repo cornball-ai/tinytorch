@@ -5,6 +5,9 @@
 \usage{
 .first_tensor(x)
 }
+\arguments{
+\item{x}{A list or torch_tensor.}
+}
 \description{
 Find First Tensor in a List
 }

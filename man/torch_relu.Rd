@@ -11,3 +11,8 @@ torch_relu(self)
 \description{
 ReLU activation (namespace-level)
 }
+\examples{
+\donttest{
+torch_relu(torch_tensor(c(-1, 0, 1)))
+}
+}

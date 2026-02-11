@@ -16,3 +16,6 @@ Cached PTX string or NULL if not found
 \description{
 Get cached GPU kernel
 }
+\examples{
+gpu_kernel_get("abc123", 86)
+}

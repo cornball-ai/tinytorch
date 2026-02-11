@@ -20,3 +20,11 @@ Forward pass: propagates shapes and dtypes from inputs through every node.
 Returns a new ir_graph with \code{output_shape} and \code{output_dtype}
 in each node's attrs.
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+infer_shapes(g, list(x = c(2L, 3L)))
+}
+}

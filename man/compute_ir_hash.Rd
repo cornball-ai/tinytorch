@@ -14,3 +14,11 @@ Character hash string
 \description{
 Compute IR hash for cache key
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+compute_ir_hash(g)
+}
+}

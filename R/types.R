@@ -2,6 +2,9 @@
 # These integer codes are passed to C++ and cast to at::ScalarType
 
 #' @export
+torch_uint8 <- structure(0L, class = "torch_dtype")
+
+#' @export
 torch_float16 <- structure(5L, class = "torch_dtype")
 
 #' @export
@@ -40,6 +43,8 @@ torch_bool <- structure(11L, class = "torch_dtype")
 #' Print a torch_dtype
 #' @param x A torch_dtype.
 #' @param ... Ignored.
+#' @examples
+#' print(torch_float32)
 #' @export
 print.torch_dtype <- function(x, ...) {
   names <- c(
@@ -52,6 +57,8 @@ print.torch_dtype <- function(x, ...) {
   invisible(x)
 }
 
+#' @examples
+#' as.character(torch_float32)
 #' @export
 as.character.torch_dtype <- function(x, ...) {
   # Match torch R package convention

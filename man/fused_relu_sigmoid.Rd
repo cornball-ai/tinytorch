@@ -14,3 +14,8 @@ A new torch tensor (float32).
 \description{
 Fused relu + sigmoid
 }
+\examples{
+\donttest{
+fused_relu_sigmoid(torch_randn(c(2, 3)))
+}
+}

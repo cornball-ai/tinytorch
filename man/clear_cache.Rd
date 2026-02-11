@@ -11,3 +11,6 @@ Invisibly returns the number of items cleared
 \description{
 Removes all cached traced functions.
 }
+\examples{
+clear_cache()
+}

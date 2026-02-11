@@ -11,3 +11,6 @@ Named list with cache stats
 \description{
 Get cache statistics
 }
+\examples{
+gpu_kernel_stats()
+}

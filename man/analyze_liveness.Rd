@@ -16,3 +16,11 @@ Backward pass: for each node, compute the last point its output is consumed.
 Nodes in \code{output_ids} have \code{last_use = Inf} (live at graph exit).
 Nodes with no consumers get \code{last_use = NA} (dead code).
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+analyze_liveness(g)
+}
+}

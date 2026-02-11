@@ -52,6 +52,14 @@ ir_graph <- function(nodes, input_ids, output_ids) {
 #' @param statements List of R expressions (from segment_expr())
 #' @param env Environment with tensor values
 #' @return An ir_graph
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env()
+#' e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' print(g)
+#' }
 #' @export
 lower_to_ir <- function(statements, env = parent.frame()) {
   # State for the lowering pass
@@ -301,6 +309,14 @@ format_ir_node <- function(node) {
 #' @param x An ir_graph
 #' @param ... Ignored
 #' @return Invisibly returns x
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env()
+#' e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' print(g)
+#' }
 #' @export
 print.ir_graph <- function(x, ...) {
   # Print nodes in ID order
@@ -324,6 +340,14 @@ print.ir_graph <- function(x, ...) {
 #'
 #' @param graph An ir_graph
 #' @return TRUE if valid, otherwise stops with an error
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env()
+#' e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' validate_ir(g)
+#' }
 #' @export
 validate_ir <- function(graph) {
   if (!inherits(graph, "ir_graph")) {

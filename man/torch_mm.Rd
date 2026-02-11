@@ -5,6 +5,18 @@
 \usage{
 torch_mm(self, other)
 }
+\arguments{
+\item{self}{A torch_tensor.}
+
+\item{other}{A torch_tensor.}
+}
 \description{
 Matrix-matrix multiplication (2D only)
+}
+\examples{
+\donttest{
+a <- torch_randn(c(2, 3))
+b <- torch_randn(c(3, 4))
+torch_mm(a, b)
+}
 }

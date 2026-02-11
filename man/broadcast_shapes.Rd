@@ -20,3 +20,6 @@ Broadcast Two Shapes (NumPy-compatible)
 Right-aligns dimensions and checks compatibility.
 Each dimension pair must be equal, or one must be 1.
 }
+\examples{
+broadcast_shapes(c(2, 1), c(1, 3))
+}

@@ -18,6 +18,11 @@
 #'   \item{n_params}{Number of parameters}
 #'   \item{forward_args}{Formal argument names of forward()}
 #'   \item{module}{Live reference to the nn_module}
+#' @examples
+#' \donttest{
+#' m <- nn_sequential(nn_linear(10, 5), nn_relu())
+#' discover_modules(m)
+#' }
 #' @export
 discover_modules <- function(module, max_depth = 10L) {
   if (!inherits(module, "nn_module")) {
@@ -96,6 +101,12 @@ discover_modules <- function(module, max_depth = 10L) {
 #'
 #' @param x A module_tree from discover_modules()
 #' @param ... Ignored
+#' @examples
+#' \donttest{
+#' m <- nn_sequential(nn_linear(10, 5), nn_relu())
+#' tree <- discover_modules(m)
+#' print(tree)
+#' }
 #' @export
 print.module_tree <- function(x, ...) {
   cat(sprintf("Module tree: %d modules\n\n", length(x)))
@@ -130,6 +141,11 @@ print.module_tree <- function(x, ...) {
 #' @param verbose Print progress (default TRUE)
 #' @return A data.frame with columns: path, class, n_params, graph_breaks,
 #'   traceable, correct, error
+#' @examples
+#' \donttest{
+#' m <- nn_sequential(nn_linear(10, 5), nn_relu())
+#' trace_report(m, list(input = torch_randn(c(1, 10))))
+#' }
 #' @export
 trace_report <- function(module, example_inputs = NULL,
                          max_depth = 10L, check_correctness = TRUE,
@@ -155,7 +171,7 @@ trace_report <- function(module, example_inputs = NULL,
   }, candidates)
 
   if (verbose) {
-    cat(sprintf("Trace report: %d candidate modules\n\n", length(candidates)))
+    message(sprintf("Trace report: %d candidate modules\n", length(candidates)))
   }
 
   rows <- list()
@@ -164,13 +180,13 @@ trace_report <- function(module, example_inputs = NULL,
     path <- if (nzchar(info$path)) info$path else "(root)"
     mod <- info$module
 
-    if (verbose) cat(sprintf("  %-40s ", substr(path, 1, 40)))
+    if (verbose) message(sprintf("  %-40s ", substr(path, 1, 40)), appendLF = FALSE)
 
     # Try to create example inputs for this sub-module
     inputs <- .make_example_inputs(mod, info$forward_args, example_inputs)
 
     if (is.null(inputs)) {
-      if (verbose) cat("SKIP (can't infer inputs)\n")
+      if (verbose) message("SKIP (can't infer inputs)")
       rows[[length(rows) + 1L]] <- data.frame(
         path = path, class = info$class, n_params = info$n_params,
         graph_breaks = NA_integer_, traceable = NA, correct = NA,
@@ -188,7 +204,7 @@ trace_report <- function(module, example_inputs = NULL,
     })
 
     if (is.character(trace_result)) {
-      if (verbose) cat(sprintf("ERROR: %s\n", substr(trace_result, 1, 50)))
+      if (verbose) message(sprintf("ERROR: %s", substr(trace_result, 1, 50)))
       rows[[length(rows) + 1L]] <- data.frame(
         path = path, class = info$class, n_params = info$n_params,
         graph_breaks = NA_integer_, traceable = FALSE, correct = NA,
@@ -232,7 +248,7 @@ trace_report <- function(module, example_inputs = NULL,
     if (verbose) {
       ok_str <- if (isTRUE(correct)) "correct" else
                 if (is.na(correct)) "?" else "MISMATCH"
-      cat(sprintf("%d breaks, %s, %d params\n", n_breaks, ok_str, info$n_params))
+      message(sprintf("%d breaks, %s, %d params", n_breaks, ok_str, info$n_params))
     }
 
     rows[[length(rows) + 1L]] <- data.frame(
@@ -255,8 +271,8 @@ trace_report <- function(module, example_inputs = NULL,
     n_traced <- sum(result$traceable, na.rm = TRUE)
     n_correct <- sum(result$correct, na.rm = TRUE)
     n_total <- nrow(result)
-    cat(sprintf("\n  %d/%d traceable, %d/%d correct\n",
-                n_traced, n_total, n_correct, n_total))
+    message(sprintf("\n  %d/%d traceable, %d/%d correct",
+                    n_traced, n_total, n_correct, n_total))
   }
 
   result
@@ -268,12 +284,16 @@ trace_report <- function(module, example_inputs = NULL,
 #' Searches installed R packages for those that import or depend on torch.
 #'
 #' @return Character vector of package names
+#' @examples
+#' \donttest{
+#' find_torch_packages()
+#' }
 #' @export
 find_torch_packages <- function() {
-  ip <- installed.packages()
+  db <- utils::installed.packages()
   pkgs <- character(0)
   for (pkg in c("torch", "Rtorch")) {
-    deps <- tools::package_dependencies(pkg, db = ip,
+    deps <- tools::package_dependencies(pkg, db = db,
               reverse = TRUE, which = c("Depends", "Imports", "Suggests"))
     found <- deps[[pkg]]
     if (!is.null(found)) pkgs <- c(pkgs, found)
@@ -291,6 +311,10 @@ find_torch_packages <- function() {
 #'
 #' @param pkg Package name (string) or path to package source directory
 #' @return A data.frame with columns: name, file, exported
+#' @examples
+#' \donttest{
+#' find_modules_in_package("Rtorch")
+#' }
 #' @export
 find_modules_in_package <- function(pkg) {
   # Determine source directory
@@ -468,6 +492,7 @@ find_modules_in_package <- function(pkg) {
 
 
 #' Find First Tensor in a List
+#' @param x A list or torch_tensor.
 #' @keywords internal
 .first_tensor <- function(x) {
   if (inherits(x, "torch_tensor")) return(x)
@@ -482,6 +507,7 @@ find_modules_in_package <- function(pkg) {
 
 
 #' Find nn_modules at Runtime in an Installed Package
+#' @param pkg_name Package name string.
 #' @keywords internal
 .find_modules_runtime <- function(pkg_name) {
   if (!requireNamespace(pkg_name, quietly = TRUE)) {

@@ -15,3 +15,10 @@ torch_add(self, other, alpha = 1)
 \description{
 Add two tensors
 }
+\examples{
+\donttest{
+a <- torch_ones(c(2, 3))
+b <- torch_ones(c(2, 3))
+torch_add(a, b)
+}
+}

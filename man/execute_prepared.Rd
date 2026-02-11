@@ -20,3 +20,12 @@ Fast execution path using a pre-computed execution plan from
 \code{prepare_graph()}. No optimization or compilation overhead --
 just runs the execution loop.
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+pg <- prepare_graph(g, list(x = torch_randn(c(2, 3))))
+execute_prepared(pg, list(x = torch_randn(c(2, 3))))
+}
+}

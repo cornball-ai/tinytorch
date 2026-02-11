@@ -1,3 +1,6 @@
+#' @useDynLib Rtorch, .registration = TRUE
+NULL
+
 .onLoad <- function(libname, pkgname) {
   # Ensure libtorch shared libraries are on the library path
   torch_home <- system.file(package = "torch")

@@ -18,3 +18,6 @@ Analyze Variable Flow in an Expression
 Identifies which variables are read (inputs) and written (outputs)
 in an expression. Used to determine function signatures for compilation.
 }
+\examples{
+analyze_variables(quote(y <- x$matmul(w)))
+}

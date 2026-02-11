@@ -24,3 +24,11 @@ fuseable elementwise chains:
 (they contain reductions or special layouts that can't be
 elementwise-fused).
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+decompose_high_level_ops(g)
+}
+}

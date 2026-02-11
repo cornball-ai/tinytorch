@@ -13,6 +13,28 @@ torch_conv1d(
   groups = 1L
 )
 }
+\arguments{
+\item{input}{Input tensor of shape (N, C_in, L).}
+
+\item{weight}{Filter tensor of shape (C_out, C_in/groups, kW).}
+
+\item{bias}{Optional bias tensor of shape (C_out).}
+
+\item{stride}{Stride of the convolution. Default 1.}
+
+\item{padding}{Zero-padding added to both sides. Default 0.}
+
+\item{dilation}{Spacing between kernel elements. Default 1.}
+
+\item{groups}{Number of blocked connections. Default 1.}
+}
 \description{
 1D convolution
+}
+\examples{
+\donttest{
+x <- torch_randn(c(1, 1, 10))
+w <- torch_randn(c(1, 1, 3))
+torch_conv1d(x, w)
+}
 }

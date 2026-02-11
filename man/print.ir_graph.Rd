@@ -16,3 +16,12 @@ Invisibly returns x
 \description{
 Print an IR Graph
 }
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env()
+e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+print(g)
+}
+}

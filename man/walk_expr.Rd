@@ -16,3 +16,7 @@ A nested list representing the classified AST
 \description{
 Recursively walks an R expression, classifying each node.
 }
+\examples{
+walked <- walk_expr(quote(y <- x$matmul(w)))
+walked$type
+}

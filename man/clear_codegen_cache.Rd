@@ -11,3 +11,6 @@ Number of kernels cleared
 \description{
 Clear Codegen Cache
 }
+\examples{
+clear_codegen_cache()
+}

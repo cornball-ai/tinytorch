@@ -234,8 +234,8 @@ execute_with_fusion <- function(stmt, env, verbose = FALSE) {
 
       if (!is.null(kernel_fn)) {
         if (verbose) {
-          cat(sprintf("    FUSED: %s -> %s(%s)\n",
-                      match$description, match$kernel, input_name))
+          message(sprintf("    FUSED: %s -> %s(%s)",
+                          match$description, match$kernel, input_name))
         }
 
         # Execute fused kernel

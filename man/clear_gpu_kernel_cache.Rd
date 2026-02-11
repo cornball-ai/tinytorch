@@ -11,3 +11,6 @@ Number of entries cleared (invisibly)
 \description{
 Clear GPU Kernel Cache
 }
+\examples{
+clear_gpu_kernel_cache()
+}

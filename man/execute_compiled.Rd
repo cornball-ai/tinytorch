@@ -29,3 +29,11 @@ Better for long chains but has trace overhead.
 Fusion is tried first. Operations that don't match a fused pattern
 fall through to jit_trace (if enabled) or direct execution.
 }
+\examples{
+\donttest{
+x <- torch_randn(c(2, 3))
+env <- new.env()
+env$x <- x
+execute_compiled(quote(x$relu()), env)
+}
+}

@@ -16,3 +16,10 @@ Invisibly returns \code{x}
 \description{
 Print a Compiled Module
 }
+\examples{
+\donttest{
+m <- nn_linear(3, 2)
+cm <- compile(m, input = torch_randn(c(1, 3)))
+print(cm)
+}
+}

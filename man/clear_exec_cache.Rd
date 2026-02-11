@@ -12,3 +12,6 @@ Integer, number of entries cleared (invisibly)
 Removes all cached prepared graphs from the auto-cache used by
 \code{execute_optimized()}.
 }
+\examples{
+clear_exec_cache()
+}

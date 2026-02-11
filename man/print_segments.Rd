@@ -14,3 +14,6 @@ Invisibly returns the segments
 \description{
 Pretty-prints how an expression would be segmented.
 }
+\examples{
+print_segments(quote({ y <- x$relu(); print(y) }))
+}

@@ -105,6 +105,13 @@ detect_in_place <- function(graph, liveness) {
 #' @param input_shapes Named list of input shapes (used if graph lacks annotations)
 #' @param input_dtypes Optional named list of input dtypes
 #' @return A memory_plan object
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' plan_memory(g, list(x = c(2L, 3L)))
+#' }
 #' @export
 plan_memory <- function(graph, input_shapes = NULL, input_dtypes = NULL) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
@@ -240,6 +247,13 @@ plan_memory <- function(graph, input_shapes = NULL, input_dtypes = NULL) {
 }
 
 
+#' @examples
+#' \donttest{
+#' stmts <- list(quote(y <- x$relu()))
+#' e <- new.env(); e$x <- torch_randn(c(2, 3))
+#' g <- lower_to_ir(stmts, e)
+#' print(plan_memory(g, list(x = c(2L, 3L))))
+#' }
 #' @export
 print.memory_plan <- function(x, ...) {
   cat(sprintf("Memory Plan: %d buffer(s), %s total\n",

@@ -15,3 +15,7 @@ Logical, TRUE if entirely graph-safe
 Walks the expression tree and checks if all nodes are graph-safe
 (can be compiled to a torch graph without breaks).
 }
+\examples{
+is_graph_safe(quote(y <- x$matmul(w)))
+is_graph_safe(quote(print(x)))
+}

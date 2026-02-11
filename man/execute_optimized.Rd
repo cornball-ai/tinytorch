@@ -22,6 +22,8 @@ execute_optimized(
 
 \item{fuse}{Logical, compile fusion groups to kernels (default TRUE)}
 
+\item{fuse_matmul_epilogues}{Logical, fuse matmul+bias+activation on GPU (default FALSE)}
+
 \item{backend}{Character: "auto", "gpu", or "cpu". "auto" detects
 from input tensors and ariel availability.}
 
@@ -40,4 +42,12 @@ input shapes, and backend. For single-op graphs, uses eager fallback
 to avoid all pipeline overhead.
 For maximum performance in tight loops, use \code{prepare_graph()}
 and \code{execute_prepared()} directly.
+}
+\examples{
+\donttest{
+stmts <- list(quote(y <- x$relu()))
+e <- new.env(); e$x <- torch_randn(c(2, 3))
+g <- lower_to_ir(stmts, e)
+execute_optimized(g, list(x = torch_randn(c(2, 3))))
+}
 }

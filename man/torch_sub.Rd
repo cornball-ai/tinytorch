@@ -5,6 +5,20 @@
 \usage{
 torch_sub(self, other, alpha = 1)
 }
+\arguments{
+\item{self}{A torch_tensor.}
+
+\item{other}{A torch_tensor.}
+
+\item{alpha}{Scalar multiplier for other (default 1).}
+}
 \description{
 Subtract two tensors
+}
+\examples{
+\donttest{
+a <- torch_ones(c(2, 3))
+b <- torch_ones(c(2, 3))
+torch_sub(a, b)
+}
 }

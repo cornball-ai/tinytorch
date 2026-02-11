@@ -16,3 +16,8 @@ A new torch tensor (float32).
 \description{
 Fused softcap: tanh(x/cap) * cap
 }
+\examples{
+\donttest{
+fused_softcap(torch_randn(c(2, 3)), 30.0)
+}
+}

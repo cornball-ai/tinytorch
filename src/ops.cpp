@@ -721,3 +721,319 @@ extern "C" SEXP C_torch_item(SEXP self) {
     }
     return R_NilValue;
 }
+
+// ---- New tensor operations ----
+
+extern "C" SEXP C_torch_cat(SEXP tensors_sexp, SEXP dim_sexp) {
+    try {
+        R_xlen_t n = Rf_xlength(tensors_sexp);
+        std::vector<at::Tensor> tensors;
+        tensors.reserve(n);
+        for (R_xlen_t i = 0; i < n; i++) {
+            tensors.push_back(*get_tensor_ptr(VECTOR_ELT(tensors_sexp, i)));
+        }
+        int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
+        if (dim > 0) dim = dim - 1;
+        return make_tensor_sexp(new at::Tensor(at::cat(tensors, dim)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_clamp(SEXP self, SEXP min_sexp, SEXP max_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        c10::optional<at::Scalar> min_val;
+        c10::optional<at::Scalar> max_val;
+        if (!Rf_isNull(min_sexp)) min_val = at::Scalar(Rf_asReal(min_sexp));
+        if (!Rf_isNull(max_sexp)) max_val = at::Scalar(Rf_asReal(max_sexp));
+        return make_tensor_sexp(new at::Tensor(at::clamp(*a, min_val, max_val)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_where(SEXP condition, SEXP self, SEXP other) {
+    try {
+        auto* cond = get_tensor_ptr(condition);
+        auto* a = get_tensor_ptr(self);
+        auto* b = get_tensor_ptr(other);
+        return make_tensor_sexp(new at::Tensor(at::where(*cond, *a, *b)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_sort(SEXP self, SEXP dim_sexp, SEXP descending_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
+        if (dim > 0) dim = dim - 1;
+        bool descending = Rf_asLogical(descending_sexp);
+        auto result = a->sort(dim, descending);
+        // Return as R list with $values and $indices
+        SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+        SET_VECTOR_ELT(out, 0, make_tensor_sexp(new at::Tensor(std::get<0>(result))));
+        SET_VECTOR_ELT(out, 1, make_tensor_sexp(new at::Tensor(std::get<1>(result))));
+        SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+        SET_STRING_ELT(names, 0, Rf_mkChar("values"));
+        SET_STRING_ELT(names, 1, Rf_mkChar("indices"));
+        Rf_setAttrib(out, R_NamesSymbol, names);
+        UNPROTECT(2);
+        return out;
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_flip(SEXP self, SEXP dims_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        auto dims = sexp_to_int_vec(dims_sexp);
+        // Convert 1-based to 0-based
+        for (auto& d : dims) {
+            if (d > 0) d = d - 1;
+        }
+        return make_tensor_sexp(new at::Tensor(
+            a->flip(at::IntArrayRef(dims.data(), dims.size()))));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_cumsum(SEXP self, SEXP dim_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
+        if (dim > 0) dim = dim - 1;
+        return make_tensor_sexp(new at::Tensor(a->cumsum(dim)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_maximum(SEXP self, SEXP other) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        auto* b = get_tensor_ptr(other);
+        return make_tensor_sexp(new at::Tensor(at::maximum(*a, *b)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_multinomial(SEXP self, SEXP num_samples_sexp,
+                                     SEXP replacement_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        int64_t num_samples = static_cast<int64_t>(Rf_asInteger(num_samples_sexp));
+        bool replacement = Rf_asLogical(replacement_sexp);
+        return make_tensor_sexp(new at::Tensor(
+            a->multinomial(num_samples, replacement)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_outer(SEXP self, SEXP vec2) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        auto* b = get_tensor_ptr(vec2);
+        return make_tensor_sexp(new at::Tensor(at::outer(*a, *b)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_triu(SEXP self, SEXP diagonal_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        int64_t diagonal = static_cast<int64_t>(Rf_asInteger(diagonal_sexp));
+        return make_tensor_sexp(new at::Tensor(a->triu(diagonal)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_norm(SEXP self, SEXP p_sexp, SEXP dim_sexp,
+                              SEXP keepdim_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        double p = Rf_asReal(p_sexp);
+        bool keepdim = Rf_asLogical(keepdim_sexp);
+        if (Rf_isNull(dim_sexp)) {
+            return make_tensor_sexp(new at::Tensor(a->norm(p)));
+        }
+        int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
+        if (dim > 0) dim = dim - 1;
+        return make_tensor_sexp(new at::Tensor(a->norm(p, dim, keepdim)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_std(SEXP self, SEXP dim_sexp, SEXP keepdim_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        bool keepdim = Rf_asLogical(keepdim_sexp);
+        if (Rf_isNull(dim_sexp)) {
+            return make_tensor_sexp(new at::Tensor(a->std()));
+        }
+        int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
+        if (dim > 0) dim = dim - 1;
+        return make_tensor_sexp(new at::Tensor(a->std(dim, keepdim)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+// ---- Complex & signal processing ----
+
+extern "C" SEXP C_torch_complex(SEXP real, SEXP imag) {
+    try {
+        auto* r = get_tensor_ptr(real);
+        auto* i = get_tensor_ptr(imag);
+        return make_tensor_sexp(new at::Tensor(at::complex(*r, *i)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_real(SEXP self) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        return make_tensor_sexp(new at::Tensor(at::real(*a)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_imag(SEXP self) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        return make_tensor_sexp(new at::Tensor(at::imag(*a)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_polar(SEXP abs, SEXP angle) {
+    try {
+        auto* a = get_tensor_ptr(abs);
+        auto* b = get_tensor_ptr(angle);
+        return make_tensor_sexp(new at::Tensor(at::polar(*a, *b)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_view_as_real(SEXP self) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        return make_tensor_sexp(new at::Tensor(at::view_as_real(*a)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_stft(SEXP input, SEXP n_fft_sexp, SEXP hop_sexp,
+                              SEXP win_length_sexp, SEXP window,
+                              SEXP center_sexp, SEXP normalized_sexp,
+                              SEXP onesided_sexp, SEXP return_complex_sexp) {
+    try {
+        auto* inp = get_tensor_ptr(input);
+        int64_t n_fft = static_cast<int64_t>(Rf_asInteger(n_fft_sexp));
+        int64_t hop = static_cast<int64_t>(Rf_asInteger(hop_sexp));
+        int64_t win_length = static_cast<int64_t>(Rf_asInteger(win_length_sexp));
+        bool center = Rf_asLogical(center_sexp);
+        bool normalized = Rf_asLogical(normalized_sexp);
+        bool onesided = Rf_asLogical(onesided_sexp);
+        bool return_complex = Rf_asLogical(return_complex_sexp);
+
+        c10::optional<at::Tensor> win_opt;
+        if (!Rf_isNull(window)) {
+            win_opt = *get_tensor_ptr(window);
+        }
+
+        // If center=TRUE, pad input
+        at::Tensor x = *inp;
+        if (center) {
+            int64_t pad_amount = n_fft / 2;
+            x = at::constant_pad_nd(x, {pad_amount, pad_amount}, 0);
+        }
+
+        return make_tensor_sexp(new at::Tensor(
+            at::stft(x, n_fft, hop, win_length, win_opt,
+                     normalized, onesided, return_complex)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_istft(SEXP input, SEXP n_fft_sexp, SEXP hop_sexp,
+                               SEXP win_length_sexp, SEXP window,
+                               SEXP center_sexp, SEXP normalized_sexp,
+                               SEXP onesided_sexp, SEXP length_sexp,
+                               SEXP return_complex_sexp) {
+    try {
+        auto* inp = get_tensor_ptr(input);
+        int64_t n_fft = static_cast<int64_t>(Rf_asInteger(n_fft_sexp));
+        int64_t hop = static_cast<int64_t>(Rf_asInteger(hop_sexp));
+        int64_t win_length = static_cast<int64_t>(Rf_asInteger(win_length_sexp));
+        bool center = Rf_asLogical(center_sexp);
+        bool normalized = Rf_asLogical(normalized_sexp);
+        bool onesided = Rf_asLogical(onesided_sexp);
+        bool return_complex = Rf_asLogical(return_complex_sexp);
+
+        c10::optional<at::Tensor> win_opt;
+        if (!Rf_isNull(window)) {
+            win_opt = *get_tensor_ptr(window);
+        }
+
+        c10::optional<int64_t> len_opt;
+        if (!Rf_isNull(length_sexp)) {
+            len_opt = static_cast<int64_t>(Rf_asInteger(length_sexp));
+        }
+
+        return make_tensor_sexp(new at::Tensor(
+            at::istft(*inp, n_fft, hop, win_length, win_opt,
+                      center, normalized, onesided, len_opt, return_complex)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_hann_window(SEXP length_sexp, SEXP periodic_sexp,
+                                     SEXP dtype_sexp) {
+    try {
+        int64_t length = static_cast<int64_t>(Rf_asInteger(length_sexp));
+        bool periodic = Rf_asLogical(periodic_sexp);
+        auto opts = at::TensorOptions();
+        auto dtype = sexp_to_dtype(dtype_sexp);
+        if (dtype.has_value()) opts = opts.dtype(dtype.value());
+        return make_tensor_sexp(new at::Tensor(
+            torch::hann_window(length, periodic, opts)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}

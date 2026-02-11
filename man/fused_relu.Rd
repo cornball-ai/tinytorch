@@ -14,3 +14,8 @@ A new torch tensor (float32).
 \description{
 Fused relu
 }
+\examples{
+\donttest{
+fused_relu(torch_randn(c(2, 3)))
+}
+}
