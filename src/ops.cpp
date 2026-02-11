@@ -1000,11 +1000,17 @@ extern "C" SEXP C_torch_stft(SEXP input, SEXP n_fft_sexp, SEXP hop_sexp,
             win_opt = *get_tensor_ptr(window);
         }
 
-        // If center=TRUE, pad input
+        // If center=TRUE, pad input with reflect padding (matching PyTorch default)
         at::Tensor x = *inp;
         if (center) {
             int64_t pad_amount = n_fft / 2;
-            x = at::constant_pad_nd(x, {pad_amount, pad_amount}, 0);
+            // reflection_pad1d expects 3D input (batch, channel, length)
+            bool needs_unsqueeze = (x.dim() == 1);
+            if (needs_unsqueeze) x = x.unsqueeze(0).unsqueeze(0);
+            else if (x.dim() == 2) x = x.unsqueeze(1);
+            x = at::reflection_pad1d(x, {pad_amount, pad_amount});
+            if (needs_unsqueeze) x = x.squeeze(0).squeeze(0);
+            else if (inp->dim() == 2) x = x.squeeze(1);
         }
 
         return make_tensor_sexp(new at::Tensor(
