@@ -3,53 +3,44 @@
 // ---- Activation functions ----
 
 // [[Rcpp::export]]
-SEXP C_nnf_silu(SEXP self) {
-        auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(at::silu(*a)));
-}
+at::Tensor C_nnf_silu(at::Tensor self) { return at::silu(self); }
 
 // [[Rcpp::export]]
-SEXP C_nnf_gelu(SEXP self, SEXP approximate_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_nnf_gelu(at::Tensor self, SEXP approximate_sexp) {
         std::string approx = Rf_isNull(approximate_sexp) ? "none" :
                              std::string(CHAR(STRING_ELT(approximate_sexp, 0)));
-        return make_tensor_sexp(new at::Tensor(at::gelu(*a, approx)));
+        return at::gelu(self, approx);
 }
 
 // [[Rcpp::export]]
-SEXP C_nnf_leaky_relu(SEXP self, SEXP negative_slope_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_nnf_leaky_relu(at::Tensor self, SEXP negative_slope_sexp) {
         double ns = Rf_isNull(negative_slope_sexp) ? 0.01 : Rf_asReal(negative_slope_sexp);
-        return make_tensor_sexp(new at::Tensor(at::leaky_relu(*a, ns)));
+        return at::leaky_relu(self, ns);
 }
 
 // [[Rcpp::export]]
-SEXP C_nnf_elu(SEXP self, SEXP alpha_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_nnf_elu(at::Tensor self, SEXP alpha_sexp) {
         double alpha = Rf_isNull(alpha_sexp) ? 1.0 : Rf_asReal(alpha_sexp);
-        return make_tensor_sexp(new at::Tensor(at::elu(*a, alpha)));
+        return at::elu(self, alpha);
 }
 
 // [[Rcpp::export]]
-SEXP C_nnf_softmax(SEXP self, SEXP dim_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_nnf_softmax(at::Tensor self, SEXP dim_sexp) {
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(at::softmax(*a, dim)));
+        return at::softmax(self, dim);
 }
 
 // [[Rcpp::export]]
-SEXP C_nnf_log_softmax(SEXP self, SEXP dim_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_nnf_log_softmax(at::Tensor self, SEXP dim_sexp) {
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(at::log_softmax(*a, dim)));
+        return at::log_softmax(self, dim);
 }
 
 // [[Rcpp::export]]
-SEXP C_nnf_layer_norm(SEXP self, SEXP normalized_shape_sexp,
+at::Tensor C_nnf_layer_norm(at::Tensor self, SEXP normalized_shape_sexp,
                                   SEXP weight, SEXP bias, SEXP eps_sexp) {
-        auto* a = get_tensor_ptr(self);
         auto nshape = sexp_to_int_vec(normalized_shape_sexp);
         double eps = Rf_isNull(eps_sexp) ? 1e-5 : Rf_asReal(eps_sexp);
 
@@ -62,66 +53,51 @@ SEXP C_nnf_layer_norm(SEXP self, SEXP normalized_shape_sexp,
             b_opt = *get_tensor_ptr(bias);
         }
 
-        return make_tensor_sexp(new at::Tensor(
-            at::layer_norm(*a, at::IntArrayRef(nshape.data(), nshape.size()),
-                           w_opt, b_opt, eps)));
+        return at::layer_norm(self, at::IntArrayRef(nshape.data(), nshape.size()),
+                           w_opt, b_opt, eps);
 }
 
 // ---- Linear algebra functions ----
 
 // [[Rcpp::export]]
-SEXP C_torch_linear(SEXP input, SEXP weight, SEXP bias) {
-        auto* inp = get_tensor_ptr(input);
-        auto* w = get_tensor_ptr(weight);
-
+at::Tensor C_torch_linear(at::Tensor input, at::Tensor weight, SEXP bias) {
         if (Rf_isNull(bias)) {
-            return make_tensor_sexp(new at::Tensor(at::linear(*inp, *w)));
+            return at::linear(input, weight);
         } else {
-            auto* b = get_tensor_ptr(bias);
-            return make_tensor_sexp(new at::Tensor(at::linear(*inp, *w, *b)));
+            return at::linear(input, weight, *get_tensor_ptr(bias));
         }
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_conv1d(SEXP input, SEXP weight, SEXP bias,
+at::Tensor C_torch_conv1d(at::Tensor input, at::Tensor weight, SEXP bias,
                                 SEXP stride_sexp, SEXP padding_sexp,
                                 SEXP dilation_sexp, SEXP groups_sexp) {
-        auto* inp = get_tensor_ptr(input);
-        auto* w = get_tensor_ptr(weight);
-
         int64_t stride = static_cast<int64_t>(Rf_asInteger(stride_sexp));
         int64_t padding = static_cast<int64_t>(Rf_asInteger(padding_sexp));
         int64_t dilation = static_cast<int64_t>(Rf_asInteger(dilation_sexp));
         int64_t groups = static_cast<int64_t>(Rf_asInteger(groups_sexp));
 
         if (Rf_isNull(bias)) {
-            return make_tensor_sexp(new at::Tensor(
-                at::conv1d(*inp, *w, {}, stride, padding, dilation, groups)));
+            return at::conv1d(input, weight, {}, stride, padding, dilation, groups);
         } else {
-            auto* b = get_tensor_ptr(bias);
-            return make_tensor_sexp(new at::Tensor(
-                at::conv1d(*inp, *w, *b, stride, padding, dilation, groups)));
+            return at::conv1d(input, weight, *get_tensor_ptr(bias),
+                           stride, padding, dilation, groups);
         }
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_embedding(SEXP weight, SEXP indices) {
-        auto* w = get_tensor_ptr(weight);
-        auto* idx = get_tensor_ptr(indices);
+at::Tensor C_torch_embedding(at::Tensor weight, at::Tensor indices) {
         // Convert 1-indexed R indices to 0-indexed ATen indices
-        auto idx0 = idx->sub(1);
-        return make_tensor_sexp(new at::Tensor(at::embedding(*w, idx0)));
+        return at::embedding(weight, indices.sub(1));
 }
 
 // ---- Transposed convolution ----
 
 // [[Rcpp::export]]
-SEXP C_torch_conv_transpose1d(SEXP input, SEXP weight, SEXP bias,
+at::Tensor C_torch_conv_transpose1d(at::Tensor input, at::Tensor weight, SEXP bias,
                                           SEXP stride_sexp, SEXP padding_sexp,
                                           SEXP output_padding_sexp,
                                           SEXP groups_sexp, SEXP dilation_sexp) {
-        auto* inp = get_tensor_ptr(input);
-        auto* w = get_tensor_ptr(weight);
         int64_t stride = static_cast<int64_t>(Rf_asInteger(stride_sexp));
         int64_t padding = static_cast<int64_t>(Rf_asInteger(padding_sexp));
         int64_t output_padding = static_cast<int64_t>(Rf_asInteger(output_padding_sexp));
@@ -129,56 +105,47 @@ SEXP C_torch_conv_transpose1d(SEXP input, SEXP weight, SEXP bias,
         int64_t dilation = static_cast<int64_t>(Rf_asInteger(dilation_sexp));
 
         if (Rf_isNull(bias)) {
-            return make_tensor_sexp(new at::Tensor(
-                at::conv_transpose1d(*inp, *w, {}, stride, padding,
-                                     output_padding, groups, dilation)));
+            return at::conv_transpose1d(input, weight, {}, stride, padding,
+                                     output_padding, groups, dilation);
         } else {
-            auto* b = get_tensor_ptr(bias);
-            return make_tensor_sexp(new at::Tensor(
-                at::conv_transpose1d(*inp, *w, *b, stride, padding,
-                                     output_padding, groups, dilation)));
+            return at::conv_transpose1d(input, weight, *get_tensor_ptr(bias),
+                                     stride, padding, output_padding, groups, dilation);
         }
 }
 
 // ---- 2D convolution ----
 
 // [[Rcpp::export]]
-SEXP C_torch_conv2d(SEXP input, SEXP weight, SEXP bias,
+at::Tensor C_torch_conv2d(at::Tensor input, at::Tensor weight, SEXP bias,
                                 SEXP stride_sexp, SEXP padding_sexp,
                                 SEXP dilation_sexp, SEXP groups_sexp) {
-        auto* inp = get_tensor_ptr(input);
-        auto* w = get_tensor_ptr(weight);
         auto stride = sexp_to_int_vec(stride_sexp);
         auto padding = sexp_to_int_vec(padding_sexp);
         auto dilation = sexp_to_int_vec(dilation_sexp);
         int64_t groups = static_cast<int64_t>(Rf_asInteger(groups_sexp));
 
         if (Rf_isNull(bias)) {
-            return make_tensor_sexp(new at::Tensor(
-                at::conv2d(*inp, *w, {},
+            return at::conv2d(input, weight, {},
                            at::IntArrayRef(stride.data(), stride.size()),
                            at::IntArrayRef(padding.data(), padding.size()),
                            at::IntArrayRef(dilation.data(), dilation.size()),
-                           groups)));
+                           groups);
         } else {
-            auto* b = get_tensor_ptr(bias);
-            return make_tensor_sexp(new at::Tensor(
-                at::conv2d(*inp, *w, *b,
+            return at::conv2d(input, weight, *get_tensor_ptr(bias),
                            at::IntArrayRef(stride.data(), stride.size()),
                            at::IntArrayRef(padding.data(), padding.size()),
                            at::IntArrayRef(dilation.data(), dilation.size()),
-                           groups)));
+                           groups);
         }
 }
 
 // ---- Batch normalization ----
 
 // [[Rcpp::export]]
-SEXP C_torch_batch_norm(SEXP input, SEXP weight, SEXP bias,
+at::Tensor C_torch_batch_norm(at::Tensor input, SEXP weight, SEXP bias,
                                     SEXP running_mean, SEXP running_var,
                                     SEXP training_sexp, SEXP momentum_sexp,
                                     SEXP eps_sexp, SEXP cudnn_enabled_sexp) {
-        auto* inp = get_tensor_ptr(input);
         bool training = Rf_asLogical(training_sexp);
         double momentum = Rf_asReal(momentum_sexp);
         double eps = Rf_asReal(eps_sexp);
@@ -190,9 +157,8 @@ SEXP C_torch_batch_norm(SEXP input, SEXP weight, SEXP bias,
         if (!Rf_isNull(running_mean)) rm_opt = *get_tensor_ptr(running_mean);
         if (!Rf_isNull(running_var)) rv_opt = *get_tensor_ptr(running_var);
 
-        return make_tensor_sexp(new at::Tensor(
-            at::batch_norm(*inp, w_opt, b_opt, rm_opt, rv_opt,
-                           training, momentum, eps, cudnn_enabled)));
+        return at::batch_norm(input, w_opt, b_opt, rm_opt, rv_opt,
+                           training, momentum, eps, cudnn_enabled);
 }
 
 // ---- LSTM ----
@@ -256,28 +222,25 @@ SEXP C_torch_lstm(SEXP input, SEXP hx_sexp, SEXP params_sexp,
 // ---- NN functional: pad ----
 
 // [[Rcpp::export]]
-SEXP C_nnf_pad(SEXP input, SEXP pad_sexp, SEXP mode_sexp,
+at::Tensor C_nnf_pad(at::Tensor input, SEXP pad_sexp, SEXP mode_sexp,
                            SEXP value_sexp) {
-        auto* inp = get_tensor_ptr(input);
         auto pad = sexp_to_int_vec(pad_sexp);
         double value = Rf_asReal(value_sexp);
         const char* mode = CHAR(STRING_ELT(mode_sexp, 0));
 
         std::string mode_str(mode);
-        at::Tensor result;
         if (mode_str == "constant") {
-            result = at::constant_pad_nd(*inp,
+            return at::constant_pad_nd(input,
                 at::IntArrayRef(pad.data(), pad.size()), value);
         } else if (mode_str == "reflect") {
-            result = at::reflection_pad1d(*inp,
+            return at::reflection_pad1d(input,
                 at::IntArrayRef(pad.data(), pad.size()));
         } else if (mode_str == "replicate") {
-            result = at::replication_pad1d(*inp,
+            return at::replication_pad1d(input,
                 at::IntArrayRef(pad.data(), pad.size()));
         } else {
             Rf_error("Unsupported padding mode: %s", mode);
         }
-        return make_tensor_sexp(new at::Tensor(result));
 }
 
 // ---- NN functional: interpolate ----
@@ -340,58 +303,50 @@ SEXP C_nnf_interpolate(SEXP input, SEXP size_sexp,
 // ---- NN functional: avg_pool1d ----
 
 // [[Rcpp::export]]
-SEXP C_nnf_avg_pool1d(SEXP input, SEXP kernel_size_sexp,
+at::Tensor C_nnf_avg_pool1d(at::Tensor input, SEXP kernel_size_sexp,
                                    SEXP stride_sexp, SEXP padding_sexp,
                                    SEXP ceil_mode_sexp,
                                    SEXP count_include_pad_sexp) {
-        auto* inp = get_tensor_ptr(input);
         int64_t kernel_size = static_cast<int64_t>(Rf_asInteger(kernel_size_sexp));
         int64_t stride = static_cast<int64_t>(Rf_asInteger(stride_sexp));
         int64_t padding = static_cast<int64_t>(Rf_asInteger(padding_sexp));
         bool ceil_mode = Rf_asLogical(ceil_mode_sexp);
         bool count_include_pad = Rf_asLogical(count_include_pad_sexp);
 
-        return make_tensor_sexp(new at::Tensor(
-            at::avg_pool1d(*inp, {kernel_size}, {stride}, {padding},
-                           ceil_mode, count_include_pad)));
+        return at::avg_pool1d(input, {kernel_size}, {stride}, {padding},
+                           ceil_mode, count_include_pad);
 }
 
 // ---- NN functional: softplus ----
 
 // [[Rcpp::export]]
-SEXP C_nnf_softplus(SEXP input, SEXP beta_sexp, SEXP threshold_sexp) {
-        auto* inp = get_tensor_ptr(input);
+at::Tensor C_nnf_softplus(at::Tensor input, SEXP beta_sexp, SEXP threshold_sexp) {
         double beta = Rf_asReal(beta_sexp);
         double threshold = Rf_asReal(threshold_sexp);
-        return make_tensor_sexp(new at::Tensor(
-            at::softplus(*inp, beta, threshold)));
+        return at::softplus(input, beta, threshold);
 }
 
 // ---- NN functional: normalize ----
 
 // [[Rcpp::export]]
-SEXP C_nnf_normalize(SEXP input, SEXP p_sexp, SEXP dim_sexp,
+at::Tensor C_nnf_normalize(at::Tensor input, SEXP p_sexp, SEXP dim_sexp,
                                   SEXP eps_sexp) {
-        auto* inp = get_tensor_ptr(input);
         double p = Rf_asReal(p_sexp);
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
         double eps = Rf_asReal(eps_sexp);
         // F.normalize = x / max(norm(x, p, dim, keepdim=True), eps)
-        auto norm = inp->norm(p, dim, /*keepdim=*/true);
+        auto norm = input.norm(p, dim, /*keepdim=*/true);
         auto clamped = at::clamp_min(norm, eps);
-        return make_tensor_sexp(new at::Tensor(inp->div(clamped)));
+        return input.div(clamped);
 }
 
 // ---- Scaled Dot-Product Attention ----
 
 // [[Rcpp::export]]
-SEXP C_torch_sdpa(SEXP query, SEXP key, SEXP value,
+at::Tensor C_torch_sdpa(at::Tensor query, at::Tensor key, at::Tensor value,
                               SEXP attn_mask_sexp, SEXP dropout_sexp,
                               SEXP is_causal_sexp) {
-        auto* q = get_tensor_ptr(query);
-        auto* k = get_tensor_ptr(key);
-        auto* v = get_tensor_ptr(value);
         double dropout_p = Rf_asReal(dropout_sexp);
         bool is_causal = Rf_asLogical(is_causal_sexp);
 
@@ -400,7 +355,6 @@ SEXP C_torch_sdpa(SEXP query, SEXP key, SEXP value,
             attn_mask = *get_tensor_ptr(attn_mask_sexp);
         }
 
-        auto result = at::scaled_dot_product_attention(
-            *q, *k, *v, attn_mask, dropout_p, is_causal);
-        return make_tensor_sexp(new at::Tensor(result));
+        return at::scaled_dot_product_attention(
+            query, key, value, attn_mask, dropout_p, is_causal);
 }

@@ -61,6 +61,17 @@ std::vector<int64_t> sexp_to_int_vec(SEXP x) {
     return out;
 }
 
+// ---- Rcpp::as / Rcpp::wrap for at::Tensor ----
+
+namespace Rcpp {
+    template<> at::Tensor as(SEXP x) {
+        return *get_tensor_ptr(x);
+    }
+    template<> SEXP wrap(const at::Tensor& t) {
+        return make_tensor_sexp(new at::Tensor(t));
+    }
+}
+
 // ---- Device helper ----
 
 at::Device sexp_to_device(SEXP device_sexp) {
@@ -182,10 +193,7 @@ SEXP C_torch_randn(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_empty_like(SEXP self) {
-        auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(at::empty_like(*a)));
-}
+at::Tensor C_torch_empty_like(at::Tensor self) { return at::empty_like(self); }
 
 // [[Rcpp::export]]
 SEXP C_torch_empty(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
@@ -276,94 +284,79 @@ SEXP C_torch_linspace(SEXP start_sexp, SEXP end_sexp,
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_ones_like(SEXP self, SEXP dtype_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_torch_ones_like(at::Tensor self, SEXP dtype_sexp) {
         if (Rf_isNull(dtype_sexp)) {
-            return make_tensor_sexp(new at::Tensor(at::ones_like(*a)));
+            return at::ones_like(self);
         } else {
             auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
-            return make_tensor_sexp(new at::Tensor(at::ones_like(*a, at::TensorOptions().dtype(dt))));
+            return at::ones_like(self, at::TensorOptions().dtype(dt));
         }
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_zeros_like(SEXP self, SEXP dtype_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_torch_zeros_like(at::Tensor self, SEXP dtype_sexp) {
         if (Rf_isNull(dtype_sexp)) {
-            return make_tensor_sexp(new at::Tensor(at::zeros_like(*a)));
+            return at::zeros_like(self);
         } else {
             auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
-            return make_tensor_sexp(new at::Tensor(at::zeros_like(*a, at::TensorOptions().dtype(dt))));
+            return at::zeros_like(self, at::TensorOptions().dtype(dt));
         }
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_randn_like(SEXP self, SEXP dtype_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_torch_randn_like(at::Tensor self, SEXP dtype_sexp) {
         if (Rf_isNull(dtype_sexp)) {
-            return make_tensor_sexp(new at::Tensor(at::randn_like(*a)));
+            return at::randn_like(self);
         } else {
             auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
-            return make_tensor_sexp(new at::Tensor(at::randn_like(*a, at::TensorOptions().dtype(dt))));
+            return at::randn_like(self, at::TensorOptions().dtype(dt));
         }
 }
 
 // ---- Tensor method backends ----
 
 // [[Rcpp::export]]
-SEXP C_torch_permute(SEXP self, SEXP dims_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_torch_permute(at::Tensor self, SEXP dims_sexp) {
         auto dims = sexp_to_int_vec(dims_sexp);
         // Convert 1-based to 0-based
         for (auto& d : dims) {
             if (d > 0) d = d - 1;
         }
-        return make_tensor_sexp(new at::Tensor(
-            a->permute(at::IntArrayRef(dims.data(), dims.size()))));
+        return self.permute(at::IntArrayRef(dims.data(), dims.size()));
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_expand(SEXP self, SEXP size_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_torch_expand(at::Tensor self, SEXP size_sexp) {
         auto size = sexp_to_int_vec(size_sexp);
-        return make_tensor_sexp(new at::Tensor(
-            a->expand(at::IntArrayRef(size.data(), size.size()))));
+        return self.expand(at::IntArrayRef(size.data(), size.size()));
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_gather(SEXP self, SEXP dim_sexp, SEXP index) {
-        auto* a = get_tensor_ptr(self);
-        auto* idx = get_tensor_ptr(index);
+at::Tensor C_torch_gather(at::Tensor self, SEXP dim_sexp, at::Tensor index) {
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
         // Convert 1-indexed R indices to 0-indexed ATen indices
-        auto idx0 = idx->sub(1);
-        return make_tensor_sexp(new at::Tensor(a->gather(dim, idx0)));
+        return self.gather(dim, index.sub(1));
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_masked_fill(SEXP self, SEXP mask, SEXP value_sexp) {
-        auto* a = get_tensor_ptr(self);
-        auto* m = get_tensor_ptr(mask);
+at::Tensor C_torch_masked_fill(at::Tensor self, at::Tensor mask, SEXP value_sexp) {
         double value = Rf_asReal(value_sexp);
-        return make_tensor_sexp(new at::Tensor(
-            a->masked_fill(*m, at::Scalar(value))));
+        return self.masked_fill(mask, at::Scalar(value));
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_masked_fill_(SEXP self, SEXP mask, SEXP value_sexp) {
+SEXP C_torch_masked_fill_(SEXP self, at::Tensor mask, SEXP value_sexp) {
         auto* a = get_tensor_ptr(self);
-        auto* m = get_tensor_ptr(mask);
         double value = Rf_asReal(value_sexp);
-        a->masked_fill_(*m, at::Scalar(value));
+        a->masked_fill_(mask, at::Scalar(value));
         return self;
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_copy_(SEXP self, SEXP src) {
+SEXP C_torch_copy_(SEXP self, at::Tensor src) {
         auto* a = get_tensor_ptr(self);
-        auto* b = get_tensor_ptr(src);
-        a->copy_(*b);
+        a->copy_(src);
         return self;
 }
 
@@ -401,78 +394,65 @@ SEXP C_torch_fill_(SEXP self, SEXP value_sexp) {
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_repeat(SEXP self, SEXP sizes_sexp) {
-        auto* a = get_tensor_ptr(self);
+at::Tensor C_torch_repeat(at::Tensor self, SEXP sizes_sexp) {
         auto sizes = sexp_to_int_vec(sizes_sexp);
-        return make_tensor_sexp(new at::Tensor(
-            a->repeat_symint(c10::fromIntArrayRefSlow(sizes))));
+        return self.repeat_symint(c10::fromIntArrayRefSlow(sizes));
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_repeat_interleave(SEXP self, SEXP repeats_sexp,
+at::Tensor C_torch_repeat_interleave(at::Tensor self, SEXP repeats_sexp,
                                             SEXP dim_sexp) {
-        auto* a = get_tensor_ptr(self);
         int64_t repeats = static_cast<int64_t>(Rf_asInteger(repeats_sexp));
         if (Rf_isNull(dim_sexp)) {
-            return make_tensor_sexp(new at::Tensor(
-                a->repeat_interleave(repeats)));
+            return self.repeat_interleave(repeats);
         }
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(
-            a->repeat_interleave(repeats, dim)));
+        return self.repeat_interleave(repeats, dim);
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_index_select(SEXP self, SEXP dim_sexp, SEXP index) {
-        auto* a = get_tensor_ptr(self);
-        auto* idx = get_tensor_ptr(index);
+at::Tensor C_torch_index_select(at::Tensor self, SEXP dim_sexp, at::Tensor index) {
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(a->index_select(dim, *idx)));
+        return self.index_select(dim, index);
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_narrow(SEXP self, SEXP dim_sexp, SEXP start_sexp,
+at::Tensor C_torch_narrow(at::Tensor self, SEXP dim_sexp, SEXP start_sexp,
                                 SEXP length_sexp) {
-        auto* a = get_tensor_ptr(self);
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
         int64_t start = static_cast<int64_t>(Rf_asInteger(start_sexp));
         int64_t length = static_cast<int64_t>(Rf_asInteger(length_sexp));
-        return make_tensor_sexp(new at::Tensor(a->narrow(dim, start, length)));
+        return self.narrow(dim, start, length);
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_scatter_(SEXP self, SEXP dim_sexp, SEXP index, SEXP src) {
+SEXP C_torch_scatter_(SEXP self, SEXP dim_sexp, at::Tensor index, at::Tensor src) {
         auto* a = get_tensor_ptr(self);
-        auto* idx = get_tensor_ptr(index);
-        auto* s = get_tensor_ptr(src);
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        a->scatter_(dim, *idx, *s);
+        a->scatter_(dim, index, src);
         return self;
 }
 
 // ---- Device transfer functions ----
 
 // [[Rcpp::export]]
-SEXP C_tensor_to_device(SEXP self, SEXP device_sexp) {
-        auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(a->to(sexp_to_device(device_sexp))));
+at::Tensor C_tensor_to_device(at::Tensor self, SEXP device_sexp) {
+        return self.to(sexp_to_device(device_sexp));
 }
 
 // [[Rcpp::export]]
-SEXP C_tensor_to_dtype_device(SEXP self, SEXP dtype_sexp,
+at::Tensor C_tensor_to_dtype_device(at::Tensor self, SEXP dtype_sexp,
                                           SEXP device_sexp) {
-        auto* a = get_tensor_ptr(self);
         auto dtype = sexp_to_dtype(dtype_sexp);
         auto device = sexp_to_device(device_sexp);
         if (dtype.has_value()) {
-            return make_tensor_sexp(new at::Tensor(
-                a->to(device, dtype.value())));
+            return self.to(device, dtype.value());
         } else {
-            return make_tensor_sexp(new at::Tensor(a->to(device)));
+            return self.to(device);
         }
 }
 

@@ -1,11 +1,9 @@
 #include "Rtorch.h"
 
 // [[Rcpp::export]]
-SEXP C_as_array(SEXP self) {
-        auto* t = get_tensor_ptr(self);
-
+SEXP C_as_array(at::Tensor self) {
         // Move to CPU
-        at::Tensor cpu_t = t->to(at::kCPU);
+        at::Tensor cpu_t = self.to(at::kCPU);
 
         // Convert to double for R
         if (cpu_t.scalar_type() != at::kDouble) {
@@ -34,7 +32,7 @@ SEXP C_as_array(SEXP self) {
 
         // Set dim attribute if multi-dimensional (use original sizes, not permuted)
         if (ndim > 1) {
-            auto sizes = t->sizes();
+            auto sizes = self.sizes();
             SEXP dim = PROTECT(Rf_allocVector(INTSXP, ndim));
             int* pdim = INTEGER(dim);
             for (int i = 0; i < ndim; i++) {
@@ -51,9 +49,8 @@ SEXP C_as_array(SEXP self) {
 // ---- Properties ----
 
 // [[Rcpp::export]]
-SEXP C_tensor_shape(SEXP self) {
-        auto* t = get_tensor_ptr(self);
-        auto sizes = t->sizes();
+SEXP C_tensor_shape(at::Tensor self) {
+        auto sizes = self.sizes();
         int ndim = sizes.size();
         SEXP result = PROTECT(Rf_allocVector(INTSXP, ndim));
         int* out = INTEGER(result);
@@ -65,41 +62,35 @@ SEXP C_tensor_shape(SEXP self) {
 }
 
 // [[Rcpp::export]]
-SEXP C_tensor_dtype(SEXP self) {
-        auto* t = get_tensor_ptr(self);
-        int code = static_cast<int>(t->scalar_type());
+SEXP C_tensor_dtype(at::Tensor self) {
+        int code = static_cast<int>(self.scalar_type());
         return Rf_ScalarInteger(code);
 }
 
 // [[Rcpp::export]]
-SEXP C_tensor_device(SEXP self) {
-        auto* t = get_tensor_ptr(self);
-        std::string dev = t->device().str();
+SEXP C_tensor_device(at::Tensor self) {
+        std::string dev = self.device().str();
         return Rf_mkString(dev.c_str());
 }
 
 // [[Rcpp::export]]
-SEXP C_tensor_ndim(SEXP self) {
-        auto* t = get_tensor_ptr(self);
-        return Rf_ScalarInteger(t->dim());
+SEXP C_tensor_ndim(at::Tensor self) {
+        return Rf_ScalarInteger(self.dim());
 }
 
 // [[Rcpp::export]]
-SEXP C_tensor_numel(SEXP self) {
-        auto* t = get_tensor_ptr(self);
-        return Rf_ScalarInteger(static_cast<int>(t->numel()));
+SEXP C_tensor_numel(at::Tensor self) {
+        return Rf_ScalarInteger(static_cast<int>(self.numel()));
 }
 
 // [[Rcpp::export]]
-SEXP C_tensor_requires_grad(SEXP self) {
-        auto* t = get_tensor_ptr(self);
-        return Rf_ScalarLogical(t->requires_grad());
+SEXP C_tensor_requires_grad(at::Tensor self) {
+        return Rf_ScalarLogical(self.requires_grad());
 }
 
 // [[Rcpp::export]]
-SEXP C_tensor_print(SEXP self) {
-        auto* t = get_tensor_ptr(self);
+SEXP C_tensor_print(at::Tensor self) {
         std::ostringstream oss;
-        oss << *t;
+        oss << self;
         Rprintf("%s\n", oss.str().c_str());
 }
