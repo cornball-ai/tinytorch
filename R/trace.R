@@ -371,6 +371,8 @@ expand_module <- function(module, arg_exprs = list(), prefix = "",
       val <- tryCatch(fwd_defaults[[nm]], error = function(e) NULL)
       if (is.null(val) || (!is.symbol(val) && !is.language(val))) {
         assign(nm, val, envir = known_scalars)
+        # Also put in formal_map so the default substitutes in expressions
+        assign(nm, val, envir = formal_map)
       }
     }
   }
@@ -509,18 +511,40 @@ expand_module <- function(module, arg_exprs = list(), prefix = "",
         }
 
         if (resolved$type == "method") {
-          # Self method call — try to inline the body
+          # Self method call — inline the body
           method_fn <- resolved$value
           method_body <- body(method_fn)
           if (!is.null(method_body)) {
-            # Substitute args into the method body
             method_formals <- names(formals(method_fn))
             method_args <- list()
             for (i in seq_along(expr)[-1]) {
               method_args <- c(method_args, list(rewrite(expr[[i]])))
             }
-            # Create a sub-expansion with the method as a pseudo-module
-            # For now, just graph break on self methods
+            # Save and extend formal_map with method's formals
+            saved_bindings <- list()
+            for (j in seq_along(method_formals)) {
+              fname <- method_formals[j]
+              if (exists(fname, envir = formal_map, inherits = FALSE)) {
+                saved_bindings[[fname]] <- get(fname, envir = formal_map,
+                                               inherits = FALSE)
+              }
+              if (j <= length(method_args)) {
+                assign(fname, method_args[[j]], envir = formal_map)
+              }
+            }
+            # Rewrite the method body (self refs still resolve correctly)
+            inlined <- rewrite(method_body)
+            # Restore formal_map
+            for (fname in method_formals) {
+              if (fname %in% names(saved_bindings)) {
+                assign(fname, saved_bindings[[fname]], envir = formal_map)
+              } else {
+                if (exists(fname, envir = formal_map, inherits = FALSE)) {
+                  rm(list = fname, envir = formal_map)
+                }
+              }
+            }
+            return(inlined)
           }
           graph_breaks[[length(graph_breaks) + 1L]] <<- list(
             reason = sprintf("self method: self$%s()", method_name),

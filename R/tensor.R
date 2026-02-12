@@ -196,6 +196,14 @@ torch_sigmoid <- function(self) {
   .Call(C_torch_min, self, dim)
 }
 
+.tensor_methods$argmax <- function(self, dim = NULL, keepdim = FALSE) {
+  .Call(C_torch_argmax, self, dim, keepdim)
+}
+
+.tensor_methods$argmin <- function(self, dim = NULL, keepdim = FALSE) {
+  .Call(C_torch_argmin, self, dim, keepdim)
+}
+
 .tensor_methods$reshape <- function(self, shape) {
   .Call(C_torch_reshape, self, as.integer(shape))
 }
@@ -514,6 +522,10 @@ torch_sigmoid <- function(self) {
 
 .tensor_methods$dim <- function(self) {
   .Call(C_tensor_ndim, self)
+}
+
+.tensor_methods$numel <- function(self) {
+  .Call(C_tensor_numel, self)
 }
 
 .tensor_methods$size <- function(self, dim = NULL) {

@@ -971,8 +971,8 @@ compile_fusion_group_gpu <- function(graph, group_id, block_size = 1024L,
     grid <- c(as.integer(ceiling(n_elem / block_size)), 1L, 1L)
     block <- c(threads_per_block, 1L, 1L)
 
-    ariel::gpu_launch(ptx, kernel_name, inputs, output,
-                       grid, block, shared_mem)
+    gpu_launch(ptx, kernel_name, inputs, output,
+               grid, block, shared_mem)
     output
   }
 

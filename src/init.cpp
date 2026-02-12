@@ -40,6 +40,8 @@ extern "C" SEXP C_torch_sum(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_mean(SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_max(SEXP, SEXP);
 extern "C" SEXP C_torch_min(SEXP, SEXP);
+extern "C" SEXP C_torch_argmax(SEXP, SEXP, SEXP);
+extern "C" SEXP C_torch_argmin(SEXP, SEXP, SEXP);
 
 // Forward declarations - shape
 extern "C" SEXP C_torch_reshape(SEXP, SEXP);
@@ -164,6 +166,13 @@ extern "C" SEXP C_nnf_softplus(SEXP, SEXP, SEXP);
 extern "C" SEXP C_nnf_normalize(SEXP, SEXP, SEXP, SEXP);
 extern "C" SEXP C_torch_sdpa(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
+// Forward declarations - GPU kernel launch
+extern "C" SEXP C_gpu_launch(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_gpu_launch_reduction(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_gpu_launch_generic(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_gpu_kernel_cache_clear();
+extern "C" SEXP C_gpu_kernel_cache_stats();
+
 // Forward declarations - fused kernels
 extern "C" SEXP cpp_fused_relu(SEXP);
 extern "C" SEXP cpp_fused_relu_sigmoid(SEXP);
@@ -174,6 +183,10 @@ extern "C" SEXP cpp_fused_sincos(SEXP);
 extern "C" SEXP cpp_fused_softcap(SEXP, SEXP);
 extern "C" SEXP cpp_fused_rmsnorm(SEXP, SEXP, SEXP);
 extern "C" SEXP cpp_tensor_shapes_key(SEXP);
+
+// Forward declarations - transformer
+extern "C" SEXP C_transformer_decoder_layer_step(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern "C" SEXP C_transformer_encoder_layer(SEXP, SEXP, SEXP);
 
 // Forward declarations - indexing
 extern "C" SEXP C_torch_index(SEXP, SEXP, SEXP);
@@ -239,6 +252,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_torch_mean",        (DL_FUNC) &C_torch_mean,        3},
     {"C_torch_max",         (DL_FUNC) &C_torch_max,         2},
     {"C_torch_min",         (DL_FUNC) &C_torch_min,         2},
+    {"C_torch_argmax",      (DL_FUNC) &C_torch_argmax,      3},
+    {"C_torch_argmin",      (DL_FUNC) &C_torch_argmin,      3},
 
     // Shape
     {"C_torch_reshape",     (DL_FUNC) &C_torch_reshape,     2},
@@ -378,6 +393,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"cpp_fused_rmsnorm",           (DL_FUNC) &cpp_fused_rmsnorm,           3},
     {"cpp_tensor_shapes_key",       (DL_FUNC) &cpp_tensor_shapes_key,       1},
 
+    // Transformer
+    {"C_transformer_decoder_layer_step", (DL_FUNC) &C_transformer_decoder_layer_step, 7},
+    {"C_transformer_encoder_layer",      (DL_FUNC) &C_transformer_encoder_layer,      3},
+
     // Conversion & properties
     {"C_as_array",              (DL_FUNC) &C_as_array,              1},
     {"C_tensor_shape",          (DL_FUNC) &C_tensor_shape,          1},
@@ -396,6 +415,13 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_cuda_empty_cache",      (DL_FUNC) &C_cuda_empty_cache,      0},
     {"C_cuda_mem_info",         (DL_FUNC) &C_cuda_mem_info,         0},
     {"C_cuda_memory_stats",     (DL_FUNC) &C_cuda_memory_stats,     0},
+
+    // GPU kernel launch
+    {"C_gpu_launch",              (DL_FUNC) &C_gpu_launch,              7},
+    {"C_gpu_launch_reduction",    (DL_FUNC) &C_gpu_launch_reduction,    8},
+    {"C_gpu_launch_generic",      (DL_FUNC) &C_gpu_launch_generic,      7},
+    {"C_gpu_kernel_cache_clear",  (DL_FUNC) &C_gpu_kernel_cache_clear,  0},
+    {"C_gpu_kernel_cache_stats",  (DL_FUNC) &C_gpu_kernel_cache_stats,  0},
 
     {NULL, NULL, 0}
 };

@@ -8,8 +8,9 @@
 
   # Arithmetic
   "add", "sub", "mul", "div", "matmul", "mm", "bmm",
-  "pow", "sqrt", "exp", "log", "log2", "log10",
+  "pow", "sqrt", "rsqrt", "exp", "log", "log2", "log10",
   "abs", "neg", "sign", "floor", "ceil", "round", "trunc",
+  "sin", "cos",
   # Comparison
 
   "eq", "ne", "lt", "le", "gt", "ge",
@@ -50,7 +51,8 @@
   "torch_einsum",
   "torch_linear", "torch_layer_norm",
   "torch_gelu", "torch_silu", "torch_sigmoid",
-  "torch_conv1d"
+  "torch_conv1d",
+  "torch_scaled_dot_product_attention"
 )
 
 # Operators that work on tensors

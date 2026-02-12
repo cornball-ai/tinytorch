@@ -51,16 +51,16 @@ expect_true(torch_allclose(fn_result, expected, atol = 1e-5),
 
 # ===== compile() with graph breaks =====
 
-# Create a module with a closure field (causes graph break: self method)
+# Create a module with a side-effect call (causes graph break)
 break_mod <- nn_module(
   "break_mod",
   initialize = function() {
     self$linear <- nn_linear(5, 3)
-    self$act_fn <- function(x) x$relu()
   },
   forward = function(input) {
     x <- self$linear(input)
-    self$act_fn(x)
+    cat("debug\n")
+    x$relu()
   }
 )
 bm <- break_mod()

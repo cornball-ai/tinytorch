@@ -103,7 +103,10 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
     log2 = inputs[[1]]$log2(),
     log10 = inputs[[1]]$log10(),
     sqrt = inputs[[1]]$sqrt(),
+    rsqrt = inputs[[1]]$rsqrt(),
     abs = inputs[[1]]$abs(),
+    sin = inputs[[1]]$sin(),
+    cos = inputs[[1]]$cos(),
     neg = -inputs[[1]],
     sign = inputs[[1]]$sign(),
     floor = inputs[[1]]$floor(),
@@ -119,6 +122,15 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
     contiguous = inputs[[1]]$contiguous(),
     clone = inputs[[1]]$clone(),
     detach = inputs[[1]]$detach(),
+
+    # Dynamic shape ops (from x$size() / c() in traced modules)
+    size = {
+      d <- attrs$dim %||% attrs$arg1
+      if (is.null(d) && length(inputs) >= 2L) d <- inputs[[2]]
+      if (!is.null(d)) inputs[[1]]$size(as.integer(d))
+      else inputs[[1]]$size()
+    },
+    c = as.integer(unlist(inputs)),
 
     # Binary ops
     add = inputs[[1]] + inputs[[2]],
@@ -160,20 +172,35 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       }
     },
 
-    # Shape ops
-    reshape = inputs[[1]]$reshape(as.integer(attrs$shape %||% attrs$arg1)),
-    view = inputs[[1]]$view(as.integer(attrs$shape %||% attrs$arg1)),
+    # Shape ops (shape from attrs if static, from inputs[[2]] if dynamic)
+    reshape = {
+      shape <- attrs$shape %||% attrs$arg1
+      if (is.null(shape) && length(inputs) >= 2L) shape <- inputs[[2]]
+      inputs[[1]]$reshape(as.integer(shape))
+    },
+    view = {
+      shape <- attrs$shape %||% attrs$arg1
+      if (is.null(shape) && length(inputs) >= 2L) shape <- inputs[[2]]
+      inputs[[1]]$view(as.integer(shape))
+    },
     transpose = {
-      d0 <- as.integer(attrs$dim0 %||% attrs$arg1 %||% 1L)
-      d1 <- as.integer(attrs$dim1 %||% attrs$arg2 %||% 2L)
-      inputs[[1]]$transpose(d0, d1)
+      d0 <- attrs$dim0 %||% attrs$arg1
+      d1 <- attrs$dim1 %||% attrs$arg2
+      if (is.null(d0) && length(inputs) >= 2L) d0 <- inputs[[2]]
+      if (is.null(d1) && length(inputs) >= 3L) d1 <- inputs[[3]]
+      inputs[[1]]$transpose(as.integer(d0 %||% 1L), as.integer(d1 %||% 2L))
     },
     squeeze = {
       d <- attrs$dim %||% attrs$arg1
+      if (is.null(d) && length(inputs) >= 2L) d <- inputs[[2]]
       if (!is.null(d)) inputs[[1]]$squeeze(as.integer(d))
       else inputs[[1]]$squeeze()
     },
-    unsqueeze = inputs[[1]]$unsqueeze(as.integer(attrs$dim %||% attrs$arg1)),
+    unsqueeze = {
+      d <- attrs$dim %||% attrs$arg1
+      if (is.null(d) && length(inputs) >= 2L) d <- inputs[[2]]
+      inputs[[1]]$unsqueeze(as.integer(d))
+    },
     flatten = {
       sd <- as.integer(attrs$start_dim %||% attrs$arg1 %||% 1L)
       ed <- as.integer(attrs$end_dim %||% attrs$arg2 %||% -1L)
@@ -186,8 +213,10 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       torch_linear(inputs[[1]], inputs[[2]], bias)
     },
     torch_layer_norm = {
-      # normalized_shape may be in attrs or as a constant input
-      nshape <- attrs$normalized_shape %||% attrs$arg1
+      # normalized_shape may be in attrs (as arg2 from tracer positional args,
+      # or normalized_shape/arg1 from manual IR) or as a constant input node.
+      nshape <- attrs$normalized_shape %||% attrs$arg2 %||% attrs$arg1
+      eps <- attrs$eps %||% attrs$arg5 %||% 1e-5
       weight <- NULL
       bias <- NULL
       if (is.null(nshape) && length(inputs) >= 2L && is.list(inputs[[2]])) {
@@ -199,7 +228,6 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
         weight <- if (length(inputs) >= 2L) inputs[[2]] else NULL
         bias <- if (length(inputs) >= 3L) inputs[[3]] else NULL
       }
-      eps <- attrs$eps %||% 1e-5
       nnf_layer_norm(inputs[[1]], nshape, weight, bias, eps)
     },
     torch_gelu = nnf_gelu(inputs[[1]]),
@@ -213,6 +241,23 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       groups <- attrs$groups %||% 1L
       torch_conv1d(inputs[[1]], inputs[[2]], bias,
                     stride, padding, dilation, groups)
+    },
+    torch_sdpa = ,
+    torch_scaled_dot_product_attention = {
+      mask <- if (length(inputs) >= 4L) inputs[[4]] else NULL
+      torch_scaled_dot_product_attention(inputs[[1]], inputs[[2]], inputs[[3]],
+                                          attn_mask = mask)
+    },
+
+    # List construction (from sub-module returns)
+    list = {
+      setNames(as.list(inputs), attrs$names)
+    },
+
+    # Field access on list/object (e.g., result$output)
+    getattr = {
+      field <- attrs$field
+      inputs[[1]][[field]]
     },
 
     # Fallback: try method call on first input
@@ -293,7 +338,10 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
     log2 = bquote(.(inp[[1]])$log2()),
     log10 = bquote(.(inp[[1]])$log10()),
     sqrt = bquote(.(inp[[1]])$sqrt()),
+    rsqrt = bquote(.(inp[[1]])$rsqrt()),
     abs = bquote(.(inp[[1]])$abs()),
+    sin = bquote(.(inp[[1]])$sin()),
+    cos = bquote(.(inp[[1]])$cos()),
     neg = bquote(-.(inp[[1]])),
     sign = bquote(.(inp[[1]])$sign()),
     floor = bquote(.(inp[[1]])$floor()),
@@ -301,6 +349,18 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
     round = bquote(.(inp[[1]])$round()),
     trunc = bquote(.(inp[[1]])$trunc()),
     contiguous = bquote(.(inp[[1]])$contiguous()),
+
+    # Dynamic shape ops
+    size = {
+      d <- attrs$dim %||% attrs$arg1
+      if (!is.null(d)) bquote(.(inp[[1]])$size(.(as.integer(d))))
+      else if (length(inp) >= 2L) bquote(.(inp[[1]])$size(.(inp[[2]])))
+      else bquote(.(inp[[1]])$size())
+    },
+    c = {
+      as.call(c(list(as.name("as.integer")),
+        list(as.call(c(list(as.name("c")), inp)))))
+    },
     clone = bquote(.(inp[[1]])$clone()),
     detach = bquote(.(inp[[1]])$detach()),
 
@@ -354,20 +414,38 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       }
     },
 
-    # Shape ops
+    # Shape ops — dims may be in attrs (from optimizer) or in inputs (from tracer)
     transpose = {
-      d0 <- as.integer(attrs$dim0 %||% attrs$arg1 %||% 1L)
-      d1 <- as.integer(attrs$dim1 %||% attrs$arg2 %||% 2L)
-      bquote(.(inp[[1]])$transpose(.(d0), .(d1)))
+      d0 <- attrs$dim0 %||% attrs$arg1
+      d1 <- attrs$dim1 %||% attrs$arg2
+      if (!is.null(d0) && !is.null(d1)) {
+        bquote(.(inp[[1]])$transpose(.(as.integer(d0)), .(as.integer(d1))))
+      } else {
+        # Dims from input nodes
+        bquote(.(inp[[1]])$transpose(as.integer(.(inp[[2]])), as.integer(.(inp[[3]]))))
+      }
     },
-    reshape = bquote(.(inp[[1]])$reshape(.(as.integer(attrs$shape %||% attrs$arg1)))),
-    view = bquote(.(inp[[1]])$view(.(as.integer(attrs$shape %||% attrs$arg1)))),
+    reshape = {
+      shape <- attrs$shape %||% attrs$arg1
+      if (!is.null(shape)) bquote(.(inp[[1]])$reshape(.(as.integer(shape))))
+      else bquote(.(inp[[1]])$reshape(.(inp[[2]])))
+    },
+    view = {
+      shape <- attrs$shape %||% attrs$arg1
+      if (!is.null(shape)) bquote(.(inp[[1]])$view(.(as.integer(shape))))
+      else bquote(.(inp[[1]])$view(.(inp[[2]])))
+    },
     squeeze = {
       d <- attrs$dim %||% attrs$arg1
       if (!is.null(d)) bquote(.(inp[[1]])$squeeze(.(as.integer(d))))
+      else if (length(inp) >= 2L) bquote(.(inp[[1]])$squeeze(as.integer(.(inp[[2]]))))
       else bquote(.(inp[[1]])$squeeze())
     },
-    unsqueeze = bquote(.(inp[[1]])$unsqueeze(.(as.integer(attrs$dim %||% attrs$arg1)))),
+    unsqueeze = {
+      d <- attrs$dim %||% attrs$arg1
+      if (!is.null(d)) bquote(.(inp[[1]])$unsqueeze(.(as.integer(d))))
+      else bquote(.(inp[[1]])$unsqueeze(as.integer(.(inp[[2]]))))
+    },
     flatten = {
       sd <- as.integer(attrs$start_dim %||% attrs$arg1 %||% 1L)
       ed <- as.integer(attrs$end_dim %||% attrs$arg2 %||% -1L)
@@ -383,8 +461,8 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       }
     },
     torch_layer_norm = {
-      nshape <- attrs$normalized_shape %||% attrs$arg1
-      eps <- attrs$eps %||% 1e-5
+      nshape <- attrs$normalized_shape %||% attrs$arg2 %||% attrs$arg1
+      eps <- attrs$eps %||% attrs$arg5 %||% 1e-5
       if (!is.null(nshape)) {
         if (length(inp) >= 3L) {
           bquote(nnf_layer_norm(.(inp[[1]]), .(nshape),
@@ -419,6 +497,31 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       groups <- attrs$groups %||% 1L
       bquote(torch_conv1d(.(inp[[1]]), .(inp[[2]]), .(bias_expr),
                            .(stride), .(padding), .(dilation), .(groups)))
+    },
+    torch_sdpa = ,
+    torch_scaled_dot_product_attention = {
+      mask_expr <- if (length(inp) >= 4L) inp[[4]] else quote(NULL)
+      bquote(torch_scaled_dot_product_attention(
+        .(inp[[1]]), .(inp[[2]]), .(inp[[3]]), attn_mask = .(mask_expr)))
+    },
+
+    # List construction (from sub-module returns)
+    list = {
+      nms <- attrs$names
+      if (!is.null(nms)) {
+        # Named list: list(output = v1, kv_cache = v2)
+        call_args <- inp
+        names(call_args) <- nms
+        as.call(c(list(as.name("list")), call_args))
+      } else {
+        as.call(c(list(as.name("list")), inp))
+      }
+    },
+
+    # Field access on list/object (e.g., result$output)
+    getattr = {
+      field <- attrs$field
+      bquote(.(inp[[1]])[[.(field)]])
     },
 
     # Fallback: dispatch through the interpreter
@@ -480,11 +583,17 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       next
     }
 
-    # Constant: pre-compute and bind in closure env
+    # Constant: pre-compute and bind in closure env.
+    # Scalar constants stay as plain R values (not torch_tensor) because
+    # they may be consumed by ops that expect R integers (size, transpose,
+    # reshape dims, etc.). Binary tensor ops handle R scalar promotion
+    # automatically via S3 dispatch and C++ at::Tensor + scalar.
+    # Only array/multi-element constants become tensors (they may need
+    # device placement and are never used as plain dim arguments).
     if (node$op == "constant") {
       cname <- paste0(".c", id)
       val <- node$attrs$value
-      if (is.numeric(val) || is.logical(val)) {
+      if ((is.numeric(val) || is.logical(val)) && length(val) > 1L) {
         ct <- torch_tensor(val)
         if (!is.null(target_device)) ct <- ct$to(device = target_device)
         fn_env[[cname]] <- ct
@@ -780,7 +889,9 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
   backend <- prepared$backend %||% "cpu"
 
   # Initialize input values via pre-computed input_map
-  values <- list()
+  # Use environment for values to support NULL entries
+  # (list[[key]] <- NULL removes the entry, env[[key]] <- NULL preserves it)
+  values <- new.env(parent = emptyenv())
   for (nm in names(input_map)) {
     if (nm %in% names(inputs)) {
       values[[input_map[[nm]]]] <- inputs[[nm]]
@@ -803,7 +914,7 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
     node <- graph$nodes[[id_str]]
 
     # Skip already computed (inputs)
-    if (!is.null(values[[id_str]])) next
+    if (exists(id_str, envir = values, inherits = FALSE)) next
 
     # Matmul epilogue: fused matmul+bias+epilogue
     if (id_str %in% names(matmul_epilogues)) {
@@ -865,9 +976,11 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
     }
 
     # Handle constants
+    # Scalar constants stay as plain R values — see note in
+    # .compile_fast_executor for rationale.
     if (node$op == "constant") {
       val <- node$attrs$value
-      if (is.numeric(val) || is.logical(val)) {
+      if ((is.numeric(val) || is.logical(val)) && length(val) > 1L) {
         ct <- torch_tensor(val)
         if (!is.null(target_device)) {
           ct <- ct$to(device = target_device)
@@ -889,7 +1002,10 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
     })
 
     # Check all inputs are available
-    if (any(vapply(inp_tensors, is.null, logical(1)))) {
+    missing <- !vapply(node$inputs, function(inp_id) {
+      exists(as.character(inp_id), envir = values, inherits = FALSE)
+    }, logical(1))
+    if (any(missing)) {
       if (verbose) message(sprintf("  Skip %%%d (%s): missing inputs", id, node$op))
       next
     }

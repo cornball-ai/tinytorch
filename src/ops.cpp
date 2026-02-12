@@ -215,6 +215,38 @@ extern "C" SEXP C_torch_min(SEXP self, SEXP dim_sexp) {
     return R_NilValue;
 }
 
+extern "C" SEXP C_torch_argmax(SEXP self, SEXP dim_sexp, SEXP keepdim_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        bool keepdim = Rf_asLogical(keepdim_sexp);
+        if (Rf_isNull(dim_sexp)) {
+            return make_tensor_sexp(new at::Tensor(a->argmax()));
+        }
+        int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
+        if (dim > 0) dim = dim - 1;
+        return make_tensor_sexp(new at::Tensor(a->argmax(dim, keepdim)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
+extern "C" SEXP C_torch_argmin(SEXP self, SEXP dim_sexp, SEXP keepdim_sexp) {
+    try {
+        auto* a = get_tensor_ptr(self);
+        bool keepdim = Rf_asLogical(keepdim_sexp);
+        if (Rf_isNull(dim_sexp)) {
+            return make_tensor_sexp(new at::Tensor(a->argmin()));
+        }
+        int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
+        if (dim > 0) dim = dim - 1;
+        return make_tensor_sexp(new at::Tensor(a->argmin(dim, keepdim)));
+    } catch (const std::exception& e) {
+        Rf_error("%s", e.what());
+    }
+    return R_NilValue;
+}
+
 // ---- Shape operations ----
 
 extern "C" SEXP C_torch_reshape(SEXP self, SEXP shape_sexp) {

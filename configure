@@ -33,7 +33,7 @@ CUDA_CPPFLAGS=""
 if [ -f "$TORCH_LIB/libtorch_cuda.so" ] || [ -f "$TORCH_LIB/libtorch_cuda.dylib" ]; then
   # --no-as-needed forces the library into DT_NEEDED even without direct symbol refs.
   # libtorch_cuda registers CUDA dispatch keys via static constructors at load time.
-  CUDA_LIBS="-Wl,--no-as-needed -ltorch_cuda -lc10_cuda -Wl,--as-needed"
+  CUDA_LIBS="-Wl,--no-as-needed -ltorch_cuda -lc10_cuda -Wl,--as-needed -lcuda"
 
   # Find CUDA SDK headers (needed for CUDACachingAllocator.h -> cuda_runtime_api.h)
   for cuda_dir in /usr/local/cuda /usr/local/cuda-12 /usr/local/cuda-12.8; do

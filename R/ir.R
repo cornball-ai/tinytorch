@@ -166,6 +166,12 @@ lower_to_ir <- function(statements, env = parent.frame()) {
                               attrs = list(field = field))))
     }
 
+    # Handle namespace-qualified calls: pkg::fn(args) → treat as fn(args)
+    if (is.call(fn) && identical(fn[[1]], as.symbol("::")) && length(fn) == 3L) {
+      fn <- fn[[3]]  # Extract the function name
+      expr[[1]] <- fn  # Replace in expr so arg processing works
+    }
+
     if (is.symbol(fn)) {
       fn_name <- as.character(fn)
 
@@ -235,14 +241,23 @@ lower_to_ir <- function(statements, env = parent.frame()) {
 
       # Other known function - lower args
       arg_ids <- integer()
+      arg_names <- character()
       if (length(expr) > 1) {
+        nms <- names(expr)
         for (i in seq_along(expr)[-1]) {
           arg_ids <- c(arg_ids, lower_expr(expr[[i]]))
+          nm <- if (!is.null(nms) && nms[i] != "") nms[i] else ""
+          arg_names <- c(arg_names, nm)
         }
       }
       id <- new_id()
+      fn_attrs <- list(fn = fn_name)
+      # Preserve argument names for list() calls
+      if (fn_name == "list" && any(arg_names != "")) {
+        fn_attrs$names <- arg_names
+      }
       return(add_node(ir_node(id, fn_name, inputs = arg_ids,
-                              attrs = list(fn = fn_name))))
+                              attrs = fn_attrs)))
     }
 
     # Fallback: opaque expression

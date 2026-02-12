@@ -18,10 +18,13 @@
     neg = -vals[[1]],
     abs = abs(vals[[1]]),
     sqrt = sqrt(vals[[1]]),
+    rsqrt = 1 / sqrt(vals[[1]]),
     exp = exp(vals[[1]]),
     log = log(vals[[1]]),
     log2 = log2(vals[[1]]),
     log10 = log10(vals[[1]]),
+    sin = sin(vals[[1]]),
+    cos = cos(vals[[1]]),
     floor = floor(vals[[1]]),
     ceil = ceiling(vals[[1]]),
     round = round(vals[[1]]),
@@ -399,34 +402,9 @@ decompose_high_level_ops <- function(graph) {
     op <- node$op
 
     if (op == "torch_linear") {
-      # torch_linear(x, w, b) -> transpose(w) + matmul(x, wt) [+ add(mm, b)]
-      x_id <- node$inputs[1]
-      w_id <- node$inputs[2]
-      has_bias <- length(node$inputs) >= 3L
-
-      # w_t = transpose(w)
-      wt_id <- new_id()
-      add_new_node(wt_id, "transpose", w_id, list(dim0 = 1L, dim1 = 2L))
-
-      # mm = matmul(x, w_t)
-      mm_id <- new_id()
-      add_new_node(mm_id, "matmul", c(x_id, wt_id))
-
-      if (has_bias) {
-        b_id <- node$inputs[3]
-        # result = add(mm, b) — this is elementwise, fuseable
-        add_id <- new_id()
-        add_new_node(add_id, "add", c(mm_id, b_id))
-        # Replace original node: redirect consumers to add_id
-        nodes[[id_str]] <- ir_node(id, "add", c(mm_id, b_id), node$attrs)
-        # Actually, we can't change the id of the new node. Instead, rewrite
-        # the original node in place to point to the add result.
-        # Simpler: replace original node with identity to add_id
-        nodes[[id_str]] <- ir_node(id, "add", c(mm_id, b_id))
-      } else {
-        # No bias: replace original with matmul
-        nodes[[id_str]] <- ir_node(id, "matmul", c(x_id, wt_id))
-      }
+      # Keep torch_linear as-is: executor handles it natively via
+      # cuBLAS (GPU) or MKL (CPU), which is faster and more numerically
+      # stable than decomposing to transpose + matmul + add.
 
     } else if (op == "torch_gelu") {
       # torch_gelu(x) -> gelu(x)
@@ -468,7 +446,8 @@ fusion_annotate <- function(graph) {
 
   elementwise_ops <- c(
     "relu", "sigmoid", "tanh", "exp", "log", "log2", "log10",
-    "sqrt", "abs", "neg", "sign", "floor", "ceil", "round", "trunc",
+    "sqrt", "rsqrt", "abs", "neg", "sign", "floor", "ceil", "round", "trunc",
+    "sin", "cos",
     "gelu", "silu", "leaky_relu", "elu",
     "add", "sub", "mul", "div", "pow", "remainder", "floor_div"
   )
@@ -549,8 +528,9 @@ detect_matmul_epilogues <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
 
   unary_ops <- c(
-    "relu", "sigmoid", "tanh", "exp", "log", "log2", "sqrt",
-    "abs", "neg", "sign", "silu", "gelu", "leaky_relu", "elu"
+    "relu", "sigmoid", "tanh", "exp", "log", "log2", "sqrt", "rsqrt",
+    "abs", "neg", "sign", "sin", "cos",
+    "silu", "gelu", "leaky_relu", "elu"
   )
 
   # Build map: group_id -> sorted node IDs
@@ -628,6 +608,141 @@ detect_matmul_epilogues <- function(graph) {
 }
 
 
+#' Detect Scaled Dot-Product Attention Patterns
+#'
+#' Finds the manual attention pattern in the IR graph:
+#' \code{matmul(Q, K^T) -> mul(_, scale) -> [add(_, mask)] -> softmax(_, -1) -> matmul(_, V)}
+#' and rewrites it to a single \code{torch_sdpa} node that dispatches to
+#' FlashAttention on GPU.
+#'
+#' @param graph An ir_graph
+#' @return A new ir_graph with SDPA patterns fused
+#' @noRd
+detect_sdpa_patterns <- function(graph) {
+  if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
+
+  nodes <- .clone_nodes(graph$nodes)
+  redirect <- list()
+
+  # Build consumer map: node_id -> list of consumer node_ids
+  consumers <- list()
+  for (node in nodes) {
+    for (inp_id in node$inputs) {
+      key <- as.character(inp_id)
+      consumers[[key]] <- c(consumers[[key]], node$id)
+    }
+  }
+
+  # Helper: check if a node has exactly one consumer
+  single_consumer <- function(id) {
+    length(consumers[[as.character(id)]]) == 1L
+  }
+
+  ids <- sort(as.integer(names(nodes)))
+
+  for (id in ids) {
+    id_str <- as.character(id)
+    node <- nodes[[id_str]]
+
+    # Look for the final matmul: matmul(softmax_output, V)
+    if (node$op != "matmul" || length(node$inputs) != 2L) next
+
+    softmax_id <- node$inputs[1]
+    v_id <- node$inputs[2]
+    softmax_node <- nodes[[as.character(softmax_id)]]
+
+    # The first input must be softmax with dim=-1
+    if (is.null(softmax_node) || softmax_node$op != "softmax") next
+    sdim <- softmax_node$attrs$dim %||% softmax_node$attrs$arg1
+    if (!is.null(sdim) && sdim != -1L) next
+    if (!single_consumer(softmax_id)) next
+
+    # softmax input: either add(scores, mask) or mul(matmul_result, scale)
+    softmax_inp_id <- softmax_node$inputs[1]
+    softmax_inp <- nodes[[as.character(softmax_inp_id)]]
+    if (is.null(softmax_inp)) next
+
+    mask_id <- NULL
+    scores_id <- NULL
+
+    if (softmax_inp$op == "add" && length(softmax_inp$inputs) == 2L &&
+        single_consumer(softmax_inp_id)) {
+      # Pattern with mask: add(scaled_scores, mask)
+      # Figure out which input is the scaled scores vs the mask
+      # The scaled scores come from mul(matmul_result, scale)
+      inp1_node <- nodes[[as.character(softmax_inp$inputs[1])]]
+      inp2_node <- nodes[[as.character(softmax_inp$inputs[2])]]
+
+      if (!is.null(inp1_node) && inp1_node$op == "mul") {
+        scores_id <- softmax_inp$inputs[1]
+        mask_id <- softmax_inp$inputs[2]
+      } else if (!is.null(inp2_node) && inp2_node$op == "mul") {
+        scores_id <- softmax_inp$inputs[2]
+        mask_id <- softmax_inp$inputs[1]
+      } else {
+        next
+      }
+    } else if (softmax_inp$op == "mul" && single_consumer(softmax_inp_id)) {
+      # Pattern without mask: mul(matmul_result, scale)
+      scores_id <- softmax_inp_id
+    } else {
+      next
+    }
+
+    # scores_id should be mul(matmul_result, scale)
+    scores_node <- nodes[[as.character(scores_id)]]
+    if (is.null(scores_node) || scores_node$op != "mul" ||
+        length(scores_node$inputs) != 2L) next
+    if (!single_consumer(scores_id)) next
+
+    # One input to mul should be a matmul(Q, K^T), the other a scale constant
+    mm_id <- NULL
+    for (inp in scores_node$inputs) {
+      inp_node <- nodes[[as.character(inp)]]
+      if (!is.null(inp_node) && inp_node$op == "matmul") {
+        mm_id <- inp
+        break
+      }
+    }
+    if (is.null(mm_id)) next
+
+    mm_node <- nodes[[as.character(mm_id)]]
+    if (length(mm_node$inputs) != 2L) next
+    if (!single_consumer(mm_id)) next
+
+    # mm_node is matmul(Q, K_transposed)
+    q_id <- mm_node$inputs[1]
+    kt_id <- mm_node$inputs[2]
+
+    # kt should be a transpose of K (transpose with dims 3,4 or -1,-2)
+    kt_node <- nodes[[as.character(kt_id)]]
+    if (is.null(kt_node) || kt_node$op != "transpose") next
+
+    d0 <- kt_node$attrs$dim0 %||% kt_node$attrs$arg1
+    d1 <- kt_node$attrs$dim1 %||% kt_node$attrs$arg2
+    # Accept transpose(3,4) for 1-based or transpose(-2,-1) for negative dims
+    valid_transpose <- (!is.null(d0) && !is.null(d1)) &&
+      ((d0 == 3L && d1 == 4L) || (d0 == 4L && d1 == 3L) ||
+       (d0 == -2L && d1 == -1L) || (d0 == -1L && d1 == -2L))
+    if (!valid_transpose) next
+
+    # K is the input to the transpose
+    k_id <- kt_node$inputs[1]
+
+    # Build the SDPA node, reusing the final matmul's ID
+    if (!is.null(mask_id)) {
+      nodes[[id_str]] <- ir_node(id, "torch_sdpa",
+                                  c(q_id, k_id, v_id, mask_id))
+    } else {
+      nodes[[id_str]] <- ir_node(id, "torch_sdpa",
+                                  c(q_id, k_id, v_id))
+    }
+  }
+
+  ir_graph(nodes, graph$input_ids, graph$output_ids)
+}
+
+
 #' Run Optimization Pipeline
 #'
 #' Applies a sequence of optimization passes to an IR graph.
@@ -656,6 +771,8 @@ optimize_graph <- function(graph, passes = NULL) {
       dead_code_eliminate,
       common_subexpr_eliminate,
       algebraic_simplify,
+      dead_code_eliminate,
+      detect_sdpa_patterns,
       dead_code_eliminate,
       fusion_annotate
     )
