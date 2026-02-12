@@ -743,6 +743,49 @@ detect_sdpa_patterns <- function(graph) {
 }
 
 
+#' Annotate Reduction Kernels
+#'
+#' Identifies IR nodes that can be compiled to dedicated Triton reduction
+#' kernels: \code{softmax}, \code{log_softmax}, and \code{torch_layer_norm}.
+#' Annotates them with a \code{reduction_kernel} attribute indicating the
+#' kernel type. These are compiled separately from elementwise fusion groups.
+#'
+#' @param graph An ir_graph
+#' @return A new ir_graph with reduction_kernel annotations
+#' @noRd
+annotate_reduction_kernels <- function(graph) {
+  if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
+
+  nodes <- .clone_nodes(graph$nodes)
+
+  for (id_str in names(nodes)) {
+    node <- nodes[[id_str]]
+    op <- node$op
+
+    if (op %in% c("softmax", "nnf_softmax", "torch_softmax")) {
+      # Row-wise softmax: compile to fused Triton reduction kernel.
+      # Default dim=-1 (last dimension) which is the standard case.
+      dim <- node$attrs$dim %||% node$attrs$arg1 %||% -1L
+      if (dim == -1L) {
+        nodes[[id_str]]$attrs$reduction_kernel <- "softmax"
+      }
+
+    } else if (op %in% c("log_softmax", "nnf_log_softmax")) {
+      dim <- node$attrs$dim %||% node$attrs$arg1 %||% -1L
+      if (dim == -1L) {
+        nodes[[id_str]]$attrs$reduction_kernel <- "log_softmax"
+      }
+
+    } else if (op %in% c("torch_layer_norm", "nnf_layer_norm")) {
+      # Full layer norm: mean, var, normalize, scale, shift in one kernel
+      nodes[[id_str]]$attrs$reduction_kernel <- "layer_norm"
+    }
+  }
+
+  ir_graph(nodes, graph$input_ids, graph$output_ids)
+}
+
+
 #' Run Optimization Pipeline
 #'
 #' Applies a sequence of optimization passes to an IR graph.
@@ -774,7 +817,8 @@ optimize_graph <- function(graph, passes = NULL) {
       dead_code_eliminate,
       detect_sdpa_patterns,
       dead_code_eliminate,
-      fusion_annotate
+      fusion_annotate,
+      annotate_reduction_kernels
     )
   }
 

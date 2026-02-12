@@ -236,7 +236,9 @@ extern "C" SEXP C_gpu_launch_generic(
             }
         }
 
-        // Build args array: tensor pointers first, then scalars in order
+        // Build args array: tensor pointers first, then scalars in order,
+        // then 2 null metadata pointers (Triton convention)
+        CUdeviceptr null_ptr = 0;
         std::vector<void*> args;
         for (int i = 0; i < n_tensors; i++) {
             args.push_back(&tensor_ptrs[i]);
@@ -248,6 +250,8 @@ extern "C" SEXP C_gpu_launch_generic(
                 args.push_back(&float_scalars[scalar_info[i].idx]);
             }
         }
+        args.push_back(&null_ptr);
+        args.push_back(&null_ptr);
 
         int* grid = INTEGER(grid_sexp);
         int* block = INTEGER(block_sexp);

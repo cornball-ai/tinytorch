@@ -1116,6 +1116,230 @@ compile_matmul_epilogue_gpu <- function(pattern_info,
 }
 
 
+# ============================================================================
+# GPU Reduction Kernels via ariel
+# ============================================================================
+
+#' Compile a Softmax Node to a Triton GPU Kernel
+#'
+#' Calls \code{ariel::emit_ttir_softmax()} then \code{ariel::mlir_compile()}
+#' and builds a launch closure using \code{gpu_launch_reduction()}.
+#' The kernel performs numerically-stable row-wise softmax in a single pass.
+#'
+#' @param node_id Integer, the softmax node's IR id
+#' @param node The softmax IR node
+#' @param sm CUDA compute capability (default 89)
+#' @param num_warps Warps per block (default 4)
+#' @return List with call_fn, output_id, external_input_ids, node_id,
+#'   reduction_type, gpu (TRUE). NULL on failure.
+#' @noRd
+compile_softmax_gpu <- function(node_id, node, n_cols = NULL,
+                                 sm = 89L, num_warps = 4L) {
+  if (!requireNamespace("ariel", quietly = TRUE)) return(NULL)
+
+  # Block size must be >= n_cols (each program processes one full row).
+  # Round up to next power of 2 for Triton's tl.arange().
+  block_size <- 1024L
+  if (!is.null(n_cols)) {
+    block_size <- as.integer(2^ceiling(log2(max(n_cols, 32))))
+    block_size <- min(block_size, 8192L)
+  } else {
+    shape <- node$attrs$output_shape
+    if (!is.null(shape)) {
+      n_cols <- shape[length(shape)]
+      block_size <- as.integer(2^ceiling(log2(max(n_cols, 32))))
+      block_size <- min(block_size, 8192L)
+    }
+  }
+
+  cache_key <- sprintf("gpu_softmax|bs%d|sm%d|w%d", block_size, sm, num_warps)
+  if (exists(cache_key, envir = .gpu_kernel_cache, inherits = FALSE)) {
+    cached <- get(cache_key, envir = .gpu_kernel_cache, inherits = FALSE)
+    return(c(cached, list(
+      output_id = node_id,
+      external_input_ids = node$inputs,
+      node_id = node_id,
+      reduction_type = "softmax"
+    )))
+  }
+
+  # Emit TTIR and compile (unique name per block_size to avoid C++ cache collision)
+  func_name <- sprintf("softmax_bs%d", block_size)
+  ttir <- tryCatch(
+    ariel::emit_ttir_softmax(func_name = func_name, block_size = block_size),
+    error = function(e) NULL
+  )
+  if (is.null(ttir)) return(NULL)
+
+  compiled <- tryCatch(
+    ariel::mlir_compile(ttir, sm = sm, num_warps = num_warps),
+    error = function(e) NULL
+  )
+  if (is.null(compiled)) return(NULL)
+
+  ptx <- compiled$ptx
+  kernel_name <- compiled$kernel_name
+  shared_mem <- compiled$shared_mem %||% 0L
+  threads_per_block <- num_warps * 32L
+
+  # Softmax kernel: (in_ptr, out_ptr, n_cols)
+  # Launch: one program per row, grid = (n_rows, 1, 1)
+  # Only the first input (the tensor) is needed; dim=-1 is baked into the kernel.
+  tensor_input_id <- node$inputs[1]
+
+  call_fn <- function(input) {
+    shape <- input$shape
+    n_dims <- length(shape)
+    n_cols <- shape[n_dims]
+    n_rows <- as.integer(prod(shape) / n_cols)
+
+    output <- torch_empty_like(input)
+
+    grid <- c(n_rows, 1L, 1L)
+    block <- c(threads_per_block, 1L, 1L)
+
+    gpu_launch_reduction(ptx, kernel_name, input, output,
+                          as.integer(n_cols), grid, block, shared_mem)
+    output
+  }
+
+  info <- list(call_fn = call_fn, func_name = kernel_name, gpu = TRUE)
+  assign(cache_key, info, envir = .gpu_kernel_cache)
+
+  c(info, list(
+    output_id = node_id,
+    external_input_ids = tensor_input_id,
+    node_id = node_id,
+    reduction_type = "softmax"
+  ))
+}
+
+
+#' Compile a Layer Norm Node to a Triton GPU Kernel
+#'
+#' Calls \code{ariel::emit_ttir_layer_norm()} then \code{ariel::mlir_compile()}
+#' and builds a launch closure using \code{gpu_launch_generic()}.
+#' Fuses mean, variance, normalize, scale, and shift into one kernel.
+#'
+#' @param node_id Integer, the torch_layer_norm node's IR id
+#' @param node The torch_layer_norm IR node
+#' @param sm CUDA compute capability (default 89)
+#' @param num_warps Warps per block (default 4)
+#' @return List with call_fn, output_id, external_input_ids, node_id,
+#'   reduction_type, gpu (TRUE). NULL on failure.
+#' @noRd
+compile_layer_norm_gpu <- function(node_id, node, n_cols = NULL,
+                                    sm = 89L, num_warps = 4L) {
+  if (!requireNamespace("ariel", quietly = TRUE)) return(NULL)
+
+  # Block size must be >= n_cols for full row processing
+  block_size <- 1024L
+  if (!is.null(n_cols)) {
+    block_size <- as.integer(2^ceiling(log2(max(n_cols, 32))))
+    block_size <- min(block_size, 8192L)
+  } else {
+    shape <- node$attrs$output_shape
+    if (!is.null(shape)) {
+      n_cols <- shape[length(shape)]
+      block_size <- as.integer(2^ceiling(log2(max(n_cols, 32))))
+      block_size <- min(block_size, 8192L)
+    }
+  }
+
+  eps <- node$attrs$eps %||% node$attrs$arg5 %||% 1e-5
+
+  cache_key <- sprintf("gpu_layernorm|bs%d|sm%d|w%d", block_size, sm, num_warps)
+  if (exists(cache_key, envir = .gpu_kernel_cache, inherits = FALSE)) {
+    cached <- get(cache_key, envir = .gpu_kernel_cache, inherits = FALSE)
+    return(c(cached, list(
+      output_id = node_id,
+      external_input_ids = node$inputs,
+      node_id = node_id,
+      reduction_type = "layer_norm"
+    )))
+  }
+
+  # Emit TTIR and compile (unique name per block_size to avoid C++ cache collision)
+  func_name <- sprintf("layer_norm_bs%d", block_size)
+  ttir <- tryCatch(
+    ariel::emit_ttir_layer_norm(func_name = func_name, block_size = block_size),
+    error = function(e) NULL
+  )
+  if (is.null(ttir)) return(NULL)
+
+  compiled <- tryCatch(
+    ariel::mlir_compile(ttir, sm = sm, num_warps = num_warps),
+    error = function(e) NULL
+  )
+  if (is.null(compiled)) return(NULL)
+
+  ptx <- compiled$ptx
+  kernel_name <- compiled$kernel_name
+  shared_mem <- compiled$shared_mem %||% 0L
+  threads_per_block <- num_warps * 32L
+
+  # Layer norm kernel: (in_ptr, weight_ptr, bias_ptr, out_ptr, n_cols, eps)
+  # Launch: one program per row, grid = (n_rows, 1, 1)
+  #
+  # IR node inputs: [x, normalized_shape_constant, weight, bias, eps_constant]
+  # or variations. We only need the tensor inputs: x, weight, bias.
+  # Identify which inputs are tensors vs constants at compile time.
+  call_fn <- function(input, weight, bias) {
+    shape <- input$shape
+    n_dims <- length(shape)
+    n_cols <- shape[n_dims]
+    n_rows <- as.integer(prod(shape) / n_cols)
+
+    output <- torch_empty_like(input)
+
+    grid <- c(n_rows, 1L, 1L)
+    block <- c(threads_per_block, 1L, 1L)
+
+    # gpu_launch_generic: tensors = [in, weight, bias, out],
+    #   scalars = [n_cols (int), eps (float)]
+    gpu_launch_generic(
+      ptx, kernel_name,
+      list(input, weight, bias, output),
+      list(as.integer(n_cols), eps),
+      grid, block, shared_mem
+    )
+    output
+  }
+
+  # Extract only the tensor input IDs (skip constant nodes like
+  # normalized_shape and eps). For traced layer_norm:
+  # inputs = [x, normalized_shape, weight, bias, eps]
+  # We need x (input 1), weight (input 3), bias (input 4)
+  tensor_input_ids <- integer()
+  for (inp_id in node$inputs) {
+    inp_str <- as.character(inp_id)
+    # Check if this is an input node (tensor parameter) — skip constants
+    # We check in the graph at compile time via prepare_graph
+    tensor_input_ids <- c(tensor_input_ids, inp_id)
+  }
+  # First input is always x. For layer_norm with standard trace:
+  # [x, normalized_shape, weight, bias, eps_constant]
+  # We need x (1st), weight (3rd tensor if norm_shape is constant, else 2nd), bias
+  # Simplify: take inputs 1, 3, 4 (skip 2=normalized_shape, 5=eps)
+  if (length(node$inputs) >= 4L) {
+    tensor_input_ids <- c(node$inputs[1], node$inputs[3], node$inputs[4])
+  } else {
+    # Fallback: first 3 inputs are x, weight, bias
+    tensor_input_ids <- node$inputs[seq_len(min(3L, length(node$inputs)))]
+  }
+
+  info <- list(call_fn = call_fn, func_name = kernel_name, gpu = TRUE)
+  assign(cache_key, info, envir = .gpu_kernel_cache)
+
+  c(info, list(
+    output_id = node_id,
+    external_input_ids = tensor_input_ids,
+    node_id = node_id,
+    reduction_type = "layer_norm"
+  ))
+}
+
+
 #' Clear GPU Kernel Cache
 #'
 #' @return Number of entries cleared (invisibly)

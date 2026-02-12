@@ -568,6 +568,13 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
     matmul_epi_entries[[mm_str]] <- matmul_epilogues[[mm_str]]
   }
 
+  # Map reduction kernel node IDs
+  reduction_kernels <- prepared$reduction_kernels %||% list()
+  reduction_entries <- new.env(parent = emptyenv())
+  for (rk_str in names(reduction_kernels)) {
+    reduction_entries[[rk_str]] <- reduction_kernels[[rk_str]]
+  }
+
   for (id in exec_order) {
     id_str <- as.character(id)
     node <- graph$nodes[[id_str]]
@@ -613,6 +620,20 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
       fn_env[[kname]] <- k$call_fn
       out_var <- vn(k$output_id)
       # call_fn(A, B, bias) — 3 inputs from external_input_ids
+      call_args <- lapply(k$external_input_ids, function(eid) vn(eid))
+      kcall <- as.call(c(list(as.name(kname)), call_args))
+      body_exprs[[length(body_exprs) + 1L]] <- bquote(
+        .(out_var) <- .(kcall)
+      )
+      next
+    }
+
+    # Reduction kernel: compiled softmax / layer_norm
+    if (exists(id_str, envir = reduction_entries, inherits = FALSE)) {
+      k <- reduction_entries[[id_str]]
+      kname <- paste0(".rk", id)
+      fn_env[[kname]] <- k$call_fn
+      out_var <- vn(k$output_id)
       call_args <- lapply(k$external_input_ids, function(eid) vn(eid))
       kcall <- as.call(c(list(as.name(kname)), call_args))
       body_exprs[[length(body_exprs) + 1L]] <- bquote(
@@ -783,7 +804,63 @@ prepare_graph <- function(graph, example_inputs, optimize = TRUE, fuse = TRUE,
     }
   }
 
-  # 3b. Detect and compile matmul epilogue patterns (GPU only)
+  # 3b. Compile reduction kernels (GPU only)
+  # Scans for nodes annotated with reduction_kernel by annotate_reduction_kernels()
+  # and compiles them to dedicated Triton reduction kernels (softmax, layer_norm).
+  # Block size must be >= n_cols for the reduction to be correct, so we
+  # resolve the actual column count from shape annotations or example inputs.
+  reduction_kernels <- list()
+  if (fuse && backend == "gpu") {
+    for (id_str in names(graph$nodes)) {
+      node <- graph$nodes[[id_str]]
+      rk <- node$attrs$reduction_kernel
+      if (is.null(rk)) next
+
+      # Resolve actual n_cols from shape annotation or example input
+      n_cols <- NULL
+      shape <- node$attrs$output_shape
+      if (!is.null(shape)) {
+        n_cols <- shape[length(shape)]
+      }
+      if (is.null(n_cols) && length(node$inputs) > 0L) {
+        # Try to get shape from the first input's annotation or example
+        inp_node <- graph$nodes[[as.character(node$inputs[1])]]
+        if (!is.null(inp_node)) {
+          ishape <- inp_node$attrs$output_shape
+          if (!is.null(ishape)) {
+            n_cols <- ishape[length(ishape)]
+          } else if (!is.null(inp_node$attrs$name)) {
+            t <- example_inputs[[inp_node$attrs$name]]
+            if (inherits(t, "torch_tensor")) {
+              ishape <- as.integer(t$shape)
+              n_cols <- ishape[length(ishape)]
+            }
+          }
+        }
+      }
+
+      nid <- as.integer(id_str)
+      k <- NULL
+      if (rk == "softmax" || rk == "log_softmax") {
+        k <- tryCatch(
+          compile_softmax_gpu(nid, node, n_cols = n_cols),
+          error = function(e) NULL
+        )
+      } else if (rk == "layer_norm") {
+        k <- tryCatch(
+          compile_layer_norm_gpu(nid, node, n_cols = n_cols),
+          error = function(e) NULL
+        )
+      }
+
+      if (!is.null(k)) {
+        reduction_kernels[[id_str]] <- k
+        fused_node_set <- c(fused_node_set, id_str)
+      }
+    }
+  }
+
+  # 3c. Detect and compile matmul epilogue patterns (GPU only)
   # Disabled by default: cuBLAS matmul + separate elementwise kernel is currently
   # faster than our Triton matmul with fused epilogue. Our tiled matmul doesn't
   # use tensor cores or auto-tuned tile sizes. Enable when the Triton matmul
@@ -825,6 +902,7 @@ prepare_graph <- function(graph, example_inputs, optimize = TRUE, fuse = TRUE,
   prepared <- structure(list(
     graph = graph,
     kernels = kernels,
+    reduction_kernels = reduction_kernels,
     matmul_epilogues = matmul_epilogues,
     fused_node_set = fused_node_set,
     exec_order = exec_order,
@@ -883,6 +961,7 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
 
   graph <- prepared$graph
   kernels <- prepared$kernels
+  reduction_kernels <- prepared$reduction_kernels %||% list()
   matmul_epilogues <- prepared$matmul_epilogues %||% list()
   fused_node_set <- prepared$fused_node_set
   input_map <- prepared$input_map
@@ -938,6 +1017,31 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
         }
         next
       }
+    }
+
+    # Reduction kernel: fused softmax / layer_norm
+    if (id_str %in% names(reduction_kernels)) {
+      k <- reduction_kernels[[id_str]]
+      ext_inputs <- lapply(k$external_input_ids, function(eid) {
+        values[[as.character(eid)]]
+      })
+      result <- tryCatch(
+        do.call(k$call_fn, ext_inputs),
+        error = function(e) {
+          if (verbose) message(sprintf("  Reduction kernel failed: %s",
+                                       conditionMessage(e)))
+          NULL
+        }
+      )
+      if (!is.null(result)) {
+        values[[as.character(k$output_id)]] <- result
+        if (verbose) {
+          message(sprintf("  %%%d = %s (Triton reduction kernel)",
+                          id, k$reduction_type %||% "reduction"))
+        }
+        next
+      }
+      # Fall through to torch dispatch on failure
     }
 
     # Skip nodes handled by a fusion group (not the entry point)
