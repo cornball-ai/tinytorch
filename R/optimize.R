@@ -494,15 +494,145 @@ fusion_annotate <- function(graph) {
     }
   }
 
-  # Only keep groups with >= 2 members
+  # Only keep groups with >= 2 members and positive cost model
   if (length(node_group) > 0L) {
     group_ids <- unlist(node_group)
     group_counts <- table(group_ids)
     valid_groups <- as.integer(names(group_counts[group_counts >= 2L]))
 
+    # Build map: group_id -> member node IDs
+    group_members <- list()
     for (id_str in names(node_group)) {
-      if (node_group[[id_str]] %in% valid_groups) {
+      gid <- node_group[[id_str]]
+      if (gid %in% valid_groups) {
+        gid_str <- as.character(gid)
+        group_members[[gid_str]] <- c(group_members[[gid_str]],
+                                       as.integer(id_str))
+      }
+    }
+
+    # Filter by cost model
+    profitable_groups <- integer()
+    for (gid_str in names(group_members)) {
+      cost <- estimate_fusion_cost(graph, group_members[[gid_str]])
+      if (cost$profitable) {
+        profitable_groups <- c(profitable_groups, as.integer(gid_str))
+      }
+    }
+
+    for (id_str in names(node_group)) {
+      if (node_group[[id_str]] %in% profitable_groups) {
         nodes[[id_str]]$attrs$fusion_group <- as.integer(node_group[[id_str]])
+      }
+    }
+  }
+
+  ir_graph(nodes, graph$input_ids, graph$output_ids)
+}
+
+
+#' Horizontal Fusion
+#'
+#' Merges independent fusion groups that operate on same-shaped tensors into a
+#' single group. This reduces kernel launch count without changing semantics.
+#' Two groups can merge when: (1) they have the same output shape, and
+#' (2) neither group's nodes consume outputs from the other group.
+#'
+#' @param graph An ir_graph with fusion_group annotations
+#' @return A new ir_graph with merged fusion groups
+#' @noRd
+horizontal_fuse <- function(graph) {
+  if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
+
+  nodes <- .clone_nodes(graph$nodes)
+
+  # Collect groups: group_id -> list(node_ids, shape)
+  groups <- list()
+  for (id_str in names(nodes)) {
+    gid <- nodes[[id_str]]$attrs$fusion_group
+    if (!is.null(gid)) {
+      gid_str <- as.character(gid)
+      if (is.null(groups[[gid_str]])) {
+        groups[[gid_str]] <- list(node_ids = integer(), shape = NULL)
+      }
+      groups[[gid_str]]$node_ids <- c(groups[[gid_str]]$node_ids,
+                                       as.integer(id_str))
+      # Use first available shape
+      if (is.null(groups[[gid_str]]$shape)) {
+        groups[[gid_str]]$shape <- nodes[[id_str]]$attrs$output_shape
+      }
+    }
+  }
+
+  if (length(groups) < 2L) {
+    return(ir_graph(nodes, graph$input_ids, graph$output_ids))
+  }
+
+  # Build merge map: target_gid -> source_gid (merge source into target)
+  merge_map <- list()  # gid_str -> merged_gid (integer)
+  gid_strs <- names(groups)
+
+  for (i in seq_along(gid_strs)) {
+    gi_str <- gid_strs[i]
+    # Already merged?
+    if (!is.null(merge_map[[gi_str]])) next
+
+    gi <- groups[[gi_str]]
+    if (is.null(gi$shape)) next
+
+    for (j in seq(i + 1L, length(gid_strs))) {
+      if (j > length(gid_strs)) break
+      gj_str <- gid_strs[j]
+      if (!is.null(merge_map[[gj_str]])) next
+
+      gj <- groups[[gj_str]]
+      if (is.null(gj$shape)) next
+
+      # Same shape?
+      if (!identical(as.integer(gi$shape), as.integer(gj$shape))) next
+
+      # Check independence: no node in gj consumes output from gi or vice versa
+      gi_set <- as.character(gi$node_ids)
+      gj_set <- as.character(gj$node_ids)
+      dependent <- FALSE
+
+      for (nid_str in gj_set) {
+        for (inp_id in nodes[[nid_str]]$inputs) {
+          if (as.character(inp_id) %in% gi_set) {
+            dependent <- TRUE
+            break
+          }
+        }
+        if (dependent) break
+      }
+      if (!dependent) {
+        for (nid_str in gi_set) {
+          for (inp_id in nodes[[nid_str]]$inputs) {
+            if (as.character(inp_id) %in% gj_set) {
+              dependent <- TRUE
+              break
+            }
+          }
+          if (dependent) break
+        }
+      }
+
+      if (!dependent) {
+        merge_map[[gj_str]] <- as.integer(gi_str)
+      }
+    }
+  }
+
+  # Apply merges
+  if (length(merge_map) > 0L) {
+    for (id_str in names(nodes)) {
+      gid <- nodes[[id_str]]$attrs$fusion_group
+      if (!is.null(gid)) {
+        gid_str <- as.character(gid)
+        target <- merge_map[[gid_str]]
+        if (!is.null(target)) {
+          nodes[[id_str]]$attrs$fusion_group <- target
+        }
       }
     }
   }
@@ -756,29 +886,40 @@ detect_sdpa_patterns <- function(graph) {
 annotate_reduction_kernels <- function(graph) {
   if (!inherits(graph, "ir_graph")) stop("Expected an ir_graph", call. = FALSE)
 
+  # Build consumer map for cost model
+  consumers <- list()
+  for (node in graph$nodes) {
+    for (inp_id in node$inputs) {
+      key <- as.character(inp_id)
+      consumers[[key]] <- c(consumers[[key]], node$id)
+    }
+  }
+
   nodes <- .clone_nodes(graph$nodes)
 
   for (id_str in names(nodes)) {
     node <- nodes[[id_str]]
     op <- node$op
+    kernel_type <- NULL
 
     if (op %in% c("softmax", "nnf_softmax", "torch_softmax")) {
-      # Row-wise softmax: compile to fused Triton reduction kernel.
-      # Default dim=-1 (last dimension) which is the standard case.
       dim <- node$attrs$dim %||% node$attrs$arg1 %||% -1L
-      if (dim == -1L) {
-        nodes[[id_str]]$attrs$reduction_kernel <- "softmax"
-      }
+      if (dim == -1L) kernel_type <- "softmax"
 
     } else if (op %in% c("log_softmax", "nnf_log_softmax")) {
       dim <- node$attrs$dim %||% node$attrs$arg1 %||% -1L
-      if (dim == -1L) {
-        nodes[[id_str]]$attrs$reduction_kernel <- "log_softmax"
-      }
+      if (dim == -1L) kernel_type <- "log_softmax"
 
     } else if (op %in% c("torch_layer_norm", "nnf_layer_norm")) {
-      # Full layer norm: mean, var, normalize, scale, shift in one kernel
-      nodes[[id_str]]$attrs$reduction_kernel <- "layer_norm"
+      kernel_type <- "layer_norm"
+    }
+
+    if (!is.null(kernel_type)) {
+      # Cost model: skip standalone reductions (slower than torch built-in)
+      cost <- estimate_reduction_cost(graph, node$id, consumers)
+      if (cost$profitable) {
+        nodes[[id_str]]$attrs$reduction_kernel <- kernel_type
+      }
     }
   }
 
@@ -818,6 +959,7 @@ optimize_graph <- function(graph, passes = NULL) {
       detect_sdpa_patterns,
       dead_code_eliminate,
       fusion_annotate,
+      horizontal_fuse,
       annotate_reduction_kernels
     )
   }
