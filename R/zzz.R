@@ -1,4 +1,5 @@
 #' @useDynLib Rtorch, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
 NULL
 
 .onLoad <- function(libname, pkgname) {

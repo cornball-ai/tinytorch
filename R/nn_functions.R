@@ -7,7 +7,7 @@
 #' torch_sin(torch_tensor(c(0, 3.14159 / 2)))
 #' }
 #' @export
-torch_sin <- function(self) .Call(C_torch_sin, self)
+torch_sin <- function(self) C_torch_sin(self)
 
 #' Compute cos of tensor
 #' @param self A torch_tensor.
@@ -16,7 +16,7 @@ torch_sin <- function(self) .Call(C_torch_sin, self)
 #' torch_cos(torch_tensor(c(0, 3.14159)))
 #' }
 #' @export
-torch_cos <- function(self) .Call(C_torch_cos, self)
+torch_cos <- function(self) C_torch_cos(self)
 
 #' Compute tanh of tensor
 #' @param self A torch_tensor.
@@ -25,7 +25,7 @@ torch_cos <- function(self) .Call(C_torch_cos, self)
 #' torch_tanh(torch_randn(c(2, 3)))
 #' }
 #' @export
-torch_tanh <- function(self) .Call(C_torch_tanh, self)
+torch_tanh <- function(self) C_torch_tanh(self)
 
 #' Compute reciprocal square root of tensor
 #' @param self A torch_tensor.
@@ -34,7 +34,7 @@ torch_tanh <- function(self) .Call(C_torch_tanh, self)
 #' torch_rsqrt(torch_tensor(c(1, 4, 9)))
 #' }
 #' @export
-torch_rsqrt <- function(self) .Call(C_torch_rsqrt, self)
+torch_rsqrt <- function(self) C_torch_rsqrt(self)
 
 #' ReLU activation (namespace-level)
 #' @param self A torch_tensor.
@@ -43,7 +43,7 @@ torch_rsqrt <- function(self) .Call(C_torch_rsqrt, self)
 #' torch_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
-torch_relu <- function(self) .Call(C_torch_relu, self)
+torch_relu <- function(self) C_torch_relu(self)
 
 # ---- NN functional API ----
 
@@ -54,7 +54,7 @@ torch_relu <- function(self) .Call(C_torch_relu, self)
 #' nnf_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
-nnf_relu <- function(input) .Call(C_torch_relu, input)
+nnf_relu <- function(input) C_torch_relu(input)
 
 #' SiLU activation (swish)
 #' @param self A torch_tensor.
@@ -64,7 +64,7 @@ nnf_relu <- function(input) .Call(C_torch_relu, input)
 #' }
 #' @export
 nnf_silu <- function(self) {
-  .Call(C_nnf_silu, self)
+  C_nnf_silu(self)
 }
 
 #' GELU activation
@@ -75,7 +75,7 @@ nnf_silu <- function(self) {
 #' }
 #' @export
 nnf_gelu <- function(self, approximate = "none") {
-  .Call(C_nnf_gelu, self, approximate)
+  C_nnf_gelu(self, approximate)
 }
 
 #' Leaky ReLU activation
@@ -87,7 +87,7 @@ nnf_gelu <- function(self, approximate = "none") {
 #' }
 #' @export
 nnf_leaky_relu <- function(self, negative_slope = 0.01) {
-  .Call(C_nnf_leaky_relu, self, negative_slope)
+  C_nnf_leaky_relu(self, negative_slope)
 }
 
 #' ELU activation
@@ -99,7 +99,7 @@ nnf_leaky_relu <- function(self, negative_slope = 0.01) {
 #' }
 #' @export
 nnf_elu <- function(self, alpha = 1.0) {
-  .Call(C_nnf_elu, self, alpha)
+  C_nnf_elu(self, alpha)
 }
 
 #' Softmax
@@ -111,7 +111,7 @@ nnf_elu <- function(self, alpha = 1.0) {
 #' }
 #' @export
 nnf_softmax <- function(self, dim = -1L) {
-  .Call(C_nnf_softmax, self, as.integer(dim))
+  C_nnf_softmax(self, as.integer(dim))
 }
 
 #' Log-softmax
@@ -123,7 +123,7 @@ nnf_softmax <- function(self, dim = -1L) {
 #' }
 #' @export
 nnf_log_softmax <- function(self, dim = -1L) {
-  .Call(C_nnf_log_softmax, self, as.integer(dim))
+  C_nnf_log_softmax(self, as.integer(dim))
 }
 
 #' Layer normalization
@@ -140,7 +140,7 @@ nnf_log_softmax <- function(self, dim = -1L) {
 #' @export
 nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
                            bias = NULL, eps = 1e-5) {
-  .Call(C_nnf_layer_norm, input, as.integer(normalized_shape),
+  C_nnf_layer_norm(input, as.integer(normalized_shape),
         weight, bias, eps)
 }
 
@@ -158,7 +158,7 @@ nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
 #' }
 #' @export
 torch_linear <- function(input, weight, bias = NULL) {
-  .Call(C_torch_linear, input, weight, bias)
+  C_torch_linear(input, weight, bias)
 }
 
 #' 1D convolution
@@ -179,7 +179,7 @@ torch_linear <- function(input, weight, bias = NULL) {
 torch_conv1d <- function(input, weight, bias = NULL,
                          stride = 1L, padding = 0L,
                          dilation = 1L, groups = 1L) {
-  .Call(C_torch_conv1d, input, weight, bias,
+  C_torch_conv1d(input, weight, bias,
         as.integer(stride), as.integer(padding),
         as.integer(dilation), as.integer(groups))
 }
@@ -195,25 +195,25 @@ torch_conv1d <- function(input, weight, bias = NULL,
 #' }
 #' @export
 torch_embedding <- function(weight, indices) {
-  .Call(C_torch_embedding, weight, indices)
+  C_torch_embedding(weight, indices)
 }
 
 # ---- Aliases for tracer (nnf_ -> torch_ expansion) ----
 
 #' @rdname nnf_gelu
 #' @param self A torch_tensor.
-torch_gelu <- function(self) .Call(C_nnf_gelu, self)
+torch_gelu <- function(self) C_nnf_gelu(self, NULL)
 
 #' @rdname nnf_silu
 #' @param self A torch_tensor.
-torch_silu <- function(self) .Call(C_nnf_silu, self)
+torch_silu <- function(self) C_nnf_silu(self)
 
 #' @rdname nnf_softmax
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply softmax over (1-based).
 #' @param dtype Ignored; for API compatibility.
 torch_softmax <- function(self, dim = -1L, dtype = NULL) {
-  .Call(C_nnf_softmax, self, as.integer(dim))
+  C_nnf_softmax(self, as.integer(dim))
 }
 
 #' @rdname nnf_log_softmax
@@ -221,7 +221,7 @@ torch_softmax <- function(self, dim = -1L, dtype = NULL) {
 #' @param dim Dimension to apply log-softmax over (1-based).
 #' @param dtype Ignored; for API compatibility.
 torch_log_softmax <- function(self, dim = -1L, dtype = NULL) {
-  .Call(C_nnf_log_softmax, self, as.integer(dim))
+  C_nnf_log_softmax(self, as.integer(dim))
 }
 
 #' @rdname nnf_layer_norm
@@ -232,38 +232,38 @@ torch_log_softmax <- function(self, dim = -1L, dtype = NULL) {
 #' @param eps Small constant for numerical stability.
 torch_layer_norm <- function(input, normalized_shape, weight = NULL,
                              bias = NULL, eps = 1e-5) {
-  .Call(C_nnf_layer_norm, input, as.integer(normalized_shape),
+  C_nnf_layer_norm(input, as.integer(normalized_shape),
         weight, bias, eps)
 }
 
 # ---- Namespace exports for existing C++ unary ops ----
 
 #' @export
-torch_abs <- function(self) .Call(C_torch_abs, self)
+torch_abs <- function(self) C_torch_abs(self)
 
 #' @export
-torch_exp <- function(self) .Call(C_torch_exp, self)
+torch_exp <- function(self) C_torch_exp(self)
 
 #' @export
-torch_log <- function(self) .Call(C_torch_log, self)
+torch_log <- function(self) C_torch_log(self)
 
 #' @export
-torch_sqrt <- function(self) .Call(C_torch_sqrt, self)
+torch_sqrt <- function(self) C_torch_sqrt(self)
 
 #' @export
-torch_floor <- function(self) .Call(C_torch_floor, self)
+torch_floor <- function(self) C_torch_floor(self)
 
 #' @export
 torch_pow <- function(self, exponent) {
   if (!inherits(self, "torch_tensor") && inherits(exponent, "torch_tensor")) {
     # scalar ^ tensor
-    .Call(C_torch_scalar_pow, self, exponent)
+    C_torch_scalar_pow(self, exponent)
   } else if (is.numeric(exponent) && !inherits(exponent, "torch_tensor")) {
     # tensor ^ scalar
-    .Call(C_torch_pow_scalar, self, exponent)
+    C_torch_pow_scalar(self, exponent)
   } else {
     # tensor ^ tensor
-    .Call(C_torch_pow, self, exponent)
+    C_torch_pow(self, exponent)
   }
 }
 
@@ -271,7 +271,7 @@ torch_pow <- function(self, exponent) {
 
 #' @export
 nnf_pad <- function(input, pad, mode = "constant", value = 0) {
-  .Call(C_nnf_pad, input, as.integer(pad), mode, as.double(value))
+  C_nnf_pad(input, as.integer(pad), mode, as.double(value))
 }
 
 # ---- NN functional: interpolate ----
@@ -283,7 +283,7 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
   size_int <- if (!is.null(size)) as.integer(size) else NULL
   scale_dbl <- if (!is.null(scale_factor)) as.double(scale_factor) else NULL
   ac <- if (!is.null(align_corners)) as.logical(align_corners) else NULL
-  .Call(C_nnf_interpolate, input, size_int, scale_dbl, mode, ac)
+  C_nnf_interpolate(input, size_int, scale_dbl, mode, ac)
 }
 
 # ---- NN functional: avg_pool1d ----
@@ -292,7 +292,7 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
 nnf_avg_pool1d <- function(input, kernel_size, stride = kernel_size,
                            padding = 0L, ceil_mode = FALSE,
                            count_include_pad = TRUE) {
-  .Call(C_nnf_avg_pool1d, input, as.integer(kernel_size),
+  C_nnf_avg_pool1d(input, as.integer(kernel_size),
         as.integer(stride), as.integer(padding),
         as.logical(ceil_mode), as.logical(count_include_pad))
 }
@@ -301,25 +301,25 @@ nnf_avg_pool1d <- function(input, kernel_size, stride = kernel_size,
 
 #' @export
 nnf_softplus <- function(input, beta = 1.0, threshold = 20.0) {
-  .Call(C_nnf_softplus, input, as.double(beta), as.double(threshold))
+  C_nnf_softplus(input, as.double(beta), as.double(threshold))
 }
 
 # ---- NN functional: normalize ----
 
 #' @export
 nnf_normalize <- function(input, p = 2, dim = -1L, eps = 1e-12) {
-  .Call(C_nnf_normalize, input, as.double(p), as.integer(dim), as.double(eps))
+  C_nnf_normalize(input, as.double(p), as.integer(dim), as.double(eps))
 }
 
 # ---- NN functional: sigmoid ----
 
 #' @export
-nnf_sigmoid <- function(input) .Call(C_torch_sigmoid, input)
+nnf_sigmoid <- function(input) C_torch_sigmoid(input)
 
 # ---- NN functional: tanh ----
 
 #' @export
-nnf_tanh <- function(input) .Call(C_torch_tanh, input)
+nnf_tanh <- function(input) C_torch_tanh(input)
 
 # ---- Utilities ----
 
@@ -342,19 +342,19 @@ with_no_grad <- function(code) code
 #' Check if CUDA is available
 #' @return Logical scalar.
 #' @export
-cuda_is_available <- function() .Call(C_cuda_is_available)
+cuda_is_available <- function() C_cuda_is_available()
 
 #' Get number of CUDA devices
 #' @return Integer scalar.
 #' @export
-cuda_device_count <- function() .Call(C_cuda_device_count)
+cuda_device_count <- function() C_cuda_device_count()
 
 #' Release cached CUDA memory
 #'
 #' Releases all unoccupied cached memory held by the CUDA allocator
 #' so that it can be used by other GPU applications.
 #' @export
-cuda_empty_cache <- function() invisible(.Call(C_cuda_empty_cache))
+cuda_empty_cache <- function() invisible(C_cuda_empty_cache())
 
 #' CUDA memory info
 #'
@@ -363,7 +363,7 @@ cuda_empty_cache <- function() invisible(.Call(C_cuda_empty_cache))
 #' @return Named numeric vector with elements "free" and "total".
 #' @export
 cuda_mem_info <- function() {
-    x <- .Call(C_cuda_mem_info)
+    x <- C_cuda_mem_info()
     if (length(x) == 0) return(c(free = 0, total = 0))
     c(free = x[1], total = x[2])
 }
@@ -377,7 +377,7 @@ cuda_mem_info <- function() {
 #'   reserved_current, reserved_peak.
 #' @export
 cuda_memory_stats <- function() {
-    x <- .Call(C_cuda_memory_stats)
+    x <- C_cuda_memory_stats()
     if (length(x) == 0) return(c(allocated_current = 0, allocated_peak = 0,
                                   reserved_current = 0, reserved_peak = 0))
     c(allocated_current = x[1], allocated_peak = x[2],
@@ -412,7 +412,7 @@ torch_scaled_dot_product_attention <- function(query, key, value,
                                                is_causal = FALSE) {
   # Handle list() sentinel (chatterbox passes list() for "no mask")
   if (is.list(attn_mask) && length(attn_mask) == 0) attn_mask <- NULL
-  .Call(C_torch_sdpa, query, key, value, attn_mask,
+  C_torch_sdpa(query, key, value, attn_mask,
         as.double(dropout_p), as.logical(is_causal))
 }
 
@@ -448,7 +448,7 @@ torch_scaled_dot_product_attention <- function(query, key, value,
 transformer_decoder_layer_step <- function(x, weights, self_cache_k, self_cache_v,
                                            cross_cache_k, cross_cache_v, n_head) {
   stopifnot(is.list(weights), length(weights) == 21L)
-  .Call(C_transformer_decoder_layer_step, x, weights,
+  C_transformer_decoder_layer_step(x, weights,
         self_cache_k, self_cache_v, cross_cache_k, cross_cache_v,
         as.integer(n_head))
 }
@@ -477,5 +477,5 @@ transformer_decoder_layer_step <- function(x, weights, self_cache_k, self_cache_
 #' @export
 transformer_encoder_layer <- function(x, weights, n_head) {
   stopifnot(is.list(weights), length(weights) == 15L)
-  .Call(C_transformer_encoder_layer, x, weights, as.integer(n_head))
+  C_transformer_encoder_layer(x, weights, as.integer(n_head))
 }

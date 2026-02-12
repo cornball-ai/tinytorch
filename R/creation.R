@@ -14,7 +14,7 @@ torch_tensor <- function(data, dtype = NULL, device = NULL) {
   if (inherits(data, "torch_tensor")) return(data)
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_tensor, data, dtype_code, device_str)
+  C_torch_tensor(data, dtype_code, device_str)
 }
 
 #' Create a tensor of zeros
@@ -30,7 +30,7 @@ torch_zeros <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_zeros, size, dtype_code, device_str)
+  C_torch_zeros(size, dtype_code, device_str)
 }
 
 #' Create a tensor of ones
@@ -46,7 +46,7 @@ torch_ones <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_ones, size, dtype_code, device_str)
+  C_torch_ones(size, dtype_code, device_str)
 }
 
 #' Create a tensor with random normal values
@@ -62,7 +62,7 @@ torch_randn <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_randn, size, dtype_code, device_str)
+  C_torch_randn(size, dtype_code, device_str)
 }
 
 #' Create an uninitialized tensor with same shape/dtype as input
@@ -74,7 +74,7 @@ torch_randn <- function(..., dtype = NULL, device = NULL) {
 #' }
 #' @export
 torch_empty_like <- function(self) {
-  .Call(C_torch_empty_like, self)
+  C_torch_empty_like(self)
 }
 
 #' Create an uninitialized tensor
@@ -90,7 +90,7 @@ torch_empty <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_empty, size, dtype_code, device_str)
+  C_torch_empty(size, dtype_code, device_str)
 }
 
 #' Create a tensor from raw bytes buffer
@@ -101,7 +101,7 @@ torch_empty <- function(..., dtype = NULL, device = NULL) {
 #' @export
 torch_tensor_from_buffer <- function(raw, shape, dtype, device = NULL) {
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_tensor_from_buffer, raw, as.integer(shape), unclass(dtype), device_str)
+  C_torch_tensor_from_buffer(raw, as.integer(shape), unclass(dtype), device_str)
 }
 
 #' Create a tensor with evenly spaced values
@@ -115,7 +115,7 @@ torch_tensor_from_buffer <- function(raw, shape, dtype, device = NULL) {
 torch_arange <- function(start, end, step = 1L, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_arange, as.double(start), as.double(end),
+  C_torch_arange(as.double(start), as.double(end),
         as.double(step), dtype_code, device_str)
 }
 
@@ -129,7 +129,7 @@ torch_arange <- function(start, end, step = 1L, dtype = NULL, device = NULL) {
 torch_full <- function(size, fill_value, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_full, as.integer(size), as.double(fill_value), dtype_code, device_str)
+  C_torch_full(as.integer(size), as.double(fill_value), dtype_code, device_str)
 }
 
 #' Create a tensor with evenly spaced values between start and end
@@ -143,7 +143,7 @@ torch_full <- function(size, fill_value, dtype = NULL, device = NULL) {
 torch_linspace <- function(start, end, steps = 100L, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_linspace, as.double(start), as.double(end),
+  C_torch_linspace(as.double(start), as.double(end),
         as.integer(steps), dtype_code, device_str)
 }
 
@@ -153,7 +153,7 @@ torch_linspace <- function(start, end, steps = 100L, dtype = NULL, device = NULL
 #' @return A torch_tensor.
 #' @export
 torch_ones_like <- function(self, dtype = NULL) {
-  .Call(C_torch_ones_like, self, if (!is.null(dtype)) unclass(dtype) else NULL)
+  C_torch_ones_like(self, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Create a tensor of zeros with same shape/dtype as input
@@ -162,7 +162,7 @@ torch_ones_like <- function(self, dtype = NULL) {
 #' @return A torch_tensor.
 #' @export
 torch_zeros_like <- function(self, dtype = NULL) {
-  .Call(C_torch_zeros_like, self, if (!is.null(dtype)) unclass(dtype) else NULL)
+  C_torch_zeros_like(self, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Create a tensor of random normal values with same shape/dtype as input
@@ -171,7 +171,7 @@ torch_zeros_like <- function(self, dtype = NULL) {
 #' @return A torch_tensor.
 #' @export
 torch_randn_like <- function(self, dtype = NULL) {
-  .Call(C_torch_randn_like, self, if (!is.null(dtype)) unclass(dtype) else NULL)
+  C_torch_randn_like(self, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Concatenate tensors along a dimension
@@ -180,7 +180,7 @@ torch_randn_like <- function(self, dtype = NULL) {
 #' @return A torch_tensor.
 #' @export
 torch_cat <- function(tensors, dim = 1L) {
-  .Call(C_torch_cat, tensors, as.integer(dim))
+  C_torch_cat(tensors, as.integer(dim))
 }
 
 #' Clamp tensor values to a range
@@ -192,7 +192,7 @@ torch_cat <- function(tensors, dim = 1L) {
 torch_clamp <- function(self, min = NULL, max = NULL) {
   min_val <- if (!is.null(min)) as.double(min) else NULL
   max_val <- if (!is.null(max)) as.double(max) else NULL
-  .Call(C_torch_clamp, self, min_val, max_val)
+  C_torch_clamp(self, min_val, max_val)
 }
 
 #' Element-wise selection based on condition
@@ -202,7 +202,7 @@ torch_clamp <- function(self, min = NULL, max = NULL) {
 #' @return A torch_tensor.
 #' @export
 torch_where <- function(condition, self, other) {
-  .Call(C_torch_where, condition, self, other)
+  C_torch_where(condition, self, other)
 }
 
 #' Sort tensor along a dimension
@@ -212,7 +212,7 @@ torch_where <- function(condition, self, other) {
 #' @return A list with values and indices tensors.
 #' @export
 torch_sort <- function(self, dim = -1L, descending = FALSE) {
-  .Call(C_torch_sort, self, as.integer(dim), as.logical(descending))
+  C_torch_sort(self, as.integer(dim), as.logical(descending))
 }
 
 #' Flip tensor along given dimensions
@@ -221,7 +221,7 @@ torch_sort <- function(self, dim = -1L, descending = FALSE) {
 #' @return A torch_tensor.
 #' @export
 torch_flip <- function(self, dims) {
-  .Call(C_torch_flip, self, as.integer(dims))
+  C_torch_flip(self, as.integer(dims))
 }
 
 #' Cumulative sum along a dimension
@@ -230,7 +230,7 @@ torch_flip <- function(self, dims) {
 #' @return A torch_tensor.
 #' @export
 torch_cumsum <- function(self, dim) {
-  .Call(C_torch_cumsum, self, as.integer(dim))
+  C_torch_cumsum(self, as.integer(dim))
 }
 
 #' Element-wise maximum of two tensors
@@ -239,7 +239,7 @@ torch_cumsum <- function(self, dim) {
 #' @return A torch_tensor.
 #' @export
 torch_maximum <- function(self, other) {
-  .Call(C_torch_maximum, self, other)
+  C_torch_maximum(self, other)
 }
 
 #' Draw samples from a multinomial distribution
@@ -249,7 +249,7 @@ torch_maximum <- function(self, other) {
 #' @return A torch_tensor of indices.
 #' @export
 torch_multinomial <- function(self, num_samples, replacement = FALSE) {
-  .Call(C_torch_multinomial, self, as.integer(num_samples), as.logical(replacement))
+  C_torch_multinomial(self, as.integer(num_samples), as.logical(replacement))
 }
 
 #' Outer product of two vectors
@@ -258,7 +258,7 @@ torch_multinomial <- function(self, num_samples, replacement = FALSE) {
 #' @return A torch_tensor.
 #' @export
 torch_outer <- function(self, vec2) {
-  .Call(C_torch_outer, self, vec2)
+  C_torch_outer(self, vec2)
 }
 
 #' Upper triangular part of a matrix
@@ -267,7 +267,7 @@ torch_outer <- function(self, vec2) {
 #' @return A torch_tensor.
 #' @export
 torch_triu <- function(self, diagonal = 0L) {
-  .Call(C_torch_triu, self, as.integer(diagonal))
+  C_torch_triu(self, as.integer(diagonal))
 }
 
 #' Norm of a tensor
@@ -278,7 +278,7 @@ torch_triu <- function(self, diagonal = 0L) {
 #' @return A torch_tensor.
 #' @export
 torch_norm <- function(self, p = 2, dim = NULL, keepdim = FALSE) {
-  .Call(C_torch_norm, self, as.double(p), dim, as.logical(keepdim))
+  C_torch_norm(self, as.double(p), dim, as.logical(keepdim))
 }
 
 #' Standard deviation of a tensor
@@ -288,7 +288,7 @@ torch_norm <- function(self, p = 2, dim = NULL, keepdim = FALSE) {
 #' @return A torch_tensor.
 #' @export
 torch_std <- function(self, dim = NULL, keepdim = FALSE, unbiased = TRUE) {
-  .Call(C_torch_std, self, dim, as.logical(keepdim), as.logical(unbiased))
+  C_torch_std(self, dim, as.logical(keepdim), as.logical(unbiased))
 }
 
 # ---- Complex & signal processing ----
@@ -299,7 +299,7 @@ torch_std <- function(self, dim = NULL, keepdim = FALSE, unbiased = TRUE) {
 #' @return A torch_tensor.
 #' @export
 torch_complex <- function(real, imag) {
-  .Call(C_torch_complex, real, imag)
+  C_torch_complex(real, imag)
 }
 
 #' Extract real part of a complex tensor
@@ -307,7 +307,7 @@ torch_complex <- function(real, imag) {
 #' @return A torch_tensor.
 #' @export
 torch_real <- function(self) {
-  .Call(C_torch_real, self)
+  C_torch_real(self)
 }
 
 #' Extract imaginary part of a complex tensor
@@ -315,7 +315,7 @@ torch_real <- function(self) {
 #' @return A torch_tensor.
 #' @export
 torch_imag <- function(self) {
-  .Call(C_torch_imag, self)
+  C_torch_imag(self)
 }
 
 #' Create a complex tensor from polar coordinates
@@ -324,7 +324,7 @@ torch_imag <- function(self) {
 #' @return A torch_tensor.
 #' @export
 torch_polar <- function(abs, angle) {
-  .Call(C_torch_polar, abs, angle)
+  C_torch_polar(abs, angle)
 }
 
 #' View a complex tensor as a real tensor with extra dimension
@@ -332,7 +332,7 @@ torch_polar <- function(abs, angle) {
 #' @return A torch_tensor.
 #' @export
 torch_view_as_real <- function(self) {
-  .Call(C_torch_view_as_real, self)
+  C_torch_view_as_real(self)
 }
 
 #' Short-time Fourier Transform
@@ -353,7 +353,7 @@ torch_stft <- function(input, n_fft, hop_length = NULL, win_length = NULL,
   hop <- if (!is.null(hop_length)) as.integer(hop_length) else as.integer(n_fft %/% 4L)
   winl <- if (!is.null(win_length)) as.integer(win_length) else as.integer(n_fft)
   os <- if (!is.null(onesided)) as.logical(onesided) else TRUE
-  .Call(C_torch_stft, input, as.integer(n_fft), hop, winl,
+  C_torch_stft(input, as.integer(n_fft), hop, winl,
         window, as.logical(center), as.logical(normalized),
         os, as.logical(return_complex))
 }
@@ -378,7 +378,7 @@ torch_istft <- function(input, n_fft, hop_length = NULL, win_length = NULL,
   hop <- if (!is.null(hop_length)) as.integer(hop_length) else as.integer(n_fft %/% 4L)
   winl <- if (!is.null(win_length)) as.integer(win_length) else as.integer(n_fft)
   len <- if (!is.null(length)) as.integer(length) else NULL
-  .Call(C_torch_istft, input, as.integer(n_fft), hop, winl,
+  C_torch_istft(input, as.integer(n_fft), hop, winl,
         window, as.logical(center), as.logical(normalized),
         as.logical(onesided), len, as.logical(return_complex))
 }
@@ -394,7 +394,7 @@ torch_hann_window <- function(window_length, periodic = TRUE,
                               dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  .Call(C_torch_hann_window, as.integer(window_length),
+  C_torch_hann_window(as.integer(window_length),
         as.logical(periodic), dtype_code, device_str)
 }
 

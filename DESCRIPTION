@@ -12,6 +12,8 @@ License: MIT + file LICENSE
 URL: https://github.com/cornball-ai/Rtorch
 BugReports: https://github.com/cornball-ai/Rtorch/issues
 Depends: R (>= 4.1.0)
+Imports: Rcpp
+LinkingTo: Rcpp
 Suggests: tinytest, digest, ariel
 VignetteBuilder: simplermarkdown
 NeedsCompilation: yes

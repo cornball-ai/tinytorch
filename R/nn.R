@@ -69,11 +69,11 @@ nn_module <- function(classname = NULL, ...) {
         if (inherits(p, "torch_tensor")) {
           p_new <- p
           if (!is.null(dtype) && !is.null(device)) {
-            p_new <- .Call(C_tensor_to_dtype_device, p, unclass(dtype), as.character(device))
+            p_new <- C_tensor_to_dtype_device(p, unclass(dtype), as.character(device))
           } else if (!is.null(device)) {
-            p_new <- .Call(C_tensor_to_device, p, as.character(device))
+            p_new <- C_tensor_to_device(p, as.character(device))
           } else if (!is.null(dtype)) {
-            p_new <- .Call(C_torch_to_dtype, p, unclass(dtype))
+            p_new <- C_torch_to_dtype(p, unclass(dtype))
           }
           cls <- class(p)
           class(p_new) <- cls
@@ -87,11 +87,11 @@ nn_module <- function(classname = NULL, ...) {
         if (inherits(b, "torch_tensor")) {
           b_new <- b
           if (!is.null(dtype) && !is.null(device)) {
-            b_new <- .Call(C_tensor_to_dtype_device, b, unclass(dtype), as.character(device))
+            b_new <- C_tensor_to_dtype_device(b, unclass(dtype), as.character(device))
           } else if (!is.null(device)) {
-            b_new <- .Call(C_tensor_to_device, b, as.character(device))
+            b_new <- C_tensor_to_device(b, as.character(device))
           } else if (!is.null(dtype)) {
-            b_new <- .Call(C_torch_to_dtype, b, unclass(dtype))
+            b_new <- C_torch_to_dtype(b, unclass(dtype))
           }
           cls <- class(b)
           class(b_new) <- cls
@@ -481,7 +481,7 @@ nn_dropout <- function(p = 0.5, inplace = FALSE) {
 #' @export
 nn_sigmoid <- function() {
   nn_module("nn_sigmoid",
-    forward = function(input) .Call(C_torch_sigmoid, input)
+    forward = function(input) C_torch_sigmoid(input)
   )()
 }
 
@@ -499,7 +499,7 @@ nn_silu <- function() {
 #' @export
 nn_tanh <- function() {
   nn_module("nn_tanh",
-    forward = function(input) .Call(C_torch_tanh, input)
+    forward = function(input) C_torch_tanh(input)
   )()
 }
 
@@ -621,7 +621,7 @@ nn_conv_transpose1d <- function(in_channels, out_channels, kernel_size,
       }
     },
     forward = function(input) {
-      .Call(C_torch_conv_transpose1d, input, self$weight, self$bias,
+      C_torch_conv_transpose1d(input, self$weight, self$bias,
             as.integer(self$stride), as.integer(self$padding),
             as.integer(self$output_padding), as.integer(self$groups),
             as.integer(self$dilation))
@@ -666,7 +666,7 @@ nn_conv2d <- function(in_channels, out_channels, kernel_size,
       }
     },
     forward = function(input) {
-      .Call(C_torch_conv2d, input, self$weight, self$bias,
+      C_torch_conv2d(input, self$weight, self$bias,
             self$stride, self$padding, self$dilation,
             as.integer(self$groups))
     }
@@ -706,7 +706,7 @@ nn_batch_norm1d <- function(num_features, eps = 1e-5, momentum = 0.1,
       }
     },
     forward = function(input) {
-      .Call(C_torch_batch_norm, input,
+      C_torch_batch_norm(input,
             self$weight, self$bias,
             self$running_mean, self$running_var,
             FALSE,  # training=FALSE for inference
@@ -797,7 +797,7 @@ nn_lstm <- function(input_size, hidden_size, num_layers = 1L,
           ))
         }
       }
-      .Call(C_torch_lstm, input, hx, params,
+      C_torch_lstm(input, hx, params,
             as.logical(self$bias), as.integer(self$num_layers),
             as.double(self$dropout), as.logical(self$batch_first),
             as.logical(self$bidirectional))

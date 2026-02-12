@@ -16,7 +16,7 @@
 #' @keywords internal
 gpu_launch <- function(ptx, kernel_name, inputs, output,
                        grid, block, shared_mem = 0L) {
-  .Call(C_gpu_launch, ptx, kernel_name, inputs, output,
+  C_gpu_launch(ptx, kernel_name, inputs, output,
         as.integer(grid), as.integer(block), as.integer(shared_mem))
   invisible(NULL)
 }
@@ -35,7 +35,7 @@ gpu_launch <- function(ptx, kernel_name, inputs, output,
 #' @keywords internal
 gpu_launch_reduction <- function(ptx, kernel_name, input, output,
                                   n_elements, grid, block, shared_mem = 0L) {
-  .Call(C_gpu_launch_reduction, ptx, kernel_name, input, output,
+  C_gpu_launch_reduction(ptx, kernel_name, input, output,
         as.integer(n_elements), as.integer(grid), as.integer(block),
         as.integer(shared_mem))
   invisible(NULL)
@@ -58,7 +58,7 @@ gpu_launch_reduction <- function(ptx, kernel_name, input, output,
 #' @keywords internal
 gpu_launch_generic <- function(ptx, kernel_name, tensors, scalars,
                                 grid, block, shared_mem = 0L) {
-  .Call(C_gpu_launch_generic, ptx, kernel_name, tensors, scalars,
+  C_gpu_launch_generic(ptx, kernel_name, tensors, scalars,
         as.integer(grid), as.integer(block), as.integer(shared_mem))
   invisible(NULL)
 }
@@ -68,7 +68,7 @@ gpu_launch_generic <- function(ptx, kernel_name, tensors, scalars,
 #' @return Number of cached kernels cleared.
 #' @export
 gpu_kernel_cache_clear <- function() {
-  .Call(C_gpu_kernel_cache_clear)
+  C_gpu_kernel_cache_clear()
 }
 
 #' GPU kernel cache statistics
@@ -76,5 +76,5 @@ gpu_kernel_cache_clear <- function() {
 #' @return List with n_cached and kernel_names.
 #' @export
 gpu_kernel_cache_stats <- function() {
-  .Call(C_gpu_kernel_cache_stats)
+  C_gpu_kernel_cache_stats()
 }

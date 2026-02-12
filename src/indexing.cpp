@@ -104,8 +104,8 @@ static TensorIndex sexp_to_index(SEXP idx) {
 // C_torch_index: implements [.torch_tensor
 // indices_list: R list where each element is an index spec (NULL, int, vec, logical, tensor)
 // drop: whether to drop dimensions from scalar indexing
-extern "C" SEXP C_torch_index(SEXP self_sexp, SEXP indices_list, SEXP drop_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_index(SEXP self_sexp, SEXP indices_list, SEXP drop_sexp) {
         auto* self = get_tensor_ptr(self_sexp);
         bool drop = Rf_asLogical(drop_sexp);
         R_xlen_t n_indices = Rf_xlength(indices_list);
@@ -140,17 +140,13 @@ extern "C" SEXP C_torch_index(SEXP self_sexp, SEXP indices_list, SEXP drop_sexp)
         }
 
         return make_tensor_sexp(new at::Tensor(result));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
 // C_torch_index_put: implements [<-.torch_tensor
 // indices_list: same format as C_torch_index
 // value: either a torch_tensor or a scalar
-extern "C" SEXP C_torch_index_put(SEXP self_sexp, SEXP indices_list, SEXP value_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_index_put(SEXP self_sexp, SEXP indices_list, SEXP value_sexp) {
         auto* self = get_tensor_ptr(self_sexp);
         R_xlen_t n_indices = Rf_xlength(indices_list);
 
@@ -177,8 +173,4 @@ extern "C" SEXP C_torch_index_put(SEXP self_sexp, SEXP indices_list, SEXP value_
         }
 
         return self_sexp;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }

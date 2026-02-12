@@ -61,6 +61,17 @@ std::vector<int64_t> sexp_to_int_vec(SEXP x) {
     return out;
 }
 
+// ---- Rcpp::as / Rcpp::wrap for at::Tensor ----
+
+namespace Rcpp {
+    template<> at::Tensor as(SEXP x) {
+        return *get_tensor_ptr(x);
+    }
+    template<> SEXP wrap(const at::Tensor& t) {
+        return make_tensor_sexp(new at::Tensor(t));
+    }
+}
+
 // ---- Device helper ----
 
 at::Device sexp_to_device(SEXP device_sexp) {
@@ -70,8 +81,8 @@ at::Device sexp_to_device(SEXP device_sexp) {
 
 // ---- Creation functions ----
 
-extern "C" SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp) {
         auto dtype = sexp_to_dtype(dtype_sexp);
 
         at::Tensor t;
@@ -118,14 +129,10 @@ extern "C" SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp) {
         }
 
         return make_tensor_sexp(new at::Tensor(t));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_tensor_raw(SEXP data, SEXP dim_sexp, SEXP dtype_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_tensor_raw(SEXP data, SEXP dim_sexp, SEXP dtype_sexp) {
         auto dtype = sexp_to_dtype(dtype_sexp);
         R_xlen_t n = Rf_xlength(data);
 
@@ -150,14 +157,10 @@ extern "C" SEXP C_torch_tensor_raw(SEXP data, SEXP dim_sexp, SEXP dtype_sexp) {
         }
 
         return make_tensor_sexp(new at::Tensor(t));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_zeros(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_zeros(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
@@ -165,14 +168,10 @@ extern "C" SEXP C_torch_zeros(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp)
         if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::zeros(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_ones(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_ones(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
@@ -180,14 +179,10 @@ extern "C" SEXP C_torch_ones(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) 
         if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::ones(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_randn(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_randn(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
@@ -195,24 +190,13 @@ extern "C" SEXP C_torch_randn(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp)
         if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::randn(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_empty_like(SEXP self) {
-    try {
-        auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(at::empty_like(*a)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
-}
+// [[Rcpp::export]]
+at::Tensor C_torch_empty_like(at::Tensor self) { return at::empty_like(self); }
 
-extern "C" SEXP C_torch_empty(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_empty(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
         auto size = sexp_to_int_vec(size_sexp);
         auto opts = at::TensorOptions();
         auto dtype = sexp_to_dtype(dtype_sexp);
@@ -220,17 +204,13 @@ extern "C" SEXP C_torch_empty(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp)
         if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         auto* t = new at::Tensor(torch::empty(at::IntArrayRef(size.data(), size.size()), opts));
         return make_tensor_sexp(t);
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
 // ---- Create tensor from raw bytes ----
 
-extern "C" SEXP C_torch_tensor_from_buffer(SEXP raw_sexp, SEXP shape_sexp,
+// [[Rcpp::export]]
+SEXP C_torch_tensor_from_buffer(SEXP raw_sexp, SEXP shape_sexp,
                                             SEXP dtype_sexp, SEXP device_sexp) {
-    try {
         R_xlen_t nbytes = Rf_xlength(raw_sexp);
         void* data = RAW(raw_sexp);
         auto shape = sexp_to_int_vec(shape_sexp);
@@ -251,18 +231,14 @@ extern "C" SEXP C_torch_tensor_from_buffer(SEXP raw_sexp, SEXP shape_sexp,
         }
 
         return make_tensor_sexp(new at::Tensor(t));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
 // ---- New creation functions ----
 
-extern "C" SEXP C_torch_arange(SEXP start_sexp, SEXP end_sexp,
+// [[Rcpp::export]]
+SEXP C_torch_arange(SEXP start_sexp, SEXP end_sexp,
                                 SEXP step_sexp, SEXP dtype_sexp,
                                 SEXP device_sexp) {
-    try {
         double start = Rf_asReal(start_sexp);
         double end = Rf_asReal(end_sexp);
         double step = Rf_asReal(step_sexp);
@@ -277,15 +253,11 @@ extern "C" SEXP C_torch_arange(SEXP start_sexp, SEXP end_sexp,
         if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         return make_tensor_sexp(new at::Tensor(
             torch::arange(start, end, step, opts)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_full(SEXP size_sexp, SEXP fill_sexp, SEXP dtype_sexp,
+// [[Rcpp::export]]
+SEXP C_torch_full(SEXP size_sexp, SEXP fill_sexp, SEXP dtype_sexp,
                               SEXP device_sexp) {
-    try {
         auto size = sexp_to_int_vec(size_sexp);
         double fill = Rf_asReal(fill_sexp);
         auto opts = at::TensorOptions();
@@ -294,16 +266,12 @@ extern "C" SEXP C_torch_full(SEXP size_sexp, SEXP fill_sexp, SEXP dtype_sexp,
         if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         return make_tensor_sexp(new at::Tensor(
             torch::full(at::IntArrayRef(size.data(), size.size()), fill, opts)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_linspace(SEXP start_sexp, SEXP end_sexp,
+// [[Rcpp::export]]
+SEXP C_torch_linspace(SEXP start_sexp, SEXP end_sexp,
                                   SEXP steps_sexp, SEXP dtype_sexp,
                                   SEXP device_sexp) {
-    try {
         double start = Rf_asReal(start_sexp);
         double end = Rf_asReal(end_sexp);
         int64_t steps = static_cast<int64_t>(Rf_asInteger(steps_sexp));
@@ -313,298 +281,188 @@ extern "C" SEXP C_torch_linspace(SEXP start_sexp, SEXP end_sexp,
         if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
         return make_tensor_sexp(new at::Tensor(
             torch::linspace(start, end, steps, opts)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_ones_like(SEXP self, SEXP dtype_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
+// [[Rcpp::export]]
+at::Tensor C_torch_ones_like(at::Tensor self, SEXP dtype_sexp) {
         if (Rf_isNull(dtype_sexp)) {
-            return make_tensor_sexp(new at::Tensor(at::ones_like(*a)));
+            return at::ones_like(self);
         } else {
             auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
-            return make_tensor_sexp(new at::Tensor(at::ones_like(*a, at::TensorOptions().dtype(dt))));
+            return at::ones_like(self, at::TensorOptions().dtype(dt));
         }
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_zeros_like(SEXP self, SEXP dtype_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
+// [[Rcpp::export]]
+at::Tensor C_torch_zeros_like(at::Tensor self, SEXP dtype_sexp) {
         if (Rf_isNull(dtype_sexp)) {
-            return make_tensor_sexp(new at::Tensor(at::zeros_like(*a)));
+            return at::zeros_like(self);
         } else {
             auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
-            return make_tensor_sexp(new at::Tensor(at::zeros_like(*a, at::TensorOptions().dtype(dt))));
+            return at::zeros_like(self, at::TensorOptions().dtype(dt));
         }
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_randn_like(SEXP self, SEXP dtype_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
+// [[Rcpp::export]]
+at::Tensor C_torch_randn_like(at::Tensor self, SEXP dtype_sexp) {
         if (Rf_isNull(dtype_sexp)) {
-            return make_tensor_sexp(new at::Tensor(at::randn_like(*a)));
+            return at::randn_like(self);
         } else {
             auto dt = static_cast<c10::ScalarType>(Rf_asInteger(dtype_sexp));
-            return make_tensor_sexp(new at::Tensor(at::randn_like(*a, at::TensorOptions().dtype(dt))));
+            return at::randn_like(self, at::TensorOptions().dtype(dt));
         }
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
 // ---- Tensor method backends ----
 
-extern "C" SEXP C_torch_permute(SEXP self, SEXP dims_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
+// [[Rcpp::export]]
+at::Tensor C_torch_permute(at::Tensor self, SEXP dims_sexp) {
         auto dims = sexp_to_int_vec(dims_sexp);
         // Convert 1-based to 0-based
         for (auto& d : dims) {
             if (d > 0) d = d - 1;
         }
-        return make_tensor_sexp(new at::Tensor(
-            a->permute(at::IntArrayRef(dims.data(), dims.size()))));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.permute(at::IntArrayRef(dims.data(), dims.size()));
 }
 
-extern "C" SEXP C_torch_expand(SEXP self, SEXP size_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
+// [[Rcpp::export]]
+at::Tensor C_torch_expand(at::Tensor self, SEXP size_sexp) {
         auto size = sexp_to_int_vec(size_sexp);
-        return make_tensor_sexp(new at::Tensor(
-            a->expand(at::IntArrayRef(size.data(), size.size()))));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.expand(at::IntArrayRef(size.data(), size.size()));
 }
 
-extern "C" SEXP C_torch_gather(SEXP self, SEXP dim_sexp, SEXP index) {
-    try {
-        auto* a = get_tensor_ptr(self);
-        auto* idx = get_tensor_ptr(index);
+// [[Rcpp::export]]
+at::Tensor C_torch_gather(at::Tensor self, SEXP dim_sexp, at::Tensor index) {
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
         // Convert 1-indexed R indices to 0-indexed ATen indices
-        auto idx0 = idx->sub(1);
-        return make_tensor_sexp(new at::Tensor(a->gather(dim, idx0)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.gather(dim, index.sub(1));
 }
 
-extern "C" SEXP C_torch_masked_fill(SEXP self, SEXP mask, SEXP value_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
-        auto* m = get_tensor_ptr(mask);
+// [[Rcpp::export]]
+at::Tensor C_torch_masked_fill(at::Tensor self, at::Tensor mask, SEXP value_sexp) {
         double value = Rf_asReal(value_sexp);
-        return make_tensor_sexp(new at::Tensor(
-            a->masked_fill(*m, at::Scalar(value))));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.masked_fill(mask, at::Scalar(value));
 }
 
-extern "C" SEXP C_torch_masked_fill_(SEXP self, SEXP mask, SEXP value_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_masked_fill_(SEXP self, at::Tensor mask, SEXP value_sexp) {
         auto* a = get_tensor_ptr(self);
-        auto* m = get_tensor_ptr(mask);
         double value = Rf_asReal(value_sexp);
-        a->masked_fill_(*m, at::Scalar(value));
+        a->masked_fill_(mask, at::Scalar(value));
         return self;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_copy_(SEXP self, SEXP src) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_copy_(SEXP self, at::Tensor src) {
         auto* a = get_tensor_ptr(self);
-        auto* b = get_tensor_ptr(src);
-        a->copy_(*b);
+        a->copy_(src);
         return self;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_normal_(SEXP self, SEXP mean_sexp, SEXP std_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_normal_(SEXP self, SEXP mean_sexp, SEXP std_sexp) {
         auto* a = get_tensor_ptr(self);
         double mean = Rf_asReal(mean_sexp);
         double std = Rf_asReal(std_sexp);
         a->normal_(mean, std);
         return self;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_uniform_(SEXP self, SEXP from_sexp, SEXP to_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_uniform_(SEXP self, SEXP from_sexp, SEXP to_sexp) {
         auto* a = get_tensor_ptr(self);
         double from = Rf_asReal(from_sexp);
         double to = Rf_asReal(to_sexp);
         a->uniform_(from, to);
         return self;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_zero_(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_zero_(SEXP self) {
         auto* a = get_tensor_ptr(self);
         a->zero_();
         return self;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_fill_(SEXP self, SEXP value_sexp) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_fill_(SEXP self, SEXP value_sexp) {
         auto* a = get_tensor_ptr(self);
         double value = Rf_asReal(value_sexp);
         a->fill_(at::Scalar(value));
         return self;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_torch_repeat(SEXP self, SEXP sizes_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
+// [[Rcpp::export]]
+at::Tensor C_torch_repeat(at::Tensor self, SEXP sizes_sexp) {
         auto sizes = sexp_to_int_vec(sizes_sexp);
-        return make_tensor_sexp(new at::Tensor(
-            a->repeat_symint(c10::fromIntArrayRefSlow(sizes))));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.repeat_symint(c10::fromIntArrayRefSlow(sizes));
 }
 
-extern "C" SEXP C_torch_repeat_interleave(SEXP self, SEXP repeats_sexp,
+// [[Rcpp::export]]
+at::Tensor C_torch_repeat_interleave(at::Tensor self, SEXP repeats_sexp,
                                             SEXP dim_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
         int64_t repeats = static_cast<int64_t>(Rf_asInteger(repeats_sexp));
         if (Rf_isNull(dim_sexp)) {
-            return make_tensor_sexp(new at::Tensor(
-                a->repeat_interleave(repeats)));
+            return self.repeat_interleave(repeats);
         }
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(
-            a->repeat_interleave(repeats, dim)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.repeat_interleave(repeats, dim);
 }
 
-extern "C" SEXP C_torch_index_select(SEXP self, SEXP dim_sexp, SEXP index) {
-    try {
-        auto* a = get_tensor_ptr(self);
-        auto* idx = get_tensor_ptr(index);
+// [[Rcpp::export]]
+at::Tensor C_torch_index_select(at::Tensor self, SEXP dim_sexp, at::Tensor index) {
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        return make_tensor_sexp(new at::Tensor(a->index_select(dim, *idx)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.index_select(dim, index);
 }
 
-extern "C" SEXP C_torch_narrow(SEXP self, SEXP dim_sexp, SEXP start_sexp,
+// [[Rcpp::export]]
+at::Tensor C_torch_narrow(at::Tensor self, SEXP dim_sexp, SEXP start_sexp,
                                 SEXP length_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
         int64_t start = static_cast<int64_t>(Rf_asInteger(start_sexp));
         int64_t length = static_cast<int64_t>(Rf_asInteger(length_sexp));
-        return make_tensor_sexp(new at::Tensor(a->narrow(dim, start, length)));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+        return self.narrow(dim, start, length);
 }
 
-extern "C" SEXP C_torch_scatter_(SEXP self, SEXP dim_sexp, SEXP index, SEXP src) {
-    try {
+// [[Rcpp::export]]
+SEXP C_torch_scatter_(SEXP self, SEXP dim_sexp, at::Tensor index, at::Tensor src) {
         auto* a = get_tensor_ptr(self);
-        auto* idx = get_tensor_ptr(index);
-        auto* s = get_tensor_ptr(src);
         int64_t dim = static_cast<int64_t>(Rf_asInteger(dim_sexp));
         if (dim > 0) dim = dim - 1;
-        a->scatter_(dim, *idx, *s);
+        a->scatter_(dim, index, src);
         return self;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
 // ---- Device transfer functions ----
 
-extern "C" SEXP C_tensor_to_device(SEXP self, SEXP device_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
-        return make_tensor_sexp(new at::Tensor(a->to(sexp_to_device(device_sexp))));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
+// [[Rcpp::export]]
+at::Tensor C_tensor_to_device(at::Tensor self, SEXP device_sexp) {
+        return self.to(sexp_to_device(device_sexp));
 }
 
-extern "C" SEXP C_tensor_to_dtype_device(SEXP self, SEXP dtype_sexp,
+// [[Rcpp::export]]
+at::Tensor C_tensor_to_dtype_device(at::Tensor self, SEXP dtype_sexp,
                                           SEXP device_sexp) {
-    try {
-        auto* a = get_tensor_ptr(self);
         auto dtype = sexp_to_dtype(dtype_sexp);
         auto device = sexp_to_device(device_sexp);
         if (dtype.has_value()) {
-            return make_tensor_sexp(new at::Tensor(
-                a->to(device, dtype.value())));
+            return self.to(device, dtype.value());
         } else {
-            return make_tensor_sexp(new at::Tensor(a->to(device)));
+            return self.to(device);
         }
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_cuda_is_available() {
+// [[Rcpp::export]]
+SEXP C_cuda_is_available() {
     return Rf_ScalarLogical(torch::cuda::is_available());
 }
 
-extern "C" SEXP C_cuda_device_count() {
+// [[Rcpp::export]]
+SEXP C_cuda_device_count() {
     return Rf_ScalarInteger(static_cast<int>(torch::cuda::device_count()));
 }
 
@@ -617,7 +475,8 @@ extern "C" SEXP C_cuda_device_count() {
 #endif
 #endif
 
-extern "C" SEXP C_cuda_empty_cache() {
+// [[Rcpp::export]]
+SEXP C_cuda_empty_cache() {
     if (!torch::cuda::is_available()) return R_NilValue;
 #if defined(RTORCH_CUDA) && !defined(RTORCH_CUDA_NO_SDK)
     c10::cuda::CUDACachingAllocator::emptyCache();
@@ -626,7 +485,8 @@ extern "C" SEXP C_cuda_empty_cache() {
 }
 
 // Return c(free, total) in bytes for the current CUDA device
-extern "C" SEXP C_cuda_mem_info() {
+// [[Rcpp::export]]
+SEXP C_cuda_mem_info() {
     if (!torch::cuda::is_available()) {
         return Rf_allocVector(REALSXP, 0);
     }
@@ -647,7 +507,8 @@ extern "C" SEXP C_cuda_mem_info() {
 }
 
 // Return c(allocated, reserved) in bytes from libtorch's caching allocator
-extern "C" SEXP C_cuda_memory_stats() {
+// [[Rcpp::export]]
+SEXP C_cuda_memory_stats() {
     if (!torch::cuda::is_available()) {
         return Rf_allocVector(REALSXP, 0);
     }

@@ -19,7 +19,7 @@
 #' @export
 fused_relu <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
-  .wrap_tensor(.Call("cpp_fused_relu", .ensure_float(x)))
+  .wrap_tensor(cpp_fused_relu(.ensure_float(x)))
 }
 
 #' Fused relu + sigmoid
@@ -32,7 +32,7 @@ fused_relu <- function(x) {
 #' @export
 fused_relu_sigmoid <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
-  .wrap_tensor(.Call("cpp_fused_relu_sigmoid", .ensure_float(x)))
+  .wrap_tensor(cpp_fused_relu_sigmoid(.ensure_float(x)))
 }
 
 #' Fused relu + sigmoid + tanh
@@ -45,7 +45,7 @@ fused_relu_sigmoid <- function(x) {
 #' @export
 fused_relu_sigmoid_tanh <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
-  .wrap_tensor(.Call("cpp_fused_relu_sigmoid_tanh", .ensure_float(x)))
+  .wrap_tensor(cpp_fused_relu_sigmoid_tanh(.ensure_float(x)))
 }
 
 #' Fused SiLU (Swish): x * sigmoid(x)
@@ -58,7 +58,7 @@ fused_relu_sigmoid_tanh <- function(x) {
 #' @export
 fused_silu <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
-  .wrap_tensor(.Call("cpp_fused_silu", .ensure_float(x)))
+  .wrap_tensor(cpp_fused_silu(.ensure_float(x)))
 }
 
 #' Fused GELU activation
@@ -71,7 +71,7 @@ fused_silu <- function(x) {
 #' @export
 fused_gelu <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
-  .wrap_tensor(.Call("cpp_fused_gelu", .ensure_float(x)))
+  .wrap_tensor(cpp_fused_gelu(.ensure_float(x)))
 }
 
 #' Fused sin and cos
@@ -84,7 +84,7 @@ fused_gelu <- function(x) {
 #' @export
 fused_sincos <- function(x) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
-  result <- .Call("cpp_fused_sincos", .ensure_float(x))
+  result <- cpp_fused_sincos(.ensure_float(x))
   list(
     sin = .wrap_tensor(result$sin),
     cos = .wrap_tensor(result$cos)
@@ -102,7 +102,7 @@ fused_sincos <- function(x) {
 #' @export
 fused_softcap <- function(x, cap) {
   if (!inherits(x, "torch_tensor")) stop("Input must be a torch_tensor")
-  .wrap_tensor(.Call("cpp_fused_softcap", .ensure_float(x), as.double(cap)))
+  .wrap_tensor(cpp_fused_softcap(.ensure_float(x), as.double(cap)))
 }
 
 #' Fused RMSNorm: x * rsqrt(mean(x^2) + eps) * weight
@@ -120,6 +120,6 @@ fused_softcap <- function(x, cap) {
 fused_rmsnorm <- function(x, weight, eps = 1e-6) {
   if (!inherits(x, "torch_tensor") || !inherits(weight, "torch_tensor"))
     stop("Inputs must be torch_tensors")
-  .wrap_tensor(.Call("cpp_fused_rmsnorm", .ensure_float(x), .ensure_float(weight),
+  .wrap_tensor(cpp_fused_rmsnorm(.ensure_float(x), .ensure_float(weight),
                      as.double(eps)))
 }

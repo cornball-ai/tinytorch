@@ -2,11 +2,21 @@
 #define RTORCH_H
 
 #define R_NO_REMAP
-#include <R.h>
-#include <Rinternals.h>
-#include <R_ext/Rdynload.h>
 
+// Step 1: RcppCommon.h (declares Rcpp namespace, traits, but not full Rcpp)
+#include <RcppCommon.h>
+
+// Step 2: libtorch headers
 #include <torch/torch.h>
+
+// Step 3: Forward-declare Rcpp::as/wrap specializations (before Rcpp.h)
+namespace Rcpp {
+    template<> at::Tensor as(SEXP);
+    template<> SEXP wrap(const at::Tensor&);
+}
+
+// Step 4: Full Rcpp (sees the forward declarations above)
+#include <Rcpp.h>
 
 // ---- Tensor helpers ----
 

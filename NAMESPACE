@@ -219,4 +219,6 @@ S3method(print,torch_dtype)
 S3method(print,torch_tensor)
 S3method(print,traced_module)
 
+importFrom(Rcpp,sourceCpp)
+
 useDynLib(Rtorch, .registration = TRUE)
