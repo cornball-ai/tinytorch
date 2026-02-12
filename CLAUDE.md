@@ -4,7 +4,8 @@ High-performance R bindings to libtorch. Drop-in replacement for torch with mini
 
 ## Architecture
 - S3 class `torch_tensor` with `$` method dispatch via shared method table
-- Direct .Call() to C++ wrappers (no Rcpp, no lantern, no R7)
+- Rcpp for C++ ↔ R glue (auto-registration, exception handling)
+- No lantern, no R7
 - Reuses libtorch from installed torch package
 
 ## Build

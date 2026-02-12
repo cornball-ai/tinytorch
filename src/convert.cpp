@@ -1,7 +1,7 @@
 #include "Rtorch.h"
 
-extern "C" SEXP C_as_array(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_as_array(SEXP self) {
         auto* t = get_tensor_ptr(self);
 
         // Move to CPU
@@ -46,16 +46,12 @@ extern "C" SEXP C_as_array(SEXP self) {
 
         UNPROTECT(1);
         return result;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
 // ---- Properties ----
 
-extern "C" SEXP C_tensor_shape(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_tensor_shape(SEXP self) {
         auto* t = get_tensor_ptr(self);
         auto sizes = t->sizes();
         int ndim = sizes.size();
@@ -66,72 +62,44 @@ extern "C" SEXP C_tensor_shape(SEXP self) {
         }
         UNPROTECT(1);
         return result;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_tensor_dtype(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_tensor_dtype(SEXP self) {
         auto* t = get_tensor_ptr(self);
         int code = static_cast<int>(t->scalar_type());
         return Rf_ScalarInteger(code);
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_tensor_device(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_tensor_device(SEXP self) {
         auto* t = get_tensor_ptr(self);
         std::string dev = t->device().str();
         return Rf_mkString(dev.c_str());
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_tensor_ndim(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_tensor_ndim(SEXP self) {
         auto* t = get_tensor_ptr(self);
         return Rf_ScalarInteger(t->dim());
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_tensor_numel(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_tensor_numel(SEXP self) {
         auto* t = get_tensor_ptr(self);
         return Rf_ScalarInteger(static_cast<int>(t->numel()));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_tensor_requires_grad(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_tensor_requires_grad(SEXP self) {
         auto* t = get_tensor_ptr(self);
         return Rf_ScalarLogical(t->requires_grad());
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
-extern "C" SEXP C_tensor_print(SEXP self) {
-    try {
+// [[Rcpp::export]]
+SEXP C_tensor_print(SEXP self) {
         auto* t = get_tensor_ptr(self);
         std::ostringstream oss;
         oss << *t;
         Rprintf("%s\n", oss.str().c_str());
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }

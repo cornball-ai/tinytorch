@@ -308,7 +308,7 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
     }
   }
   if (length(tensor_inputs) == 0L) return("")
-  .Call(cpp_tensor_shapes_key, tensor_inputs)
+  cpp_tensor_shapes_key(tensor_inputs)
 }
 
 # Full cache key: graph_fp || shape_fp || backend

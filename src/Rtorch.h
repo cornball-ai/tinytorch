@@ -2,10 +2,7 @@
 #define RTORCH_H
 
 #define R_NO_REMAP
-#include <R.h>
-#include <Rinternals.h>
-#include <R_ext/Rdynload.h>
-
+#include <Rcpp.h>
 #include <torch/torch.h>
 
 // ---- Tensor helpers ----

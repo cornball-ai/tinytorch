@@ -13,7 +13,8 @@ static at::Tensor reshape_qkv(const at::Tensor& x, int64_t batch, int64_t n_head
     return x.view({batch, 1, n_head, head_dim}).transpose(1, 2);
 }
 
-extern "C" SEXP C_transformer_decoder_layer_step(
+// [[Rcpp::export]]
+SEXP C_transformer_decoder_layer_step(
     SEXP x_sexp,           // (batch, 1, n_state)
     SEXP weights_sexp,     // R list of 21 weight tensors
     SEXP self_cache_k_sexp,  // (batch, n_head, seq_so_far, head_dim)
@@ -22,7 +23,6 @@ extern "C" SEXP C_transformer_decoder_layer_step(
     SEXP cross_cache_v_sexp,
     SEXP n_head_sexp)        // integer
 {
-    try {
         auto& x_in = *get_tensor_ptr(x_sexp);
         int64_t n_head = (int64_t)Rf_asInteger(n_head_sexp);
         int64_t batch = x_in.size(0);
@@ -153,10 +153,6 @@ extern "C" SEXP C_transformer_decoder_layer_step(
 
         UNPROTECT(2);
         return result;
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }
 
 
@@ -165,12 +161,12 @@ extern "C" SEXP C_transformer_decoder_layer_step(
 // Executes one complete pre-norm encoder layer in C++ with zero R allocation.
 // ================================================================
 
-extern "C" SEXP C_transformer_encoder_layer(
+// [[Rcpp::export]]
+SEXP C_transformer_encoder_layer(
     SEXP x_sexp,           // (batch, seq_len, n_state)
     SEXP weights_sexp,     // R list of 15 weight tensors
     SEXP n_head_sexp)      // integer
 {
-    try {
         auto& x_in = *get_tensor_ptr(x_sexp);
         int64_t n_head = (int64_t)Rf_asInteger(n_head_sexp);
         int64_t batch = x_in.size(0);
@@ -238,8 +234,4 @@ extern "C" SEXP C_transformer_encoder_layer(
         }
 
         return make_tensor_sexp(new at::Tensor(x));
-    } catch (const std::exception& e) {
-        Rf_error("%s", e.what());
-    }
-    return R_NilValue;
 }

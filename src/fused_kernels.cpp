@@ -16,9 +16,7 @@ static SEXP make_fused_tensor(at::Tensor&& t) {
 // Fused kernels
 // ============================================================================
 
-extern "C" {
-
-// Fused relu kernel
+// [[Rcpp::export]]
 SEXP cpp_fused_relu(SEXP input_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   if (!input) {
@@ -50,7 +48,7 @@ SEXP cpp_fused_relu(SEXP input_sexp) {
   return make_fused_tensor(std::move(output));
 }
 
-// Fused relu + sigmoid kernel
+// [[Rcpp::export]]
 SEXP cpp_fused_relu_sigmoid(SEXP input_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   if (!input) {
@@ -84,7 +82,7 @@ SEXP cpp_fused_relu_sigmoid(SEXP input_sexp) {
   return make_fused_tensor(std::move(output));
 }
 
-// Fused relu + sigmoid + tanh kernel
+// [[Rcpp::export]]
 SEXP cpp_fused_relu_sigmoid_tanh(SEXP input_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   if (!input) {
@@ -126,6 +124,7 @@ SEXP cpp_fused_relu_sigmoid_tanh(SEXP input_sexp) {
 
 // Fused SiLU (Swish): x * sigmoid(x)
 // Used in LLaMA, Mistral, modern LLMs
+// [[Rcpp::export]]
 SEXP cpp_fused_silu(SEXP input_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   if (!input) {
@@ -163,6 +162,7 @@ SEXP cpp_fused_silu(SEXP input_sexp) {
 // Fused GELU (Gaussian Error Linear Unit)
 // Approximation: x * 0.5 * (1 + tanh(sqrt(2/pi) * (x + 0.044715 * x^3)))
 // Used in GPT, BERT, transformers
+// [[Rcpp::export]]
 SEXP cpp_fused_gelu(SEXP input_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   if (!input) {
@@ -207,6 +207,7 @@ SEXP cpp_fused_gelu(SEXP input_sexp) {
 // Fused Sin+Cos: compute both sin and cos in one pass
 // Used in positional encodings (RoPE, sinusoidal)
 // Returns an R list with two tensors: list(sin=..., cos=...)
+// [[Rcpp::export]]
 SEXP cpp_fused_sincos(SEXP input_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   if (!input) {
@@ -257,6 +258,7 @@ SEXP cpp_fused_sincos(SEXP input_sexp) {
 
 // Fused softcap: (x / cap).tanh() * cap
 // Used in Gemma3 attention for logit stabilization
+// [[Rcpp::export]]
 SEXP cpp_fused_softcap(SEXP input_sexp, SEXP cap_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   if (!input) {
@@ -296,6 +298,7 @@ SEXP cpp_fused_softcap(SEXP input_sexp, SEXP cap_sexp) {
 // Fused RMSNorm: x * rsqrt(mean(x^2) + eps) * weight
 // Note: This operates on the LAST dimension only
 // Used in LLaMA, modern transformers (replaces LayerNorm)
+// [[Rcpp::export]]
 SEXP cpp_fused_rmsnorm(SEXP input_sexp, SEXP weight_sexp, SEXP eps_sexp) {
   at::Tensor* input = get_tensor_ptr(input_sexp);
   at::Tensor* weight = get_tensor_ptr(weight_sexp);
@@ -367,6 +370,7 @@ SEXP cpp_fused_rmsnorm(SEXP input_sexp, SEXP weight_sexp, SEXP eps_sexp) {
 // Takes a named list of SEXP tensors, returns a fingerprint string like:
 //   "x=1500x384:f32,ln.weight=384:f32,..."
 // One R->C++ call instead of 2N calls (N tensors * (shape + dtype)).
+// [[Rcpp::export]]
 SEXP cpp_tensor_shapes_key(SEXP tensor_list) {
   if (TYPEOF(tensor_list) != VECSXP) {
     Rf_error("Expected a list of tensors");
@@ -420,4 +424,3 @@ SEXP cpp_tensor_shapes_key(SEXP tensor_list) {
 }
 
 
-} // extern "C"

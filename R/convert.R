@@ -8,7 +8,7 @@
 #' }
 #' @export
 as_array <- function(x) {
-  .Call(C_as_array, x)
+  C_as_array(x)
 }
 
 #' @examples
@@ -18,7 +18,7 @@ as_array <- function(x) {
 #' }
 #' @export
 as.array.torch_tensor <- function(x, ...) {
-  .Call(C_as_array, x)
+  C_as_array(x)
 }
 
 #' @examples
@@ -28,7 +28,7 @@ as.array.torch_tensor <- function(x, ...) {
 #' }
 #' @export
 as.numeric.torch_tensor <- function(x, ...) {
-  as.numeric(.Call(C_as_array, x))
+  as.numeric(C_as_array(x))
 }
 
 #' @examples
@@ -38,7 +38,7 @@ as.numeric.torch_tensor <- function(x, ...) {
 #' }
 #' @export
 as.double.torch_tensor <- function(x, ...) {
-  as.double(.Call(C_as_array, x))
+  as.double(C_as_array(x))
 }
 
 #' @examples
@@ -48,7 +48,7 @@ as.double.torch_tensor <- function(x, ...) {
 #' }
 #' @export
 as.integer.torch_tensor <- function(x, ...) {
-  as.integer(.Call(C_as_array, x))
+  as.integer(C_as_array(x))
 }
 
 #' @examples
@@ -58,7 +58,7 @@ as.integer.torch_tensor <- function(x, ...) {
 #' }
 #' @export
 as.matrix.torch_tensor <- function(x, ...) {
-  arr <- .Call(C_as_array, x)
+  arr <- C_as_array(x)
   if (is.null(dim(arr))) {
     matrix(arr, nrow = length(arr), ncol = 1L)
   } else {
