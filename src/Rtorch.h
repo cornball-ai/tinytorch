@@ -40,4 +40,24 @@ std::vector<int64_t> sexp_to_int_vec(SEXP x);
 // Convert R string SEXP to at::Device (NULL → CPU)
 at::Device sexp_to_device(SEXP device_sexp);
 
+// Convert R SEXP to optional tensor (NULL → nullopt)
+c10::optional<at::Tensor> sexp_to_optional_tensor(SEXP x);
+
+// Convert R list of tensors to std::vector<at::Tensor>
+std::vector<at::Tensor> sexp_to_tensor_list(SEXP x);
+
+// Convert R SEXP to optional primitives (NULL → nullopt)
+c10::optional<int64_t> sexp_to_optional_int(SEXP x);
+c10::optional<double> sexp_to_optional_double(SEXP x);
+c10::optional<bool> sexp_to_optional_bool(SEXP x);
+
+// Convert R SEXP to optional string (NULL → nullopt)
+c10::optional<std::string> sexp_to_optional_string(SEXP x);
+
+// Convert R SEXP to optional scalar (NULL → nullopt)
+c10::optional<at::Scalar> sexp_to_optional_scalar(SEXP x);
+
+// Convert R SEXP to optional device (NULL → nullopt)
+c10::optional<at::Device> sexp_to_optional_device(SEXP x);
+
 #endif // RTORCH_H
