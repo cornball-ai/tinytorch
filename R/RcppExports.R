@@ -69,840 +69,1820 @@ cpp_tensor_shapes_key <- function(tensor_list) {
     .Call(`_Rtorch_cpp_tensor_shapes_key`, tensor_list)
 }
 
-C_torch_absolute <- function(self) {
-    .Call(`_Rtorch_C_torch_absolute`, self)
+C_torch_native_dropout <- function(input, p, train) {
+    .Call(`_Rtorch_C_torch_native_dropout`, input, p, train)
 }
 
-C_torch_angle <- function(self) {
-    .Call(`_Rtorch_C_torch_angle`, self)
+C_torch_dropout <- function(input, p, train) {
+    .Call(`_Rtorch_C_torch_dropout`, input, p, train)
 }
 
-C_torch_view_as_complex <- function(self) {
-    .Call(`_Rtorch_C_torch_view_as_complex`, self)
+C_torch_dropout_ <- function(self, p, train) {
+    .Call(`_Rtorch_C_torch_dropout_`, self, p, train)
 }
 
-C_torch_sgn <- function(self) {
-    .Call(`_Rtorch_C_torch_sgn`, self)
+C_torch_feature_dropout <- function(input, p, train) {
+    .Call(`_Rtorch_C_torch_feature_dropout`, input, p, train)
 }
 
-C_torch_acos <- function(self) {
-    .Call(`_Rtorch_C_torch_acos`, self)
+C_torch_feature_dropout_ <- function(self, p, train) {
+    .Call(`_Rtorch_C_torch_feature_dropout_`, self, p, train)
 }
 
-C_torch_arccos <- function(self) {
-    .Call(`_Rtorch_C_torch_arccos`, self)
+C_torch_alpha_dropout <- function(input, p, train) {
+    .Call(`_Rtorch_C_torch_alpha_dropout`, input, p, train)
 }
 
-C_torch_all <- function(self, dim, keepdim) {
-    .Call(`_Rtorch_C_torch_all`, self, dim, keepdim)
+C_torch_alpha_dropout_ <- function(self, p, train) {
+    .Call(`_Rtorch_C_torch_alpha_dropout_`, self, p, train)
 }
 
-C_torch_any <- function(self, dim, keepdim) {
-    .Call(`_Rtorch_C_torch_any`, self, dim, keepdim)
+C_torch_feature_alpha_dropout <- function(input, p, train) {
+    .Call(`_Rtorch_C_torch_feature_alpha_dropout`, input, p, train)
 }
 
-C_torch_acosh <- function(self) {
-    .Call(`_Rtorch_C_torch_acosh`, self)
+C_torch_feature_alpha_dropout_ <- function(self, p, train) {
+    .Call(`_Rtorch_C_torch_feature_alpha_dropout_`, self, p, train)
 }
 
-C_torch_arccosh <- function(self) {
-    .Call(`_Rtorch_C_torch_arccosh`, self)
+C_torch_abs_ <- function(self) {
+    .Call(`_Rtorch_C_torch_abs_`, self)
 }
 
-C_torch_asinh <- function(self) {
-    .Call(`_Rtorch_C_torch_asinh`, self)
+C_torch_absolute_ <- function(self) {
+    .Call(`_Rtorch_C_torch_absolute_`, self)
 }
 
-C_torch_arcsinh <- function(self) {
-    .Call(`_Rtorch_C_torch_arcsinh`, self)
+C_torch_sgn_ <- function(self) {
+    .Call(`_Rtorch_C_torch_sgn_`, self)
 }
 
-C_torch_atanh <- function(self) {
-    .Call(`_Rtorch_C_torch_atanh`, self)
+C_torch_conj_physical_ <- function(self) {
+    .Call(`_Rtorch_C_torch_conj_physical_`, self)
 }
 
-C_torch_arctanh <- function(self) {
-    .Call(`_Rtorch_C_torch_arctanh`, self)
+C_torch_acos_ <- function(self) {
+    .Call(`_Rtorch_C_torch_acos_`, self)
 }
 
-C_torch_asin <- function(self) {
-    .Call(`_Rtorch_C_torch_asin`, self)
+C_torch_arccos_ <- function(self) {
+    .Call(`_Rtorch_C_torch_arccos_`, self)
 }
 
-C_torch_arcsin <- function(self) {
-    .Call(`_Rtorch_C_torch_arcsin`, self)
+C_torch_avg_pool1d <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, ceil_mode, count_include_pad) {
+    .Call(`_Rtorch_C_torch_avg_pool1d`, self, kernel_size_sexp, stride_sexp, padding_sexp, ceil_mode, count_include_pad)
 }
 
-C_torch_atan <- function(self) {
-    .Call(`_Rtorch_C_torch_atan`, self)
+C_torch_adaptive_avg_pool1d <- function(self, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_adaptive_avg_pool1d`, self, output_size_sexp)
 }
 
-C_torch_arctan <- function(self) {
-    .Call(`_Rtorch_C_torch_arctan`, self)
+C_torch_adaptive_max_pool1d <- function(self, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_adaptive_max_pool1d`, self, output_size_sexp)
 }
 
-C_torch_atleast_1d <- function(self) {
-    .Call(`_Rtorch_C_torch_atleast_1d`, self)
+C_torch_add_ <- function(self, other, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_add_`, self, other, alpha_sexp)
 }
 
-C_torch_atleast_2d <- function(self) {
-    .Call(`_Rtorch_C_torch_atleast_2d`, self)
+C_torch_addmv <- function(self, mat, vec, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addmv`, self, mat, vec, beta_sexp, alpha_sexp)
 }
 
-C_torch_atleast_3d <- function(self) {
-    .Call(`_Rtorch_C_torch_atleast_3d`, self)
+C_torch_addmv_ <- function(self, mat, vec, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addmv_`, self, mat, vec, beta_sexp, alpha_sexp)
 }
 
-C_torch_bitwise_not <- function(self) {
-    .Call(`_Rtorch_C_torch_bitwise_not`, self)
+C_torch_addr <- function(self, vec1, vec2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addr`, self, vec1, vec2, beta_sexp, alpha_sexp)
 }
 
-C_torch_copysign <- function(self, other) {
-    .Call(`_Rtorch_C_torch_copysign`, self, other)
+C_torch_addr_ <- function(self, vec1, vec2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addr_`, self, vec1, vec2, beta_sexp, alpha_sexp)
 }
 
-C_torch_logical_xor <- function(self, other) {
-    .Call(`_Rtorch_C_torch_logical_xor`, self, other)
+C_torch_affine_grid_generator <- function(theta, size_sexp, align_corners) {
+    .Call(`_Rtorch_C_torch_affine_grid_generator`, theta, size_sexp, align_corners)
 }
 
-C_torch_logical_and <- function(self, other) {
-    .Call(`_Rtorch_C_torch_logical_and`, self, other)
+C_torch_acosh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_acosh_`, self)
 }
 
-C_torch_logical_or <- function(self, other) {
-    .Call(`_Rtorch_C_torch_logical_or`, self, other)
+C_torch_arccosh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_arccosh_`, self)
 }
 
-C_torch_clamp_max <- function(self, other) {
-    .Call(`_Rtorch_C_torch_clamp_max`, self, other)
+C_torch_asinh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_asinh_`, self)
 }
 
-C_torch_clamp_min <- function(self, other) {
-    .Call(`_Rtorch_C_torch_clamp_min`, self, other)
+C_torch_arcsinh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_arcsinh_`, self)
 }
 
-C_torch_cosh <- function(self) {
-    .Call(`_Rtorch_C_torch_cosh`, self)
+C_torch_atanh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_atanh_`, self)
 }
 
-C_torch_corrcoef <- function(self) {
-    .Call(`_Rtorch_C_torch_corrcoef`, self)
+C_torch_arctanh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_arctanh_`, self)
 }
 
-C_torch_diag_embed <- function(self, offset, dim1, dim2) {
-    .Call(`_Rtorch_C_torch_diag_embed`, self, offset, dim1, dim2)
+C_torch_as_strided <- function(self, size_sexp, stride_sexp, storage_offset) {
+    .Call(`_Rtorch_C_torch_as_strided`, self, size_sexp, stride_sexp, storage_offset)
 }
 
-C_torch_diagflat <- function(self, offset) {
-    .Call(`_Rtorch_C_torch_diagflat`, self, offset)
+C_torch_as_strided_ <- function(self, size_sexp, stride_sexp, storage_offset) {
+    .Call(`_Rtorch_C_torch_as_strided_`, self, size_sexp, stride_sexp, storage_offset)
 }
 
-C_torch_diagonal <- function(self, offset, dim1, dim2) {
-    .Call(`_Rtorch_C_torch_diagonal`, self, offset, dim1, dim2)
+C_torch_asin_ <- function(self) {
+    .Call(`_Rtorch_C_torch_asin_`, self)
 }
 
-C_torch_linalg_diagonal <- function(self, offset, dim1, dim2) {
-    .Call(`_Rtorch_C_torch_linalg_diagonal`, self, offset, dim1, dim2)
+C_torch_arcsin_ <- function(self) {
+    .Call(`_Rtorch_C_torch_arcsin_`, self)
 }
 
-C_torch_divide <- function(self, other) {
-    .Call(`_Rtorch_C_torch_divide`, self, other)
+C_torch_atan_ <- function(self) {
+    .Call(`_Rtorch_C_torch_atan_`, self)
 }
 
-C_torch_true_divide <- function(self, other) {
-    .Call(`_Rtorch_C_torch_true_divide`, self, other)
+C_torch_arctan_ <- function(self) {
+    .Call(`_Rtorch_C_torch_arctan_`, self)
 }
 
-C_torch_dot <- function(self, tensor) {
-    .Call(`_Rtorch_C_torch_dot`, self, tensor)
+C_torch_baddbmm <- function(self, batch1, batch2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_baddbmm`, self, batch1, batch2, beta_sexp, alpha_sexp)
 }
 
-C_torch_vdot <- function(self, other) {
-    .Call(`_Rtorch_C_torch_vdot`, self, other)
+C_torch_baddbmm_ <- function(self, batch1, batch2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_baddbmm_`, self, batch1, batch2, beta_sexp, alpha_sexp)
 }
 
-C_torch_erf <- function(self) {
-    .Call(`_Rtorch_C_torch_erf`, self)
+C_torch_bartlett_window <- function(window_length, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_bartlett_window`, window_length, dtype_sexp, device_sexp)
 }
 
-C_torch_erfc <- function(self) {
-    .Call(`_Rtorch_C_torch_erfc`, self)
+C_torch_bilinear <- function(input1, input2, weight, bias) {
+    .Call(`_Rtorch_C_torch_bilinear`, input1, input2, weight, bias)
 }
 
-C_torch_exp2 <- function(self) {
-    .Call(`_Rtorch_C_torch_exp2`, self)
+C_torch_binary_cross_entropy <- function(self, target, weight, reduction) {
+    .Call(`_Rtorch_C_torch_binary_cross_entropy`, self, target, weight, reduction)
 }
 
-C_torch_expm1 <- function(self) {
-    .Call(`_Rtorch_C_torch_expm1`, self)
+C_torch_binary_cross_entropy_with_logits <- function(self, target, weight, pos_weight, reduction) {
+    .Call(`_Rtorch_C_torch_binary_cross_entropy_with_logits`, self, target, weight, pos_weight, reduction)
 }
 
-C_torch_fill <- function(self, other) {
-    .Call(`_Rtorch_C_torch_fill`, self, other)
+C_torch_bincount <- function(self, weights, minlength) {
+    .Call(`_Rtorch_C_torch_bincount`, self, weights, minlength)
 }
 
-C_torch_frac <- function(self) {
-    .Call(`_Rtorch_C_torch_frac`, self)
+C_torch_bitwise_not_ <- function(self) {
+    .Call(`_Rtorch_C_torch_bitwise_not_`, self)
 }
 
-C_torch_gcd <- function(self, other) {
-    .Call(`_Rtorch_C_torch_gcd`, self, other)
+C_torch_copysign_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_copysign_`, self, other)
 }
 
-C_torch_lcm <- function(self, other) {
-    .Call(`_Rtorch_C_torch_lcm`, self, other)
+C_torch_logical_not_ <- function(self) {
+    .Call(`_Rtorch_C_torch_logical_not_`, self)
 }
 
-C_torch_isnan <- function(self) {
-    .Call(`_Rtorch_C_torch_isnan`, self)
+C_torch_logical_xor_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_logical_xor_`, self, other)
 }
 
-C_torch_isreal <- function(self) {
-    .Call(`_Rtorch_C_torch_isreal`, self)
+C_torch_logical_and_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_logical_and_`, self, other)
 }
 
-C_torch_kron <- function(self, other) {
-    .Call(`_Rtorch_C_torch_kron`, self, other)
+C_torch_logical_or_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_logical_or_`, self, other)
 }
 
-C_torch_log1p <- function(self) {
-    .Call(`_Rtorch_C_torch_log1p`, self)
+C_torch_blackman_window <- function(window_length, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_blackman_window`, window_length, dtype_sexp, device_sexp)
 }
 
-C_torch_logaddexp <- function(self, other) {
-    .Call(`_Rtorch_C_torch_logaddexp`, self, other)
+C_torch_broadcast_to <- function(self, size_sexp) {
+    .Call(`_Rtorch_C_torch_broadcast_to`, self, size_sexp)
 }
 
-C_torch_logaddexp2 <- function(self, other) {
-    .Call(`_Rtorch_C_torch_logaddexp2`, self, other)
+C_torch_concat <- function(tensors_sexp, dim) {
+    .Call(`_Rtorch_C_torch_concat`, tensors_sexp, dim)
 }
 
-C_torch_xlogy <- function(self, other) {
-    .Call(`_Rtorch_C_torch_xlogy`, self, other)
+C_torch_concatenate <- function(tensors_sexp, dim) {
+    .Call(`_Rtorch_C_torch_concatenate`, tensors_sexp, dim)
 }
 
-C_torch_logcumsumexp <- function(self, dim) {
-    .Call(`_Rtorch_C_torch_logcumsumexp`, self, dim)
+C_torch_block_diag <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_block_diag`, tensors_sexp)
 }
 
-C_torch_matrix_power <- function(self, n) {
-    .Call(`_Rtorch_C_torch_matrix_power`, self, n)
+C_torch_ceil_ <- function(self) {
+    .Call(`_Rtorch_C_torch_ceil_`, self)
 }
 
-C_torch_matrix_exp <- function(self) {
-    .Call(`_Rtorch_C_torch_matrix_exp`, self)
+C_torch_chain_matmul <- function(matrices_sexp) {
+    .Call(`_Rtorch_C_torch_chain_matmul`, matrices_sexp)
 }
 
-C_torch_median <- function(self) {
-    .Call(`_Rtorch_C_torch_median`, self)
+C_torch_clamp_ <- function(self, min, max) {
+    .Call(`_Rtorch_C_torch_clamp_`, self, min, max)
 }
 
-C_torch_nanmedian <- function(self) {
-    .Call(`_Rtorch_C_torch_nanmedian`, self)
+C_torch_clamp_max_ <- function(self, max_sexp) {
+    .Call(`_Rtorch_C_torch_clamp_max_`, self, max_sexp)
 }
 
-C_torch_multiply <- function(self, other) {
-    .Call(`_Rtorch_C_torch_multiply`, self, other)
+C_torch_clamp_min_ <- function(self, min_sexp) {
+    .Call(`_Rtorch_C_torch_clamp_min_`, self, min_sexp)
 }
 
-C_torch_mv <- function(self, vec) {
-    .Call(`_Rtorch_C_torch_mv`, self, vec)
+C_torch_clip <- function(self, min, max) {
+    .Call(`_Rtorch_C_torch_clip`, self, min, max)
 }
 
-C_torch_mvlgamma <- function(self, p) {
-    .Call(`_Rtorch_C_torch_mvlgamma`, self, p)
+C_torch_clip_ <- function(self, min, max) {
+    .Call(`_Rtorch_C_torch_clip_`, self, min, max)
 }
 
-C_torch_pdist <- function(self, p) {
-    .Call(`_Rtorch_C_torch_pdist`, self, p)
+C_torch_constant_pad_nd <- function(self, pad_sexp, value_sexp) {
+    .Call(`_Rtorch_C_torch_constant_pad_nd`, self, pad_sexp, value_sexp)
 }
 
-C_torch_movedim <- function(self, source, destination) {
-    .Call(`_Rtorch_C_torch_movedim`, self, source, destination)
+C_torch_convolution <- function(input, weight, bias, stride_sexp, padding_sexp, dilation_sexp, transposed, output_padding_sexp, groups) {
+    .Call(`_Rtorch_C_torch_convolution`, input, weight, bias, stride_sexp, padding_sexp, dilation_sexp, transposed, output_padding_sexp, groups)
 }
 
-C_torch_moveaxis <- function(self, source, destination) {
-    .Call(`_Rtorch_C_torch_moveaxis`, self, source, destination)
+C_torch_convolution_overrideable <- function(input, weight, bias, stride_sexp, padding_sexp, dilation_sexp, transposed, output_padding_sexp, groups) {
+    .Call(`_Rtorch_C_torch_convolution_overrideable`, input, weight, bias, stride_sexp, padding_sexp, dilation_sexp, transposed, output_padding_sexp, groups)
 }
 
-C_torch_adjoint <- function(self) {
-    .Call(`_Rtorch_C_torch_adjoint`, self)
+C_torch_conv3d <- function(input, weight, bias, stride_sexp, padding_sexp, dilation_sexp, groups) {
+    .Call(`_Rtorch_C_torch_conv3d`, input, weight, bias, stride_sexp, padding_sexp, dilation_sexp, groups)
 }
 
-C_torch_pixel_shuffle <- function(self, upscale_factor) {
-    .Call(`_Rtorch_C_torch_pixel_shuffle`, self, upscale_factor)
+C_torch_conv_tbc <- function(self, weight, bias, pad) {
+    .Call(`_Rtorch_C_torch_conv_tbc`, self, weight, bias, pad)
 }
 
-C_torch_pixel_unshuffle <- function(self, downscale_factor) {
-    .Call(`_Rtorch_C_torch_pixel_unshuffle`, self, downscale_factor)
+C_torch_conv_transpose2d <- function(input, weight, bias, stride_sexp, padding_sexp, output_padding_sexp, groups, dilation_sexp) {
+    .Call(`_Rtorch_C_torch_conv_transpose2d`, input, weight, bias, stride_sexp, padding_sexp, output_padding_sexp, groups, dilation_sexp)
 }
 
-C_torch_pinverse <- function(self, rcond) {
-    .Call(`_Rtorch_C_torch_pinverse`, self, rcond)
+C_torch_conv_transpose3d <- function(input, weight, bias, stride_sexp, padding_sexp, output_padding_sexp, groups, dilation_sexp) {
+    .Call(`_Rtorch_C_torch_conv_transpose3d`, input, weight, bias, stride_sexp, padding_sexp, output_padding_sexp, groups, dilation_sexp)
 }
 
-C_torch_rad2deg <- function(self) {
-    .Call(`_Rtorch_C_torch_rad2deg`, self)
+C_torch_copy <- function(self, src, non_blocking) {
+    .Call(`_Rtorch_C_torch_copy`, self, src, non_blocking)
 }
 
-C_torch_deg2rad <- function(self) {
-    .Call(`_Rtorch_C_torch_deg2rad`, self)
+C_torch_cos_ <- function(self) {
+    .Call(`_Rtorch_C_torch_cos_`, self)
 }
 
-C_torch_ravel <- function(self) {
-    .Call(`_Rtorch_C_torch_ravel`, self)
+C_torch_cosh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_cosh_`, self)
 }
 
-C_torch_reciprocal <- function(self) {
-    .Call(`_Rtorch_C_torch_reciprocal`, self)
+C_torch_cosine_embedding_loss <- function(input1, input2, target, margin, reduction) {
+    .Call(`_Rtorch_C_torch_cosine_embedding_loss`, input1, input2, target, margin, reduction)
 }
 
-C_torch_negative <- function(self) {
-    .Call(`_Rtorch_C_torch_negative`, self)
+C_torch_count_nonzero <- function(self, dim_sexp) {
+    .Call(`_Rtorch_C_torch_count_nonzero`, self, dim_sexp)
 }
 
-C_torch_relu6 <- function(self) {
-    .Call(`_Rtorch_C_torch_relu6`, self)
+C_torch_cov <- function(self, correction, fweights, aweights) {
+    .Call(`_Rtorch_C_torch_cov`, self, correction, fweights, aweights)
 }
 
-C_torch_prelu <- function(self, weight) {
-    .Call(`_Rtorch_C_torch_prelu`, self, weight)
+C_torch_cummax <- function(self, dim) {
+    .Call(`_Rtorch_C_torch_cummax`, self, dim)
 }
 
-C_torch_hardshrink <- function(self, other) {
-    .Call(`_Rtorch_C_torch_hardshrink`, self, other)
+C_torch_cummin <- function(self, dim) {
+    .Call(`_Rtorch_C_torch_cummin`, self, dim)
 }
 
-C_torch_selu <- function(self) {
-    .Call(`_Rtorch_C_torch_selu`, self)
+C_torch_cumprod <- function(self, dim, dtype) {
+    .Call(`_Rtorch_C_torch_cumprod`, self, dim, dtype)
 }
 
-C_torch_celu <- function(self, other) {
-    .Call(`_Rtorch_C_torch_celu`, self, other)
+C_torch_cumprod_ <- function(self, dim, dtype) {
+    .Call(`_Rtorch_C_torch_cumprod_`, self, dim, dtype)
 }
 
-C_torch_silu <- function(self) {
-    .Call(`_Rtorch_C_torch_silu`, self)
+C_torch_cumsum_ <- function(self, dim, dtype) {
+    .Call(`_Rtorch_C_torch_cumsum_`, self, dim, dtype)
 }
 
-C_torch_mish <- function(self) {
-    .Call(`_Rtorch_C_torch_mish`, self)
+C_torch_cumulative_trapezoid <- function(y, x, dim) {
+    .Call(`_Rtorch_C_torch_cumulative_trapezoid`, y, x, dim)
 }
 
-C_torch_sinc <- function(self) {
-    .Call(`_Rtorch_C_torch_sinc`, self)
+C_torch_ctc_loss <- function(log_probs, targets, input_lengths_sexp, target_lengths_sexp, blank, reduction, zero_infinity) {
+    .Call(`_Rtorch_C_torch_ctc_loss`, log_probs, targets, input_lengths_sexp, target_lengths_sexp, blank, reduction, zero_infinity)
 }
 
-C_torch_sinh <- function(self) {
-    .Call(`_Rtorch_C_torch_sinh`, self)
+C_torch_fill_diagonal_ <- function(self, fill_value_sexp, wrap) {
+    .Call(`_Rtorch_C_torch_fill_diagonal_`, self, fill_value_sexp, wrap)
 }
 
-C_torch_square <- function(self) {
-    .Call(`_Rtorch_C_torch_square`, self)
+C_torch_diff <- function(self, n, dim, prepend, append) {
+    .Call(`_Rtorch_C_torch_diff`, self, n, dim, prepend, append)
 }
 
-C_torch_tan <- function(self) {
-    .Call(`_Rtorch_C_torch_tan`, self)
+C_torch_div_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_div_`, self, other)
 }
 
-C_torch_fliplr <- function(self) {
-    .Call(`_Rtorch_C_torch_fliplr`, self)
+C_torch_divide_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_divide_`, self, other)
 }
 
-C_torch_flipud <- function(self) {
-    .Call(`_Rtorch_C_torch_flipud`, self)
+C_torch_true_divide_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_true_divide_`, self, other)
 }
 
-C_torch_fix <- function(self) {
-    .Call(`_Rtorch_C_torch_fix`, self)
+C_torch_einsum <- function(equation, tensors_sexp, path_sexp) {
+    .Call(`_Rtorch_C_torch_einsum`, equation, tensors_sexp, path_sexp)
 }
 
-C_torch_var <- function(self, unbiased) {
-    .Call(`_Rtorch_C_torch_var`, self, unbiased)
+C_torch_embedding_renorm_ <- function(self, indices, max_norm, norm_type) {
+    .Call(`_Rtorch_C_torch_embedding_renorm_`, self, indices, max_norm, norm_type)
 }
 
-C_torch_positive <- function(self) {
-    .Call(`_Rtorch_C_torch_positive`, self)
+C_torch_row_stack <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_row_stack`, tensors_sexp)
 }
 
-C_torch_subtract <- function(self, other, alpha_sexp) {
-    .Call(`_Rtorch_C_torch_subtract`, self, other, alpha_sexp)
+C_torch_embedding_bag <- function(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset) {
+    .Call(`_Rtorch_C_torch_embedding_bag`, weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset)
 }
 
-C_torch_rsub <- function(self, other, alpha_sexp) {
-    .Call(`_Rtorch_C_torch_rsub`, self, other, alpha_sexp)
+C_torch_empty_permuted <- function(size_sexp, physical_layout_sexp, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_empty_permuted`, size_sexp, physical_layout_sexp, dtype_sexp, device_sexp)
 }
 
-C_torch_bitwise_and <- function(self, other) {
-    .Call(`_Rtorch_C_torch_bitwise_and`, self, other)
+C_torch_empty_strided <- function(size_sexp, stride_sexp, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_empty_strided`, size_sexp, stride_sexp, dtype_sexp, device_sexp)
 }
 
-C_torch_bitwise_or <- function(self, other) {
-    .Call(`_Rtorch_C_torch_bitwise_or`, self, other)
+C_torch_erf_ <- function(self) {
+    .Call(`_Rtorch_C_torch_erf_`, self)
 }
 
-C_torch_bitwise_xor <- function(self, other) {
-    .Call(`_Rtorch_C_torch_bitwise_xor`, self, other)
+C_torch_erfc_ <- function(self) {
+    .Call(`_Rtorch_C_torch_erfc_`, self)
 }
 
-C_torch_bitwise_left_shift <- function(self, other) {
-    .Call(`_Rtorch_C_torch_bitwise_left_shift`, self, other)
+C_torch_exp_ <- function(self) {
+    .Call(`_Rtorch_C_torch_exp_`, self)
 }
 
-C_torch_bitwise_right_shift <- function(self, other) {
-    .Call(`_Rtorch_C_torch_bitwise_right_shift`, self, other)
+C_torch_exp2_ <- function(self) {
+    .Call(`_Rtorch_C_torch_exp2_`, self)
 }
 
-C_torch_diag <- function(self, diagonal) {
-    .Call(`_Rtorch_C_torch_diag`, self, diagonal)
+C_torch_expm1_ <- function(self) {
+    .Call(`_Rtorch_C_torch_expm1_`, self)
 }
 
-C_torch_tril <- function(self, diagonal) {
-    .Call(`_Rtorch_C_torch_tril`, self, diagonal)
+C_torch_eye <- function(n, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_eye`, n, dtype_sexp, device_sexp)
 }
 
-C_torch_trace <- function(self) {
-    .Call(`_Rtorch_C_torch_trace`, self)
+C_torch_unflatten <- function(self, dim, sizes_sexp) {
+    .Call(`_Rtorch_C_torch_unflatten`, self, dim, sizes_sexp)
 }
 
-C_torch_not_equal <- function(self, other) {
-    .Call(`_Rtorch_C_torch_not_equal`, self, other)
+C_torch_floor_ <- function(self) {
+    .Call(`_Rtorch_C_torch_floor_`, self)
 }
 
-C_torch_greater_equal <- function(self, other) {
-    .Call(`_Rtorch_C_torch_greater_equal`, self, other)
+C_torch_floor_divide_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_floor_divide_`, self, other)
 }
 
-C_torch_less_equal <- function(self, other) {
-    .Call(`_Rtorch_C_torch_less_equal`, self, other)
+C_torch_frac_ <- function(self) {
+    .Call(`_Rtorch_C_torch_frac_`, self)
 }
 
-C_torch_greater <- function(self, other) {
-    .Call(`_Rtorch_C_torch_greater`, self, other)
+C_torch_from_file <- function(filename, shared, size, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_from_file`, filename, shared, size, dtype_sexp, device_sexp)
 }
 
-C_torch_less <- function(self, other) {
-    .Call(`_Rtorch_C_torch_less`, self, other)
+C_torch_gcd_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_gcd_`, self, other)
 }
 
-C_torch_take <- function(self, index) {
-    .Call(`_Rtorch_C_torch_take`, self, index)
+C_torch_lcm_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_lcm_`, self, other)
 }
 
-C_torch_masked_select <- function(self, mask) {
-    .Call(`_Rtorch_C_torch_masked_select`, self, mask)
+C_torch_grid_sampler <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
+    .Call(`_Rtorch_C_torch_grid_sampler`, input, grid, interpolation_mode, padding_mode, align_corners)
 }
 
-C_torch_nonzero <- function(self) {
-    .Call(`_Rtorch_C_torch_nonzero`, self)
+C_torch_grid_sampler_2d <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
+    .Call(`_Rtorch_C_torch_grid_sampler_2d`, input, grid, interpolation_mode, padding_mode, align_corners)
 }
 
-C_torch_argwhere <- function(self) {
-    .Call(`_Rtorch_C_torch_argwhere`, self)
+C_torch_grid_sampler_3d <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
+    .Call(`_Rtorch_C_torch_grid_sampler_3d`, input, grid, interpolation_mode, padding_mode, align_corners)
 }
 
-C_torch_swapaxes <- function(self, axis0, axis1) {
-    .Call(`_Rtorch_C_torch_swapaxes`, self, axis0, axis1)
+C_torch_hamming_window <- function(window_length, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_hamming_window`, window_length, dtype_sexp, device_sexp)
 }
 
-C_torch_swapdims <- function(self, dim0, dim1) {
-    .Call(`_Rtorch_C_torch_swapdims`, self, dim0, dim1)
+C_torch_kaiser_window <- function(window_length, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_kaiser_window`, window_length, dtype_sexp, device_sexp)
 }
 
-C_torch_cholesky <- function(self, upper) {
-    .Call(`_Rtorch_C_torch_cholesky`, self, upper)
+C_torch_hinge_embedding_loss <- function(self, target, margin, reduction) {
+    .Call(`_Rtorch_C_torch_hinge_embedding_loss`, self, target, margin, reduction)
 }
 
-C_torch_cholesky_inverse <- function(self, upper) {
-    .Call(`_Rtorch_C_torch_cholesky_inverse`, self, upper)
+C_torch_group_norm <- function(input, num_groups, weight, bias, eps, cudnn_enabled) {
+    .Call(`_Rtorch_C_torch_group_norm`, input, num_groups, weight, bias, eps, cudnn_enabled)
 }
 
-C_torch_orgqr <- function(self, input2) {
-    .Call(`_Rtorch_C_torch_orgqr`, self, input2)
+C_torch_native_group_norm <- function(input, weight, bias, N, C, HxW, group, eps) {
+    .Call(`_Rtorch_C_torch_native_group_norm`, input, weight, bias, N, C, HxW, group, eps)
 }
 
-C_torch_lgamma <- function(self) {
-    .Call(`_Rtorch_C_torch_lgamma`, self)
+C_torch_index_copy_ <- function(self, dim, index, source) {
+    .Call(`_Rtorch_C_torch_index_copy_`, self, dim, index, source)
 }
 
-C_torch_digamma <- function(self) {
-    .Call(`_Rtorch_C_torch_digamma`, self)
+C_torch_instance_norm <- function(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled) {
+    .Call(`_Rtorch_C_torch_instance_norm`, input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled)
 }
 
-C_torch_erfinv <- function(self) {
-    .Call(`_Rtorch_C_torch_erfinv`, self)
+C_torch_isclose <- function(self, other, rtol, atol, equal_nan) {
+    .Call(`_Rtorch_C_torch_isclose`, self, other, rtol, atol, equal_nan)
 }
 
-C_torch_i0 <- function(self) {
-    .Call(`_Rtorch_C_torch_i0`, self)
+C_torch_isin <- function(elements, test_elements, assume_unique, invert) {
+    .Call(`_Rtorch_C_torch_isin`, elements, test_elements, assume_unique, invert)
 }
 
-C_torch_signbit <- function(self) {
-    .Call(`_Rtorch_C_torch_signbit`, self)
+C_torch_kl_div <- function(self, target, reduction, log_target) {
+    .Call(`_Rtorch_C_torch_kl_div`, self, target, reduction, log_target)
 }
 
-C_torch_dist <- function(self, other, p_sexp) {
-    .Call(`_Rtorch_C_torch_dist`, self, other, p_sexp)
+C_torch_kthvalue <- function(self, k, dim, keepdim) {
+    .Call(`_Rtorch_C_torch_kthvalue`, self, k, dim, keepdim)
 }
 
-C_torch_atan2 <- function(self, other) {
-    .Call(`_Rtorch_C_torch_atan2`, self, other)
+C_torch_native_layer_norm <- function(input, normalized_shape_sexp, weight, bias, eps) {
+    .Call(`_Rtorch_C_torch_native_layer_norm`, input, normalized_shape_sexp, weight, bias, eps)
 }
 
-C_torch_arctan2 <- function(self, other) {
-    .Call(`_Rtorch_C_torch_arctan2`, self, other)
+C_torch_rms_norm <- function(input, normalized_shape_sexp, weight, eps) {
+    .Call(`_Rtorch_C_torch_rms_norm`, input, normalized_shape_sexp, weight, eps)
 }
 
-C_torch_lerp <- function(self, end, weight_sexp) {
-    .Call(`_Rtorch_C_torch_lerp`, self, end, weight_sexp)
+C_torch_nan_to_num <- function(self, nan, posinf, neginf) {
+    .Call(`_Rtorch_C_torch_nan_to_num`, self, nan, posinf, neginf)
 }
 
-C_torch_fmod <- function(self, other) {
-    .Call(`_Rtorch_C_torch_fmod`, self, other)
+C_torch_nan_to_num_ <- function(self, nan, posinf, neginf) {
+    .Call(`_Rtorch_C_torch_nan_to_num_`, self, nan, posinf, neginf)
 }
 
-C_torch_hypot <- function(self, other) {
-    .Call(`_Rtorch_C_torch_hypot`, self, other)
+C_torch_ldexp_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_ldexp_`, self, other)
 }
 
-C_torch_igamma <- function(self, other) {
-    .Call(`_Rtorch_C_torch_igamma`, self, other)
+C_torch_log_ <- function(self) {
+    .Call(`_Rtorch_C_torch_log_`, self)
 }
 
-C_torch_igammac <- function(self, other) {
-    .Call(`_Rtorch_C_torch_igammac`, self, other)
+C_torch_log10_ <- function(self) {
+    .Call(`_Rtorch_C_torch_log10_`, self)
 }
 
-C_torch_nextafter <- function(self, other) {
-    .Call(`_Rtorch_C_torch_nextafter`, self, other)
+C_torch_log1p_ <- function(self) {
+    .Call(`_Rtorch_C_torch_log1p_`, self)
 }
 
-C_torch_fmin <- function(self, other) {
-    .Call(`_Rtorch_C_torch_fmin`, self, other)
+C_torch_log2_ <- function(self) {
+    .Call(`_Rtorch_C_torch_log2_`, self)
 }
 
-C_torch_fmax <- function(self, other) {
-    .Call(`_Rtorch_C_torch_fmax`, self, other)
+C_torch_xlogy_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_xlogy_`, self, other)
 }
 
-C_torch_minimum <- function(self, other) {
-    .Call(`_Rtorch_C_torch_minimum`, self, other)
+C_torch_logspace <- function(start_sexp, end_sexp, steps, base, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_logspace`, start_sexp, end_sexp, steps, base, dtype_sexp, device_sexp)
 }
 
-C_torch_msort <- function(self) {
-    .Call(`_Rtorch_C_torch_msort`, self)
+C_torch_logsumexp <- function(self, dim_sexp, keepdim) {
+    .Call(`_Rtorch_C_torch_logsumexp`, self, dim_sexp, keepdim)
 }
 
-C_torch_argsort <- function(self, dim, descending) {
-    .Call(`_Rtorch_C_torch_argsort`, self, dim, descending)
+C_torch_margin_ranking_loss <- function(input1, input2, target, margin, reduction) {
+    .Call(`_Rtorch_C_torch_margin_ranking_loss`, input1, input2, target, margin, reduction)
 }
 
-C_torch_float_power <- function(self, exponent) {
-    .Call(`_Rtorch_C_torch_float_power`, self, exponent)
+C_torch_aminmax <- function(self, dim, keepdim) {
+    .Call(`_Rtorch_C_torch_aminmax`, self, dim, keepdim)
 }
 
-C_torch_alias <- function(self) {
-    .Call(`_Rtorch_C_torch_alias`, self)
+C_torch_amax <- function(self, dim_sexp, keepdim) {
+    .Call(`_Rtorch_C_torch_amax`, self, dim_sexp, keepdim)
 }
 
-C_torch_glu <- function(self, dim) {
-    .Call(`_Rtorch_C_torch_glu`, self, dim)
+C_torch_max_pool1d_with_indices <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode) {
+    .Call(`_Rtorch_C_torch_max_pool1d_with_indices`, self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode)
 }
 
-C_torch_hardsigmoid <- function(self) {
-    .Call(`_Rtorch_C_torch_hardsigmoid`, self)
+C_torch_max_pool1d <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode) {
+    .Call(`_Rtorch_C_torch_max_pool1d`, self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode)
 }
 
-C_torch_hardswish <- function(self) {
-    .Call(`_Rtorch_C_torch_hardswish`, self)
+C_torch_max_pool2d <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode) {
+    .Call(`_Rtorch_C_torch_max_pool2d`, self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode)
 }
 
-C_torch_leaky_relu <- function(self, other) {
-    .Call(`_Rtorch_C_torch_leaky_relu`, self, other)
+C_torch_max_pool3d <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode) {
+    .Call(`_Rtorch_C_torch_max_pool3d`, self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode)
 }
 
-C_torch_log_sigmoid <- function(self) {
-    .Call(`_Rtorch_C_torch_log_sigmoid`, self)
+C_torch_nanmean <- function(self, dim_sexp, keepdim, dtype) {
+    .Call(`_Rtorch_C_torch_nanmean`, self, dim_sexp, keepdim, dtype)
 }
 
-C_torch_softshrink <- function(self, other) {
-    .Call(`_Rtorch_C_torch_softshrink`, self, other)
+C_torch_amin <- function(self, dim_sexp, keepdim) {
+    .Call(`_Rtorch_C_torch_amin`, self, dim_sexp, keepdim)
 }
 
-C_torch_isfinite <- function(self) {
-    .Call(`_Rtorch_C_torch_isfinite`, self)
+C_torch_mode <- function(self, dim, keepdim) {
+    .Call(`_Rtorch_C_torch_mode`, self, dim, keepdim)
 }
 
-C_torch_isinf <- function(self) {
-    .Call(`_Rtorch_C_torch_isinf`, self)
+C_torch_mul_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_mul_`, self, other)
 }
 
-C_torch_isposinf <- function(self) {
-    .Call(`_Rtorch_C_torch_isposinf`, self)
+C_torch_multiply_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_multiply_`, self, other)
 }
 
-C_torch_isneginf <- function(self) {
-    .Call(`_Rtorch_C_torch_isneginf`, self)
+C_torch_mvlgamma_ <- function(self, p) {
+    .Call(`_Rtorch_C_torch_mvlgamma_`, self, p)
 }
 
-C_torch_special_entr <- function(self) {
-    .Call(`_Rtorch_C_torch_special_entr`, self)
+C_torch_native_batch_norm <- function(input, weight, bias, running_mean, running_var, training, momentum, eps) {
+    .Call(`_Rtorch_C_torch_native_batch_norm`, input, weight, bias, running_mean, running_var, training, momentum, eps)
 }
 
-C_torch_special_ndtri <- function(self) {
-    .Call(`_Rtorch_C_torch_special_ndtri`, self)
+C_torch_batch_norm_stats <- function(input, eps) {
+    .Call(`_Rtorch_C_torch_batch_norm_stats`, input, eps)
 }
 
-C_torch_special_log_ndtr <- function(self) {
-    .Call(`_Rtorch_C_torch_special_log_ndtr`, self)
+C_torch_batch_norm_elemt <- function(input, weight, bias, mean, invstd, eps) {
+    .Call(`_Rtorch_C_torch_batch_norm_elemt`, input, weight, bias, mean, invstd, eps)
 }
 
-C_torch_special_expm1 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_expm1`, self)
+C_torch_batch_norm_gather_stats <- function(input, mean, invstd, running_mean, running_var, momentum, eps, count) {
+    .Call(`_Rtorch_C_torch_batch_norm_gather_stats`, input, mean, invstd, running_mean, running_var, momentum, eps, count)
 }
 
-C_torch_special_exp2 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_exp2`, self)
+C_torch_batch_norm_gather_stats_with_counts <- function(input, mean, invstd, running_mean, running_var, momentum, eps, counts) {
+    .Call(`_Rtorch_C_torch_batch_norm_gather_stats_with_counts`, input, mean, invstd, running_mean, running_var, momentum, eps, counts)
 }
 
-C_torch_special_psi <- function(self) {
-    .Call(`_Rtorch_C_torch_special_psi`, self)
+C_torch_batch_norm_update_stats <- function(input, running_mean, running_var, momentum) {
+    .Call(`_Rtorch_C_torch_batch_norm_update_stats`, input, running_mean, running_var, momentum)
 }
 
-C_torch_special_digamma <- function(self) {
-    .Call(`_Rtorch_C_torch_special_digamma`, self)
+C_torch_pairwise_distance <- function(x1, x2, p, eps, keepdim) {
+    .Call(`_Rtorch_C_torch_pairwise_distance`, x1, x2, p, eps, keepdim)
 }
 
-C_torch_special_gammaln <- function(self) {
-    .Call(`_Rtorch_C_torch_special_gammaln`, self)
+C_torch_cdist <- function(x1, x2, p, compute_mode) {
+    .Call(`_Rtorch_C_torch_cdist`, x1, x2, p, compute_mode)
 }
 
-C_torch_special_erf <- function(self) {
-    .Call(`_Rtorch_C_torch_special_erf`, self)
+C_torch_cosine_similarity <- function(x1, x2, dim, eps) {
+    .Call(`_Rtorch_C_torch_cosine_similarity`, x1, x2, dim, eps)
 }
 
-C_torch_special_erfc <- function(self) {
-    .Call(`_Rtorch_C_torch_special_erfc`, self)
+C_torch_channel_shuffle <- function(self, groups) {
+    .Call(`_Rtorch_C_torch_channel_shuffle`, self, groups)
 }
 
-C_torch_special_erfcx <- function(self) {
-    .Call(`_Rtorch_C_torch_special_erfcx`, self)
+C_torch_native_channel_shuffle <- function(self, groups) {
+    .Call(`_Rtorch_C_torch_native_channel_shuffle`, self, groups)
 }
 
-C_torch_special_erfinv <- function(self) {
-    .Call(`_Rtorch_C_torch_special_erfinv`, self)
+C_torch_poisson_nll_loss <- function(input, target, log_input, full, eps, reduction) {
+    .Call(`_Rtorch_C_torch_poisson_nll_loss`, input, target, log_input, full, eps, reduction)
 }
 
-C_torch_special_ndtr <- function(self) {
-    .Call(`_Rtorch_C_torch_special_ndtr`, self)
+C_torch_rad2deg_ <- function(self) {
+    .Call(`_Rtorch_C_torch_rad2deg_`, self)
 }
 
-C_torch_special_xlog1py <- function(self, other) {
-    .Call(`_Rtorch_C_torch_special_xlog1py`, self, other)
+C_torch_deg2rad_ <- function(self) {
+    .Call(`_Rtorch_C_torch_deg2rad_`, self)
 }
 
-C_torch_special_xlogy <- function(self, other) {
-    .Call(`_Rtorch_C_torch_special_xlogy`, self, other)
+C_torch_scalar_tensor <- function(s_sexp, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_scalar_tensor`, s_sexp, dtype_sexp, device_sexp)
 }
 
-C_torch_special_zeta <- function(self, other) {
-    .Call(`_Rtorch_C_torch_special_zeta`, self, other)
+C_torch_rand <- function(size_sexp, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_rand`, size_sexp, dtype_sexp, device_sexp)
 }
 
-C_torch_special_i0 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_i0`, self)
+C_torch_randint <- function(high, size_sexp, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_randint`, high, size_sexp, dtype_sexp, device_sexp)
 }
 
-C_torch_special_i0e <- function(self) {
-    .Call(`_Rtorch_C_torch_special_i0e`, self)
+C_torch_randperm <- function(n, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_randperm`, n, dtype_sexp, device_sexp)
 }
 
-C_torch_special_i1 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_i1`, self)
+C_torch_range <- function(start_sexp, end_sexp, step_sexp, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_range`, start_sexp, end_sexp, step_sexp, dtype_sexp, device_sexp)
 }
 
-C_torch_special_i1e <- function(self) {
-    .Call(`_Rtorch_C_torch_special_i1e`, self)
+C_torch_reciprocal_ <- function(self) {
+    .Call(`_Rtorch_C_torch_reciprocal_`, self)
 }
 
-C_torch_special_expit <- function(self) {
-    .Call(`_Rtorch_C_torch_special_expit`, self)
+C_torch_neg_ <- function(self) {
+    .Call(`_Rtorch_C_torch_neg_`, self)
 }
 
-C_torch_special_sinc <- function(self) {
-    .Call(`_Rtorch_C_torch_special_sinc`, self)
+C_torch_negative_ <- function(self) {
+    .Call(`_Rtorch_C_torch_negative_`, self)
 }
 
-C_torch_special_round <- function(self, decimals) {
-    .Call(`_Rtorch_C_torch_special_round`, self, decimals)
+C_torch_round_ <- function(self) {
+    .Call(`_Rtorch_C_torch_round_`, self)
 }
 
-C_torch_special_log1p <- function(self) {
-    .Call(`_Rtorch_C_torch_special_log1p`, self)
+C_torch_relu_ <- function(self) {
+    .Call(`_Rtorch_C_torch_relu_`, self)
 }
 
-C_torch_special_gammainc <- function(self, other) {
-    .Call(`_Rtorch_C_torch_special_gammainc`, self, other)
+C_torch_relu6_ <- function(self) {
+    .Call(`_Rtorch_C_torch_relu6_`, self)
 }
 
-C_torch_special_gammaincc <- function(self, other) {
-    .Call(`_Rtorch_C_torch_special_gammaincc`, self, other)
+C_torch_gelu_ <- function(self, approximate) {
+    .Call(`_Rtorch_C_torch_gelu_`, self, approximate)
 }
 
-C_torch_special_multigammaln <- function(self, p) {
-    .Call(`_Rtorch_C_torch_special_multigammaln`, self, p)
+C_torch_rsqrt_ <- function(self) {
+    .Call(`_Rtorch_C_torch_rsqrt_`, self)
 }
 
-C_torch_linalg_cholesky <- function(self, upper) {
-    .Call(`_Rtorch_C_torch_linalg_cholesky`, self, upper)
+C_torch_select <- function(self, dim, index) {
+    .Call(`_Rtorch_C_torch_select`, self, dim, index)
 }
 
-C_torch_linalg_det <- function(self) {
-    .Call(`_Rtorch_C_torch_linalg_det`, self)
+C_torch_selu_ <- function(self) {
+    .Call(`_Rtorch_C_torch_selu_`, self)
 }
 
-C_torch_det <- function(self) {
-    .Call(`_Rtorch_C_torch_det`, self)
+C_torch_celu_ <- function(self, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_celu_`, self, alpha_sexp)
 }
 
-C_torch_linalg_matmul <- function(self, other) {
-    .Call(`_Rtorch_C_torch_linalg_matmul`, self, other)
+C_torch_silu_ <- function(self) {
+    .Call(`_Rtorch_C_torch_silu_`, self)
 }
 
-C_torch_linalg_matrix_exp <- function(self) {
-    .Call(`_Rtorch_C_torch_linalg_matrix_exp`, self)
+C_torch_mish_ <- function(self) {
+    .Call(`_Rtorch_C_torch_mish_`, self)
 }
 
-C_torch_logdet <- function(self) {
-    .Call(`_Rtorch_C_torch_logdet`, self)
+C_torch_sigmoid_ <- function(self) {
+    .Call(`_Rtorch_C_torch_sigmoid_`, self)
 }
 
-C_torch_linalg_eigvals <- function(self) {
-    .Call(`_Rtorch_C_torch_linalg_eigvals`, self)
+C_torch_logit <- function(self, eps) {
+    .Call(`_Rtorch_C_torch_logit`, self, eps)
 }
 
-C_torch_linalg_householder_product <- function(self, tau) {
-    .Call(`_Rtorch_C_torch_linalg_householder_product`, self, tau)
+C_torch_logit_ <- function(self, eps) {
+    .Call(`_Rtorch_C_torch_logit_`, self, eps)
 }
 
-C_torch_linalg_inv <- function(self) {
-    .Call(`_Rtorch_C_torch_linalg_inv`, self)
+C_torch_sin_ <- function(self) {
+    .Call(`_Rtorch_C_torch_sin_`, self)
 }
 
-C_torch_inverse <- function(self) {
-    .Call(`_Rtorch_C_torch_inverse`, self)
+C_torch_sinc_ <- function(self) {
+    .Call(`_Rtorch_C_torch_sinc_`, self)
 }
 
-C_torch_inner <- function(self, other) {
-    .Call(`_Rtorch_C_torch_inner`, self, other)
+C_torch_sinh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_sinh_`, self)
 }
 
-C_torch_ger <- function(self, vec2) {
-    .Call(`_Rtorch_C_torch_ger`, self, vec2)
+C_torch_detach_ <- function(self) {
+    .Call(`_Rtorch_C_torch_detach_`, self)
 }
 
-C_torch_linalg_tensorinv <- function(self, ind) {
-    .Call(`_Rtorch_C_torch_linalg_tensorinv`, self, ind)
+C_torch_slice <- function(self, dim, start, end, step) {
+    .Call(`_Rtorch_C_torch_slice`, self, dim, start, end, step)
 }
 
-C_torch_linalg_matrix_power <- function(self, n) {
-    .Call(`_Rtorch_C_torch_linalg_matrix_power`, self, n)
+C_torch_slice_inverse <- function(self, src, dim, start, end, step) {
+    .Call(`_Rtorch_C_torch_slice_inverse`, self, src, dim, start, end, step)
 }
 
-C_torch_special_airy_ai <- function(self) {
-    .Call(`_Rtorch_C_torch_special_airy_ai`, self)
+C_torch_slice_scatter <- function(self, src, dim, start, end, step) {
+    .Call(`_Rtorch_C_torch_slice_scatter`, self, src, dim, start, end, step)
 }
 
-C_torch_special_bessel_j0 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_bessel_j0`, self)
+C_torch_select_scatter <- function(self, src, dim, index) {
+    .Call(`_Rtorch_C_torch_select_scatter`, self, src, dim, index)
 }
 
-C_torch_special_bessel_j1 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_bessel_j1`, self)
+C_torch_diagonal_scatter <- function(self, src, offset, dim1, dim2) {
+    .Call(`_Rtorch_C_torch_diagonal_scatter`, self, src, offset, dim1, dim2)
 }
 
-C_torch_special_bessel_y0 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_bessel_y0`, self)
+C_torch_as_strided_scatter <- function(self, src, size_sexp, stride_sexp, storage_offset) {
+    .Call(`_Rtorch_C_torch_as_strided_scatter`, self, src, size_sexp, stride_sexp, storage_offset)
 }
 
-C_torch_special_bessel_y1 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_bessel_y1`, self)
+C_torch_squeeze_ <- function(self) {
+    .Call(`_Rtorch_C_torch_squeeze_`, self)
 }
 
-C_torch_special_chebyshev_polynomial_t <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_chebyshev_polynomial_t`, self, n)
+C_torch_sspaddmm <- function(self, mat1, mat2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_sspaddmm`, self, mat1, mat2, beta_sexp, alpha_sexp)
 }
 
-C_torch_special_chebyshev_polynomial_u <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_chebyshev_polynomial_u`, self, n)
+C_torch_stack <- function(tensors_sexp, dim) {
+    .Call(`_Rtorch_C_torch_stack`, tensors_sexp, dim)
 }
 
-C_torch_special_chebyshev_polynomial_v <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_chebyshev_polynomial_v`, self, n)
+C_torch_hstack <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_hstack`, tensors_sexp)
 }
 
-C_torch_special_chebyshev_polynomial_w <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_chebyshev_polynomial_w`, self, n)
+C_torch_vstack <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_vstack`, tensors_sexp)
 }
 
-C_torch_special_hermite_polynomial_h <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_hermite_polynomial_h`, self, n)
+C_torch_dstack <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_dstack`, tensors_sexp)
 }
 
-C_torch_special_hermite_polynomial_he <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_hermite_polynomial_he`, self, n)
+C_torch_nansum <- function(self, dim_sexp, keepdim, dtype) {
+    .Call(`_Rtorch_C_torch_nansum`, self, dim_sexp, keepdim, dtype)
 }
 
-C_torch_special_laguerre_polynomial_l <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_laguerre_polynomial_l`, self, n)
+C_torch_sqrt_ <- function(self) {
+    .Call(`_Rtorch_C_torch_sqrt_`, self)
 }
 
-C_torch_special_legendre_polynomial_p <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_legendre_polynomial_p`, self, n)
+C_torch_square_ <- function(self) {
+    .Call(`_Rtorch_C_torch_square_`, self)
 }
 
-C_torch_special_modified_bessel_i0 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_modified_bessel_i0`, self)
+C_torch_std_mean <- function(self, unbiased) {
+    .Call(`_Rtorch_C_torch_std_mean`, self, unbiased)
 }
 
-C_torch_special_modified_bessel_i1 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_modified_bessel_i1`, self)
+C_torch_prod <- function(self, dtype) {
+    .Call(`_Rtorch_C_torch_prod`, self, dtype)
 }
 
-C_torch_special_modified_bessel_k0 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_modified_bessel_k0`, self)
+C_torch_t_ <- function(self) {
+    .Call(`_Rtorch_C_torch_t_`, self)
 }
 
-C_torch_special_modified_bessel_k1 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_modified_bessel_k1`, self)
+C_torch_tan_ <- function(self) {
+    .Call(`_Rtorch_C_torch_tan_`, self)
 }
 
-C_torch_special_scaled_modified_bessel_k0 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_scaled_modified_bessel_k0`, self)
+C_torch_tanh_ <- function(self) {
+    .Call(`_Rtorch_C_torch_tanh_`, self)
 }
 
-C_torch_special_scaled_modified_bessel_k1 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_scaled_modified_bessel_k1`, self)
+C_torch_tensordot <- function(self, other, dims_self_sexp, dims_other_sexp) {
+    .Call(`_Rtorch_C_torch_tensordot`, self, other, dims_self_sexp, dims_other_sexp)
 }
 
-C_torch_special_shifted_chebyshev_polynomial_t <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_shifted_chebyshev_polynomial_t`, self, n)
+C_torch_threshold <- function(self, threshold_sexp, value_sexp) {
+    .Call(`_Rtorch_C_torch_threshold`, self, threshold_sexp, value_sexp)
 }
 
-C_torch_special_shifted_chebyshev_polynomial_u <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_shifted_chebyshev_polynomial_u`, self, n)
+C_torch_threshold_ <- function(self, threshold_sexp, value_sexp) {
+    .Call(`_Rtorch_C_torch_threshold_`, self, threshold_sexp, value_sexp)
 }
 
-C_torch_special_shifted_chebyshev_polynomial_v <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_shifted_chebyshev_polynomial_v`, self, n)
+C_torch_tile <- function(self, dims_sexp) {
+    .Call(`_Rtorch_C_torch_tile`, self, dims_sexp)
 }
 
-C_torch_special_shifted_chebyshev_polynomial_w <- function(self, n) {
-    .Call(`_Rtorch_C_torch_special_shifted_chebyshev_polynomial_w`, self, n)
+C_torch_transpose_ <- function(self, dim0, dim1) {
+    .Call(`_Rtorch_C_torch_transpose_`, self, dim0, dim1)
 }
 
-C_torch_special_spherical_bessel_j0 <- function(self) {
-    .Call(`_Rtorch_C_torch_special_spherical_bessel_j0`, self)
+C_torch_roll <- function(self, shifts_sexp, dims_sexp) {
+    .Call(`_Rtorch_C_torch_roll`, self, shifts_sexp, dims_sexp)
+}
+
+C_torch_rot90 <- function(self, k, dims_sexp) {
+    .Call(`_Rtorch_C_torch_rot90`, self, k, dims_sexp)
+}
+
+C_torch_trapezoid <- function(y, x, dim) {
+    .Call(`_Rtorch_C_torch_trapezoid`, y, x, dim)
+}
+
+C_torch_trapz <- function(y, x, dim) {
+    .Call(`_Rtorch_C_torch_trapz`, y, x, dim)
+}
+
+C_torch_triplet_margin_loss <- function(anchor, positive, negative, margin, p, eps, swap, reduction) {
+    .Call(`_Rtorch_C_torch_triplet_margin_loss`, anchor, positive, negative, margin, p, eps, swap, reduction)
+}
+
+C_torch_trunc_ <- function(self) {
+    .Call(`_Rtorch_C_torch_trunc_`, self)
+}
+
+C_torch_fix_ <- function(self) {
+    .Call(`_Rtorch_C_torch_fix_`, self)
+}
+
+C_torch_unique_dim <- function(self, dim, sorted, return_inverse, return_counts) {
+    .Call(`_Rtorch_C_torch_unique_dim`, self, dim, sorted, return_inverse, return_counts)
+}
+
+C_torch_unique_consecutive <- function(self, return_inverse, return_counts, dim) {
+    .Call(`_Rtorch_C_torch_unique_consecutive`, self, return_inverse, return_counts, dim)
+}
+
+C_torch_unique_dim_consecutive <- function(self, dim, return_inverse, return_counts) {
+    .Call(`_Rtorch_C_torch_unique_dim_consecutive`, self, dim, return_inverse, return_counts)
+}
+
+C_torch_unsqueeze_ <- function(self, dim) {
+    .Call(`_Rtorch_C_torch_unsqueeze_`, self, dim)
+}
+
+C_torch_vander <- function(x, N, increasing) {
+    .Call(`_Rtorch_C_torch_vander`, x, N, increasing)
+}
+
+C_torch_var_mean <- function(self, unbiased) {
+    .Call(`_Rtorch_C_torch_var_mean`, self, unbiased)
+}
+
+C_torch_frexp <- function(self) {
+    .Call(`_Rtorch_C_torch_frexp`, self)
+}
+
+C_torch_frobenius_norm <- function(self, dim_sexp, keepdim) {
+    .Call(`_Rtorch_C_torch_frobenius_norm`, self, dim_sexp, keepdim)
+}
+
+C_torch_sub_ <- function(self, other, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_sub_`, self, other, alpha_sexp)
+}
+
+C_torch_subtract_ <- function(self, other, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_subtract_`, self, other, alpha_sexp)
+}
+
+C_torch_heaviside_ <- function(self, values) {
+    .Call(`_Rtorch_C_torch_heaviside_`, self, values)
+}
+
+C_torch_addmm <- function(self, mat1, mat2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addmm`, self, mat1, mat2, beta_sexp, alpha_sexp)
+}
+
+C_torch_addmm_ <- function(self, mat1, mat2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addmm_`, self, mat1, mat2, beta_sexp, alpha_sexp)
+}
+
+C_torch_fused_moving_avg_obs_fake_quant <- function(self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, averaging_const, quant_min, quant_max, ch_axis, per_row_fake_quant, symmetric_quant) {
+    .Call(`_Rtorch_C_torch_fused_moving_avg_obs_fake_quant`, self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, averaging_const, quant_min, quant_max, ch_axis, per_row_fake_quant, symmetric_quant)
+}
+
+C_torch_choose_qparams_optimized <- function(input, numel, n_bins, ratio, bit_width) {
+    .Call(`_Rtorch_C_torch_choose_qparams_optimized`, input, numel, n_bins, ratio, bit_width)
+}
+
+C_torch_cartesian_prod <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_cartesian_prod`, tensors_sexp)
+}
+
+C_torch_gru <- function(input, hx, params_sexp, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
+    .Call(`_Rtorch_C_torch_gru`, input, hx, params_sexp, has_biases, num_layers, dropout, train, bidirectional, batch_first)
+}
+
+C_torch_rnn_tanh <- function(input, hx, params_sexp, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
+    .Call(`_Rtorch_C_torch_rnn_tanh`, input, hx, params_sexp, has_biases, num_layers, dropout, train, bidirectional, batch_first)
+}
+
+C_torch_rnn_relu <- function(input, hx, params_sexp, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
+    .Call(`_Rtorch_C_torch_rnn_relu`, input, hx, params_sexp, has_biases, num_layers, dropout, train, bidirectional, batch_first)
+}
+
+C_torch_lstm_cell <- function(input, hx_sexp, w_ih, w_hh, b_ih, b_hh) {
+    .Call(`_Rtorch_C_torch_lstm_cell`, input, hx_sexp, w_ih, w_hh, b_ih, b_hh)
+}
+
+C_torch_gru_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh) {
+    .Call(`_Rtorch_C_torch_gru_cell`, input, hx, w_ih, w_hh, b_ih, b_hh)
+}
+
+C_torch_rnn_tanh_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh) {
+    .Call(`_Rtorch_C_torch_rnn_tanh_cell`, input, hx, w_ih, w_hh, b_ih, b_hh)
+}
+
+C_torch_rnn_relu_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh) {
+    .Call(`_Rtorch_C_torch_rnn_relu_cell`, input, hx, w_ih, w_hh, b_ih, b_hh)
+}
+
+C_torch_set_ <- function(self, source, storage_offset, size_sexp, stride_sexp) {
+    .Call(`_Rtorch_C_torch_set_`, self, source, storage_offset, size_sexp, stride_sexp)
+}
+
+C_torch_masked_scatter_ <- function(self, mask, source) {
+    .Call(`_Rtorch_C_torch_masked_scatter_`, self, mask, source)
+}
+
+C_torch_masked_scatter <- function(self, mask, source) {
+    .Call(`_Rtorch_C_torch_masked_scatter`, self, mask, source)
+}
+
+C_torch_put_ <- function(self, index, source, accumulate) {
+    .Call(`_Rtorch_C_torch_put_`, self, index, source, accumulate)
+}
+
+C_torch_put <- function(self, index, source, accumulate) {
+    .Call(`_Rtorch_C_torch_put`, self, index, source, accumulate)
+}
+
+C_torch_index_add_ <- function(self, dim, index, source, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_index_add_`, self, dim, index, source, alpha_sexp)
+}
+
+C_torch_index_add <- function(self, dim, index, source, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_index_add`, self, dim, index, source, alpha_sexp)
+}
+
+C_torch_index_reduce_ <- function(self, dim, index, source, reduce, include_self) {
+    .Call(`_Rtorch_C_torch_index_reduce_`, self, dim, index, source, reduce, include_self)
+}
+
+C_torch_index_reduce <- function(self, dim, index, source, reduce, include_self) {
+    .Call(`_Rtorch_C_torch_index_reduce`, self, dim, index, source, reduce, include_self)
+}
+
+C_torch_index_fill_ <- function(self, dim, index, value_sexp) {
+    .Call(`_Rtorch_C_torch_index_fill_`, self, dim, index, value_sexp)
+}
+
+C_torch_index_fill <- function(self, dim, index, value_sexp) {
+    .Call(`_Rtorch_C_torch_index_fill`, self, dim, index, value_sexp)
+}
+
+C_torch_scatter <- function(self, dim, index, src) {
+    .Call(`_Rtorch_C_torch_scatter`, self, dim, index, src)
+}
+
+C_torch_scatter_add <- function(self, dim, index, src) {
+    .Call(`_Rtorch_C_torch_scatter_add`, self, dim, index, src)
+}
+
+C_torch_scatter_add_ <- function(self, dim, index, src) {
+    .Call(`_Rtorch_C_torch_scatter_add_`, self, dim, index, src)
+}
+
+C_torch_scatter_reduce <- function(self, dim, index, src, reduce, include_self) {
+    .Call(`_Rtorch_C_torch_scatter_reduce`, self, dim, index, src, reduce, include_self)
+}
+
+C_torch_scatter_reduce_ <- function(self, dim, index, src, reduce, include_self) {
+    .Call(`_Rtorch_C_torch_scatter_reduce_`, self, dim, index, src, reduce, include_self)
+}
+
+C_torch_eq_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_eq_`, self, other_sexp)
+}
+
+C_torch_bitwise_and_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_bitwise_and_`, self, other_sexp)
+}
+
+C_torch___and__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___and__`, self, other_sexp)
+}
+
+C_torch___iand__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___iand__`, self, other_sexp)
+}
+
+C_torch_bitwise_or_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_bitwise_or_`, self, other_sexp)
+}
+
+C_torch___or__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___or__`, self, other_sexp)
+}
+
+C_torch___ior__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___ior__`, self, other_sexp)
+}
+
+C_torch_bitwise_xor_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_bitwise_xor_`, self, other_sexp)
+}
+
+C_torch___xor__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___xor__`, self, other_sexp)
+}
+
+C_torch___ixor__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___ixor__`, self, other_sexp)
+}
+
+C_torch___lshift__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___lshift__`, self, other_sexp)
+}
+
+C_torch___ilshift__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___ilshift__`, self, other_sexp)
+}
+
+C_torch_bitwise_left_shift_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_bitwise_left_shift_`, self, other)
+}
+
+C_torch___rshift__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___rshift__`, self, other_sexp)
+}
+
+C_torch___irshift__ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch___irshift__`, self, other_sexp)
+}
+
+C_torch_bitwise_right_shift_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_bitwise_right_shift_`, self, other)
+}
+
+C_torch_tril_ <- function(self, diagonal) {
+    .Call(`_Rtorch_C_torch_tril_`, self, diagonal)
+}
+
+C_torch_triu_ <- function(self, diagonal) {
+    .Call(`_Rtorch_C_torch_triu_`, self, diagonal)
+}
+
+C_torch_digamma_ <- function(self) {
+    .Call(`_Rtorch_C_torch_digamma_`, self)
+}
+
+C_torch_lerp_ <- function(self, end, weight_sexp) {
+    .Call(`_Rtorch_C_torch_lerp_`, self, end, weight_sexp)
+}
+
+C_torch_addbmm_ <- function(self, batch1, batch2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addbmm_`, self, batch1, batch2, beta_sexp, alpha_sexp)
+}
+
+C_torch_addbmm <- function(self, batch1, batch2, beta_sexp, alpha_sexp) {
+    .Call(`_Rtorch_C_torch_addbmm`, self, batch1, batch2, beta_sexp, alpha_sexp)
+}
+
+C_torch_cross <- function(self, other, dim) {
+    .Call(`_Rtorch_C_torch_cross`, self, other, dim)
+}
+
+C_torch_tril_indices <- function(row, col, offset, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_tril_indices`, row, col, offset, dtype_sexp, device_sexp)
+}
+
+C_torch_triu_indices <- function(row, col, offset, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_triu_indices`, row, col, offset, dtype_sexp, device_sexp)
+}
+
+C_torch_ne_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_ne_`, self, other_sexp)
+}
+
+C_torch_not_equal_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_not_equal_`, self, other_sexp)
+}
+
+C_torch_ge_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_ge_`, self, other_sexp)
+}
+
+C_torch_greater_equal_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_greater_equal_`, self, other_sexp)
+}
+
+C_torch_le_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_le_`, self, other_sexp)
+}
+
+C_torch_less_equal_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_less_equal_`, self, other_sexp)
+}
+
+C_torch_gt_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_gt_`, self, other_sexp)
+}
+
+C_torch_greater_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_greater_`, self, other_sexp)
+}
+
+C_torch_lt_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_lt_`, self, other_sexp)
+}
+
+C_torch_less_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_less_`, self, other_sexp)
+}
+
+C_torch_take_along_dim <- function(self, indices, dim) {
+    .Call(`_Rtorch_C_torch_take_along_dim`, self, indices, dim)
+}
+
+C_torch_nonzero_static <- function(self, size, fill_value) {
+    .Call(`_Rtorch_C_torch_nonzero_static`, self, size, fill_value)
+}
+
+C_torch_addcmul <- function(self, tensor1, tensor2, value_sexp) {
+    .Call(`_Rtorch_C_torch_addcmul`, self, tensor1, tensor2, value_sexp)
+}
+
+C_torch_addcmul_ <- function(self, tensor1, tensor2, value_sexp) {
+    .Call(`_Rtorch_C_torch_addcmul_`, self, tensor1, tensor2, value_sexp)
+}
+
+C_torch_addcdiv <- function(self, tensor1, tensor2, value_sexp) {
+    .Call(`_Rtorch_C_torch_addcdiv`, self, tensor1, tensor2, value_sexp)
+}
+
+C_torch_addcdiv_ <- function(self, tensor1, tensor2, value_sexp) {
+    .Call(`_Rtorch_C_torch_addcdiv_`, self, tensor1, tensor2, value_sexp)
+}
+
+C_torch_cross_entropy_loss <- function(self, target, weight, reduction, ignore_index, label_smoothing) {
+    .Call(`_Rtorch_C_torch_cross_entropy_loss`, self, target, weight, reduction, ignore_index, label_smoothing)
+}
+
+C_torch_triangular_solve <- function(self, A, upper, transpose, unitriangular) {
+    .Call(`_Rtorch_C_torch_triangular_solve`, self, A, upper, transpose, unitriangular)
+}
+
+C_torch_linalg_solve_triangular <- function(self, B, upper, left, unitriangular) {
+    .Call(`_Rtorch_C_torch_linalg_solve_triangular`, self, B, upper, left, unitriangular)
+}
+
+C_torch_linalg_vander <- function(x, N) {
+    .Call(`_Rtorch_C_torch_linalg_vander`, x, N)
+}
+
+C_torch_svd <- function(self, some, compute_uv) {
+    .Call(`_Rtorch_C_torch_svd`, self, some, compute_uv)
+}
+
+C_torch_swapaxes_ <- function(self, axis0, axis1) {
+    .Call(`_Rtorch_C_torch_swapaxes_`, self, axis0, axis1)
+}
+
+C_torch_swapdims_ <- function(self, dim0, dim1) {
+    .Call(`_Rtorch_C_torch_swapdims_`, self, dim0, dim1)
+}
+
+C_torch_cholesky_solve <- function(self, input2, upper) {
+    .Call(`_Rtorch_C_torch_cholesky_solve`, self, input2, upper)
+}
+
+C_torch_qr <- function(self, some) {
+    .Call(`_Rtorch_C_torch_qr`, self, some)
+}
+
+C_torch_geqrf <- function(self) {
+    .Call(`_Rtorch_C_torch_geqrf`, self)
+}
+
+C_torch_ormqr <- function(self, input2, input3, left, transpose) {
+    .Call(`_Rtorch_C_torch_ormqr`, self, input2, input3, left, transpose)
+}
+
+C_torch_lu_solve <- function(self, LU_data, LU_pivots) {
+    .Call(`_Rtorch_C_torch_lu_solve`, self, LU_data, LU_pivots)
+}
+
+C_torch_lu_unpack <- function(LU_data, LU_pivots, unpack_data, unpack_pivots) {
+    .Call(`_Rtorch_C_torch_lu_unpack`, LU_data, LU_pivots, unpack_data, unpack_pivots)
+}
+
+C_torch_lgamma_ <- function(self) {
+    .Call(`_Rtorch_C_torch_lgamma_`, self)
+}
+
+C_torch_polygamma <- function(n, self) {
+    .Call(`_Rtorch_C_torch_polygamma`, n, self)
+}
+
+C_torch_polygamma_ <- function(self, n) {
+    .Call(`_Rtorch_C_torch_polygamma_`, self, n)
+}
+
+C_torch_erfinv_ <- function(self) {
+    .Call(`_Rtorch_C_torch_erfinv_`, self)
+}
+
+C_torch_i0_ <- function(self) {
+    .Call(`_Rtorch_C_torch_i0_`, self)
+}
+
+C_torch_sign_ <- function(self) {
+    .Call(`_Rtorch_C_torch_sign_`, self)
+}
+
+C_torch_atan2_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_atan2_`, self, other)
+}
+
+C_torch_arctan2_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_arctan2_`, self, other)
+}
+
+C_torch_histc <- function(self, bins, min_sexp, max_sexp) {
+    .Call(`_Rtorch_C_torch_histc`, self, bins, min_sexp, max_sexp)
+}
+
+C_torch_histogram <- function(self, bins, weight, density) {
+    .Call(`_Rtorch_C_torch_histogram`, self, bins, weight, density)
+}
+
+C_torch_fmod_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_fmod_`, self, other_sexp)
+}
+
+C_torch_hypot_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_hypot_`, self, other)
+}
+
+C_torch_igamma_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_igamma_`, self, other)
+}
+
+C_torch_igammac_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_igammac_`, self, other)
+}
+
+C_torch_nextafter_ <- function(self, other) {
+    .Call(`_Rtorch_C_torch_nextafter_`, self, other)
+}
+
+C_torch_remainder_ <- function(self, other_sexp) {
+    .Call(`_Rtorch_C_torch_remainder_`, self, other_sexp)
+}
+
+C_torch_quantile <- function(self, q, dim, keepdim, interpolation) {
+    .Call(`_Rtorch_C_torch_quantile`, self, q, dim, keepdim, interpolation)
+}
+
+C_torch_nanquantile <- function(self, q, dim, keepdim, interpolation) {
+    .Call(`_Rtorch_C_torch_nanquantile`, self, q, dim, keepdim, interpolation)
+}
+
+C_torch_topk <- function(self, k, dim, largest, sorted) {
+    .Call(`_Rtorch_C_torch_topk`, self, k, dim, largest, sorted)
+}
+
+C_torch_renorm <- function(self, p_sexp, dim, maxnorm_sexp) {
+    .Call(`_Rtorch_C_torch_renorm`, self, p_sexp, dim, maxnorm_sexp)
+}
+
+C_torch_renorm_ <- function(self, p_sexp, dim, maxnorm_sexp) {
+    .Call(`_Rtorch_C_torch_renorm_`, self, p_sexp, dim, maxnorm_sexp)
+}
+
+C_torch_pow_ <- function(self, exponent_sexp) {
+    .Call(`_Rtorch_C_torch_pow_`, self, exponent_sexp)
+}
+
+C_torch_float_power_ <- function(self, exponent_sexp) {
+    .Call(`_Rtorch_C_torch_float_power_`, self, exponent_sexp)
+}
+
+C_torch_bucketize <- function(self, boundaries, out_int32, right) {
+    .Call(`_Rtorch_C_torch_bucketize`, self, boundaries, out_int32, right)
+}
+
+C_torch_searchsorted <- function(sorted_sequence, self, out_int32, right, side, sorter) {
+    .Call(`_Rtorch_C_torch_searchsorted`, sorted_sequence, self, out_int32, right, side, sorter)
+}
+
+C_torch_mse_loss <- function(self, target, reduction) {
+    .Call(`_Rtorch_C_torch_mse_loss`, self, target, reduction)
+}
+
+C_torch_l1_loss <- function(self, target, reduction) {
+    .Call(`_Rtorch_C_torch_l1_loss`, self, target, reduction)
+}
+
+C_torch_multi_margin_loss <- function(self, target, p_sexp, margin_sexp, weight, reduction) {
+    .Call(`_Rtorch_C_torch_multi_margin_loss`, self, target, p_sexp, margin_sexp, weight, reduction)
+}
+
+C_torch_multilabel_margin_loss <- function(self, target, reduction) {
+    .Call(`_Rtorch_C_torch_multilabel_margin_loss`, self, target, reduction)
+}
+
+C_torch_multilabel_margin_loss_forward <- function(self, target, reduction) {
+    .Call(`_Rtorch_C_torch_multilabel_margin_loss_forward`, self, target, reduction)
+}
+
+C_torch_nll_loss_nd <- function(self, target, weight, reduction, ignore_index) {
+    .Call(`_Rtorch_C_torch_nll_loss_nd`, self, target, weight, reduction, ignore_index)
+}
+
+C_torch_nll_loss <- function(self, target, weight, reduction, ignore_index) {
+    .Call(`_Rtorch_C_torch_nll_loss`, self, target, weight, reduction, ignore_index)
+}
+
+C_torch_nll_loss_forward <- function(self, target, weight, reduction, ignore_index) {
+    .Call(`_Rtorch_C_torch_nll_loss_forward`, self, target, weight, reduction, ignore_index)
+}
+
+C_torch_nll_loss2d <- function(self, target, weight, reduction, ignore_index) {
+    .Call(`_Rtorch_C_torch_nll_loss2d`, self, target, weight, reduction, ignore_index)
+}
+
+C_torch_nll_loss2d_forward <- function(self, target, weight, reduction, ignore_index) {
+    .Call(`_Rtorch_C_torch_nll_loss2d_forward`, self, target, weight, reduction, ignore_index)
+}
+
+C_torch_smooth_l1_loss <- function(self, target, reduction, beta) {
+    .Call(`_Rtorch_C_torch_smooth_l1_loss`, self, target, reduction, beta)
+}
+
+C_torch_huber_loss <- function(self, target, reduction, delta) {
+    .Call(`_Rtorch_C_torch_huber_loss`, self, target, reduction, delta)
+}
+
+C_torch_soft_margin_loss <- function(self, target, reduction) {
+    .Call(`_Rtorch_C_torch_soft_margin_loss`, self, target, reduction)
+}
+
+C_torch_elu <- function(self, alpha_sexp, scale_sexp, input_scale_sexp) {
+    .Call(`_Rtorch_C_torch_elu`, self, alpha_sexp, scale_sexp, input_scale_sexp)
+}
+
+C_torch_elu_ <- function(self, alpha_sexp, scale_sexp, input_scale_sexp) {
+    .Call(`_Rtorch_C_torch_elu_`, self, alpha_sexp, scale_sexp, input_scale_sexp)
+}
+
+C_torch_glu_jvp <- function(glu, x, dx, dim) {
+    .Call(`_Rtorch_C_torch_glu_jvp`, glu, x, dx, dim)
+}
+
+C_torch_hardsigmoid_ <- function(self) {
+    .Call(`_Rtorch_C_torch_hardsigmoid_`, self)
+}
+
+C_torch_hardtanh <- function(self, min_val_sexp, max_val_sexp) {
+    .Call(`_Rtorch_C_torch_hardtanh`, self, min_val_sexp, max_val_sexp)
+}
+
+C_torch_hardtanh_ <- function(self, min_val_sexp, max_val_sexp) {
+    .Call(`_Rtorch_C_torch_hardtanh_`, self, min_val_sexp, max_val_sexp)
+}
+
+C_torch_hardswish_ <- function(self) {
+    .Call(`_Rtorch_C_torch_hardswish_`, self)
+}
+
+C_torch_leaky_relu_ <- function(self, negative_slope_sexp) {
+    .Call(`_Rtorch_C_torch_leaky_relu_`, self, negative_slope_sexp)
+}
+
+C_torch_log_sigmoid_forward <- function(self) {
+    .Call(`_Rtorch_C_torch_log_sigmoid_forward`, self)
+}
+
+C_torch_softplus <- function(self, beta_sexp, threshold_sexp) {
+    .Call(`_Rtorch_C_torch_softplus`, self, beta_sexp, threshold_sexp)
+}
+
+C_torch_adaptive_avg_pool2d <- function(self, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_adaptive_avg_pool2d`, self, output_size_sexp)
+}
+
+C_torch_adaptive_avg_pool3d <- function(self, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_adaptive_avg_pool3d`, self, output_size_sexp)
+}
+
+C_torch_adaptive_max_pool2d <- function(self, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_adaptive_max_pool2d`, self, output_size_sexp)
+}
+
+C_torch_adaptive_max_pool3d <- function(self, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_adaptive_max_pool3d`, self, output_size_sexp)
+}
+
+C_torch_avg_pool2d <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, ceil_mode, count_include_pad, divisor_override) {
+    .Call(`_Rtorch_C_torch_avg_pool2d`, self, kernel_size_sexp, stride_sexp, padding_sexp, ceil_mode, count_include_pad, divisor_override)
+}
+
+C_torch_avg_pool3d <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, ceil_mode, count_include_pad, divisor_override) {
+    .Call(`_Rtorch_C_torch_avg_pool3d`, self, kernel_size_sexp, stride_sexp, padding_sexp, ceil_mode, count_include_pad, divisor_override)
+}
+
+C_torch_fractional_max_pool2d <- function(self, kernel_size_sexp, output_size_sexp, random_samples) {
+    .Call(`_Rtorch_C_torch_fractional_max_pool2d`, self, kernel_size_sexp, output_size_sexp, random_samples)
+}
+
+C_torch_fractional_max_pool3d <- function(self, kernel_size_sexp, output_size_sexp, random_samples) {
+    .Call(`_Rtorch_C_torch_fractional_max_pool3d`, self, kernel_size_sexp, output_size_sexp, random_samples)
+}
+
+C_torch_max_pool2d_with_indices <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode) {
+    .Call(`_Rtorch_C_torch_max_pool2d_with_indices`, self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode)
+}
+
+C_torch_max_pool3d_with_indices <- function(self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode) {
+    .Call(`_Rtorch_C_torch_max_pool3d_with_indices`, self, kernel_size_sexp, stride_sexp, padding_sexp, dilation_sexp, ceil_mode)
+}
+
+C_torch_max_unpool2d <- function(self, indices, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_max_unpool2d`, self, indices, output_size_sexp)
+}
+
+C_torch_max_unpool3d <- function(self, indices, output_size_sexp, stride_sexp, padding_sexp) {
+    .Call(`_Rtorch_C_torch_max_unpool3d`, self, indices, output_size_sexp, stride_sexp, padding_sexp)
+}
+
+C_torch_reflection_pad1d <- function(self, padding_sexp) {
+    .Call(`_Rtorch_C_torch_reflection_pad1d`, self, padding_sexp)
+}
+
+C_torch_reflection_pad2d <- function(self, padding_sexp) {
+    .Call(`_Rtorch_C_torch_reflection_pad2d`, self, padding_sexp)
+}
+
+C_torch_reflection_pad3d <- function(self, padding_sexp) {
+    .Call(`_Rtorch_C_torch_reflection_pad3d`, self, padding_sexp)
+}
+
+C_torch_replication_pad1d <- function(self, padding_sexp) {
+    .Call(`_Rtorch_C_torch_replication_pad1d`, self, padding_sexp)
+}
+
+C_torch_replication_pad2d <- function(self, padding_sexp) {
+    .Call(`_Rtorch_C_torch_replication_pad2d`, self, padding_sexp)
+}
+
+C_torch_replication_pad3d <- function(self, padding_sexp) {
+    .Call(`_Rtorch_C_torch_replication_pad3d`, self, padding_sexp)
+}
+
+C_torch_pad <- function(self, pad_sexp, mode, value) {
+    .Call(`_Rtorch_C_torch_pad`, self, pad_sexp, mode, value)
+}
+
+C_torch_upsample_linear1d <- function(self, output_size_sexp, align_corners, scales) {
+    .Call(`_Rtorch_C_torch_upsample_linear1d`, self, output_size_sexp, align_corners, scales)
+}
+
+C_torch_upsample_bilinear2d <- function(self, output_size_sexp, align_corners, scales_h, scales_w) {
+    .Call(`_Rtorch_C_torch_upsample_bilinear2d`, self, output_size_sexp, align_corners, scales_h, scales_w)
+}
+
+C_torch_upsample_bicubic2d <- function(self, output_size_sexp, align_corners, scales_h, scales_w) {
+    .Call(`_Rtorch_C_torch_upsample_bicubic2d`, self, output_size_sexp, align_corners, scales_h, scales_w)
+}
+
+C_torch_upsample_trilinear3d <- function(self, output_size_sexp, align_corners, scales_d, scales_h, scales_w) {
+    .Call(`_Rtorch_C_torch_upsample_trilinear3d`, self, output_size_sexp, align_corners, scales_d, scales_h, scales_w)
+}
+
+C_torch_upsample_nearest1d <- function(self, output_size_sexp, scales) {
+    .Call(`_Rtorch_C_torch_upsample_nearest1d`, self, output_size_sexp, scales)
+}
+
+C_torch_upsample_nearest2d <- function(self, output_size_sexp, scales_h, scales_w) {
+    .Call(`_Rtorch_C_torch_upsample_nearest2d`, self, output_size_sexp, scales_h, scales_w)
+}
+
+C_torch_upsample_nearest3d <- function(self, output_size_sexp, scales_d, scales_h, scales_w) {
+    .Call(`_Rtorch_C_torch_upsample_nearest3d`, self, output_size_sexp, scales_d, scales_h, scales_w)
+}
+
+C_torch_slow_conv_transpose2d <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, output_padding_sexp, dilation_sexp) {
+    .Call(`_Rtorch_C_torch_slow_conv_transpose2d`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, output_padding_sexp, dilation_sexp)
+}
+
+C_torch_slow_conv_transpose3d <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, output_padding_sexp, dilation_sexp) {
+    .Call(`_Rtorch_C_torch_slow_conv_transpose3d`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, output_padding_sexp, dilation_sexp)
+}
+
+C_torch_thnn_conv2d <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp) {
+    .Call(`_Rtorch_C_torch_thnn_conv2d`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp)
+}
+
+C_torch_conv_depthwise3d <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, dilation_sexp) {
+    .Call(`_Rtorch_C_torch_conv_depthwise3d`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, dilation_sexp)
+}
+
+C_torch_slow_conv3d <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp) {
+    .Call(`_Rtorch_C_torch_slow_conv3d`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp)
+}
+
+C_torch_slow_conv3d_forward <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp) {
+    .Call(`_Rtorch_C_torch_slow_conv3d_forward`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp)
+}
+
+C_torch_slow_conv_dilated2d <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, dilation_sexp) {
+    .Call(`_Rtorch_C_torch_slow_conv_dilated2d`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, dilation_sexp)
+}
+
+C_torch_slow_conv_dilated3d <- function(self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, dilation_sexp) {
+    .Call(`_Rtorch_C_torch_slow_conv_dilated3d`, self, weight, kernel_size_sexp, bias, stride_sexp, padding_sexp, dilation_sexp)
+}
+
+C_torch_col2im <- function(self, output_size_sexp, kernel_size_sexp, dilation_sexp, padding_sexp, stride_sexp) {
+    .Call(`_Rtorch_C_torch_col2im`, self, output_size_sexp, kernel_size_sexp, dilation_sexp, padding_sexp, stride_sexp)
+}
+
+C_torch_column_stack <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_column_stack`, tensors_sexp)
+}
+
+C_torch_im2col <- function(self, kernel_size_sexp, dilation_sexp, padding_sexp, stride_sexp) {
+    .Call(`_Rtorch_C_torch_im2col`, self, kernel_size_sexp, dilation_sexp, padding_sexp, stride_sexp)
+}
+
+C_torch_special_logit <- function(self, eps) {
+    .Call(`_Rtorch_C_torch_special_logit`, self, eps)
+}
+
+C_torch_special_polygamma <- function(n, self) {
+    .Call(`_Rtorch_C_torch_special_polygamma`, n, self)
+}
+
+C_torch_special_logsumexp <- function(self, dim_sexp, keepdim) {
+    .Call(`_Rtorch_C_torch_special_logsumexp`, self, dim_sexp, keepdim)
+}
+
+C_torch_special_log_softmax <- function(self, dim, dtype) {
+    .Call(`_Rtorch_C_torch_special_log_softmax`, self, dim, dtype)
+}
+
+C_torch_special_softmax <- function(self, dim, dtype) {
+    .Call(`_Rtorch_C_torch_special_softmax`, self, dim, dtype)
+}
+
+C_torch_fft_fft <- function(self, n, dim, norm) {
+    .Call(`_Rtorch_C_torch_fft_fft`, self, n, dim, norm)
+}
+
+C_torch_fft_ifft <- function(self, n, dim, norm) {
+    .Call(`_Rtorch_C_torch_fft_ifft`, self, n, dim, norm)
+}
+
+C_torch_fft_rfft <- function(self, n, dim, norm) {
+    .Call(`_Rtorch_C_torch_fft_rfft`, self, n, dim, norm)
+}
+
+C_torch_fft_irfft <- function(self, n, dim, norm) {
+    .Call(`_Rtorch_C_torch_fft_irfft`, self, n, dim, norm)
+}
+
+C_torch_fft_hfft <- function(self, n, dim, norm) {
+    .Call(`_Rtorch_C_torch_fft_hfft`, self, n, dim, norm)
+}
+
+C_torch_fft_ihfft <- function(self, n, dim, norm) {
+    .Call(`_Rtorch_C_torch_fft_ihfft`, self, n, dim, norm)
+}
+
+C_torch_fft_fft2 <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_fft2`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_ifft2 <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_ifft2`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_rfft2 <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_rfft2`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_irfft2 <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_irfft2`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_hfft2 <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_hfft2`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_ihfft2 <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_ihfft2`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_fftn <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_fftn`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_ifftn <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_ifftn`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_rfftn <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_rfftn`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_irfftn <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_irfftn`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_hfftn <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_hfftn`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_ihfftn <- function(self, s_sexp, dim_sexp, norm) {
+    .Call(`_Rtorch_C_torch_fft_ihfftn`, self, s_sexp, dim_sexp, norm)
+}
+
+C_torch_fft_fftfreq <- function(n, d, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_fft_fftfreq`, n, d, dtype_sexp, device_sexp)
+}
+
+C_torch_fft_rfftfreq <- function(n, d, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_fft_rfftfreq`, n, d, dtype_sexp, device_sexp)
+}
+
+C_torch_fft_fftshift <- function(self, dim_sexp) {
+    .Call(`_Rtorch_C_torch_fft_fftshift`, self, dim_sexp)
+}
+
+C_torch_fft_ifftshift <- function(self, dim_sexp) {
+    .Call(`_Rtorch_C_torch_fft_ifftshift`, self, dim_sexp)
+}
+
+C_torch_linalg_cholesky_ex <- function(self, upper, check_errors) {
+    .Call(`_Rtorch_C_torch_linalg_cholesky_ex`, self, upper, check_errors)
+}
+
+C_torch_linalg_cross <- function(self, other, dim) {
+    .Call(`_Rtorch_C_torch_linalg_cross`, self, other, dim)
+}
+
+C_torch_linalg_lu_factor <- function(A, pivot) {
+    .Call(`_Rtorch_C_torch_linalg_lu_factor`, A, pivot)
+}
+
+C_torch_linalg_lu_factor_ex <- function(A, pivot, check_errors) {
+    .Call(`_Rtorch_C_torch_linalg_lu_factor_ex`, A, pivot, check_errors)
+}
+
+C_torch_linalg_lu <- function(A, pivot) {
+    .Call(`_Rtorch_C_torch_linalg_lu`, A, pivot)
+}
+
+C_torch_linalg_lu_solve <- function(LU, pivots, B, left, adjoint) {
+    .Call(`_Rtorch_C_torch_linalg_lu_solve`, LU, pivots, B, left, adjoint)
+}
+
+C_torch_linalg_ldl_factor_ex <- function(self, hermitian, check_errors) {
+    .Call(`_Rtorch_C_torch_linalg_ldl_factor_ex`, self, hermitian, check_errors)
+}
+
+C_torch_linalg_ldl_factor <- function(self, hermitian) {
+    .Call(`_Rtorch_C_torch_linalg_ldl_factor`, self, hermitian)
+}
+
+C_torch_linalg_ldl_solve <- function(LD, pivots, B, hermitian) {
+    .Call(`_Rtorch_C_torch_linalg_ldl_solve`, LD, pivots, B, hermitian)
+}
+
+C_torch_linalg_lstsq <- function(self, b, rcond, driver) {
+    .Call(`_Rtorch_C_torch_linalg_lstsq`, self, b, rcond, driver)
+}
+
+C_torch_linalg_vecdot <- function(x, y, dim) {
+    .Call(`_Rtorch_C_torch_linalg_vecdot`, x, y, dim)
+}
+
+C_torch_linalg_slogdet <- function(A) {
+    .Call(`_Rtorch_C_torch_linalg_slogdet`, A)
+}
+
+C_torch_slogdet <- function(self) {
+    .Call(`_Rtorch_C_torch_slogdet`, self)
+}
+
+C_torch_linalg_eig <- function(self) {
+    .Call(`_Rtorch_C_torch_linalg_eig`, self)
+}
+
+C_torch_linalg_eigh <- function(self, UPLO) {
+    .Call(`_Rtorch_C_torch_linalg_eigh`, self, UPLO)
+}
+
+C_torch_linalg_eigvalsh <- function(self, UPLO) {
+    .Call(`_Rtorch_C_torch_linalg_eigvalsh`, self, UPLO)
+}
+
+C_torch_linalg_inv_ex <- function(A, check_errors) {
+    .Call(`_Rtorch_C_torch_linalg_inv_ex`, A, check_errors)
+}
+
+C_torch_linalg_norm <- function(self, ord, dim_sexp, keepdim, dtype) {
+    .Call(`_Rtorch_C_torch_linalg_norm`, self, ord, dim_sexp, keepdim, dtype)
+}
+
+C_torch_linalg_vector_norm <- function(self, ord_sexp, dim_sexp, keepdim, dtype) {
+    .Call(`_Rtorch_C_torch_linalg_vector_norm`, self, ord_sexp, dim_sexp, keepdim, dtype)
+}
+
+C_torch_linalg_matrix_norm <- function(self, ord_sexp, dim_sexp, keepdim, dtype) {
+    .Call(`_Rtorch_C_torch_linalg_matrix_norm`, self, ord_sexp, dim_sexp, keepdim, dtype)
+}
+
+C_torch_linalg_svd <- function(A, full_matrices, driver) {
+    .Call(`_Rtorch_C_torch_linalg_svd`, A, full_matrices, driver)
+}
+
+C_torch_linalg_svdvals <- function(A, driver) {
+    .Call(`_Rtorch_C_torch_linalg_svdvals`, A, driver)
+}
+
+C_torch_linalg_cond <- function(self, p) {
+    .Call(`_Rtorch_C_torch_linalg_cond`, self, p)
+}
+
+C_torch_linalg_pinv <- function(self, atol, rtol, hermitian) {
+    .Call(`_Rtorch_C_torch_linalg_pinv`, self, atol, rtol, hermitian)
+}
+
+C_torch_linalg_solve_ex <- function(A, B, left, check_errors) {
+    .Call(`_Rtorch_C_torch_linalg_solve_ex`, A, B, left, check_errors)
+}
+
+C_torch_linalg_solve <- function(A, B, left) {
+    .Call(`_Rtorch_C_torch_linalg_solve`, A, B, left)
+}
+
+C_torch_linalg_tensorsolve <- function(self, other, dims_sexp) {
+    .Call(`_Rtorch_C_torch_linalg_tensorsolve`, self, other, dims_sexp)
+}
+
+C_torch_linalg_qr <- function(A, mode) {
+    .Call(`_Rtorch_C_torch_linalg_qr`, A, mode)
+}
+
+C_torch_linalg_matrix_rank <- function(input, atol, rtol, hermitian) {
+    .Call(`_Rtorch_C_torch_linalg_matrix_rank`, input, atol, rtol, hermitian)
+}
+
+C_torch_linalg_multi_dot <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_linalg_multi_dot`, tensors_sexp)
+}
+
+C_torch_nested_to_padded_tensor <- function(self, padding, output_size_sexp) {
+    .Call(`_Rtorch_C_torch_nested_to_padded_tensor`, self, padding, output_size_sexp)
+}
+
+C_torch_segment_reduce <- function(data, reduce, lengths, indices, offsets, axis, unsafe, initial) {
+    .Call(`_Rtorch_C_torch_segment_reduce`, data, reduce, lengths, indices, offsets, axis, unsafe, initial)
+}
+
+C_torch_pad_sequence <- function(sequences_sexp, batch_first, padding_value, padding_side) {
+    .Call(`_Rtorch_C_torch_pad_sequence`, sequences_sexp, batch_first, padding_value, padding_side)
+}
+
+C_torch_flatten_dense_tensors <- function(tensors_sexp) {
+    .Call(`_Rtorch_C_torch_flatten_dense_tensors`, tensors_sexp)
 }
 
 C_gpu_launch <- function(ptx_sexp, kernel_name_sexp, inputs_sexp, output_sexp, grid_sexp, block_sexp, shared_mem_sexp) {

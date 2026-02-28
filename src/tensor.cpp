@@ -61,6 +61,62 @@ std::vector<int64_t> sexp_to_int_vec(SEXP x) {
     return out;
 }
 
+// ---- Optional tensor helper ----
+
+c10::optional<at::Tensor> sexp_to_optional_tensor(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return *get_tensor_ptr(x);
+}
+
+// ---- Tensor list helper ----
+
+std::vector<at::Tensor> sexp_to_tensor_list(SEXP x) {
+    R_xlen_t n = Rf_xlength(x);
+    std::vector<at::Tensor> out;
+    out.reserve(n);
+    for (R_xlen_t i = 0; i < n; i++)
+        out.push_back(*get_tensor_ptr(VECTOR_ELT(x, i)));
+    return out;
+}
+
+// ---- Optional primitive helpers ----
+
+c10::optional<int64_t> sexp_to_optional_int(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return static_cast<int64_t>(Rf_asInteger(x));
+}
+
+c10::optional<double> sexp_to_optional_double(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return Rf_asReal(x);
+}
+
+c10::optional<bool> sexp_to_optional_bool(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return static_cast<bool>(Rf_asLogical(x));
+}
+
+// ---- Optional string helper ----
+
+c10::optional<std::string> sexp_to_optional_string(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return std::string(CHAR(STRING_ELT(x, 0)));
+}
+
+// ---- Optional scalar helper ----
+
+c10::optional<at::Scalar> sexp_to_optional_scalar(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return sexp_to_scalar(x);
+}
+
+// ---- Optional device helper ----
+
+c10::optional<at::Device> sexp_to_optional_device(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return at::Device(std::string(CHAR(STRING_ELT(x, 0))));
+}
+
 // ---- Rcpp::as / Rcpp::wrap for at::Tensor ----
 
 namespace Rcpp {
