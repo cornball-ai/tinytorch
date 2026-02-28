@@ -456,6 +456,30 @@ at::Tensor C_tensor_to_dtype_device(at::Tensor self, SEXP dtype_sexp,
         }
 }
 
+// ---- Thread management ----
+
+// [[Rcpp::export]]
+SEXP C_torch_set_num_threads(SEXP n_sexp) {
+    at::set_num_threads(Rf_asInteger(n_sexp));
+    return R_NilValue;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_get_num_threads() {
+    return Rf_ScalarInteger(at::get_num_threads());
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_set_num_interop_threads(SEXP n_sexp) {
+    at::set_num_interop_threads(Rf_asInteger(n_sexp));
+    return R_NilValue;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_get_num_interop_threads() {
+    return Rf_ScalarInteger(at::get_num_interop_threads());
+}
+
 // [[Rcpp::export]]
 SEXP C_cuda_is_available() {
     return Rf_ScalarLogical(torch::cuda::is_available());
