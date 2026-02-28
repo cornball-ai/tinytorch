@@ -339,6 +339,40 @@ with_no_grad <- function(code) code
 
 # ---- CUDA utilities ----
 
+#' Set Number of CPU Threads
+#'
+#' Controls the number of threads used for intraop parallelism
+#' (MKL, OpenBLAS, etc.) in libtorch operations.
+#'
+#' @param n Integer number of threads.
+#' @export
+torch_set_num_threads <- function(n) {
+  invisible(C_torch_set_num_threads(as.integer(n)))
+}
+
+#' Get Number of CPU Threads
+#'
+#' @return Integer number of threads used for intraop parallelism.
+#' @export
+torch_get_num_threads <- function() C_torch_get_num_threads()
+
+#' Set Number of Interop Threads
+#'
+#' Controls the number of threads used for interop parallelism
+#' (e.g., across independent operations) in libtorch.
+#'
+#' @param n Integer number of threads.
+#' @export
+torch_set_num_interop_threads <- function(n) {
+  invisible(C_torch_set_num_interop_threads(as.integer(n)))
+}
+
+#' Get Number of Interop Threads
+#'
+#' @return Integer number of interop threads.
+#' @export
+torch_get_num_interop_threads <- function() C_torch_get_num_interop_threads()
+
 #' Check if CUDA is available
 #' @return Logical scalar.
 #' @export
@@ -451,6 +485,98 @@ transformer_decoder_layer_step <- function(x, weights, self_cache_k, self_cache_
   C_transformer_decoder_layer_step(x, weights,
         self_cache_k, self_cache_v, cross_cache_k, cross_cache_v,
         as.integer(n_head))
+}
+
+#' Fused Decoder Forward Step
+#'
+#' Executes the entire decoder forward pass in a single C++ call:
+#' token embedding, positional embedding, all N decoder layers
+#' (self-attn + cross-attn + MLP with KV cache), final layer norm,
+#' logits projection, and argmax.
+#'
+#' @param token_ids Integer tensor (batch, seq_len) of 0-indexed token IDs.
+#' @param global_weights List of 4 tensors: token_emb.weight, pos_emb.weight,
+#'   final_ln.weight, final_ln.bias.
+#' @param layer_weights List of N lists, each containing 21 weight tensors
+#'   (same order as \code{\link{transformer_decoder_layer_step}}).
+#' @param self_cache_k List of N tensors for self-attention key cache,
+#'   or NULL for prefill.
+#' @param self_cache_v List of N tensors for self-attention value cache,
+#'   or NULL for prefill.
+#' @param cross_cache_k List of N pre-computed cross-attention key tensors.
+#' @param cross_cache_v List of N pre-computed cross-attention value tensors.
+#' @param n_head Integer number of attention heads.
+#' @param offset Integer position offset for positional embedding.
+#' @return Named list: token_id (integer), self_cache_k, self_cache_v,
+#'   cross_cache_k, cross_cache_v.
+#' @export
+decoder_forward_step <- function(token_ids, global_weights, layer_weights,
+                                 self_cache_k, self_cache_v,
+                                 cross_cache_k, cross_cache_v,
+                                 n_head, offset) {
+  C_decoder_forward_step(token_ids, global_weights, layer_weights,
+    self_cache_k, self_cache_v, cross_cache_k, cross_cache_v,
+    as.integer(n_head), as.integer(offset))
+}
+
+#' Prepare Cross-Attention Caches
+#'
+#' Projects encoder output through each decoder layer's cross-attention
+#' K/V weights in a single C++ call.
+#'
+#' @param encoder_output Encoder output tensor (batch, src_len, n_state).
+#' @param cross_kv_weights List of N lists, each containing 3 tensors:
+#'   cross_k.weight, cross_v.weight, cross_v.bias.
+#' @param n_head Integer number of attention heads.
+#' @return Named list with k and v, each a list of N tensors
+#'   shaped (batch, n_head, src_len, head_dim).
+#' @export
+prepare_cross_caches <- function(encoder_output, cross_kv_weights, n_head) {
+  C_prepare_cross_caches(encoder_output, cross_kv_weights, as.integer(n_head))
+}
+
+#' Fused Encoder Forward
+#'
+#' Executes the entire encoder forward pass in a single C++ call:
+#' conv1+gelu, conv2+gelu, permute, positional embedding, all N
+#' encoder layers (self-attention + MLP), and final layer norm.
+#'
+#' @param mel Input tensor (batch, n_mels, n_frames) mel spectrogram.
+#' @param global_weights List of 7 tensors: conv1.weight, conv1.bias,
+#'   conv2.weight, conv2.bias, positional_embedding, ln_post.weight, ln_post.bias.
+#' @param layer_weights List of N lists, each containing 15 weight tensors
+#'   (same order as \code{\link{transformer_encoder_layer}}).
+#' @param n_head Integer number of attention heads.
+#' @param n_ctx Integer maximum context length for sequence truncation.
+#' @return Output tensor (batch, seq_len, n_state).
+#' @export
+encoder_forward <- function(mel, global_weights, layer_weights, n_head, n_ctx) {
+  C_encoder_forward(mel, global_weights, layer_weights,
+    as.integer(n_head), as.integer(n_ctx))
+}
+
+#' Greedy Decode
+#'
+#' Runs the entire autoregressive decode loop in C++.
+#' One boundary crossing for the full sequence — no per-token R overhead.
+#'
+#' @param initial_tokens Integer vector of initial token IDs (0-indexed).
+#' @param global_weights List of 4 tensors: token_emb.weight, pos_emb.weight,
+#'   final_ln.weight, final_ln.bias.
+#' @param layer_weights List of N lists, each containing 21 weight tensors.
+#' @param cross_cache_k List of N pre-computed cross-attention key tensors.
+#' @param cross_cache_v List of N pre-computed cross-attention value tensors.
+#' @param n_head Integer number of attention heads.
+#' @param max_length Maximum output sequence length.
+#' @param eot_token End-of-text token ID (0-indexed).
+#' @return Integer vector of generated token IDs (0-indexed).
+#' @export
+greedy_decode <- function(initial_tokens, global_weights, layer_weights,
+                          cross_cache_k, cross_cache_v,
+                          n_head, max_length, eot_token) {
+  C_greedy_decode(as.integer(initial_tokens), global_weights, layer_weights,
+    cross_cache_k, cross_cache_v,
+    as.integer(n_head), as.integer(max_length), as.integer(eot_token))
 }
 
 #' Fused Transformer Encoder Layer

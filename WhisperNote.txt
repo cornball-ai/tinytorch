@@ -1,0 +1,50 @@
+Whisper Fused Decoder Loop — Deferred Optimization
+====================================================
+
+Context: Rtorch whisper GPU decode is ~178ms vs PyTorch ~120ms (1.5x gap).
+Breakdown: mel=33ms, encode=40ms, decode=105ms.
+
+The decoder is the bottleneck: ~25 tokens x ~14 .Call() crossings per token
+= 350+ R/C++ boundary crossings + R list packing/unpacking for KV caches.
+
+Planned optimization (user chose "fused per-step call"):
+- Keep the R greedy decode loop in whisper/transcribe.R (readable)
+- Create C_decoder_forward_step in Rtorch/src/transformer.cpp:
+  - One .Call() per token instead of 14
+  - Handles: token embedding, positional embedding, all decoder layers
+    (self-attn + cross-attn + MLP), final layer norm, logits, argmax
+  - Two modes: prefill (initial tokens w/ causal mask) and incremental (single token w/ KV cache)
+  - Returns: list(token_id, kv_caches)
+
+Weight packing (per layer, 24 weights):
+  0-1: self_attn_ln weight/bias
+  2-3: self_q weight/bias
+  4:   self_k weight (no bias)
+  5-6: self_v weight/bias
+  7-8: self_out weight/bias
+  9-10: cross_attn_ln weight/bias
+  11-12: cross_q weight/bias
+  13:  cross_k weight (no bias)
+  14-15: cross_v weight/bias
+  16-17: cross_out weight/bias
+  18-19: mlp_ln weight/bias
+  20-21: fc1 weight/bias
+  22-23: fc2 weight/bias
+
+Global weights [0-3]: token_emb, pos_emb, final_ln_w, final_ln_b
+
+Also: remove gc() from encoder forward (line 252 of encoder.R) — saves ~50ms.
+      The fused C++ path creates no R intermediates, so gc() is unnecessary.
+
+Whisper files to modify:
+- ~/whisper/R/encoder.R — remove gc() from fused path
+- ~/whisper/R/decoder.R — add pack_generate_weights() method
+- ~/whisper/R/model.R — call pack_generate_weights() after loading
+- ~/whisper/R/transcribe.R — update greedy_decode() to use fused step
+
+Rtorch files to modify:
+- src/transformer.cpp — add C_decoder_forward_step
+- src/init.cpp — register it (or use Rcpp::export after migration)
+- R/generate.R — R wrapper greedy_generate() or decoder_forward_step()
+
+Do this AFTER the Rcpp migration is complete.
