@@ -69,6 +69,18 @@ cpp_tensor_shapes_key <- function(tensor_list) {
     .Call(`_Rtorch_cpp_tensor_shapes_key`, tensor_list)
 }
 
+C_torch_rename_ <- function(self, names_sexp) {
+    .Call(`_Rtorch_C_torch_rename_`, self, names_sexp)
+}
+
+C_torch_rename <- function(self, names_sexp) {
+    .Call(`_Rtorch_C_torch_rename`, self, names_sexp)
+}
+
+C_torch_align_to <- function(self, names_sexp) {
+    .Call(`_Rtorch_C_torch_align_to`, self, names_sexp)
+}
+
 C_torch_align_as <- function(self, other) {
     .Call(`_Rtorch_C_torch_align_as`, self, other)
 }
@@ -83,6 +95,10 @@ C_torch_sym_constrain_range <- function(size_sexp, min, max) {
 
 C_torch_sym_constrain_range_for_size <- function(size_sexp, min, max) {
     .Call(`_Rtorch_C_torch_sym_constrain_range_for_size`, size_sexp, min, max)
+}
+
+C_torch_refine_names <- function(self, names_sexp) {
+    .Call(`_Rtorch_C_torch_refine_names`, self, names_sexp)
 }
 
 C_torch_native_dropout <- function(input, p, train) {
@@ -1145,8 +1161,8 @@ C_torch_scalar_tensor <- function(s_sexp, dtype_sexp, device_sexp) {
     .Call(`_Rtorch_C_torch_scalar_tensor`, s_sexp, dtype_sexp, device_sexp)
 }
 
-C_torch_rand <- function(size_sexp, dtype_sexp, device_sexp) {
-    .Call(`_Rtorch_C_torch_rand`, size_sexp, dtype_sexp, device_sexp)
+C_torch_rand <- function(size_sexp, names_sexp, dtype_sexp, device_sexp) {
+    .Call(`_Rtorch_C_torch_rand`, size_sexp, names_sexp, dtype_sexp, device_sexp)
 }
 
 C_torch_rand_like <- function(self, dtype_sexp, device_sexp, memory_format) {
@@ -1383,6 +1399,10 @@ C_torch_vstack <- function(tensors_sexp) {
 
 C_torch_dstack <- function(tensors_sexp) {
     .Call(`_Rtorch_C_torch_dstack`, tensors_sexp)
+}
+
+C_torch_stride <- function(self, dim) {
+    .Call(`_Rtorch_C_torch_stride`, self, dim)
 }
 
 C_torch_nansum <- function(self, dim_sexp, keepdim, dtype) {
@@ -1755,6 +1775,10 @@ C_torch_q_per_channel_axis <- function(self) {
 
 C_torch_int_repr <- function(self) {
     .Call(`_Rtorch_C_torch_int_repr`, self)
+}
+
+C_torch_qscheme <- function(self) {
+    .Call(`_Rtorch_C_torch_qscheme`, self)
 }
 
 C_torch_fake_quantize_per_tensor_affine <- function(self, scale, zero_point, quant_min, quant_max) {
@@ -2319,6 +2343,10 @@ C_torch_histc <- function(self, bins, min_sexp, max_sexp) {
 
 C_torch_histogram <- function(self, bins, weight, density) {
     .Call(`_Rtorch_C_torch_histogram`, self, bins, weight, density)
+}
+
+C_torch_histogramdd <- function(self, bins_sexp, range_sexp, weight, density) {
+    .Call(`_Rtorch_C_torch_histogramdd`, self, bins_sexp, range_sexp, weight, density)
 }
 
 C_torch_fmod <- function(self, other_sexp) {

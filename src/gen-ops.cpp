@@ -4,6 +4,35 @@
 
 
 // [[Rcpp::export]]
+at::Tensor C_torch_rename_(at::Tensor self, SEXP names_sexp) {
+    c10::optional<at::DimnameList> names_ref;
+    std::vector<at::Dimname> names_vec;
+    if (!Rf_isNull(names_sexp)) {
+        names_vec = sexp_to_dimname_vec(names_sexp);
+        names_ref = at::DimnameList(names_vec.data(), names_vec.size());
+    }
+    self.rename_(names_ref);
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_rename(at::Tensor self, SEXP names_sexp) {
+    c10::optional<at::DimnameList> names_ref;
+    std::vector<at::Dimname> names_vec;
+    if (!Rf_isNull(names_sexp)) {
+        names_vec = sexp_to_dimname_vec(names_sexp);
+        names_ref = at::DimnameList(names_vec.data(), names_vec.size());
+    }
+    return self.rename(names_ref);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_align_to(at::Tensor self, SEXP names_sexp) {
+    auto names_vec = sexp_to_dimname_vec(names_sexp);
+    return self.align_to(at::DimnameList(names_vec.data(), names_vec.size()));
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_align_as(at::Tensor self, at::Tensor other) { return self.align_as(other); }
 
 // [[Rcpp::export]]
@@ -23,6 +52,12 @@ SEXP C_torch_sym_constrain_range(SEXP size_sexp, SEXP min, SEXP max) {
 SEXP C_torch_sym_constrain_range_for_size(SEXP size_sexp, SEXP min, SEXP max) {
     at::sym_constrain_range_for_size(sexp_to_scalar(size_sexp), sexp_to_optional_int(min), sexp_to_optional_int(max));
     return R_NilValue;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_refine_names(at::Tensor self, SEXP names_sexp) {
+    auto names_vec = sexp_to_dimname_vec(names_sexp);
+    return self.refine_names(at::DimnameList(names_vec.data(), names_vec.size()));
 }
 
 // [[Rcpp::export]]
@@ -1507,13 +1542,19 @@ SEXP C_torch_scalar_tensor(SEXP s_sexp, SEXP dtype_sexp, SEXP device_sexp) {
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_rand(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+SEXP C_torch_rand(SEXP size_sexp, SEXP names_sexp, SEXP dtype_sexp, SEXP device_sexp) {
     auto size_vec = sexp_to_int_vec(size_sexp);
+    c10::optional<at::DimnameList> names_ref;
+    std::vector<at::Dimname> names_vec;
+    if (!Rf_isNull(names_sexp)) {
+        names_vec = sexp_to_dimname_vec(names_sexp);
+        names_ref = at::DimnameList(names_vec.data(), names_vec.size());
+    }
     auto opts = at::TensorOptions();
     auto dtype = sexp_to_dtype(dtype_sexp);
     if (dtype.has_value()) opts = opts.dtype(dtype.value());
     if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
-    return make_tensor_sexp(new at::Tensor(at::rand(at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+    return make_tensor_sexp(new at::Tensor(at::rand(at::IntArrayRef(size_vec.data(), size_vec.size()), names_ref, opts)));
 }
 
 // [[Rcpp::export]]
@@ -1641,7 +1682,7 @@ at::Tensor C_torch_rsqrt_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_select(at::Tensor self, int64_t dim, int64_t index) { return at::select(self, dim, index); }
+at::Tensor C_torch_select(at::Tensor self, SEXP dim, int64_t index) { return at::select(self, sexp_to_dimname(dim), index); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_selu(at::Tensor self) { return at::selu(self); }
@@ -1822,6 +1863,9 @@ at::Tensor C_torch_dstack(SEXP tensors_sexp) {
     auto tensors_vec = sexp_to_tensor_list(tensors_sexp);
     return at::dstack(tensors_vec);
 }
+
+// [[Rcpp::export]]
+int64_t C_torch_stride(at::Tensor self, SEXP dim) { return at::stride(self, sexp_to_dimname(dim)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_nansum(at::Tensor self, SEXP dim_sexp, bool keepdim, SEXP dtype) {
@@ -2311,6 +2355,11 @@ int64_t C_torch_q_per_channel_axis(at::Tensor self) { return at::q_per_channel_a
 
 // [[Rcpp::export]]
 at::Tensor C_torch_int_repr(at::Tensor self) { return at::int_repr(self); }
+
+// [[Rcpp::export]]
+SEXP C_torch_qscheme(at::Tensor self) {
+    return Rf_ScalarInteger(static_cast<int>(self.qscheme()));
+}
 
 // [[Rcpp::export]]
 at::Tensor C_torch_fake_quantize_per_tensor_affine(at::Tensor self, double scale, int64_t zero_point, int64_t quant_min, int64_t quant_max) { return at::fake_quantize_per_tensor_affine(self, scale, zero_point, quant_min, quant_max); }
@@ -3083,6 +3132,27 @@ SEXP C_torch_histogram(at::Tensor self, at::Tensor bins, SEXP weight, bool densi
     SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
     SET_VECTOR_ELT(out, 0, Rcpp::wrap(std::get<0>(result)));
     SET_VECTOR_ELT(out, 1, Rcpp::wrap(std::get<1>(result)));
+    SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+    SET_STRING_ELT(names, 0, Rf_mkChar("hist"));
+    SET_STRING_ELT(names, 1, Rf_mkChar("bin_edges"));
+    Rf_setAttrib(out, R_NamesSymbol, names);
+    UNPROTECT(2);
+    return out;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_histogramdd(at::Tensor self, SEXP bins_sexp, SEXP range_sexp, SEXP weight, bool density) {
+    auto bins_vec = sexp_to_int_vec(bins_sexp);
+    c10::optional<at::ArrayRef<double>> range_ref;
+    std::vector<double> range_vec;
+    if (!Rf_isNull(range_sexp)) {
+        range_vec = sexp_to_double_vec(range_sexp);
+        range_ref = at::ArrayRef<double>(range_vec.data(), range_vec.size());
+    }
+    auto result = at::histogramdd(self, at::IntArrayRef(bins_vec.data(), bins_vec.size()), range_ref, sexp_to_optional_tensor(weight), density);
+    SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+    SET_VECTOR_ELT(out, 0, Rcpp::wrap(std::get<0>(result)));
+    SET_VECTOR_ELT(out, 1, tensor_list_to_sexp(std::get<1>(result)));
     SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
     SET_STRING_ELT(names, 0, Rf_mkChar("hist"));
     SET_STRING_ELT(names, 1, Rf_mkChar("bin_edges"));

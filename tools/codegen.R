@@ -245,6 +245,11 @@ ARG_CONVERSIONS <- list(
     cpp_call = NULL,
     r_convert = NULL,
     skip_in_call = TRUE
+  ),
+  "Dimname" = list(
+    cpp_type = "SEXP",
+    cpp_call = "sexp_to_dimname(%s)",
+    r_convert = NULL
   )
 )
 
@@ -271,6 +276,11 @@ is_scalar_list_type <- function(type) {
 # Tensor?[] pattern
 is_optional_tensor_list_type <- function(type) {
   type == "Tensor?[]"
+}
+
+# Dimname[] patterns (Dimname[], Dimname[1], Dimname[]?)
+is_dimname_array_type <- function(type) {
+  grepl("^Dimname\\[\\d*\\]\\??$", type)
 }
 
 # ---- Return type support ----
@@ -334,6 +344,7 @@ is_supported_arg <- function(type) {
   if (is_tensor_list_type(type)) return(TRUE)
   if (is_scalar_list_type(type)) return(TRUE)
   if (is_optional_tensor_list_type(type)) return(TRUE)
+  if (is_dimname_array_type(type)) return(TRUE)
   FALSE
 }
 
@@ -348,10 +359,14 @@ is_supported_return <- function(ret) {
   if (length(ret$types) == 1 && ret$types == "void") return(TRUE)
   # Scalar types
   if (length(ret$types) == 1 && ret$types %in% c("bool", "int", "float",
-                                                   "Scalar", "ScalarType"))
+                                                   "Scalar", "ScalarType",
+                                                   "QScheme"))
     return(TRUE)
   # Tuple of Tensors
   if (length(ret$types) > 1 && all(ret$types == "Tensor")) return(TRUE)
+  # Mixed tuple with Tensor and Tensor[]
+  if (length(ret$types) > 1 && all(ret$types %in% c("Tensor", "Tensor[]")))
+    return(TRUE)
   FALSE
 }
 
@@ -365,8 +380,7 @@ has_tensor_options <- function(args) {
 }
 
 # Types we still cannot generate
-SKIP_ARG_TYPES <- c("Dimname[]?", "Dimname[]", "Dimname[1]",
-                     "Storage", "Stream")
+SKIP_ARG_TYPES <- c("Storage", "Stream")
 
 can_generate <- function(parsed) {
   if (is.null(parsed)) return(FALSE)
@@ -409,6 +423,7 @@ cpp_param <- function(a) {
   if (is_tensor_list_type(type)) return(sprintf("SEXP %s_sexp", name))
   if (is_scalar_list_type(type)) return(sprintf("SEXP %s_sexp", name))
   if (is_optional_tensor_list_type(type)) return(sprintf("SEXP %s_sexp", name))
+  if (is_dimname_array_type(type)) return(sprintf("SEXP %s_sexp", name))
 
   NULL
 }
@@ -445,6 +460,12 @@ cpp_call_expr <- function(a) {
   if (is_tensor_list_type(type)) return(sprintf("%s_vec", name))
   if (is_scalar_list_type(type)) return(sprintf("%s_vec", name))
   if (is_optional_tensor_list_type(type)) return(sprintf("%s_vec", name))
+
+  if (is_dimname_array_type(type)) {
+    is_optional <- grepl("\\?$", type)
+    if (is_optional) return(sprintf("%s_ref", name))
+    return(sprintf("at::DimnameList(%s_vec.data(), %s_vec.size())", name, name))
+  }
 
   name
 }
@@ -499,6 +520,23 @@ cpp_locals <- function(args) {
       lines <- c(lines,
         sprintf("    auto %s_vec = sexp_to_optional_tensor_list(%s_sexp);",
                 a$name, a$name))
+    }
+    if (is_dimname_array_type(a$type)) {
+      is_optional <- grepl("\\?$", a$type)
+      if (is_optional) {
+        lines <- c(lines,
+          sprintf("    c10::optional<at::DimnameList> %s_ref;", a$name),
+          sprintf("    std::vector<at::Dimname> %s_vec;", a$name),
+          sprintf("    if (!Rf_isNull(%s_sexp)) {", a$name),
+          sprintf("        %s_vec = sexp_to_dimname_vec(%s_sexp);", a$name, a$name),
+          sprintf("        %s_ref = at::DimnameList(%s_vec.data(), %s_vec.size());",
+                  a$name, a$name, a$name),
+          "    }"
+        )
+      } else {
+        lines <- c(lines, sprintf("    auto %s_vec = sexp_to_dimname_vec(%s_sexp);",
+                                  a$name, a$name))
+      }
     }
   }
   lines
@@ -613,20 +651,22 @@ gen_cpp_general <- function(parsed, variants = "") {
     ))
   }
 
-  # Scalar return types (bool, int, float, Scalar, ScalarType)
+  # Scalar return types (bool, int, float, Scalar, ScalarType, QScheme)
   if (length(ret$types) == 1 && ret$types %in% c("bool", "int", "float",
-                                                    "Scalar", "ScalarType")) {
+                                                    "Scalar", "ScalarType",
+                                                    "QScheme")) {
     cpp_ret <- switch(ret$types,
       "bool" = "bool",
       "int" = "int64_t",
       "float" = "double",
       "Scalar" = "at::Scalar",
-      "ScalarType" = "at::ScalarType"
+      "ScalarType" = "at::ScalarType",
+      "QScheme" = "at::QScheme"
     )
     body <- character()
     if (length(call$locals) > 0) body <- c(body, call$locals)
 
-    if (ret$types == "ScalarType") {
+    if (ret$types %in% c("ScalarType", "QScheme")) {
       # Return as integer (enum value)
       body <- c(body, sprintf("    return Rf_ScalarInteger(static_cast<int>(%s));",
                               call$expr))
@@ -694,9 +734,15 @@ gen_cpp_tuple_return <- function(name, param_str, call_expr, locals, ret) {
   body <- c(body, sprintf("    SEXP out = PROTECT(Rf_allocVector(VECSXP, %d));",
                            ntup))
   for (i in seq_len(ntup)) {
-    body <- c(body, sprintf(
-      "    SET_VECTOR_ELT(out, %d, Rcpp::wrap(std::get<%d>(result)));",
-      i - 1L, i - 1L))
+    if (ret$types[i] == "Tensor[]") {
+      body <- c(body, sprintf(
+        "    SET_VECTOR_ELT(out, %d, tensor_list_to_sexp(std::get<%d>(result)));",
+        i - 1L, i - 1L))
+    } else {
+      body <- c(body, sprintf(
+        "    SET_VECTOR_ELT(out, %d, Rcpp::wrap(std::get<%d>(result)));",
+        i - 1L, i - 1L))
+    }
   }
   body <- c(body, sprintf("    SEXP names = PROTECT(Rf_allocVector(STRSXP, %d));",
                            ntup))

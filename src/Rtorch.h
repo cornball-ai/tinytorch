@@ -82,4 +82,9 @@ c10::List<c10::optional<at::Tensor>> sexp_to_optional_tensor_list(SEXP x);
 // Convert std::vector<at::Tensor> to R list of tensors
 SEXP tensor_list_to_sexp(const std::vector<at::Tensor>& tensors);
 
+// Dimname helpers
+at::Dimname sexp_to_dimname(SEXP x);
+std::vector<at::Dimname> sexp_to_dimname_vec(SEXP x);
+c10::optional<std::vector<at::Dimname>> sexp_to_optional_dimname_vec(SEXP x);
+
 #endif // RTORCH_H

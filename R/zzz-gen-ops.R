@@ -5,6 +5,21 @@
 
 
 #' @export
+torch_rename_ <- function(self, names) {
+    C_torch_rename_(self, names)
+}
+
+#' @export
+torch_rename <- function(self, names) {
+    C_torch_rename(self, names)
+}
+
+#' @export
+torch_align_to <- function(self, names) {
+    C_torch_align_to(self, names)
+}
+
+#' @export
 torch_align_as <- function(self, other) {
     C_torch_align_as(self, other)
 }
@@ -22,6 +37,11 @@ torch_sym_constrain_range <- function(size, min = NULL, max = NULL) {
 #' @export
 torch_sym_constrain_range_for_size <- function(size, min = NULL, max = NULL) {
     C_torch_sym_constrain_range_for_size(size, min, max)
+}
+
+#' @export
+torch_refine_names <- function(self, names) {
+    C_torch_refine_names(self, names)
 }
 
 #' @export
@@ -1350,8 +1370,8 @@ torch_scalar_tensor <- function(s, dtype = NULL, device = NULL) {
 }
 
 #' @export
-torch_rand <- function(size, dtype = NULL, device = NULL) {
-    C_torch_rand(size, dtype, device)
+torch_rand <- function(size, names, dtype = NULL, device = NULL) {
+    C_torch_rand(size, names, dtype, device)
 }
 
 #' @export
@@ -1466,7 +1486,7 @@ torch_rsqrt_ <- function(self) {
 
 #' @export
 torch_select <- function(self, dim, index) {
-    C_torch_select(self, as.integer(dim), as.integer(index))
+    C_torch_select(self, dim, as.integer(index))
 }
 
 #' @export
@@ -1647,6 +1667,11 @@ torch_vstack <- function(tensors) {
 #' @export
 torch_dstack <- function(tensors) {
     C_torch_dstack(tensors)
+}
+
+#' @export
+torch_stride <- function(self, dim) {
+    C_torch_stride(self, dim)
 }
 
 #' @export
@@ -2112,6 +2137,11 @@ torch_q_per_channel_axis <- function(self) {
 #' @export
 torch_int_repr <- function(self) {
     C_torch_int_repr(self)
+}
+
+#' @export
+torch_qscheme <- function(self) {
+    C_torch_qscheme(self)
 }
 
 #' @export
@@ -2817,6 +2847,11 @@ torch_histc <- function(self, bins = 100, min = 0, max = 0) {
 #' @export
 torch_histogram <- function(self, bins, weight = NULL, density = FALSE) {
     C_torch_histogram(self, bins, weight, as.logical(density))
+}
+
+#' @export
+torch_histogramdd <- function(self, bins, range = NULL, weight = NULL, density = FALSE) {
+    C_torch_histogramdd(self, bins, range, weight, as.logical(density))
 }
 
 #' @export
@@ -3978,8 +4013,24 @@ torch_special_spherical_bessel_j0 <- function(x) {
 # ---- Method table entries ----
 
 
+.tensor_methods$`rename_` <- function(self, names) {
+    C_torch_rename_(self, names)
+}
+
+.tensor_methods$rename <- function(self, names) {
+    C_torch_rename(self, names)
+}
+
+.tensor_methods$align_to <- function(self, names) {
+    C_torch_align_to(self, names)
+}
+
 .tensor_methods$align_as <- function(self, other) {
     C_torch_align_as(self, other)
+}
+
+.tensor_methods$refine_names <- function(self, names) {
+    C_torch_refine_names(self, names)
 }
 
 .tensor_methods$`abs_` <- function(self) C_torch_abs_(self)
@@ -4559,7 +4610,7 @@ torch_special_spherical_bessel_j0 <- function(x) {
 .tensor_methods$`rsqrt_` <- function(self) C_torch_rsqrt_(self)
 
 .tensor_methods$select <- function(self, dim, index) {
-    C_torch_select(self, as.integer(dim), as.integer(index))
+    C_torch_select(self, dim, as.integer(index))
 }
 
 .tensor_methods$`sigmoid_` <- function(self) C_torch_sigmoid_(self)
@@ -4644,6 +4695,10 @@ torch_special_spherical_bessel_j0 <- function(x) {
 
 .tensor_methods$sspaddmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
     C_torch_sspaddmm(self, mat1, mat2, beta, alpha)
+}
+
+.tensor_methods$stride <- function(self, dim) {
+    C_torch_stride(self, dim)
 }
 
 .tensor_methods$nansum <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
@@ -4827,6 +4882,8 @@ torch_special_spherical_bessel_j0 <- function(x) {
 .tensor_methods$q_per_channel_axis <- function(self) C_torch_q_per_channel_axis(self)
 
 .tensor_methods$int_repr <- function(self) C_torch_int_repr(self)
+
+.tensor_methods$qscheme <- function(self) C_torch_qscheme(self)
 
 .tensor_methods$`set_` <- function(self, source, storage_offset, size, stride = NULL) {
     C_torch_set_(self, source, as.integer(storage_offset), size, stride)

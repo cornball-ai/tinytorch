@@ -192,6 +192,29 @@ c10::List<c10::optional<at::Tensor>> sexp_to_optional_tensor_list(SEXP x) {
     return out;
 }
 
+// ---- Dimname helpers ----
+
+at::Dimname sexp_to_dimname(SEXP x) {
+    std::string s = CHAR(STRING_ELT(x, 0));
+    return at::Dimname::fromSymbol(c10::Symbol::fromQualString(s));
+}
+
+std::vector<at::Dimname> sexp_to_dimname_vec(SEXP x) {
+    R_xlen_t n = Rf_xlength(x);
+    std::vector<at::Dimname> out;
+    out.reserve(n);
+    for (R_xlen_t i = 0; i < n; i++) {
+        std::string s = CHAR(STRING_ELT(x, i));
+        out.push_back(at::Dimname::fromSymbol(c10::Symbol::fromQualString(s)));
+    }
+    return out;
+}
+
+c10::optional<std::vector<at::Dimname>> sexp_to_optional_dimname_vec(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return sexp_to_dimname_vec(x);
+}
+
 // ---- Tensor list to SEXP helper (for Tensor[] returns) ----
 
 SEXP tensor_list_to_sexp(const std::vector<at::Tensor>& tensors) {
