@@ -10,11 +10,13 @@
 #' torch_tensor(matrix(1:6, 2, 3))
 #' }
 #' @export
-torch_tensor <- function(data, dtype = NULL, device = NULL) {
+torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALSE) {
   if (inherits(data, "torch_tensor")) return(data)
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
-  C_torch_tensor(data, dtype_code, device_str)
+  t <- C_torch_tensor(data, dtype_code, device_str)
+  if (requires_grad) C_tensor_requires_grad_(t, TRUE)
+  t
 }
 
 #' Create a tensor of zeros

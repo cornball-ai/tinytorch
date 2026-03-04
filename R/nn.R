@@ -42,6 +42,9 @@ nn_module <- function(classname = NULL, ...) {
 
     # Helper to register parameters (called during initialize)
     self$register_parameter <- function(name, tensor) {
+      if (!inherits(tensor, "nn_parameter")) {
+        tensor <- nn_parameter(tensor)
+      }
       private$parameters_[[name]] <- tensor
       self[[name]] <- tensor
     }
@@ -111,13 +114,10 @@ nn_module <- function(classname = NULL, ...) {
           sub_env$to(device = device, dtype = dtype)
         }
       }
-      # Rebuild the parameters snapshot so $parameters reflects the new device/dtype
-      self$parameters <- collect_params(self)
       invisible(self)
     }
 
-    # Parameters accessor (returns named list of registered parameters)
-    # Note: this is a snapshot; re-access for live view
+    # Parameters accessor (defined after collect_params is created)
     self$parameters <- NULL  # Placeholder, updated after initialize
 
     # Bind all user methods with self available in environment
@@ -148,6 +148,7 @@ nn_module <- function(classname = NULL, ...) {
         private$modules_[[nm]] <- val
       } else if (inherits(val, "torch_tensor") && !nm %in% names(private$parameters_) &&
                  !nm %in% names(private$buffers_)) {
+        if (!val$requires_grad) C_tensor_requires_grad_(val, TRUE)
         private$parameters_[[nm]] <- val
       }
     }
@@ -173,7 +174,9 @@ nn_module <- function(classname = NULL, ...) {
       }
       params
     }
-    self$parameters <- collect_params(self)
+    self$parameters <- function(recurse = TRUE) {
+      if (recurse) collect_params(self) else private$parameters_
+    }
 
     # Make module callable: m(x) calls m$forward(x)
     # Wrap in a function that dispatches to forward
@@ -394,10 +397,11 @@ nn_layer_norm <- function(normalized_shape, eps = 1e-5) {
 
 #' Tag a tensor as an nn parameter
 #' @param data A torch_tensor.
-#' @param requires_grad Ignored (no autograd).
+#' @param requires_grad Whether this parameter requires gradients.
 #' @return The tensor with additional class tag.
 #' @export
 nn_parameter <- function(data, requires_grad = TRUE) {
+  if (requires_grad) C_tensor_requires_grad_(data, TRUE)
   class(data) <- c("nn_parameter", class(data))
   data
 }

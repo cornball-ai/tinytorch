@@ -3,14 +3,8 @@
 \alias{torch_eval}
 \title{Evaluate R Expressions as Torch Computations}
 \usage{
-torch_eval(
-  expr,
-  ...,
-  .env = parent.frame(),
-  .compile = FALSE,
-  .fuse = TRUE,
-  .verbose = FALSE
-)
+torch_eval(expr, ..., .env = parent.frame(), .compile = FALSE, .fuse = TRUE,
+           .verbose = FALSE)
 }
 \arguments{
 \item{expr}{An R expression involving torch tensor operations.

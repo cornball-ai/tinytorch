@@ -3,13 +3,8 @@
 \alias{expand_module}
 \title{Expand a Module's forward() Body}
 \usage{
-expand_module(
-  module,
-  arg_exprs = list(),
-  prefix = "",
-  depth = 0L,
-  max_depth = 10L
-)
+expand_module(module, arg_exprs = list(), prefix = "", depth = 0L,
+              max_depth = 10L)
 }
 \arguments{
 \item{module}{An nn_module callable or R6 instance}

@@ -1,7 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{with_no_grad}
 \alias{with_no_grad}
-\title{No-op gradient context manager}
+\title{Disable gradient computation}
 \usage{
 with_no_grad(code)
 }
@@ -9,7 +9,7 @@ with_no_grad(code)
 \item{code}{Expression to evaluate.}
 }
 \description{
-Since Rtorch has no autograd, this simply evaluates the expression.
+Evaluates the expression with gradient computation disabled.
 }
 \examples{
 \donttest{

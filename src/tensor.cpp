@@ -117,6 +117,116 @@ c10::optional<at::Device> sexp_to_optional_device(SEXP x) {
     return at::Device(std::string(CHAR(STRING_ELT(x, 0))));
 }
 
+// ---- Non-optional device helper ----
+
+at::Device sexp_to_required_device(SEXP x) {
+    return at::Device(std::string(CHAR(STRING_ELT(x, 0))));
+}
+
+// ---- Optional generator helper ----
+
+c10::optional<at::Generator> sexp_to_optional_generator(SEXP x) {
+    // Always pass nullopt — libtorch uses default RNG
+    // R-side generator objects not yet supported
+    return c10::nullopt;
+}
+
+// ---- Memory format helper ----
+
+c10::optional<at::MemoryFormat> sexp_to_optional_memory_format(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    std::string s = CHAR(STRING_ELT(x, 0));
+    if (s == "contiguous") return at::MemoryFormat::Contiguous;
+    if (s == "channels_last") return at::MemoryFormat::ChannelsLast;
+    if (s == "channels_last_3d") return at::MemoryFormat::ChannelsLast3d;
+    if (s == "preserve") return at::MemoryFormat::Preserve;
+    Rf_error("Unknown memory format: %s", s.c_str());
+    return c10::nullopt;
+}
+
+// ---- Double vector helper ----
+
+std::vector<double> sexp_to_double_vec(SEXP x) {
+    R_xlen_t n = Rf_xlength(x);
+    std::vector<double> out(n);
+    double* p = REAL(x);
+    for (R_xlen_t i = 0; i < n; i++) out[i] = p[i];
+    return out;
+}
+
+c10::optional<std::vector<double>> sexp_to_optional_double_vec(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return sexp_to_double_vec(x);
+}
+
+// ---- Scalar list helper ----
+
+std::vector<at::Scalar> sexp_to_scalar_list(SEXP x) {
+    R_xlen_t n = Rf_xlength(x);
+    std::vector<at::Scalar> out;
+    out.reserve(n);
+    if (Rf_isReal(x)) {
+        double* p = REAL(x);
+        for (R_xlen_t i = 0; i < n; i++) out.emplace_back(p[i]);
+    } else {
+        int* p = INTEGER(x);
+        for (R_xlen_t i = 0; i < n; i++) out.emplace_back(static_cast<int64_t>(p[i]));
+    }
+    return out;
+}
+
+// ---- Optional tensor list helper ----
+
+c10::List<c10::optional<at::Tensor>> sexp_to_optional_tensor_list(SEXP x) {
+    R_xlen_t n = Rf_xlength(x);
+    c10::List<c10::optional<at::Tensor>> out;
+    out.reserve(n);
+    for (R_xlen_t i = 0; i < n; i++) {
+        SEXP elt = VECTOR_ELT(x, i);
+        if (Rf_isNull(elt)) {
+            out.push_back(c10::nullopt);
+        } else {
+            out.push_back(*get_tensor_ptr(elt));
+        }
+    }
+    return out;
+}
+
+// ---- Dimname helpers ----
+
+at::Dimname sexp_to_dimname(SEXP x) {
+    std::string s = CHAR(STRING_ELT(x, 0));
+    return at::Dimname::fromSymbol(c10::Symbol::fromQualString(s));
+}
+
+std::vector<at::Dimname> sexp_to_dimname_vec(SEXP x) {
+    R_xlen_t n = Rf_xlength(x);
+    std::vector<at::Dimname> out;
+    out.reserve(n);
+    for (R_xlen_t i = 0; i < n; i++) {
+        std::string s = CHAR(STRING_ELT(x, i));
+        out.push_back(at::Dimname::fromSymbol(c10::Symbol::fromQualString(s)));
+    }
+    return out;
+}
+
+c10::optional<std::vector<at::Dimname>> sexp_to_optional_dimname_vec(SEXP x) {
+    if (Rf_isNull(x)) return c10::nullopt;
+    return sexp_to_dimname_vec(x);
+}
+
+// ---- Tensor list to SEXP helper (for Tensor[] returns) ----
+
+SEXP tensor_list_to_sexp(const std::vector<at::Tensor>& tensors) {
+    R_xlen_t n = tensors.size();
+    SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+    for (R_xlen_t i = 0; i < n; i++) {
+        SET_VECTOR_ELT(out, i, make_tensor_sexp(new at::Tensor(tensors[i])));
+    }
+    UNPROTECT(1);
+    return out;
+}
+
 // ---- Rcpp::as / Rcpp::wrap for at::Tensor ----
 
 namespace Rcpp {

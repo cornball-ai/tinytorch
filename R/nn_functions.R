@@ -323,9 +323,9 @@ nnf_tanh <- function(input) C_torch_tanh(input)
 
 # ---- Utilities ----
 
-#' No-op gradient context manager
+#' Disable gradient computation
 #'
-#' Since Rtorch has no autograd, this simply evaluates the expression.
+#' Evaluates the expression with gradient computation disabled.
 #' @param code Expression to evaluate.
 #' @examples
 #' \donttest{
@@ -335,7 +335,11 @@ nnf_tanh <- function(input) C_torch_tanh(input)
 #' })
 #' }
 #' @export
-with_no_grad <- function(code) code
+with_no_grad <- function(code) {
+  C_autograd_set_grad_mode(FALSE)
+  on.exit(C_autograd_set_grad_mode(TRUE))
+  force(code)
+}
 
 # ---- CUDA utilities ----
 

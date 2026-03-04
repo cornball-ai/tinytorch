@@ -3,17 +3,9 @@
 \alias{nn_conv_transpose1d}
 \title{1D transposed convolution module}
 \usage{
-nn_conv_transpose1d(
-  in_channels,
-  out_channels,
-  kernel_size,
-  stride = 1L,
-  padding = 0L,
-  output_padding = 0L,
-  groups = 1L,
-  bias = TRUE,
-  dilation = 1L
-)
+nn_conv_transpose1d(in_channels, out_channels, kernel_size, stride = 1L,
+                    padding = 0L, output_padding = 0L, groups = 1L,
+                    bias = TRUE, dilation = 1L)
 }
 \arguments{
 \item{in_channels}{Integer.}

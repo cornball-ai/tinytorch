@@ -3,13 +3,8 @@
 \alias{nn_batch_norm1d}
 \title{1D batch normalization module}
 \usage{
-nn_batch_norm1d(
-  num_features,
-  eps = 1e-05,
-  momentum = 0.1,
-  affine = TRUE,
-  track_running_stats = TRUE
-)
+nn_batch_norm1d(num_features, eps = 1e-05, momentum = 0.1, affine = TRUE,
+                track_running_stats = TRUE)
 }
 \arguments{
 \item{num_features}{Integer.}

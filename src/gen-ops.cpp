@@ -4,6 +4,63 @@
 
 
 // [[Rcpp::export]]
+at::Tensor C_torch_rename_(at::Tensor self, SEXP names_sexp) {
+    c10::optional<at::DimnameList> names_ref;
+    std::vector<at::Dimname> names_vec;
+    if (!Rf_isNull(names_sexp)) {
+        names_vec = sexp_to_dimname_vec(names_sexp);
+        names_ref = at::DimnameList(names_vec.data(), names_vec.size());
+    }
+    self.rename_(names_ref);
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_rename(at::Tensor self, SEXP names_sexp) {
+    c10::optional<at::DimnameList> names_ref;
+    std::vector<at::Dimname> names_vec;
+    if (!Rf_isNull(names_sexp)) {
+        names_vec = sexp_to_dimname_vec(names_sexp);
+        names_ref = at::DimnameList(names_vec.data(), names_vec.size());
+    }
+    return self.rename(names_ref);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_align_to(at::Tensor self, SEXP names_sexp) {
+    auto names_vec = sexp_to_dimname_vec(names_sexp);
+    return self.align_to(at::DimnameList(names_vec.data(), names_vec.size()));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_align_as(at::Tensor self, at::Tensor other) { return self.align_as(other); }
+
+// [[Rcpp::export]]
+SEXP C_torch_align_tensors(SEXP tensors_sexp) {
+    auto tensors_vec = sexp_to_tensor_list(tensors_sexp);
+    auto result = at::align_tensors(tensors_vec);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sym_constrain_range(SEXP size_sexp, SEXP min, SEXP max) {
+    at::sym_constrain_range(sexp_to_scalar(size_sexp), sexp_to_optional_int(min), sexp_to_optional_int(max));
+    return R_NilValue;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sym_constrain_range_for_size(SEXP size_sexp, SEXP min, SEXP max) {
+    at::sym_constrain_range_for_size(sexp_to_scalar(size_sexp), sexp_to_optional_int(min), sexp_to_optional_int(max));
+    return R_NilValue;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_refine_names(at::Tensor self, SEXP names_sexp) {
+    auto names_vec = sexp_to_dimname_vec(names_sexp);
+    return self.refine_names(at::DimnameList(names_vec.data(), names_vec.size()));
+}
+
+// [[Rcpp::export]]
 SEXP C_torch_native_dropout(at::Tensor input, double p, SEXP train) {
     auto result = at::native_dropout(input, p, sexp_to_optional_bool(train));
     SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
@@ -60,10 +117,22 @@ at::Tensor C_torch_abs_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_absolute(at::Tensor self) { return at::absolute(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_absolute_(at::Tensor self) {
     self.absolute_();
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_angle(at::Tensor self) { return at::angle(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_view_as_complex(at::Tensor self) { return at::view_as_complex(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_sgn(at::Tensor self) { return at::sgn(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_sgn_(at::Tensor self) {
@@ -72,16 +141,34 @@ at::Tensor C_torch_sgn_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_chalf(at::Tensor self, SEXP memory_format) { return self.chalf(sexp_to_optional_memory_format(memory_format)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_conj_physical(at::Tensor self) { return at::conj_physical(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_conj_physical_(at::Tensor self) {
     at::conj_physical_(self);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_resolve_conj(at::Tensor self) { return at::resolve_conj(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_resolve_neg(at::Tensor self) { return at::resolve_neg(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_acos(at::Tensor self) { return at::acos(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_acos_(at::Tensor self) {
     at::acos_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_arccos(at::Tensor self) { return at::arccos(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_arccos_(at::Tensor self) {
@@ -149,10 +236,22 @@ at::Tensor C_torch_affine_grid_generator(at::Tensor theta, SEXP size_sexp, bool 
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_all(at::Tensor self, int64_t dim, bool keepdim) { return at::all(self, dim, keepdim); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_any(at::Tensor self, int64_t dim, bool keepdim) { return at::any(self, dim, keepdim); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_acosh(at::Tensor self) { return at::acosh(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_acosh_(at::Tensor self) {
     at::acosh_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_arccosh(at::Tensor self) { return at::arccosh(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_arccosh_(at::Tensor self) {
@@ -161,10 +260,16 @@ at::Tensor C_torch_arccosh_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_asinh(at::Tensor self) { return at::asinh(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_asinh_(at::Tensor self) {
     at::asinh_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_arcsinh(at::Tensor self) { return at::arcsinh(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_arcsinh_(at::Tensor self) {
@@ -173,10 +278,16 @@ at::Tensor C_torch_arcsinh_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_atanh(at::Tensor self) { return at::atanh(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_atanh_(at::Tensor self) {
     at::atanh_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_arctanh(at::Tensor self) { return at::arctanh(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_arctanh_(at::Tensor self) {
@@ -200,10 +311,16 @@ at::Tensor C_torch_as_strided_(at::Tensor self, SEXP size_sexp, SEXP stride_sexp
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_asin(at::Tensor self) { return at::asin(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_asin_(at::Tensor self) {
     at::asin_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_arcsin(at::Tensor self) { return at::arcsin(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_arcsin_(at::Tensor self) {
@@ -212,16 +329,31 @@ at::Tensor C_torch_arcsin_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_atan(at::Tensor self) { return at::atan(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_atan_(at::Tensor self) {
     at::atan_(self);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_arctan(at::Tensor self) { return at::arctan(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_arctan_(at::Tensor self) {
     at::arctan_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_atleast_1d(at::Tensor self) { return at::atleast_1d(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_atleast_2d(at::Tensor self) { return at::atleast_2d(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_atleast_3d(at::Tensor self) { return at::atleast_3d(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_baddbmm(at::Tensor self, at::Tensor batch1, at::Tensor batch2, SEXP beta_sexp, SEXP alpha_sexp) { return at::baddbmm(self, batch1, batch2, sexp_to_scalar(beta_sexp), sexp_to_scalar(alpha_sexp)); }
@@ -242,6 +374,18 @@ SEXP C_torch_bartlett_window(int64_t window_length, SEXP dtype_sexp, SEXP device
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_quantized_batch_norm(at::Tensor input, SEXP weight, SEXP bias, at::Tensor mean, at::Tensor var, double eps, double output_scale, int64_t output_zero_point) { return at::quantized_batch_norm(input, sexp_to_optional_tensor(weight), sexp_to_optional_tensor(bias), mean, var, eps, output_scale, output_zero_point); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_bernoulli(at::Tensor self, SEXP generator) { return at::bernoulli(self, sexp_to_optional_generator(generator)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_bernoulli_(at::Tensor self, at::Tensor p, SEXP generator) {
+    self.bernoulli_(p, sexp_to_optional_generator(generator));
+    return self;
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_bilinear(at::Tensor input1, at::Tensor input2, at::Tensor weight, SEXP bias) { return at::bilinear(input1, input2, weight, sexp_to_optional_tensor(bias)); }
 
 // [[Rcpp::export]]
@@ -254,10 +398,16 @@ at::Tensor C_torch_binary_cross_entropy_with_logits(at::Tensor self, at::Tensor 
 at::Tensor C_torch_bincount(at::Tensor self, SEXP weights, int64_t minlength) { return at::bincount(self, sexp_to_optional_tensor(weights), minlength); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_bitwise_not(at::Tensor self) { return at::bitwise_not(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_bitwise_not_(at::Tensor self) {
     self.bitwise_not_();
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_copysign(at::Tensor self, at::Tensor other) { return at::copysign(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_copysign_(at::Tensor self, at::Tensor other) {
@@ -272,16 +422,25 @@ at::Tensor C_torch_logical_not_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_logical_xor(at::Tensor self, at::Tensor other) { return at::logical_xor(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_logical_xor_(at::Tensor self, at::Tensor other) {
     self.logical_xor_(other);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_logical_and(at::Tensor self, at::Tensor other) { return at::logical_and(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_logical_and_(at::Tensor self, at::Tensor other) {
     self.logical_and_(other);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_logical_or(at::Tensor self, at::Tensor other) { return at::logical_or(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_logical_or_(at::Tensor self, at::Tensor other) {
@@ -296,6 +455,13 @@ SEXP C_torch_blackman_window(int64_t window_length, SEXP dtype_sexp, SEXP device
     if (dtype.has_value()) opts = opts.dtype(dtype.value());
     if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
     return make_tensor_sexp(new at::Tensor(at::blackman_window(window_length, opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_broadcast_tensors(SEXP tensors_sexp) {
+    auto tensors_vec = sexp_to_tensor_list(tensors_sexp);
+    auto result = at::broadcast_tensors(tensors_vec);
+    return tensor_list_to_sexp(result);
 }
 
 // [[Rcpp::export]]
@@ -335,16 +501,40 @@ at::Tensor C_torch_chain_matmul(SEXP matrices_sexp) {
 }
 
 // [[Rcpp::export]]
+SEXP C_torch_unsafe_chunk(at::Tensor self, int64_t chunks, int64_t dim) {
+    auto result = at::unsafe_chunk(self, chunks, dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_chunk(at::Tensor self, int64_t chunks, int64_t dim) {
+    auto result = at::chunk(self, chunks, dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_tensor_split(at::Tensor self, int64_t sections, int64_t dim) {
+    auto result = at::tensor_split(self, sections, dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_clamp_(at::Tensor self, SEXP min, SEXP max) {
     at::clamp_(self, sexp_to_optional_scalar(min), sexp_to_optional_scalar(max));
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_clamp_max(at::Tensor self, SEXP max_sexp) { return at::clamp_max(self, sexp_to_scalar(max_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_clamp_max_(at::Tensor self, SEXP max_sexp) {
     at::clamp_max_(self, sexp_to_scalar(max_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_clamp_min(at::Tensor self, SEXP min_sexp) { return at::clamp_min(self, sexp_to_scalar(min_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_clamp_min_(at::Tensor self, SEXP min_sexp) {
@@ -424,6 +614,9 @@ at::Tensor C_torch_cos_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_cosh(at::Tensor self) { return at::cosh(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_cosh_(at::Tensor self) {
     at::cosh_(self);
     return self;
@@ -440,6 +633,9 @@ at::Tensor C_torch_count_nonzero(at::Tensor self, SEXP dim_sexp) {
 
 // [[Rcpp::export]]
 at::Tensor C_torch_cov(at::Tensor self, int64_t correction, SEXP fweights, SEXP aweights) { return at::cov(self, correction, sexp_to_optional_tensor(fweights), sexp_to_optional_tensor(aweights)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_corrcoef(at::Tensor self) { return at::corrcoef(self); }
 
 // [[Rcpp::export]]
 SEXP C_torch_cummax(at::Tensor self, int64_t dim) {
@@ -495,6 +691,18 @@ at::Tensor C_torch_ctc_loss(at::Tensor log_probs, at::Tensor targets, SEXP input
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_diag_embed(at::Tensor self, int64_t offset, int64_t dim1, int64_t dim2) { return at::diag_embed(self, offset, dim1, dim2); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_diagflat(at::Tensor self, int64_t offset) { return at::diagflat(self, offset); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_diagonal(at::Tensor self, int64_t offset, int64_t dim1, int64_t dim2) { return at::diagonal(self, offset, dim1, dim2); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_linalg_diagonal(at::Tensor A, int64_t offset, int64_t dim1, int64_t dim2) { return at::linalg_diagonal(A, offset, dim1, dim2); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_fill_diagonal_(at::Tensor self, SEXP fill_value_sexp, bool wrap) {
     self.fill_diagonal_(sexp_to_scalar(fill_value_sexp), wrap);
     return self;
@@ -504,10 +712,19 @@ at::Tensor C_torch_fill_diagonal_(at::Tensor self, SEXP fill_value_sexp, bool wr
 at::Tensor C_torch_diff(at::Tensor self, int64_t n, int64_t dim, SEXP prepend, SEXP append) { return at::diff(self, n, dim, sexp_to_optional_tensor(prepend), sexp_to_optional_tensor(append)); }
 
 // [[Rcpp::export]]
+SEXP C_torch_gradient(at::Tensor self, SEXP spacing, SEXP dim, int64_t edge_order) {
+    auto result = at::gradient(self, sexp_to_optional_scalar(spacing), sexp_to_optional_int(dim), edge_order);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_div_(at::Tensor self, at::Tensor other) {
     self.div_(other);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_divide(at::Tensor self, at::Tensor other) { return at::divide(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_divide_(at::Tensor self, at::Tensor other) {
@@ -516,10 +733,19 @@ at::Tensor C_torch_divide_(at::Tensor self, at::Tensor other) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_true_divide(at::Tensor self, at::Tensor other) { return at::true_divide(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_true_divide_(at::Tensor self, at::Tensor other) {
     self.true_divide_(other);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_dot(at::Tensor self, at::Tensor tensor) { return at::dot(self, tensor); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_vdot(at::Tensor self, at::Tensor other) { return at::vdot(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_einsum(std::string equation, SEXP tensors_sexp, SEXP path_sexp) {
@@ -575,6 +801,74 @@ SEXP C_torch_empty_permuted(SEXP size_sexp, SEXP physical_layout_sexp, SEXP dtyp
 }
 
 // [[Rcpp::export]]
+SEXP C_torch_new_empty(at::Tensor self, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(self.new_empty(at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_new_empty_strided(at::Tensor self, SEXP size_sexp, SEXP stride_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto stride_vec = sexp_to_int_vec(stride_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(self.new_empty_strided(at::IntArrayRef(size_vec.data(), size_vec.size()), at::IntArrayRef(stride_vec.data(), stride_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_new_full(at::Tensor self, SEXP size_sexp, SEXP fill_value_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(self.new_full(at::IntArrayRef(size_vec.data(), size_vec.size()), sexp_to_scalar(fill_value_sexp), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_new_zeros(at::Tensor self, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(self.new_zeros(at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_new_ones(at::Tensor self, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(self.new_ones(at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_resize_(at::Tensor self, SEXP size_sexp, SEXP memory_format) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    self.resize_(at::IntArrayRef(size_vec.data(), size_vec.size()), sexp_to_optional_memory_format(memory_format));
+    return self;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_empty_quantized(SEXP size_sexp, at::Tensor qtensor, SEXP dtype_sexp, SEXP device_sexp, SEXP memory_format) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::empty_quantized(at::IntArrayRef(size_vec.data(), size_vec.size()), qtensor, opts, sexp_to_optional_memory_format(memory_format))));
+}
+
+// [[Rcpp::export]]
 SEXP C_torch_empty_strided(SEXP size_sexp, SEXP stride_sexp, SEXP dtype_sexp, SEXP device_sexp) {
     auto size_vec = sexp_to_int_vec(size_sexp);
     auto stride_vec = sexp_to_int_vec(stride_sexp);
@@ -586,10 +880,16 @@ SEXP C_torch_empty_strided(SEXP size_sexp, SEXP stride_sexp, SEXP dtype_sexp, SE
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_erf(at::Tensor self) { return at::erf(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_erf_(at::Tensor self) {
     at::erf_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_erfc(at::Tensor self) { return at::erfc(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_erfc_(at::Tensor self) {
@@ -604,16 +904,25 @@ at::Tensor C_torch_exp_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_exp2(at::Tensor self) { return at::exp2(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_exp2_(at::Tensor self) {
     at::exp2_(self);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_expm1(at::Tensor self) { return at::expm1(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_expm1_(at::Tensor self) {
     at::expm1_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_expand_as(at::Tensor self, at::Tensor other) { return self.expand_as(other); }
 
 // [[Rcpp::export]]
 SEXP C_torch_eye(int64_t n, SEXP dtype_sexp, SEXP device_sexp) {
@@ -631,6 +940,9 @@ at::Tensor C_torch_unflatten(at::Tensor self, int64_t dim, SEXP sizes_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_fill(at::Tensor self, SEXP value_sexp) { return at::fill(self, sexp_to_scalar(value_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_floor_(at::Tensor self) {
     at::floor_(self);
     return self;
@@ -643,9 +955,21 @@ at::Tensor C_torch_floor_divide_(at::Tensor self, at::Tensor other) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_frac(at::Tensor self) { return at::frac(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_frac_(at::Tensor self) {
     at::frac_(self);
     return self;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_full_like(at::Tensor self, SEXP fill_value_sexp, SEXP dtype_sexp, SEXP device_sexp, SEXP memory_format) {
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::full_like(self, sexp_to_scalar(fill_value_sexp), opts, sexp_to_optional_memory_format(memory_format))));
 }
 
 // [[Rcpp::export]]
@@ -658,10 +982,16 @@ SEXP C_torch_from_file(std::string filename, SEXP shared, SEXP size, SEXP dtype_
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_gcd(at::Tensor self, at::Tensor other) { return at::gcd(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_gcd_(at::Tensor self, at::Tensor other) {
     at::gcd_(self, other);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_lcm(at::Tensor self, at::Tensor other) { return at::lcm(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_lcm_(at::Tensor self, at::Tensor other) {
@@ -725,6 +1055,13 @@ at::Tensor C_torch_index_copy_(at::Tensor self, int64_t dim, at::Tensor index, a
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_index_put_(at::Tensor self, SEXP indices_sexp, at::Tensor values, bool accumulate) {
+    auto indices_vec = sexp_to_optional_tensor_list(indices_sexp);
+    at::index_put_(self, indices_vec, values, accumulate);
+    return self;
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_instance_norm(at::Tensor input, SEXP weight, SEXP bias, SEXP running_mean, SEXP running_var, bool use_input_stats, double momentum, double eps, bool cudnn_enabled) { return at::instance_norm(input, sexp_to_optional_tensor(weight), sexp_to_optional_tensor(bias), sexp_to_optional_tensor(running_mean), sexp_to_optional_tensor(running_var), use_input_stats, momentum, eps, cudnn_enabled); }
 
 // [[Rcpp::export]]
@@ -734,7 +1071,25 @@ at::Tensor C_torch_isclose(at::Tensor self, at::Tensor other, double rtol, doubl
 at::Tensor C_torch_isin(at::Tensor elements, at::Tensor test_elements, bool assume_unique, bool invert) { return at::isin(elements, test_elements, assume_unique, invert); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_isnan(at::Tensor self) { return at::isnan(self); }
+
+// [[Rcpp::export]]
+bool C_torch_is_distributed(at::Tensor self) { return self.is_distributed(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_isreal(at::Tensor self) { return at::isreal(self); }
+
+// [[Rcpp::export]]
+bool C_torch_is_nonzero(at::Tensor self) { return self.is_nonzero(); }
+
+// [[Rcpp::export]]
+bool C_torch_is_same_size(at::Tensor self, at::Tensor other) { return self.is_same_size(other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_kl_div(at::Tensor self, at::Tensor target, int64_t reduction, bool log_target) { return at::kl_div(self, target, reduction, log_target); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_kron(at::Tensor self, at::Tensor other) { return at::kron(self, other); }
 
 // [[Rcpp::export]]
 SEXP C_torch_kthvalue(at::Tensor self, int64_t k, int64_t dim, bool keepdim) {
@@ -783,6 +1138,9 @@ at::Tensor C_torch_nan_to_num_(at::Tensor self, SEXP nan, SEXP posinf, SEXP negi
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_ldexp(at::Tensor self, at::Tensor other) { return at::ldexp(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_ldexp_(at::Tensor self, at::Tensor other) {
     at::ldexp_(self, other);
     return self;
@@ -801,6 +1159,9 @@ at::Tensor C_torch_log10_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_log1p(at::Tensor self) { return at::log1p(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_log1p_(at::Tensor self) {
     at::log1p_(self);
     return self;
@@ -811,6 +1172,15 @@ at::Tensor C_torch_log2_(at::Tensor self) {
     at::log2_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_logaddexp(at::Tensor self, at::Tensor other) { return at::logaddexp(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_logaddexp2(at::Tensor self, at::Tensor other) { return at::logaddexp2(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_xlogy(at::Tensor self, at::Tensor other) { return at::xlogy(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_xlogy_(at::Tensor self, at::Tensor other) {
@@ -828,6 +1198,9 @@ SEXP C_torch_logspace(SEXP start_sexp, SEXP end_sexp, int64_t steps, double base
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_logcumsumexp(at::Tensor self, int64_t dim) { return at::logcumsumexp(self, dim); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_logsumexp(at::Tensor self, SEXP dim_sexp, bool keepdim) {
     auto dim_vec = sexp_to_int_vec(dim_sexp);
     return at::logsumexp(self, at::IntArrayRef(dim_vec.data(), dim_vec.size()), keepdim);
@@ -835,6 +1208,12 @@ at::Tensor C_torch_logsumexp(at::Tensor self, SEXP dim_sexp, bool keepdim) {
 
 // [[Rcpp::export]]
 at::Tensor C_torch_margin_ranking_loss(at::Tensor input1, at::Tensor input2, at::Tensor target, double margin, int64_t reduction) { return at::margin_ranking_loss(input1, input2, target, margin, reduction); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_matrix_power(at::Tensor self, int64_t n) { return at::matrix_power(self, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_matrix_exp(at::Tensor self) { return at::matrix_exp(self); }
 
 // [[Rcpp::export]]
 SEXP C_torch_aminmax(at::Tensor self, SEXP dim, bool keepdim) {
@@ -893,6 +1272,33 @@ at::Tensor C_torch_max_pool2d(at::Tensor self, SEXP kernel_size_sexp, SEXP strid
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_quantized_max_pool1d(at::Tensor self, SEXP kernel_size_sexp, SEXP stride_sexp, SEXP padding_sexp, SEXP dilation_sexp, bool ceil_mode) {
+    auto kernel_size_vec = sexp_to_int_vec(kernel_size_sexp);
+    auto stride_vec = sexp_to_int_vec(stride_sexp);
+    auto padding_vec = sexp_to_int_vec(padding_sexp);
+    auto dilation_vec = sexp_to_int_vec(dilation_sexp);
+    return at::quantized_max_pool1d(self, at::IntArrayRef(kernel_size_vec.data(), kernel_size_vec.size()), at::IntArrayRef(stride_vec.data(), stride_vec.size()), at::IntArrayRef(padding_vec.data(), padding_vec.size()), at::IntArrayRef(dilation_vec.data(), dilation_vec.size()), ceil_mode);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantized_max_pool2d(at::Tensor self, SEXP kernel_size_sexp, SEXP stride_sexp, SEXP padding_sexp, SEXP dilation_sexp, bool ceil_mode) {
+    auto kernel_size_vec = sexp_to_int_vec(kernel_size_sexp);
+    auto stride_vec = sexp_to_int_vec(stride_sexp);
+    auto padding_vec = sexp_to_int_vec(padding_sexp);
+    auto dilation_vec = sexp_to_int_vec(dilation_sexp);
+    return at::quantized_max_pool2d(self, at::IntArrayRef(kernel_size_vec.data(), kernel_size_vec.size()), at::IntArrayRef(stride_vec.data(), stride_vec.size()), at::IntArrayRef(padding_vec.data(), padding_vec.size()), at::IntArrayRef(dilation_vec.data(), dilation_vec.size()), ceil_mode);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantized_max_pool3d(at::Tensor self, SEXP kernel_size_sexp, SEXP stride_sexp, SEXP padding_sexp, SEXP dilation_sexp, bool ceil_mode) {
+    auto kernel_size_vec = sexp_to_int_vec(kernel_size_sexp);
+    auto stride_vec = sexp_to_int_vec(stride_sexp);
+    auto padding_vec = sexp_to_int_vec(padding_sexp);
+    auto dilation_vec = sexp_to_int_vec(dilation_sexp);
+    return at::quantized_max_pool3d(self, at::IntArrayRef(kernel_size_vec.data(), kernel_size_vec.size()), at::IntArrayRef(stride_vec.data(), stride_vec.size()), at::IntArrayRef(padding_vec.data(), padding_vec.size()), at::IntArrayRef(dilation_vec.data(), dilation_vec.size()), ceil_mode);
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_max_pool3d(at::Tensor self, SEXP kernel_size_sexp, SEXP stride_sexp, SEXP padding_sexp, SEXP dilation_sexp, bool ceil_mode) {
     auto kernel_size_vec = sexp_to_int_vec(kernel_size_sexp);
     auto stride_vec = sexp_to_int_vec(stride_sexp);
@@ -911,6 +1317,12 @@ at::Tensor C_torch_nanmean(at::Tensor self, SEXP dim_sexp, bool keepdim, SEXP dt
     }
     return at::nanmean(self, dim_ref, keepdim, sexp_to_dtype(dtype));
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_median(at::Tensor self) { return at::median(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_nanmedian(at::Tensor self) { return at::nanmedian(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_amin(at::Tensor self, SEXP dim_sexp, bool keepdim) {
@@ -939,10 +1351,19 @@ at::Tensor C_torch_mul_(at::Tensor self, at::Tensor other) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_multiply(at::Tensor self, at::Tensor other) { return at::multiply(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_multiply_(at::Tensor self, at::Tensor other) {
     self.multiply_(other);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_mv(at::Tensor self, at::Tensor vec) { return at::mv(self, vec); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_mvlgamma(at::Tensor self, int64_t p) { return at::mvlgamma(self, p); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_mvlgamma_(at::Tensor self, int64_t p) {
@@ -1026,13 +1447,54 @@ SEXP C_torch_batch_norm_update_stats(at::Tensor input, SEXP running_mean, SEXP r
 }
 
 // [[Rcpp::export]]
+bool C_torch_is_vulkan_available() { return at::is_vulkan_available(); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_pairwise_distance(at::Tensor x1, at::Tensor x2, double p, double eps, bool keepdim) { return at::pairwise_distance(x1, x2, p, eps, keepdim); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_cdist(at::Tensor x1, at::Tensor x2, double p, SEXP compute_mode) { return at::cdist(x1, x2, p, sexp_to_optional_int(compute_mode)); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_pdist(at::Tensor self, double p) { return at::pdist(self, p); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_cosine_similarity(at::Tensor x1, at::Tensor x2, int64_t dim, double eps) { return at::cosine_similarity(x1, x2, dim, eps); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_movedim(at::Tensor self, SEXP source_sexp, SEXP destination_sexp) {
+    auto source_vec = sexp_to_int_vec(source_sexp);
+    auto destination_vec = sexp_to_int_vec(destination_sexp);
+    return at::movedim(self, at::IntArrayRef(source_vec.data(), source_vec.size()), at::IntArrayRef(destination_vec.data(), destination_vec.size()));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_moveaxis(at::Tensor self, SEXP source_sexp, SEXP destination_sexp) {
+    auto source_vec = sexp_to_int_vec(source_sexp);
+    auto destination_vec = sexp_to_int_vec(destination_sexp);
+    return at::moveaxis(self, at::IntArrayRef(source_vec.data(), source_vec.size()), at::IntArrayRef(destination_vec.data(), destination_vec.size()));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_numpy_T(at::Tensor self) { return self.numpy_T(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_matrix_H(at::Tensor self) { return self.matrix_H(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_mT(at::Tensor self) { return self.mT(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_mH(at::Tensor self) { return self.mH(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_adjoint(at::Tensor self) { return at::adjoint(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_pixel_shuffle(at::Tensor self, int64_t upscale_factor) { return at::pixel_shuffle(self, upscale_factor); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_pixel_unshuffle(at::Tensor self, int64_t downscale_factor) { return at::pixel_unshuffle(self, downscale_factor); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_channel_shuffle(at::Tensor self, int64_t groups) { return at::channel_shuffle(self, groups); }
@@ -1041,13 +1503,28 @@ at::Tensor C_torch_channel_shuffle(at::Tensor self, int64_t groups) { return at:
 at::Tensor C_torch_native_channel_shuffle(at::Tensor self, int64_t groups) { return at::native_channel_shuffle(self, groups); }
 
 // [[Rcpp::export]]
+bool C_torch_is_pinned(at::Tensor self, SEXP device) { return self.is_pinned(sexp_to_optional_device(device)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_pin_memory(at::Tensor self, SEXP device) { return self.pin_memory(sexp_to_optional_device(device)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_pinverse(at::Tensor self, double rcond) { return at::pinverse(self, rcond); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_poisson_nll_loss(at::Tensor input, at::Tensor target, bool log_input, bool full, double eps, int64_t reduction) { return at::poisson_nll_loss(input, target, log_input, full, eps, reduction); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_rad2deg(at::Tensor self) { return at::rad2deg(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_rad2deg_(at::Tensor self) {
     at::rad2deg_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_deg2rad(at::Tensor self) { return at::deg2rad(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_deg2rad_(at::Tensor self) {
@@ -1065,13 +1542,28 @@ SEXP C_torch_scalar_tensor(SEXP s_sexp, SEXP dtype_sexp, SEXP device_sexp) {
 }
 
 // [[Rcpp::export]]
-SEXP C_torch_rand(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+SEXP C_torch_rand(SEXP size_sexp, SEXP names_sexp, SEXP dtype_sexp, SEXP device_sexp) {
     auto size_vec = sexp_to_int_vec(size_sexp);
+    c10::optional<at::DimnameList> names_ref;
+    std::vector<at::Dimname> names_vec;
+    if (!Rf_isNull(names_sexp)) {
+        names_vec = sexp_to_dimname_vec(names_sexp);
+        names_ref = at::DimnameList(names_vec.data(), names_vec.size());
+    }
     auto opts = at::TensorOptions();
     auto dtype = sexp_to_dtype(dtype_sexp);
     if (dtype.has_value()) opts = opts.dtype(dtype.value());
     if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
-    return make_tensor_sexp(new at::Tensor(at::rand(at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+    return make_tensor_sexp(new at::Tensor(at::rand(at::IntArrayRef(size_vec.data(), size_vec.size()), names_ref, opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_rand_like(at::Tensor self, SEXP dtype_sexp, SEXP device_sexp, SEXP memory_format) {
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::rand_like(self, opts, sexp_to_optional_memory_format(memory_format))));
 }
 
 // [[Rcpp::export]]
@@ -1082,6 +1574,15 @@ SEXP C_torch_randint(int64_t high, SEXP size_sexp, SEXP dtype_sexp, SEXP device_
     if (dtype.has_value()) opts = opts.dtype(dtype.value());
     if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
     return make_tensor_sexp(new at::Tensor(at::randint(high, at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_randint_like(at::Tensor self, int64_t high, SEXP dtype_sexp, SEXP device_sexp, SEXP memory_format) {
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::randint_like(self, high, opts, sexp_to_optional_memory_format(memory_format))));
 }
 
 // [[Rcpp::export]]
@@ -1103,6 +1604,12 @@ SEXP C_torch_range(SEXP start_sexp, SEXP end_sexp, SEXP step_sexp, SEXP dtype_se
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_ravel(at::Tensor self) { return at::ravel(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_reciprocal(at::Tensor self) { return at::reciprocal(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_reciprocal_(at::Tensor self) {
     at::reciprocal_(self);
     return self;
@@ -1115,14 +1622,29 @@ at::Tensor C_torch_neg_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_negative(at::Tensor self) { return at::negative(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_negative_(at::Tensor self) {
     at::negative_(self);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_reshape_as(at::Tensor self, at::Tensor other) { return self.reshape_as(other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_round_(at::Tensor self) {
     at::round_(self);
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_rrelu(at::Tensor self, SEXP lower_sexp, SEXP upper_sexp, bool training, SEXP generator) { return at::rrelu(self, sexp_to_scalar(lower_sexp), sexp_to_scalar(upper_sexp), training, sexp_to_optional_generator(generator)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_rrelu_(at::Tensor self, SEXP lower_sexp, SEXP upper_sexp, bool training, SEXP generator) {
+    at::rrelu_(self, sexp_to_scalar(lower_sexp), sexp_to_scalar(upper_sexp), training, sexp_to_optional_generator(generator));
     return self;
 }
 
@@ -1133,10 +1655,16 @@ at::Tensor C_torch_relu_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_relu6(at::Tensor self) { return at::relu6(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_relu6_(at::Tensor self) {
     at::relu6_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_prelu(at::Tensor self, at::Tensor weight) { return at::prelu(self, weight); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_gelu_(at::Tensor self, std::string approximate) {
@@ -1145,19 +1673,28 @@ at::Tensor C_torch_gelu_(at::Tensor self, std::string approximate) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_hardshrink(at::Tensor self, SEXP lambd_sexp) { return at::hardshrink(self, sexp_to_scalar(lambd_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_rsqrt_(at::Tensor self) {
     at::rsqrt_(self);
     return self;
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_select(at::Tensor self, int64_t dim, int64_t index) { return at::select(self, dim, index); }
+at::Tensor C_torch_select(at::Tensor self, SEXP dim, int64_t index) { return at::select(self, sexp_to_dimname(dim), index); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_selu(at::Tensor self) { return at::selu(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_selu_(at::Tensor self) {
     at::selu_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_celu(at::Tensor self, SEXP alpha_sexp) { return at::celu(self, sexp_to_scalar(alpha_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_celu_(at::Tensor self, SEXP alpha_sexp) {
@@ -1170,6 +1707,9 @@ at::Tensor C_torch_silu_(at::Tensor self) {
     at::silu_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_mish(at::Tensor self) { return at::mish(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_mish_(at::Tensor self) {
@@ -1199,10 +1739,16 @@ at::Tensor C_torch_sin_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_sinc(at::Tensor self) { return at::sinc(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_sinc_(at::Tensor self) {
     at::sinc_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_sinh(at::Tensor self) { return at::sinh(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_sinh_(at::Tensor self) {
@@ -1239,6 +1785,53 @@ at::Tensor C_torch_as_strided_scatter(at::Tensor self, at::Tensor src, SEXP size
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_smm(at::Tensor self, at::Tensor mat2) { return at::smm(self, mat2); }
+
+// [[Rcpp::export]]
+SEXP C_torch_unsafe_split(at::Tensor self, int64_t split_size, int64_t dim) {
+    auto result = at::unsafe_split(self, split_size, dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_split(at::Tensor self, int64_t split_size, int64_t dim) {
+    auto result = at::split(self, split_size, dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_unsafe_split_with_sizes(at::Tensor self, SEXP split_sizes_sexp, int64_t dim) {
+    auto split_sizes_vec = sexp_to_int_vec(split_sizes_sexp);
+    auto result = at::unsafe_split_with_sizes(self, at::IntArrayRef(split_sizes_vec.data(), split_sizes_vec.size()), dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_split_with_sizes(at::Tensor self, SEXP split_sizes_sexp, int64_t dim) {
+    auto split_sizes_vec = sexp_to_int_vec(split_sizes_sexp);
+    auto result = at::split_with_sizes(self, at::IntArrayRef(split_sizes_vec.data(), split_sizes_vec.size()), dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_hsplit(at::Tensor self, int64_t sections) {
+    auto result = at::hsplit(self, sections);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_vsplit(at::Tensor self, int64_t sections) {
+    auto result = at::vsplit(self, sections);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_dsplit(at::Tensor self, int64_t sections) {
+    auto result = at::dsplit(self, sections);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_squeeze_(at::Tensor self) {
     self.squeeze_();
     return self;
@@ -1272,6 +1865,9 @@ at::Tensor C_torch_dstack(SEXP tensors_sexp) {
 }
 
 // [[Rcpp::export]]
+int64_t C_torch_stride(at::Tensor self, SEXP dim) { return at::stride(self, sexp_to_dimname(dim)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_nansum(at::Tensor self, SEXP dim_sexp, bool keepdim, SEXP dtype) {
     c10::optional<at::IntArrayRef> dim_ref;
     std::vector<int64_t> dim_vec;
@@ -1283,10 +1879,19 @@ at::Tensor C_torch_nansum(at::Tensor self, SEXP dim_sexp, bool keepdim, SEXP dty
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_sum_to_size(at::Tensor self, SEXP size_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    return self.sum_to_size(at::IntArrayRef(size_vec.data(), size_vec.size()));
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_sqrt_(at::Tensor self) {
     at::sqrt_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_square(at::Tensor self) { return at::square(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_square_(at::Tensor self) {
@@ -1316,6 +1921,9 @@ at::Tensor C_torch_t_(at::Tensor self) {
     self.t_();
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_tan(at::Tensor self) { return at::tan(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_tan_(at::Tensor self) {
@@ -1358,6 +1966,15 @@ at::Tensor C_torch_transpose_(at::Tensor self, int64_t dim0, int64_t dim1) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_one_hot(at::Tensor self, int64_t num_classes) { return at::one_hot(self, num_classes); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_fliplr(at::Tensor self) { return at::fliplr(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_flipud(at::Tensor self) { return at::flipud(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_roll(at::Tensor self, SEXP shifts_sexp, SEXP dims_sexp) {
     auto shifts_vec = sexp_to_int_vec(shifts_sexp);
     auto dims_vec = sexp_to_int_vec(dims_sexp);
@@ -1386,10 +2003,16 @@ at::Tensor C_torch_trunc_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_fix(at::Tensor self) { return at::fix(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_fix_(at::Tensor self) {
     at::fix_(self);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_type_as(at::Tensor self, at::Tensor other) { return self.type_as(other); }
 
 // [[Rcpp::export]]
 SEXP C_torch_unique_dim(at::Tensor self, int64_t dim, bool sorted, bool return_inverse, bool return_counts) {
@@ -1449,6 +2072,9 @@ at::Tensor C_torch_unsqueeze_(at::Tensor self, int64_t dim) {
 at::Tensor C_torch_vander(at::Tensor x, SEXP N, bool increasing) { return at::vander(x, sexp_to_optional_int(N), increasing); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_var(at::Tensor self, bool unbiased) { return at::var(self, unbiased); }
+
+// [[Rcpp::export]]
 SEXP C_torch_var_mean(at::Tensor self, bool unbiased) {
     auto result = at::var_mean(self, unbiased);
     SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
@@ -1461,6 +2087,21 @@ SEXP C_torch_var_mean(at::Tensor self, bool unbiased) {
     UNPROTECT(2);
     return out;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_view_as(at::Tensor self, at::Tensor other) { return self.view_as(other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_norm_except_dim(at::Tensor v, int64_t pow, int64_t dim) { return at::norm_except_dim(v, pow, dim); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_poisson(at::Tensor self, SEXP generator) { return at::poisson(self, sexp_to_optional_generator(generator)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_binomial(at::Tensor count, at::Tensor prob, SEXP generator) { return at::binomial(count, prob, sexp_to_optional_generator(generator)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_native_norm(at::Tensor self, SEXP p_sexp) { return at::native_norm(self, sexp_to_scalar(p_sexp)); }
 
 // [[Rcpp::export]]
 SEXP C_torch_frexp(at::Tensor self) {
@@ -1483,10 +2124,31 @@ at::Tensor C_torch_frobenius_norm(at::Tensor self, SEXP dim_sexp, bool keepdim) 
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_nuclear_norm(at::Tensor self, bool keepdim) { return at::nuclear_norm(self, keepdim); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_positive(at::Tensor self) { return at::positive(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_resize_as_(at::Tensor self, at::Tensor the_template, SEXP memory_format) {
+    at::resize_as_(self, the_template, sexp_to_optional_memory_format(memory_format));
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_resize_as_sparse_(at::Tensor self, at::Tensor the_template) {
+    at::resize_as_sparse_(self, the_template);
+    return self;
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_sub_(at::Tensor self, at::Tensor other, SEXP alpha_sexp) {
     self.sub_(other, sexp_to_scalar(alpha_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_subtract(at::Tensor self, at::Tensor other, SEXP alpha_sexp) { return at::subtract(self, other, sexp_to_scalar(alpha_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_subtract_(at::Tensor self, at::Tensor other, SEXP alpha_sexp) {
@@ -1495,10 +2157,19 @@ at::Tensor C_torch_subtract_(at::Tensor self, at::Tensor other, SEXP alpha_sexp)
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_rsub(at::Tensor self, at::Tensor other, SEXP alpha_sexp) { return at::rsub(self, other, sexp_to_scalar(alpha_sexp)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_heaviside(at::Tensor self, at::Tensor values) { return at::heaviside(self, values); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_heaviside_(at::Tensor self, at::Tensor values) {
     self.heaviside_(values);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_sparse_sampled_addmm(at::Tensor self, at::Tensor mat1, at::Tensor mat2, SEXP beta_sexp, SEXP alpha_sexp) { return at::sparse_sampled_addmm(self, mat1, mat2, sexp_to_scalar(beta_sexp), sexp_to_scalar(alpha_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_addmm(at::Tensor self, at::Tensor mat1, at::Tensor mat2, SEXP beta_sexp, SEXP alpha_sexp) { return at::addmm(self, mat1, mat2, sexp_to_scalar(beta_sexp), sexp_to_scalar(alpha_sexp)); }
@@ -1507,6 +2178,221 @@ at::Tensor C_torch_addmm(at::Tensor self, at::Tensor mat1, at::Tensor mat2, SEXP
 at::Tensor C_torch_addmm_(at::Tensor self, at::Tensor mat1, at::Tensor mat2, SEXP beta_sexp, SEXP alpha_sexp) {
     self.addmm_(mat1, mat2, sexp_to_scalar(beta_sexp), sexp_to_scalar(alpha_sexp));
     return self;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sparse_compressed_tensor(at::Tensor compressed_indices, at::Tensor plain_indices, at::Tensor values, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::sparse_compressed_tensor(compressed_indices, plain_indices, values, at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sparse_csr_tensor(at::Tensor crow_indices, at::Tensor col_indices, at::Tensor values, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::sparse_csr_tensor(crow_indices, col_indices, values, at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sparse_csc_tensor(at::Tensor ccol_indices, at::Tensor row_indices, at::Tensor values, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::sparse_csc_tensor(ccol_indices, row_indices, values, at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sparse_bsr_tensor(at::Tensor crow_indices, at::Tensor col_indices, at::Tensor values, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::sparse_bsr_tensor(crow_indices, col_indices, values, at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sparse_bsc_tensor(at::Tensor ccol_indices, at::Tensor row_indices, at::Tensor values, SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::sparse_bsc_tensor(ccol_indices, row_indices, values, at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_sparse_coo_tensor(SEXP size_sexp, SEXP dtype_sexp, SEXP device_sexp) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    auto opts = at::TensorOptions();
+    auto dtype = sexp_to_dtype(dtype_sexp);
+    if (dtype.has_value()) opts = opts.dtype(dtype.value());
+    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));
+    return make_tensor_sexp(new at::Tensor(at::sparse_coo_tensor(at::IntArrayRef(size_vec.data(), size_vec.size()), opts)));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_sparse_resize_(at::Tensor self, SEXP size_sexp, int64_t sparse_dim, int64_t dense_dim) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    self.sparse_resize_(at::IntArrayRef(size_vec.data(), size_vec.size()), sparse_dim, dense_dim);
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_sparse_resize_and_clear_(at::Tensor self, SEXP size_sexp, int64_t sparse_dim, int64_t dense_dim) {
+    auto size_vec = sexp_to_int_vec(size_sexp);
+    self.sparse_resize_and_clear_(at::IntArrayRef(size_vec.data(), size_vec.size()), sparse_dim, dense_dim);
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_sparse_mask(at::Tensor self, at::Tensor mask) { return self.sparse_mask(mask); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_to_dense(at::Tensor self, SEXP dtype, SEXP masked_grad) { return self.to_dense(sexp_to_dtype(dtype), sexp_to_optional_bool(masked_grad)); }
+
+// [[Rcpp::export]]
+int64_t C_torch_sparse_dim(at::Tensor self) { return self.sparse_dim(); }
+
+// [[Rcpp::export]]
+int64_t C_torch_dense_dim(at::Tensor self) { return self.dense_dim(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_coalesce(at::Tensor self) { return self.coalesce(); }
+
+// [[Rcpp::export]]
+bool C_torch_is_coalesced(at::Tensor self) { return self.is_coalesced(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_indices(at::Tensor self) { return self.indices(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_values(at::Tensor self) { return self.values(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_crow_indices(at::Tensor self) { return self.crow_indices(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_col_indices(at::Tensor self) { return self.col_indices(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_ccol_indices(at::Tensor self) { return self.ccol_indices(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_row_indices(at::Tensor self) { return self.row_indices(); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_hspmm(at::Tensor mat1, at::Tensor mat2) { return at::hspmm(mat1, mat2); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_copy_sparse_to_sparse_(at::Tensor self, at::Tensor src, bool non_blocking) {
+    at::copy_sparse_to_sparse_(self, src, non_blocking);
+    return self;
+}
+
+// [[Rcpp::export]]
+SEXP C_torch_unbind(at::Tensor self, int64_t dim) {
+    auto result = at::unbind(self, dim);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_to_sparse(at::Tensor self, int64_t sparse_dim) { return self.to_sparse(sparse_dim); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_to_sparse_csr(at::Tensor self, SEXP dense_dim) { return self.to_sparse_csr(sexp_to_optional_int(dense_dim)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_to_sparse_csc(at::Tensor self, SEXP dense_dim) { return self.to_sparse_csc(sexp_to_optional_int(dense_dim)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_to_sparse_bsr(at::Tensor self, SEXP blocksize_sexp, SEXP dense_dim) {
+    auto blocksize_vec = sexp_to_int_vec(blocksize_sexp);
+    return self.to_sparse_bsr(at::IntArrayRef(blocksize_vec.data(), blocksize_vec.size()), sexp_to_optional_int(dense_dim));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_to_sparse_bsc(at::Tensor self, SEXP blocksize_sexp, SEXP dense_dim) {
+    auto blocksize_vec = sexp_to_int_vec(blocksize_sexp);
+    return self.to_sparse_bsc(at::IntArrayRef(blocksize_vec.data(), blocksize_vec.size()), sexp_to_optional_int(dense_dim));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantize_per_tensor_dynamic(at::Tensor self, SEXP dtype, bool reduce_range) { return at::quantize_per_tensor_dynamic(self, sexp_to_dtype(dtype).value(), reduce_range); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantize_per_tensor(at::Tensor self, double scale, int64_t zero_point, SEXP dtype) { return at::quantize_per_tensor(self, scale, zero_point, sexp_to_dtype(dtype).value()); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantize_per_channel(at::Tensor self, at::Tensor scales, at::Tensor zero_points, int64_t axis, SEXP dtype) { return at::quantize_per_channel(self, scales, zero_points, axis, sexp_to_dtype(dtype).value()); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_dequantize(at::Tensor self) { return at::dequantize(self); }
+
+// [[Rcpp::export]]
+double C_torch_q_scale(at::Tensor self) { return at::q_scale(self); }
+
+// [[Rcpp::export]]
+int64_t C_torch_q_zero_point(at::Tensor self) { return at::q_zero_point(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_q_per_channel_scales(at::Tensor self) { return at::q_per_channel_scales(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_q_per_channel_zero_points(at::Tensor self) { return at::q_per_channel_zero_points(self); }
+
+// [[Rcpp::export]]
+int64_t C_torch_q_per_channel_axis(at::Tensor self) { return at::q_per_channel_axis(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_int_repr(at::Tensor self) { return at::int_repr(self); }
+
+// [[Rcpp::export]]
+SEXP C_torch_qscheme(at::Tensor self) {
+    return Rf_ScalarInteger(static_cast<int>(self.qscheme()));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_fake_quantize_per_tensor_affine(at::Tensor self, double scale, int64_t zero_point, int64_t quant_min, int64_t quant_max) { return at::fake_quantize_per_tensor_affine(self, scale, zero_point, quant_min, quant_max); }
+
+// [[Rcpp::export]]
+SEXP C_torch_fake_quantize_per_tensor_affine_cachemask(at::Tensor self, double scale, int64_t zero_point, int64_t quant_min, int64_t quant_max) {
+    auto result = at::fake_quantize_per_tensor_affine_cachemask(self, scale, zero_point, quant_min, quant_max);
+    SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+    SET_VECTOR_ELT(out, 0, Rcpp::wrap(std::get<0>(result)));
+    SET_VECTOR_ELT(out, 1, Rcpp::wrap(std::get<1>(result)));
+    SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+    SET_STRING_ELT(names, 0, Rf_mkChar("output"));
+    SET_STRING_ELT(names, 1, Rf_mkChar("mask"));
+    Rf_setAttrib(out, R_NamesSymbol, names);
+    UNPROTECT(2);
+    return out;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_fake_quantize_per_channel_affine(at::Tensor self, at::Tensor scale, at::Tensor zero_point, int64_t axis, int64_t quant_min, int64_t quant_max) { return at::fake_quantize_per_channel_affine(self, scale, zero_point, axis, quant_min, quant_max); }
+
+// [[Rcpp::export]]
+SEXP C_torch_fake_quantize_per_channel_affine_cachemask(at::Tensor self, at::Tensor scale, at::Tensor zero_point, int64_t axis, int64_t quant_min, int64_t quant_max) {
+    auto result = at::fake_quantize_per_channel_affine_cachemask(self, scale, zero_point, axis, quant_min, quant_max);
+    SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+    SET_VECTOR_ELT(out, 0, Rcpp::wrap(std::get<0>(result)));
+    SET_VECTOR_ELT(out, 1, Rcpp::wrap(std::get<1>(result)));
+    SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+    SET_STRING_ELT(names, 0, Rf_mkChar("output"));
+    SET_STRING_ELT(names, 1, Rf_mkChar("mask"));
+    Rf_setAttrib(out, R_NamesSymbol, names);
+    UNPROTECT(2);
+    return out;
 }
 
 // [[Rcpp::export]]
@@ -1527,9 +2413,32 @@ SEXP C_torch_choose_qparams_optimized(at::Tensor input, int64_t numel, int64_t n
 }
 
 // [[Rcpp::export]]
+SEXP C_torch_meshgrid(SEXP tensors_sexp) {
+    auto tensors_vec = sexp_to_tensor_list(tensors_sexp);
+    auto result = at::meshgrid(tensors_vec);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_cartesian_prod(SEXP tensors_sexp) {
     auto tensors_vec = sexp_to_tensor_list(tensors_sexp);
     return at::cartesian_prod(tensors_vec);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_combinations(at::Tensor self, int64_t r, bool with_replacement) { return at::combinations(self, r, with_replacement); }
+
+// [[Rcpp::export]]
+SEXP C_torch_result_type(at::Tensor tensor, at::Tensor other) {
+    return Rf_ScalarInteger(static_cast<int>(at::result_type(tensor, other)));
+}
+
+// [[Rcpp::export]]
+bool C_torch_can_cast(SEXP from_, SEXP to) { return at::can_cast(sexp_to_dtype(from_).value(), sexp_to_dtype(to).value()); }
+
+// [[Rcpp::export]]
+SEXP C_torch_promote_types(SEXP type1, SEXP type2) {
+    return Rf_ScalarInteger(static_cast<int>(at::promote_types(sexp_to_dtype(type1).value(), sexp_to_dtype(type2).value())));
 }
 
 // [[Rcpp::export]]
@@ -1602,12 +2511,39 @@ at::Tensor C_torch_rnn_tanh_cell(at::Tensor input, at::Tensor hx, at::Tensor w_i
 at::Tensor C_torch_rnn_relu_cell(at::Tensor input, at::Tensor hx, at::Tensor w_ih, at::Tensor w_hh, SEXP b_ih, SEXP b_hh) { return at::rnn_relu_cell(input, hx, w_ih, w_hh, sexp_to_optional_tensor(b_ih), sexp_to_optional_tensor(b_hh)); }
 
 // [[Rcpp::export]]
+SEXP C_torch_quantized_lstm_cell(at::Tensor input, SEXP hx_sexp, at::Tensor w_ih, at::Tensor w_hh, at::Tensor b_ih, at::Tensor b_hh, at::Tensor packed_ih, at::Tensor packed_hh, at::Tensor col_offsets_ih, at::Tensor col_offsets_hh, SEXP scale_ih_sexp, SEXP scale_hh_sexp, SEXP zero_point_ih_sexp, SEXP zero_point_hh_sexp) {
+    auto hx_vec = sexp_to_tensor_list(hx_sexp);
+    auto result = at::quantized_lstm_cell(input, hx_vec, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, sexp_to_scalar(scale_ih_sexp), sexp_to_scalar(scale_hh_sexp), sexp_to_scalar(zero_point_ih_sexp), sexp_to_scalar(zero_point_hh_sexp));
+    SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+    SET_VECTOR_ELT(out, 0, Rcpp::wrap(std::get<0>(result)));
+    SET_VECTOR_ELT(out, 1, Rcpp::wrap(std::get<1>(result)));
+    SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+    SET_STRING_ELT(names, 0, Rf_mkChar("r1"));
+    SET_STRING_ELT(names, 1, Rf_mkChar("r2"));
+    Rf_setAttrib(out, R_NamesSymbol, names);
+    UNPROTECT(2);
+    return out;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantized_gru_cell(at::Tensor input, at::Tensor hx, at::Tensor w_ih, at::Tensor w_hh, at::Tensor b_ih, at::Tensor b_hh, at::Tensor packed_ih, at::Tensor packed_hh, at::Tensor col_offsets_ih, at::Tensor col_offsets_hh, SEXP scale_ih_sexp, SEXP scale_hh_sexp, SEXP zero_point_ih_sexp, SEXP zero_point_hh_sexp) { return at::quantized_gru_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, sexp_to_scalar(scale_ih_sexp), sexp_to_scalar(scale_hh_sexp), sexp_to_scalar(zero_point_ih_sexp), sexp_to_scalar(zero_point_hh_sexp)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantized_rnn_relu_cell(at::Tensor input, at::Tensor hx, at::Tensor w_ih, at::Tensor w_hh, at::Tensor b_ih, at::Tensor b_hh, at::Tensor packed_ih, at::Tensor packed_hh, at::Tensor col_offsets_ih, at::Tensor col_offsets_hh, SEXP scale_ih_sexp, SEXP scale_hh_sexp, SEXP zero_point_ih_sexp, SEXP zero_point_hh_sexp) { return at::quantized_rnn_relu_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, sexp_to_scalar(scale_ih_sexp), sexp_to_scalar(scale_hh_sexp), sexp_to_scalar(zero_point_ih_sexp), sexp_to_scalar(zero_point_hh_sexp)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_quantized_rnn_tanh_cell(at::Tensor input, at::Tensor hx, at::Tensor w_ih, at::Tensor w_hh, at::Tensor b_ih, at::Tensor b_hh, at::Tensor packed_ih, at::Tensor packed_hh, at::Tensor col_offsets_ih, at::Tensor col_offsets_hh, SEXP scale_ih_sexp, SEXP scale_hh_sexp, SEXP zero_point_ih_sexp, SEXP zero_point_hh_sexp) { return at::quantized_rnn_tanh_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, sexp_to_scalar(scale_ih_sexp), sexp_to_scalar(scale_hh_sexp), sexp_to_scalar(zero_point_ih_sexp), sexp_to_scalar(zero_point_hh_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_set_(at::Tensor self, at::Tensor source, int64_t storage_offset, SEXP size_sexp, SEXP stride_sexp) {
     auto size_vec = sexp_to_int_vec(size_sexp);
     auto stride_vec = sexp_to_int_vec(stride_sexp);
     self.set_(source, storage_offset, at::IntArrayRef(size_vec.data(), size_vec.size()), at::IntArrayRef(stride_vec.data(), stride_vec.size()));
     return self;
 }
+
+// [[Rcpp::export]]
+bool C_torch_is_set_to(at::Tensor self, at::Tensor tensor) { return self.is_set_to(tensor); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_masked_scatter_(at::Tensor self, at::Tensor mask, at::Tensor source) {
@@ -1682,6 +2618,9 @@ at::Tensor C_torch_eq_(at::Tensor self, SEXP other_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_bitwise_and(at::Tensor self, SEXP other_sexp) { return at::bitwise_and(self, sexp_to_scalar(other_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_bitwise_and_(at::Tensor self, SEXP other_sexp) {
     self.bitwise_and_(sexp_to_scalar(other_sexp));
     return self;
@@ -1700,6 +2639,9 @@ at::Tensor C_torch___iand__(at::Tensor self, SEXP other_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_bitwise_or(at::Tensor self, SEXP other_sexp) { return at::bitwise_or(self, sexp_to_scalar(other_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_bitwise_or_(at::Tensor self, SEXP other_sexp) {
     self.bitwise_or_(sexp_to_scalar(other_sexp));
     return self;
@@ -1716,6 +2658,9 @@ at::Tensor C_torch___ior__(at::Tensor self, SEXP other_sexp) {
     self.__ior__(sexp_to_scalar(other_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_bitwise_xor(at::Tensor self, SEXP other_sexp) { return at::bitwise_xor(self, sexp_to_scalar(other_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_bitwise_xor_(at::Tensor self, SEXP other_sexp) {
@@ -1748,6 +2693,9 @@ at::Tensor C_torch___ilshift__(at::Tensor self, SEXP other_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_bitwise_left_shift(at::Tensor self, at::Tensor other) { return at::bitwise_left_shift(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_bitwise_left_shift_(at::Tensor self, at::Tensor other) {
     self.bitwise_left_shift_(other);
     return self;
@@ -1764,6 +2712,9 @@ at::Tensor C_torch___irshift__(at::Tensor self, SEXP other_sexp) {
     self.__irshift__(sexp_to_scalar(other_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_bitwise_right_shift(at::Tensor self, at::Tensor other) { return at::bitwise_right_shift(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_bitwise_right_shift_(at::Tensor self, at::Tensor other) {
@@ -1805,7 +2756,43 @@ at::Tensor C_torch_addbmm_(at::Tensor self, at::Tensor batch1, at::Tensor batch2
 at::Tensor C_torch_addbmm(at::Tensor self, at::Tensor batch1, at::Tensor batch2, SEXP beta_sexp, SEXP alpha_sexp) { return at::addbmm(self, batch1, batch2, sexp_to_scalar(beta_sexp), sexp_to_scalar(alpha_sexp)); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_random_(at::Tensor self, int64_t from, SEXP to, SEXP generator) {
+    self.random_(from, sexp_to_optional_int(to), sexp_to_optional_generator(generator));
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_cauchy_(at::Tensor self, double median, double sigma, SEXP generator) {
+    self.cauchy_(median, sigma, sexp_to_optional_generator(generator));
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_log_normal_(at::Tensor self, double mean, double std, SEXP generator) {
+    self.log_normal_(mean, std, sexp_to_optional_generator(generator));
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_exponential_(at::Tensor self, double lambd, SEXP generator) {
+    self.exponential_(lambd, sexp_to_optional_generator(generator));
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_geometric_(at::Tensor self, double p, SEXP generator) {
+    self.geometric_(p, sexp_to_optional_generator(generator));
+    return self;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_diag(at::Tensor self, int64_t diagonal) { return at::diag(self, diagonal); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_cross(at::Tensor self, at::Tensor other, SEXP dim) { return at::cross(self, other, sexp_to_optional_int(dim)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_tril(at::Tensor self, int64_t diagonal) { return at::tril(self, diagonal); }
 
 // [[Rcpp::export]]
 SEXP C_torch_tril_indices(int64_t row, int64_t col, int64_t offset, SEXP dtype_sexp, SEXP device_sexp) {
@@ -1826,10 +2813,16 @@ SEXP C_torch_triu_indices(int64_t row, int64_t col, int64_t offset, SEXP dtype_s
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_trace(at::Tensor self) { return at::trace(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_ne_(at::Tensor self, SEXP other_sexp) {
     self.ne_(sexp_to_scalar(other_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_not_equal(at::Tensor self, SEXP other_sexp) { return at::not_equal(self, sexp_to_scalar(other_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_not_equal_(at::Tensor self, SEXP other_sexp) {
@@ -1844,6 +2837,9 @@ at::Tensor C_torch_ge_(at::Tensor self, SEXP other_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_greater_equal(at::Tensor self, SEXP other_sexp) { return at::greater_equal(self, sexp_to_scalar(other_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_greater_equal_(at::Tensor self, SEXP other_sexp) {
     self.greater_equal_(sexp_to_scalar(other_sexp));
     return self;
@@ -1854,6 +2850,9 @@ at::Tensor C_torch_le_(at::Tensor self, SEXP other_sexp) {
     self.le_(sexp_to_scalar(other_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_less_equal(at::Tensor self, SEXP other_sexp) { return at::less_equal(self, sexp_to_scalar(other_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_less_equal_(at::Tensor self, SEXP other_sexp) {
@@ -1868,6 +2867,9 @@ at::Tensor C_torch_gt_(at::Tensor self, SEXP other_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_greater(at::Tensor self, SEXP other_sexp) { return at::greater(self, sexp_to_scalar(other_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_greater_(at::Tensor self, SEXP other_sexp) {
     self.greater_(sexp_to_scalar(other_sexp));
     return self;
@@ -1880,16 +2882,37 @@ at::Tensor C_torch_lt_(at::Tensor self, SEXP other_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_less(at::Tensor self, SEXP other_sexp) { return at::less(self, sexp_to_scalar(other_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_less_(at::Tensor self, SEXP other_sexp) {
     self.less_(sexp_to_scalar(other_sexp));
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_take(at::Tensor self, at::Tensor index) { return at::take(self, index); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_take_along_dim(at::Tensor self, at::Tensor indices, SEXP dim) { return at::take_along_dim(self, indices, sexp_to_optional_int(dim)); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_masked_select(at::Tensor self, at::Tensor mask) { return at::masked_select(self, mask); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_nonzero(at::Tensor self) { return at::nonzero(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_nonzero_static(at::Tensor self, int64_t size, int64_t fill_value) { return at::nonzero_static(self, size, fill_value); }
+
+// [[Rcpp::export]]
+SEXP C_torch_nonzero_numpy(at::Tensor self) {
+    auto result = at::nonzero_numpy(self);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_argwhere(at::Tensor self) { return at::argwhere(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_addcmul(at::Tensor self, at::Tensor tensor1, at::Tensor tensor2, SEXP value_sexp) { return at::addcmul(self, tensor1, tensor2, sexp_to_scalar(value_sexp)); }
@@ -1949,10 +2972,16 @@ SEXP C_torch_svd(at::Tensor self, bool some, bool compute_uv) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_swapaxes(at::Tensor self, int64_t axis0, int64_t axis1) { return at::swapaxes(self, axis0, axis1); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_swapaxes_(at::Tensor self, int64_t axis0, int64_t axis1) {
     self.swapaxes_(axis0, axis1);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_swapdims(at::Tensor self, int64_t dim0, int64_t dim1) { return at::swapdims(self, dim0, dim1); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_swapdims_(at::Tensor self, int64_t dim0, int64_t dim1) {
@@ -1961,7 +2990,13 @@ at::Tensor C_torch_swapdims_(at::Tensor self, int64_t dim0, int64_t dim1) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_cholesky(at::Tensor self, bool upper) { return at::cholesky(self, upper); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_cholesky_solve(at::Tensor self, at::Tensor input2, bool upper) { return at::cholesky_solve(self, input2, upper); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_cholesky_inverse(at::Tensor self, bool upper) { return at::cholesky_inverse(self, upper); }
 
 // [[Rcpp::export]]
 SEXP C_torch_qr(at::Tensor self, bool some) {
@@ -1992,6 +3027,9 @@ SEXP C_torch_geqrf(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_orgqr(at::Tensor self, at::Tensor input2) { return at::orgqr(self, input2); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_ormqr(at::Tensor self, at::Tensor input2, at::Tensor input3, bool left, bool transpose) { return at::ormqr(self, input2, input3, left, transpose); }
 
 // [[Rcpp::export]]
@@ -2020,6 +3058,12 @@ at::Tensor C_torch_lgamma_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_lgamma(at::Tensor self) { return at::lgamma(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_digamma(at::Tensor self) { return at::digamma(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_polygamma(int64_t n, at::Tensor self) { return at::polygamma(n, self); }
 
 // [[Rcpp::export]]
@@ -2029,10 +3073,16 @@ at::Tensor C_torch_polygamma_(at::Tensor self, int64_t n) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_erfinv(at::Tensor self) { return at::erfinv(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_erfinv_(at::Tensor self) {
     self.erfinv_();
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_i0(at::Tensor self) { return at::i0(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_i0_(at::Tensor self) {
@@ -2047,16 +3097,31 @@ at::Tensor C_torch_sign_(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_signbit(at::Tensor self) { return at::signbit(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_dist(at::Tensor self, at::Tensor other, SEXP p_sexp) { return at::dist(self, other, sexp_to_scalar(p_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_atan2_(at::Tensor self, at::Tensor other) {
     self.atan2_(other);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_atan2(at::Tensor self, at::Tensor other) { return at::atan2(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_arctan2(at::Tensor self, at::Tensor other) { return at::arctan2(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_arctan2_(at::Tensor self, at::Tensor other) {
     self.arctan2_(other);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_lerp(at::Tensor self, at::Tensor end, SEXP weight_sexp) { return at::lerp(self, end, sexp_to_scalar(weight_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_histc(at::Tensor self, int64_t bins, SEXP min_sexp, SEXP max_sexp) { return at::histc(self, bins, sexp_to_scalar(min_sexp), sexp_to_scalar(max_sexp)); }
@@ -2076,10 +3141,37 @@ SEXP C_torch_histogram(at::Tensor self, at::Tensor bins, SEXP weight, bool densi
 }
 
 // [[Rcpp::export]]
+SEXP C_torch_histogramdd(at::Tensor self, SEXP bins_sexp, SEXP range_sexp, SEXP weight, bool density) {
+    auto bins_vec = sexp_to_int_vec(bins_sexp);
+    c10::optional<at::ArrayRef<double>> range_ref;
+    std::vector<double> range_vec;
+    if (!Rf_isNull(range_sexp)) {
+        range_vec = sexp_to_double_vec(range_sexp);
+        range_ref = at::ArrayRef<double>(range_vec.data(), range_vec.size());
+    }
+    auto result = at::histogramdd(self, at::IntArrayRef(bins_vec.data(), bins_vec.size()), range_ref, sexp_to_optional_tensor(weight), density);
+    SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
+    SET_VECTOR_ELT(out, 0, Rcpp::wrap(std::get<0>(result)));
+    SET_VECTOR_ELT(out, 1, tensor_list_to_sexp(std::get<1>(result)));
+    SEXP names = PROTECT(Rf_allocVector(STRSXP, 2));
+    SET_STRING_ELT(names, 0, Rf_mkChar("hist"));
+    SET_STRING_ELT(names, 1, Rf_mkChar("bin_edges"));
+    Rf_setAttrib(out, R_NamesSymbol, names);
+    UNPROTECT(2);
+    return out;
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_fmod(at::Tensor self, SEXP other_sexp) { return at::fmod(self, sexp_to_scalar(other_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_fmod_(at::Tensor self, SEXP other_sexp) {
     self.fmod_(sexp_to_scalar(other_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_hypot(at::Tensor self, at::Tensor other) { return at::hypot(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_hypot_(at::Tensor self, at::Tensor other) {
@@ -2088,16 +3180,25 @@ at::Tensor C_torch_hypot_(at::Tensor self, at::Tensor other) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_igamma(at::Tensor self, at::Tensor other) { return at::igamma(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_igamma_(at::Tensor self, at::Tensor other) {
     self.igamma_(other);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_igammac(at::Tensor self, at::Tensor other) { return at::igammac(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_igammac_(at::Tensor self, at::Tensor other) {
     self.igammac_(other);
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_nextafter(at::Tensor self, at::Tensor other) { return at::nextafter(self, other); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_nextafter_(at::Tensor self, at::Tensor other) {
@@ -2112,10 +3213,25 @@ at::Tensor C_torch_remainder_(at::Tensor self, SEXP other_sexp) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_fmin(at::Tensor self, at::Tensor other) { return at::fmin(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_fmax(at::Tensor self, at::Tensor other) { return at::fmax(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_minimum(at::Tensor self, at::Tensor other) { return at::minimum(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_quantile(at::Tensor self, at::Tensor q, SEXP dim, bool keepdim, std::string interpolation) { return at::quantile(self, q, sexp_to_optional_int(dim), keepdim, interpolation); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_nanquantile(at::Tensor self, at::Tensor q, SEXP dim, bool keepdim, std::string interpolation) { return at::nanquantile(self, q, sexp_to_optional_int(dim), keepdim, interpolation); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_msort(at::Tensor self) { return at::msort(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_argsort(at::Tensor self, int64_t dim, bool descending) { return at::argsort(self, dim, descending); }
 
 // [[Rcpp::export]]
 SEXP C_torch_topk(at::Tensor self, int64_t k, int64_t dim, bool largest, bool sorted) {
@@ -2141,16 +3257,34 @@ at::Tensor C_torch_renorm_(at::Tensor self, SEXP p_sexp, int64_t dim, SEXP maxno
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_unfold(at::Tensor self, int64_t dimension, int64_t size, int64_t step) { return self.unfold(dimension, size, step); }
+
+// [[Rcpp::export]]
+bool C_torch_equal(at::Tensor self, at::Tensor other) { return at::equal(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_pow_(at::Tensor self, SEXP exponent_sexp) {
     self.pow_(sexp_to_scalar(exponent_sexp));
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_float_power(at::Tensor self, at::Tensor exponent) { return at::float_power(self, exponent); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_float_power_(at::Tensor self, SEXP exponent_sexp) {
     self.float_power_(sexp_to_scalar(exponent_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_normal_functional(at::Tensor self, double mean, double std, SEXP generator) { return at::normal_functional(self, mean, std, sexp_to_optional_generator(generator)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_normal(at::Tensor mean, double std, SEXP generator) { return at::normal(mean, std, sexp_to_optional_generator(generator)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_alias(at::Tensor self) { return at::alias(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_bucketize(at::Tensor self, at::Tensor boundaries, bool out_int32, bool right) { return at::bucketize(self, boundaries, out_int32, right); }
@@ -2240,7 +3374,13 @@ at::Tensor C_torch_elu_(at::Tensor self, SEXP alpha_sexp, SEXP scale_sexp, SEXP 
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_glu(at::Tensor self, int64_t dim) { return at::glu(self, dim); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_glu_jvp(at::Tensor glu, at::Tensor x, at::Tensor dx, int64_t dim) { return at::glu_jvp(glu, x, dx, dim); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_hardsigmoid(at::Tensor self) { return at::hardsigmoid(self); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_hardsigmoid_(at::Tensor self) {
@@ -2258,16 +3398,25 @@ at::Tensor C_torch_hardtanh_(at::Tensor self, SEXP min_val_sexp, SEXP max_val_se
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_hardswish(at::Tensor self) { return at::hardswish(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_hardswish_(at::Tensor self) {
     at::hardswish_(self);
     return self;
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_leaky_relu(at::Tensor self, SEXP negative_slope_sexp) { return at::leaky_relu(self, sexp_to_scalar(negative_slope_sexp)); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_leaky_relu_(at::Tensor self, SEXP negative_slope_sexp) {
     at::leaky_relu_(self, sexp_to_scalar(negative_slope_sexp));
     return self;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_log_sigmoid(at::Tensor self) { return at::log_sigmoid(self); }
 
 // [[Rcpp::export]]
 SEXP C_torch_log_sigmoid_forward(at::Tensor self) {
@@ -2284,7 +3433,19 @@ SEXP C_torch_log_sigmoid_forward(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_rrelu_with_noise(at::Tensor self, at::Tensor noise, SEXP lower_sexp, SEXP upper_sexp, bool training, SEXP generator) { return at::rrelu_with_noise(self, noise, sexp_to_scalar(lower_sexp), sexp_to_scalar(upper_sexp), training, sexp_to_optional_generator(generator)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_rrelu_with_noise_(at::Tensor self, at::Tensor noise, SEXP lower_sexp, SEXP upper_sexp, bool training, SEXP generator) {
+    at::rrelu_with_noise_(self, noise, sexp_to_scalar(lower_sexp), sexp_to_scalar(upper_sexp), training, sexp_to_optional_generator(generator));
+    return self;
+}
+
+// [[Rcpp::export]]
 at::Tensor C_torch_softplus(at::Tensor self, SEXP beta_sexp, SEXP threshold_sexp) { return at::softplus(self, sexp_to_scalar(beta_sexp), sexp_to_scalar(threshold_sexp)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_softshrink(at::Tensor self, SEXP lambd_sexp) { return at::softshrink(self, sexp_to_scalar(lambd_sexp)); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_adaptive_avg_pool2d(at::Tensor self, SEXP output_size_sexp) {
@@ -2469,45 +3630,122 @@ at::Tensor C_torch_pad(at::Tensor self, SEXP pad_sexp, std::string mode, SEXP va
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_upsample_linear1d(at::Tensor self, SEXP output_size_sexp, bool align_corners, SEXP scales) {
-    auto output_size_vec = sexp_to_int_vec(output_size_sexp);
-    return at::upsample_linear1d(self, at::IntArrayRef(output_size_vec.data(), output_size_vec.size()), align_corners, sexp_to_optional_double(scales));
+at::Tensor C_torch_upsample_linear1d(at::Tensor input, SEXP output_size_sexp, bool align_corners, SEXP scale_factors_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    c10::optional<at::ArrayRef<double>> scale_factors_ref;
+    std::vector<double> scale_factors_vec;
+    if (!Rf_isNull(scale_factors_sexp)) {
+        scale_factors_vec = sexp_to_double_vec(scale_factors_sexp);
+        scale_factors_ref = at::ArrayRef<double>(scale_factors_vec.data(), scale_factors_vec.size());
+    }
+    return at::upsample_linear1d(input, output_size_ref, align_corners, scale_factors_ref);
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_upsample_bilinear2d(at::Tensor self, SEXP output_size_sexp, bool align_corners, SEXP scales_h, SEXP scales_w) {
-    auto output_size_vec = sexp_to_int_vec(output_size_sexp);
-    return at::upsample_bilinear2d(self, at::IntArrayRef(output_size_vec.data(), output_size_vec.size()), align_corners, sexp_to_optional_double(scales_h), sexp_to_optional_double(scales_w));
+at::Tensor C_torch_upsample_bilinear2d(at::Tensor input, SEXP output_size_sexp, bool align_corners, SEXP scale_factors_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    c10::optional<at::ArrayRef<double>> scale_factors_ref;
+    std::vector<double> scale_factors_vec;
+    if (!Rf_isNull(scale_factors_sexp)) {
+        scale_factors_vec = sexp_to_double_vec(scale_factors_sexp);
+        scale_factors_ref = at::ArrayRef<double>(scale_factors_vec.data(), scale_factors_vec.size());
+    }
+    return at::upsample_bilinear2d(input, output_size_ref, align_corners, scale_factors_ref);
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_upsample_bicubic2d(at::Tensor self, SEXP output_size_sexp, bool align_corners, SEXP scales_h, SEXP scales_w) {
-    auto output_size_vec = sexp_to_int_vec(output_size_sexp);
-    return at::upsample_bicubic2d(self, at::IntArrayRef(output_size_vec.data(), output_size_vec.size()), align_corners, sexp_to_optional_double(scales_h), sexp_to_optional_double(scales_w));
+at::Tensor C_torch_upsample_trilinear3d(at::Tensor input, SEXP output_size_sexp, bool align_corners, SEXP scale_factors_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    c10::optional<at::ArrayRef<double>> scale_factors_ref;
+    std::vector<double> scale_factors_vec;
+    if (!Rf_isNull(scale_factors_sexp)) {
+        scale_factors_vec = sexp_to_double_vec(scale_factors_sexp);
+        scale_factors_ref = at::ArrayRef<double>(scale_factors_vec.data(), scale_factors_vec.size());
+    }
+    return at::upsample_trilinear3d(input, output_size_ref, align_corners, scale_factors_ref);
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_upsample_trilinear3d(at::Tensor self, SEXP output_size_sexp, bool align_corners, SEXP scales_d, SEXP scales_h, SEXP scales_w) {
-    auto output_size_vec = sexp_to_int_vec(output_size_sexp);
-    return at::upsample_trilinear3d(self, at::IntArrayRef(output_size_vec.data(), output_size_vec.size()), align_corners, sexp_to_optional_double(scales_d), sexp_to_optional_double(scales_h), sexp_to_optional_double(scales_w));
+at::Tensor C_torch_upsample_bicubic2d(at::Tensor input, SEXP output_size_sexp, bool align_corners, SEXP scale_factors_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    c10::optional<at::ArrayRef<double>> scale_factors_ref;
+    std::vector<double> scale_factors_vec;
+    if (!Rf_isNull(scale_factors_sexp)) {
+        scale_factors_vec = sexp_to_double_vec(scale_factors_sexp);
+        scale_factors_ref = at::ArrayRef<double>(scale_factors_vec.data(), scale_factors_vec.size());
+    }
+    return at::upsample_bicubic2d(input, output_size_ref, align_corners, scale_factors_ref);
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_upsample_nearest1d(at::Tensor self, SEXP output_size_sexp, SEXP scales) {
-    auto output_size_vec = sexp_to_int_vec(output_size_sexp);
-    return at::upsample_nearest1d(self, at::IntArrayRef(output_size_vec.data(), output_size_vec.size()), sexp_to_optional_double(scales));
+at::Tensor C_torch_upsample_nearest1d(at::Tensor input, SEXP output_size_sexp, SEXP scale_factors_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    c10::optional<at::ArrayRef<double>> scale_factors_ref;
+    std::vector<double> scale_factors_vec;
+    if (!Rf_isNull(scale_factors_sexp)) {
+        scale_factors_vec = sexp_to_double_vec(scale_factors_sexp);
+        scale_factors_ref = at::ArrayRef<double>(scale_factors_vec.data(), scale_factors_vec.size());
+    }
+    return at::upsample_nearest1d(input, output_size_ref, scale_factors_ref);
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_upsample_nearest2d(at::Tensor self, SEXP output_size_sexp, SEXP scales_h, SEXP scales_w) {
-    auto output_size_vec = sexp_to_int_vec(output_size_sexp);
-    return at::upsample_nearest2d(self, at::IntArrayRef(output_size_vec.data(), output_size_vec.size()), sexp_to_optional_double(scales_h), sexp_to_optional_double(scales_w));
+at::Tensor C_torch_upsample_nearest2d(at::Tensor input, SEXP output_size_sexp, SEXP scale_factors_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    c10::optional<at::ArrayRef<double>> scale_factors_ref;
+    std::vector<double> scale_factors_vec;
+    if (!Rf_isNull(scale_factors_sexp)) {
+        scale_factors_vec = sexp_to_double_vec(scale_factors_sexp);
+        scale_factors_ref = at::ArrayRef<double>(scale_factors_vec.data(), scale_factors_vec.size());
+    }
+    return at::upsample_nearest2d(input, output_size_ref, scale_factors_ref);
 }
 
 // [[Rcpp::export]]
-at::Tensor C_torch_upsample_nearest3d(at::Tensor self, SEXP output_size_sexp, SEXP scales_d, SEXP scales_h, SEXP scales_w) {
-    auto output_size_vec = sexp_to_int_vec(output_size_sexp);
-    return at::upsample_nearest3d(self, at::IntArrayRef(output_size_vec.data(), output_size_vec.size()), sexp_to_optional_double(scales_d), sexp_to_optional_double(scales_h), sexp_to_optional_double(scales_w));
+at::Tensor C_torch_upsample_nearest3d(at::Tensor input, SEXP output_size_sexp, SEXP scale_factors_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    c10::optional<at::ArrayRef<double>> scale_factors_ref;
+    std::vector<double> scale_factors_vec;
+    if (!Rf_isNull(scale_factors_sexp)) {
+        scale_factors_vec = sexp_to_double_vec(scale_factors_sexp);
+        scale_factors_ref = at::ArrayRef<double>(scale_factors_vec.data(), scale_factors_vec.size());
+    }
+    return at::upsample_nearest3d(input, output_size_ref, scale_factors_ref);
 }
 
 // [[Rcpp::export]]
@@ -2607,6 +3845,78 @@ at::Tensor C_torch_im2col(at::Tensor self, SEXP kernel_size_sexp, SEXP dilation_
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_isfinite(at::Tensor self) { return at::isfinite(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_isinf(at::Tensor self) { return at::isinf(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_isposinf(at::Tensor self) { return at::isposinf(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_isneginf(at::Tensor self) { return at::isneginf(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_entr(at::Tensor self) { return at::special_entr(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_ndtri(at::Tensor self) { return at::special_ndtri(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_log_ndtr(at::Tensor self) { return at::special_log_ndtr(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_expm1(at::Tensor self) { return at::special_expm1(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_exp2(at::Tensor self) { return at::special_exp2(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_psi(at::Tensor self) { return at::special_psi(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_digamma(at::Tensor self) { return at::special_digamma(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_gammaln(at::Tensor self) { return at::special_gammaln(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_erf(at::Tensor self) { return at::special_erf(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_erfc(at::Tensor self) { return at::special_erfc(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_erfcx(at::Tensor self) { return at::special_erfcx(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_erfinv(at::Tensor self) { return at::special_erfinv(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_ndtr(at::Tensor self) { return at::special_ndtr(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_xlog1py(at::Tensor self, at::Tensor other) { return at::special_xlog1py(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_xlogy(at::Tensor self, at::Tensor other) { return at::special_xlogy(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_zeta(at::Tensor self, at::Tensor other) { return at::special_zeta(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_i0(at::Tensor self) { return at::special_i0(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_i0e(at::Tensor self) { return at::special_i0e(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_i1(at::Tensor self) { return at::special_i1(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_i1e(at::Tensor self) { return at::special_i1e(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_special_logit(at::Tensor self, SEXP eps) { return at::special_logit(self, sexp_to_optional_double(eps)); }
 
 // [[Rcpp::export]]
@@ -2619,7 +3929,28 @@ at::Tensor C_torch_special_logsumexp(at::Tensor self, SEXP dim_sexp, bool keepdi
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_special_expit(at::Tensor self) { return at::special_expit(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_sinc(at::Tensor self) { return at::special_sinc(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_round(at::Tensor self, int64_t decimals) { return at::special_round(self, decimals); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_log1p(at::Tensor self) { return at::special_log1p(self); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_special_log_softmax(at::Tensor self, int64_t dim, SEXP dtype) { return at::special_log_softmax(self, dim, sexp_to_dtype(dtype)); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_gammainc(at::Tensor self, at::Tensor other) { return at::special_gammainc(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_gammaincc(at::Tensor self, at::Tensor other) { return at::special_gammaincc(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_multigammaln(at::Tensor self, int64_t p) { return at::special_multigammaln(self, p); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_special_softmax(at::Tensor self, int64_t dim, SEXP dtype) { return at::special_softmax(self, dim, sexp_to_dtype(dtype)); }
@@ -2871,6 +4202,9 @@ SEXP C_torch_linalg_cholesky_ex(at::Tensor self, bool upper, bool check_errors) 
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_linalg_cholesky(at::Tensor self, bool upper) { return at::linalg_cholesky(self, upper); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_linalg_cross(at::Tensor self, at::Tensor other, int64_t dim) { return at::linalg_cross(self, other, dim); }
 
 // [[Rcpp::export]]
@@ -2921,6 +4255,12 @@ SEXP C_torch_linalg_lu(at::Tensor A, bool pivot) {
 
 // [[Rcpp::export]]
 at::Tensor C_torch_linalg_lu_solve(at::Tensor LU, at::Tensor pivots, at::Tensor B, bool left, bool adjoint) { return at::linalg_lu_solve(LU, pivots, B, left, adjoint); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_linalg_det(at::Tensor A) { return at::linalg_det(A); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_det(at::Tensor self) { return at::det(self); }
 
 // [[Rcpp::export]]
 SEXP C_torch_linalg_ldl_factor_ex(at::Tensor self, bool hermitian, bool check_errors) {
@@ -2974,7 +4314,13 @@ SEXP C_torch_linalg_lstsq(at::Tensor self, at::Tensor b, SEXP rcond, SEXP driver
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_linalg_matmul(at::Tensor self, at::Tensor other) { return at::linalg_matmul(self, other); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_linalg_vecdot(at::Tensor x, at::Tensor y, int64_t dim) { return at::linalg_vecdot(x, y, dim); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_linalg_matrix_exp(at::Tensor self) { return at::linalg_matrix_exp(self); }
 
 // [[Rcpp::export]]
 SEXP C_torch_linalg_slogdet(at::Tensor A) {
@@ -3005,6 +4351,9 @@ SEXP C_torch_slogdet(at::Tensor self) {
 }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_logdet(at::Tensor self) { return at::logdet(self); }
+
+// [[Rcpp::export]]
 SEXP C_torch_linalg_eig(at::Tensor self) {
     auto result = at::linalg_eig(self);
     SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
@@ -3017,6 +4366,9 @@ SEXP C_torch_linalg_eig(at::Tensor self) {
     UNPROTECT(2);
     return out;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_linalg_eigvals(at::Tensor self) { return at::linalg_eigvals(self); }
 
 // [[Rcpp::export]]
 SEXP C_torch_linalg_eigh(at::Tensor self, std::string UPLO) {
@@ -3036,6 +4388,9 @@ SEXP C_torch_linalg_eigh(at::Tensor self, std::string UPLO) {
 at::Tensor C_torch_linalg_eigvalsh(at::Tensor self, std::string UPLO) { return at::linalg_eigvalsh(self, UPLO); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_linalg_householder_product(at::Tensor input, at::Tensor tau) { return at::linalg_householder_product(input, tau); }
+
+// [[Rcpp::export]]
 SEXP C_torch_linalg_inv_ex(at::Tensor A, bool check_errors) {
     auto result = at::linalg_inv_ex(A, check_errors);
     SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
@@ -3048,6 +4403,18 @@ SEXP C_torch_linalg_inv_ex(at::Tensor A, bool check_errors) {
     UNPROTECT(2);
     return out;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_linalg_inv(at::Tensor A) { return at::linalg_inv(A); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_inverse(at::Tensor self) { return at::inverse(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_inner(at::Tensor self, at::Tensor other) { return at::inner(self, other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_ger(at::Tensor self, at::Tensor vec2) { return at::ger(self, vec2); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_linalg_norm(at::Tensor self, SEXP ord, SEXP dim_sexp, bool keepdim, SEXP dtype) {
@@ -3120,6 +4487,9 @@ SEXP C_torch_linalg_solve_ex(at::Tensor A, at::Tensor B, bool left, bool check_e
 at::Tensor C_torch_linalg_solve(at::Tensor A, at::Tensor B, bool left) { return at::linalg_solve(A, B, left); }
 
 // [[Rcpp::export]]
+at::Tensor C_torch_linalg_tensorinv(at::Tensor self, int64_t ind) { return at::linalg_tensorinv(self, ind); }
+
+// [[Rcpp::export]]
 at::Tensor C_torch_linalg_tensorsolve(at::Tensor self, at::Tensor other, SEXP dims_sexp) {
     c10::optional<at::IntArrayRef> dims_ref;
     std::vector<int64_t> dims_vec;
@@ -3143,6 +4513,9 @@ SEXP C_torch_linalg_qr(at::Tensor A, std::string mode) {
     UNPROTECT(2);
     return out;
 }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_linalg_matrix_power(at::Tensor self, int64_t n) { return at::linalg_matrix_power(self, n); }
 
 // [[Rcpp::export]]
 at::Tensor C_torch_linalg_matrix_rank(at::Tensor input, SEXP atol, SEXP rtol, bool hermitian) { return at::linalg_matrix_rank(input, sexp_to_optional_tensor(atol), sexp_to_optional_tensor(rtol), hermitian); }
@@ -3178,3 +4551,93 @@ at::Tensor C_torch_flatten_dense_tensors(SEXP tensors_sexp) {
     auto tensors_vec = sexp_to_tensor_list(tensors_sexp);
     return at::flatten_dense_tensors(tensors_vec);
 }
+
+// [[Rcpp::export]]
+SEXP C_torch_unflatten_dense_tensors(at::Tensor flat, SEXP tensors_sexp) {
+    auto tensors_vec = sexp_to_tensor_list(tensors_sexp);
+    auto result = at::unflatten_dense_tensors(flat, tensors_vec);
+    return tensor_list_to_sexp(result);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_to_padded_tensor(at::Tensor self, double padding, SEXP output_size_sexp) {
+    c10::optional<at::IntArrayRef> output_size_ref;
+    std::vector<int64_t> output_size_vec;
+    if (!Rf_isNull(output_size_sexp)) {
+        output_size_vec = sexp_to_int_vec(output_size_sexp);
+        output_size_ref = at::IntArrayRef(output_size_vec.data(), output_size_vec.size());
+    }
+    return self.to_padded_tensor(padding, output_size_ref);
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_airy_ai(at::Tensor x) { return at::special_airy_ai(x); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_bessel_j0(at::Tensor self) { return at::special_bessel_j0(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_bessel_j1(at::Tensor self) { return at::special_bessel_j1(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_bessel_y0(at::Tensor self) { return at::special_bessel_y0(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_bessel_y1(at::Tensor self) { return at::special_bessel_y1(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_chebyshev_polynomial_t(at::Tensor x, at::Tensor n) { return at::special_chebyshev_polynomial_t(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_chebyshev_polynomial_u(at::Tensor x, at::Tensor n) { return at::special_chebyshev_polynomial_u(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_chebyshev_polynomial_v(at::Tensor x, at::Tensor n) { return at::special_chebyshev_polynomial_v(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_chebyshev_polynomial_w(at::Tensor x, at::Tensor n) { return at::special_chebyshev_polynomial_w(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_hermite_polynomial_h(at::Tensor x, at::Tensor n) { return at::special_hermite_polynomial_h(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_hermite_polynomial_he(at::Tensor x, at::Tensor n) { return at::special_hermite_polynomial_he(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_laguerre_polynomial_l(at::Tensor x, at::Tensor n) { return at::special_laguerre_polynomial_l(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_legendre_polynomial_p(at::Tensor x, at::Tensor n) { return at::special_legendre_polynomial_p(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_modified_bessel_i0(at::Tensor self) { return at::special_modified_bessel_i0(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_modified_bessel_i1(at::Tensor self) { return at::special_modified_bessel_i1(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_modified_bessel_k0(at::Tensor self) { return at::special_modified_bessel_k0(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_modified_bessel_k1(at::Tensor self) { return at::special_modified_bessel_k1(self); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_scaled_modified_bessel_k0(at::Tensor x) { return at::special_scaled_modified_bessel_k0(x); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_scaled_modified_bessel_k1(at::Tensor x) { return at::special_scaled_modified_bessel_k1(x); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_shifted_chebyshev_polynomial_t(at::Tensor x, at::Tensor n) { return at::special_shifted_chebyshev_polynomial_t(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_shifted_chebyshev_polynomial_u(at::Tensor x, at::Tensor n) { return at::special_shifted_chebyshev_polynomial_u(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_shifted_chebyshev_polynomial_v(at::Tensor x, at::Tensor n) { return at::special_shifted_chebyshev_polynomial_v(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_shifted_chebyshev_polynomial_w(at::Tensor x, at::Tensor n) { return at::special_shifted_chebyshev_polynomial_w(x, n); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_special_spherical_bessel_j0(at::Tensor x) { return at::special_spherical_bessel_j0(x); }
