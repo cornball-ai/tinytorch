@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # ===== diffuseR (CLIP) Module Tracing =====
 #
 # Tests trace_module on CLIP text encoder modules from diffuseR.

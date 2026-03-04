@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # ===== Helper utilities =====
 
 is_nn_module_callable <- Rtorch:::is_nn_module_callable

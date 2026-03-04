@@ -6,3 +6,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^TODO\.md$
+^ANALYSIS\.md$
+^AGENTS\.md$
+^WhisperNote\.txt$
+^tools$

@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # test_executor.R - Tests for Phase 4: Backend (generalized CPU codegen + executor)
 
 # ============================================================

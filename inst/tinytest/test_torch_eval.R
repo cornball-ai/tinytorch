@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # test_torch_eval.R - Tests for torch_eval()
 
 # --- Basic expression capture and evaluation ---

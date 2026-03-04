@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # ===== Whisper Encoder Layer Tracing =====
 #
 # Tests trace_module on realistic Whisper-style encoder layers.

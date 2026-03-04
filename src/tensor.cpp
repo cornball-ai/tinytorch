@@ -1,5 +1,12 @@
 #include "Rtorch.h"
 
+// ---- Backend availability ping ----
+
+// [[Rcpp::export]]
+SEXP C_rtorch_ping() {
+    return Rf_ScalarInteger(1);
+}
+
 // ---- Tensor finalizer ----
 
 static void tensor_finalizer(SEXP ptr) {

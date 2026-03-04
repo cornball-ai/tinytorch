@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # ===== compile() on nn_module =====
 
 m <- nn_linear(10, 5)

@@ -12050,6 +12050,16 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
+// C_rtorch_ping
+SEXP C_rtorch_ping();
+RcppExport SEXP _Rtorch_C_rtorch_ping() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(C_rtorch_ping());
+    return rcpp_result_gen;
+END_RCPP
+}
 // C_torch_tensor
 SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp);
 RcppExport SEXP _Rtorch_C_torch_tensor(SEXP dataSEXP, SEXP dtype_sexpSEXP, SEXP device_sexpSEXP) {
@@ -13581,6 +13591,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rtorch_C_optim_adamw", (DL_FUNC) &_Rtorch_C_optim_adamw, 7},
     {"_Rtorch_C_optim_step", (DL_FUNC) &_Rtorch_C_optim_step, 1},
     {"_Rtorch_C_optim_zero_grad", (DL_FUNC) &_Rtorch_C_optim_zero_grad, 2},
+    {"_Rtorch_C_rtorch_ping", (DL_FUNC) &_Rtorch_C_rtorch_ping, 0},
     {"_Rtorch_C_torch_tensor", (DL_FUNC) &_Rtorch_C_torch_tensor, 3},
     {"_Rtorch_C_torch_tensor_raw", (DL_FUNC) &_Rtorch_C_torch_tensor_raw, 3},
     {"_Rtorch_C_torch_zeros", (DL_FUNC) &_Rtorch_C_torch_zeros, 3},

@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # Tests for GPU Triton kernel fusion via compile()
 # Requires CUDA GPU and ariel package with Triton support.
 

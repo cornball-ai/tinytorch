@@ -8,10 +8,12 @@ Authors@R: c(
     person("Daniel", "Falbel", role = "ctb",
            comment = "torch R package API design")
     )
-Description: Direct R bindings to 'libtorch' with minimal overhead. Provides a
-    'torch'-compatible API that eliminates intermediate layers ('Rcpp', lantern,
-    R7 dispatch) for maximum performance on tensor operations. Includes an
-    expression compiler that optimizes R 'torch' code into fused SIMD kernels.
+Description: Direct R bindings to 'libtorch' (PyTorch C++ distribution) with
+    minimal overhead. Installs on all platforms; full functionality requires
+    'libtorch' on Linux (see README). Provides a 'torch'-compatible API that
+    eliminates intermediate layers for maximum performance on tensor operations.
+    Includes an expression compiler that optimizes R 'torch' code into fused
+    SIMD kernels.
 License: MIT + file LICENSE
 URL: https://github.com/cornball-ai/Rtorch
 BugReports: https://github.com/cornball-ai/Rtorch/issues
@@ -21,4 +23,4 @@ LinkingTo: Rcpp
 Suggests: tinytest, digest, ariel
 VignetteBuilder: simplermarkdown
 NeedsCompilation: yes
-SystemRequirements: libtorch (reuses installed torch package)
+SystemRequirements: LibTorch (PyTorch C++ distribution, optional); see README

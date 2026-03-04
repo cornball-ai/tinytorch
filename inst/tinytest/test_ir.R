@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # test_ir.R - Tests for IR foundation
 
 # --- IR node construction ---

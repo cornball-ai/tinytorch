@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # Tests for pre-compiled fused SIMD kernels
 
 # =============================================================================

@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # test_optimize.R - Tests for optimization passes
 
 # ============================================================

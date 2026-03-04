@@ -3777,6 +3777,10 @@ C_optim_zero_grad <- function(optim_sexp, set_to_none) {
     invisible(.Call(`_Rtorch_C_optim_zero_grad`, optim_sexp, set_to_none))
 }
 
+C_rtorch_ping <- function() {
+    .Call(`_Rtorch_C_rtorch_ping`)
+}
+
 C_torch_tensor <- function(data, dtype_sexp, device_sexp) {
     .Call(`_Rtorch_C_torch_tensor`, data, dtype_sexp, device_sexp)
 }

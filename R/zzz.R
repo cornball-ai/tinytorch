@@ -3,16 +3,20 @@
 NULL
 
 .onLoad <- function(libname, pkgname) {
-  # Ensure libtorch shared libraries are on the library path
-  torch_home <- system.file(package = "torch")
-  if (nzchar(torch_home)) {
-    lib_path <- file.path(torch_home, "lib")
-    # On Linux, add to LD_LIBRARY_PATH equivalent via dyn.load search
-    if (.Platform$OS.type == "unix") {
-      current <- Sys.getenv("LD_LIBRARY_PATH", "")
-      if (!grepl(lib_path, current, fixed = TRUE)) {
-        Sys.setenv(LD_LIBRARY_PATH = paste(lib_path, current, sep = ":"))
-      }
+  # In stub mode (no libtorch), nothing to do
+  if (!tryCatch(.Call("_Rtorch_C_rtorch_ping") == 1L, error = function(e) FALSE)) {
+    return(invisible())
+  }
+
+  # Real backend: ensure libtorch shared libraries are findable.
+  # The rpath baked into Rtorch.so at compile time handles this for most cases.
+  # Add LIBTORCH_HOME/lib to LD_LIBRARY_PATH as a fallback.
+  libtorch_home <- Sys.getenv("LIBTORCH_HOME", "")
+  if (nzchar(libtorch_home)) {
+    lib_path <- file.path(libtorch_home, "lib")
+    current <- Sys.getenv("LD_LIBRARY_PATH", "")
+    if (!grepl(lib_path, current, fixed = TRUE)) {
+      Sys.setenv(LD_LIBRARY_PATH = paste(lib_path, current, sep = ":"))
     }
   }
 }

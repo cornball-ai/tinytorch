@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # ===== Module Discovery =====
 
 # Simple model for testing

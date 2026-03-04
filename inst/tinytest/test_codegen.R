@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # test_codegen.R - Tests for fused kernel code generation
 
 # Skip if Rcpp not available

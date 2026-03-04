@@ -1,3 +1,5 @@
+if (!Rtorch::is_available()) exit_file("LibTorch not available")
+
 # ===== Chatterbox (Llama) Module Tracing =====
 #
 # Tests trace_module on Llama-style modules from chatterbox.
