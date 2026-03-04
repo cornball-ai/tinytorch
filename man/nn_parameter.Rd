@@ -8,7 +8,7 @@ nn_parameter(data, requires_grad = TRUE)
 \arguments{
 \item{data}{A torch_tensor.}
 
-\item{requires_grad}{Ignored (no autograd).}
+\item{requires_grad}{Whether this parameter requires gradients.}
 }
 \value{
 The tensor with additional class tag.

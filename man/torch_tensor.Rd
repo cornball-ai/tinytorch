@@ -3,7 +3,7 @@
 \alias{torch_tensor}
 \title{Create a tensor from R data}
 \usage{
-torch_tensor(data, dtype = NULL, device = NULL)
+torch_tensor(data, dtype = NULL, device = NULL, requires_grad = FALSE)
 }
 \arguments{
 \item{data}{An R numeric, integer, or logical vector/matrix/array.}

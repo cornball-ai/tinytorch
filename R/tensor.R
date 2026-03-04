@@ -331,7 +331,19 @@ torch_sigmoid <- function(self) {
 }
 
 .tensor_methods$requires_grad_ <- function(self, requires_grad = TRUE) {
-  # No-op for now (no autograd support)
+  C_tensor_requires_grad_(self, requires_grad)
+  invisible(self)
+}
+
+.tensor_methods$backward <- function(self, gradient = NULL,
+                                      retain_graph = FALSE,
+                                      create_graph = FALSE) {
+  C_tensor_backward(self, gradient, retain_graph, create_graph)
+  invisible(self)
+}
+
+.tensor_methods$retain_grad <- function(self) {
+  C_tensor_retain_grad(self)
   invisible(self)
 }
 
@@ -430,8 +442,10 @@ torch_sigmoid <- function(self) {
   C_torch_scatter_(self, as.integer(dim), index, src)
 }
 
-# Data property (no-op, returns self since no autograd)
-.tensor_properties$data <- function(self) self
+# Properties
+.tensor_properties$data <- function(self) C_torch_detach(self)
+.tensor_properties$grad <- function(self) C_tensor_grad(self)
+.tensor_properties$is_leaf <- function(self) C_tensor_is_leaf(self)
 
 # Binary methods
 .tensor_methods$pow <- function(self, other) {

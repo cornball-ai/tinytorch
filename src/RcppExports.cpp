@@ -10,6 +10,83 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// C_tensor_requires_grad_
+SEXP C_tensor_requires_grad_(SEXP self_sexp, bool requires_grad);
+RcppExport SEXP _Rtorch_C_tensor_requires_grad_(SEXP self_sexpSEXP, SEXP requires_gradSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type self_sexp(self_sexpSEXP);
+    Rcpp::traits::input_parameter< bool >::type requires_grad(requires_gradSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_tensor_requires_grad_(self_sexp, requires_grad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_tensor_grad
+SEXP C_tensor_grad(SEXP self_sexp);
+RcppExport SEXP _Rtorch_C_tensor_grad(SEXP self_sexpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type self_sexp(self_sexpSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_tensor_grad(self_sexp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_tensor_backward
+void C_tensor_backward(SEXP self_sexp, SEXP gradient_sexp, bool retain_graph, bool create_graph);
+RcppExport SEXP _Rtorch_C_tensor_backward(SEXP self_sexpSEXP, SEXP gradient_sexpSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type self_sexp(self_sexpSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type gradient_sexp(gradient_sexpSEXP);
+    Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
+    Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
+    C_tensor_backward(self_sexp, gradient_sexp, retain_graph, create_graph);
+    return R_NilValue;
+END_RCPP
+}
+// C_autograd_set_grad_mode
+void C_autograd_set_grad_mode(bool enabled);
+RcppExport SEXP _Rtorch_C_autograd_set_grad_mode(SEXP enabledSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type enabled(enabledSEXP);
+    C_autograd_set_grad_mode(enabled);
+    return R_NilValue;
+END_RCPP
+}
+// C_autograd_is_enabled
+bool C_autograd_is_enabled();
+RcppExport SEXP _Rtorch_C_autograd_is_enabled() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(C_autograd_is_enabled());
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_tensor_is_leaf
+bool C_tensor_is_leaf(SEXP self_sexp);
+RcppExport SEXP _Rtorch_C_tensor_is_leaf(SEXP self_sexpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type self_sexp(self_sexpSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_tensor_is_leaf(self_sexp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_tensor_retain_grad
+void C_tensor_retain_grad(SEXP self_sexp);
+RcppExport SEXP _Rtorch_C_tensor_retain_grad(SEXP self_sexpSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type self_sexp(self_sexpSEXP);
+    C_tensor_retain_grad(self_sexp);
+    return R_NilValue;
+END_RCPP
+}
 // C_as_array
 SEXP C_as_array(at::Tensor self);
 RcppExport SEXP _Rtorch_C_as_array(SEXP selfSEXP) {
@@ -11902,6 +11979,77 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// C_optim_sgd
+SEXP C_optim_sgd(SEXP params_sexp, double lr, double momentum, double dampening, double weight_decay, bool nesterov);
+RcppExport SEXP _Rtorch_C_optim_sgd(SEXP params_sexpSEXP, SEXP lrSEXP, SEXP momentumSEXP, SEXP dampeningSEXP, SEXP weight_decaySEXP, SEXP nesterovSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type params_sexp(params_sexpSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type momentum(momentumSEXP);
+    Rcpp::traits::input_parameter< double >::type dampening(dampeningSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type nesterov(nesterovSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_optim_sgd(params_sexp, lr, momentum, dampening, weight_decay, nesterov));
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_optim_adam
+SEXP C_optim_adam(SEXP params_sexp, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _Rtorch_C_optim_adam(SEXP params_sexpSEXP, SEXP lrSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type params_sexp(params_sexpSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< double >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_optim_adam(params_sexp, lr, beta1, beta2, eps, weight_decay, amsgrad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_optim_adamw
+SEXP C_optim_adamw(SEXP params_sexp, double lr, double beta1, double beta2, double eps, double weight_decay, bool amsgrad);
+RcppExport SEXP _Rtorch_C_optim_adamw(SEXP params_sexpSEXP, SEXP lrSEXP, SEXP beta1SEXP, SEXP beta2SEXP, SEXP epsSEXP, SEXP weight_decaySEXP, SEXP amsgradSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type params_sexp(params_sexpSEXP);
+    Rcpp::traits::input_parameter< double >::type lr(lrSEXP);
+    Rcpp::traits::input_parameter< double >::type beta1(beta1SEXP);
+    Rcpp::traits::input_parameter< double >::type beta2(beta2SEXP);
+    Rcpp::traits::input_parameter< double >::type eps(epsSEXP);
+    Rcpp::traits::input_parameter< double >::type weight_decay(weight_decaySEXP);
+    Rcpp::traits::input_parameter< bool >::type amsgrad(amsgradSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_optim_adamw(params_sexp, lr, beta1, beta2, eps, weight_decay, amsgrad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_optim_step
+void C_optim_step(SEXP optim_sexp);
+RcppExport SEXP _Rtorch_C_optim_step(SEXP optim_sexpSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type optim_sexp(optim_sexpSEXP);
+    C_optim_step(optim_sexp);
+    return R_NilValue;
+END_RCPP
+}
+// C_optim_zero_grad
+void C_optim_zero_grad(SEXP optim_sexp, bool set_to_none);
+RcppExport SEXP _Rtorch_C_optim_zero_grad(SEXP optim_sexpSEXP, SEXP set_to_noneSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type optim_sexp(optim_sexpSEXP);
+    Rcpp::traits::input_parameter< bool >::type set_to_none(set_to_noneSEXP);
+    C_optim_zero_grad(optim_sexp, set_to_none);
+    return R_NilValue;
+END_RCPP
+}
 // C_torch_tensor
 SEXP C_torch_tensor(SEXP data, SEXP dtype_sexp, SEXP device_sexp);
 RcppExport SEXP _Rtorch_C_torch_tensor(SEXP dataSEXP, SEXP dtype_sexpSEXP, SEXP device_sexpSEXP) {
@@ -12489,6 +12637,13 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_Rtorch_C_tensor_requires_grad_", (DL_FUNC) &_Rtorch_C_tensor_requires_grad_, 2},
+    {"_Rtorch_C_tensor_grad", (DL_FUNC) &_Rtorch_C_tensor_grad, 1},
+    {"_Rtorch_C_tensor_backward", (DL_FUNC) &_Rtorch_C_tensor_backward, 4},
+    {"_Rtorch_C_autograd_set_grad_mode", (DL_FUNC) &_Rtorch_C_autograd_set_grad_mode, 1},
+    {"_Rtorch_C_autograd_is_enabled", (DL_FUNC) &_Rtorch_C_autograd_is_enabled, 0},
+    {"_Rtorch_C_tensor_is_leaf", (DL_FUNC) &_Rtorch_C_tensor_is_leaf, 1},
+    {"_Rtorch_C_tensor_retain_grad", (DL_FUNC) &_Rtorch_C_tensor_retain_grad, 1},
     {"_Rtorch_C_as_array", (DL_FUNC) &_Rtorch_C_as_array, 1},
     {"_Rtorch_C_tensor_shape", (DL_FUNC) &_Rtorch_C_tensor_shape, 1},
     {"_Rtorch_C_tensor_dtype", (DL_FUNC) &_Rtorch_C_tensor_dtype, 1},
@@ -13421,6 +13576,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rtorch_C_torch_stft", (DL_FUNC) &_Rtorch_C_torch_stft, 9},
     {"_Rtorch_C_torch_istft", (DL_FUNC) &_Rtorch_C_torch_istft, 10},
     {"_Rtorch_C_torch_hann_window", (DL_FUNC) &_Rtorch_C_torch_hann_window, 4},
+    {"_Rtorch_C_optim_sgd", (DL_FUNC) &_Rtorch_C_optim_sgd, 6},
+    {"_Rtorch_C_optim_adam", (DL_FUNC) &_Rtorch_C_optim_adam, 7},
+    {"_Rtorch_C_optim_adamw", (DL_FUNC) &_Rtorch_C_optim_adamw, 7},
+    {"_Rtorch_C_optim_step", (DL_FUNC) &_Rtorch_C_optim_step, 1},
+    {"_Rtorch_C_optim_zero_grad", (DL_FUNC) &_Rtorch_C_optim_zero_grad, 2},
     {"_Rtorch_C_torch_tensor", (DL_FUNC) &_Rtorch_C_torch_tensor, 3},
     {"_Rtorch_C_torch_tensor_raw", (DL_FUNC) &_Rtorch_C_torch_tensor_raw, 3},
     {"_Rtorch_C_torch_zeros", (DL_FUNC) &_Rtorch_C_torch_zeros, 3},
