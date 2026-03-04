@@ -3,16 +3,8 @@
 \alias{gpu_launch_reduction}
 \title{Launch a compiled GPU reduction kernel}
 \usage{
-gpu_launch_reduction(
-  ptx,
-  kernel_name,
-  input,
-  output,
-  n_elements,
-  grid,
-  block,
-  shared_mem = 0L
-)
+gpu_launch_reduction(ptx, kernel_name, input, output, n_elements, grid, block,
+                     shared_mem = 0L)
 }
 \arguments{
 \item{ptx}{Character, PTX assembly text.}

@@ -3,15 +3,8 @@
 \alias{gpu_launch_generic}
 \title{Launch a compiled GPU kernel (generic)}
 \usage{
-gpu_launch_generic(
-  ptx,
-  kernel_name,
-  tensors,
-  scalars,
-  grid,
-  block,
-  shared_mem = 0L
-)
+gpu_launch_generic(ptx, kernel_name, tensors, scalars, grid, block,
+                   shared_mem = 0L)
 }
 \arguments{
 \item{ptx}{Character, PTX assembly text.}

@@ -3,17 +3,9 @@
 \alias{torch_stft}
 \title{Short-time Fourier Transform}
 \usage{
-torch_stft(
-  input,
-  n_fft,
-  hop_length = NULL,
-  win_length = NULL,
-  window = NULL,
-  center = TRUE,
-  normalized = FALSE,
-  onesided = NULL,
-  return_complex = TRUE
-)
+torch_stft(input, n_fft, hop_length = NULL, win_length = NULL, window = NULL,
+           center = TRUE, normalized = FALSE, onesided = NULL,
+           return_complex = TRUE)
 }
 \arguments{
 \item{input}{Input tensor.}

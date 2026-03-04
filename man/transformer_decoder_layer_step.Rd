@@ -3,15 +3,8 @@
 \alias{transformer_decoder_layer_step}
 \title{Fused Transformer Decoder Layer Step}
 \usage{
-transformer_decoder_layer_step(
-  x,
-  weights,
-  self_cache_k,
-  self_cache_v,
-  cross_cache_k,
-  cross_cache_v,
-  n_head
-)
+transformer_decoder_layer_step(x, weights, self_cache_k, self_cache_v,
+                               cross_cache_k, cross_cache_v, n_head)
 }
 \arguments{
 \item{x}{Input tensor (batch, 1, n_state).}

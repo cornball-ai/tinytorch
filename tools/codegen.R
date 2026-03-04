@@ -32,8 +32,6 @@ parse_native_functions <- function(path) {
     tags_line <- grep("^  tags:", block, value = TRUE)
     tags <- if (length(tags_line)) tags_line[1] else ""
 
-    # Detect out-variant: non-self args with Tensor(a!) aliasing
-    # Match Tensor(letter!) but not the first Tensor(a!) which is self for in-place
     is_out <- is_out_variant(sig)
 
     entries[[i]] <- list(sig = sig, variants = variants, manual = manual,
@@ -44,18 +42,12 @@ parse_native_functions <- function(path) {
 }
 
 # Detect out-variant signatures by looking for output tensor args.
-# Out variants have Tensor(a!) args that are NOT self (self is the first arg
-# in in-place ops). The pattern: if the sig has Tensor(letter!) args after
-# the keyword-only marker (*), those are output args.
+# Out variants have Tensor(a!) args after the keyword-only marker (*).
 is_out_variant <- function(sig) {
-  # Get args part
   m <- regmatches(sig, regexec("\\((.*)\\)", sig))[[1]]
   if (length(m) < 2) return(FALSE)
   args_str <- m[2]
-
-  # Check for *, Tensor(a!) pattern (output args after keyword-only marker)
   if (grepl("\\*.*Tensor\\([a-z]+!\\)", args_str)) return(TRUE)
-
   FALSE
 }
 
@@ -151,7 +143,6 @@ parse_one_arg <- function(s, keyword_only = FALSE) {
 #   cpp_type: C++ parameter type in function signature
 #   cpp_call_expr: expression to pass to at::func(); NULL means just use param name
 #   r_convert: R-side conversion in wrapper; NULL means pass through
-#   needs_local: if TRUE, emitter generates a local variable (multi-line body)
 
 ARG_CONVERSIONS <- list(
   "Tensor" = list(
@@ -224,10 +215,36 @@ ARG_CONVERSIONS <- list(
     cpp_call = "sexp_to_optional_device(%s)",
     r_convert = NULL
   ),
+  "Device" = list(
+    cpp_type = "SEXP",
+    cpp_call = "sexp_to_required_device(%s)",
+    r_convert = NULL
+  ),
   "ScalarType" = list(
     cpp_type = "SEXP",
     cpp_call = "sexp_to_dtype(%s).value()",
     r_convert = NULL
+  ),
+  "Generator?" = list(
+    cpp_type = "SEXP",
+    cpp_call = "sexp_to_optional_generator(%s)",
+    r_convert = NULL
+  ),
+  "MemoryFormat?" = list(
+    cpp_type = "SEXP",
+    cpp_call = "sexp_to_optional_memory_format(%s)",
+    r_convert = NULL
+  ),
+  "MemoryFormat" = list(
+    cpp_type = "SEXP",
+    cpp_call = "sexp_to_optional_memory_format(%s).value()",
+    r_convert = NULL
+  ),
+  "Layout?" = list(
+    cpp_type = "SEXP",
+    cpp_call = NULL,
+    r_convert = NULL,
+    skip_in_call = TRUE
   )
 )
 
@@ -236,9 +253,24 @@ is_int_array_type <- function(type) {
   grepl("^int\\[\\d*\\]\\??$", type)
 }
 
+# float[] patterns (float[], float[]?)
+is_float_array_type <- function(type) {
+  grepl("^float\\[\\]\\??$", type)
+}
+
 # Tensor[] pattern
 is_tensor_list_type <- function(type) {
   type == "Tensor[]"
+}
+
+# Scalar[] pattern
+is_scalar_list_type <- function(type) {
+  type == "Scalar[]"
+}
+
+# Tensor?[] pattern
+is_optional_tensor_list_type <- function(type) {
+  type == "Tensor?[]"
 }
 
 # ---- Return type support ----
@@ -253,7 +285,12 @@ parse_return_type <- function(ret_str) {
     return(list(types = "Tensor", names = NULL))
   }
 
-  # Tuple: (Tensor foo, Tensor bar)
+  # Void return: ()
+  if (ret_str == "()") {
+    return(list(types = "void", names = NULL))
+  }
+
+  # Tuple: (Tensor foo, Tensor bar) or mixed tuples
   if (grepl("^\\(", ret_str)) {
     inner <- sub("^\\((.*)\\)$", "\\1", ret_str)
     parts <- strsplit(inner, ",")[[1]]
@@ -270,9 +307,18 @@ parse_return_type <- function(ret_str) {
     return(list(types = types, names = names))
   }
 
-  # Simple types
-  if (ret_str %in% c("Tensor", "bool", "int", "float", "Scalar")) {
-    return(list(types = ret_str, names = NULL))
+  # Simple non-Tensor types
+  if (ret_str == "bool") return(list(types = "bool", names = NULL))
+  if (ret_str == "int") return(list(types = "int", names = NULL))
+  if (ret_str == "float") return(list(types = "float", names = NULL))
+  if (ret_str == "Scalar") return(list(types = "Scalar", names = NULL))
+  if (ret_str == "ScalarType") return(list(types = "ScalarType", names = NULL))
+  if (ret_str == "QScheme") return(list(types = "QScheme", names = NULL))
+  if (ret_str == "Tensor[]") return(list(types = "Tensor[]", names = NULL))
+
+  # Tensor(a)[] — list of aliased tensors
+  if (grepl("^Tensor(\\([a-z!]+\\))?\\[\\]$", ret_str)) {
+    return(list(types = "Tensor[]", names = NULL))
   }
 
   NULL
@@ -284,7 +330,10 @@ parse_return_type <- function(ret_str) {
 is_supported_arg <- function(type) {
   if (type %in% names(ARG_CONVERSIONS)) return(TRUE)
   if (is_int_array_type(type)) return(TRUE)
+  if (is_float_array_type(type)) return(TRUE)
   if (is_tensor_list_type(type)) return(TRUE)
+  if (is_scalar_list_type(type)) return(TRUE)
+  if (is_optional_tensor_list_type(type)) return(TRUE)
   FALSE
 }
 
@@ -293,6 +342,14 @@ is_supported_return <- function(ret) {
   if (is.null(ret)) return(FALSE)
   # Simple Tensor return
   if (length(ret$types) == 1 && ret$types == "Tensor") return(TRUE)
+  # Tensor list return
+  if (length(ret$types) == 1 && ret$types == "Tensor[]") return(TRUE)
+  # Void return
+  if (length(ret$types) == 1 && ret$types == "void") return(TRUE)
+  # Scalar types
+  if (length(ret$types) == 1 && ret$types %in% c("bool", "int", "float",
+                                                   "Scalar", "ScalarType"))
+    return(TRUE)
   # Tuple of Tensors
   if (length(ret$types) > 1 && all(ret$types == "Tensor")) return(TRUE)
   FALSE
@@ -307,10 +364,9 @@ has_tensor_options <- function(args) {
     any(vapply(args, function(a) a$type == "ScalarType?", FALSE))
 }
 
-# Filter: skip types we can't generate yet
-SKIP_ARG_TYPES <- c("Layout?", "MemoryFormat?", "Generator?", "Dimname[]?",
-                     "Dimname[]", "Scalar[]", "Tensor?[]", "Storage", "Stream",
-                     "float[]?")
+# Types we still cannot generate
+SKIP_ARG_TYPES <- c("Dimname[]?", "Dimname[]", "Dimname[1]",
+                     "Storage", "Stream")
 
 can_generate <- function(parsed) {
   if (is.null(parsed)) return(FALSE)
@@ -322,7 +378,6 @@ can_generate <- function(parsed) {
     # Skip the TensorOptions args we'll handle specially
     if (a$name %in% c("layout", "pin_memory") &&
         a$type %in% c("Layout?", "bool?")) next
-    # Skip MemoryFormat?, Generator?, Dimname
     if (a$type %in% SKIP_ARG_TYPES) return(FALSE)
     if (!is_supported_arg(a$type)) return(FALSE)
   }
@@ -349,13 +404,11 @@ cpp_param <- function(a) {
     return(sprintf("%s %s", conv$cpp_type, name))
   }
 
-  if (is_int_array_type(type)) {
-    return(sprintf("SEXP %s_sexp", name))
-  }
-
-  if (is_tensor_list_type(type)) {
-    return(sprintf("SEXP %s_sexp", name))
-  }
+  if (is_int_array_type(type)) return(sprintf("SEXP %s_sexp", name))
+  if (is_float_array_type(type)) return(sprintf("SEXP %s_sexp", name))
+  if (is_tensor_list_type(type)) return(sprintf("SEXP %s_sexp", name))
+  if (is_scalar_list_type(type)) return(sprintf("SEXP %s_sexp", name))
+  if (is_optional_tensor_list_type(type)) return(sprintf("SEXP %s_sexp", name))
 
   NULL
 }
@@ -369,6 +422,7 @@ cpp_call_expr <- function(a) {
 
   if (type %in% names(ARG_CONVERSIONS)) {
     conv <- ARG_CONVERSIONS[[type]]
+    if (isTRUE(conv$skip_in_call)) return(NULL)
     if (!is.null(conv$cpp_call)) {
       actual_name <- if (type == "Scalar") paste0(name, "_sexp") else name
       return(sprintf(conv$cpp_call, actual_name))
@@ -378,28 +432,30 @@ cpp_call_expr <- function(a) {
 
   if (is_int_array_type(type)) {
     is_optional <- grepl("\\?$", type)
-    if (is_optional) {
-      return(sprintf("%s_ref", name))
-    }
-    return(sprintf("at::IntArrayRef(%s_vec.data(), %s_vec.size())",
-                   name, name))
+    if (is_optional) return(sprintf("%s_ref", name))
+    return(sprintf("at::IntArrayRef(%s_vec.data(), %s_vec.size())", name, name))
   }
 
-  if (is_tensor_list_type(type)) {
-    return(sprintf("%s_vec", name))
+  if (is_float_array_type(type)) {
+    is_optional <- grepl("\\?$", type)
+    if (is_optional) return(sprintf("%s_ref", name))
+    return(sprintf("at::ArrayRef<double>(%s_vec.data(), %s_vec.size())", name, name))
   }
+
+  if (is_tensor_list_type(type)) return(sprintf("%s_vec", name))
+  if (is_scalar_list_type(type)) return(sprintf("%s_vec", name))
+  if (is_optional_tensor_list_type(type)) return(sprintf("%s_vec", name))
 
   name
 }
 
-# Generate locals needed before the call (int[] vectors, Tensor[] lists)
+# Generate locals needed before the call (int[] vectors, Tensor[] lists, etc.)
 cpp_locals <- function(args) {
   lines <- character()
   for (a in args) {
     if (is_int_array_type(a$type)) {
       is_optional <- grepl("\\?$", a$type)
       if (is_optional) {
-        # Optional int array: convert to vec only if non-NULL
         lines <- c(lines,
           sprintf("    c10::optional<at::IntArrayRef> %s_ref;", a$name),
           sprintf("    std::vector<int64_t> %s_vec;", a$name),
@@ -414,33 +470,95 @@ cpp_locals <- function(args) {
                                   a$name, a$name))
       }
     }
+    if (is_float_array_type(a$type)) {
+      is_optional <- grepl("\\?$", a$type)
+      if (is_optional) {
+        lines <- c(lines,
+          sprintf("    c10::optional<at::ArrayRef<double>> %s_ref;", a$name),
+          sprintf("    std::vector<double> %s_vec;", a$name),
+          sprintf("    if (!Rf_isNull(%s_sexp)) {", a$name),
+          sprintf("        %s_vec = sexp_to_double_vec(%s_sexp);", a$name, a$name),
+          sprintf("        %s_ref = at::ArrayRef<double>(%s_vec.data(), %s_vec.size());",
+                  a$name, a$name, a$name),
+          "    }"
+        )
+      } else {
+        lines <- c(lines, sprintf("    auto %s_vec = sexp_to_double_vec(%s_sexp);",
+                                  a$name, a$name))
+      }
+    }
     if (is_tensor_list_type(a$type)) {
       lines <- c(lines, sprintf("    auto %s_vec = sexp_to_tensor_list(%s_sexp);",
                                 a$name, a$name))
+    }
+    if (is_scalar_list_type(a$type)) {
+      lines <- c(lines, sprintf("    auto %s_vec = sexp_to_scalar_list(%s_sexp);",
+                                a$name, a$name))
+    }
+    if (is_optional_tensor_list_type(a$type)) {
+      lines <- c(lines,
+        sprintf("    auto %s_vec = sexp_to_optional_tensor_list(%s_sexp);",
+                a$name, a$name))
     }
   }
   lines
 }
 
-# Does this op need a multi-line body?
-needs_multiline <- function(parsed) {
-  ret <- parse_return_type(parsed$ret)
-  if (length(ret$types) > 1) return(TRUE)  # tuple return
-  for (a in parsed$args) {
-    if (is_int_array_type(a$type)) return(TRUE)
-    if (is_tensor_list_type(a$type)) return(TRUE)
-    if (has_tensor_options(parsed$args) &&
-        a$name == "dtype" && a$type == "ScalarType?") return(TRUE)
+# Ops that exist only as Tensor methods, not as at:: free functions.
+# Their at::ops/*.h headers have an empty at:: namespace block.
+METHOD_ONLY_OPS <- c(
+  "chalf", "coalesce", "contiguous", "data", "expand_as", "indices",
+  "is_coalesced", "is_set_to", "item", "mH", "mT", "numpy_T",
+  "matrix_H", "qscheme", "rename", "rename_", "reshape_as", "to",
+  "to_dense", "to_sparse", "to_padded_tensor", "type_as",
+  "unfold", "values", "view_as",
+  "sum_to_size", "pin_memory",
+  "new_empty", "new_empty_strided", "new_full", "new_zeros", "new_ones",
+  "dense_dim", "sparse_dim",
+  "is_same_size", "is_distributed", "is_nonzero"
+)
+
+# Build the call expression for an op, either at::name() or self.name()
+build_call <- function(name, active_args, variants, skip_self = FALSE) {
+  is_method_only <- grepl("method", variants) && !grepl("function", variants)
+  if (name %in% METHOD_ONLY_OPS) is_method_only <- TRUE
+
+  if (is_method_only || skip_self) {
+    # Method call: self.op(other_args)
+    self_idx <- which(vapply(active_args, function(a) a$name == "self", FALSE))
+    if (length(self_idx) == 0) self_idx <- 1L
+    non_self_args <- if (length(active_args) > 1) active_args[-self_idx[1]] else list()
+    call_parts <- vapply(non_self_args, function(a) {
+      e <- cpp_call_expr(a)
+      if (is.null(e)) "" else e
+    }, "")
+    call_parts <- call_parts[nzchar(call_parts)]
+    call_str <- paste(call_parts, collapse = ", ")
+    locals <- cpp_locals(non_self_args)
+    list(expr = sprintf("self.%s(%s)", name, call_str),
+         locals = locals, style = "method")
+  } else {
+    # Free function: at::name(all_args)
+    call_parts <- vapply(active_args, function(a) {
+      e <- cpp_call_expr(a)
+      if (is.null(e)) "" else e
+    }, "")
+    call_parts <- call_parts[nzchar(call_parts)]
+    call_str <- paste(call_parts, collapse = ", ")
+    locals <- cpp_locals(active_args)
+    list(expr = sprintf("at::%s(%s)", name, call_str),
+         locals = locals, style = "function")
   }
-  FALSE
 }
 
 gen_cpp_general <- function(parsed, variants = "") {
   n <- parsed$name
   ret <- parse_return_type(parsed$ret)
   is_inplace <- grepl("_$", n)
+  is_method_only <- grepl("method", variants) && !grepl("function", variants)
+  if (n %in% METHOD_ONLY_OPS) is_method_only <- TRUE
 
-  # Filter out layout/pin_memory args
+  # Filter out layout/pin_memory args (handled by TensorOptions)
   active_args <- Filter(function(a) !(a$name %in% c("layout", "pin_memory")),
                         parsed$args)
 
@@ -452,74 +570,108 @@ gen_cpp_general <- function(parsed, variants = "") {
   params <- params[nzchar(params)]
   param_str <- paste(params, collapse = ", ")
 
-  # In-place ops: use method style if variants says "method" (no at:: free fn),
-  # otherwise use at:: free function style.
+  # TensorOptions detection: replace dtype/device args with opts builder
+  if (has_tensor_options(active_args)) {
+    return(gen_cpp_tensor_options(parsed, active_args, ret, variants))
+  }
+
+  call <- build_call(n, active_args, variants)
+
+  # In-place ops
   if (is_inplace) {
-    is_method_only <- grepl("method", variants) && !grepl("function", variants)
-
-    if (is_method_only) {
-      # self.op_(arg2, arg3, ...) — method call, skip self in call args
-      self_idx <- which(vapply(active_args, function(a) a$name == "self", FALSE))
-      if (length(self_idx) == 0) self_idx <- 1L
-      non_self_args <- active_args[-self_idx[1]]
-      call_parts <- vapply(non_self_args, function(a) {
-        e <- cpp_call_expr(a)
-        if (is.null(e)) "" else e
-      }, "")
-      call_parts <- call_parts[nzchar(call_parts)]
-      call_str <- paste(call_parts, collapse = ", ")
-      locals <- cpp_locals(non_self_args)
-
-      body <- character()
-      if (length(locals) > 0) body <- c(body, locals)
-      body <- c(body, sprintf("    self.%s(%s);", n, call_str))
-      body <- c(body, "    return self;")
-    } else {
-      # at::op_(self, ...) — free function call
-      call_parts <- vapply(active_args, function(a) {
-        e <- cpp_call_expr(a)
-        if (is.null(e)) "" else e
-      }, "")
-      call_parts <- call_parts[nzchar(call_parts)]
-      call_str <- paste(call_parts, collapse = ", ")
-      locals <- cpp_locals(active_args)
-
-      body <- character()
-      if (length(locals) > 0) body <- c(body, locals)
-      body <- c(body, sprintf("    at::%s(%s);", n, call_str))
-      body <- c(body, "    return self;")
-    }
-
+    body <- character()
+    if (length(call$locals) > 0) body <- c(body, call$locals)
+    body <- c(body, sprintf("    %s;", call$expr))
+    body <- c(body, "    return self;")
     return(sprintf(
       "// [[Rcpp::export]]\nat::Tensor C_torch_%s(%s) {\n%s\n}",
       n, param_str, paste(body, collapse = "\n")
     ))
   }
 
-  # Build call argument list (non-inplace)
-  call_parts <- vapply(active_args, function(a) {
-    e <- cpp_call_expr(a)
-    if (is.null(e)) "" else e
-  }, "")
-  call_parts <- call_parts[nzchar(call_parts)]
-  call_str <- paste(call_parts, collapse = ", ")
+  # Void return
+  if (length(ret$types) == 1 && ret$types == "void") {
+    body <- character()
+    if (length(call$locals) > 0) body <- c(body, call$locals)
+    body <- c(body, sprintf("    %s;", call$expr))
+    body <- c(body, "    return R_NilValue;")
+    return(sprintf(
+      "// [[Rcpp::export]]\nSEXP C_torch_%s(%s) {\n%s\n}",
+      n, param_str, paste(body, collapse = "\n")
+    ))
+  }
 
-  locals <- cpp_locals(active_args)
+  # Tensor[] return
+  if (length(ret$types) == 1 && ret$types == "Tensor[]") {
+    body <- character()
+    if (length(call$locals) > 0) body <- c(body, call$locals)
+    body <- c(body, sprintf("    auto result = %s;", call$expr))
+    body <- c(body, "    return tensor_list_to_sexp(result);")
+    return(sprintf(
+      "// [[Rcpp::export]]\nSEXP C_torch_%s(%s) {\n%s\n}",
+      n, param_str, paste(body, collapse = "\n")
+    ))
+  }
+
+  # Scalar return types (bool, int, float, Scalar, ScalarType)
+  if (length(ret$types) == 1 && ret$types %in% c("bool", "int", "float",
+                                                    "Scalar", "ScalarType")) {
+    cpp_ret <- switch(ret$types,
+      "bool" = "bool",
+      "int" = "int64_t",
+      "float" = "double",
+      "Scalar" = "at::Scalar",
+      "ScalarType" = "at::ScalarType"
+    )
+    body <- character()
+    if (length(call$locals) > 0) body <- c(body, call$locals)
+
+    if (ret$types == "ScalarType") {
+      # Return as integer (enum value)
+      body <- c(body, sprintf("    return Rf_ScalarInteger(static_cast<int>(%s));",
+                              call$expr))
+      return(sprintf(
+        "// [[Rcpp::export]]\nSEXP C_torch_%s(%s) {\n%s\n}",
+        n, param_str, paste(body, collapse = "\n")
+      ))
+    }
+
+    if (ret$types == "Scalar") {
+      # Return as SEXP via Rcpp::wrap
+      body <- c(body, sprintf("    at::Scalar s = %s;", call$expr))
+      body <- c(body, "    if (s.isIntegral(false)) return Rf_ScalarInteger(s.toLong());")
+      body <- c(body, "    return Rf_ScalarReal(s.toDouble());")
+      return(sprintf(
+        "// [[Rcpp::export]]\nSEXP C_torch_%s(%s) {\n%s\n}",
+        n, param_str, paste(body, collapse = "\n")
+      ))
+    }
+
+    if (length(call$locals) > 0) {
+      body <- c(body, sprintf("    return %s;", call$expr))
+      return(sprintf(
+        "// [[Rcpp::export]]\n%s C_torch_%s(%s) {\n%s\n}",
+        cpp_ret, n, param_str, paste(body, collapse = "\n")
+      ))
+    } else {
+      return(sprintf(
+        "// [[Rcpp::export]]\n%s C_torch_%s(%s) { return %s; }",
+        cpp_ret, n, param_str, call$expr
+      ))
+    }
+  }
+
+  # Tuple return
   is_tuple <- length(ret$types) > 1
-
-  # TensorOptions detection: replace dtype/device args with opts builder
-  if (has_tensor_options(active_args)) {
-    return(gen_cpp_tensor_options(parsed, active_args, ret))
-  }
-
   if (is_tuple) {
-    return(gen_cpp_tuple_return(n, param_str, call_str, locals, ret))
+    return(gen_cpp_tuple_return(n, param_str, call$expr, call$locals, ret))
   }
 
-  if (length(locals) > 0) {
+  # Simple Tensor return
+  if (length(call$locals) > 0) {
     body <- c(
-      locals,
-      sprintf("    return at::%s(%s);", n, call_str)
+      call$locals,
+      sprintf("    return %s;", call$expr)
     )
     sprintf(
       "// [[Rcpp::export]]\nat::Tensor C_torch_%s(%s) {\n%s\n}",
@@ -527,18 +679,18 @@ gen_cpp_general <- function(parsed, variants = "") {
     )
   } else {
     sprintf(
-      "// [[Rcpp::export]]\nat::Tensor C_torch_%s(%s) { return at::%s(%s); }",
-      n, param_str, n, call_str
+      "// [[Rcpp::export]]\nat::Tensor C_torch_%s(%s) { return %s; }",
+      n, param_str, call$expr
     )
   }
 }
 
 # Generate C++ for tuple-returning ops
-gen_cpp_tuple_return <- function(name, param_str, call_str, locals, ret) {
+gen_cpp_tuple_return <- function(name, param_str, call_expr, locals, ret) {
   ntup <- length(ret$types)
   body <- character()
   if (length(locals) > 0) body <- c(body, locals)
-  body <- c(body, sprintf("    auto result = at::%s(%s);", name, call_str))
+  body <- c(body, sprintf("    auto result = %s;", call_expr))
   body <- c(body, sprintf("    SEXP out = PROTECT(Rf_allocVector(VECSXP, %d));",
                            ntup))
   for (i in seq_len(ntup)) {
@@ -563,37 +715,44 @@ gen_cpp_tuple_return <- function(name, param_str, call_str, locals, ret) {
 }
 
 # Generate C++ for TensorOptions creation ops
-gen_cpp_tensor_options <- function(parsed, active_args, ret) {
+gen_cpp_tensor_options <- function(parsed, active_args, ret, variants = "") {
   n <- parsed$name
 
   # Separate TensorOptions args from regular args
   opts_args <- c("dtype", "device", "layout", "pin_memory")
-  regular_args <- Filter(function(a) !(a$name %in% opts_args), active_args)
-  has_device <- any(vapply(active_args, function(a) a$name == "device", FALSE))
+  # MemoryFormat is a trailing kwarg in _like ops, not part of TensorOptions
+  has_memfmt <- any(vapply(active_args, function(a)
+    a$name == "memory_format" && a$type == "MemoryFormat?", FALSE))
+  skip_names <- opts_args
+  if (has_memfmt) skip_names <- c(skip_names, "memory_format")
+  regular_args <- Filter(function(a) !(a$name %in% skip_names), active_args)
 
-  # Build params: regular args + dtype + device
+  is_method_only <- grepl("method", variants) && !grepl("function", variants)
+  if (n %in% METHOD_ONLY_OPS) is_method_only <- TRUE
+
+  # For method-only ops, self is implicit — exclude from regular_args for call
+  self_in_regular <- which(vapply(regular_args, function(a) a$name == "self", FALSE))
+
+  # Build params: regular args + dtype + device (+ memory_format if present)
   params <- character()
   for (a in regular_args) {
     p <- cpp_param(a)
     if (!is.null(p) && nzchar(p)) params <- c(params, p)
   }
   params <- c(params, "SEXP dtype_sexp", "SEXP device_sexp")
+  if (has_memfmt) params <- c(params, "SEXP memory_format")
   param_str <- paste(params, collapse = ", ")
 
   # Build body
   body <- character()
 
-  # Locals for int[] etc in regular args
-  for (a in regular_args) {
-    if (is_int_array_type(a$type)) {
-      body <- c(body, sprintf("    auto %s_vec = sexp_to_int_vec(%s_sexp);",
-                              a$name, a$name))
-    }
-    if (is_tensor_list_type(a$type)) {
-      body <- c(body, sprintf("    auto %s_vec = sexp_to_tensor_list(%s_sexp);",
-                              a$name, a$name))
-    }
+  # Locals for int[] etc in regular args (exclude self for method-only)
+  args_for_locals <- if (is_method_only && length(self_in_regular) > 0) {
+    regular_args[-self_in_regular[1]]
+  } else {
+    regular_args
   }
+  body <- c(body, cpp_locals(args_for_locals))
 
   body <- c(body, "    auto opts = at::TensorOptions();")
   body <- c(body,
@@ -602,17 +761,31 @@ gen_cpp_tensor_options <- function(parsed, active_args, ret) {
     "    if (!Rf_isNull(device_sexp)) opts = opts.device(sexp_to_device(device_sexp));"
   )
 
-  # Build call args
+  # Build call args (excluding self for method-only)
+  call_args_list <- if (is_method_only && length(self_in_regular) > 0) {
+    regular_args[-self_in_regular[1]]
+  } else {
+    regular_args
+  }
   call_parts <- character()
-  for (a in regular_args) {
+  for (a in call_args_list) {
     call_parts <- c(call_parts, cpp_call_expr(a))
   }
   call_parts <- c(call_parts, "opts")
+  if (has_memfmt) {
+    call_parts <- c(call_parts, "sexp_to_optional_memory_format(memory_format)")
+  }
   call_str <- paste(call_parts, collapse = ", ")
 
-  body <- c(body, sprintf(
-    "    return make_tensor_sexp(new at::Tensor(at::%s(%s)));",
-    n, call_str))
+  if (is_method_only) {
+    body <- c(body, sprintf(
+      "    return make_tensor_sexp(new at::Tensor(self.%s(%s)));",
+      n, call_str))
+  } else {
+    body <- c(body, sprintf(
+      "    return make_tensor_sexp(new at::Tensor(at::%s(%s)));",
+      n, call_str))
+  }
 
   sprintf(
     "// [[Rcpp::export]]\nSEXP C_torch_%s(%s) {\n%s\n}",
@@ -644,7 +817,6 @@ gen_r_general <- function(parsed, is_method = FALSE) {
 
   # For TensorOptions ops, further filter - we expose dtype + device only
   if (is_opts) {
-    # Keep non-options args, plus dtype and device
     opts_skip <- c("layout", "pin_memory")
     active_args <- Filter(function(a) !(a$name %in% opts_skip), active_args)
   }
@@ -702,48 +874,17 @@ gen_r_general <- function(parsed, is_method = FALSE) {
 
 # ---- Exclusion filters ----
 
+# Only exclude ops that are truly internal or backend-specific
 EXCLUDE_PATTERNS <- c(
-  "backward",
-  "^fbgemm", "^mkldnn", "^cudnn", "^miopen",
-  "quantize", "^fake_quantize",
-  "^q_scale$", "^q_zero_point$", "^q_per_channel",
-  "^int_repr$", "^dequantize$",
-  "sparse",
-  "^coalesce$", "^is_coalesced$",
-  "^indices$", "^values$",
-  "^crow_indices$", "^col_indices$", "^ccol_indices$", "^row_indices$",
-  "_copy$",
-  "^lift", "^lift_fresh",
-  "^is_distributed$",
-  "^is_same_size$",
-  "^norm_except_dim$",
-  "^native_norm$",
-  "^nuclear_norm$",
-  "^hspmm$", "^smm$",
-  "^to_sparse$", "^to_mkldnn",
-  "^dense_dim$", "^sparse_dim$",
-  "^align_as$", "^align_to",
-  "^numpy_T$",
-  "^matrix_H$", "^mT$", "^mH$",
-  "^resolve_conj$", "^resolve_neg$", "^conj_physical$",
-  "^one_hot$",
-  "^type_as$",
-  "^is_set_to$",
-  "^infinitely_differentiable_gelu",
-  "^ldexp$",
-  "^matrix_exp_backward$",
-  "^combinations$",
-  "^heaviside$",
-  "^expand_as$", "^reshape_as$", "^view_as$",
-  "^unfold$",
-  "^equal$",
-  "^is_nonzero$",
-  "^sum_to_size$",        # method-only, not in at::
-  "^to_dense$",           # method-only, not in at::
-  "^new_empty$", "^new_empty_strided$", "^new_full$", "^new_zeros$", "^new_ones$",
-  "^pin_memory$",         # method-only
-  "^to_padded_tensor$",   # method-only
-  "^_[a-z]"  # internal ops (leading underscore)
+  "backward",                    # autograd internals
+  "^fbgemm",                     # Facebook GEMM backend
+  "^mkldnn", "^to_mkldnn",      # Intel MKL-DNN backend
+  "^cudnn",                      # cuDNN backend
+  "^miopen",                     # AMD MIOpen backend
+  "^_[a-z]",                     # internal ops (leading underscore)
+  "_copy$",                      # copy variants (internal dispatch)
+  "^lift$", "^lift_fresh",       # autograd internals
+  "^infinitely_differentiable_gelu"  # internal gelu variant
 )
 
 should_exclude <- function(name) {
@@ -772,6 +913,7 @@ codegen <- function(yaml_path = "~/pytorch-ref/aten/src/ATen/native/native_funct
   generated <- character()
   excluded <- character()
   skipped_types <- list()
+  failed_ops <- character()
 
   for (entry in entries) {
     if (entry$manual) next
@@ -802,11 +944,22 @@ codegen <- function(yaml_path = "~/pytorch-ref/aten/src/ATen/native/native_funct
           skipped_types[[a$type]] <- (skipped_types[[a$type]] %||% 0L) + 1L
         }
       }
+      ret <- parse_return_type(parsed$ret)
+      if (is.null(ret) || !is_supported_return(ret)) {
+        rkey <- paste0("ret:", parsed$ret)
+        skipped_types[[rkey]] <- (skipped_types[[rkey]] %||% 0L) + 1L
+      }
       next
     }
 
     # Generate C++
-    cpp <- gen_cpp_general(parsed, variants = entry$variants)
+    cpp <- tryCatch(
+      gen_cpp_general(parsed, variants = entry$variants),
+      error = function(e) {
+        failed_ops <<- c(failed_ops, sprintf("%s: %s", parsed$name, e$message))
+        NULL
+      }
+    )
     if (is.null(cpp)) next
     cpp_lines <- c(cpp_lines, cpp)
 
@@ -827,17 +980,21 @@ codegen <- function(yaml_path = "~/pytorch-ref/aten/src/ATen/native/native_funct
   cat("Hand-written:", length(existing_ops), "ops\n")
   cat("Excluded:", length(unique(excluded)), "ops\n")
 
+  if (length(failed_ops) > 0) {
+    cat("\nFailed to generate:\n")
+    for (f in failed_ops) cat("  ", f, "\n")
+  }
+
   if (length(skipped_types) > 0) {
-    cat("\nUnsupported arg types (op count):\n")
+    cat("\nUnsupported arg/return types (op count):\n")
     sorted <- sort(unlist(skipped_types), decreasing = TRUE)
     for (nm in names(sorted)) {
-      cat(sprintf("  %-20s %d ops\n", nm, sorted[nm]))
+      cat(sprintf("  %-30s %d ops\n", nm, sorted[nm]))
     }
   }
 
   if (dry_run) {
     cat("\n=== DRY RUN ===\n")
-    cat("Would generate:", paste(generated, collapse = ", "), "\n")
     return(invisible(list(
       ops = generated,
       excluded = unique(excluded),
@@ -892,7 +1049,7 @@ scan_existing_ops <- function(src_dir = "src", r_dir = "R") {
   # Scan C++ for C_torch_* function names
   cpp_files <- list.files(src_dir, pattern = "\\.cpp$", full.names = TRUE)
   for (f in cpp_files) {
-    if (basename(f) == "gen-ops.cpp") next
+    if (basename(f) %in% c("gen-ops.cpp", "RcppExports.cpp")) next
     lines <- readLines(f)
     m <- regmatches(lines, gregexpr("C_torch_(\\w+)", lines))
     ops <- c(ops, unlist(lapply(m, function(x) sub("C_torch_", "", x))))
@@ -901,7 +1058,7 @@ scan_existing_ops <- function(src_dir = "src", r_dir = "R") {
   # Scan R for C_torch_* calls
   r_files <- list.files(r_dir, pattern = "\\.R$", full.names = TRUE)
   for (f in r_files) {
-    if (basename(f) == "zzz-gen-ops.R") next
+    if (basename(f) %in% c("zzz-gen-ops.R", "RcppExports.R")) next
     lines <- readLines(f)
     m <- regmatches(lines, gregexpr("C_torch_(\\w+)", lines))
     ops <- c(ops, unlist(lapply(m, function(x) sub("C_torch_", "", x))))
@@ -909,6 +1066,15 @@ scan_existing_ops <- function(src_dir = "src", r_dir = "R") {
     # (may use C_nnf_* or other C function names)
     m2 <- regmatches(lines, gregexpr("^torch_(\\w+)\\s*<-\\s*function", lines))
     ops <- c(ops, unlist(lapply(m2, function(x) sub("^torch_(\\w+)\\s.*", "\\1", x))))
+    # Also scan for hand-written method table entries: .tensor_methods$name <- function
+    m3 <- regmatches(lines,
+      gregexpr("\\.tensor_methods\\$`?(\\w+)`?\\s*<-\\s*function", lines))
+    for (match in m3) {
+      if (length(match) > 0) {
+        nm <- sub(".*\\$`?(\\w+)`?\\s.*", "\\1", match)
+        ops <- c(ops, nm)
+      }
+    }
   }
 
   unique(ops)

@@ -60,4 +60,26 @@ c10::optional<at::Scalar> sexp_to_optional_scalar(SEXP x);
 // Convert R SEXP to optional device (NULL → nullopt)
 c10::optional<at::Device> sexp_to_optional_device(SEXP x);
 
+// Convert R SEXP to non-optional device
+at::Device sexp_to_required_device(SEXP x);
+
+// Convert R SEXP to optional generator (always nullopt for now)
+c10::optional<at::Generator> sexp_to_optional_generator(SEXP x);
+
+// Convert R SEXP to optional memory format
+c10::optional<at::MemoryFormat> sexp_to_optional_memory_format(SEXP x);
+
+// Convert R numeric vector to std::vector<double>
+std::vector<double> sexp_to_double_vec(SEXP x);
+c10::optional<std::vector<double>> sexp_to_optional_double_vec(SEXP x);
+
+// Convert R numeric/integer vector to std::vector<at::Scalar>
+std::vector<at::Scalar> sexp_to_scalar_list(SEXP x);
+
+// Convert R list of tensors (with possible NULLs) to c10::List of optional tensors
+c10::List<c10::optional<at::Tensor>> sexp_to_optional_tensor_list(SEXP x);
+
+// Convert std::vector<at::Tensor> to R list of tensors
+SEXP tensor_list_to_sexp(const std::vector<at::Tensor>& tensors);
+
 #endif // RTORCH_H

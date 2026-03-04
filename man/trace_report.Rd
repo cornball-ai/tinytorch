@@ -3,14 +3,8 @@
 \alias{trace_report}
 \title{Try Tracing All Discovered Modules}
 \usage{
-trace_report(
-  module,
-  example_inputs = NULL,
-  max_depth = 10L,
-  check_correctness = TRUE,
-  atol = 1e-04,
-  verbose = TRUE
-)
+trace_report(module, example_inputs = NULL, max_depth = 10L,
+             check_correctness = TRUE, atol = 1e-04, verbose = TRUE)
 }
 \arguments{
 \item{module}{An nn_module instance (or a module_tree from discover_modules())}

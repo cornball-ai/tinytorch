@@ -3,15 +3,9 @@
 \alias{execute_optimized}
 \title{Execute an Optimized IR Graph}
 \usage{
-execute_optimized(
-  graph,
-  inputs,
-  optimize = TRUE,
-  fuse = TRUE,
-  fuse_matmul_epilogues = FALSE,
-  backend = "auto",
-  verbose = FALSE
-)
+execute_optimized(graph, inputs, optimize = TRUE, fuse = TRUE,
+                  fuse_matmul_epilogues = FALSE, backend = "auto",
+                  verbose = FALSE)
 }
 \arguments{
 \item{graph}{An ir_graph}

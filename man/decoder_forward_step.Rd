@@ -3,17 +3,8 @@
 \alias{decoder_forward_step}
 \title{Fused Decoder Forward Step}
 \usage{
-decoder_forward_step(
-  token_ids,
-  global_weights,
-  layer_weights,
-  self_cache_k,
-  self_cache_v,
-  cross_cache_k,
-  cross_cache_v,
-  n_head,
-  offset
-)
+decoder_forward_step(token_ids, global_weights, layer_weights, self_cache_k,
+                     self_cache_v, cross_cache_k, cross_cache_v, n_head, offset)
 }
 \arguments{
 \item{token_ids}{Integer tensor (batch, seq_len) of 0-indexed token IDs.}

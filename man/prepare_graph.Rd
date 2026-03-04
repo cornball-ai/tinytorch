@@ -3,14 +3,8 @@
 \alias{prepare_graph}
 \title{Prepare an IR Graph for Fast Execution}
 \usage{
-prepare_graph(
-  graph,
-  example_inputs,
-  optimize = TRUE,
-  fuse = TRUE,
-  fuse_matmul_epilogues = FALSE,
-  backend = "auto"
-)
+prepare_graph(graph, example_inputs, optimize = TRUE, fuse = TRUE,
+              fuse_matmul_epilogues = FALSE, backend = "auto")
 }
 \arguments{
 \item{graph}{An ir_graph}

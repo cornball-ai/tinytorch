@@ -3,18 +3,9 @@
 \alias{torch_istft}
 \title{Inverse Short-time Fourier Transform}
 \usage{
-torch_istft(
-  input,
-  n_fft,
-  hop_length = NULL,
-  win_length = NULL,
-  window = NULL,
-  center = TRUE,
-  normalized = FALSE,
-  onesided = TRUE,
-  length = NULL,
-  return_complex = FALSE
-)
+torch_istft(input, n_fft, hop_length = NULL, win_length = NULL, window = NULL,
+            center = TRUE, normalized = FALSE, onesided = TRUE, length = NULL,
+            return_complex = FALSE)
 }
 \arguments{
 \item{input}{Input tensor.}

@@ -3,16 +3,8 @@
 \alias{greedy_decode}
 \title{Greedy Decode}
 \usage{
-greedy_decode(
-  initial_tokens,
-  global_weights,
-  layer_weights,
-  cross_cache_k,
-  cross_cache_v,
-  n_head,
-  max_length,
-  eot_token
-)
+greedy_decode(initial_tokens, global_weights, layer_weights, cross_cache_k,
+              cross_cache_v, n_head, max_length, eot_token)
 }
 \arguments{
 \item{initial_tokens}{Integer vector of initial token IDs (0-indexed).}

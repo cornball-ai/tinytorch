@@ -3,14 +3,8 @@
 \alias{torch_scaled_dot_product_attention}
 \title{Scaled Dot-Product Attention}
 \usage{
-torch_scaled_dot_product_attention(
-  query,
-  key,
-  value,
-  attn_mask = NULL,
-  dropout_p = 0,
-  is_causal = FALSE
-)
+torch_scaled_dot_product_attention(query, key, value, attn_mask = NULL,
+                                   dropout_p = 0, is_causal = FALSE)
 }
 \arguments{
 \item{query}{Query tensor (batch, heads, seq_q, head_dim).}

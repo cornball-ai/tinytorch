@@ -3,14 +3,8 @@
 \alias{trace_module}
 \title{Trace an nn_module for Optimized Execution}
 \usage{
-trace_module(
-  module,
-  ...,
-  .optimize = TRUE,
-  .fuse = FALSE,
-  .backend = "auto",
-  .verbose = FALSE
-)
+trace_module(module, ..., .optimize = TRUE, .fuse = FALSE, .backend = "auto",
+             .verbose = FALSE)
 }
 \arguments{
 \item{module}{An nn_module callable}

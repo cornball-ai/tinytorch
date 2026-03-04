@@ -3,16 +3,8 @@
 \alias{nn_conv2d}
 \title{2D convolution module}
 \usage{
-nn_conv2d(
-  in_channels,
-  out_channels,
-  kernel_size,
-  stride = 1L,
-  padding = 0L,
-  dilation = 1L,
-  groups = 1L,
-  bias = TRUE
-)
+nn_conv2d(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L,
+          dilation = 1L, groups = 1L, bias = TRUE)
 }
 \arguments{
 \item{in_channels}{Integer.}

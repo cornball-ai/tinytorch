@@ -3,14 +3,7 @@
 \alias{compile}
 \title{Compile and Save/Load Optimized Torch Modules}
 \usage{
-compile(
-  obj,
-  ...,
-  path = NULL,
-  .optimize = TRUE,
-  .fuse = TRUE,
-  .backend = "auto"
-)
+compile(obj, ..., path = NULL, .optimize = TRUE, .fuse = TRUE, .backend = "auto")
 }
 \arguments{
 \item{obj}{An nn_module callable or a plain R function containing

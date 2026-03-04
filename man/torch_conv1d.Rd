@@ -3,15 +3,8 @@
 \alias{torch_conv1d}
 \title{1D convolution}
 \usage{
-torch_conv1d(
-  input,
-  weight,
-  bias = NULL,
-  stride = 1L,
-  padding = 0L,
-  dilation = 1L,
-  groups = 1L
-)
+torch_conv1d(input, weight, bias = NULL, stride = 1L, padding = 0L,
+             dilation = 1L, groups = 1L)
 }
 \arguments{
 \item{input}{Input tensor of shape (N, C_in, L).}
