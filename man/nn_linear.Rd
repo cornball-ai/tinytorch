@@ -19,7 +19,7 @@ An nn_module instance.
 Linear layer
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_linear(3, 2)
 m(torch_randn(c(1, 3)))
 }

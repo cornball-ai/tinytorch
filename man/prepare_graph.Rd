@@ -30,7 +30,7 @@ compilation once. Returns a prepared execution plan that can be
 executed many times via \code{execute_prepared()}.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

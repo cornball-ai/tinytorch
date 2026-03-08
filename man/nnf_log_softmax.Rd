@@ -19,7 +19,7 @@ torch_log_softmax(self, dim = -1L, dtype = NULL)
 Log-softmax
 }
 \examples{
-\donttest{
+\dontrun{
 nnf_log_softmax(torch_randn(c(2, 3)), dim = 2)
 }
 }

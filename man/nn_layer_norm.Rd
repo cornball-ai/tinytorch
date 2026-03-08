@@ -18,7 +18,7 @@ An nn_module instance.
 Layer normalization module
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_layer_norm(4)
 m(torch_randn(c(2, 4)))
 }

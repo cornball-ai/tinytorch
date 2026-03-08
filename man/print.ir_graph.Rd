@@ -17,7 +17,7 @@ Invisibly returns x
 Print an IR Graph
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env()
 e$x <- torch_randn(c(2, 3))

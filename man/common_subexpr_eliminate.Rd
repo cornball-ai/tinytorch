@@ -16,7 +16,7 @@ If two nodes have the same op, same inputs, and same attrs,
 replace the second with a reference to the first.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

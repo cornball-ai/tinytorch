@@ -10,3 +10,4 @@
 ^AGENTS\.md$
 ^WhisperNote\.txt$
 ^tools$
+^src/Makevars$

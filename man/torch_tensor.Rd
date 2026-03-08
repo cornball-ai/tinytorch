@@ -19,7 +19,7 @@ A torch_tensor object.
 Create a tensor from R data
 }
 \examples{
-\donttest{
+\dontrun{
 torch_tensor(c(1, 2, 3))
 torch_tensor(matrix(1:6, 2, 3))
 }

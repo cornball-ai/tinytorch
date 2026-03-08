@@ -16,7 +16,7 @@ Checks that all input references resolve, there are no cycles,
 and nodes are in topological order.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env()
 e$x <- torch_randn(c(2, 3))

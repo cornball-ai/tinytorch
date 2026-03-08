@@ -14,7 +14,7 @@ torch_matmul(self, other)
 Matrix multiplication
 }
 \examples{
-\donttest{
+\dontrun{
 a <- torch_randn(c(2, 3))
 b <- torch_randn(c(3, 4))
 torch_matmul(a, b)

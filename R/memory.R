@@ -106,7 +106,7 @@ detect_in_place <- function(graph, liveness) {
 #' @param input_dtypes Optional named list of input dtypes
 #' @return A memory_plan object
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)
@@ -248,7 +248,7 @@ plan_memory <- function(graph, input_shapes = NULL, input_dtypes = NULL) {
 
 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)

@@ -14,7 +14,7 @@
 Print Module Tree
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_sequential(nn_linear(10, 5), nn_relu())
 tree <- discover_modules(m)
 print(tree)

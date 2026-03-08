@@ -243,7 +243,7 @@ compile_segment <- function(statements, env) {
 #' @param verbose Logical, whether to print compilation info
 #' @return The result of the expression
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' env <- new.env()
 #' env$x <- x

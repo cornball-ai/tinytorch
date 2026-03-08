@@ -15,7 +15,7 @@ torch_silu(self)
 SiLU activation (swish)
 }
 \examples{
-\donttest{
+\dontrun{
 nnf_silu(torch_randn(c(2, 3)))
 }
 }

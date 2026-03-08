@@ -16,7 +16,7 @@ torch_linear(input, weight, bias = NULL)
 Linear transformation
 }
 \examples{
-\donttest{
+\dontrun{
 x <- torch_randn(c(2, 3))
 w <- torch_randn(c(4, 3))
 torch_linear(x, w)

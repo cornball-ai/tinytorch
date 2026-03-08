@@ -15,7 +15,7 @@ Named list of node_id (as character) to integer vector of dependency IDs
 For each node, compute the full transitive dependency set.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

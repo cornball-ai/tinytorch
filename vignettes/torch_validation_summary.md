@@ -1,3 +1,8 @@
+<!--
+%\VignetteEngine{simplermarkdown::mdweave_to_html}
+%\VignetteIndexEntry{Validation: R torch vs Python PyTorch}
+-->
+
 # R torch vs Python PyTorch: Validation & Benchmark Summary
 
 Cornball AI maintains native R implementations of several AI models originally

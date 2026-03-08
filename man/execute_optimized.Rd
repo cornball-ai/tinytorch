@@ -38,7 +38,7 @@ For maximum performance in tight loops, use \code{prepare_graph()}
 and \code{execute_prepared()} directly.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

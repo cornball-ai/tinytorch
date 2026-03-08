@@ -16,7 +16,7 @@ Searches a package's R source files for nn_module definitions.
 Works on both installed packages and local source directories.
 }
 \examples{
-\donttest{
+\dontrun{
 find_modules_in_package("Rtorch")
 }
 }

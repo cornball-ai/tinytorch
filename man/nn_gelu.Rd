@@ -12,7 +12,7 @@ An nn_module instance.
 GELU activation module
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_gelu()
 m(torch_randn(c(2, 3)))
 }

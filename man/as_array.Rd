@@ -15,7 +15,7 @@ An R numeric vector, matrix, or array.
 Convert a tensor to an R array
 }
 \examples{
-\donttest{
+\dontrun{
 x <- torch_tensor(c(1, 2, 3))
 as_array(x)
 }

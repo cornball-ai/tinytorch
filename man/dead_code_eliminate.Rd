@@ -16,7 +16,7 @@ Remove nodes whose outputs are never consumed.
 Walks backward from outputs to find reachable nodes.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

@@ -17,3 +17,4 @@ src/Makevars
 
 # OS
 .DS_Store
+src/Makevars

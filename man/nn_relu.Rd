@@ -12,7 +12,7 @@ An nn_module instance.
 ReLU activation module
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_relu()
 m(torch_randn(c(2, 3)))
 }

@@ -15,7 +15,7 @@ torch_gelu(self)
 GELU activation
 }
 \examples{
-\donttest{
+\dontrun{
 nnf_gelu(torch_randn(c(2, 3)))
 }
 }

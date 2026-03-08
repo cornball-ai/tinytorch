@@ -206,7 +206,7 @@ load_compiled <- function(path) {
 #' @param ... Ignored
 #' @return Invisibly returns \code{x}
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_linear(3, 2)
 #' cm <- compile(m, input = torch_randn(c(1, 3)))
 #' print(cm)

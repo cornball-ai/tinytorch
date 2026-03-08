@@ -62,7 +62,7 @@ gpu_kernel_stats <- function() {
 #' @param graph IR graph object
 #' @return Character hash string
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)

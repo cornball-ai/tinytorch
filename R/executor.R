@@ -710,7 +710,7 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
 #'   from input tensors and ariel availability.
 #' @return A \code{prepared_graph} object
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)
@@ -941,7 +941,7 @@ prepare_graph <- function(graph, example_inputs, optimize = TRUE, fuse = TRUE,
 #' @param verbose Logical, print execution info
 #' @return A torch_tensor (or list of tensors for multi-output graphs)
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)
@@ -1163,7 +1163,7 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
 #' @param verbose Logical, print execution info
 #' @return A torch_tensor (or list of tensors for multi-output graphs)
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)

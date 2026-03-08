@@ -5,7 +5,7 @@
 #' @param device Ignored for now (CPU only).
 #' @return A torch_tensor object.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_tensor(c(1, 2, 3))
 #' torch_tensor(matrix(1:6, 2, 3))
 #' }
@@ -24,7 +24,7 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_zeros(c(2, 3))
 #' }
 #' @export
@@ -40,7 +40,7 @@ torch_zeros <- function(..., dtype = NULL, device = NULL) {
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_ones(c(2, 3))
 #' }
 #' @export
@@ -56,7 +56,7 @@ torch_ones <- function(..., dtype = NULL, device = NULL) {
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_randn(c(2, 3))
 #' }
 #' @export
@@ -70,7 +70,7 @@ torch_randn <- function(..., dtype = NULL, device = NULL) {
 #' Create an uninitialized tensor with same shape/dtype as input
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' torch_empty_like(x)
 #' }
@@ -84,7 +84,7 @@ torch_empty_like <- function(self) {
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_empty(c(2, 3))
 #' }
 #' @export
@@ -408,7 +408,7 @@ torch_hann_window <- function(window_length, periodic = TRUE,
 #' @param atol Absolute tolerance (default 1e-08).
 #' @return Logical scalar.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' a <- torch_ones(c(2, 3))
 #' b <- torch_ones(c(2, 3))
 #' torch_allclose(a, b)

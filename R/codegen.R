@@ -323,7 +323,7 @@ compile_fused_kernel <- function(ops, dtype = "float") {
 #' @param ops Character vector of operations
 #' @return Output torch tensor
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_ops(torch_randn(c(2, 3)), c("relu", "sigmoid"))
 #' }
 #' @export
@@ -456,7 +456,7 @@ get_fusion_groups <- function(graph) {
 #' @return List with code, func_name, n_inputs, external_input_ids,
 #'   output_id, group_node_ids, dtype. NULL if group has unsupported ops.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()$sigmoid()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- fusion_annotate(lower_to_ir(stmts, e))

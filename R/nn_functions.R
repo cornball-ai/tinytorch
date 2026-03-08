@@ -3,7 +3,7 @@
 #' Compute sin of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_sin(torch_tensor(c(0, 3.14159 / 2)))
 #' }
 #' @export
@@ -12,7 +12,7 @@ torch_sin <- function(self) C_torch_sin(self)
 #' Compute cos of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_cos(torch_tensor(c(0, 3.14159)))
 #' }
 #' @export
@@ -21,7 +21,7 @@ torch_cos <- function(self) C_torch_cos(self)
 #' Compute tanh of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_tanh(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -30,7 +30,7 @@ torch_tanh <- function(self) C_torch_tanh(self)
 #' Compute reciprocal square root of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_rsqrt(torch_tensor(c(1, 4, 9)))
 #' }
 #' @export
@@ -39,7 +39,7 @@ torch_rsqrt <- function(self) C_torch_rsqrt(self)
 #' ReLU activation (namespace-level)
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -50,7 +50,7 @@ torch_relu <- function(self) C_torch_relu(self)
 #' ReLU activation (functional)
 #' @param input A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -59,7 +59,7 @@ nnf_relu <- function(input) C_torch_relu(input)
 #' SiLU activation (swish)
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_silu(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -70,7 +70,7 @@ nnf_silu <- function(self) {
 #' GELU activation
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_gelu(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -82,7 +82,7 @@ nnf_gelu <- function(self, approximate = "none") {
 #' @param self A torch_tensor.
 #' @param negative_slope Negative slope coefficient. Default 0.01.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_leaky_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -94,7 +94,7 @@ nnf_leaky_relu <- function(self, negative_slope = 0.01) {
 #' @param self A torch_tensor.
 #' @param alpha Scale for the negative factor. Default 1.0.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_elu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -106,7 +106,7 @@ nnf_elu <- function(self, alpha = 1.0) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply softmax over (1-based).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_softmax(torch_randn(c(2, 3)), dim = 2)
 #' }
 #' @export
@@ -118,7 +118,7 @@ nnf_softmax <- function(self, dim = -1L) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply log-softmax over (1-based).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_log_softmax(torch_randn(c(2, 3)), dim = 2)
 #' }
 #' @export
@@ -133,7 +133,7 @@ nnf_log_softmax <- function(self, dim = -1L) {
 #' @param bias Optional bias tensor.
 #' @param eps Small constant for numerical stability.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 4))
 #' nnf_layer_norm(x, 4L)
 #' }
@@ -151,7 +151,7 @@ nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
 #' @param weight Weight matrix.
 #' @param bias Optional bias vector.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' w <- torch_randn(c(4, 3))
 #' torch_linear(x, w)
@@ -170,7 +170,7 @@ torch_linear <- function(input, weight, bias = NULL) {
 #' @param dilation Spacing between kernel elements. Default 1.
 #' @param groups Number of blocked connections. Default 1.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(1, 1, 10))
 #' w <- torch_randn(c(1, 1, 3))
 #' torch_conv1d(x, w)
@@ -188,7 +188,7 @@ torch_conv1d <- function(input, weight, bias = NULL,
 #' @param weight Embedding matrix tensor.
 #' @param indices Integer tensor of indices.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' emb <- torch_randn(c(10, 4))
 #' idx <- torch_tensor(c(1L, 3L, 5L))
 #' torch_embedding(emb, idx)
@@ -328,7 +328,7 @@ nnf_tanh <- function(input) C_torch_tanh(input)
 #' Evaluates the expression with gradient computation disabled.
 #' @param code Expression to evaluate.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' with_no_grad({
 #'   x <- torch_randn(c(2, 3))
 #'   torch_relu(x)
@@ -562,7 +562,7 @@ encoder_forward <- function(mel, global_weights, layer_weights, n_head, n_ctx) {
 #' Greedy Decode
 #'
 #' Runs the entire autoregressive decode loop in C++.
-#' One boundary crossing for the full sequence — no per-token R overhead.
+#' One boundary crossing for the full sequence -- no per-token R overhead.
 #'
 #' @param initial_tokens Integer vector of initial token IDs (0-indexed).
 #' @param global_weights List of 4 tensors: token_emb.weight, pos_emb.weight,

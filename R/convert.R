@@ -2,7 +2,7 @@
 #' @param x A torch_tensor.
 #' @return An R numeric vector, matrix, or array.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_tensor(c(1, 2, 3))
 #' as_array(x)
 #' }
@@ -12,7 +12,7 @@ as_array <- function(x) {
 }
 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_tensor(matrix(1:6, 2, 3))
 #' as.array(x)
 #' }
@@ -22,7 +22,7 @@ as.array.torch_tensor <- function(x, ...) {
 }
 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_tensor(c(1, 2, 3))
 #' as.numeric(x)
 #' }
@@ -32,7 +32,7 @@ as.numeric.torch_tensor <- function(x, ...) {
 }
 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_tensor(c(1, 2, 3))
 #' as.double(x)
 #' }
@@ -42,7 +42,7 @@ as.double.torch_tensor <- function(x, ...) {
 }
 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_tensor(c(1, 2, 3))
 #' as.integer(x)
 #' }
@@ -52,7 +52,7 @@ as.integer.torch_tensor <- function(x, ...) {
 }
 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_tensor(matrix(1:6, 2, 3))
 #' as.matrix(x)
 #' }

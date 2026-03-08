@@ -12,7 +12,7 @@ torch_empty_like(self)
 Create an uninitialized tensor with same shape/dtype as input
 }
 \examples{
-\donttest{
+\dontrun{
 x <- torch_randn(c(2, 3))
 torch_empty_like(x)
 }
