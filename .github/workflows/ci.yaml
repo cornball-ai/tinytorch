@@ -41,7 +41,7 @@ jobs:
         if: runner.os == 'Linux' && steps.cache-libtorch.outputs.cache-hit != 'true'
         run: |
           mkdir -p ~/.local/lib
-          curl -sL "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-${LIBTORCH_VERSION}%2Bcpu.zip" -o /tmp/libtorch.zip
+          curl -sL "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-${LIBTORCH_VERSION}%2Bcpu.zip" -o /tmp/libtorch.zip
           unzip -q /tmp/libtorch.zip -d ~/.local/lib
 
       - name: Dependencies
