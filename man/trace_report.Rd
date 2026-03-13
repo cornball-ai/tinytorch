@@ -32,7 +32,7 @@ on each sub-module. Reports graph breaks, correctness, and which modules
 are candidates for optimization.
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_sequential(nn_linear(10, 5), nn_relu())
 trace_report(m, list(input = torch_randn(c(1, 10))))
 }

@@ -1,12 +1,12 @@
-# Rtorch
+# tinytorch
 
 High-performance R bindings to libtorch. Drop-in replacement for torch with minimal overhead.
 
 ## Architecture
 - S3 class `torch_tensor` with `$` method dispatch via shared method table
-- Rcpp for C++ ↔ R glue (auto-registration, exception handling)
+- Rcpp for C++ / R glue (auto-registration, exception handling)
 - No lantern, no R7
-- Reuses libtorch from installed torch package
+- Dual backend: real (libtorch) or stub (no-op) selected at configure time
 
 ## Build
 ```bash
@@ -15,7 +15,7 @@ r -e 'tinyrox::document(); tinypkgr::install()'
 
 ## Test
 ```bash
-r -e 'tinytest::test_package("Rtorch")'
+r -e 'tinytest::test_package("tinytorch")'
 ```
 
 ## Key conventions

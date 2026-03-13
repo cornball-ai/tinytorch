@@ -17,7 +17,7 @@ Invisibly returns x
 Print a Traced Module
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_linear(3, 2)
 traced <- trace_module(m, input = torch_randn(c(1, 3)))
 print(traced)

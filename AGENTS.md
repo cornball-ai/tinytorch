@@ -11,7 +11,7 @@ This is an R package with C++/libtorch bindings.
 
 ## Build, Test, and Development Commands
 - `r -e 'tinyrox::document(); tinypkgr::install()'`: regenerate docs and install the package locally.
-- `r -e 'tinytest::test_package("Rtorch")'`: run the tinytest suite.
+- `r -e 'tinytest::test_package("tinytorch")'`: run the tinytest suite.
 - Optional: `torch_lint(quote({ ... }))` (see `?torch_lint`) to flag graph breaks in compiled expressions.
 
 ## Coding Style & Naming Conventions

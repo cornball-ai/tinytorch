@@ -1,51 +1,112 @@
 #!/bin/sh
 
-# Find torch package installation
-TORCH_HOME=$(Rscript -e "cat(system.file(package='torch'))")
+# tinytorch configure script
+# Detects libtorch and generates src/Makevars for real or stub backend.
 
-if [ -z "$TORCH_HOME" ] || [ "$TORCH_HOME" = "" ]; then
-  echo "ERROR: torch package not installed. Install it first:"
-  echo '  install.packages("torch")'
-  exit 1
+# ---- Force stub mode (for testing) ----
+
+if [ "$TINYTORCH_STUB" = "1" ]; then
+  echo "* TINYTORCH_STUB=1: forcing stub backend"
+  cat > src/Makevars <<EOF
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
+OBJECTS = stubs.o
+EOF
+  echo "Generated src/Makevars (stub mode)"
+  exit 0
 fi
+
+# ---- Platform check ----
+
+PLATFORM=$(uname -s)
+case "$PLATFORM" in
+  Linux) ;;
+  *)
+    echo "* Non-Linux platform ($PLATFORM): using stub backend"
+    echo "  tinytorch will install but is_available() will return FALSE"
+    cat > src/Makevars <<EOF
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
+OBJECTS = stubs.o
+EOF
+    echo "Generated src/Makevars (stub mode)"
+    exit 0
+    ;;
+esac
+
+# ---- Search for libtorch ----
+
+TORCH_HOME=""
+TORCH_SOURCE=""
+
+# 1. LIBTORCH_HOME env var
+if [ -n "$LIBTORCH_HOME" ] && [ -d "$LIBTORCH_HOME/include/torch" ]; then
+  TORCH_HOME="$LIBTORCH_HOME"
+  TORCH_SOURCE="LIBTORCH_HOME env var"
+fi
+
+# 2. ~/.local/lib/libtorch
+if [ -z "$TORCH_HOME" ] && [ -d "$HOME/.local/lib/libtorch/include/torch" ]; then
+  TORCH_HOME="$HOME/.local/lib/libtorch"
+  TORCH_SOURCE="~/.local/lib/libtorch"
+fi
+
+# 3. torch R package
+if [ -z "$TORCH_HOME" ]; then
+  TORCH_PKG=$(Rscript -e "cat(system.file(package='torch'))" 2>/dev/null)
+  if [ -n "$TORCH_PKG" ] && [ -d "$TORCH_PKG/include/torch" ]; then
+    TORCH_HOME="$TORCH_PKG"
+    TORCH_SOURCE="torch R package"
+  fi
+fi
+
+# 4. Stub fallback
+if [ -z "$TORCH_HOME" ]; then
+  echo "* libtorch not found: using stub backend"
+  echo "  Searched: LIBTORCH_HOME, ~/.local/lib/libtorch, torch R package"
+  echo "  Install libtorch with tinytorch::install_libtorch() and reinstall"
+  cat > src/Makevars <<EOF
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
+OBJECTS = stubs.o
+EOF
+  echo "Generated src/Makevars (stub mode)"
+  exit 0
+fi
+
+# ---- Validate libtorch ----
 
 TORCH_INCLUDE="${TORCH_HOME}/include"
 TORCH_LIB="${TORCH_HOME}/lib"
 
-if [ ! -d "$TORCH_INCLUDE/torch" ]; then
-  echo "ERROR: libtorch headers not found at $TORCH_INCLUDE/torch"
-  echo "Make sure torch is installed with libtorch binaries."
-  exit 1
+if [ ! -f "$TORCH_LIB/libtorch.so" ] && [ ! -f "$TORCH_LIB/libtorch_cpu.so" ]; then
+  echo "WARNING: libtorch shared library not found in $TORCH_LIB"
+  echo "  Falling back to stub backend"
+  cat > src/Makevars <<EOF
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
+OBJECTS = stubs.o
+EOF
+  echo "Generated src/Makevars (stub mode)"
+  exit 0
 fi
 
-if [ ! -f "$TORCH_LIB/libtorch.so" ] && [ ! -f "$TORCH_LIB/libtorch.dylib" ]; then
-  echo "ERROR: libtorch shared library not found in $TORCH_LIB"
-  exit 1
-fi
-
-echo "Found libtorch:"
+echo "Found libtorch via $TORCH_SOURCE:"
 echo "  Headers: $TORCH_INCLUDE"
 echo "  Libraries: $TORCH_LIB"
 
-# Detect CUDA support
+# ---- Detect CUDA ----
+
 CUDA_LIBS=""
 CUDA_CPPFLAGS=""
-if [ -f "$TORCH_LIB/libtorch_cuda.so" ] || [ -f "$TORCH_LIB/libtorch_cuda.dylib" ]; then
-  # --no-as-needed forces the library into DT_NEEDED even without direct symbol refs.
-  # libtorch_cuda registers CUDA dispatch keys via static constructors at load time.
+if [ -f "$TORCH_LIB/libtorch_cuda.so" ]; then
   CUDA_LIBS="-Wl,--no-as-needed -ltorch_cuda -lc10_cuda -Wl,--as-needed -lcuda"
 
-  # Find CUDA SDK headers (needed for CUDACachingAllocator.h -> cuda_runtime_api.h)
   for cuda_dir in /usr/local/cuda /usr/local/cuda-12 /usr/local/cuda-12.8; do
     if [ -f "$cuda_dir/include/cuda_runtime_api.h" ]; then
-      CUDA_CPPFLAGS="-I${cuda_dir}/include -DRTORCH_CUDA"
+      CUDA_CPPFLAGS="-I${cuda_dir}/include -DTINYTORCH_CUDA"
       echo "  CUDA SDK: $cuda_dir/include"
       break
     fi
   done
   if [ -z "$CUDA_CPPFLAGS" ]; then
-    # No CUDA SDK headers, use dlsym fallback
-    CUDA_CPPFLAGS="-DRTORCH_CUDA -DRTORCH_CUDA_NO_SDK"
+    CUDA_CPPFLAGS="-DTINYTORCH_CUDA -DTINYTORCH_CUDA_NO_SDK"
     echo "  CUDA SDK: not found (using dlsym fallback)"
   fi
   echo "  CUDA: enabled"
@@ -53,12 +114,20 @@ else
   echo "  CUDA: not available (CPU only)"
 fi
 
-# Generate Makevars from template
-sed \
-  -e "s|@TORCH_INCLUDE@|${TORCH_INCLUDE}|g" \
-  -e "s|@TORCH_LIB@|${TORCH_LIB}|g" \
-  -e "s|@CUDA_LIBS@|${CUDA_LIBS}|g" \
-  -e "s|@CUDA_CPPFLAGS@|${CUDA_CPPFLAGS}|g" \
-  src/Makevars.in > src/Makevars
+# ---- Generate Makevars (real backend) ----
 
-echo "Generated src/Makevars"
+REAL_OBJECTS="RcppExports.o init.o gen-ops.o tensor.o ops.o nn_functions.o transformer.o fused_kernels.o gpu_launch.o indexing.o autograd.o optimizer.o convert.o"
+
+cat > src/Makevars <<EOF
+CXX_STD = CXX17
+
+PKG_CPPFLAGS = -I${TORCH_INCLUDE} -I${TORCH_INCLUDE}/torch/csrc/api/include ${CUDA_CPPFLAGS} -DTINYTORCH_HAVE_LIBTORCH=1
+PKG_CXXFLAGS = \$(CXX17STD) -D_GLIBCXX_USE_CXX11_ABI=1
+
+PKG_LIBS = -L${TORCH_LIB} -ltorch -ltorch_cpu -lc10 ${CUDA_LIBS} \\
+           -Wl,-rpath,${TORCH_LIB}
+
+OBJECTS = ${REAL_OBJECTS}
+EOF
+
+echo "Generated src/Makevars (real backend)"

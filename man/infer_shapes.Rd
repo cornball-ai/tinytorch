@@ -21,7 +21,7 @@ Returns a new ir_graph with \code{output_shape} and \code{output_dtype}
 in each node's attrs.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

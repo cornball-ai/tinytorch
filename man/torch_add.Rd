@@ -16,7 +16,7 @@ torch_add(self, other, alpha = 1)
 Add two tensors
 }
 \examples{
-\donttest{
+\dontrun{
 a <- torch_ones(c(2, 3))
 b <- torch_ones(c(2, 3))
 torch_add(a, b)

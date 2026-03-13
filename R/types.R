@@ -1,42 +1,64 @@
-# Dtype constants matching c10::ScalarType enum values
-# These integer codes are passed to C++ and cast to at::ScalarType
+#' Torch Data Types
+#'
+#' Constants representing tensor element types, matching libtorch's
+#' \code{c10::ScalarType} enum. Pass these to \code{dtype} arguments
+#' in tensor creation functions.
+#'
+#' @name torch_dtype_constants
+#' @examples
+#' torch_float32
+#' torch_int64
+NULL
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_uint8 <- structure(0L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_float16 <- structure(5L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_float <- structure(6L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_float32 <- torch_float
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_float64 <- structure(7L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_double <- torch_float64
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_int8 <- structure(1L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_int16 <- structure(2L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_int <- structure(3L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_int32 <- torch_int
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_int64 <- structure(4L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_long <- torch_int64
 
+#' @rdname torch_dtype_constants
 #' @export
 torch_bool <- structure(11L, class = "torch_dtype")
 

@@ -19,7 +19,7 @@
 #'   \item{forward_args}{Formal argument names of forward()}
 #'   \item{module}{Live reference to the nn_module}
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_sequential(nn_linear(10, 5), nn_relu())
 #' discover_modules(m)
 #' }
@@ -102,7 +102,7 @@ discover_modules <- function(module, max_depth = 10L) {
 #' @param x A module_tree from discover_modules()
 #' @param ... Ignored
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_sequential(nn_linear(10, 5), nn_relu())
 #' tree <- discover_modules(m)
 #' print(tree)
@@ -142,7 +142,7 @@ print.module_tree <- function(x, ...) {
 #' @return A data.frame with columns: path, class, n_params, graph_breaks,
 #'   traceable, correct, error
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_sequential(nn_linear(10, 5), nn_relu())
 #' trace_report(m, list(input = torch_randn(c(1, 10))))
 #' }
@@ -285,21 +285,21 @@ trace_report <- function(module, example_inputs = NULL,
 #'
 #' @return Character vector of package names
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' find_torch_packages()
 #' }
 #' @export
 find_torch_packages <- function() {
   db <- utils::installed.packages()
   pkgs <- character(0)
-  for (pkg in c("torch", "Rtorch")) {
+  for (pkg in c("torch", "tinytorch")) {
     deps <- tools::package_dependencies(pkg, db = db,
               reverse = TRUE, which = c("Depends", "Imports", "Suggests"))
     found <- deps[[pkg]]
     if (!is.null(found)) pkgs <- c(pkgs, found)
   }
-  # Always include Rtorch itself
-  pkgs <- unique(c(pkgs, "Rtorch"))
+  # Always include tinytorch itself
+  pkgs <- unique(c(pkgs, "tinytorch"))
   sort(pkgs)
 }
 
@@ -312,8 +312,8 @@ find_torch_packages <- function() {
 #' @param pkg Package name (string) or path to package source directory
 #' @return A data.frame with columns: name, file, exported
 #' @examples
-#' \donttest{
-#' find_modules_in_package("Rtorch")
+#' \dontrun{
+#' find_modules_in_package("tinytorch")
 #' }
 #' @export
 find_modules_in_package <- function(pkg) {
@@ -343,7 +343,7 @@ find_modules_in_package <- function(pkg) {
 
   # Search for nn_module definitions
   # Pattern: name <- nn_module(
-  pattern <- "^\\s*([a-zA-Z_.][a-zA-Z0-9_.]*)(\\s*<-\\s*)(Rtorch::)?nn_module\\("
+  pattern <- "^\\s*([a-zA-Z_.][a-zA-Z0-9_.]*)(\\s*<-\\s*)(tinytorch::)?nn_module\\("
 
   results <- list()
   for (f in r_files) {

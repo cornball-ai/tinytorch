@@ -11,6 +11,8 @@ torch_tensor(data, dtype = NULL, device = NULL, requires_grad = FALSE)
 \item{dtype}{Optional torch dtype (e.g. torch_float).}
 
 \item{device}{Ignored for now (CPU only).}
+
+\item{requires_grad}{Logical. Track gradients for this tensor. Default FALSE.}
 }
 \value{
 A torch_tensor object.
@@ -19,7 +21,7 @@ A torch_tensor object.
 Create a tensor from R data
 }
 \examples{
-\donttest{
+\dontrun{
 torch_tensor(c(1, 2, 3))
 torch_tensor(matrix(1:6, 2, 3))
 }

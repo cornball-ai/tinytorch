@@ -19,7 +19,7 @@ the evaluation environment. Walks each statement recursively,
 emitting IR nodes.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env()
 e$x <- torch_randn(c(2, 3))

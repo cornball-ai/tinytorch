@@ -16,7 +16,7 @@ trace_module(module, ..., .optimize = TRUE, .fuse = FALSE, .backend = "auto",
 \item{.fuse}{Logical, compile fusion groups to kernels}
 
 \item{.backend}{Character: "auto", "gpu", or "cpu". "auto" detects
-from input tensors at call time and ariel availability.}
+from input tensors at call time.}
 
 \item{.verbose}{Logical, print tracing info}
 }
@@ -34,7 +34,7 @@ resolves parameters and sub-modules, and optionally optimizes
 through the IR pipeline.
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_linear(3, 2)
 traced <- trace_module(m, input = torch_randn(c(1, 3)))
 traced$fn(input = torch_randn(c(1, 3)))

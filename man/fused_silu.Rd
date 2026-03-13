@@ -15,7 +15,7 @@ A new torch tensor (float32).
 Fused SiLU (Swish): x * sigmoid(x)
 }
 \examples{
-\donttest{
+\dontrun{
 fused_silu(torch_randn(c(2, 3)))
 }
 }

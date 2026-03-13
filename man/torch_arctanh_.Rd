@@ -1,0 +1,16 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_arctanh_}
+\alias{torch_arctanh_}
+\title{Arctanh}
+\usage{
+torch_arctanh_(self)
+}
+\arguments{
+\item{self}{A torch_tensor.}
+}
+\value{
+A torch_tensor.
+}
+\description{
+Wrapper for \code{at::arctanh_}.
+}

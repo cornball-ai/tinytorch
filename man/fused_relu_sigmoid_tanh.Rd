@@ -15,7 +15,7 @@ A new torch tensor (float32).
 Fused relu + sigmoid + tanh
 }
 \examples{
-\donttest{
+\dontrun{
 fused_relu_sigmoid_tanh(torch_randn(c(2, 3)))
 }
 }

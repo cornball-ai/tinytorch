@@ -2,7 +2,7 @@
 #'
 #' Runs a full optimization pipeline on an IR graph and executes it,
 #' dispatching fused kernel groups to compiled SIMD kernels (CPU) or
-#' Triton kernels (GPU via ariel) and non-fused ops to torch.
+#' SIMD kernels (CPU) and non-fused ops to torch.
 #'
 #' Two-level API:
 #' - `prepare_graph()` + `execute_prepared()`: explicit two-step for
@@ -65,21 +65,10 @@
 #' Detect Backend from Input Tensors
 #'
 #' @param inputs Named list of torch_tensors
-#' @return "gpu" if any input is on CUDA and ariel is available, else "cpu"
+#' @return Currently always "cpu". GPU backend requires an external package.
 #' @noRd
 .detect_backend <- function(inputs) {
-  has_cuda <- FALSE
-  for (t in inputs) {
-    if (inherits(t, "torch_tensor") && t$is_cuda) {
-      has_cuda <- TRUE
-      break
-    }
-  }
-  if (has_cuda && requireNamespace("ariel", quietly = TRUE)) {
-    "gpu"
-  } else {
-    "cpu"
-  }
+  "cpu"
 }
 
 
@@ -548,7 +537,7 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
   vn <- function(id) as.name(paste0("v", id))
 
   # Closure environment: constants and kernel fns bound here
-  fn_env <- new.env(parent = asNamespace("Rtorch"))
+  fn_env <- new.env(parent = asNamespace("tinytorch"))
   fn_env$dispatch_torch_op <- dispatch_torch_op
   fn_env$.wrap_result_tensor <- .wrap_result_tensor
 
@@ -707,10 +696,10 @@ dispatch_torch_op <- function(op, inputs, attrs = list()) {
 #' @param fuse Logical, compile fusion groups to kernels (default TRUE)
 #' @param fuse_matmul_epilogues Logical, fuse matmul+bias+activation on GPU (default FALSE)
 #' @param backend Character: "auto", "gpu", or "cpu". "auto" detects
-#'   from input tensors and ariel availability.
+#'   from input tensors.
 #' @return A \code{prepared_graph} object
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)
@@ -941,7 +930,7 @@ prepare_graph <- function(graph, example_inputs, optimize = TRUE, fuse = TRUE,
 #' @param verbose Logical, print execution info
 #' @return A torch_tensor (or list of tensors for multi-output graphs)
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)
@@ -1144,7 +1133,7 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
 #' Runs the full optimization pipeline (constant folding, DCE, CSE,
 #' algebraic simplification, fusion annotation) then executes the graph.
 #' Fusion groups are compiled to SIMD-vectorized C++ kernels (CPU) or
-#' Triton GPU kernels (via ariel); non-fused ops are dispatched to torch.
+#' SIMD kernels (CPU); non-fused ops are dispatched to torch.
 #'
 #' Automatically caches prepared graphs keyed by graph structure,
 #' input shapes, and backend. For single-op graphs, uses eager fallback
@@ -1159,11 +1148,11 @@ execute_prepared <- function(prepared, inputs, verbose = FALSE) {
 #' @param fuse Logical, compile fusion groups to kernels (default TRUE)
 #' @param fuse_matmul_epilogues Logical, fuse matmul+bias+activation on GPU (default FALSE)
 #' @param backend Character: "auto", "gpu", or "cpu". "auto" detects
-#'   from input tensors and ariel availability.
+#'   from input tensors.
 #' @param verbose Logical, print execution info
 #' @return A torch_tensor (or list of tensors for multi-output graphs)
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)

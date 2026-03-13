@@ -1,3 +1,5 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # test_analysis.R - Tests for analysis passes
 
 # ============================================================
@@ -221,11 +223,11 @@ expect_equal(liveness_shared[[inp_x]], max(relu_n$id, sig_n$id))
 # ============================================================
 
 # Build a graph manually where a node has no consumers
-dead_graph <- Rtorch:::ir_graph(
+dead_graph <- tinytorch:::ir_graph(
   nodes = list(
-    "1" = Rtorch:::ir_node(1L, "input", attrs = list(name = "x")),
-    "2" = Rtorch:::ir_node(2L, "relu", inputs = 1L),
-    "3" = Rtorch:::ir_node(3L, "sigmoid", inputs = 1L)
+    "1" = tinytorch:::ir_node(1L, "input", attrs = list(name = "x")),
+    "2" = tinytorch:::ir_node(2L, "relu", inputs = 1L),
+    "3" = tinytorch:::ir_node(3L, "sigmoid", inputs = 1L)
   ),
   input_ids = 1L,
   output_ids = 3L  # relu (node 2) is dead

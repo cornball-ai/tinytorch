@@ -14,7 +14,7 @@ nnf_elu(self, alpha = 1)
 ELU activation
 }
 \examples{
-\donttest{
+\dontrun{
 nnf_elu(torch_tensor(c(-1, 0, 1)))
 }
 }

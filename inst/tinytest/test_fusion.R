@@ -1,3 +1,5 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # Tests for automatic kernel fusion in torch_eval
 
 # =============================================================================

@@ -19,7 +19,7 @@ execute_optimized(graph, inputs, optimize = TRUE, fuse = TRUE,
 \item{fuse_matmul_epilogues}{Logical, fuse matmul+bias+activation on GPU (default FALSE)}
 
 \item{backend}{Character: "auto", "gpu", or "cpu". "auto" detects
-from input tensors and ariel availability.}
+from input tensors.}
 
 \item{verbose}{Logical, print execution info}
 }
@@ -30,7 +30,7 @@ A torch_tensor (or list of tensors for multi-output graphs)
 Runs the full optimization pipeline (constant folding, DCE, CSE,
 algebraic simplification, fusion annotation) then executes the graph.
 Fusion groups are compiled to SIMD-vectorized C++ kernels (CPU) or
-Triton GPU kernels (via ariel); non-fused ops are dispatched to torch.
+SIMD kernels (CPU); non-fused ops are dispatched to torch.
 Automatically caches prepared graphs keyed by graph structure,
 input shapes, and backend. For single-op graphs, uses eager fallback
 to avoid all pipeline overhead.
@@ -38,7 +38,7 @@ For maximum performance in tight loops, use \code{prepare_graph()}
 and \code{execute_prepared()} directly.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

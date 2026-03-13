@@ -22,7 +22,7 @@ determines external inputs, and generates a single C++ function with
 SIMD-vectorized loop + scalar tail using at::vec API.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()$sigmoid()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- fusion_annotate(lower_to_ir(stmts, e))

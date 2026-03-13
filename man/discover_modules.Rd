@@ -28,7 +28,7 @@ Returns a flat list of module info: path, class, parameter count,
 forward() argument names, and the live module reference.
 }
 \examples{
-\donttest{
+\dontrun{
 m <- nn_sequential(nn_linear(10, 5), nn_relu())
 discover_modules(m)
 }

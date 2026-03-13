@@ -1,0 +1,16 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_log_}
+\alias{torch_log_}
+\title{Log}
+\usage{
+torch_log_(self)
+}
+\arguments{
+\item{self}{A torch_tensor.}
+}
+\value{
+A torch_tensor.
+}
+\description{
+Wrapper for \code{at::log_}.
+}

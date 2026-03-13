@@ -21,7 +21,7 @@ Fast execution path using a pre-computed execution plan from
 just runs the execution loop.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

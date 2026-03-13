@@ -14,7 +14,7 @@ torch_embedding(weight, indices)
 Embedding lookup
 }
 \examples{
-\donttest{
+\dontrun{
 emb <- torch_randn(c(10, 4))
 idx <- torch_tensor(c(1L, 3L, 5L))
 torch_embedding(emb, idx)

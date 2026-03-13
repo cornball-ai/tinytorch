@@ -13,7 +13,7 @@
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_relu(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -26,7 +26,7 @@ fused_relu <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_relu_sigmoid(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -39,7 +39,7 @@ fused_relu_sigmoid <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_relu_sigmoid_tanh(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -52,7 +52,7 @@ fused_relu_sigmoid_tanh <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_silu(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -65,7 +65,7 @@ fused_silu <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_gelu(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -78,7 +78,7 @@ fused_gelu <- function(x) {
 #' @param x A torch tensor.
 #' @return A list with sin and cos tensors (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_sincos(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -96,7 +96,7 @@ fused_sincos <- function(x) {
 #' @param cap Scalar capping value.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' fused_softcap(torch_randn(c(2, 3)), 30.0)
 #' }
 #' @export
@@ -111,7 +111,7 @@ fused_softcap <- function(x, cap) {
 #' @param eps Small constant for numerical stability.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 4))
 #' w <- torch_ones(c(4))
 #' fused_rmsnorm(x, w)

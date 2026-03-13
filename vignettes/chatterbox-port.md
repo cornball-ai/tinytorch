@@ -1,24 +1,24 @@
 <!--
 %\VignetteEngine{simplermarkdown::mdweave_to_html}
-%\VignetteIndexEntry{Porting Chatterbox TTS to Rtorch}
+%\VignetteIndexEntry{Porting Chatterbox TTS to tinytorch}
 -->
 ---
-title: "Porting Chatterbox TTS to Rtorch"
+title: "Porting Chatterbox TTS to tinytorch"
 ---
 
-Porting Chatterbox TTS to Rtorch
+Porting Chatterbox TTS to tinytorch
 =================================
 
 This documents the work required to port
 [Chatterbox TTS](https://github.com/resemble-ai/chatterbox) from the
-`torch` R package to Rtorch. Chatterbox is a complete text-to-speech
+`torch` R package to tinytorch. Chatterbox is a complete text-to-speech
 engine with voice cloning, comprising ~5000 lines of R code across 12
-files with 521 `Rtorch::` call sites.
+files with 521 `tinytorch::` call sites.
 
 The port required changes on both sides: new C++ ops and R modules in
-Rtorch, and compatibility fixes in Chatterbox.
+tinytorch, and compatibility fixes in Chatterbox.
 
-Rtorch: New C++ Operations
+tinytorch: New C++ Operations
 --------------------------
 
 ### Tensor Creation (src/tensor.cpp)
@@ -68,7 +68,7 @@ Full `[.torch_tensor` and `[<-.torch_tensor` via ATen's
 - Boolean mask indexing
 - `drop = FALSE` support via unsqueeze
 
-Rtorch: New R Modules
+tinytorch: New R Modules
 ---------------------
 
 ### nn_module Infrastructure
@@ -107,20 +107,20 @@ Chatterbox: Compatibility Fixes
 ### Dtype Constants (52 call sites)
 
 The `torch` R package exposes dtype as zero-argument functions
-(`torch_float32()`), while Rtorch uses constants (`torch_float32`).
+(`torch_float32()`), while tinytorch uses constants (`torch_float32`).
 All 52 occurrences across 12 files were updated:
 
 ```r
 # Before (torch R package)
-Rtorch::torch_tensor(x, dtype = Rtorch::torch_float32())
+tinytorch::torch_tensor(x, dtype = tinytorch::torch_float32())
 
-# After (Rtorch)
-Rtorch::torch_tensor(x, dtype = Rtorch::torch_float32)
+# After (tinytorch)
+tinytorch::torch_tensor(x, dtype = tinytorch::torch_float32)
 ```
 
 ### LSTM Parameter Names (0-indexed)
 
-Rtorch uses PyTorch's 0-indexed parameter names (`weight_ih_l0`),
+tinytorch uses PyTorch's 0-indexed parameter names (`weight_ih_l0`),
 matching the safetensors keys directly. The voice encoder weight
 loader had a `+1` conversion that was wrong:
 
@@ -129,14 +129,14 @@ loader had a `+1` conversion that was wrong:
 r_layer <- py_layer + 1
 r_weight_ih <- paste0("weight_ih_l", r_layer)
 
-# After (0-indexed, matching PyTorch and Rtorch)
+# After (0-indexed, matching PyTorch and tinytorch)
 r_weight_ih <- paste0("weight_ih_l", layer)
 ```
 
 ### Safetensors Reader
 
 Chatterbox's `R/safetensors.R` was rewritten to parse the safetensors
-binary format directly and create Rtorch tensors via
+binary format directly and create tinytorch tensors via
 `torch_tensor_from_buffer`. This avoids the `safetensors` CRAN package
 which creates `torch` package tensors (incompatible external pointer
 format).
@@ -147,19 +147,19 @@ R's `!!!` operator (from rlang) doesn't work in base R:
 
 ```r
 # Before
-Rtorch::nn_sequential(!!!layers)
+tinytorch::nn_sequential(!!!layers)
 
 # After
-do.call(Rtorch::nn_sequential, layers)
+do.call(tinytorch::nn_sequential, layers)
 ```
 
 ### Byte-Compiled Package Cache
 
-After changing Rtorch, chatterbox must be reinstalled (`R CMD INSTALL`)
+After changing tinytorch, chatterbox must be reinstalled (`R CMD INSTALL`)
 or the old byte-compiled code runs with stale references:
 
 ```bash
-cd ~/Rtorch && R CMD INSTALL .
+cd ~/tinytorch && R CMD INSTALL .
 cd ~/chatterbox && R CMD INSTALL .  # Required!
 ```
 
@@ -169,7 +169,7 @@ Key Design Decisions
 ### torch_arange: Inclusive End
 
 The `torch` R package uses inclusive end semantics while ATen uses
-exclusive. Rtorch matches the R package by computing the element count
+exclusive. tinytorch matches the R package by computing the element count
 and adjusting the exclusive end:
 
 ```cpp
@@ -199,14 +199,14 @@ index specs to C++.
 ### useDynLib in NAMESPACE
 
 `tinyrox::document()` overwrites NAMESPACE but doesn't support
-`@useDynLib`. The `useDynLib(Rtorch, .registration = TRUE)` line and
+`@useDynLib`. The `useDynLib(tinytorch, .registration = TRUE)` line and
 manual S3 registrations (`[`, `[<-`, `[[`) must be re-added after each
 `document()` call. This is a known limitation to be addressed in tinyrox.
 
-Rtorch: CUDA Device Support
+tinytorch: CUDA Device Support
 ----------------------------
 
-The port required full CUDA support in Rtorch. All tensor creation
+The port required full CUDA support in tinytorch. All tensor creation
 functions (`torch_zeros`, `torch_ones`, `torch_randn`, `torch_empty`,
 `torch_full`, `torch_arange`, `torch_linspace`, `torch_hann_window`,
 `torch_tensor`, `torch_tensor_from_buffer`) now accept a `device=`
@@ -255,7 +255,7 @@ Results
 -------
 
 With these changes, the full Chatterbox TTS pipeline (798M parameters)
-runs on CUDA via Rtorch. The port validates component-by-component
+runs on CUDA via tinytorch. The port validates component-by-component
 against the Python reference implementation:
 
 | Component             | Max Difference |
@@ -270,5 +270,5 @@ against the Python reference implementation:
 | CFM Decoder           | < 0.028       |
 | HiFi-GAN Vocoder      | < 0.026       |
 
-Chatterbox is the largest application ported to Rtorch to date,
-covering 521 `Rtorch::` call sites across ~5000 lines of R code.
+Chatterbox is the largest application ported to tinytorch to date,
+covering 521 `tinytorch::` call sites across ~5000 lines of R code.

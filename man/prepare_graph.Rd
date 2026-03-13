@@ -19,7 +19,7 @@ shape inference and fusion compilation)}
 \item{fuse_matmul_epilogues}{Logical, fuse matmul+bias+activation on GPU (default FALSE)}
 
 \item{backend}{Character: "auto", "gpu", or "cpu". "auto" detects
-from input tensors and ariel availability.}
+from input tensors.}
 }
 \value{
 A \code{prepared_graph} object
@@ -30,7 +30,7 @@ compilation once. Returns a prepared execution plan that can be
 executed many times via \code{execute_prepared()}.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

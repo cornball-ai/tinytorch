@@ -53,7 +53,7 @@ ir_graph <- function(nodes, input_ids, output_ids) {
 #' @param env Environment with tensor values
 #' @return An ir_graph
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env()
 #' e$x <- torch_randn(c(2, 3))
@@ -325,7 +325,7 @@ format_ir_node <- function(node) {
 #' @param ... Ignored
 #' @return Invisibly returns x
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env()
 #' e$x <- torch_randn(c(2, 3))
@@ -356,7 +356,7 @@ print.ir_graph <- function(x, ...) {
 #' @param graph An ir_graph
 #' @return TRUE if valid, otherwise stops with an error
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env()
 #' e$x <- torch_randn(c(2, 3))

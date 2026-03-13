@@ -5,7 +5,7 @@
 #' @param other A torch_tensor.
 #' @param alpha Scalar multiplier for other (default 1).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' a <- torch_ones(c(2, 3))
 #' b <- torch_ones(c(2, 3))
 #' torch_add(a, b)
@@ -20,7 +20,7 @@ torch_add <- function(self, other, alpha = 1) {
 #' @param other A torch_tensor.
 #' @param alpha Scalar multiplier for other (default 1).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' a <- torch_ones(c(2, 3))
 #' b <- torch_ones(c(2, 3))
 #' torch_sub(a, b)
@@ -34,7 +34,7 @@ torch_sub <- function(self, other, alpha = 1) {
 #' @param self A torch_tensor.
 #' @param other A torch_tensor or scalar.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' a <- torch_randn(c(2, 3))
 #' torch_mul(a, 2.0)
 #' }
@@ -47,7 +47,7 @@ torch_mul <- function(self, other) {
 #' @param self A torch_tensor.
 #' @param other A torch_tensor or scalar.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' a <- torch_randn(c(2, 3))
 #' torch_div(a, 2.0)
 #' }
@@ -60,7 +60,7 @@ torch_div <- function(self, other) {
 #' @param self A torch_tensor.
 #' @param other A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' a <- torch_randn(c(2, 3))
 #' b <- torch_randn(c(3, 4))
 #' torch_matmul(a, b)
@@ -73,15 +73,17 @@ torch_matmul <- function(self, other) {
 #' Matrix-matrix multiplication (2D only)
 #' @param self A torch_tensor.
 #' @param other A torch_tensor.
+#' @param out_dtype Optional output dtype for mixed-precision (PyTorch 2.8+).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' a <- torch_randn(c(2, 3))
 #' b <- torch_randn(c(3, 4))
 #' torch_mm(a, b)
 #' }
 #' @export
-torch_mm <- function(self, other) {
-  C_torch_mm(self, other)
+torch_mm <- function(self, other, out_dtype = NULL) {
+  if (is.null(out_dtype)) C_torch_mm(self, other)
+  else C_torch_mm_dtype(self, other, out_dtype)
 }
 
 #' Sum of tensor elements
@@ -89,7 +91,7 @@ torch_mm <- function(self, other) {
 #' @param dim Optional dimension to reduce (1-based).
 #' @param keepdim Whether to keep the reduced dimension.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' torch_sum(x)
 #' torch_sum(x, dim = 1)
@@ -104,7 +106,7 @@ torch_sum <- function(self, dim = NULL, keepdim = FALSE) {
 #' @param dim Optional dimension to reduce (1-based).
 #' @param keepdim Whether to keep the reduced dimension.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' torch_mean(x)
 #' torch_mean(x, dim = 1)
@@ -117,7 +119,7 @@ torch_mean <- function(self, dim = NULL, keepdim = FALSE) {
 #' Sigmoid activation (namespace-level)
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' torch_sigmoid(x)
 #' }
@@ -172,8 +174,9 @@ torch_sigmoid <- function(self) {
   C_torch_matmul(self, other)
 }
 
-.tensor_methods$mm <- function(self, other) {
-  C_torch_mm(self, other)
+.tensor_methods$mm <- function(self, other, out_dtype = NULL) {
+  if (is.null(out_dtype)) C_torch_mm(self, other)
+  else C_torch_mm_dtype(self, other, out_dtype)
 }
 
 .tensor_methods$t <- function(self) {
@@ -522,8 +525,9 @@ torch_sigmoid <- function(self) {
 }
 
 # Additional linalg/shape methods
-.tensor_methods$bmm <- function(self, other) {
-  C_torch_bmm(self, other)
+.tensor_methods$bmm <- function(self, other, out_dtype = NULL) {
+  if (is.null(out_dtype)) C_torch_bmm(self, other)
+  else C_torch_bmm_dtype(self, other, out_dtype)
 }
 
 .tensor_methods$transpose <- function(self, dim0, dim1) {
@@ -593,7 +597,7 @@ torch_sigmoid <- function(self) {
 # ---- print ----
 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' print(x)
 #' }
@@ -602,7 +606,7 @@ print.torch_tensor <- function(x, ...) {
   C_tensor_print(x)
   shape <- C_tensor_shape(x)
   dtype_code <- C_tensor_dtype(x)
-  cat(sprintf("[ Rtorch — %s [ %s ] ]\n",
+  cat(sprintf("[ tinytorch -- %s [ %s ] ]\n",
               .dtype_name(dtype_code),
               paste(shape, collapse = ", ")))
   invisible(x)

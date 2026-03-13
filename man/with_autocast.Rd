@@ -15,5 +15,5 @@ with_autocast(device_type = "cpu", dtype = NULL, enabled = TRUE, code)
 \item{code}{Expression to evaluate.}
 }
 \description{
-Since Rtorch is CPU-only, autocast is a no-op.
+Since tinytorch is CPU-only, autocast is a no-op.
 }

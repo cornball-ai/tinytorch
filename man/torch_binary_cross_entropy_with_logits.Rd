@@ -1,0 +1,25 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_binary_cross_entropy_with_logits}
+\alias{torch_binary_cross_entropy_with_logits}
+\title{Binary cross entropy with logits}
+\usage{
+torch_binary_cross_entropy_with_logits(self, target, weight = NULL,
+                                       pos_weight = NULL, reduction = Mean)
+}
+\arguments{
+\item{self}{A torch_tensor.}
+
+\item{target}{A torch_tensor.}
+
+\item{weight}{A torch_tensor. Optional.}
+
+\item{pos_weight}{A torch_tensor. Optional.}
+
+\item{reduction}{An integer.}
+}
+\value{
+A torch_tensor.
+}
+\description{
+Wrapper for \code{at::binary_cross_entropy_with_logits}.
+}

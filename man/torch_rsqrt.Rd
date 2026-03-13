@@ -12,7 +12,7 @@ torch_rsqrt(self)
 Compute reciprocal square root of tensor
 }
 \examples{
-\donttest{
+\dontrun{
 torch_rsqrt(torch_tensor(c(1, 4, 9)))
 }
 }

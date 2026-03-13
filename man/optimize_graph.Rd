@@ -20,7 +20,7 @@ common_subexpr_eliminate, algebraic_simplify, dead_code_eliminate,
 fusion_annotate.
 }
 \examples{
-\donttest{
+\dontrun{
 stmts <- list(quote(y <- x$relu()$sigmoid()))
 e <- new.env(); e$x <- torch_randn(c(2, 3))
 g <- lower_to_ir(stmts, e)

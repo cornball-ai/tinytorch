@@ -10,12 +10,14 @@ torch_gelu(self)
 }
 \arguments{
 \item{self}{A torch_tensor.}
+
+\item{approximate}{Character, "none" or "tanh". Default "none".}
 }
 \description{
 GELU activation
 }
 \examples{
-\donttest{
+\dontrun{
 nnf_gelu(torch_randn(c(2, 3)))
 }
 }

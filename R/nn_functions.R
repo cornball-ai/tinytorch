@@ -3,7 +3,7 @@
 #' Compute sin of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_sin(torch_tensor(c(0, 3.14159 / 2)))
 #' }
 #' @export
@@ -12,7 +12,7 @@ torch_sin <- function(self) C_torch_sin(self)
 #' Compute cos of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_cos(torch_tensor(c(0, 3.14159)))
 #' }
 #' @export
@@ -21,7 +21,7 @@ torch_cos <- function(self) C_torch_cos(self)
 #' Compute tanh of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_tanh(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -30,7 +30,7 @@ torch_tanh <- function(self) C_torch_tanh(self)
 #' Compute reciprocal square root of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_rsqrt(torch_tensor(c(1, 4, 9)))
 #' }
 #' @export
@@ -39,7 +39,7 @@ torch_rsqrt <- function(self) C_torch_rsqrt(self)
 #' ReLU activation (namespace-level)
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' torch_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -50,7 +50,7 @@ torch_relu <- function(self) C_torch_relu(self)
 #' ReLU activation (functional)
 #' @param input A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -59,7 +59,7 @@ nnf_relu <- function(input) C_torch_relu(input)
 #' SiLU activation (swish)
 #' @param self A torch_tensor.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_silu(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -69,8 +69,9 @@ nnf_silu <- function(self) {
 
 #' GELU activation
 #' @param self A torch_tensor.
+#' @param approximate Character, "none" or "tanh". Default "none".
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_gelu(torch_randn(c(2, 3)))
 #' }
 #' @export
@@ -82,7 +83,7 @@ nnf_gelu <- function(self, approximate = "none") {
 #' @param self A torch_tensor.
 #' @param negative_slope Negative slope coefficient. Default 0.01.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_leaky_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -94,7 +95,7 @@ nnf_leaky_relu <- function(self, negative_slope = 0.01) {
 #' @param self A torch_tensor.
 #' @param alpha Scale for the negative factor. Default 1.0.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_elu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' @export
@@ -106,7 +107,7 @@ nnf_elu <- function(self, alpha = 1.0) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply softmax over (1-based).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_softmax(torch_randn(c(2, 3)), dim = 2)
 #' }
 #' @export
@@ -118,7 +119,7 @@ nnf_softmax <- function(self, dim = -1L) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply log-softmax over (1-based).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' nnf_log_softmax(torch_randn(c(2, 3)), dim = 2)
 #' }
 #' @export
@@ -133,7 +134,7 @@ nnf_log_softmax <- function(self, dim = -1L) {
 #' @param bias Optional bias tensor.
 #' @param eps Small constant for numerical stability.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 4))
 #' nnf_layer_norm(x, 4L)
 #' }
@@ -151,7 +152,7 @@ nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
 #' @param weight Weight matrix.
 #' @param bias Optional bias vector.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(2, 3))
 #' w <- torch_randn(c(4, 3))
 #' torch_linear(x, w)
@@ -170,7 +171,7 @@ torch_linear <- function(input, weight, bias = NULL) {
 #' @param dilation Spacing between kernel elements. Default 1.
 #' @param groups Number of blocked connections. Default 1.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' x <- torch_randn(c(1, 1, 10))
 #' w <- torch_randn(c(1, 1, 3))
 #' torch_conv1d(x, w)
@@ -188,7 +189,7 @@ torch_conv1d <- function(input, weight, bias = NULL,
 #' @param weight Embedding matrix tensor.
 #' @param indices Integer tensor of indices.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' emb <- torch_randn(c(10, 4))
 #' idx <- torch_tensor(c(1L, 3L, 5L))
 #' torch_embedding(emb, idx)
@@ -238,21 +239,40 @@ torch_layer_norm <- function(input, normalized_shape, weight = NULL,
 
 # ---- Namespace exports for existing C++ unary ops ----
 
+#' Absolute value
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_abs <- function(self) C_torch_abs(self)
 
+#' Exponential
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_exp <- function(self) C_torch_exp(self)
 
+#' Natural logarithm
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log <- function(self) C_torch_log(self)
 
+#' Square root
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sqrt <- function(self) C_torch_sqrt(self)
 
+#' Floor
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_floor <- function(self) C_torch_floor(self)
 
+#' Power
+#' @param self A torch_tensor or numeric scalar.
+#' @param exponent A torch_tensor or numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_pow <- function(self, exponent) {
   if (!inherits(self, "torch_tensor") && inherits(exponent, "torch_tensor")) {
@@ -269,6 +289,16 @@ torch_pow <- function(self, exponent) {
 
 # ---- NN functional: pad ----
 
+#' Pad a tensor
+#'
+#' Pads the input tensor using the specified padding mode.
+#'
+#' @param input A torch_tensor.
+#' @param pad Integer vector of padding sizes.
+#' @param mode Padding mode: "constant", "reflect", "replicate", or "circular".
+#'   Default "constant".
+#' @param value Fill value for constant padding. Default 0.
+#' @return A torch_tensor.
 #' @export
 nnf_pad <- function(input, pad, mode = "constant", value = 0) {
   C_nnf_pad(input, as.integer(pad), mode, as.double(value))
@@ -276,6 +306,18 @@ nnf_pad <- function(input, pad, mode = "constant", value = 0) {
 
 # ---- NN functional: interpolate ----
 
+#' Interpolate a tensor
+#'
+#' Down/up samples the input to the given size or scale_factor.
+#'
+#' @param input A torch_tensor.
+#' @param size Integer vector of output spatial sizes.
+#' @param scale_factor Numeric multiplier for spatial size.
+#' @param mode Interpolation mode: "nearest", "linear", "bilinear", "bicubic",
+#'   "trilinear", or "area". Default "nearest".
+#' @param align_corners Logical. If TRUE, aligns corner pixels. Default NULL.
+#' @param recompute_scale_factor Logical. Ignored (for API compatibility).
+#' @return A torch_tensor.
 #' @export
 nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
                             mode = "nearest", align_corners = NULL,
@@ -288,6 +330,17 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
 
 # ---- NN functional: avg_pool1d ----
 
+#' 1D average pooling
+#'
+#' Applies 1D average pooling over an input signal.
+#'
+#' @param input A torch_tensor of shape (N, C, L).
+#' @param kernel_size Integer, size of the pooling window.
+#' @param stride Integer, stride of the pooling window. Default kernel_size.
+#' @param padding Integer, zero-padding on both sides. Default 0.
+#' @param ceil_mode Logical. Use ceil instead of floor for output size. Default FALSE.
+#' @param count_include_pad Logical. Include padding in average. Default TRUE.
+#' @return A torch_tensor.
 #' @export
 nnf_avg_pool1d <- function(input, kernel_size, stride = kernel_size,
                            padding = 0L, ceil_mode = FALSE,
@@ -299,6 +352,14 @@ nnf_avg_pool1d <- function(input, kernel_size, stride = kernel_size,
 
 # ---- NN functional: softplus ----
 
+#' Softplus activation
+#'
+#' Applies the softplus function element-wise.
+#'
+#' @param input A torch_tensor.
+#' @param beta Multiplier for the input. Default 1.0.
+#' @param threshold Values above this revert to linear. Default 20.0.
+#' @return A torch_tensor.
 #' @export
 nnf_softplus <- function(input, beta = 1.0, threshold = 20.0) {
   C_nnf_softplus(input, as.double(beta), as.double(threshold))
@@ -306,6 +367,15 @@ nnf_softplus <- function(input, beta = 1.0, threshold = 20.0) {
 
 # ---- NN functional: normalize ----
 
+#' Normalize a tensor along a dimension
+#'
+#' Performs Lp normalization along the given dimension.
+#'
+#' @param input A torch_tensor.
+#' @param p Norm order. Default 2.
+#' @param dim Dimension to normalize along. Default -1.
+#' @param eps Small constant for numerical stability. Default 1e-12.
+#' @return A torch_tensor.
 #' @export
 nnf_normalize <- function(input, p = 2, dim = -1L, eps = 1e-12) {
   C_nnf_normalize(input, as.double(p), as.integer(dim), as.double(eps))
@@ -313,11 +383,17 @@ nnf_normalize <- function(input, p = 2, dim = -1L, eps = 1e-12) {
 
 # ---- NN functional: sigmoid ----
 
+#' Sigmoid activation (functional)
+#' @param input A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 nnf_sigmoid <- function(input) C_torch_sigmoid(input)
 
 # ---- NN functional: tanh ----
 
+#' Tanh activation (functional)
+#' @param input A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 nnf_tanh <- function(input) C_torch_tanh(input)
 
@@ -328,7 +404,7 @@ nnf_tanh <- function(input) C_torch_tanh(input)
 #' Evaluates the expression with gradient computation disabled.
 #' @param code Expression to evaluate.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' with_no_grad({
 #'   x <- torch_randn(c(2, 3))
 #'   torch_relu(x)
@@ -424,7 +500,7 @@ cuda_memory_stats <- function() {
 
 #' No-op autocast context manager
 #'
-#' Since Rtorch is CPU-only, autocast is a no-op.
+#' Since tinytorch is CPU-only, autocast is a no-op.
 #' @param device_type Ignored.
 #' @param dtype Ignored.
 #' @param enabled Ignored.
@@ -562,7 +638,7 @@ encoder_forward <- function(mel, global_weights, layer_weights, n_head, n_ctx) {
 #' Greedy Decode
 #'
 #' Runs the entire autoregressive decode loop in C++.
-#' One boundary crossing for the full sequence — no per-token R overhead.
+#' One boundary crossing for the full sequence -- no per-token R overhead.
 #'
 #' @param initial_tokens Integer vector of initial token IDs (0-indexed).
 #' @param global_weights List of 4 tensors: token_emb.weight, pos_emb.weight,

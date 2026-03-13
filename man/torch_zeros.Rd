@@ -16,7 +16,7 @@ torch_zeros(..., dtype = NULL, device = NULL)
 Create a tensor of zeros
 }
 \examples{
-\donttest{
+\dontrun{
 torch_zeros(c(2, 3))
 }
 }

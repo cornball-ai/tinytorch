@@ -1,3 +1,5 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # test_segment.R - Tests for graph segmentation
 
 # --- Single segment cases ---

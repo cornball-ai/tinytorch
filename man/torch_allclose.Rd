@@ -21,7 +21,7 @@ Logical scalar.
 Check if two tensors are element-wise close
 }
 \examples{
-\donttest{
+\dontrun{
 a <- torch_ones(c(2, 3))
 b <- torch_ones(c(2, 3))
 torch_allclose(a, b)

@@ -25,7 +25,7 @@ torch_conv1d(input, weight, bias = NULL, stride = 1L, padding = 0L,
 1D convolution
 }
 \examples{
-\donttest{
+\dontrun{
 x <- torch_randn(c(1, 1, 10))
 w <- torch_randn(c(1, 1, 3))
 torch_conv1d(x, w)

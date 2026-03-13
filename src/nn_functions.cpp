@@ -1,4 +1,4 @@
-#include "Rtorch.h"
+#include "tinytorch.h"
 
 // ---- Activation functions ----
 

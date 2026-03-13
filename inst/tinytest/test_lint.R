@@ -1,3 +1,5 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # test_lint.R - Tests for torch_lint()
 
 # --- Clean expressions ---

@@ -9,7 +9,7 @@
 #' @param ... Named functions: initialize, forward, and any other methods.
 #' @return A constructor function that creates module instances.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' Linear <- nn_module("Linear",
 #'   initialize = function(in_f, out_f) {
 #'     self$register_parameter("weight", torch_randn(c(out_f, in_f)))
@@ -266,7 +266,7 @@ length.nn_module <- function(x) {
 #' @param bias Logical, whether to include a bias term.
 #' @return An nn_module instance.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_linear(3, 2)
 #' m(torch_randn(c(1, 3)))
 #' }
@@ -295,7 +295,7 @@ nn_linear <- function(in_features, out_features, bias = TRUE) {
 #'
 #' @return An nn_module instance.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_relu()
 #' m(torch_randn(c(2, 3)))
 #' }
@@ -314,7 +314,7 @@ nn_relu <- function() {
 #'
 #' @return An nn_module instance.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_gelu()
 #' m(torch_randn(c(2, 3)))
 #' }
@@ -334,7 +334,7 @@ nn_gelu <- function() {
 #' @param ... nn_module instances to chain sequentially.
 #' @return An nn_module instance.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_sequential(nn_linear(3, 4), nn_relu(), nn_linear(4, 2))
 #' m(torch_randn(c(1, 3)))
 #' }
@@ -369,7 +369,7 @@ nn_sequential <- function(...) {
 #' @param eps Small constant for numerical stability.
 #' @return An nn_module instance.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_layer_norm(4)
 #' m(torch_randn(c(2, 4)))
 #' }
@@ -463,7 +463,7 @@ nn_identity <- function() {
 
 # ---- nn_dropout ----
 
-#' Dropout module (no-op in eval mode, Rtorch has no autograd)
+#' Dropout module (no-op in eval mode, tinytorch has no autograd)
 #' @param p Probability of dropping. Ignored.
 #' @param inplace Ignored.
 #' @return An nn_module instance.

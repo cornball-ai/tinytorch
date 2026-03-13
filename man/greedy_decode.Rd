@@ -29,5 +29,5 @@ Integer vector of generated token IDs (0-indexed).
 }
 \description{
 Runs the entire autoregressive decode loop in C++.
-One boundary crossing for the full sequence — no per-token R overhead.
+One boundary crossing for the full sequence -- no per-token R overhead.
 }

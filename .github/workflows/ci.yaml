@@ -1,0 +1,60 @@
+# Run CI for R using https://eddelbuettel.github.io/r-ci/
+
+name: ci
+
+on:
+  push:
+  pull_request:
+
+env:
+  _R_CHECK_FORCE_SUGGESTS_: "false"
+  LIBTORCH_VERSION: "2.8.0"
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        include:
+          - {os: macos-latest}
+          - {os: ubuntu-latest}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup
+        uses: eddelbuettel/github-actions/r-ci@master
+        with:
+          dev_version: 'TRUE'
+          backend: 'RAPT'
+
+      - name: Cache libtorch
+        if: runner.os == 'Linux'
+        id: cache-libtorch
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/lib/libtorch
+          key: libtorch-cpu-${{ runner.os }}-${{ env.LIBTORCH_VERSION }}
+
+      - name: Install libtorch
+        if: runner.os == 'Linux' && steps.cache-libtorch.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.local/lib
+          curl -sL "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-${LIBTORCH_VERSION}%2Bcpu.zip" -o /tmp/libtorch.zip
+          unzip -q /tmp/libtorch.zip -d ~/.local/lib
+
+      - name: Dependencies
+        run: ./run.sh install_deps
+
+      - name: Test
+        run: ./run.sh run_tests
+
+      - name: Audit shared libraries
+        if: runner.os == 'Linux'
+        env:
+          GITHUB_PAT: ${{ github.token }}
+        run: |
+          Rscript -e 'remotes::install_github("cornball-ai/tinyelf")'
+          Rscript -e 'install.packages(".", repos = NULL, type = "source")'
+          Rscript -e 'tinyelf::audit_so(system.file("libs", package = "tinytorch"))'

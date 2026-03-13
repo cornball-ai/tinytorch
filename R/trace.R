@@ -216,7 +216,7 @@ expand_nnf <- function(fn_name, arg_exprs, arg_names = NULL) {
   }
 
   # Not in registry — try to get the function body
-  fn <- tryCatch(getFromNamespace(fn_name, "Rtorch"), error = function(e) NULL)
+  fn <- tryCatch(getFromNamespace(fn_name, "tinytorch"), error = function(e) NULL)
   if (is.null(fn) || !is.function(fn)) return(NULL)
 
   fn_body <- body(fn)
@@ -291,7 +291,7 @@ try_resolve_static <- function(expr, known_values) {
 #'   params (named list of parameter tensors),
 #'   graph_breaks (list of break descriptions)
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_linear(3, 2)
 #' expand_module(m, arg_exprs = list(input = as.symbol("input")))
 #' }
@@ -906,7 +906,7 @@ inline_statements <- function(statements) {
 #' @param .optimize Logical, run optimization passes on the IR
 #' @param .fuse Logical, compile fusion groups to kernels
 #' @param .backend Character: "auto", "gpu", or "cpu". "auto" detects
-#'   from input tensors at call time and ariel availability.
+#'   from input tensors at call time.
 #' @param .verbose Logical, print tracing info
 #' @return A list with:
 #'   \item{fn}{A function that executes the traced graph}
@@ -915,7 +915,7 @@ inline_statements <- function(statements) {
 #'   \item{graph_breaks}{List of graph break descriptions}
 #'   \item{ir}{The IR graph (if no graph breaks), or NULL}
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_linear(3, 2)
 #' traced <- trace_module(m, input = torch_randn(c(1, 3)))
 #' traced$fn(input = torch_randn(c(1, 3)))
@@ -1090,11 +1090,7 @@ make_traced_fn <- function(statements, params, input_names,
 
       # Resolve backend
       resolved_backend <- if (backend == "auto") {
-        if (!is.null(target_device)) {
-          if (requireNamespace("ariel", quietly = TRUE)) "gpu" else "cpu"
-        } else {
-          "cpu"
-        }
+        "cpu"
       } else {
         backend
       }
@@ -1166,7 +1162,7 @@ make_traced_fn <- function(statements, params, input_names,
         }
       }
     }
-    parent.env(exec_env) <- asNamespace("Rtorch")
+    parent.env(exec_env) <- asNamespace("tinytorch")
 
     result <- NULL
     for (stmt in statements) {
@@ -1183,7 +1179,7 @@ make_traced_fn <- function(statements, params, input_names,
 #' @param ... Ignored
 #' @return Invisibly returns x
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' m <- nn_linear(3, 2)
 #' traced <- trace_module(m, input = torch_randn(c(1, 3)))
 #' print(traced)

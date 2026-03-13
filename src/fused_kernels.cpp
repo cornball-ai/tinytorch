@@ -1,13 +1,13 @@
-// Fused SIMD kernels for Rtorch (originally from torchlang)
+// Fused SIMD kernels for tinytorch (originally from torchlang)
 // Uses ATen's at::vec API for vectorization
 
-#include "Rtorch.h"
+#include "tinytorch.h"
 #include <ATen/cpu/vec/vec.h>
 #include <cmath>
 #include <algorithm>
 
-// Use Rtorch's get_tensor_ptr and make_tensor_sexp from Rtorch.h
-// Wrapper to create tensor from rvalue ref using Rtorch's heap-alloc convention
+// Use tinytorch's get_tensor_ptr and make_tensor_sexp from tinytorch.h
+// Wrapper to create tensor from rvalue ref using tinytorch's heap-alloc convention
 static SEXP make_fused_tensor(at::Tensor&& t) {
   return make_tensor_sexp(new at::Tensor(std::move(t)));
 }

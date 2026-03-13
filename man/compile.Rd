@@ -22,7 +22,7 @@ and the \code{compiled_module} is returned invisibly.}
 \item{.fuse}{Logical, compile fusion groups to kernels (default TRUE).}
 
 \item{.backend}{Character: "auto", "gpu", or "cpu". "auto" detects
-from input tensors and ariel availability.}
+from input tensors.}
 }
 \value{
 A \code{compiled_module} object (invisibly if \code{path}

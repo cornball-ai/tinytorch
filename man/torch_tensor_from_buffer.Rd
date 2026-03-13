@@ -11,6 +11,8 @@ torch_tensor_from_buffer(raw, shape, dtype, device = NULL)
 \item{shape}{Integer vector of dimensions.}
 
 \item{dtype}{A torch_dtype.}
+
+\item{device}{Ignored (CPU only).}
 }
 \value{
 A torch_tensor.

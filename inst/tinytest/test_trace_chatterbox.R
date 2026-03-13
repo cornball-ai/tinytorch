@@ -1,11 +1,13 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # ===== Chatterbox (Llama) Module Tracing =====
 #
 # Tests trace_module on Llama-style modules from chatterbox.
 # Uses inline module definitions at tiny dimensions.
 # Sources ~/chatterbox/R/llama.R for the actual module code.
 
-# chatterbox uses torch R6 modules — skip until ported to Rtorch
-exit_file("chatterbox not yet ported to Rtorch")
+# chatterbox uses torch R6 modules — skip until ported to tinytorch
+exit_file("chatterbox not yet ported to tinytorch")
 
 # Tiny dimensions for fast testing
 hidden_size <- 64L

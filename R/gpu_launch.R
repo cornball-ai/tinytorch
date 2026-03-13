@@ -1,7 +1,7 @@
 # GPU kernel launch via CUDA driver API
 #
 # These wrap the C functions in src/gpu_launch.cpp which load PTX,
-# extract device pointers from Rtorch tensors, and launch kernels.
+# extract device pointers from tinytorch tensors, and launch kernels.
 
 #' Launch a compiled GPU kernel (elementwise)
 #'

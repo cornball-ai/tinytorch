@@ -12,7 +12,7 @@ with_no_grad(code)
 Evaluates the expression with gradient computation disabled.
 }
 \examples{
-\donttest{
+\dontrun{
 with_no_grad({
   x <- torch_randn(c(2, 3))
   torch_relu(x)

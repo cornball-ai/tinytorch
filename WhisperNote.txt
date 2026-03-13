@@ -1,7 +1,7 @@
 Whisper Fused Decoder Loop — Deferred Optimization
 ====================================================
 
-Context: Rtorch whisper GPU decode is ~178ms vs PyTorch ~120ms (1.5x gap).
+Context: tinytorch whisper GPU decode is ~178ms vs PyTorch ~120ms (1.5x gap).
 Breakdown: mel=33ms, encode=40ms, decode=105ms.
 
 The decoder is the bottleneck: ~25 tokens x ~14 .Call() crossings per token
@@ -9,7 +9,7 @@ The decoder is the bottleneck: ~25 tokens x ~14 .Call() crossings per token
 
 Planned optimization (user chose "fused per-step call"):
 - Keep the R greedy decode loop in whisper/transcribe.R (readable)
-- Create C_decoder_forward_step in Rtorch/src/transformer.cpp:
+- Create C_decoder_forward_step in tinytorch/src/transformer.cpp:
   - One .Call() per token instead of 14
   - Handles: token embedding, positional embedding, all decoder layers
     (self-attn + cross-attn + MLP), final layer norm, logits, argmax
@@ -42,7 +42,7 @@ Whisper files to modify:
 - ~/whisper/R/model.R — call pack_generate_weights() after loading
 - ~/whisper/R/transcribe.R — update greedy_decode() to use fused step
 
-Rtorch files to modify:
+tinytorch files to modify:
 - src/transformer.cpp — add C_decoder_forward_step
 - src/init.cpp — register it (or use Rcpp::export after migration)
 - R/generate.R — R wrapper greedy_generate() or decoder_forward_step()

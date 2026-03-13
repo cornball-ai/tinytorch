@@ -1,4 +1,4 @@
-#include "Rtorch.h"
+#include "tinytorch.h"
 
 // [[Rcpp::export]]
 SEXP C_as_array(at::Tensor self) {
@@ -93,4 +93,5 @@ SEXP C_tensor_print(at::Tensor self) {
         std::ostringstream oss;
         oss << self;
         Rprintf("%s\n", oss.str().c_str());
+        return R_NilValue;
 }

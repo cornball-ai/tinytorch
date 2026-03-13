@@ -11,6 +11,8 @@ torch_std(self, dim = NULL, keepdim = FALSE, unbiased = TRUE)
 \item{dim}{Optional dimension to reduce.}
 
 \item{keepdim}{Whether to keep the reduced dimension.}
+
+\item{unbiased}{Logical. Use Bessel's correction. Default TRUE.}
 }
 \value{
 A torch_tensor.

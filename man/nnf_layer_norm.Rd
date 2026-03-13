@@ -24,7 +24,7 @@ torch_layer_norm(input, normalized_shape, weight = NULL, bias = NULL,
 Layer normalization
 }
 \examples{
-\donttest{
+\dontrun{
 x <- torch_randn(c(2, 4))
 nnf_layer_norm(x, 4L)
 }

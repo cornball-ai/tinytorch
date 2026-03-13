@@ -1,14 +1,16 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # test_ir.R - Tests for IR foundation
 
 # --- IR node construction ---
 
-n1 <- Rtorch:::ir_node(1L, "input", attrs = list(name = "x"))
+n1 <- tinytorch:::ir_node(1L, "input", attrs = list(name = "x"))
 expect_equal(n1$id, 1L)
 expect_equal(n1$op, "input")
 expect_equal(n1$attrs$name, "x")
 expect_equal(length(n1$inputs), 0L)
 
-n2 <- Rtorch:::ir_node(2L, "relu", inputs = 1L)
+n2 <- tinytorch:::ir_node(2L, "relu", inputs = 1L)
 expect_equal(n2$inputs, 1L)
 
 # --- Simple chain: x$relu()$sigmoid() ---
@@ -170,16 +172,16 @@ expect_true(any(grepl("return %", output)))
 # --- Validator catches bad graphs ---
 
 # Bad reference
-bad_graph <- Rtorch:::ir_graph(
-  nodes = list("1" = Rtorch:::ir_node(1L, "relu", inputs = 99L)),
+bad_graph <- tinytorch:::ir_graph(
+  nodes = list("1" = tinytorch:::ir_node(1L, "relu", inputs = 99L)),
   input_ids = integer(),
   output_ids = 1L
 )
 expect_error(validate_ir(bad_graph), "non-existent input")
 
 # Bad output reference
-bad_graph2 <- Rtorch:::ir_graph(
-  nodes = list("1" = Rtorch:::ir_node(1L, "input")),
+bad_graph2 <- tinytorch:::ir_graph(
+  nodes = list("1" = tinytorch:::ir_node(1L, "input")),
   input_ids = 1L,
   output_ids = 99L
 )
@@ -190,10 +192,10 @@ expect_error(validate_ir(list()), "ir_graph")
 
 # --- Topological order check ---
 
-bad_topo <- Rtorch:::ir_graph(
+bad_topo <- tinytorch:::ir_graph(
   nodes = list(
-    "2" = Rtorch:::ir_node(2L, "relu", inputs = 3L),
-    "3" = Rtorch:::ir_node(3L, "input")
+    "2" = tinytorch:::ir_node(2L, "relu", inputs = 3L),
+    "3" = tinytorch:::ir_node(3L, "input")
   ),
   input_ids = 3L,
   output_ids = 2L
@@ -209,14 +211,14 @@ expect_equal(out_cmp$op, "gt")
 
 # --- format_ir_node ---
 
-n_input <- Rtorch:::ir_node(1L, "input", attrs = list(name = "x"))
-expect_true(grepl("input\\[x\\]", Rtorch:::format_ir_node(n_input)))
+n_input <- tinytorch:::ir_node(1L, "input", attrs = list(name = "x"))
+expect_true(grepl("input\\[x\\]", tinytorch:::format_ir_node(n_input)))
 
-n_const <- Rtorch:::ir_node(2L, "constant", attrs = list(value = 42))
-expect_true(grepl("constant\\(42\\)", Rtorch:::format_ir_node(n_const)))
+n_const <- tinytorch:::ir_node(2L, "constant", attrs = list(value = 42))
+expect_true(grepl("constant\\(42\\)", tinytorch:::format_ir_node(n_const)))
 
-n_relu <- Rtorch:::ir_node(3L, "relu", inputs = 1L)
-expect_true(grepl("relu\\(%1\\)", Rtorch:::format_ir_node(n_relu)))
+n_relu <- tinytorch:::ir_node(3L, "relu", inputs = 1L)
+expect_true(grepl("relu\\(%1\\)", tinytorch:::format_ir_node(n_relu)))
 
-n_add <- Rtorch:::ir_node(4L, "add", inputs = c(1L, 2L))
-expect_true(grepl("add\\(%1, %2\\)", Rtorch:::format_ir_node(n_add)))
+n_add <- tinytorch:::ir_node(4L, "add", inputs = c(1L, 2L))
+expect_true(grepl("add\\(%1, %2\\)", tinytorch:::format_ir_node(n_add)))

@@ -11,6 +11,6 @@ torch_load <- function(path) {
 }
 
 jit_trace <- function(fn, ...) {
-  stop("jit_trace is not yet supported in Rtorch. Use compile = FALSE.",
+  stop("jit_trace is not yet supported in tinytorch. Use compile = FALSE.",
        call. = FALSE)
 }

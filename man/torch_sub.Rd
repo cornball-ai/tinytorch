@@ -16,7 +16,7 @@ torch_sub(self, other, alpha = 1)
 Subtract two tensors
 }
 \examples{
-\donttest{
+\dontrun{
 a <- torch_ones(c(2, 3))
 b <- torch_ones(c(2, 3))
 torch_sub(a, b)

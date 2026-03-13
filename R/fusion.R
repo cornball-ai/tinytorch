@@ -228,7 +228,7 @@ execute_with_fusion <- function(stmt, env, verbose = FALSE) {
     if (!is.null(input_tensor) && inherits(input_tensor, "torch_tensor")) {
       # Get the kernel function
       kernel_fn <- tryCatch(
-        get(match$kernel, envir = asNamespace("Rtorch")),
+        get(match$kernel, envir = asNamespace("tinytorch")),
         error = function(e) NULL
       )
 

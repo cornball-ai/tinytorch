@@ -12,7 +12,7 @@ torch_relu(self)
 ReLU activation (namespace-level)
 }
 \examples{
-\donttest{
+\dontrun{
 torch_relu(torch_tensor(c(-1, 0, 1)))
 }
 }

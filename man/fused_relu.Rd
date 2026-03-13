@@ -15,7 +15,7 @@ A new torch tensor (float32).
 Fused relu
 }
 \examples{
-\donttest{
+\dontrun{
 fused_relu(torch_randn(c(2, 3)))
 }
 }

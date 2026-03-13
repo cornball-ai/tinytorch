@@ -55,7 +55,7 @@ broadcast_shapes <- function(shape_a, shape_b) {
 #' @param input_dtypes Optional named list mapping input names to dtype strings
 #' @return A new ir_graph with shape/dtype annotations
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)
@@ -434,7 +434,7 @@ infer_shapes <- function(graph, input_shapes, input_dtypes = NULL) {
 #' @param graph An ir_graph
 #' @return Named list of node_id (as character) to last_use_id (integer or Inf)
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)
@@ -478,7 +478,7 @@ analyze_liveness <- function(graph) {
 #' @param graph An ir_graph
 #' @return Named list of node_id (as character) to integer vector of dependency IDs
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' stmts <- list(quote(y <- x$relu()))
 #' e <- new.env(); e$x <- torch_randn(c(2, 3))
 #' g <- lower_to_ir(stmts, e)

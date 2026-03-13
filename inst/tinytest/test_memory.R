@@ -1,3 +1,5 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # test_memory.R - Tests for memory planning
 
 # ============================================================
@@ -9,7 +11,7 @@
 ir_chain <- lower_to_ir(list(quote(x$relu()$sigmoid()$tanh())))
 ir_chain <- infer_shapes(ir_chain, list(x = c(100L)))
 liveness <- analyze_liveness(ir_chain)
-in_place <- Rtorch:::detect_in_place(ir_chain, liveness)
+in_place <- tinytorch:::detect_in_place(ir_chain, liveness)
 
 # At least sigmoid and tanh should be in-place
 expect_true(length(in_place) >= 2L)
@@ -22,7 +24,7 @@ expect_true(length(in_place) >= 2L)
 ir_relu <- lower_to_ir(list(quote(x$relu())))
 ir_relu <- infer_shapes(ir_relu, list(x = c(100L)))
 liveness_relu <- analyze_liveness(ir_relu)
-ip_relu <- Rtorch:::detect_in_place(ir_relu, liveness_relu)
+ip_relu <- tinytorch:::detect_in_place(ir_relu, liveness_relu)
 
 # relu's input is x (a graph input) - no in-place
 relu_node <- Filter(function(n) n$op == "relu", ir_relu$nodes)[[1]]
@@ -41,7 +43,7 @@ ir_mm <- lower_to_ir(list(
 ir_mm <- infer_shapes(ir_mm,
   list(x = c(10L, 20L), y = c(20L, 5L)))
 liveness_mm <- analyze_liveness(ir_mm)
-ip_mm <- Rtorch:::detect_in_place(ir_mm, liveness_mm)
+ip_mm <- tinytorch:::detect_in_place(ir_mm, liveness_mm)
 
 # relu CAN be in-place on matmul (same shape [10,5])
 relu_mm <- Filter(function(n) n$op == "relu", ir_mm$nodes)[[1]]
@@ -60,7 +62,7 @@ ir_multi <- lower_to_ir(list(
 ))
 ir_multi <- infer_shapes(ir_multi, list(x = c(50L)))
 liveness_multi <- analyze_liveness(ir_multi)
-ip_multi <- Rtorch:::detect_in_place(ir_multi, liveness_multi)
+ip_multi <- tinytorch:::detect_in_place(ir_multi, liveness_multi)
 
 # relu's last_use = add's id (not Inf), so add CAN be in-place on relu
 add_node <- Filter(function(n) n$op == "add", ir_multi$nodes)[[1]]
@@ -165,8 +167,8 @@ expect_equal(plan_f64$naive_bytes, 8000)
 # plan_memory: empty graph (input only)
 # ============================================================
 
-ir_empty <- Rtorch:::ir_graph(
-  nodes = list("1" = Rtorch:::ir_node(1L, "input", attrs = list(name = "x"))),
+ir_empty <- tinytorch:::ir_graph(
+  nodes = list("1" = tinytorch:::ir_node(1L, "input", attrs = list(name = "x"))),
   input_ids = 1L,
   output_ids = 1L
 )

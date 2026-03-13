@@ -1,3 +1,5 @@
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
+
 # test_optimize.R - Tests for optimization passes
 
 # ============================================================
@@ -43,11 +45,11 @@ expect_equal(length(add_nf), 1L)  # add stays
 # ============================================================
 
 # Dead node removed
-dead_ir <- Rtorch:::ir_graph(
+dead_ir <- tinytorch:::ir_graph(
   nodes = list(
-    "1" = Rtorch:::ir_node(1L, "input", attrs = list(name = "x")),
-    "2" = Rtorch:::ir_node(2L, "relu", inputs = 1L),
-    "3" = Rtorch:::ir_node(3L, "sigmoid", inputs = 1L)
+    "1" = tinytorch:::ir_node(1L, "input", attrs = list(name = "x")),
+    "2" = tinytorch:::ir_node(2L, "relu", inputs = 1L),
+    "3" = tinytorch:::ir_node(3L, "sigmoid", inputs = 1L)
   ),
   input_ids = 1L,
   output_ids = 2L
@@ -59,11 +61,11 @@ expect_equal(length(result_dce$nodes), 2L)
 expect_null(result_dce$nodes[["3"]])
 
 # Dead input node removed
-dead_input <- Rtorch:::ir_graph(
+dead_input <- tinytorch:::ir_graph(
   nodes = list(
-    "1" = Rtorch:::ir_node(1L, "input", attrs = list(name = "x")),
-    "2" = Rtorch:::ir_node(2L, "input", attrs = list(name = "y")),
-    "3" = Rtorch:::ir_node(3L, "relu", inputs = 1L)
+    "1" = tinytorch:::ir_node(1L, "input", attrs = list(name = "x")),
+    "2" = tinytorch:::ir_node(2L, "input", attrs = list(name = "y")),
+    "3" = tinytorch:::ir_node(3L, "relu", inputs = 1L)
   ),
   input_ids = c(1L, 2L),
   output_ids = 3L
