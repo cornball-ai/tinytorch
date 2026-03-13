@@ -1,7 +1,7 @@
-// Fused transformer layers for Rtorch
+// Fused transformer layers for tinytorch
 // Execute complete pre-norm transformer layers in C++ with zero R allocation.
 
-#include "Rtorch.h"
+#include "tinytorch.h"
 
 // Helper: extract tensor from R list by index (0-based)
 static at::Tensor& list_tensor(SEXP list, int idx) {

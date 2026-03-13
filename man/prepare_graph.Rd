@@ -19,7 +19,7 @@ shape inference and fusion compilation)}
 \item{fuse_matmul_epilogues}{Logical, fuse matmul+bias+activation on GPU (default FALSE)}
 
 \item{backend}{Character: "auto", "gpu", or "cpu". "auto" detects
-from input tensors and ariel availability.}
+from input tensors.}
 }
 \value{
 A \code{prepared_graph} object

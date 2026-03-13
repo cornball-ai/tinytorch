@@ -1,4 +1,4 @@
-#include "Rtorch.h"
+#include "tinytorch.h"
 #include <torch/optim.h>
 
 static void optimizer_finalizer(SEXP ptr) {

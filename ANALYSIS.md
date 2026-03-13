@@ -1,4 +1,4 @@
-# Rtorch Performance Analysis: Whisper Transcription
+# tinytorch Performance Analysis: Whisper Transcription
 
 Benchmark: whisper-tiny on 7.5s JFK audio clip, CPU, 20-core machine.
 
@@ -6,10 +6,10 @@ Benchmark: whisper-tiny on 7.5s JFK audio clip, CPU, 20-core machine.
 
 ```
 Backend         Warm Mean   RT Factor
-Rtorch              0.24s     31.06x
+tinytorch              0.24s     31.06x
 PyTorch (Python)    0.22s     33.91x
 
-Rtorch vs Python: 91% (warm start)
+tinytorch vs Python: 91% (warm start)
 ```
 
 Both produce identical output: "As not what your country can do for you,
@@ -17,7 +17,7 @@ as what you can do for your country."
 
 ## Starting Point
 
-Rtorch 2.9s mean, highly variable (1.3s to 4.3s). PyTorch 0.22s stable.
+tinytorch 2.9s mean, highly variable (1.3s to 4.3s). PyTorch 0.22s stable.
 
 ## What We Changed (in chronological order)
 
@@ -104,11 +104,11 @@ kernel time per token is lower.
 
 MKL defaults to all available cores. On this 20-core machine, that
 causes thread oversubscription for whisper-tiny's small matrices
-(384-dim hidden state). Both Rtorch and PyTorch are affected equally:
+(384-dim hidden state). Both tinytorch and PyTorch are affected equally:
 
 ```
                 20 threads          4 threads
-Rtorch          0.4-3.3s (var)     0.11s (stable)
+tinytorch          0.4-3.3s (var)     0.11s (stable)
 PyTorch         0.2-2.1s (var)     0.10s (stable)
 ```
 
@@ -123,7 +123,7 @@ Working approaches:
 
 Does NOT work:
 - `Sys.setenv(OMP_NUM_THREADS = "4")` before `library()` -- too late
-- `Rtorch::torch_set_num_threads(4)` -- affects libtorch only, not R's BLAS
+- `tinytorch::torch_set_num_threads(4)` -- affects libtorch only, not R's BLAS
 - `~/.Renviron` -- littler doesn't load it
 
 ## What openai-whisper Actually Does
@@ -203,7 +203,7 @@ R path: ~350+ crossings (preserved as readable reference implementation).
 
 ## Files Modified
 
-### Rtorch
+### tinytorch
 
 | File | Change |
 |------|--------|

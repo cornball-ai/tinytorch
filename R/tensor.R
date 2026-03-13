@@ -73,6 +73,7 @@ torch_matmul <- function(self, other) {
 #' Matrix-matrix multiplication (2D only)
 #' @param self A torch_tensor.
 #' @param other A torch_tensor.
+#' @param out_dtype Optional output dtype for mixed-precision (PyTorch 2.8+).
 #' @examples
 #' \dontrun{
 #' a <- torch_randn(c(2, 3))
@@ -80,8 +81,9 @@ torch_matmul <- function(self, other) {
 #' torch_mm(a, b)
 #' }
 #' @export
-torch_mm <- function(self, other) {
-  C_torch_mm(self, other)
+torch_mm <- function(self, other, out_dtype = NULL) {
+  if (is.null(out_dtype)) C_torch_mm(self, other)
+  else C_torch_mm_dtype(self, other, out_dtype)
 }
 
 #' Sum of tensor elements
@@ -172,8 +174,9 @@ torch_sigmoid <- function(self) {
   C_torch_matmul(self, other)
 }
 
-.tensor_methods$mm <- function(self, other) {
-  C_torch_mm(self, other)
+.tensor_methods$mm <- function(self, other, out_dtype = NULL) {
+  if (is.null(out_dtype)) C_torch_mm(self, other)
+  else C_torch_mm_dtype(self, other, out_dtype)
 }
 
 .tensor_methods$t <- function(self) {
@@ -522,8 +525,9 @@ torch_sigmoid <- function(self) {
 }
 
 # Additional linalg/shape methods
-.tensor_methods$bmm <- function(self, other) {
-  C_torch_bmm(self, other)
+.tensor_methods$bmm <- function(self, other, out_dtype = NULL) {
+  if (is.null(out_dtype)) C_torch_bmm(self, other)
+  else C_torch_bmm_dtype(self, other, out_dtype)
 }
 
 .tensor_methods$transpose <- function(self, dim0, dim1) {
@@ -602,7 +606,7 @@ print.torch_tensor <- function(x, ...) {
   C_tensor_print(x)
   shape <- C_tensor_shape(x)
   dtype_code <- C_tensor_dtype(x)
-  cat(sprintf("[ Rtorch -- %s [ %s ] ]\n",
+  cat(sprintf("[ tinytorch -- %s [ %s ] ]\n",
               .dtype_name(dtype_code),
               paste(shape, collapse = ", ")))
   invisible(x)

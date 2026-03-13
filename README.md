@@ -16,13 +16,35 @@ On non-Linux systems, tinytorch builds in stub mode: the package loads but `is_a
 
 ### Installing libtorch
 
+See the [PyTorch install page](https://pytorch.org/get-started/locally/) for the full list of builds. Install libtorch before tinytorch so the backend is ready on the first install:
+
+```bash
+mkdir -p ~/.local/lib
+
+# CUDA 12.8 (recommended)
+curl -sL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.8.0%2Bcu128.zip" \
+  -o /tmp/libtorch.zip
+
+# CUDA 12.6
+curl -sL "https://download.pytorch.org/libtorch/cu126/libtorch-cxx11-abi-shared-with-deps-2.8.0%2Bcu126.zip" \
+  -o /tmp/libtorch.zip
+
+# CPU only
+curl -sL "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.8.0%2Bcpu.zip" \
+  -o /tmp/libtorch.zip
+
+unzip -q /tmp/libtorch.zip -d ~/.local/lib
+```
+
+Or from R (requires tinytorch to already be installed in stub mode):
+
 ```r
-tinytorch::install_libtorch()
-# Then reinstall tinytorch to pick up the backend
+tinytorch::install_libtorch()  # CPU only
+# Then reinstall to pick up the backend
 install.packages("tinytorch")
 ```
 
-This downloads the CPU build to `~/.local/lib/libtorch`. For CUDA, install libtorch manually and point `LIBTORCH_HOME` at it.
+Both methods install to `~/.local/lib/libtorch`. You can also set `LIBTORCH_HOME` to point at a custom location.
 
 The configure script searches for libtorch in order:
 
@@ -42,6 +64,10 @@ libtorch requires glibc >= 2.29. In practice:
 | Fedora | 31 |
 
 Older systems will fail at link time or with symbol errors at runtime.
+
+### What's missing on Linux
+
+Some libtorch ops only ship with Apple MPS kernels (e.g. `_fused_rms_norm` in 2.8). These have no CPU or CUDA implementation, so tinytorch doesn't bind them. We track this across releases and will pick them up when PyTorch adds CUDA/CPU dispatch.
 
 ## Usage
 

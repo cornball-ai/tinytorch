@@ -3,6 +3,7 @@
 #' @param data An R numeric, integer, or logical vector/matrix/array.
 #' @param dtype Optional torch dtype (e.g. torch_float).
 #' @param device Ignored for now (CPU only).
+#' @param requires_grad Logical. Track gradients for this tensor. Default FALSE.
 #' @return A torch_tensor object.
 #' @examples
 #' \dontrun{
@@ -99,6 +100,7 @@ torch_empty <- function(..., dtype = NULL, device = NULL) {
 #' @param raw Raw vector of bytes.
 #' @param shape Integer vector of dimensions.
 #' @param dtype A torch_dtype.
+#' @param device Ignored (CPU only).
 #' @return A torch_tensor.
 #' @export
 torch_tensor_from_buffer <- function(raw, shape, dtype, device = NULL) {
@@ -287,6 +289,7 @@ torch_norm <- function(self, p = 2, dim = NULL, keepdim = FALSE) {
 #' @param self A torch_tensor.
 #' @param dim Optional dimension to reduce.
 #' @param keepdim Whether to keep the reduced dimension.
+#' @param unbiased Logical. Use Bessel's correction. Default TRUE.
 #' @return A torch_tensor.
 #' @export
 torch_std <- function(self, dim = NULL, keepdim = FALSE, unbiased = TRUE) {

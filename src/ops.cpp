@@ -1,4 +1,4 @@
-#include "Rtorch.h"
+#include "tinytorch.h"
 
 // ---- Arithmetic ops ----
 
@@ -55,6 +55,11 @@ at::Tensor C_torch_matmul(at::Tensor self, at::Tensor other) { return self.matmu
 
 // [[Rcpp::export]]
 at::Tensor C_torch_mm(at::Tensor self, at::Tensor other) { return self.mm(other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_mm_dtype(at::Tensor self, at::Tensor other, SEXP out_dtype) {
+    return at::mm(self, other, sexp_to_dtype(out_dtype).value());
+}
 
 // [[Rcpp::export]]
 at::Tensor C_torch_t(at::Tensor self) { return self.t(); }
@@ -298,6 +303,11 @@ at::Tensor C_torch_ge_scalar(at::Tensor self, SEXP scalar) {
 
 // [[Rcpp::export]]
 at::Tensor C_torch_bmm(at::Tensor self, at::Tensor other) { return self.bmm(other); }
+
+// [[Rcpp::export]]
+at::Tensor C_torch_bmm_dtype(at::Tensor self, at::Tensor other, SEXP out_dtype) {
+    return at::bmm(self, other, sexp_to_dtype(out_dtype).value());
+}
 
 // [[Rcpp::export]]
 at::Tensor C_torch_transpose(at::Tensor self, SEXP dim0_sexp, SEXP dim1_sexp) {
@@ -556,3 +566,20 @@ SEXP C_torch_hann_window(SEXP length_sexp, SEXP periodic_sexp,
         return make_tensor_sexp(new at::Tensor(
             torch::hann_window(length, periodic, opts)));
 }
+
+// ---- PyTorch 2.8 dtype overloads for mixed-precision matmul ----
+
+// [[Rcpp::export]]
+at::Tensor C_torch_addmm_dtype(at::Tensor self, at::Tensor mat1, at::Tensor mat2,
+                                SEXP out_dtype, SEXP beta_sexp, SEXP alpha_sexp) {
+    return at::addmm(self, mat1, mat2, sexp_to_dtype(out_dtype).value(),
+                     sexp_to_scalar(beta_sexp), sexp_to_scalar(alpha_sexp));
+}
+
+// [[Rcpp::export]]
+at::Tensor C_torch_baddbmm_dtype(at::Tensor self, at::Tensor batch1, at::Tensor batch2,
+                                  SEXP out_dtype, SEXP beta_sexp, SEXP alpha_sexp) {
+    return at::baddbmm(self, batch1, batch2, sexp_to_dtype(out_dtype).value(),
+                       sexp_to_scalar(beta_sexp), sexp_to_scalar(alpha_sexp));
+}
+

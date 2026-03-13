@@ -1,30 +1,36 @@
 #!/usr/bin/env r
 #
-# Generate src/stubs.c from src/RcppExports.cpp registration table.
+# Generate src/stubs.c from src/RcppExports.cpp function declarations.
 # Run after Rcpp::compileAttributes() whenever entry points change.
 #
 # Usage: r -e 'source("tools/gen_stubs.R")'
 
+pkg_name <- read.dcf("DESCRIPTION", "Package")[[1]]
 exports_file <- "src/RcppExports.cpp"
 stubs_file <- "src/stubs.c"
 
 lines <- readLines(exports_file)
 
-# Extract registration entries: {"_Rtorch_funcname", (DL_FUNC) &_Rtorch_funcname, N},
-reg_pattern <- '^\\s*\\{"(_Rtorch_[^"]+)",\\s*\\(DL_FUNC\\)\\s*&[^,]+,\\s*(\\d+)\\}.*$'
-reg_lines <- grep(reg_pattern, lines, value = TRUE)
+# Extract function declarations: RcppExport SEXP _tinytorch_funcname(args) {
+prefix <- paste0("_", pkg_name, "_")
+decl_pattern <- paste0("^RcppExport SEXP (", prefix, "[A-Za-z0-9_]+)\\((.*)\\)\\s*\\{")
+decl_lines <- grep(decl_pattern, lines, value = TRUE)
 
 entries <- data.frame(
-  name = sub(reg_pattern, "\\1", reg_lines),
-  nargs = as.integer(sub(reg_pattern, "\\2", reg_lines)),
+  name = sub(decl_pattern, "\\1", decl_lines),
+  args_str = sub(decl_pattern, "\\2", decl_lines),
   stringsAsFactors = FALSE
 )
 
-# Ensure _Rtorch_C_rtorch_ping is in the table (the Rcpp wrapper name)
-# The unprefixed C_rtorch_ping is NOT registered — only the _Rtorch_ variant
-# is used by R's .Call()
+# Count args by counting SEXP parameters
+entries$nargs <- vapply(entries$args_str, function(s) {
+  if (nchar(trimws(s)) == 0) return(0L)
+  length(strsplit(s, ",")[[1]])
+}, 0L)
 
 cat("Parsed", nrow(entries), "entry points from", exports_file, "\n")
+
+ping_wrapper <- paste0(prefix, "C_rtorch_ping")
 
 # Generate stubs
 out <- character()
@@ -41,26 +47,25 @@ out <- c(out,
   "    return ScalarInteger(0);",
   "}",
   "",
-  "/* Rcpp-style wrapper for ping (same as real backend) */",
-  "SEXP _Rtorch_C_rtorch_ping(void) {",
+  sprintf("/* Rcpp-style wrapper for ping (matches %s) */", ping_wrapper),
+  sprintf("SEXP %s(void) {", ping_wrapper),
   "    return C_rtorch_ping();",
   "}",
   "",
   "/* ---- Stub entry points ---- */",
   "",
-  "static SEXP rtorch_stub_error(void) {",
-  '    Rf_error("Rtorch backend not available (libtorch not found or unsupported platform)");',
+  "static SEXP stub_error(void) {",
+  sprintf('    Rf_error("%s backend not available (libtorch not found or unsupported platform)");', pkg_name),
   "    return R_NilValue;",
   "}",
   ""
 )
 
-# Generate stub functions (skip C_rtorch_ping and its Rcpp wrapper)
-ping_names <- c("C_rtorch_ping", "_Rtorch_C_rtorch_ping")
+# Generate stub functions (skip ping wrapper)
 for (i in seq_len(nrow(entries))) {
   nm <- entries$name[i]
   na <- entries$nargs[i]
-  if (nm %in% ping_names) next
+  if (nm == ping_wrapper) next
 
   args <- if (na == 0L) {
     "void"
@@ -68,14 +73,13 @@ for (i in seq_len(nrow(entries))) {
     paste(sprintf("SEXP a%d", seq_len(na)), collapse = ", ")
   }
 
-  # Suppress unused parameter warnings
   out <- c(out, sprintf("SEXP %s(%s) {", nm, args))
   if (na > 0L) {
     for (j in seq_len(na)) {
       out <- c(out, sprintf("    (void)a%d;", j))
     }
   }
-  out <- c(out, "    return rtorch_stub_error();", "}", "")
+  out <- c(out, "    return stub_error();", "}", "")
 }
 
 # Generate registration table
@@ -86,17 +90,16 @@ out <- c(out,
 )
 
 for (i in seq_len(nrow(entries))) {
-  nm <- entries$name[i]
-  # Skip bare C_rtorch_ping — only register the _Rtorch_ prefixed wrapper
-  if (nm == "C_rtorch_ping") next
-  out <- c(out, sprintf('    {"%s", (DL_FUNC) &%s, %d},', nm, nm, entries$nargs[i]))
+  out <- c(out, sprintf('    {"%s", (DL_FUNC) &%s, %d},',
+                         entries$name[i], entries$name[i], entries$nargs[i]))
 }
 
+init_fn <- paste0("R_init_", pkg_name)
 out <- c(out,
   "    {NULL, NULL, 0}",
   "};",
   "",
-  "void R_init_Rtorch(DllInfo *dll) {",
+  sprintf("void %s(DllInfo *dll) {", init_fn),
   "    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);",
   "    R_useDynamicSymbols(dll, FALSE);",
   "}",

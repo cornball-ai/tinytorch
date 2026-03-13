@@ -1,4 +1,4 @@
-#include "Rtorch.h"
+#include "tinytorch.h"
 
 // ---- Backend availability ping ----
 
@@ -665,8 +665,8 @@ SEXP C_cuda_device_count() {
 
 // ---- CUDA memory management ----
 
-#ifdef RTORCH_CUDA
-#ifndef RTORCH_CUDA_NO_SDK
+#ifdef TINYTORCH_CUDA
+#ifndef TINYTORCH_CUDA_NO_SDK
 #include <c10/cuda/CUDACachingAllocator.h>
 #include <cuda_runtime_api.h>
 #endif
@@ -675,7 +675,7 @@ SEXP C_cuda_device_count() {
 // [[Rcpp::export]]
 SEXP C_cuda_empty_cache() {
     if (!torch::cuda::is_available()) return R_NilValue;
-#if defined(RTORCH_CUDA) && !defined(RTORCH_CUDA_NO_SDK)
+#if defined(TINYTORCH_CUDA) && !defined(TINYTORCH_CUDA_NO_SDK)
     c10::cuda::CUDACachingAllocator::emptyCache();
 #endif
     return R_NilValue;
@@ -687,7 +687,7 @@ SEXP C_cuda_mem_info() {
     if (!torch::cuda::is_available()) {
         return Rf_allocVector(REALSXP, 0);
     }
-#if defined(RTORCH_CUDA) && !defined(RTORCH_CUDA_NO_SDK)
+#if defined(TINYTORCH_CUDA) && !defined(TINYTORCH_CUDA_NO_SDK)
     size_t free_bytes = 0, total_bytes = 0;
     cudaError_t err = cudaMemGetInfo(&free_bytes, &total_bytes);
     if (err != cudaSuccess) Rf_error("cudaMemGetInfo failed: %s", cudaGetErrorString(err));
@@ -709,7 +709,7 @@ SEXP C_cuda_memory_stats() {
     if (!torch::cuda::is_available()) {
         return Rf_allocVector(REALSXP, 0);
     }
-#if defined(RTORCH_CUDA) && !defined(RTORCH_CUDA_NO_SDK)
+#if defined(TINYTORCH_CUDA) && !defined(TINYTORCH_CUDA_NO_SDK)
     try {
         auto stats = c10::cuda::CUDACachingAllocator::getDeviceStats(0);
         SEXP result = PROTECT(Rf_allocVector(REALSXP, 4));

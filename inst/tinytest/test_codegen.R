@@ -1,4 +1,4 @@
-if (!Rtorch::is_available()) exit_file("LibTorch not available")
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
 
 # test_codegen.R - Tests for fused kernel code generation
 
@@ -10,18 +10,18 @@ if (!requireNamespace("Rcpp", quietly = TRUE)) {
 # --- Test op expression generation ---
 
 # Test that gen_op_expr works (internal function)
-relu_vec <- Rtorch:::gen_op_expr("relu", "vx", vectorized = TRUE)
+relu_vec <- tinytorch:::gen_op_expr("relu", "vx", vectorized = TRUE)
 expect_true(grepl("clamp_min", relu_vec))
 
-sigmoid_vec <- Rtorch:::gen_op_expr("sigmoid", "vx", vectorized = TRUE)
+sigmoid_vec <- tinytorch:::gen_op_expr("sigmoid", "vx", vectorized = TRUE)
 expect_true(grepl("exp", sigmoid_vec))
 
-add_vec <- Rtorch:::gen_op_expr("add", c("va", "vb"), vectorized = TRUE)
+add_vec <- tinytorch:::gen_op_expr("add", c("va", "vb"), vectorized = TRUE)
 expect_true(grepl("\\+", add_vec))
 
 # --- Test code generation ---
 
-code <- Rtorch:::gen_fused_kernel_code(
+code <- tinytorch:::gen_fused_kernel_code(
   ops = c("relu", "sigmoid"),
   dtype = "float",
   func_name = "test_kernel"

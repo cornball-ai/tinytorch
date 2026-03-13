@@ -1,4 +1,4 @@
-Package: Rtorch
+Package: tinytorch
 Type: Package
 Title: High-Performance R Bindings to Libtorch
 Version: 0.1.0
@@ -16,12 +16,12 @@ Description: Direct R bindings to 'libtorch' (PyTorch C++ distribution) with
     SIMD kernels.
 Encoding: UTF-8
 License: MIT + file LICENSE
-URL: https://github.com/cornball-ai/Rtorch
-BugReports: https://github.com/cornball-ai/Rtorch/issues
+URL: https://github.com/cornball-ai/tinytorch
+BugReports: https://github.com/cornball-ai/tinytorch/issues
 Depends: R (>= 4.1.0)
 Imports: Rcpp
 LinkingTo: Rcpp
-Suggests: tinytest, digest, ariel, simplermarkdown
+Suggests: tinytest, digest, simplermarkdown
 VignetteBuilder: simplermarkdown
 NeedsCompilation: yes
 SystemRequirements: LibTorch (PyTorch C++ distribution, optional); see README

@@ -17,6 +17,6 @@ Works on both installed packages and local source directories.
 }
 \examples{
 \dontrun{
-find_modules_in_package("Rtorch")
+find_modules_in_package("tinytorch")
 }
 }

@@ -4,4006 +4,9468 @@
 # ---- Namespace functions ----
 
 
+#' Rename 
+#'
+#' Wrapper for \code{at::rename_}.
+#' @param self A torch_tensor.
+#' @param names A character vector of dimension names.
+#' @return A torch_tensor.
 #' @export
 torch_rename_ <- function(self, names) {
     C_torch_rename_(self, names)
 }
 
+#' Rename
+#'
+#' Wrapper for \code{at::rename}.
+#' @param self A torch_tensor.
+#' @param names A character vector of dimension names.
+#' @return A torch_tensor.
 #' @export
 torch_rename <- function(self, names) {
     C_torch_rename(self, names)
 }
 
+#' Align to
+#'
+#' Wrapper for \code{at::align_to}.
+#' @param self A torch_tensor.
+#' @param names A character vector of dimension names.
+#' @return A torch_tensor.
 #' @export
 torch_align_to <- function(self, names) {
     C_torch_align_to(self, names)
 }
 
+#' Align as
+#'
+#' Wrapper for \code{at::align_as}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_align_as <- function(self, other) {
     C_torch_align_as(self, other)
 }
 
+#' Align tensors
+#'
+#' Wrapper for \code{at::align_tensors}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_align_tensors <- function(tensors) {
     C_torch_align_tensors(tensors)
 }
 
+#' Sym constrain range
+#'
+#' Wrapper for \code{at::sym_constrain_range}.
+#' @param size A numeric scalar.
+#' @param min An integer. Optional.
+#' @param max An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sym_constrain_range <- function(size, min = NULL, max = NULL) {
     C_torch_sym_constrain_range(size, min, max)
 }
 
+#' Sym constrain range for size
+#'
+#' Wrapper for \code{at::sym_constrain_range_for_size}.
+#' @param size A numeric scalar.
+#' @param min An integer. Optional.
+#' @param max An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sym_constrain_range_for_size <- function(size, min = NULL, max = NULL) {
     C_torch_sym_constrain_range_for_size(size, min, max)
 }
 
+#' Refine names
+#'
+#' Wrapper for \code{at::refine_names}.
+#' @param self A torch_tensor.
+#' @param names A character vector of dimension names.
+#' @return A torch_tensor.
 #' @export
 torch_refine_names <- function(self, names) {
     C_torch_refine_names(self, names)
 }
 
+#' Native dropout
+#'
+#' Wrapper for \code{at::native_dropout}.
+#' @param input A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_native_dropout <- function(input, p, train) {
     C_torch_native_dropout(input, as.double(p), train)
 }
 
+#' Dropout
+#'
+#' Wrapper for \code{at::dropout}.
+#' @param input A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_dropout <- function(input, p, train) {
     C_torch_dropout(input, as.double(p), as.logical(train))
 }
 
+#' Dropout 
+#'
+#' Wrapper for \code{at::dropout_}.
+#' @param self A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_dropout_ <- function(self, p, train) {
     C_torch_dropout_(self, as.double(p), as.logical(train))
 }
 
+#' Feature dropout
+#'
+#' Wrapper for \code{at::feature_dropout}.
+#' @param input A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_feature_dropout <- function(input, p, train) {
     C_torch_feature_dropout(input, as.double(p), as.logical(train))
 }
 
+#' Feature dropout 
+#'
+#' Wrapper for \code{at::feature_dropout_}.
+#' @param self A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_feature_dropout_ <- function(self, p, train) {
     C_torch_feature_dropout_(self, as.double(p), as.logical(train))
 }
 
+#' Alpha dropout
+#'
+#' Wrapper for \code{at::alpha_dropout}.
+#' @param input A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_alpha_dropout <- function(input, p, train) {
     C_torch_alpha_dropout(input, as.double(p), as.logical(train))
 }
 
+#' Alpha dropout 
+#'
+#' Wrapper for \code{at::alpha_dropout_}.
+#' @param self A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_alpha_dropout_ <- function(self, p, train) {
     C_torch_alpha_dropout_(self, as.double(p), as.logical(train))
 }
 
+#' Feature alpha dropout
+#'
+#' Wrapper for \code{at::feature_alpha_dropout}.
+#' @param input A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_feature_alpha_dropout <- function(input, p, train) {
     C_torch_feature_alpha_dropout(input, as.double(p), as.logical(train))
 }
 
+#' Feature alpha dropout 
+#'
+#' Wrapper for \code{at::feature_alpha_dropout_}.
+#' @param self A torch_tensor.
+#' @param p A numeric value.
+#' @param train A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_feature_alpha_dropout_ <- function(self, p, train) {
     C_torch_feature_alpha_dropout_(self, as.double(p), as.logical(train))
 }
 
+#' Abs 
+#'
+#' Wrapper for \code{at::abs_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_abs_ <- function(self) {
     C_torch_abs_(self)
 }
 
+#' Absolute
+#'
+#' Wrapper for \code{at::absolute}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_absolute <- function(self) {
     C_torch_absolute(self)
 }
 
+#' Absolute 
+#'
+#' Wrapper for \code{at::absolute_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_absolute_ <- function(self) {
     C_torch_absolute_(self)
 }
 
+#' Angle
+#'
+#' Wrapper for \code{at::angle}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_angle <- function(self) {
     C_torch_angle(self)
 }
 
+#' View as complex
+#'
+#' Wrapper for \code{at::view_as_complex}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_view_as_complex <- function(self) {
     C_torch_view_as_complex(self)
 }
 
+#' Sgn
+#'
+#' Wrapper for \code{at::sgn}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sgn <- function(self) {
     C_torch_sgn(self)
 }
 
+#' Sgn 
+#'
+#' Wrapper for \code{at::sgn_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sgn_ <- function(self) {
     C_torch_sgn_(self)
 }
 
+#' Chalf
+#'
+#' Wrapper for \code{at::chalf}.
+#' @param self A torch_tensor.
+#' @param memory_format A memory format. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_chalf <- function(self, memory_format = NULL) {
     C_torch_chalf(self, memory_format)
 }
 
+#' Conj physical
+#'
+#' Wrapper for \code{at::conj_physical}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_conj_physical <- function(self) {
     C_torch_conj_physical(self)
 }
 
+#' Conj physical 
+#'
+#' Wrapper for \code{at::conj_physical_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_conj_physical_ <- function(self) {
     C_torch_conj_physical_(self)
 }
 
+#' Resolve conj
+#'
+#' Wrapper for \code{at::resolve_conj}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_resolve_conj <- function(self) {
     C_torch_resolve_conj(self)
 }
 
+#' Resolve neg
+#'
+#' Wrapper for \code{at::resolve_neg}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_resolve_neg <- function(self) {
     C_torch_resolve_neg(self)
 }
 
+#' Acos
+#'
+#' Wrapper for \code{at::acos}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_acos <- function(self) {
     C_torch_acos(self)
 }
 
+#' Acos 
+#'
+#' Wrapper for \code{at::acos_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_acos_ <- function(self) {
     C_torch_acos_(self)
 }
 
+#' Arccos
+#'
+#' Wrapper for \code{at::arccos}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arccos <- function(self) {
     C_torch_arccos(self)
 }
 
+#' Arccos 
+#'
+#' Wrapper for \code{at::arccos_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arccos_ <- function(self) {
     C_torch_arccos_(self)
 }
 
+#' Avg pool1d
+#'
+#' Wrapper for \code{at::avg_pool1d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[1]).
+#' @param stride (int[1]).
+#' @param padding (int[1]).
+#' @param ceil_mode A logical value.
+#' @param count_include_pad A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_avg_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, count_include_pad = TRUE) {
     C_torch_avg_pool1d(self, kernel_size, stride, padding, as.logical(ceil_mode), as.logical(count_include_pad))
 }
 
+#' Adaptive avg pool1d
+#'
+#' Wrapper for \code{at::adaptive_avg_pool1d}.
+#' @param self A torch_tensor.
+#' @param output_size (int[1]).
+#' @return A torch_tensor.
 #' @export
 torch_adaptive_avg_pool1d <- function(self, output_size) {
     C_torch_adaptive_avg_pool1d(self, output_size)
 }
 
+#' Adaptive max pool1d
+#'
+#' Wrapper for \code{at::adaptive_max_pool1d}.
+#' @param self A torch_tensor.
+#' @param output_size (int[1]).
+#' @return A torch_tensor.
 #' @export
 torch_adaptive_max_pool1d <- function(self, output_size) {
     C_torch_adaptive_max_pool1d(self, output_size)
 }
 
+#' Add 
+#'
+#' Wrapper for \code{at::add_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_add_ <- function(self, other, alpha = 1) {
     C_torch_add_(self, other, alpha)
 }
 
+#' Addmv
+#'
+#' Wrapper for \code{at::addmv}.
+#' @param self A torch_tensor.
+#' @param mat A torch_tensor.
+#' @param vec A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addmv <- function(self, mat, vec, beta = 1, alpha = 1) {
     C_torch_addmv(self, mat, vec, beta, alpha)
 }
 
+#' Addmv 
+#'
+#' Wrapper for \code{at::addmv_}.
+#' @param self A torch_tensor.
+#' @param mat A torch_tensor.
+#' @param vec A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addmv_ <- function(self, mat, vec, beta = 1, alpha = 1) {
     C_torch_addmv_(self, mat, vec, beta, alpha)
 }
 
+#' Addr
+#'
+#' Wrapper for \code{at::addr}.
+#' @param self A torch_tensor.
+#' @param vec1 A torch_tensor.
+#' @param vec2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addr <- function(self, vec1, vec2, beta = 1, alpha = 1) {
     C_torch_addr(self, vec1, vec2, beta, alpha)
 }
 
+#' Addr 
+#'
+#' Wrapper for \code{at::addr_}.
+#' @param self A torch_tensor.
+#' @param vec1 A torch_tensor.
+#' @param vec2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addr_ <- function(self, vec1, vec2, beta = 1, alpha = 1) {
     C_torch_addr_(self, vec1, vec2, beta, alpha)
 }
 
+#' Affine grid generator
+#'
+#' Wrapper for \code{at::affine_grid_generator}.
+#' @param theta A torch_tensor.
+#' @param size An integer vector.
+#' @param align_corners A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_affine_grid_generator <- function(theta, size, align_corners) {
     C_torch_affine_grid_generator(theta, size, as.logical(align_corners))
 }
 
+#' All
+#'
+#' Wrapper for \code{at::all}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_all <- function(self, dim, keepdim = FALSE) {
     C_torch_all(self, as.integer(dim), as.logical(keepdim))
 }
 
+#' Any
+#'
+#' Wrapper for \code{at::any}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_any <- function(self, dim, keepdim = FALSE) {
     C_torch_any(self, as.integer(dim), as.logical(keepdim))
 }
 
+#' Acosh
+#'
+#' Wrapper for \code{at::acosh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_acosh <- function(self) {
     C_torch_acosh(self)
 }
 
+#' Acosh 
+#'
+#' Wrapper for \code{at::acosh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_acosh_ <- function(self) {
     C_torch_acosh_(self)
 }
 
+#' Arccosh
+#'
+#' Wrapper for \code{at::arccosh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arccosh <- function(self) {
     C_torch_arccosh(self)
 }
 
+#' Arccosh 
+#'
+#' Wrapper for \code{at::arccosh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arccosh_ <- function(self) {
     C_torch_arccosh_(self)
 }
 
+#' Asinh
+#'
+#' Wrapper for \code{at::asinh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_asinh <- function(self) {
     C_torch_asinh(self)
 }
 
+#' Asinh 
+#'
+#' Wrapper for \code{at::asinh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_asinh_ <- function(self) {
     C_torch_asinh_(self)
 }
 
+#' Arcsinh
+#'
+#' Wrapper for \code{at::arcsinh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arcsinh <- function(self) {
     C_torch_arcsinh(self)
 }
 
+#' Arcsinh 
+#'
+#' Wrapper for \code{at::arcsinh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arcsinh_ <- function(self) {
     C_torch_arcsinh_(self)
 }
 
+#' Atanh
+#'
+#' Wrapper for \code{at::atanh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atanh <- function(self) {
     C_torch_atanh(self)
 }
 
+#' Atanh 
+#'
+#' Wrapper for \code{at::atanh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atanh_ <- function(self) {
     C_torch_atanh_(self)
 }
 
+#' Arctanh
+#'
+#' Wrapper for \code{at::arctanh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arctanh <- function(self) {
     C_torch_arctanh(self)
 }
 
+#' Arctanh 
+#'
+#' Wrapper for \code{at::arctanh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arctanh_ <- function(self) {
     C_torch_arctanh_(self)
 }
 
+#' As strided
+#'
+#' Wrapper for \code{at::as_strided}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param stride An integer vector.
+#' @param storage_offset An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_as_strided <- function(self, size, stride, storage_offset = NULL) {
     C_torch_as_strided(self, size, stride, storage_offset)
 }
 
+#' As strided 
+#'
+#' Wrapper for \code{at::as_strided_}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param stride An integer vector.
+#' @param storage_offset An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_as_strided_ <- function(self, size, stride, storage_offset = NULL) {
     C_torch_as_strided_(self, size, stride, storage_offset)
 }
 
+#' Asin
+#'
+#' Wrapper for \code{at::asin}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_asin <- function(self) {
     C_torch_asin(self)
 }
 
+#' Asin 
+#'
+#' Wrapper for \code{at::asin_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_asin_ <- function(self) {
     C_torch_asin_(self)
 }
 
+#' Arcsin
+#'
+#' Wrapper for \code{at::arcsin}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arcsin <- function(self) {
     C_torch_arcsin(self)
 }
 
+#' Arcsin 
+#'
+#' Wrapper for \code{at::arcsin_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arcsin_ <- function(self) {
     C_torch_arcsin_(self)
 }
 
+#' Atan
+#'
+#' Wrapper for \code{at::atan}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atan <- function(self) {
     C_torch_atan(self)
 }
 
+#' Atan 
+#'
+#' Wrapper for \code{at::atan_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atan_ <- function(self) {
     C_torch_atan_(self)
 }
 
+#' Arctan
+#'
+#' Wrapper for \code{at::arctan}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arctan <- function(self) {
     C_torch_arctan(self)
 }
 
+#' Arctan 
+#'
+#' Wrapper for \code{at::arctan_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arctan_ <- function(self) {
     C_torch_arctan_(self)
 }
 
+#' Atleast 1d
+#'
+#' Wrapper for \code{at::atleast_1d}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atleast_1d <- function(self) {
     C_torch_atleast_1d(self)
 }
 
+#' Atleast 2d
+#'
+#' Wrapper for \code{at::atleast_2d}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atleast_2d <- function(self) {
     C_torch_atleast_2d(self)
 }
 
+#' Atleast 3d
+#'
+#' Wrapper for \code{at::atleast_3d}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atleast_3d <- function(self) {
     C_torch_atleast_3d(self)
 }
 
+#' Baddbmm
+#'
+#' Wrapper for \code{at::baddbmm}.
+#' @param self A torch_tensor.
+#' @param batch1 A torch_tensor.
+#' @param batch2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
-torch_baddbmm <- function(self, batch1, batch2, beta = 1, alpha = 1) {
-    C_torch_baddbmm(self, batch1, batch2, beta, alpha)
+torch_baddbmm <- function(self, batch1, batch2, beta = 1, alpha = 1, out_dtype = NULL) {
+    if (is.null(out_dtype)) C_torch_baddbmm(self, batch1, batch2, beta, alpha)
+    else C_torch_baddbmm_dtype(self, batch1, batch2, out_dtype, beta, alpha)
 }
 
+#' Baddbmm 
+#'
+#' Wrapper for \code{at::baddbmm_}.
+#' @param self A torch_tensor.
+#' @param batch1 A torch_tensor.
+#' @param batch2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_baddbmm_ <- function(self, batch1, batch2, beta = 1, alpha = 1) {
     C_torch_baddbmm_(self, batch1, batch2, beta, alpha)
 }
 
+#' Bartlett window
+#'
+#' Wrapper for \code{at::bartlett_window}.
+#' @param window_length An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_bartlett_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_bartlett_window(as.integer(window_length), dtype, device)
 }
 
+#' Quantized batch norm
+#'
+#' Wrapper for \code{at::quantized_batch_norm}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param mean A torch_tensor.
+#' @param var A torch_tensor.
+#' @param eps A numeric value.
+#' @param output_scale A numeric value.
+#' @param output_zero_point An integer.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_batch_norm <- function(input, weight, bias, mean, var, eps, output_scale, output_zero_point) {
     C_torch_quantized_batch_norm(input, weight, bias, mean, var, as.double(eps), as.double(output_scale), as.integer(output_zero_point))
 }
 
+#' Bernoulli
+#'
+#' Wrapper for \code{at::bernoulli}.
+#' @param self A torch_tensor.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_bernoulli <- function(self, generator = NULL) {
     C_torch_bernoulli(self, generator)
 }
 
+#' Bernoulli 
+#'
+#' Wrapper for \code{at::bernoulli_}.
+#' @param self A torch_tensor.
+#' @param p A torch_tensor.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_bernoulli_ <- function(self, p, generator = NULL) {
     C_torch_bernoulli_(self, p, generator)
 }
 
+#' Bilinear
+#'
+#' Wrapper for \code{at::bilinear}.
+#' @param input1 A torch_tensor.
+#' @param input2 A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_bilinear <- function(input1, input2, weight, bias = NULL) {
     C_torch_bilinear(input1, input2, weight, bias)
 }
 
+#' Binary cross entropy
+#'
+#' Wrapper for \code{at::binary_cross_entropy}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor. Optional.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_binary_cross_entropy <- function(self, target, weight = NULL, reduction = Mean) {
     C_torch_binary_cross_entropy(self, target, weight, as.integer(reduction))
 }
 
+#' Binary cross entropy with logits
+#'
+#' Wrapper for \code{at::binary_cross_entropy_with_logits}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor. Optional.
+#' @param pos_weight A torch_tensor. Optional.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_binary_cross_entropy_with_logits <- function(self, target, weight = NULL, pos_weight = NULL, reduction = Mean) {
     C_torch_binary_cross_entropy_with_logits(self, target, weight, pos_weight, as.integer(reduction))
 }
 
+#' Bincount
+#'
+#' Wrapper for \code{at::bincount}.
+#' @param self A torch_tensor.
+#' @param weights A torch_tensor. Optional.
+#' @param minlength An integer.
+#' @return A torch_tensor.
 #' @export
 torch_bincount <- function(self, weights = NULL, minlength = 0) {
     C_torch_bincount(self, weights, as.integer(minlength))
 }
 
+#' Bitwise not
+#'
+#' Wrapper for \code{at::bitwise_not}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_not <- function(self) {
     C_torch_bitwise_not(self)
 }
 
+#' Bitwise not 
+#'
+#' Wrapper for \code{at::bitwise_not_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_not_ <- function(self) {
     C_torch_bitwise_not_(self)
 }
 
+#' Copysign
+#'
+#' Wrapper for \code{at::copysign}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_copysign <- function(self, other) {
     C_torch_copysign(self, other)
 }
 
+#' Copysign 
+#'
+#' Wrapper for \code{at::copysign_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_copysign_ <- function(self, other) {
     C_torch_copysign_(self, other)
 }
 
+#' Logical not 
+#'
+#' Wrapper for \code{at::logical_not_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logical_not_ <- function(self) {
     C_torch_logical_not_(self)
 }
 
+#' Logical xor
+#'
+#' Wrapper for \code{at::logical_xor}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logical_xor <- function(self, other) {
     C_torch_logical_xor(self, other)
 }
 
+#' Logical xor 
+#'
+#' Wrapper for \code{at::logical_xor_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logical_xor_ <- function(self, other) {
     C_torch_logical_xor_(self, other)
 }
 
+#' Logical and
+#'
+#' Wrapper for \code{at::logical_and}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logical_and <- function(self, other) {
     C_torch_logical_and(self, other)
 }
 
+#' Logical and 
+#'
+#' Wrapper for \code{at::logical_and_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logical_and_ <- function(self, other) {
     C_torch_logical_and_(self, other)
 }
 
+#' Logical or
+#'
+#' Wrapper for \code{at::logical_or}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logical_or <- function(self, other) {
     C_torch_logical_or(self, other)
 }
 
+#' Logical or 
+#'
+#' Wrapper for \code{at::logical_or_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logical_or_ <- function(self, other) {
     C_torch_logical_or_(self, other)
 }
 
+#' Blackman window
+#'
+#' Wrapper for \code{at::blackman_window}.
+#' @param window_length An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_blackman_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_blackman_window(as.integer(window_length), dtype, device)
 }
 
+#' Broadcast tensors
+#'
+#' Wrapper for \code{at::broadcast_tensors}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_broadcast_tensors <- function(tensors) {
     C_torch_broadcast_tensors(tensors)
 }
 
+#' Broadcast to
+#'
+#' Wrapper for \code{at::broadcast_to}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_broadcast_to <- function(self, size) {
     C_torch_broadcast_to(self, size)
 }
 
+#' Concat
+#'
+#' Wrapper for \code{at::concat}.
+#' @param tensors A list of torch_tensors.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_concat <- function(tensors, dim = 0) {
     C_torch_concat(tensors, as.integer(dim))
 }
 
+#' Concatenate
+#'
+#' Wrapper for \code{at::concatenate}.
+#' @param tensors A list of torch_tensors.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_concatenate <- function(tensors, dim = 0) {
     C_torch_concatenate(tensors, as.integer(dim))
 }
 
+#' Block diag
+#'
+#' Wrapper for \code{at::block_diag}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_block_diag <- function(tensors) {
     C_torch_block_diag(tensors)
 }
 
+#' Ceil 
+#'
+#' Wrapper for \code{at::ceil_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_ceil_ <- function(self) {
     C_torch_ceil_(self)
 }
 
+#' Chain matmul
+#'
+#' Wrapper for \code{at::chain_matmul}.
+#' @param matrices A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_chain_matmul <- function(matrices) {
     C_torch_chain_matmul(matrices)
 }
 
+#' Unsafe chunk
+#'
+#' Wrapper for \code{at::unsafe_chunk}.
+#' @param self A torch_tensor.
+#' @param chunks An integer.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_unsafe_chunk <- function(self, chunks, dim = 0) {
     C_torch_unsafe_chunk(self, as.integer(chunks), as.integer(dim))
 }
 
+#' Chunk
+#'
+#' Wrapper for \code{at::chunk}.
+#' @param self A torch_tensor.
+#' @param chunks An integer.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_chunk <- function(self, chunks, dim = 0) {
     C_torch_chunk(self, as.integer(chunks), as.integer(dim))
 }
 
+#' Tensor split
+#'
+#' Wrapper for \code{at::tensor_split}.
+#' @param self A torch_tensor.
+#' @param sections An integer.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_tensor_split <- function(self, sections, dim = 0) {
     C_torch_tensor_split(self, as.integer(sections), as.integer(dim))
 }
 
+#' Clamp 
+#'
+#' Wrapper for \code{at::clamp_}.
+#' @param self A torch_tensor.
+#' @param min A numeric scalar. Optional.
+#' @param max A numeric scalar. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_clamp_ <- function(self, min = NULL, max = NULL) {
     C_torch_clamp_(self, min, max)
 }
 
+#' Clamp max
+#'
+#' Wrapper for \code{at::clamp_max}.
+#' @param self A torch_tensor.
+#' @param max A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_clamp_max <- function(self, max) {
     C_torch_clamp_max(self, max)
 }
 
+#' Clamp max 
+#'
+#' Wrapper for \code{at::clamp_max_}.
+#' @param self A torch_tensor.
+#' @param max A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_clamp_max_ <- function(self, max) {
     C_torch_clamp_max_(self, max)
 }
 
+#' Clamp min
+#'
+#' Wrapper for \code{at::clamp_min}.
+#' @param self A torch_tensor.
+#' @param min A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_clamp_min <- function(self, min) {
     C_torch_clamp_min(self, min)
 }
 
+#' Clamp min 
+#'
+#' Wrapper for \code{at::clamp_min_}.
+#' @param self A torch_tensor.
+#' @param min A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_clamp_min_ <- function(self, min) {
     C_torch_clamp_min_(self, min)
 }
 
+#' Clip
+#'
+#' Wrapper for \code{at::clip}.
+#' @param self A torch_tensor.
+#' @param min A numeric scalar. Optional.
+#' @param max A numeric scalar. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_clip <- function(self, min = NULL, max = NULL) {
     C_torch_clip(self, min, max)
 }
 
+#' Clip 
+#'
+#' Wrapper for \code{at::clip_}.
+#' @param self A torch_tensor.
+#' @param min A numeric scalar. Optional.
+#' @param max A numeric scalar. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_clip_ <- function(self, min = NULL, max = NULL) {
     C_torch_clip_(self, min, max)
 }
 
+#' Constant pad nd
+#'
+#' Wrapper for \code{at::constant_pad_nd}.
+#' @param self A torch_tensor.
+#' @param pad An integer vector.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_constant_pad_nd <- function(self, pad, value = 0) {
     C_torch_constant_pad_nd(self, pad, value)
 }
 
+#' Convolution
+#'
+#' Wrapper for \code{at::convolution}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param stride An integer vector.
+#' @param padding An integer vector.
+#' @param dilation An integer vector.
+#' @param transposed A logical value.
+#' @param output_padding An integer vector.
+#' @param groups An integer.
+#' @return A torch_tensor.
 #' @export
 torch_convolution <- function(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups) {
     C_torch_convolution(input, weight, bias, stride, padding, dilation, as.logical(transposed), output_padding, as.integer(groups))
 }
 
+#' Convolution overrideable
+#'
+#' Wrapper for \code{at::convolution_overrideable}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param stride An integer vector.
+#' @param padding An integer vector.
+#' @param dilation An integer vector.
+#' @param transposed A logical value.
+#' @param output_padding An integer vector.
+#' @param groups An integer.
+#' @return A torch_tensor.
 #' @export
 torch_convolution_overrideable <- function(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups) {
     C_torch_convolution_overrideable(input, weight, bias, stride, padding, dilation, as.logical(transposed), output_padding, as.integer(groups))
 }
 
+#' Conv3d
+#'
+#' Wrapper for \code{at::conv3d}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param dilation (int[3]).
+#' @param groups An integer.
+#' @return A torch_tensor.
 #' @export
 torch_conv3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, groups = 1) {
     C_torch_conv3d(input, weight, bias, stride, padding, dilation, as.integer(groups))
 }
 
+#' Conv tbc
+#'
+#' Wrapper for \code{at::conv_tbc}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param pad An integer.
+#' @return A torch_tensor.
 #' @export
 torch_conv_tbc <- function(self, weight, bias, pad = 0) {
     C_torch_conv_tbc(self, weight, bias, as.integer(pad))
 }
 
+#' Conv transpose2d
+#'
+#' Wrapper for \code{at::conv_transpose2d}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @param output_padding (int[2]).
+#' @param groups An integer.
+#' @param dilation (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_conv_transpose2d <- function(input, weight, bias = NULL, stride = 1, padding = 0, output_padding = 0, groups = 1, dilation = 1) {
     C_torch_conv_transpose2d(input, weight, bias, stride, padding, output_padding, as.integer(groups), dilation)
 }
 
+#' Conv transpose3d
+#'
+#' Wrapper for \code{at::conv_transpose3d}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param output_padding (int[3]).
+#' @param groups An integer.
+#' @param dilation (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_conv_transpose3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, output_padding = 0, groups = 1, dilation = 1) {
     C_torch_conv_transpose3d(input, weight, bias, stride, padding, output_padding, as.integer(groups), dilation)
 }
 
+#' Copy
+#'
+#' Wrapper for \code{at::copy}.
+#' @param self A torch_tensor.
+#' @param src A torch_tensor.
+#' @param non_blocking A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_copy <- function(self, src, non_blocking = FALSE) {
     C_torch_copy(self, src, as.logical(non_blocking))
 }
 
+#' Cos 
+#'
+#' Wrapper for \code{at::cos_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_cos_ <- function(self) {
     C_torch_cos_(self)
 }
 
+#' Cosh
+#'
+#' Wrapper for \code{at::cosh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_cosh <- function(self) {
     C_torch_cosh(self)
 }
 
+#' Cosh 
+#'
+#' Wrapper for \code{at::cosh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_cosh_ <- function(self) {
     C_torch_cosh_(self)
 }
 
+#' Cosine embedding loss
+#'
+#' Wrapper for \code{at::cosine_embedding_loss}.
+#' @param input1 A torch_tensor.
+#' @param input2 A torch_tensor.
+#' @param target A torch_tensor.
+#' @param margin A numeric value.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_cosine_embedding_loss <- function(input1, input2, target, margin = 0.0, reduction = Mean) {
     C_torch_cosine_embedding_loss(input1, input2, target, as.double(margin), as.integer(reduction))
 }
 
+#' Count nonzero
+#'
+#' Wrapper for \code{at::count_nonzero}.
+#' @param self A torch_tensor.
+#' @param dim An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_count_nonzero <- function(self, dim) {
     C_torch_count_nonzero(self, dim)
 }
 
+#' Cov
+#'
+#' Wrapper for \code{at::cov}.
+#' @param self A torch_tensor.
+#' @param correction An integer.
+#' @param fweights A torch_tensor. Optional.
+#' @param aweights A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_cov <- function(self, correction = 1, fweights = NULL, aweights = NULL) {
     C_torch_cov(self, as.integer(correction), fweights, aweights)
 }
 
+#' Corrcoef
+#'
+#' Wrapper for \code{at::corrcoef}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_corrcoef <- function(self) {
     C_torch_corrcoef(self)
 }
 
+#' Cummax
+#'
+#' Wrapper for \code{at::cummax}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_cummax <- function(self, dim) {
     C_torch_cummax(self, as.integer(dim))
 }
 
+#' Cummin
+#'
+#' Wrapper for \code{at::cummin}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_cummin <- function(self, dim) {
     C_torch_cummin(self, as.integer(dim))
 }
 
+#' Cumprod
+#'
+#' Wrapper for \code{at::cumprod}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_cumprod <- function(self, dim, dtype = NULL) {
     C_torch_cumprod(self, as.integer(dim), dtype)
 }
 
+#' Cumprod 
+#'
+#' Wrapper for \code{at::cumprod_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_cumprod_ <- function(self, dim, dtype = NULL) {
     C_torch_cumprod_(self, as.integer(dim), dtype)
 }
 
+#' Cumsum 
+#'
+#' Wrapper for \code{at::cumsum_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_cumsum_ <- function(self, dim, dtype = NULL) {
     C_torch_cumsum_(self, as.integer(dim), dtype)
 }
 
+#' Cumulative trapezoid
+#'
+#' Wrapper for \code{at::cumulative_trapezoid}.
+#' @param y A torch_tensor.
+#' @param x A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_cumulative_trapezoid <- function(y, x, dim = -1) {
     C_torch_cumulative_trapezoid(y, x, as.integer(dim))
 }
 
+#' Ctc loss
+#'
+#' Wrapper for \code{at::ctc_loss}.
+#' @param log_probs A torch_tensor.
+#' @param targets A torch_tensor.
+#' @param input_lengths An integer vector.
+#' @param target_lengths An integer vector.
+#' @param blank An integer.
+#' @param reduction An integer.
+#' @param zero_infinity A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank = 0, reduction = Mean, zero_infinity = FALSE) {
     C_torch_ctc_loss(log_probs, targets, input_lengths, target_lengths, as.integer(blank), as.integer(reduction), as.logical(zero_infinity))
 }
 
+#' Diag embed
+#'
+#' Wrapper for \code{at::diag_embed}.
+#' @param self A torch_tensor.
+#' @param offset An integer.
+#' @param dim1 An integer.
+#' @param dim2 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_diag_embed <- function(self, offset = 0, dim1 = -2, dim2 = -1) {
     C_torch_diag_embed(self, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
 
+#' Diagflat
+#'
+#' Wrapper for \code{at::diagflat}.
+#' @param self A torch_tensor.
+#' @param offset An integer.
+#' @return A torch_tensor.
 #' @export
 torch_diagflat <- function(self, offset = 0) {
     C_torch_diagflat(self, as.integer(offset))
 }
 
+#' Diagonal
+#'
+#' Wrapper for \code{at::diagonal}.
+#' @param self A torch_tensor.
+#' @param offset An integer.
+#' @param dim1 An integer.
+#' @param dim2 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_diagonal <- function(self, offset = 0, dim1 = 0, dim2 = 1) {
     C_torch_diagonal(self, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
 
+#' Linalg diagonal
+#'
+#' Wrapper for \code{at::linalg_diagonal}.
+#' @param A A torch_tensor.
+#' @param offset An integer.
+#' @param dim1 An integer.
+#' @param dim2 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_diagonal <- function(A, offset = 0, dim1 = -2, dim2 = -1) {
     C_torch_linalg_diagonal(A, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
 
+#' Fill diagonal 
+#'
+#' Wrapper for \code{at::fill_diagonal_}.
+#' @param self A torch_tensor.
+#' @param fill_value A numeric scalar.
+#' @param wrap A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_fill_diagonal_ <- function(self, fill_value, wrap = FALSE) {
     C_torch_fill_diagonal_(self, fill_value, as.logical(wrap))
 }
 
+#' Diff
+#'
+#' Wrapper for \code{at::diff}.
+#' @param self A torch_tensor.
+#' @param n An integer.
+#' @param dim An integer.
+#' @param prepend A torch_tensor. Optional.
+#' @param append A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_diff <- function(self, n = 1, dim = -1, prepend = NULL, append = NULL) {
     C_torch_diff(self, as.integer(n), as.integer(dim), prepend, append)
 }
 
+#' Gradient
+#'
+#' Wrapper for \code{at::gradient}.
+#' @param self A torch_tensor.
+#' @param spacing A numeric scalar. Optional.
+#' @param dim An integer. Optional.
+#' @param edge_order An integer.
+#' @return A torch_tensor.
 #' @export
 torch_gradient <- function(self, spacing = NULL, dim = NULL, edge_order = 1) {
     C_torch_gradient(self, spacing, dim, as.integer(edge_order))
 }
 
+#' Div 
+#'
+#' Wrapper for \code{at::div_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_div_ <- function(self, other) {
     C_torch_div_(self, other)
 }
 
+#' Divide
+#'
+#' Wrapper for \code{at::divide}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_divide <- function(self, other) {
     C_torch_divide(self, other)
 }
 
+#' Divide 
+#'
+#' Wrapper for \code{at::divide_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_divide_ <- function(self, other) {
     C_torch_divide_(self, other)
 }
 
+#' True divide
+#'
+#' Wrapper for \code{at::true_divide}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_true_divide <- function(self, other) {
     C_torch_true_divide(self, other)
 }
 
+#' True divide 
+#'
+#' Wrapper for \code{at::true_divide_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_true_divide_ <- function(self, other) {
     C_torch_true_divide_(self, other)
 }
 
+#' Dot
+#'
+#' Wrapper for \code{at::dot}.
+#' @param self A torch_tensor.
+#' @param tensor A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_dot <- function(self, tensor) {
     C_torch_dot(self, tensor)
 }
 
+#' Vdot
+#'
+#' Wrapper for \code{at::vdot}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_vdot <- function(self, other) {
     C_torch_vdot(self, other)
 }
 
+#' Einsum
+#'
+#' Wrapper for \code{at::einsum}.
+#' @param equation A character string.
+#' @param tensors A list of torch_tensors.
+#' @param path An integer vector. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_einsum <- function(equation, tensors, path = NULL) {
     C_torch_einsum(equation, tensors, path)
 }
 
+#' Embedding renorm 
+#'
+#' Wrapper for \code{at::embedding_renorm_}.
+#' @param self A torch_tensor.
+#' @param indices A torch_tensor.
+#' @param max_norm A numeric value.
+#' @param norm_type A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_embedding_renorm_ <- function(self, indices, max_norm, norm_type) {
     C_torch_embedding_renorm_(self, indices, as.double(max_norm), as.double(norm_type))
 }
 
+#' Row stack
+#'
+#' Wrapper for \code{at::row_stack}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_row_stack <- function(tensors) {
     C_torch_row_stack(tensors)
 }
 
+#' Embedding bag
+#'
+#' Wrapper for \code{at::embedding_bag}.
+#' @param weight A torch_tensor.
+#' @param indices A torch_tensor.
+#' @param offsets A torch_tensor.
+#' @param scale_grad_by_freq A logical value.
+#' @param mode An integer.
+#' @param sparse A logical value.
+#' @param per_sample_weights A torch_tensor. Optional.
+#' @param include_last_offset A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_embedding_bag <- function(weight, indices, offsets, scale_grad_by_freq = FALSE, mode = 0, sparse = FALSE, per_sample_weights = NULL, include_last_offset = FALSE) {
     C_torch_embedding_bag(weight, indices, offsets, as.logical(scale_grad_by_freq), as.integer(mode), as.logical(sparse), per_sample_weights, as.logical(include_last_offset))
 }
 
+#' Empty permuted
+#'
+#' Wrapper for \code{at::empty_permuted}.
+#' @param size An integer vector.
+#' @param physical_layout An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_empty_permuted <- function(size, physical_layout, dtype = NULL, device = NULL) {
     C_torch_empty_permuted(size, physical_layout, dtype, device)
 }
 
+#' New empty
+#'
+#' Wrapper for \code{at::new_empty}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_new_empty <- function(self, size, dtype = NULL, device = NULL) {
     C_torch_new_empty(self, size, dtype, device)
 }
 
+#' New empty strided
+#'
+#' Wrapper for \code{at::new_empty_strided}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param stride An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_new_empty_strided <- function(self, size, stride, dtype = NULL, device = NULL) {
     C_torch_new_empty_strided(self, size, stride, dtype, device)
 }
 
+#' New full
+#'
+#' Wrapper for \code{at::new_full}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param fill_value A numeric scalar.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_new_full <- function(self, size, fill_value, dtype = NULL, device = NULL) {
     C_torch_new_full(self, size, fill_value, dtype, device)
 }
 
+#' New zeros
+#'
+#' Wrapper for \code{at::new_zeros}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_new_zeros <- function(self, size, dtype = NULL, device = NULL) {
     C_torch_new_zeros(self, size, dtype, device)
 }
 
+#' New ones
+#'
+#' Wrapper for \code{at::new_ones}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_new_ones <- function(self, size, dtype = NULL, device = NULL) {
     C_torch_new_ones(self, size, dtype, device)
 }
 
+#' Resize 
+#'
+#' Wrapper for \code{at::resize_}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param memory_format A memory format. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_resize_ <- function(self, size, memory_format = NULL) {
     C_torch_resize_(self, size, memory_format)
 }
 
+#' Empty quantized
+#'
+#' Wrapper for \code{at::empty_quantized}.
+#' @param size An integer vector.
+#' @param qtensor A torch_tensor.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @param memory_format A memory format. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_empty_quantized <- function(size, qtensor, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_empty_quantized(size, qtensor, dtype, device, memory_format)
 }
 
+#' Empty strided
+#'
+#' Wrapper for \code{at::empty_strided}.
+#' @param size An integer vector.
+#' @param stride An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_empty_strided <- function(size, stride, dtype = NULL, device = NULL) {
     C_torch_empty_strided(size, stride, dtype, device)
 }
 
+#' Erf
+#'
+#' Wrapper for \code{at::erf}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_erf <- function(self) {
     C_torch_erf(self)
 }
 
+#' Erf 
+#'
+#' Wrapper for \code{at::erf_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_erf_ <- function(self) {
     C_torch_erf_(self)
 }
 
+#' Erfc
+#'
+#' Wrapper for \code{at::erfc}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_erfc <- function(self) {
     C_torch_erfc(self)
 }
 
+#' Erfc 
+#'
+#' Wrapper for \code{at::erfc_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_erfc_ <- function(self) {
     C_torch_erfc_(self)
 }
 
+#' Exp 
+#'
+#' Wrapper for \code{at::exp_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_exp_ <- function(self) {
     C_torch_exp_(self)
 }
 
+#' Exp2
+#'
+#' Wrapper for \code{at::exp2}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_exp2 <- function(self) {
     C_torch_exp2(self)
 }
 
+#' Exp2 
+#'
+#' Wrapper for \code{at::exp2_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_exp2_ <- function(self) {
     C_torch_exp2_(self)
 }
 
+#' Expm1
+#'
+#' Wrapper for \code{at::expm1}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_expm1 <- function(self) {
     C_torch_expm1(self)
 }
 
+#' Expm1 
+#'
+#' Wrapper for \code{at::expm1_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_expm1_ <- function(self) {
     C_torch_expm1_(self)
 }
 
+#' Expand as
+#'
+#' Wrapper for \code{at::expand_as}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_expand_as <- function(self, other) {
     C_torch_expand_as(self, other)
 }
 
+#' Eye
+#'
+#' Wrapper for \code{at::eye}.
+#' @param n An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_eye <- function(n, dtype = NULL, device = NULL) {
     C_torch_eye(as.integer(n), dtype, device)
 }
 
+#' Unflatten
+#'
+#' Wrapper for \code{at::unflatten}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param sizes An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_unflatten <- function(self, dim, sizes) {
     C_torch_unflatten(self, as.integer(dim), sizes)
 }
 
+#' Fill
+#'
+#' Wrapper for \code{at::fill}.
+#' @param self A torch_tensor.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_fill <- function(self, value) {
     C_torch_fill(self, value)
 }
 
+#' Floor 
+#'
+#' Wrapper for \code{at::floor_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_floor_ <- function(self) {
     C_torch_floor_(self)
 }
 
+#' Floor divide 
+#'
+#' Wrapper for \code{at::floor_divide_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_floor_divide_ <- function(self, other) {
     C_torch_floor_divide_(self, other)
 }
 
+#' Frac
+#'
+#' Wrapper for \code{at::frac}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_frac <- function(self) {
     C_torch_frac(self)
 }
 
+#' Frac 
+#'
+#' Wrapper for \code{at::frac_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_frac_ <- function(self) {
     C_torch_frac_(self)
 }
 
+#' Full like
+#'
+#' Wrapper for \code{at::full_like}.
+#' @param self A torch_tensor.
+#' @param fill_value A numeric scalar.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @param memory_format A memory format. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_full_like <- function(self, fill_value, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_full_like(self, fill_value, dtype, device, memory_format)
 }
 
+#' From file
+#'
+#' Wrapper for \code{at::from_file}.
+#' @param filename A character string.
+#' @param shared A logical value. Optional.
+#' @param size An integer. Optional.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_from_file <- function(filename, shared = NULL, size = 0, dtype = NULL, device = NULL) {
     C_torch_from_file(filename, shared, size, dtype, device)
 }
 
+#' Gcd
+#'
+#' Wrapper for \code{at::gcd}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_gcd <- function(self, other) {
     C_torch_gcd(self, other)
 }
 
+#' Gcd 
+#'
+#' Wrapper for \code{at::gcd_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_gcd_ <- function(self, other) {
     C_torch_gcd_(self, other)
 }
 
+#' Lcm
+#'
+#' Wrapper for \code{at::lcm}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_lcm <- function(self, other) {
     C_torch_lcm(self, other)
 }
 
+#' Lcm 
+#'
+#' Wrapper for \code{at::lcm_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_lcm_ <- function(self, other) {
     C_torch_lcm_(self, other)
 }
 
+#' Grid sampler
+#'
+#' Wrapper for \code{at::grid_sampler}.
+#' @param input A torch_tensor.
+#' @param grid A torch_tensor.
+#' @param interpolation_mode An integer.
+#' @param padding_mode An integer.
+#' @param align_corners A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_grid_sampler <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
     C_torch_grid_sampler(input, grid, as.integer(interpolation_mode), as.integer(padding_mode), as.logical(align_corners))
 }
 
+#' Grid sampler 2d
+#'
+#' Wrapper for \code{at::grid_sampler_2d}.
+#' @param input A torch_tensor.
+#' @param grid A torch_tensor.
+#' @param interpolation_mode An integer.
+#' @param padding_mode An integer.
+#' @param align_corners A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_grid_sampler_2d <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
     C_torch_grid_sampler_2d(input, grid, as.integer(interpolation_mode), as.integer(padding_mode), as.logical(align_corners))
 }
 
+#' Grid sampler 3d
+#'
+#' Wrapper for \code{at::grid_sampler_3d}.
+#' @param input A torch_tensor.
+#' @param grid A torch_tensor.
+#' @param interpolation_mode An integer.
+#' @param padding_mode An integer.
+#' @param align_corners A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_grid_sampler_3d <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
     C_torch_grid_sampler_3d(input, grid, as.integer(interpolation_mode), as.integer(padding_mode), as.logical(align_corners))
 }
 
+#' Hamming window
+#'
+#' Wrapper for \code{at::hamming_window}.
+#' @param window_length An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_hamming_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_hamming_window(as.integer(window_length), dtype, device)
 }
 
+#' Kaiser window
+#'
+#' Wrapper for \code{at::kaiser_window}.
+#' @param window_length An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_kaiser_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_kaiser_window(as.integer(window_length), dtype, device)
 }
 
+#' Hinge embedding loss
+#'
+#' Wrapper for \code{at::hinge_embedding_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param margin A numeric value.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_hinge_embedding_loss <- function(self, target, margin = 1.0, reduction = Mean) {
     C_torch_hinge_embedding_loss(self, target, as.double(margin), as.integer(reduction))
 }
 
+#' Group norm
+#'
+#' Wrapper for \code{at::group_norm}.
+#' @param input A torch_tensor.
+#' @param num_groups An integer.
+#' @param weight A torch_tensor. Optional.
+#' @param bias A torch_tensor. Optional.
+#' @param eps A numeric value.
+#' @param cudnn_enabled A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_group_norm <- function(input, num_groups, weight = NULL, bias = NULL, eps = 1e-05, cudnn_enabled = TRUE) {
     C_torch_group_norm(input, as.integer(num_groups), weight, bias, as.double(eps), as.logical(cudnn_enabled))
 }
 
+#' Native group norm
+#'
+#' Wrapper for \code{at::native_group_norm}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param N An integer.
+#' @param C An integer.
+#' @param HxW An integer.
+#' @param group An integer.
+#' @param eps A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_native_group_norm <- function(input, weight, bias, N, C, HxW, group, eps) {
     C_torch_native_group_norm(input, weight, bias, as.integer(N), as.integer(C), as.integer(HxW), as.integer(group), as.double(eps))
 }
 
+#' Index copy 
+#'
+#' Wrapper for \code{at::index_copy_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param source A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_index_copy_ <- function(self, dim, index, source) {
     C_torch_index_copy_(self, as.integer(dim), index, source)
 }
 
+#' Index put 
+#'
+#' Wrapper for \code{at::index_put_}.
+#' @param self A torch_tensor.
+#' @param indices (Tensor?[]).
+#' @param values A torch_tensor.
+#' @param accumulate A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_index_put_ <- function(self, indices, values, accumulate = FALSE) {
     C_torch_index_put_(self, indices, values, as.logical(accumulate))
 }
 
+#' Instance norm
+#'
+#' Wrapper for \code{at::instance_norm}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param running_mean A torch_tensor.
+#' @param running_var A torch_tensor.
+#' @param use_input_stats A logical value.
+#' @param momentum A numeric value.
+#' @param eps A numeric value.
+#' @param cudnn_enabled A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_instance_norm <- function(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled) {
     C_torch_instance_norm(input, weight, bias, running_mean, running_var, as.logical(use_input_stats), as.double(momentum), as.double(eps), as.logical(cudnn_enabled))
 }
 
+#' Isclose
+#'
+#' Wrapper for \code{at::isclose}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param rtol A numeric value.
+#' @param atol A numeric value.
+#' @param equal_nan A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_isclose <- function(self, other, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE) {
     C_torch_isclose(self, other, as.double(rtol), as.double(atol), as.logical(equal_nan))
 }
 
+#' Isin
+#'
+#' Wrapper for \code{at::isin}.
+#' @param elements A torch_tensor.
+#' @param test_elements A torch_tensor.
+#' @param assume_unique A logical value.
+#' @param invert A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_isin <- function(elements, test_elements, assume_unique = FALSE, invert = FALSE) {
     C_torch_isin(elements, test_elements, as.logical(assume_unique), as.logical(invert))
 }
 
+#' Isnan
+#'
+#' Wrapper for \code{at::isnan}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_isnan <- function(self) {
     C_torch_isnan(self)
 }
 
+#' Is distributed
+#'
+#' Wrapper for \code{at::is_distributed}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_is_distributed <- function(self) {
     C_torch_is_distributed(self)
 }
 
+#' Isreal
+#'
+#' Wrapper for \code{at::isreal}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_isreal <- function(self) {
     C_torch_isreal(self)
 }
 
+#' Is nonzero
+#'
+#' Wrapper for \code{at::is_nonzero}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_is_nonzero <- function(self) {
     C_torch_is_nonzero(self)
 }
 
+#' Is same size
+#'
+#' Wrapper for \code{at::is_same_size}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_is_same_size <- function(self, other) {
     C_torch_is_same_size(self, other)
 }
 
+#' Kl div
+#'
+#' Wrapper for \code{at::kl_div}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @param log_target A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_kl_div <- function(self, target, reduction = Mean, log_target = FALSE) {
     C_torch_kl_div(self, target, as.integer(reduction), as.logical(log_target))
 }
 
+#' Kron
+#'
+#' Wrapper for \code{at::kron}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_kron <- function(self, other) {
     C_torch_kron(self, other)
 }
 
+#' Kthvalue
+#'
+#' Wrapper for \code{at::kthvalue}.
+#' @param self A torch_tensor.
+#' @param k An integer.
+#' @param dim An integer.
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_kthvalue <- function(self, k, dim = -1, keepdim = FALSE) {
     C_torch_kthvalue(self, as.integer(k), as.integer(dim), as.logical(keepdim))
 }
 
+#' Native layer norm
+#'
+#' Wrapper for \code{at::native_layer_norm}.
+#' @param input A torch_tensor.
+#' @param normalized_shape An integer vector.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param eps A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_native_layer_norm <- function(input, normalized_shape, weight, bias, eps) {
     C_torch_native_layer_norm(input, normalized_shape, weight, bias, as.double(eps))
 }
 
+#' Rms norm
+#'
+#' Wrapper for \code{at::rms_norm}.
+#' @param input A torch_tensor.
+#' @param normalized_shape An integer vector.
+#' @param weight A torch_tensor. Optional.
+#' @param eps A numeric value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rms_norm <- function(input, normalized_shape, weight = NULL, eps = NULL) {
     C_torch_rms_norm(input, normalized_shape, weight, eps)
 }
 
+#' Nan to num
+#'
+#' Wrapper for \code{at::nan_to_num}.
+#' @param self A torch_tensor.
+#' @param nan A numeric value. Optional.
+#' @param posinf A numeric value. Optional.
+#' @param neginf A numeric value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_nan_to_num <- function(self, nan = NULL, posinf = NULL, neginf = NULL) {
     C_torch_nan_to_num(self, nan, posinf, neginf)
 }
 
+#' Nan to num 
+#'
+#' Wrapper for \code{at::nan_to_num_}.
+#' @param self A torch_tensor.
+#' @param nan A numeric value. Optional.
+#' @param posinf A numeric value. Optional.
+#' @param neginf A numeric value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_nan_to_num_ <- function(self, nan = NULL, posinf = NULL, neginf = NULL) {
     C_torch_nan_to_num_(self, nan, posinf, neginf)
 }
 
+#' Ldexp
+#'
+#' Wrapper for \code{at::ldexp}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_ldexp <- function(self, other) {
     C_torch_ldexp(self, other)
 }
 
+#' Ldexp 
+#'
+#' Wrapper for \code{at::ldexp_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_ldexp_ <- function(self, other) {
     C_torch_ldexp_(self, other)
 }
 
+#' Log 
+#'
+#' Wrapper for \code{at::log_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log_ <- function(self) {
     C_torch_log_(self)
 }
 
+#' Log10 
+#'
+#' Wrapper for \code{at::log10_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log10_ <- function(self) {
     C_torch_log10_(self)
 }
 
+#' Log1p
+#'
+#' Wrapper for \code{at::log1p}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log1p <- function(self) {
     C_torch_log1p(self)
 }
 
+#' Log1p 
+#'
+#' Wrapper for \code{at::log1p_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log1p_ <- function(self) {
     C_torch_log1p_(self)
 }
 
+#' Log2 
+#'
+#' Wrapper for \code{at::log2_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log2_ <- function(self) {
     C_torch_log2_(self)
 }
 
+#' Logaddexp
+#'
+#' Wrapper for \code{at::logaddexp}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logaddexp <- function(self, other) {
     C_torch_logaddexp(self, other)
 }
 
+#' Logaddexp2
+#'
+#' Wrapper for \code{at::logaddexp2}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logaddexp2 <- function(self, other) {
     C_torch_logaddexp2(self, other)
 }
 
+#' Xlogy
+#'
+#' Wrapper for \code{at::xlogy}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_xlogy <- function(self, other) {
     C_torch_xlogy(self, other)
 }
 
+#' Xlogy 
+#'
+#' Wrapper for \code{at::xlogy_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_xlogy_ <- function(self, other) {
     C_torch_xlogy_(self, other)
 }
 
+#' Logspace
+#'
+#' Wrapper for \code{at::logspace}.
+#' @param start A numeric scalar.
+#' @param end A numeric scalar.
+#' @param steps An integer.
+#' @param base A numeric value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_logspace <- function(start, end, steps, base = 10.0, dtype = NULL, device = NULL) {
     C_torch_logspace(start, end, as.integer(steps), as.double(base), dtype, device)
 }
 
+#' Logcumsumexp
+#'
+#' Wrapper for \code{at::logcumsumexp}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_logcumsumexp <- function(self, dim) {
     C_torch_logcumsumexp(self, as.integer(dim))
 }
 
+#' Logsumexp
+#'
+#' Wrapper for \code{at::logsumexp}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]).
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_logsumexp <- function(self, dim, keepdim = FALSE) {
     C_torch_logsumexp(self, dim, as.logical(keepdim))
 }
 
+#' Margin ranking loss
+#'
+#' Wrapper for \code{at::margin_ranking_loss}.
+#' @param input1 A torch_tensor.
+#' @param input2 A torch_tensor.
+#' @param target A torch_tensor.
+#' @param margin A numeric value.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_margin_ranking_loss <- function(input1, input2, target, margin = 0.0, reduction = Mean) {
     C_torch_margin_ranking_loss(input1, input2, target, as.double(margin), as.integer(reduction))
 }
 
+#' Matrix power
+#'
+#' Wrapper for \code{at::matrix_power}.
+#' @param self A torch_tensor.
+#' @param n An integer.
+#' @return A torch_tensor.
 #' @export
 torch_matrix_power <- function(self, n) {
     C_torch_matrix_power(self, as.integer(n))
 }
 
+#' Matrix exp
+#'
+#' Wrapper for \code{at::matrix_exp}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_matrix_exp <- function(self) {
     C_torch_matrix_exp(self)
 }
 
+#' Aminmax
+#'
+#' Wrapper for \code{at::aminmax}.
+#' @param self A torch_tensor.
+#' @param dim An integer. Optional.
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_aminmax <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_aminmax(self, dim, as.logical(keepdim))
 }
 
+#' Amax
+#'
+#' Wrapper for \code{at::amax}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]).
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_amax <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_amax(self, dim, as.logical(keepdim))
 }
 
+#' Max pool1d with indices
+#'
+#' Wrapper for \code{at::max_pool1d_with_indices}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[1]).
+#' @param stride (int[1]).
+#' @param padding (int[1]).
+#' @param dilation (int[1]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_max_pool1d_with_indices <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool1d_with_indices(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Max pool1d
+#'
+#' Wrapper for \code{at::max_pool1d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[1]).
+#' @param stride (int[1]).
+#' @param padding (int[1]).
+#' @param dilation (int[1]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_max_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool1d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Max pool2d
+#'
+#' Wrapper for \code{at::max_pool2d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @param dilation (int[2]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_max_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool2d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Quantized max pool1d
+#'
+#' Wrapper for \code{at::quantized_max_pool1d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[1]).
+#' @param stride (int[1]).
+#' @param padding (int[1]).
+#' @param dilation (int[1]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_max_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_quantized_max_pool1d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Quantized max pool2d
+#'
+#' Wrapper for \code{at::quantized_max_pool2d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @param dilation (int[2]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_max_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_quantized_max_pool2d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Quantized max pool3d
+#'
+#' Wrapper for \code{at::quantized_max_pool3d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param dilation (int[3]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_max_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_quantized_max_pool3d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Max pool3d
+#'
+#' Wrapper for \code{at::max_pool3d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param dilation (int[3]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_max_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool3d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Nanmean
+#'
+#' Wrapper for \code{at::nanmean}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]). Optional.
+#' @param keepdim A logical value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_nanmean <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_nanmean(self, dim, as.logical(keepdim), dtype)
 }
 
+#' Median
+#'
+#' Wrapper for \code{at::median}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_median <- function(self) {
     C_torch_median(self)
 }
 
+#' Nanmedian
+#'
+#' Wrapper for \code{at::nanmedian}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_nanmedian <- function(self) {
     C_torch_nanmedian(self)
 }
 
+#' Amin
+#'
+#' Wrapper for \code{at::amin}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]).
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_amin <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_amin(self, dim, as.logical(keepdim))
 }
 
+#' Mode
+#'
+#' Wrapper for \code{at::mode}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_mode <- function(self, dim = -1, keepdim = FALSE) {
     C_torch_mode(self, as.integer(dim), as.logical(keepdim))
 }
 
+#' Mul 
+#'
+#' Wrapper for \code{at::mul_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_mul_ <- function(self, other) {
     C_torch_mul_(self, other)
 }
 
+#' Multiply
+#'
+#' Wrapper for \code{at::multiply}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_multiply <- function(self, other) {
     C_torch_multiply(self, other)
 }
 
+#' Multiply 
+#'
+#' Wrapper for \code{at::multiply_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_multiply_ <- function(self, other) {
     C_torch_multiply_(self, other)
 }
 
+#' Mv
+#'
+#' Wrapper for \code{at::mv}.
+#' @param self A torch_tensor.
+#' @param vec A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_mv <- function(self, vec) {
     C_torch_mv(self, vec)
 }
 
+#' Mvlgamma
+#'
+#' Wrapper for \code{at::mvlgamma}.
+#' @param self A torch_tensor.
+#' @param p An integer.
+#' @return A torch_tensor.
 #' @export
 torch_mvlgamma <- function(self, p) {
     C_torch_mvlgamma(self, as.integer(p))
 }
 
+#' Mvlgamma 
+#'
+#' Wrapper for \code{at::mvlgamma_}.
+#' @param self A torch_tensor.
+#' @param p An integer.
+#' @return A torch_tensor.
 #' @export
 torch_mvlgamma_ <- function(self, p) {
     C_torch_mvlgamma_(self, as.integer(p))
 }
 
+#' Native batch norm
+#'
+#' Wrapper for \code{at::native_batch_norm}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param running_mean A torch_tensor.
+#' @param running_var A torch_tensor.
+#' @param training A logical value.
+#' @param momentum A numeric value.
+#' @param eps A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_native_batch_norm <- function(input, weight, bias, running_mean, running_var, training, momentum, eps) {
     C_torch_native_batch_norm(input, weight, bias, running_mean, running_var, as.logical(training), as.double(momentum), as.double(eps))
 }
 
+#' Batch norm stats
+#'
+#' Wrapper for \code{at::batch_norm_stats}.
+#' @param input A torch_tensor.
+#' @param eps A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_batch_norm_stats <- function(input, eps) {
     C_torch_batch_norm_stats(input, as.double(eps))
 }
 
+#' Batch norm elemt
+#'
+#' Wrapper for \code{at::batch_norm_elemt}.
+#' @param input A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param bias A torch_tensor.
+#' @param mean A torch_tensor.
+#' @param invstd A torch_tensor.
+#' @param eps A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_batch_norm_elemt <- function(input, weight, bias, mean, invstd, eps) {
     C_torch_batch_norm_elemt(input, weight, bias, mean, invstd, as.double(eps))
 }
 
+#' Batch norm gather stats
+#'
+#' Wrapper for \code{at::batch_norm_gather_stats}.
+#' @param input A torch_tensor.
+#' @param mean A torch_tensor.
+#' @param invstd A torch_tensor.
+#' @param running_mean A torch_tensor.
+#' @param running_var A torch_tensor.
+#' @param momentum A numeric value.
+#' @param eps A numeric value.
+#' @param count An integer.
+#' @return A torch_tensor.
 #' @export
 torch_batch_norm_gather_stats <- function(input, mean, invstd, running_mean, running_var, momentum, eps, count) {
     C_torch_batch_norm_gather_stats(input, mean, invstd, running_mean, running_var, as.double(momentum), as.double(eps), as.integer(count))
 }
 
+#' Batch norm gather stats with counts
+#'
+#' Wrapper for \code{at::batch_norm_gather_stats_with_counts}.
+#' @param input A torch_tensor.
+#' @param mean A torch_tensor.
+#' @param invstd A torch_tensor.
+#' @param running_mean A torch_tensor.
+#' @param running_var A torch_tensor.
+#' @param momentum A numeric value.
+#' @param eps A numeric value.
+#' @param counts A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_batch_norm_gather_stats_with_counts <- function(input, mean, invstd, running_mean, running_var, momentum, eps, counts) {
     C_torch_batch_norm_gather_stats_with_counts(input, mean, invstd, running_mean, running_var, as.double(momentum), as.double(eps), counts)
 }
 
+#' Batch norm update stats
+#'
+#' Wrapper for \code{at::batch_norm_update_stats}.
+#' @param input A torch_tensor.
+#' @param running_mean A torch_tensor.
+#' @param running_var A torch_tensor.
+#' @param momentum A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_batch_norm_update_stats <- function(input, running_mean, running_var, momentum) {
     C_torch_batch_norm_update_stats(input, running_mean, running_var, as.double(momentum))
 }
 
+#' Is vulkan available
+#'
+#' Wrapper for \code{at::is_vulkan_available}.
+#' @return A torch_tensor.
 #' @export
 torch_is_vulkan_available <- function() {
     C_torch_is_vulkan_available()
 }
 
+#' Pairwise distance
+#'
+#' Wrapper for \code{at::pairwise_distance}.
+#' @param x1 A torch_tensor.
+#' @param x2 A torch_tensor.
+#' @param p A numeric value.
+#' @param eps A numeric value.
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_pairwise_distance <- function(x1, x2, p = 2, eps = 1e-06, keepdim = FALSE) {
     C_torch_pairwise_distance(x1, x2, as.double(p), as.double(eps), as.logical(keepdim))
 }
 
+#' Cdist
+#'
+#' Wrapper for \code{at::cdist}.
+#' @param x1 A torch_tensor.
+#' @param x2 A torch_tensor.
+#' @param p A numeric value.
+#' @param compute_mode An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_cdist <- function(x1, x2, p = 2, compute_mode = NULL) {
     C_torch_cdist(x1, x2, as.double(p), compute_mode)
 }
 
+#' Pdist
+#'
+#' Wrapper for \code{at::pdist}.
+#' @param self A torch_tensor.
+#' @param p A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_pdist <- function(self, p = 2) {
     C_torch_pdist(self, as.double(p))
 }
 
+#' Cosine similarity
+#'
+#' Wrapper for \code{at::cosine_similarity}.
+#' @param x1 A torch_tensor.
+#' @param x2 A torch_tensor.
+#' @param dim An integer.
+#' @param eps A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_cosine_similarity <- function(x1, x2, dim = 1, eps = 1e-08) {
     C_torch_cosine_similarity(x1, x2, as.integer(dim), as.double(eps))
 }
 
+#' Movedim
+#'
+#' Wrapper for \code{at::movedim}.
+#' @param self A torch_tensor.
+#' @param source An integer vector.
+#' @param destination An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_movedim <- function(self, source, destination) {
     C_torch_movedim(self, source, destination)
 }
 
+#' Moveaxis
+#'
+#' Wrapper for \code{at::moveaxis}.
+#' @param self A torch_tensor.
+#' @param source An integer vector.
+#' @param destination An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_moveaxis <- function(self, source, destination) {
     C_torch_moveaxis(self, source, destination)
 }
 
+#' Numpy T
+#'
+#' Wrapper for \code{at::numpy_T}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_numpy_T <- function(self) {
     C_torch_numpy_T(self)
 }
 
+#' Matrix H
+#'
+#' Wrapper for \code{at::matrix_H}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_matrix_H <- function(self) {
     C_torch_matrix_H(self)
 }
 
+#' MT
+#'
+#' Wrapper for \code{at::mT}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_mT <- function(self) {
     C_torch_mT(self)
 }
 
+#' MH
+#'
+#' Wrapper for \code{at::mH}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_mH <- function(self) {
     C_torch_mH(self)
 }
 
+#' Adjoint
+#'
+#' Wrapper for \code{at::adjoint}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_adjoint <- function(self) {
     C_torch_adjoint(self)
 }
 
+#' Pixel shuffle
+#'
+#' Wrapper for \code{at::pixel_shuffle}.
+#' @param self A torch_tensor.
+#' @param upscale_factor An integer.
+#' @return A torch_tensor.
 #' @export
 torch_pixel_shuffle <- function(self, upscale_factor) {
     C_torch_pixel_shuffle(self, as.integer(upscale_factor))
 }
 
+#' Pixel unshuffle
+#'
+#' Wrapper for \code{at::pixel_unshuffle}.
+#' @param self A torch_tensor.
+#' @param downscale_factor An integer.
+#' @return A torch_tensor.
 #' @export
 torch_pixel_unshuffle <- function(self, downscale_factor) {
     C_torch_pixel_unshuffle(self, as.integer(downscale_factor))
 }
 
+#' Channel shuffle
+#'
+#' Wrapper for \code{at::channel_shuffle}.
+#' @param self A torch_tensor.
+#' @param groups An integer.
+#' @return A torch_tensor.
 #' @export
 torch_channel_shuffle <- function(self, groups) {
     C_torch_channel_shuffle(self, as.integer(groups))
 }
 
+#' Native channel shuffle
+#'
+#' Wrapper for \code{at::native_channel_shuffle}.
+#' @param self A torch_tensor.
+#' @param groups An integer.
+#' @return A torch_tensor.
 #' @export
 torch_native_channel_shuffle <- function(self, groups) {
     C_torch_native_channel_shuffle(self, as.integer(groups))
 }
 
+#' Is pinned
+#'
+#' Wrapper for \code{at::is_pinned}.
+#' @param self A torch_tensor.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_is_pinned <- function(self, device = NULL) {
     C_torch_is_pinned(self, device)
 }
 
+#' Pin memory
+#'
+#' Wrapper for \code{at::pin_memory}.
+#' @param self A torch_tensor.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_pin_memory <- function(self, device = NULL) {
     C_torch_pin_memory(self, device)
 }
 
+#' Pinverse
+#'
+#' Wrapper for \code{at::pinverse}.
+#' @param self A torch_tensor.
+#' @param rcond A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_pinverse <- function(self, rcond = 1e-15) {
     C_torch_pinverse(self, as.double(rcond))
 }
 
+#' Poisson nll loss
+#'
+#' Wrapper for \code{at::poisson_nll_loss}.
+#' @param input A torch_tensor.
+#' @param target A torch_tensor.
+#' @param log_input A logical value.
+#' @param full A logical value.
+#' @param eps A numeric value.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_poisson_nll_loss <- function(input, target, log_input, full, eps, reduction) {
     C_torch_poisson_nll_loss(input, target, as.logical(log_input), as.logical(full), as.double(eps), as.integer(reduction))
 }
 
+#' Rad2deg
+#'
+#' Wrapper for \code{at::rad2deg}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_rad2deg <- function(self) {
     C_torch_rad2deg(self)
 }
 
+#' Rad2deg 
+#'
+#' Wrapper for \code{at::rad2deg_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_rad2deg_ <- function(self) {
     C_torch_rad2deg_(self)
 }
 
+#' Deg2rad
+#'
+#' Wrapper for \code{at::deg2rad}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_deg2rad <- function(self) {
     C_torch_deg2rad(self)
 }
 
+#' Deg2rad 
+#'
+#' Wrapper for \code{at::deg2rad_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_deg2rad_ <- function(self) {
     C_torch_deg2rad_(self)
 }
 
+#' Scalar tensor
+#'
+#' Wrapper for \code{at::scalar_tensor}.
+#' @param s A numeric scalar.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_scalar_tensor <- function(s, dtype = NULL, device = NULL) {
     C_torch_scalar_tensor(s, dtype, device)
 }
 
+#' Rand
+#'
+#' Wrapper for \code{at::rand}.
+#' @param size An integer vector.
+#' @param names A character vector of dimension names.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rand <- function(size, names, dtype = NULL, device = NULL) {
     C_torch_rand(size, names, dtype, device)
 }
 
+#' Rand like
+#'
+#' Wrapper for \code{at::rand_like}.
+#' @param self A torch_tensor.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @param memory_format A memory format. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rand_like <- function(self, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_rand_like(self, dtype, device, memory_format)
 }
 
+#' Randint
+#'
+#' Wrapper for \code{at::randint}.
+#' @param high An integer.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_randint <- function(high, size, dtype = long, device = NULL) {
     C_torch_randint(as.integer(high), size, dtype, device)
 }
 
+#' Randint like
+#'
+#' Wrapper for \code{at::randint_like}.
+#' @param self A torch_tensor.
+#' @param high An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @param memory_format A memory format. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_randint_like <- function(self, high, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_randint_like(self, as.integer(high), dtype, device, memory_format)
 }
 
+#' Randperm
+#'
+#' Wrapper for \code{at::randperm}.
+#' @param n An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_randperm <- function(n, dtype = long, device = NULL) {
     C_torch_randperm(as.integer(n), dtype, device)
 }
 
+#' Range
+#'
+#' Wrapper for \code{at::range}.
+#' @param start A numeric scalar.
+#' @param end A numeric scalar.
+#' @param step A numeric scalar.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_range <- function(start, end, step = 1, dtype = NULL, device = NULL) {
     C_torch_range(start, end, step, dtype, device)
 }
 
+#' Ravel
+#'
+#' Wrapper for \code{at::ravel}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_ravel <- function(self) {
     C_torch_ravel(self)
 }
 
+#' Reciprocal
+#'
+#' Wrapper for \code{at::reciprocal}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_reciprocal <- function(self) {
     C_torch_reciprocal(self)
 }
 
+#' Reciprocal 
+#'
+#' Wrapper for \code{at::reciprocal_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_reciprocal_ <- function(self) {
     C_torch_reciprocal_(self)
 }
 
+#' Neg 
+#'
+#' Wrapper for \code{at::neg_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_neg_ <- function(self) {
     C_torch_neg_(self)
 }
 
+#' Negative
+#'
+#' Wrapper for \code{at::negative}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_negative <- function(self) {
     C_torch_negative(self)
 }
 
+#' Negative 
+#'
+#' Wrapper for \code{at::negative_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_negative_ <- function(self) {
     C_torch_negative_(self)
 }
 
+#' Reshape as
+#'
+#' Wrapper for \code{at::reshape_as}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_reshape_as <- function(self, other) {
     C_torch_reshape_as(self, other)
 }
 
+#' Round 
+#'
+#' Wrapper for \code{at::round_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_round_ <- function(self) {
     C_torch_round_(self)
 }
 
+#' Rrelu
+#'
+#' Wrapper for \code{at::rrelu}.
+#' @param self A torch_tensor.
+#' @param lower A numeric scalar.
+#' @param upper A numeric scalar.
+#' @param training A logical value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rrelu <- function(self, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu(self, lower, upper, as.logical(training), generator)
 }
 
+#' Rrelu 
+#'
+#' Wrapper for \code{at::rrelu_}.
+#' @param self A torch_tensor.
+#' @param lower A numeric scalar.
+#' @param upper A numeric scalar.
+#' @param training A logical value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rrelu_ <- function(self, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu_(self, lower, upper, as.logical(training), generator)
 }
 
+#' Relu 
+#'
+#' Wrapper for \code{at::relu_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_relu_ <- function(self) {
     C_torch_relu_(self)
 }
 
+#' Relu6
+#'
+#' Wrapper for \code{at::relu6}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_relu6 <- function(self) {
     C_torch_relu6(self)
 }
 
+#' Relu6 
+#'
+#' Wrapper for \code{at::relu6_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_relu6_ <- function(self) {
     C_torch_relu6_(self)
 }
 
+#' Prelu
+#'
+#' Wrapper for \code{at::prelu}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_prelu <- function(self, weight) {
     C_torch_prelu(self, weight)
 }
 
+#' Gelu 
+#'
+#' Wrapper for \code{at::gelu_}.
+#' @param self A torch_tensor.
+#' @param approximate A character string.
+#' @return A torch_tensor.
 #' @export
 torch_gelu_ <- function(self, approximate = 'none') {
     C_torch_gelu_(self, approximate)
 }
 
+#' Hardshrink
+#'
+#' Wrapper for \code{at::hardshrink}.
+#' @param self A torch_tensor.
+#' @param lambd A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_hardshrink <- function(self, lambd = 0.5) {
     C_torch_hardshrink(self, lambd)
 }
 
+#' Rsqrt 
+#'
+#' Wrapper for \code{at::rsqrt_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_rsqrt_ <- function(self) {
     C_torch_rsqrt_(self)
 }
 
+#' Select
+#'
+#' Wrapper for \code{at::select}.
+#' @param self A torch_tensor.
+#' @param dim A dimension name.
+#' @param index An integer.
+#' @return A torch_tensor.
 #' @export
 torch_select <- function(self, dim, index) {
     C_torch_select(self, dim, as.integer(index))
 }
 
+#' Selu
+#'
+#' Wrapper for \code{at::selu}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_selu <- function(self) {
     C_torch_selu(self)
 }
 
+#' Selu 
+#'
+#' Wrapper for \code{at::selu_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_selu_ <- function(self) {
     C_torch_selu_(self)
 }
 
+#' Celu
+#'
+#' Wrapper for \code{at::celu}.
+#' @param self A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_celu <- function(self, alpha = 1.0) {
     C_torch_celu(self, alpha)
 }
 
+#' Celu 
+#'
+#' Wrapper for \code{at::celu_}.
+#' @param self A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_celu_ <- function(self, alpha = 1.0) {
     C_torch_celu_(self, alpha)
 }
 
+#' Silu 
+#'
+#' Wrapper for \code{at::silu_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_silu_ <- function(self) {
     C_torch_silu_(self)
 }
 
+#' Mish
+#'
+#' Wrapper for \code{at::mish}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_mish <- function(self) {
     C_torch_mish(self)
 }
 
+#' Mish 
+#'
+#' Wrapper for \code{at::mish_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_mish_ <- function(self) {
     C_torch_mish_(self)
 }
 
+#' Sigmoid 
+#'
+#' Wrapper for \code{at::sigmoid_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sigmoid_ <- function(self) {
     C_torch_sigmoid_(self)
 }
 
+#' Logit
+#'
+#' Wrapper for \code{at::logit}.
+#' @param self A torch_tensor.
+#' @param eps A numeric value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_logit <- function(self, eps = NULL) {
     C_torch_logit(self, eps)
 }
 
+#' Logit 
+#'
+#' Wrapper for \code{at::logit_}.
+#' @param self A torch_tensor.
+#' @param eps A numeric value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_logit_ <- function(self, eps = NULL) {
     C_torch_logit_(self, eps)
 }
 
+#' Sin 
+#'
+#' Wrapper for \code{at::sin_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sin_ <- function(self) {
     C_torch_sin_(self)
 }
 
+#' Sinc
+#'
+#' Wrapper for \code{at::sinc}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sinc <- function(self) {
     C_torch_sinc(self)
 }
 
+#' Sinc 
+#'
+#' Wrapper for \code{at::sinc_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sinc_ <- function(self) {
     C_torch_sinc_(self)
 }
 
+#' Sinh
+#'
+#' Wrapper for \code{at::sinh}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sinh <- function(self) {
     C_torch_sinh(self)
 }
 
+#' Sinh 
+#'
+#' Wrapper for \code{at::sinh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sinh_ <- function(self) {
     C_torch_sinh_(self)
 }
 
+#' Detach 
+#'
+#' Wrapper for \code{at::detach_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_detach_ <- function(self) {
     C_torch_detach_(self)
 }
 
+#' Slice
+#'
+#' Wrapper for \code{at::slice}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param start An integer. Optional.
+#' @param end An integer. Optional.
+#' @param step An integer.
+#' @return A torch_tensor.
 #' @export
 torch_slice <- function(self, dim = 0, start = NULL, end = NULL, step = 1) {
     C_torch_slice(self, as.integer(dim), start, end, as.integer(step))
 }
 
+#' Slice inverse
+#'
+#' Wrapper for \code{at::slice_inverse}.
+#' @param self A torch_tensor.
+#' @param src A torch_tensor.
+#' @param dim An integer.
+#' @param start An integer. Optional.
+#' @param end An integer. Optional.
+#' @param step An integer.
+#' @return A torch_tensor.
 #' @export
 torch_slice_inverse <- function(self, src, dim = 0, start = NULL, end = NULL, step = 1) {
     C_torch_slice_inverse(self, src, as.integer(dim), start, end, as.integer(step))
 }
 
+#' Slice scatter
+#'
+#' Wrapper for \code{at::slice_scatter}.
+#' @param self A torch_tensor.
+#' @param src A torch_tensor.
+#' @param dim An integer.
+#' @param start An integer. Optional.
+#' @param end An integer. Optional.
+#' @param step An integer.
+#' @return A torch_tensor.
 #' @export
 torch_slice_scatter <- function(self, src, dim = 0, start = NULL, end = NULL, step = 1) {
     C_torch_slice_scatter(self, src, as.integer(dim), start, end, as.integer(step))
 }
 
+#' Select scatter
+#'
+#' Wrapper for \code{at::select_scatter}.
+#' @param self A torch_tensor.
+#' @param src A torch_tensor.
+#' @param dim An integer.
+#' @param index An integer.
+#' @return A torch_tensor.
 #' @export
 torch_select_scatter <- function(self, src, dim, index) {
     C_torch_select_scatter(self, src, as.integer(dim), as.integer(index))
 }
 
+#' Diagonal scatter
+#'
+#' Wrapper for \code{at::diagonal_scatter}.
+#' @param self A torch_tensor.
+#' @param src A torch_tensor.
+#' @param offset An integer.
+#' @param dim1 An integer.
+#' @param dim2 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_diagonal_scatter <- function(self, src, offset = 0, dim1 = 0, dim2 = 1) {
     C_torch_diagonal_scatter(self, src, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
 
+#' As strided scatter
+#'
+#' Wrapper for \code{at::as_strided_scatter}.
+#' @param self A torch_tensor.
+#' @param src A torch_tensor.
+#' @param size An integer vector.
+#' @param stride An integer vector.
+#' @param storage_offset An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_as_strided_scatter <- function(self, src, size, stride, storage_offset = NULL) {
     C_torch_as_strided_scatter(self, src, size, stride, storage_offset)
 }
 
+#' Smm
+#'
+#' Wrapper for \code{at::smm}.
+#' @param self A torch_tensor.
+#' @param mat2 A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_smm <- function(self, mat2) {
     C_torch_smm(self, mat2)
 }
 
+#' Unsafe split
+#'
+#' Wrapper for \code{at::unsafe_split}.
+#' @param self A torch_tensor.
+#' @param split_size An integer.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_unsafe_split <- function(self, split_size, dim = 0) {
     C_torch_unsafe_split(self, as.integer(split_size), as.integer(dim))
 }
 
+#' Split
+#'
+#' Wrapper for \code{at::split}.
+#' @param self A torch_tensor.
+#' @param split_size An integer.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_split <- function(self, split_size, dim = 0) {
     C_torch_split(self, as.integer(split_size), as.integer(dim))
 }
 
+#' Unsafe split with sizes
+#'
+#' Wrapper for \code{at::unsafe_split_with_sizes}.
+#' @param self A torch_tensor.
+#' @param split_sizes An integer vector.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_unsafe_split_with_sizes <- function(self, split_sizes, dim = 0) {
     C_torch_unsafe_split_with_sizes(self, split_sizes, as.integer(dim))
 }
 
+#' Split with sizes
+#'
+#' Wrapper for \code{at::split_with_sizes}.
+#' @param self A torch_tensor.
+#' @param split_sizes An integer vector.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_split_with_sizes <- function(self, split_sizes, dim = 0) {
     C_torch_split_with_sizes(self, split_sizes, as.integer(dim))
 }
 
+#' Hsplit
+#'
+#' Wrapper for \code{at::hsplit}.
+#' @param self A torch_tensor.
+#' @param sections An integer.
+#' @return A torch_tensor.
 #' @export
 torch_hsplit <- function(self, sections) {
     C_torch_hsplit(self, as.integer(sections))
 }
 
+#' Vsplit
+#'
+#' Wrapper for \code{at::vsplit}.
+#' @param self A torch_tensor.
+#' @param sections An integer.
+#' @return A torch_tensor.
 #' @export
 torch_vsplit <- function(self, sections) {
     C_torch_vsplit(self, as.integer(sections))
 }
 
+#' Dsplit
+#'
+#' Wrapper for \code{at::dsplit}.
+#' @param self A torch_tensor.
+#' @param sections An integer.
+#' @return A torch_tensor.
 #' @export
 torch_dsplit <- function(self, sections) {
     C_torch_dsplit(self, as.integer(sections))
 }
 
+#' Squeeze 
+#'
+#' Wrapper for \code{at::squeeze_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_squeeze_ <- function(self) {
     C_torch_squeeze_(self)
 }
 
+#' Sspaddmm
+#'
+#' Wrapper for \code{at::sspaddmm}.
+#' @param self A torch_tensor.
+#' @param mat1 A torch_tensor.
+#' @param mat2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_sspaddmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
     C_torch_sspaddmm(self, mat1, mat2, beta, alpha)
 }
 
+#' Stack
+#'
+#' Wrapper for \code{at::stack}.
+#' @param tensors A list of torch_tensors.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_stack <- function(tensors, dim = 0) {
     C_torch_stack(tensors, as.integer(dim))
 }
 
+#' Hstack
+#'
+#' Wrapper for \code{at::hstack}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_hstack <- function(tensors) {
     C_torch_hstack(tensors)
 }
 
+#' Vstack
+#'
+#' Wrapper for \code{at::vstack}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_vstack <- function(tensors) {
     C_torch_vstack(tensors)
 }
 
+#' Dstack
+#'
+#' Wrapper for \code{at::dstack}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_dstack <- function(tensors) {
     C_torch_dstack(tensors)
 }
 
+#' Stride
+#'
+#' Wrapper for \code{at::stride}.
+#' @param self A torch_tensor.
+#' @param dim A dimension name.
+#' @return A torch_tensor.
 #' @export
 torch_stride <- function(self, dim) {
     C_torch_stride(self, dim)
 }
 
+#' Nansum
+#'
+#' Wrapper for \code{at::nansum}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]). Optional.
+#' @param keepdim A logical value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_nansum <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_nansum(self, dim, as.logical(keepdim), dtype)
 }
 
+#' Sum to size
+#'
+#' Wrapper for \code{at::sum_to_size}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_sum_to_size <- function(self, size) {
     C_torch_sum_to_size(self, size)
 }
 
+#' Sqrt 
+#'
+#' Wrapper for \code{at::sqrt_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sqrt_ <- function(self) {
     C_torch_sqrt_(self)
 }
 
+#' Square
+#'
+#' Wrapper for \code{at::square}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_square <- function(self) {
     C_torch_square(self)
 }
 
+#' Square 
+#'
+#' Wrapper for \code{at::square_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_square_ <- function(self) {
     C_torch_square_(self)
 }
 
+#' Std mean
+#'
+#' Wrapper for \code{at::std_mean}.
+#' @param self A torch_tensor.
+#' @param unbiased A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_std_mean <- function(self, unbiased = TRUE) {
     C_torch_std_mean(self, as.logical(unbiased))
 }
 
+#' Prod
+#'
+#' Wrapper for \code{at::prod}.
+#' @param self A torch_tensor.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_prod <- function(self, dtype = NULL) {
     C_torch_prod(self, dtype)
 }
 
+#' T 
+#'
+#' Wrapper for \code{at::t_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_t_ <- function(self) {
     C_torch_t_(self)
 }
 
+#' Tan
+#'
+#' Wrapper for \code{at::tan}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_tan <- function(self) {
     C_torch_tan(self)
 }
 
+#' Tan 
+#'
+#' Wrapper for \code{at::tan_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_tan_ <- function(self) {
     C_torch_tan_(self)
 }
 
+#' Tanh 
+#'
+#' Wrapper for \code{at::tanh_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_tanh_ <- function(self) {
     C_torch_tanh_(self)
 }
 
+#' Tensordot
+#'
+#' Wrapper for \code{at::tensordot}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param dims_self An integer vector.
+#' @param dims_other An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_tensordot <- function(self, other, dims_self, dims_other) {
     C_torch_tensordot(self, other, dims_self, dims_other)
 }
 
+#' Threshold
+#'
+#' Wrapper for \code{at::threshold}.
+#' @param self A torch_tensor.
+#' @param threshold A numeric scalar.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_threshold <- function(self, threshold, value) {
     C_torch_threshold(self, threshold, value)
 }
 
+#' Threshold 
+#'
+#' Wrapper for \code{at::threshold_}.
+#' @param self A torch_tensor.
+#' @param threshold A numeric scalar.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_threshold_ <- function(self, threshold, value) {
     C_torch_threshold_(self, threshold, value)
 }
 
+#' Tile
+#'
+#' Wrapper for \code{at::tile}.
+#' @param self A torch_tensor.
+#' @param dims An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_tile <- function(self, dims) {
     C_torch_tile(self, dims)
 }
 
+#' Transpose 
+#'
+#' Wrapper for \code{at::transpose_}.
+#' @param self A torch_tensor.
+#' @param dim0 An integer.
+#' @param dim1 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_transpose_ <- function(self, dim0, dim1) {
     C_torch_transpose_(self, as.integer(dim0), as.integer(dim1))
 }
 
+#' One hot
+#'
+#' Wrapper for \code{at::one_hot}.
+#' @param self A torch_tensor.
+#' @param num_classes An integer.
+#' @return A torch_tensor.
 #' @export
 torch_one_hot <- function(self, num_classes = -1) {
     C_torch_one_hot(self, as.integer(num_classes))
 }
 
+#' Fliplr
+#'
+#' Wrapper for \code{at::fliplr}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_fliplr <- function(self) {
     C_torch_fliplr(self)
 }
 
+#' Flipud
+#'
+#' Wrapper for \code{at::flipud}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_flipud <- function(self) {
     C_torch_flipud(self)
 }
 
+#' Roll
+#'
+#' Wrapper for \code{at::roll}.
+#' @param self A torch_tensor.
+#' @param shifts (int[1]).
+#' @param dims (int[1]).
+#' @return A torch_tensor.
 #' @export
 torch_roll <- function(self, shifts, dims = NULL) {
     C_torch_roll(self, shifts, dims)
 }
 
+#' Rot90
+#'
+#' Wrapper for \code{at::rot90}.
+#' @param self A torch_tensor.
+#' @param k An integer.
+#' @param dims An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_rot90 <- function(self, k = 1, dims = NULL) {
     C_torch_rot90(self, as.integer(k), dims)
 }
 
+#' Trapezoid
+#'
+#' Wrapper for \code{at::trapezoid}.
+#' @param y A torch_tensor.
+#' @param x A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_trapezoid <- function(y, x, dim = -1) {
     C_torch_trapezoid(y, x, as.integer(dim))
 }
 
+#' Trapz
+#'
+#' Wrapper for \code{at::trapz}.
+#' @param y A torch_tensor.
+#' @param x A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_trapz <- function(y, x, dim = -1) {
     C_torch_trapz(y, x, as.integer(dim))
 }
 
+#' Triplet margin loss
+#'
+#' Wrapper for \code{at::triplet_margin_loss}.
+#' @param anchor A torch_tensor.
+#' @param positive A torch_tensor.
+#' @param negative A torch_tensor.
+#' @param margin A numeric value.
+#' @param p A numeric value.
+#' @param eps A numeric value.
+#' @param swap A logical value.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_triplet_margin_loss <- function(anchor, positive, negative, margin = 1.0, p = 2, eps = 1e-06, swap = FALSE, reduction = Mean) {
     C_torch_triplet_margin_loss(anchor, positive, negative, as.double(margin), as.double(p), as.double(eps), as.logical(swap), as.integer(reduction))
 }
 
+#' Trunc 
+#'
+#' Wrapper for \code{at::trunc_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_trunc_ <- function(self) {
     C_torch_trunc_(self)
 }
 
+#' Fix
+#'
+#' Wrapper for \code{at::fix}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_fix <- function(self) {
     C_torch_fix(self)
 }
 
+#' Fix 
+#'
+#' Wrapper for \code{at::fix_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_fix_ <- function(self) {
     C_torch_fix_(self)
 }
 
+#' Type as
+#'
+#' Wrapper for \code{at::type_as}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_type_as <- function(self, other) {
     C_torch_type_as(self, other)
 }
 
+#' Unique dim
+#'
+#' Wrapper for \code{at::unique_dim}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param sorted A logical value.
+#' @param return_inverse A logical value.
+#' @param return_counts A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_unique_dim <- function(self, dim, sorted = TRUE, return_inverse = FALSE, return_counts = FALSE) {
     C_torch_unique_dim(self, as.integer(dim), as.logical(sorted), as.logical(return_inverse), as.logical(return_counts))
 }
 
+#' Unique consecutive
+#'
+#' Wrapper for \code{at::unique_consecutive}.
+#' @param self A torch_tensor.
+#' @param return_inverse A logical value.
+#' @param return_counts A logical value.
+#' @param dim An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_unique_consecutive <- function(self, return_inverse = FALSE, return_counts = FALSE, dim = NULL) {
     C_torch_unique_consecutive(self, as.logical(return_inverse), as.logical(return_counts), dim)
 }
 
+#' Unique dim consecutive
+#'
+#' Wrapper for \code{at::unique_dim_consecutive}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param return_inverse A logical value.
+#' @param return_counts A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_unique_dim_consecutive <- function(self, dim, return_inverse = FALSE, return_counts = FALSE) {
     C_torch_unique_dim_consecutive(self, as.integer(dim), as.logical(return_inverse), as.logical(return_counts))
 }
 
+#' Unsqueeze 
+#'
+#' Wrapper for \code{at::unsqueeze_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_unsqueeze_ <- function(self, dim) {
     C_torch_unsqueeze_(self, as.integer(dim))
 }
 
+#' Vander
+#'
+#' Wrapper for \code{at::vander}.
+#' @param x A torch_tensor.
+#' @param N An integer. Optional.
+#' @param increasing A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_vander <- function(x, N = NULL, increasing = FALSE) {
     C_torch_vander(x, N, as.logical(increasing))
 }
 
+#' Var
+#'
+#' Wrapper for \code{at::var}.
+#' @param self A torch_tensor.
+#' @param unbiased A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_var <- function(self, unbiased = TRUE) {
     C_torch_var(self, as.logical(unbiased))
 }
 
+#' Var mean
+#'
+#' Wrapper for \code{at::var_mean}.
+#' @param self A torch_tensor.
+#' @param unbiased A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_var_mean <- function(self, unbiased = TRUE) {
     C_torch_var_mean(self, as.logical(unbiased))
 }
 
+#' View as
+#'
+#' Wrapper for \code{at::view_as}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_view_as <- function(self, other) {
     C_torch_view_as(self, other)
 }
 
+#' Norm except dim
+#'
+#' Wrapper for \code{at::norm_except_dim}.
+#' @param v A torch_tensor.
+#' @param pow An integer.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_norm_except_dim <- function(v, pow = 2, dim = 0) {
     C_torch_norm_except_dim(v, as.integer(pow), as.integer(dim))
 }
 
+#' Poisson
+#'
+#' Wrapper for \code{at::poisson}.
+#' @param self A torch_tensor.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_poisson <- function(self, generator = NULL) {
     C_torch_poisson(self, generator)
 }
 
+#' Binomial
+#'
+#' Wrapper for \code{at::binomial}.
+#' @param count A torch_tensor.
+#' @param prob A torch_tensor.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_binomial <- function(count, prob, generator = NULL) {
     C_torch_binomial(count, prob, generator)
 }
 
+#' Native norm
+#'
+#' Wrapper for \code{at::native_norm}.
+#' @param self A torch_tensor.
+#' @param p A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_native_norm <- function(self, p = 2) {
     C_torch_native_norm(self, p)
 }
 
+#' Frexp
+#'
+#' Wrapper for \code{at::frexp}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_frexp <- function(self) {
     C_torch_frexp(self)
 }
 
+#' Frobenius norm
+#'
+#' Wrapper for \code{at::frobenius_norm}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]).
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_frobenius_norm <- function(self, dim, keepdim = FALSE) {
     C_torch_frobenius_norm(self, dim, as.logical(keepdim))
 }
 
+#' Nuclear norm
+#'
+#' Wrapper for \code{at::nuclear_norm}.
+#' @param self A torch_tensor.
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_nuclear_norm <- function(self, keepdim = FALSE) {
     C_torch_nuclear_norm(self, as.logical(keepdim))
 }
 
+#' Positive
+#'
+#' Wrapper for \code{at::positive}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_positive <- function(self) {
     C_torch_positive(self)
 }
 
+#' Resize as 
+#'
+#' Wrapper for \code{at::resize_as_}.
+#' @param self A torch_tensor.
+#' @param the_template A torch_tensor.
+#' @param memory_format A memory format. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_resize_as_ <- function(self, the_template, memory_format = NULL) {
     C_torch_resize_as_(self, the_template, memory_format)
 }
 
+#' Resize as sparse 
+#'
+#' Wrapper for \code{at::resize_as_sparse_}.
+#' @param self A torch_tensor.
+#' @param the_template A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_resize_as_sparse_ <- function(self, the_template) {
     C_torch_resize_as_sparse_(self, the_template)
 }
 
+#' Sub 
+#'
+#' Wrapper for \code{at::sub_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_sub_ <- function(self, other, alpha = 1) {
     C_torch_sub_(self, other, alpha)
 }
 
+#' Subtract
+#'
+#' Wrapper for \code{at::subtract}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_subtract <- function(self, other, alpha = 1) {
     C_torch_subtract(self, other, alpha)
 }
 
+#' Subtract 
+#'
+#' Wrapper for \code{at::subtract_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_subtract_ <- function(self, other, alpha = 1) {
     C_torch_subtract_(self, other, alpha)
 }
 
+#' Rsub
+#'
+#' Wrapper for \code{at::rsub}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_rsub <- function(self, other, alpha = 1) {
     C_torch_rsub(self, other, alpha)
 }
 
+#' Heaviside
+#'
+#' Wrapper for \code{at::heaviside}.
+#' @param self A torch_tensor.
+#' @param values A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_heaviside <- function(self, values) {
     C_torch_heaviside(self, values)
 }
 
+#' Heaviside 
+#'
+#' Wrapper for \code{at::heaviside_}.
+#' @param self A torch_tensor.
+#' @param values A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_heaviside_ <- function(self, values) {
     C_torch_heaviside_(self, values)
 }
 
+#' Sparse sampled addmm
+#'
+#' Wrapper for \code{at::sparse_sampled_addmm}.
+#' @param self A torch_tensor.
+#' @param mat1 A torch_tensor.
+#' @param mat2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_sampled_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
     C_torch_sparse_sampled_addmm(self, mat1, mat2, beta, alpha)
 }
 
+#' Addmm
+#'
+#' Wrapper for \code{at::addmm}.
+#' @param self A torch_tensor.
+#' @param mat1 A torch_tensor.
+#' @param mat2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
-torch_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
-    C_torch_addmm(self, mat1, mat2, beta, alpha)
+torch_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1, out_dtype = NULL) {
+    if (is.null(out_dtype)) C_torch_addmm(self, mat1, mat2, beta, alpha)
+    else C_torch_addmm_dtype(self, mat1, mat2, out_dtype, beta, alpha)
 }
 
+#' Addmm 
+#'
+#' Wrapper for \code{at::addmm_}.
+#' @param self A torch_tensor.
+#' @param mat1 A torch_tensor.
+#' @param mat2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addmm_ <- function(self, mat1, mat2, beta = 1, alpha = 1) {
     C_torch_addmm_(self, mat1, mat2, beta, alpha)
 }
 
+#' Sparse compressed tensor
+#'
+#' Wrapper for \code{at::sparse_compressed_tensor}.
+#' @param compressed_indices A torch_tensor.
+#' @param plain_indices A torch_tensor.
+#' @param values A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_compressed_tensor <- function(compressed_indices, plain_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_compressed_tensor(compressed_indices, plain_indices, values, size, dtype, device)
 }
 
+#' Sparse csr tensor
+#'
+#' Wrapper for \code{at::sparse_csr_tensor}.
+#' @param crow_indices A torch_tensor.
+#' @param col_indices A torch_tensor.
+#' @param values A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_csr_tensor <- function(crow_indices, col_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_csr_tensor(crow_indices, col_indices, values, size, dtype, device)
 }
 
+#' Sparse csc tensor
+#'
+#' Wrapper for \code{at::sparse_csc_tensor}.
+#' @param ccol_indices A torch_tensor.
+#' @param row_indices A torch_tensor.
+#' @param values A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_csc_tensor <- function(ccol_indices, row_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_csc_tensor(ccol_indices, row_indices, values, size, dtype, device)
 }
 
+#' Sparse bsr tensor
+#'
+#' Wrapper for \code{at::sparse_bsr_tensor}.
+#' @param crow_indices A torch_tensor.
+#' @param col_indices A torch_tensor.
+#' @param values A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_bsr_tensor <- function(crow_indices, col_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_bsr_tensor(crow_indices, col_indices, values, size, dtype, device)
 }
 
+#' Sparse bsc tensor
+#'
+#' Wrapper for \code{at::sparse_bsc_tensor}.
+#' @param ccol_indices A torch_tensor.
+#' @param row_indices A torch_tensor.
+#' @param values A torch_tensor.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_bsc_tensor <- function(ccol_indices, row_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_bsc_tensor(ccol_indices, row_indices, values, size, dtype, device)
 }
 
+#' Sparse coo tensor
+#'
+#' Wrapper for \code{at::sparse_coo_tensor}.
+#' @param size An integer vector.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_coo_tensor <- function(size, dtype = NULL, device = NULL) {
     C_torch_sparse_coo_tensor(size, dtype, device)
 }
 
+#' Sparse resize 
+#'
+#' Wrapper for \code{at::sparse_resize_}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param sparse_dim An integer.
+#' @param dense_dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_resize_ <- function(self, size, sparse_dim, dense_dim) {
     C_torch_sparse_resize_(self, size, as.integer(sparse_dim), as.integer(dense_dim))
 }
 
+#' Sparse resize and clear 
+#'
+#' Wrapper for \code{at::sparse_resize_and_clear_}.
+#' @param self A torch_tensor.
+#' @param size An integer vector.
+#' @param sparse_dim An integer.
+#' @param dense_dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_resize_and_clear_ <- function(self, size, sparse_dim, dense_dim) {
     C_torch_sparse_resize_and_clear_(self, size, as.integer(sparse_dim), as.integer(dense_dim))
 }
 
+#' Sparse mask
+#'
+#' Wrapper for \code{at::sparse_mask}.
+#' @param self A torch_tensor.
+#' @param mask A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_mask <- function(self, mask) {
     C_torch_sparse_mask(self, mask)
 }
 
+#' To dense
+#'
+#' Wrapper for \code{at::to_dense}.
+#' @param self A torch_tensor.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param masked_grad A logical value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_to_dense <- function(self, dtype = NULL, masked_grad = NULL) {
     C_torch_to_dense(self, dtype, masked_grad)
 }
 
+#' Sparse dim
+#'
+#' Wrapper for \code{at::sparse_dim}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sparse_dim <- function(self) {
     C_torch_sparse_dim(self)
 }
 
+#' Dense dim
+#'
+#' Wrapper for \code{at::dense_dim}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_dense_dim <- function(self) {
     C_torch_dense_dim(self)
 }
 
+#' Coalesce
+#'
+#' Wrapper for \code{at::coalesce}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_coalesce <- function(self) {
     C_torch_coalesce(self)
 }
 
+#' Is coalesced
+#'
+#' Wrapper for \code{at::is_coalesced}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_is_coalesced <- function(self) {
     C_torch_is_coalesced(self)
 }
 
+#' Indices
+#'
+#' Wrapper for \code{at::indices}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_indices <- function(self) {
     C_torch_indices(self)
 }
 
+#' Values
+#'
+#' Wrapper for \code{at::values}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_values <- function(self) {
     C_torch_values(self)
 }
 
+#' Crow indices
+#'
+#' Wrapper for \code{at::crow_indices}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_crow_indices <- function(self) {
     C_torch_crow_indices(self)
 }
 
+#' Col indices
+#'
+#' Wrapper for \code{at::col_indices}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_col_indices <- function(self) {
     C_torch_col_indices(self)
 }
 
+#' Ccol indices
+#'
+#' Wrapper for \code{at::ccol_indices}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_ccol_indices <- function(self) {
     C_torch_ccol_indices(self)
 }
 
+#' Row indices
+#'
+#' Wrapper for \code{at::row_indices}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_row_indices <- function(self) {
     C_torch_row_indices(self)
 }
 
+#' Hspmm
+#'
+#' Wrapper for \code{at::hspmm}.
+#' @param mat1 A torch_tensor.
+#' @param mat2 A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_hspmm <- function(mat1, mat2) {
     C_torch_hspmm(mat1, mat2)
 }
 
+#' Copy sparse to sparse 
+#'
+#' Wrapper for \code{at::copy_sparse_to_sparse_}.
+#' @param self A torch_tensor.
+#' @param src A torch_tensor.
+#' @param non_blocking A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_copy_sparse_to_sparse_ <- function(self, src, non_blocking = FALSE) {
     C_torch_copy_sparse_to_sparse_(self, src, as.logical(non_blocking))
 }
 
+#' Unbind
+#'
+#' Wrapper for \code{at::unbind}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_unbind <- function(self, dim = 0) {
     C_torch_unbind(self, as.integer(dim))
 }
 
+#' To sparse
+#'
+#' Wrapper for \code{at::to_sparse}.
+#' @param self A torch_tensor.
+#' @param sparse_dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_to_sparse <- function(self, sparse_dim) {
     C_torch_to_sparse(self, as.integer(sparse_dim))
 }
 
+#' To sparse csr
+#'
+#' Wrapper for \code{at::to_sparse_csr}.
+#' @param self A torch_tensor.
+#' @param dense_dim An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_to_sparse_csr <- function(self, dense_dim = NULL) {
     C_torch_to_sparse_csr(self, dense_dim)
 }
 
+#' To sparse csc
+#'
+#' Wrapper for \code{at::to_sparse_csc}.
+#' @param self A torch_tensor.
+#' @param dense_dim An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_to_sparse_csc <- function(self, dense_dim = NULL) {
     C_torch_to_sparse_csc(self, dense_dim)
 }
 
+#' To sparse bsr
+#'
+#' Wrapper for \code{at::to_sparse_bsr}.
+#' @param self A torch_tensor.
+#' @param blocksize (int[2]).
+#' @param dense_dim An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_to_sparse_bsr <- function(self, blocksize, dense_dim = NULL) {
     C_torch_to_sparse_bsr(self, blocksize, dense_dim)
 }
 
+#' To sparse bsc
+#'
+#' Wrapper for \code{at::to_sparse_bsc}.
+#' @param self A torch_tensor.
+#' @param blocksize (int[2]).
+#' @param dense_dim An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_to_sparse_bsc <- function(self, blocksize, dense_dim = NULL) {
     C_torch_to_sparse_bsc(self, blocksize, dense_dim)
 }
 
+#' Quantize per tensor dynamic
+#'
+#' Wrapper for \code{at::quantize_per_tensor_dynamic}.
+#' @param self A torch_tensor.
+#' @param dtype A torch dtype (e.g., torch_float32).
+#' @param reduce_range A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_quantize_per_tensor_dynamic <- function(self, dtype, reduce_range) {
     C_torch_quantize_per_tensor_dynamic(self, dtype, as.logical(reduce_range))
 }
 
+#' Quantize per tensor
+#'
+#' Wrapper for \code{at::quantize_per_tensor}.
+#' @param self A torch_tensor.
+#' @param scale A numeric value.
+#' @param zero_point An integer.
+#' @param dtype A torch dtype (e.g., torch_float32).
+#' @return A torch_tensor.
 #' @export
 torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
     C_torch_quantize_per_tensor(self, as.double(scale), as.integer(zero_point), dtype)
 }
 
+#' Quantize per channel
+#'
+#' Wrapper for \code{at::quantize_per_channel}.
+#' @param self A torch_tensor.
+#' @param scales A torch_tensor.
+#' @param zero_points A torch_tensor.
+#' @param axis An integer.
+#' @param dtype A torch dtype (e.g., torch_float32).
+#' @return A torch_tensor.
 #' @export
 torch_quantize_per_channel <- function(self, scales, zero_points, axis, dtype) {
     C_torch_quantize_per_channel(self, scales, zero_points, as.integer(axis), dtype)
 }
 
+#' Dequantize
+#'
+#' Wrapper for \code{at::dequantize}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_dequantize <- function(self) {
     C_torch_dequantize(self)
 }
 
+#' Q scale
+#'
+#' Wrapper for \code{at::q_scale}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_q_scale <- function(self) {
     C_torch_q_scale(self)
 }
 
+#' Q zero point
+#'
+#' Wrapper for \code{at::q_zero_point}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_q_zero_point <- function(self) {
     C_torch_q_zero_point(self)
 }
 
+#' Q per channel scales
+#'
+#' Wrapper for \code{at::q_per_channel_scales}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_q_per_channel_scales <- function(self) {
     C_torch_q_per_channel_scales(self)
 }
 
+#' Q per channel zero points
+#'
+#' Wrapper for \code{at::q_per_channel_zero_points}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_q_per_channel_zero_points <- function(self) {
     C_torch_q_per_channel_zero_points(self)
 }
 
+#' Q per channel axis
+#'
+#' Wrapper for \code{at::q_per_channel_axis}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_q_per_channel_axis <- function(self) {
     C_torch_q_per_channel_axis(self)
 }
 
+#' Int repr
+#'
+#' Wrapper for \code{at::int_repr}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_int_repr <- function(self) {
     C_torch_int_repr(self)
 }
 
+#' Qscheme
+#'
+#' Wrapper for \code{at::qscheme}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_qscheme <- function(self) {
     C_torch_qscheme(self)
 }
 
+#' Fake quantize per tensor affine
+#'
+#' Wrapper for \code{at::fake_quantize_per_tensor_affine}.
+#' @param self A torch_tensor.
+#' @param scale A numeric value.
+#' @param zero_point An integer.
+#' @param quant_min An integer.
+#' @param quant_max An integer.
+#' @return A torch_tensor.
 #' @export
 torch_fake_quantize_per_tensor_affine <- function(self, scale, zero_point, quant_min, quant_max) {
     C_torch_fake_quantize_per_tensor_affine(self, as.double(scale), as.integer(zero_point), as.integer(quant_min), as.integer(quant_max))
 }
 
+#' Fake quantize per tensor affine cachemask
+#'
+#' Wrapper for \code{at::fake_quantize_per_tensor_affine_cachemask}.
+#' @param self A torch_tensor.
+#' @param scale A numeric value.
+#' @param zero_point An integer.
+#' @param quant_min An integer.
+#' @param quant_max An integer.
+#' @return A torch_tensor.
 #' @export
 torch_fake_quantize_per_tensor_affine_cachemask <- function(self, scale, zero_point, quant_min, quant_max) {
     C_torch_fake_quantize_per_tensor_affine_cachemask(self, as.double(scale), as.integer(zero_point), as.integer(quant_min), as.integer(quant_max))
 }
 
+#' Fake quantize per channel affine
+#'
+#' Wrapper for \code{at::fake_quantize_per_channel_affine}.
+#' @param self A torch_tensor.
+#' @param scale A torch_tensor.
+#' @param zero_point A torch_tensor.
+#' @param axis An integer.
+#' @param quant_min An integer.
+#' @param quant_max An integer.
+#' @return A torch_tensor.
 #' @export
 torch_fake_quantize_per_channel_affine <- function(self, scale, zero_point, axis, quant_min, quant_max) {
     C_torch_fake_quantize_per_channel_affine(self, scale, zero_point, as.integer(axis), as.integer(quant_min), as.integer(quant_max))
 }
 
+#' Fake quantize per channel affine cachemask
+#'
+#' Wrapper for \code{at::fake_quantize_per_channel_affine_cachemask}.
+#' @param self A torch_tensor.
+#' @param scale A torch_tensor.
+#' @param zero_point A torch_tensor.
+#' @param axis An integer.
+#' @param quant_min An integer.
+#' @param quant_max An integer.
+#' @return A torch_tensor.
 #' @export
 torch_fake_quantize_per_channel_affine_cachemask <- function(self, scale, zero_point, axis, quant_min, quant_max) {
     C_torch_fake_quantize_per_channel_affine_cachemask(self, scale, zero_point, as.integer(axis), as.integer(quant_min), as.integer(quant_max))
 }
 
+#' Fused moving avg obs fake quant
+#'
+#' Wrapper for \code{at::fused_moving_avg_obs_fake_quant}.
+#' @param self A torch_tensor.
+#' @param observer_on A torch_tensor.
+#' @param fake_quant_on A torch_tensor.
+#' @param running_min A torch_tensor.
+#' @param running_max A torch_tensor.
+#' @param scale A torch_tensor.
+#' @param zero_point A torch_tensor.
+#' @param averaging_const A numeric value.
+#' @param quant_min An integer.
+#' @param quant_max An integer.
+#' @param ch_axis An integer.
+#' @param per_row_fake_quant A logical value.
+#' @param symmetric_quant A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_fused_moving_avg_obs_fake_quant <- function(self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, averaging_const, quant_min, quant_max, ch_axis, per_row_fake_quant = FALSE, symmetric_quant = FALSE) {
     C_torch_fused_moving_avg_obs_fake_quant(self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, as.double(averaging_const), as.integer(quant_min), as.integer(quant_max), as.integer(ch_axis), as.logical(per_row_fake_quant), as.logical(symmetric_quant))
 }
 
+#' Choose qparams optimized
+#'
+#' Wrapper for \code{at::choose_qparams_optimized}.
+#' @param input A torch_tensor.
+#' @param numel An integer.
+#' @param n_bins An integer.
+#' @param ratio A numeric value.
+#' @param bit_width An integer.
+#' @return A torch_tensor.
 #' @export
 torch_choose_qparams_optimized <- function(input, numel, n_bins, ratio, bit_width) {
     C_torch_choose_qparams_optimized(input, as.integer(numel), as.integer(n_bins), as.double(ratio), as.integer(bit_width))
 }
 
+#' Meshgrid
+#'
+#' Wrapper for \code{at::meshgrid}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_meshgrid <- function(tensors) {
     C_torch_meshgrid(tensors)
 }
 
+#' Cartesian prod
+#'
+#' Wrapper for \code{at::cartesian_prod}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_cartesian_prod <- function(tensors) {
     C_torch_cartesian_prod(tensors)
 }
 
+#' Combinations
+#'
+#' Wrapper for \code{at::combinations}.
+#' @param self A torch_tensor.
+#' @param r An integer.
+#' @param with_replacement A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_combinations <- function(self, r = 2, with_replacement = FALSE) {
     C_torch_combinations(self, as.integer(r), as.logical(with_replacement))
 }
 
+#' Result type
+#'
+#' Wrapper for \code{at::result_type}.
+#' @param tensor A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_result_type <- function(tensor, other) {
     C_torch_result_type(tensor, other)
 }
 
+#' Can cast
+#'
+#' Wrapper for \code{at::can_cast}.
+#' @param from_ A torch dtype (e.g., torch_float32).
+#' @param to A torch dtype (e.g., torch_float32).
+#' @return A torch_tensor.
 #' @export
 torch_can_cast <- function(from_, to) {
     C_torch_can_cast(from_, to)
 }
 
+#' Promote types
+#'
+#' Wrapper for \code{at::promote_types}.
+#' @param type1 A torch dtype (e.g., torch_float32).
+#' @param type2 A torch dtype (e.g., torch_float32).
+#' @return A torch_tensor.
 #' @export
 torch_promote_types <- function(type1, type2) {
     C_torch_promote_types(type1, type2)
 }
 
+#' Gru
+#'
+#' Wrapper for \code{at::gru}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param params A list of torch_tensors.
+#' @param has_biases A logical value.
+#' @param num_layers An integer.
+#' @param dropout A numeric value.
+#' @param train A logical value.
+#' @param bidirectional A logical value.
+#' @param batch_first A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_gru <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
     C_torch_gru(input, hx, params, as.logical(has_biases), as.integer(num_layers), as.double(dropout), as.logical(train), as.logical(bidirectional), as.logical(batch_first))
 }
 
+#' Rnn tanh
+#'
+#' Wrapper for \code{at::rnn_tanh}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param params A list of torch_tensors.
+#' @param has_biases A logical value.
+#' @param num_layers An integer.
+#' @param dropout A numeric value.
+#' @param train A logical value.
+#' @param bidirectional A logical value.
+#' @param batch_first A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_rnn_tanh <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
     C_torch_rnn_tanh(input, hx, params, as.logical(has_biases), as.integer(num_layers), as.double(dropout), as.logical(train), as.logical(bidirectional), as.logical(batch_first))
 }
 
+#' Rnn relu
+#'
+#' Wrapper for \code{at::rnn_relu}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param params A list of torch_tensors.
+#' @param has_biases A logical value.
+#' @param num_layers An integer.
+#' @param dropout A numeric value.
+#' @param train A logical value.
+#' @param bidirectional A logical value.
+#' @param batch_first A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_rnn_relu <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
     C_torch_rnn_relu(input, hx, params, as.logical(has_biases), as.integer(num_layers), as.double(dropout), as.logical(train), as.logical(bidirectional), as.logical(batch_first))
 }
 
+#' Lstm cell
+#'
+#' Wrapper for \code{at::lstm_cell}.
+#' @param input A torch_tensor.
+#' @param hx A list of torch_tensors.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor. Optional.
+#' @param b_hh A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_lstm_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_lstm_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
 
+#' Gru cell
+#'
+#' Wrapper for \code{at::gru_cell}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor. Optional.
+#' @param b_hh A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_gru_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_gru_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
 
+#' Rnn tanh cell
+#'
+#' Wrapper for \code{at::rnn_tanh_cell}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor. Optional.
+#' @param b_hh A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rnn_tanh_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_rnn_tanh_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
 
+#' Rnn relu cell
+#'
+#' Wrapper for \code{at::rnn_relu_cell}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor. Optional.
+#' @param b_hh A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rnn_relu_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_rnn_relu_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
 
+#' Quantized lstm cell
+#'
+#' Wrapper for \code{at::quantized_lstm_cell}.
+#' @param input A torch_tensor.
+#' @param hx A list of torch_tensors.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor.
+#' @param b_hh A torch_tensor.
+#' @param packed_ih A torch_tensor.
+#' @param packed_hh A torch_tensor.
+#' @param col_offsets_ih A torch_tensor.
+#' @param col_offsets_hh A torch_tensor.
+#' @param scale_ih A numeric scalar.
+#' @param scale_hh A numeric scalar.
+#' @param zero_point_ih A numeric scalar.
+#' @param zero_point_hh A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_lstm_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_lstm_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
 
+#' Quantized gru cell
+#'
+#' Wrapper for \code{at::quantized_gru_cell}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor.
+#' @param b_hh A torch_tensor.
+#' @param packed_ih A torch_tensor.
+#' @param packed_hh A torch_tensor.
+#' @param col_offsets_ih A torch_tensor.
+#' @param col_offsets_hh A torch_tensor.
+#' @param scale_ih A numeric scalar.
+#' @param scale_hh A numeric scalar.
+#' @param zero_point_ih A numeric scalar.
+#' @param zero_point_hh A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_gru_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_gru_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
 
+#' Quantized rnn relu cell
+#'
+#' Wrapper for \code{at::quantized_rnn_relu_cell}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor.
+#' @param b_hh A torch_tensor.
+#' @param packed_ih A torch_tensor.
+#' @param packed_hh A torch_tensor.
+#' @param col_offsets_ih A torch_tensor.
+#' @param col_offsets_hh A torch_tensor.
+#' @param scale_ih A numeric scalar.
+#' @param scale_hh A numeric scalar.
+#' @param zero_point_ih A numeric scalar.
+#' @param zero_point_hh A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_rnn_relu_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_rnn_relu_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
 
+#' Quantized rnn tanh cell
+#'
+#' Wrapper for \code{at::quantized_rnn_tanh_cell}.
+#' @param input A torch_tensor.
+#' @param hx A torch_tensor.
+#' @param w_ih A torch_tensor.
+#' @param w_hh A torch_tensor.
+#' @param b_ih A torch_tensor.
+#' @param b_hh A torch_tensor.
+#' @param packed_ih A torch_tensor.
+#' @param packed_hh A torch_tensor.
+#' @param col_offsets_ih A torch_tensor.
+#' @param col_offsets_hh A torch_tensor.
+#' @param scale_ih A numeric scalar.
+#' @param scale_hh A numeric scalar.
+#' @param zero_point_ih A numeric scalar.
+#' @param zero_point_hh A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_quantized_rnn_tanh_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_rnn_tanh_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
 
+#' Set 
+#'
+#' Wrapper for \code{at::set_}.
+#' @param self A torch_tensor.
+#' @param source A torch_tensor.
+#' @param storage_offset An integer.
+#' @param size An integer vector.
+#' @param stride An integer vector.
+#' @return A torch_tensor.
 #' @export
 torch_set_ <- function(self, source, storage_offset, size, stride = NULL) {
     C_torch_set_(self, source, as.integer(storage_offset), size, stride)
 }
 
+#' Is set to
+#'
+#' Wrapper for \code{at::is_set_to}.
+#' @param self A torch_tensor.
+#' @param tensor A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_is_set_to <- function(self, tensor) {
     C_torch_is_set_to(self, tensor)
 }
 
+#' Masked scatter 
+#'
+#' Wrapper for \code{at::masked_scatter_}.
+#' @param self A torch_tensor.
+#' @param mask A torch_tensor.
+#' @param source A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_masked_scatter_ <- function(self, mask, source) {
     C_torch_masked_scatter_(self, mask, source)
 }
 
+#' Masked scatter
+#'
+#' Wrapper for \code{at::masked_scatter}.
+#' @param self A torch_tensor.
+#' @param mask A torch_tensor.
+#' @param source A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_masked_scatter <- function(self, mask, source) {
     C_torch_masked_scatter(self, mask, source)
 }
 
+#' Put 
+#'
+#' Wrapper for \code{at::put_}.
+#' @param self A torch_tensor.
+#' @param index A torch_tensor.
+#' @param source A torch_tensor.
+#' @param accumulate A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_put_ <- function(self, index, source, accumulate = FALSE) {
     C_torch_put_(self, index, source, as.logical(accumulate))
 }
 
+#' Put
+#'
+#' Wrapper for \code{at::put}.
+#' @param self A torch_tensor.
+#' @param index A torch_tensor.
+#' @param source A torch_tensor.
+#' @param accumulate A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_put <- function(self, index, source, accumulate = FALSE) {
     C_torch_put(self, index, source, as.logical(accumulate))
 }
 
+#' Index add 
+#'
+#' Wrapper for \code{at::index_add_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param source A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_index_add_ <- function(self, dim, index, source, alpha = 1) {
     C_torch_index_add_(self, as.integer(dim), index, source, alpha)
 }
 
+#' Index add
+#'
+#' Wrapper for \code{at::index_add}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param source A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_index_add <- function(self, dim, index, source, alpha = 1) {
     C_torch_index_add(self, as.integer(dim), index, source, alpha)
 }
 
+#' Index reduce 
+#'
+#' Wrapper for \code{at::index_reduce_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param source A torch_tensor.
+#' @param reduce A character string.
+#' @param include_self A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_index_reduce_ <- function(self, dim, index, source, reduce, include_self = TRUE) {
     C_torch_index_reduce_(self, as.integer(dim), index, source, reduce, as.logical(include_self))
 }
 
+#' Index reduce
+#'
+#' Wrapper for \code{at::index_reduce}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param source A torch_tensor.
+#' @param reduce A character string.
+#' @param include_self A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_index_reduce <- function(self, dim, index, source, reduce, include_self = TRUE) {
     C_torch_index_reduce(self, as.integer(dim), index, source, reduce, as.logical(include_self))
 }
 
+#' Index fill 
+#'
+#' Wrapper for \code{at::index_fill_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_index_fill_ <- function(self, dim, index, value) {
     C_torch_index_fill_(self, as.integer(dim), index, value)
 }
 
+#' Index fill
+#'
+#' Wrapper for \code{at::index_fill}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_index_fill <- function(self, dim, index, value) {
     C_torch_index_fill(self, as.integer(dim), index, value)
 }
 
+#' Scatter
+#'
+#' Wrapper for \code{at::scatter}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param src A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_scatter <- function(self, dim, index, src) {
     C_torch_scatter(self, as.integer(dim), index, src)
 }
 
+#' Scatter add
+#'
+#' Wrapper for \code{at::scatter_add}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param src A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_scatter_add <- function(self, dim, index, src) {
     C_torch_scatter_add(self, as.integer(dim), index, src)
 }
 
+#' Scatter add 
+#'
+#' Wrapper for \code{at::scatter_add_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param src A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_scatter_add_ <- function(self, dim, index, src) {
     C_torch_scatter_add_(self, as.integer(dim), index, src)
 }
 
+#' Scatter reduce
+#'
+#' Wrapper for \code{at::scatter_reduce}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param src A torch_tensor.
+#' @param reduce A character string.
+#' @param include_self A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_scatter_reduce <- function(self, dim, index, src, reduce, include_self = TRUE) {
     C_torch_scatter_reduce(self, as.integer(dim), index, src, reduce, as.logical(include_self))
 }
 
+#' Scatter reduce 
+#'
+#' Wrapper for \code{at::scatter_reduce_}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param index A torch_tensor.
+#' @param src A torch_tensor.
+#' @param reduce A character string.
+#' @param include_self A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_scatter_reduce_ <- function(self, dim, index, src, reduce, include_self = TRUE) {
     C_torch_scatter_reduce_(self, as.integer(dim), index, src, reduce, as.logical(include_self))
 }
 
+#' Eq 
+#'
+#' Wrapper for \code{at::eq_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_eq_ <- function(self, other) {
     C_torch_eq_(self, other)
 }
 
+#' Bitwise and
+#'
+#' Wrapper for \code{at::bitwise_and}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_and <- function(self, other) {
     C_torch_bitwise_and(self, other)
 }
 
+#' Bitwise and 
+#'
+#' Wrapper for \code{at::bitwise_and_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_and_ <- function(self, other) {
     C_torch_bitwise_and_(self, other)
 }
 
+#'   and  
+#'
+#' Wrapper for \code{at::__and__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___and__ <- function(self, other) {
     C_torch___and__(self, other)
 }
 
+#'   iand  
+#'
+#' Wrapper for \code{at::__iand__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___iand__ <- function(self, other) {
     C_torch___iand__(self, other)
 }
 
+#' Bitwise or
+#'
+#' Wrapper for \code{at::bitwise_or}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_or <- function(self, other) {
     C_torch_bitwise_or(self, other)
 }
 
+#' Bitwise or 
+#'
+#' Wrapper for \code{at::bitwise_or_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_or_ <- function(self, other) {
     C_torch_bitwise_or_(self, other)
 }
 
+#'   or  
+#'
+#' Wrapper for \code{at::__or__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___or__ <- function(self, other) {
     C_torch___or__(self, other)
 }
 
+#'   ior  
+#'
+#' Wrapper for \code{at::__ior__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___ior__ <- function(self, other) {
     C_torch___ior__(self, other)
 }
 
+#' Bitwise xor
+#'
+#' Wrapper for \code{at::bitwise_xor}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_xor <- function(self, other) {
     C_torch_bitwise_xor(self, other)
 }
 
+#' Bitwise xor 
+#'
+#' Wrapper for \code{at::bitwise_xor_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_xor_ <- function(self, other) {
     C_torch_bitwise_xor_(self, other)
 }
 
+#'   xor  
+#'
+#' Wrapper for \code{at::__xor__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___xor__ <- function(self, other) {
     C_torch___xor__(self, other)
 }
 
+#'   ixor  
+#'
+#' Wrapper for \code{at::__ixor__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___ixor__ <- function(self, other) {
     C_torch___ixor__(self, other)
 }
 
+#'   lshift  
+#'
+#' Wrapper for \code{at::__lshift__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___lshift__ <- function(self, other) {
     C_torch___lshift__(self, other)
 }
 
+#'   ilshift  
+#'
+#' Wrapper for \code{at::__ilshift__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___ilshift__ <- function(self, other) {
     C_torch___ilshift__(self, other)
 }
 
+#' Bitwise left shift
+#'
+#' Wrapper for \code{at::bitwise_left_shift}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_left_shift <- function(self, other) {
     C_torch_bitwise_left_shift(self, other)
 }
 
+#' Bitwise left shift 
+#'
+#' Wrapper for \code{at::bitwise_left_shift_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_left_shift_ <- function(self, other) {
     C_torch_bitwise_left_shift_(self, other)
 }
 
+#'   rshift  
+#'
+#' Wrapper for \code{at::__rshift__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___rshift__ <- function(self, other) {
     C_torch___rshift__(self, other)
 }
 
+#'   irshift  
+#'
+#' Wrapper for \code{at::__irshift__}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch___irshift__ <- function(self, other) {
     C_torch___irshift__(self, other)
 }
 
+#' Bitwise right shift
+#'
+#' Wrapper for \code{at::bitwise_right_shift}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_right_shift <- function(self, other) {
     C_torch_bitwise_right_shift(self, other)
 }
 
+#' Bitwise right shift 
+#'
+#' Wrapper for \code{at::bitwise_right_shift_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_bitwise_right_shift_ <- function(self, other) {
     C_torch_bitwise_right_shift_(self, other)
 }
 
+#' Tril 
+#'
+#' Wrapper for \code{at::tril_}.
+#' @param self A torch_tensor.
+#' @param diagonal An integer.
+#' @return A torch_tensor.
 #' @export
 torch_tril_ <- function(self, diagonal = 0) {
     C_torch_tril_(self, as.integer(diagonal))
 }
 
+#' Triu 
+#'
+#' Wrapper for \code{at::triu_}.
+#' @param self A torch_tensor.
+#' @param diagonal An integer.
+#' @return A torch_tensor.
 #' @export
 torch_triu_ <- function(self, diagonal = 0) {
     C_torch_triu_(self, as.integer(diagonal))
 }
 
+#' Digamma 
+#'
+#' Wrapper for \code{at::digamma_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_digamma_ <- function(self) {
     C_torch_digamma_(self)
 }
 
+#' Lerp 
+#'
+#' Wrapper for \code{at::lerp_}.
+#' @param self A torch_tensor.
+#' @param end A torch_tensor.
+#' @param weight A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_lerp_ <- function(self, end, weight) {
     C_torch_lerp_(self, end, weight)
 }
 
+#' Addbmm 
+#'
+#' Wrapper for \code{at::addbmm_}.
+#' @param self A torch_tensor.
+#' @param batch1 A torch_tensor.
+#' @param batch2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addbmm_ <- function(self, batch1, batch2, beta = 1, alpha = 1) {
     C_torch_addbmm_(self, batch1, batch2, beta, alpha)
 }
 
+#' Addbmm
+#'
+#' Wrapper for \code{at::addbmm}.
+#' @param self A torch_tensor.
+#' @param batch1 A torch_tensor.
+#' @param batch2 A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param alpha A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addbmm <- function(self, batch1, batch2, beta = 1, alpha = 1) {
     C_torch_addbmm(self, batch1, batch2, beta, alpha)
 }
 
+#' Random 
+#'
+#' Wrapper for \code{at::random_}.
+#' @param self A torch_tensor.
+#' @param from An integer.
+#' @param to An integer.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_random_ <- function(self, from, to, generator = NULL) {
     C_torch_random_(self, as.integer(from), to, generator)
 }
 
+#' Cauchy 
+#'
+#' Wrapper for \code{at::cauchy_}.
+#' @param self A torch_tensor.
+#' @param median A numeric value.
+#' @param sigma A numeric value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_cauchy_ <- function(self, median = 0, sigma = 1, generator = NULL) {
     C_torch_cauchy_(self, as.double(median), as.double(sigma), generator)
 }
 
+#' Log normal 
+#'
+#' Wrapper for \code{at::log_normal_}.
+#' @param self A torch_tensor.
+#' @param mean A numeric value.
+#' @param std A numeric value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_log_normal_ <- function(self, mean = 1, std = 2, generator = NULL) {
     C_torch_log_normal_(self, as.double(mean), as.double(std), generator)
 }
 
+#' Exponential 
+#'
+#' Wrapper for \code{at::exponential_}.
+#' @param self A torch_tensor.
+#' @param lambd A numeric value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_exponential_ <- function(self, lambd = 1, generator = NULL) {
     C_torch_exponential_(self, as.double(lambd), generator)
 }
 
+#' Geometric 
+#'
+#' Wrapper for \code{at::geometric_}.
+#' @param self A torch_tensor.
+#' @param p A numeric value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_geometric_ <- function(self, p, generator = NULL) {
     C_torch_geometric_(self, as.double(p), generator)
 }
 
+#' Diag
+#'
+#' Wrapper for \code{at::diag}.
+#' @param self A torch_tensor.
+#' @param diagonal An integer.
+#' @return A torch_tensor.
 #' @export
 torch_diag <- function(self, diagonal = 0) {
     C_torch_diag(self, as.integer(diagonal))
 }
 
+#' Cross
+#'
+#' Wrapper for \code{at::cross}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param dim An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_cross <- function(self, other, dim = NULL) {
     C_torch_cross(self, other, dim)
 }
 
+#' Tril
+#'
+#' Wrapper for \code{at::tril}.
+#' @param self A torch_tensor.
+#' @param diagonal An integer.
+#' @return A torch_tensor.
 #' @export
 torch_tril <- function(self, diagonal = 0) {
     C_torch_tril(self, as.integer(diagonal))
 }
 
+#' Tril indices
+#'
+#' Wrapper for \code{at::tril_indices}.
+#' @param row An integer.
+#' @param col An integer.
+#' @param offset An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_tril_indices <- function(row, col, offset = 0, dtype = long, device = NULL) {
     C_torch_tril_indices(as.integer(row), as.integer(col), as.integer(offset), dtype, device)
 }
 
+#' Triu indices
+#'
+#' Wrapper for \code{at::triu_indices}.
+#' @param row An integer.
+#' @param col An integer.
+#' @param offset An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_triu_indices <- function(row, col, offset = 0, dtype = long, device = NULL) {
     C_torch_triu_indices(as.integer(row), as.integer(col), as.integer(offset), dtype, device)
 }
 
+#' Trace
+#'
+#' Wrapper for \code{at::trace}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_trace <- function(self) {
     C_torch_trace(self)
 }
 
+#' Ne 
+#'
+#' Wrapper for \code{at::ne_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_ne_ <- function(self, other) {
     C_torch_ne_(self, other)
 }
 
+#' Not equal
+#'
+#' Wrapper for \code{at::not_equal}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_not_equal <- function(self, other) {
     C_torch_not_equal(self, other)
 }
 
+#' Not equal 
+#'
+#' Wrapper for \code{at::not_equal_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_not_equal_ <- function(self, other) {
     C_torch_not_equal_(self, other)
 }
 
+#' Ge 
+#'
+#' Wrapper for \code{at::ge_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_ge_ <- function(self, other) {
     C_torch_ge_(self, other)
 }
 
+#' Greater equal
+#'
+#' Wrapper for \code{at::greater_equal}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_greater_equal <- function(self, other) {
     C_torch_greater_equal(self, other)
 }
 
+#' Greater equal 
+#'
+#' Wrapper for \code{at::greater_equal_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_greater_equal_ <- function(self, other) {
     C_torch_greater_equal_(self, other)
 }
 
+#' Le 
+#'
+#' Wrapper for \code{at::le_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_le_ <- function(self, other) {
     C_torch_le_(self, other)
 }
 
+#' Less equal
+#'
+#' Wrapper for \code{at::less_equal}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_less_equal <- function(self, other) {
     C_torch_less_equal(self, other)
 }
 
+#' Less equal 
+#'
+#' Wrapper for \code{at::less_equal_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_less_equal_ <- function(self, other) {
     C_torch_less_equal_(self, other)
 }
 
+#' Gt 
+#'
+#' Wrapper for \code{at::gt_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_gt_ <- function(self, other) {
     C_torch_gt_(self, other)
 }
 
+#' Greater
+#'
+#' Wrapper for \code{at::greater}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_greater <- function(self, other) {
     C_torch_greater(self, other)
 }
 
+#' Greater 
+#'
+#' Wrapper for \code{at::greater_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_greater_ <- function(self, other) {
     C_torch_greater_(self, other)
 }
 
+#' Lt 
+#'
+#' Wrapper for \code{at::lt_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_lt_ <- function(self, other) {
     C_torch_lt_(self, other)
 }
 
+#' Less
+#'
+#' Wrapper for \code{at::less}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_less <- function(self, other) {
     C_torch_less(self, other)
 }
 
+#' Less 
+#'
+#' Wrapper for \code{at::less_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_less_ <- function(self, other) {
     C_torch_less_(self, other)
 }
 
+#' Take
+#'
+#' Wrapper for \code{at::take}.
+#' @param self A torch_tensor.
+#' @param index A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_take <- function(self, index) {
     C_torch_take(self, index)
 }
 
+#' Take along dim
+#'
+#' Wrapper for \code{at::take_along_dim}.
+#' @param self A torch_tensor.
+#' @param indices A torch_tensor.
+#' @param dim An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_take_along_dim <- function(self, indices, dim = NULL) {
     C_torch_take_along_dim(self, indices, dim)
 }
 
+#' Masked select
+#'
+#' Wrapper for \code{at::masked_select}.
+#' @param self A torch_tensor.
+#' @param mask A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_masked_select <- function(self, mask) {
     C_torch_masked_select(self, mask)
 }
 
+#' Nonzero
+#'
+#' Wrapper for \code{at::nonzero}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_nonzero <- function(self) {
     C_torch_nonzero(self)
 }
 
+#' Nonzero static
+#'
+#' Wrapper for \code{at::nonzero_static}.
+#' @param self A torch_tensor.
+#' @param size An integer.
+#' @param fill_value An integer.
+#' @return A torch_tensor.
 #' @export
 torch_nonzero_static <- function(self, size, fill_value = -1) {
     C_torch_nonzero_static(self, as.integer(size), as.integer(fill_value))
 }
 
+#' Nonzero numpy
+#'
+#' Wrapper for \code{at::nonzero_numpy}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_nonzero_numpy <- function(self) {
     C_torch_nonzero_numpy(self)
 }
 
+#' Argwhere
+#'
+#' Wrapper for \code{at::argwhere}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_argwhere <- function(self) {
     C_torch_argwhere(self)
 }
 
+#' Addcmul
+#'
+#' Wrapper for \code{at::addcmul}.
+#' @param self A torch_tensor.
+#' @param tensor1 A torch_tensor.
+#' @param tensor2 A torch_tensor.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addcmul <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcmul(self, tensor1, tensor2, value)
 }
 
+#' Addcmul 
+#'
+#' Wrapper for \code{at::addcmul_}.
+#' @param self A torch_tensor.
+#' @param tensor1 A torch_tensor.
+#' @param tensor2 A torch_tensor.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addcmul_ <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcmul_(self, tensor1, tensor2, value)
 }
 
+#' Addcdiv
+#'
+#' Wrapper for \code{at::addcdiv}.
+#' @param self A torch_tensor.
+#' @param tensor1 A torch_tensor.
+#' @param tensor2 A torch_tensor.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addcdiv <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcdiv(self, tensor1, tensor2, value)
 }
 
+#' Addcdiv 
+#'
+#' Wrapper for \code{at::addcdiv_}.
+#' @param self A torch_tensor.
+#' @param tensor1 A torch_tensor.
+#' @param tensor2 A torch_tensor.
+#' @param value A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_addcdiv_ <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcdiv_(self, tensor1, tensor2, value)
 }
 
+#' Cross entropy loss
+#'
+#' Wrapper for \code{at::cross_entropy_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor. Optional.
+#' @param reduction An integer.
+#' @param ignore_index An integer.
+#' @param label_smoothing A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_cross_entropy_loss <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100, label_smoothing = 0.0) {
     C_torch_cross_entropy_loss(self, target, weight, as.integer(reduction), as.integer(ignore_index), as.double(label_smoothing))
 }
 
+#' Triangular solve
+#'
+#' Wrapper for \code{at::triangular_solve}.
+#' @param self A torch_tensor.
+#' @param A A torch_tensor.
+#' @param upper A logical value.
+#' @param transpose A logical value.
+#' @param unitriangular A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_triangular_solve <- function(self, A, upper = TRUE, transpose = FALSE, unitriangular = FALSE) {
     C_torch_triangular_solve(self, A, as.logical(upper), as.logical(transpose), as.logical(unitriangular))
 }
 
+#' Linalg solve triangular
+#'
+#' Wrapper for \code{at::linalg_solve_triangular}.
+#' @param self A torch_tensor.
+#' @param B A torch_tensor.
+#' @param upper A logical value.
+#' @param left A logical value.
+#' @param unitriangular A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_solve_triangular <- function(self, B, upper, left = TRUE, unitriangular = FALSE) {
     C_torch_linalg_solve_triangular(self, B, as.logical(upper), as.logical(left), as.logical(unitriangular))
 }
 
+#' Linalg vander
+#'
+#' Wrapper for \code{at::linalg_vander}.
+#' @param x A torch_tensor.
+#' @param N An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_vander <- function(x, N = NULL) {
     C_torch_linalg_vander(x, N)
 }
 
+#' Svd
+#'
+#' Wrapper for \code{at::svd}.
+#' @param self A torch_tensor.
+#' @param some A logical value.
+#' @param compute_uv A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_svd <- function(self, some = TRUE, compute_uv = TRUE) {
     C_torch_svd(self, as.logical(some), as.logical(compute_uv))
 }
 
+#' Swapaxes
+#'
+#' Wrapper for \code{at::swapaxes}.
+#' @param self A torch_tensor.
+#' @param axis0 An integer.
+#' @param axis1 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_swapaxes <- function(self, axis0, axis1) {
     C_torch_swapaxes(self, as.integer(axis0), as.integer(axis1))
 }
 
+#' Swapaxes 
+#'
+#' Wrapper for \code{at::swapaxes_}.
+#' @param self A torch_tensor.
+#' @param axis0 An integer.
+#' @param axis1 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_swapaxes_ <- function(self, axis0, axis1) {
     C_torch_swapaxes_(self, as.integer(axis0), as.integer(axis1))
 }
 
+#' Swapdims
+#'
+#' Wrapper for \code{at::swapdims}.
+#' @param self A torch_tensor.
+#' @param dim0 An integer.
+#' @param dim1 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_swapdims <- function(self, dim0, dim1) {
     C_torch_swapdims(self, as.integer(dim0), as.integer(dim1))
 }
 
+#' Swapdims 
+#'
+#' Wrapper for \code{at::swapdims_}.
+#' @param self A torch_tensor.
+#' @param dim0 An integer.
+#' @param dim1 An integer.
+#' @return A torch_tensor.
 #' @export
 torch_swapdims_ <- function(self, dim0, dim1) {
     C_torch_swapdims_(self, as.integer(dim0), as.integer(dim1))
 }
 
+#' Cholesky
+#'
+#' Wrapper for \code{at::cholesky}.
+#' @param self A torch_tensor.
+#' @param upper A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_cholesky <- function(self, upper = FALSE) {
     C_torch_cholesky(self, as.logical(upper))
 }
 
+#' Cholesky solve
+#'
+#' Wrapper for \code{at::cholesky_solve}.
+#' @param self A torch_tensor.
+#' @param input2 A torch_tensor.
+#' @param upper A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_cholesky_solve <- function(self, input2, upper = FALSE) {
     C_torch_cholesky_solve(self, input2, as.logical(upper))
 }
 
+#' Cholesky inverse
+#'
+#' Wrapper for \code{at::cholesky_inverse}.
+#' @param self A torch_tensor.
+#' @param upper A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_cholesky_inverse <- function(self, upper = FALSE) {
     C_torch_cholesky_inverse(self, as.logical(upper))
 }
 
+#' Qr
+#'
+#' Wrapper for \code{at::qr}.
+#' @param self A torch_tensor.
+#' @param some A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_qr <- function(self, some = TRUE) {
     C_torch_qr(self, as.logical(some))
 }
 
+#' Geqrf
+#'
+#' Wrapper for \code{at::geqrf}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_geqrf <- function(self) {
     C_torch_geqrf(self)
 }
 
+#' Orgqr
+#'
+#' Wrapper for \code{at::orgqr}.
+#' @param self A torch_tensor.
+#' @param input2 A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_orgqr <- function(self, input2) {
     C_torch_orgqr(self, input2)
 }
 
+#' Ormqr
+#'
+#' Wrapper for \code{at::ormqr}.
+#' @param self A torch_tensor.
+#' @param input2 A torch_tensor.
+#' @param input3 A torch_tensor.
+#' @param left A logical value.
+#' @param transpose A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_ormqr <- function(self, input2, input3, left = TRUE, transpose = FALSE) {
     C_torch_ormqr(self, input2, input3, as.logical(left), as.logical(transpose))
 }
 
+#' Lu solve
+#'
+#' Wrapper for \code{at::lu_solve}.
+#' @param self A torch_tensor.
+#' @param LU_data A torch_tensor.
+#' @param LU_pivots A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_lu_solve <- function(self, LU_data, LU_pivots) {
     C_torch_lu_solve(self, LU_data, LU_pivots)
 }
 
+#' Lu unpack
+#'
+#' Wrapper for \code{at::lu_unpack}.
+#' @param LU_data A torch_tensor.
+#' @param LU_pivots A torch_tensor.
+#' @param unpack_data A logical value.
+#' @param unpack_pivots A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_lu_unpack <- function(LU_data, LU_pivots, unpack_data = TRUE, unpack_pivots = TRUE) {
     C_torch_lu_unpack(LU_data, LU_pivots, as.logical(unpack_data), as.logical(unpack_pivots))
 }
 
+#' Lgamma 
+#'
+#' Wrapper for \code{at::lgamma_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_lgamma_ <- function(self) {
     C_torch_lgamma_(self)
 }
 
+#' Lgamma
+#'
+#' Wrapper for \code{at::lgamma}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_lgamma <- function(self) {
     C_torch_lgamma(self)
 }
 
+#' Digamma
+#'
+#' Wrapper for \code{at::digamma}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_digamma <- function(self) {
     C_torch_digamma(self)
 }
 
+#' Polygamma
+#'
+#' Wrapper for \code{at::polygamma}.
+#' @param n An integer.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_polygamma <- function(n, self) {
     C_torch_polygamma(as.integer(n), self)
 }
 
+#' Polygamma 
+#'
+#' Wrapper for \code{at::polygamma_}.
+#' @param self A torch_tensor.
+#' @param n An integer.
+#' @return A torch_tensor.
 #' @export
 torch_polygamma_ <- function(self, n) {
     C_torch_polygamma_(self, as.integer(n))
 }
 
+#' Erfinv
+#'
+#' Wrapper for \code{at::erfinv}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_erfinv <- function(self) {
     C_torch_erfinv(self)
 }
 
+#' Erfinv 
+#'
+#' Wrapper for \code{at::erfinv_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_erfinv_ <- function(self) {
     C_torch_erfinv_(self)
 }
 
+#' I0
+#'
+#' Wrapper for \code{at::i0}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_i0 <- function(self) {
     C_torch_i0(self)
 }
 
+#' I0 
+#'
+#' Wrapper for \code{at::i0_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_i0_ <- function(self) {
     C_torch_i0_(self)
 }
 
+#' Sign 
+#'
+#' Wrapper for \code{at::sign_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_sign_ <- function(self) {
     C_torch_sign_(self)
 }
 
+#' Signbit
+#'
+#' Wrapper for \code{at::signbit}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_signbit <- function(self) {
     C_torch_signbit(self)
 }
 
+#' Dist
+#'
+#' Wrapper for \code{at::dist}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param p A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_dist <- function(self, other, p = 2) {
     C_torch_dist(self, other, p)
 }
 
+#' Atan2 
+#'
+#' Wrapper for \code{at::atan2_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atan2_ <- function(self, other) {
     C_torch_atan2_(self, other)
 }
 
+#' Atan2
+#'
+#' Wrapper for \code{at::atan2}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_atan2 <- function(self, other) {
     C_torch_atan2(self, other)
 }
 
+#' Arctan2
+#'
+#' Wrapper for \code{at::arctan2}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arctan2 <- function(self, other) {
     C_torch_arctan2(self, other)
 }
 
+#' Arctan2 
+#'
+#' Wrapper for \code{at::arctan2_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_arctan2_ <- function(self, other) {
     C_torch_arctan2_(self, other)
 }
 
+#' Lerp
+#'
+#' Wrapper for \code{at::lerp}.
+#' @param self A torch_tensor.
+#' @param end A torch_tensor.
+#' @param weight A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_lerp <- function(self, end, weight) {
     C_torch_lerp(self, end, weight)
 }
 
+#' Histc
+#'
+#' Wrapper for \code{at::histc}.
+#' @param self A torch_tensor.
+#' @param bins An integer.
+#' @param min A numeric scalar.
+#' @param max A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_histc <- function(self, bins = 100, min = 0, max = 0) {
     C_torch_histc(self, as.integer(bins), min, max)
 }
 
+#' Histogram
+#'
+#' Wrapper for \code{at::histogram}.
+#' @param self A torch_tensor.
+#' @param bins A torch_tensor.
+#' @param weight A torch_tensor. Optional.
+#' @param density A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_histogram <- function(self, bins, weight = NULL, density = FALSE) {
     C_torch_histogram(self, bins, weight, as.logical(density))
 }
 
+#' Histogramdd
+#'
+#' Wrapper for \code{at::histogramdd}.
+#' @param self A torch_tensor.
+#' @param bins An integer vector.
+#' @param range A numeric vector. Optional.
+#' @param weight A torch_tensor. Optional.
+#' @param density A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_histogramdd <- function(self, bins, range = NULL, weight = NULL, density = FALSE) {
     C_torch_histogramdd(self, bins, range, weight, as.logical(density))
 }
 
+#' Fmod
+#'
+#' Wrapper for \code{at::fmod}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_fmod <- function(self, other) {
     C_torch_fmod(self, other)
 }
 
+#' Fmod 
+#'
+#' Wrapper for \code{at::fmod_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_fmod_ <- function(self, other) {
     C_torch_fmod_(self, other)
 }
 
+#' Hypot
+#'
+#' Wrapper for \code{at::hypot}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_hypot <- function(self, other) {
     C_torch_hypot(self, other)
 }
 
+#' Hypot 
+#'
+#' Wrapper for \code{at::hypot_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_hypot_ <- function(self, other) {
     C_torch_hypot_(self, other)
 }
 
+#' Igamma
+#'
+#' Wrapper for \code{at::igamma}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_igamma <- function(self, other) {
     C_torch_igamma(self, other)
 }
 
+#' Igamma 
+#'
+#' Wrapper for \code{at::igamma_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_igamma_ <- function(self, other) {
     C_torch_igamma_(self, other)
 }
 
+#' Igammac
+#'
+#' Wrapper for \code{at::igammac}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_igammac <- function(self, other) {
     C_torch_igammac(self, other)
 }
 
+#' Igammac 
+#'
+#' Wrapper for \code{at::igammac_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_igammac_ <- function(self, other) {
     C_torch_igammac_(self, other)
 }
 
+#' Nextafter
+#'
+#' Wrapper for \code{at::nextafter}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_nextafter <- function(self, other) {
     C_torch_nextafter(self, other)
 }
 
+#' Nextafter 
+#'
+#' Wrapper for \code{at::nextafter_}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_nextafter_ <- function(self, other) {
     C_torch_nextafter_(self, other)
 }
 
+#' Remainder 
+#'
+#' Wrapper for \code{at::remainder_}.
+#' @param self A torch_tensor.
+#' @param other A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_remainder_ <- function(self, other) {
     C_torch_remainder_(self, other)
 }
 
+#' Fmin
+#'
+#' Wrapper for \code{at::fmin}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_fmin <- function(self, other) {
     C_torch_fmin(self, other)
 }
 
+#' Fmax
+#'
+#' Wrapper for \code{at::fmax}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_fmax <- function(self, other) {
     C_torch_fmax(self, other)
 }
 
+#' Minimum
+#'
+#' Wrapper for \code{at::minimum}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_minimum <- function(self, other) {
     C_torch_minimum(self, other)
 }
 
+#' Quantile
+#'
+#' Wrapper for \code{at::quantile}.
+#' @param self A torch_tensor.
+#' @param q A torch_tensor.
+#' @param dim An integer. Optional.
+#' @param keepdim A logical value.
+#' @param interpolation A character string.
+#' @return A torch_tensor.
 #' @export
 torch_quantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = 'linear') {
     C_torch_quantile(self, q, dim, as.logical(keepdim), interpolation)
 }
 
+#' Nanquantile
+#'
+#' Wrapper for \code{at::nanquantile}.
+#' @param self A torch_tensor.
+#' @param q A torch_tensor.
+#' @param dim An integer. Optional.
+#' @param keepdim A logical value.
+#' @param interpolation A character string.
+#' @return A torch_tensor.
 #' @export
 torch_nanquantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = 'linear') {
     C_torch_nanquantile(self, q, dim, as.logical(keepdim), interpolation)
 }
 
+#' Msort
+#'
+#' Wrapper for \code{at::msort}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_msort <- function(self) {
     C_torch_msort(self)
 }
 
+#' Argsort
+#'
+#' Wrapper for \code{at::argsort}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param descending A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_argsort <- function(self, dim = -1, descending = FALSE) {
     C_torch_argsort(self, as.integer(dim), as.logical(descending))
 }
 
+#' Topk
+#'
+#' Wrapper for \code{at::topk}.
+#' @param self A torch_tensor.
+#' @param k An integer.
+#' @param dim An integer.
+#' @param largest A logical value.
+#' @param sorted A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_topk <- function(self, k, dim = -1, largest = TRUE, sorted = TRUE) {
     C_torch_topk(self, as.integer(k), as.integer(dim), as.logical(largest), as.logical(sorted))
 }
 
+#' Renorm
+#'
+#' Wrapper for \code{at::renorm}.
+#' @param self A torch_tensor.
+#' @param p A numeric scalar.
+#' @param dim An integer.
+#' @param maxnorm A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_renorm <- function(self, p, dim, maxnorm) {
     C_torch_renorm(self, p, as.integer(dim), maxnorm)
 }
 
+#' Renorm 
+#'
+#' Wrapper for \code{at::renorm_}.
+#' @param self A torch_tensor.
+#' @param p A numeric scalar.
+#' @param dim An integer.
+#' @param maxnorm A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_renorm_ <- function(self, p, dim, maxnorm) {
     C_torch_renorm_(self, p, as.integer(dim), maxnorm)
 }
 
+#' Unfold
+#'
+#' Wrapper for \code{at::unfold}.
+#' @param self A torch_tensor.
+#' @param dimension An integer.
+#' @param size An integer.
+#' @param step An integer.
+#' @return A torch_tensor.
 #' @export
 torch_unfold <- function(self, dimension, size, step) {
     C_torch_unfold(self, as.integer(dimension), as.integer(size), as.integer(step))
 }
 
+#' Equal
+#'
+#' Wrapper for \code{at::equal}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_equal <- function(self, other) {
     C_torch_equal(self, other)
 }
 
+#' Pow 
+#'
+#' Wrapper for \code{at::pow_}.
+#' @param self A torch_tensor.
+#' @param exponent A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_pow_ <- function(self, exponent) {
     C_torch_pow_(self, exponent)
 }
 
+#' Float power
+#'
+#' Wrapper for \code{at::float_power}.
+#' @param self A torch_tensor.
+#' @param exponent A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_float_power <- function(self, exponent) {
     C_torch_float_power(self, exponent)
 }
 
+#' Float power 
+#'
+#' Wrapper for \code{at::float_power_}.
+#' @param self A torch_tensor.
+#' @param exponent A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_float_power_ <- function(self, exponent) {
     C_torch_float_power_(self, exponent)
 }
 
+#' Normal functional
+#'
+#' Wrapper for \code{at::normal_functional}.
+#' @param self A torch_tensor.
+#' @param mean A numeric value.
+#' @param std A numeric value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_normal_functional <- function(self, mean = 0, std = 1, generator = NULL) {
     C_torch_normal_functional(self, as.double(mean), as.double(std), generator)
 }
 
+#' Normal
+#'
+#' Wrapper for \code{at::normal}.
+#' @param mean A torch_tensor.
+#' @param std A numeric value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_normal <- function(mean, std = 1, generator = NULL) {
     C_torch_normal(mean, as.double(std), generator)
 }
 
+#' Alias
+#'
+#' Wrapper for \code{at::alias}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_alias <- function(self) {
     C_torch_alias(self)
 }
 
+#' Bucketize
+#'
+#' Wrapper for \code{at::bucketize}.
+#' @param self A torch_tensor.
+#' @param boundaries A torch_tensor.
+#' @param out_int32 A logical value.
+#' @param right A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_bucketize <- function(self, boundaries, out_int32 = FALSE, right = FALSE) {
     C_torch_bucketize(self, boundaries, as.logical(out_int32), as.logical(right))
 }
 
+#' Searchsorted
+#'
+#' Wrapper for \code{at::searchsorted}.
+#' @param sorted_sequence A torch_tensor.
+#' @param self A torch_tensor.
+#' @param out_int32 A logical value.
+#' @param right A logical value.
+#' @param side A character string. Optional.
+#' @param sorter A torch_tensor. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_searchsorted <- function(sorted_sequence, self, out_int32 = FALSE, right = FALSE, side = NULL, sorter = NULL) {
     C_torch_searchsorted(sorted_sequence, self, as.logical(out_int32), as.logical(right), side, sorter)
 }
 
+#' Mse loss
+#'
+#' Wrapper for \code{at::mse_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_mse_loss <- function(self, target, reduction = Mean) {
     C_torch_mse_loss(self, target, as.integer(reduction))
 }
 
+#' L1 loss
+#'
+#' Wrapper for \code{at::l1_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_l1_loss <- function(self, target, reduction = Mean) {
     C_torch_l1_loss(self, target, as.integer(reduction))
 }
 
+#' Multi margin loss
+#'
+#' Wrapper for \code{at::multi_margin_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param p A numeric scalar.
+#' @param margin A numeric scalar.
+#' @param weight A torch_tensor. Optional.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_multi_margin_loss <- function(self, target, p = 1, margin = 1, weight = NULL, reduction = Mean) {
     C_torch_multi_margin_loss(self, target, p, margin, weight, as.integer(reduction))
 }
 
+#' Multilabel margin loss
+#'
+#' Wrapper for \code{at::multilabel_margin_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_multilabel_margin_loss <- function(self, target, reduction = Mean) {
     C_torch_multilabel_margin_loss(self, target, as.integer(reduction))
 }
 
+#' Multilabel margin loss forward
+#'
+#' Wrapper for \code{at::multilabel_margin_loss_forward}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_multilabel_margin_loss_forward <- function(self, target, reduction) {
     C_torch_multilabel_margin_loss_forward(self, target, as.integer(reduction))
 }
 
+#' Nll loss nd
+#'
+#' Wrapper for \code{at::nll_loss_nd}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor. Optional.
+#' @param reduction An integer.
+#' @param ignore_index An integer.
+#' @return A torch_tensor.
 #' @export
 torch_nll_loss_nd <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100) {
     C_torch_nll_loss_nd(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
+#' Nll loss
+#'
+#' Wrapper for \code{at::nll_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor. Optional.
+#' @param reduction An integer.
+#' @param ignore_index An integer.
+#' @return A torch_tensor.
 #' @export
 torch_nll_loss <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100) {
     C_torch_nll_loss(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
+#' Nll loss forward
+#'
+#' Wrapper for \code{at::nll_loss_forward}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param reduction An integer.
+#' @param ignore_index An integer.
+#' @return A torch_tensor.
 #' @export
 torch_nll_loss_forward <- function(self, target, weight, reduction, ignore_index) {
     C_torch_nll_loss_forward(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
+#' Nll loss2d
+#'
+#' Wrapper for \code{at::nll_loss2d}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor. Optional.
+#' @param reduction An integer.
+#' @param ignore_index An integer.
+#' @return A torch_tensor.
 #' @export
 torch_nll_loss2d <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100) {
     C_torch_nll_loss2d(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
+#' Nll loss2d forward
+#'
+#' Wrapper for \code{at::nll_loss2d_forward}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param reduction An integer.
+#' @param ignore_index An integer.
+#' @return A torch_tensor.
 #' @export
 torch_nll_loss2d_forward <- function(self, target, weight, reduction, ignore_index) {
     C_torch_nll_loss2d_forward(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
+#' Smooth l1 loss
+#'
+#' Wrapper for \code{at::smooth_l1_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @param beta A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_smooth_l1_loss <- function(self, target, reduction = Mean, beta = 1.0) {
     C_torch_smooth_l1_loss(self, target, as.integer(reduction), as.double(beta))
 }
 
+#' Huber loss
+#'
+#' Wrapper for \code{at::huber_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @param delta A numeric value.
+#' @return A torch_tensor.
 #' @export
 torch_huber_loss <- function(self, target, reduction = Mean, delta = 1.0) {
     C_torch_huber_loss(self, target, as.integer(reduction), as.double(delta))
 }
 
+#' Soft margin loss
+#'
+#' Wrapper for \code{at::soft_margin_loss}.
+#' @param self A torch_tensor.
+#' @param target A torch_tensor.
+#' @param reduction An integer.
+#' @return A torch_tensor.
 #' @export
 torch_soft_margin_loss <- function(self, target, reduction = Mean) {
     C_torch_soft_margin_loss(self, target, as.integer(reduction))
 }
 
+#' Elu
+#'
+#' Wrapper for \code{at::elu}.
+#' @param self A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @param scale A numeric scalar.
+#' @param input_scale A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_elu <- function(self, alpha = 1, scale = 1, input_scale = 1) {
     C_torch_elu(self, alpha, scale, input_scale)
 }
 
+#' Elu 
+#'
+#' Wrapper for \code{at::elu_}.
+#' @param self A torch_tensor.
+#' @param alpha A numeric scalar.
+#' @param scale A numeric scalar.
+#' @param input_scale A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_elu_ <- function(self, alpha = 1, scale = 1, input_scale = 1) {
     C_torch_elu_(self, alpha, scale, input_scale)
 }
 
+#' Glu
+#'
+#' Wrapper for \code{at::glu}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_glu <- function(self, dim = -1) {
     C_torch_glu(self, as.integer(dim))
 }
 
+#' Glu jvp
+#'
+#' Wrapper for \code{at::glu_jvp}.
+#' @param glu A torch_tensor.
+#' @param x A torch_tensor.
+#' @param dx A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_glu_jvp <- function(glu, x, dx, dim) {
     C_torch_glu_jvp(glu, x, dx, as.integer(dim))
 }
 
+#' Hardsigmoid
+#'
+#' Wrapper for \code{at::hardsigmoid}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_hardsigmoid <- function(self) {
     C_torch_hardsigmoid(self)
 }
 
+#' Hardsigmoid 
+#'
+#' Wrapper for \code{at::hardsigmoid_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_hardsigmoid_ <- function(self) {
     C_torch_hardsigmoid_(self)
 }
 
+#' Hardtanh
+#'
+#' Wrapper for \code{at::hardtanh}.
+#' @param self A torch_tensor.
+#' @param min_val A numeric scalar.
+#' @param max_val A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_hardtanh <- function(self, min_val = -1, max_val = 1) {
     C_torch_hardtanh(self, min_val, max_val)
 }
 
+#' Hardtanh 
+#'
+#' Wrapper for \code{at::hardtanh_}.
+#' @param self A torch_tensor.
+#' @param min_val A numeric scalar.
+#' @param max_val A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_hardtanh_ <- function(self, min_val = -1, max_val = 1) {
     C_torch_hardtanh_(self, min_val, max_val)
 }
 
+#' Hardswish
+#'
+#' Wrapper for \code{at::hardswish}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_hardswish <- function(self) {
     C_torch_hardswish(self)
 }
 
+#' Hardswish 
+#'
+#' Wrapper for \code{at::hardswish_}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_hardswish_ <- function(self) {
     C_torch_hardswish_(self)
 }
 
+#' Leaky relu
+#'
+#' Wrapper for \code{at::leaky_relu}.
+#' @param self A torch_tensor.
+#' @param negative_slope A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_leaky_relu <- function(self, negative_slope = 0.01) {
     C_torch_leaky_relu(self, negative_slope)
 }
 
+#' Leaky relu 
+#'
+#' Wrapper for \code{at::leaky_relu_}.
+#' @param self A torch_tensor.
+#' @param negative_slope A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_leaky_relu_ <- function(self, negative_slope = 0.01) {
     C_torch_leaky_relu_(self, negative_slope)
 }
 
+#' Log sigmoid
+#'
+#' Wrapper for \code{at::log_sigmoid}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log_sigmoid <- function(self) {
     C_torch_log_sigmoid(self)
 }
 
+#' Log sigmoid forward
+#'
+#' Wrapper for \code{at::log_sigmoid_forward}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_log_sigmoid_forward <- function(self) {
     C_torch_log_sigmoid_forward(self)
 }
 
+#' Rrelu with noise
+#'
+#' Wrapper for \code{at::rrelu_with_noise}.
+#' @param self A torch_tensor.
+#' @param noise A torch_tensor.
+#' @param lower A numeric scalar.
+#' @param upper A numeric scalar.
+#' @param training A logical value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rrelu_with_noise <- function(self, noise, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu_with_noise(self, noise, lower, upper, as.logical(training), generator)
 }
 
+#' Rrelu with noise 
+#'
+#' Wrapper for \code{at::rrelu_with_noise_}.
+#' @param self A torch_tensor.
+#' @param noise A torch_tensor.
+#' @param lower A numeric scalar.
+#' @param upper A numeric scalar.
+#' @param training A logical value.
+#' @param generator A random number generator. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_rrelu_with_noise_ <- function(self, noise, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu_with_noise_(self, noise, lower, upper, as.logical(training), generator)
 }
 
+#' Softplus
+#'
+#' Wrapper for \code{at::softplus}.
+#' @param self A torch_tensor.
+#' @param beta A numeric scalar.
+#' @param threshold A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_softplus <- function(self, beta = 1, threshold = 20) {
     C_torch_softplus(self, beta, threshold)
 }
 
+#' Softshrink
+#'
+#' Wrapper for \code{at::softshrink}.
+#' @param self A torch_tensor.
+#' @param lambd A numeric scalar.
+#' @return A torch_tensor.
 #' @export
 torch_softshrink <- function(self, lambd = 0.5) {
     C_torch_softshrink(self, lambd)
 }
 
+#' Adaptive avg pool2d
+#'
+#' Wrapper for \code{at::adaptive_avg_pool2d}.
+#' @param self A torch_tensor.
+#' @param output_size (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_adaptive_avg_pool2d <- function(self, output_size) {
     C_torch_adaptive_avg_pool2d(self, output_size)
 }
 
+#' Adaptive avg pool3d
+#'
+#' Wrapper for \code{at::adaptive_avg_pool3d}.
+#' @param self A torch_tensor.
+#' @param output_size (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_adaptive_avg_pool3d <- function(self, output_size) {
     C_torch_adaptive_avg_pool3d(self, output_size)
 }
 
+#' Adaptive max pool2d
+#'
+#' Wrapper for \code{at::adaptive_max_pool2d}.
+#' @param self A torch_tensor.
+#' @param output_size (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_adaptive_max_pool2d <- function(self, output_size) {
     C_torch_adaptive_max_pool2d(self, output_size)
 }
 
+#' Adaptive max pool3d
+#'
+#' Wrapper for \code{at::adaptive_max_pool3d}.
+#' @param self A torch_tensor.
+#' @param output_size (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_adaptive_max_pool3d <- function(self, output_size) {
     C_torch_adaptive_max_pool3d(self, output_size)
 }
 
+#' Avg pool2d
+#'
+#' Wrapper for \code{at::avg_pool2d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @param ceil_mode A logical value.
+#' @param count_include_pad A logical value.
+#' @param divisor_override An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_avg_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, count_include_pad = TRUE, divisor_override = NULL) {
     C_torch_avg_pool2d(self, kernel_size, stride, padding, as.logical(ceil_mode), as.logical(count_include_pad), divisor_override)
 }
 
+#' Avg pool3d
+#'
+#' Wrapper for \code{at::avg_pool3d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param ceil_mode A logical value.
+#' @param count_include_pad A logical value.
+#' @param divisor_override An integer. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_avg_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, count_include_pad = TRUE, divisor_override = NULL) {
     C_torch_avg_pool3d(self, kernel_size, stride, padding, as.logical(ceil_mode), as.logical(count_include_pad), divisor_override)
 }
 
+#' Fractional max pool2d
+#'
+#' Wrapper for \code{at::fractional_max_pool2d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param output_size (int[2]).
+#' @param random_samples A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_fractional_max_pool2d <- function(self, kernel_size, output_size, random_samples) {
     C_torch_fractional_max_pool2d(self, kernel_size, output_size, random_samples)
 }
 
+#' Fractional max pool3d
+#'
+#' Wrapper for \code{at::fractional_max_pool3d}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param output_size (int[3]).
+#' @param random_samples A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_fractional_max_pool3d <- function(self, kernel_size, output_size, random_samples) {
     C_torch_fractional_max_pool3d(self, kernel_size, output_size, random_samples)
 }
 
+#' Max pool2d with indices
+#'
+#' Wrapper for \code{at::max_pool2d_with_indices}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @param dilation (int[2]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_max_pool2d_with_indices <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool2d_with_indices(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Max pool3d with indices
+#'
+#' Wrapper for \code{at::max_pool3d_with_indices}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param dilation (int[3]).
+#' @param ceil_mode A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_max_pool3d_with_indices <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool3d_with_indices(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
 
+#' Max unpool2d
+#'
+#' Wrapper for \code{at::max_unpool2d}.
+#' @param self A torch_tensor.
+#' @param indices A torch_tensor.
+#' @param output_size (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_max_unpool2d <- function(self, indices, output_size) {
     C_torch_max_unpool2d(self, indices, output_size)
 }
 
+#' Max unpool3d
+#'
+#' Wrapper for \code{at::max_unpool3d}.
+#' @param self A torch_tensor.
+#' @param indices A torch_tensor.
+#' @param output_size (int[3]).
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_max_unpool3d <- function(self, indices, output_size, stride, padding) {
     C_torch_max_unpool3d(self, indices, output_size, stride, padding)
 }
 
+#' Reflection pad1d
+#'
+#' Wrapper for \code{at::reflection_pad1d}.
+#' @param self A torch_tensor.
+#' @param padding (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_reflection_pad1d <- function(self, padding) {
     C_torch_reflection_pad1d(self, padding)
 }
 
+#' Reflection pad2d
+#'
+#' Wrapper for \code{at::reflection_pad2d}.
+#' @param self A torch_tensor.
+#' @param padding (int[4]).
+#' @return A torch_tensor.
 #' @export
 torch_reflection_pad2d <- function(self, padding) {
     C_torch_reflection_pad2d(self, padding)
 }
 
+#' Reflection pad3d
+#'
+#' Wrapper for \code{at::reflection_pad3d}.
+#' @param self A torch_tensor.
+#' @param padding (int[6]).
+#' @return A torch_tensor.
 #' @export
 torch_reflection_pad3d <- function(self, padding) {
     C_torch_reflection_pad3d(self, padding)
 }
 
+#' Replication pad1d
+#'
+#' Wrapper for \code{at::replication_pad1d}.
+#' @param self A torch_tensor.
+#' @param padding (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_replication_pad1d <- function(self, padding) {
     C_torch_replication_pad1d(self, padding)
 }
 
+#' Replication pad2d
+#'
+#' Wrapper for \code{at::replication_pad2d}.
+#' @param self A torch_tensor.
+#' @param padding (int[4]).
+#' @return A torch_tensor.
 #' @export
 torch_replication_pad2d <- function(self, padding) {
     C_torch_replication_pad2d(self, padding)
 }
 
+#' Replication pad3d
+#'
+#' Wrapper for \code{at::replication_pad3d}.
+#' @param self A torch_tensor.
+#' @param padding (int[6]).
+#' @return A torch_tensor.
 #' @export
 torch_replication_pad3d <- function(self, padding) {
     C_torch_replication_pad3d(self, padding)
 }
 
+#' Pad
+#'
+#' Wrapper for \code{at::pad}.
+#' @param self A torch_tensor.
+#' @param pad An integer vector.
+#' @param mode A character string.
+#' @param value A numeric value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_pad <- function(self, pad, mode = "constant", value = NULL) {
     C_torch_pad(self, pad, mode, value)
 }
 
+#' Upsample linear1d
+#'
+#' Wrapper for \code{at::upsample_linear1d}.
+#' @param input A torch_tensor.
+#' @param output_size An integer vector.
+#' @param align_corners A logical value.
+#' @param scale_factors A numeric vector.
+#' @return A torch_tensor.
 #' @export
 torch_upsample_linear1d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_linear1d(input, output_size, as.logical(align_corners), scale_factors)
 }
 
+#' Upsample bilinear2d
+#'
+#' Wrapper for \code{at::upsample_bilinear2d}.
+#' @param input A torch_tensor.
+#' @param output_size An integer vector.
+#' @param align_corners A logical value.
+#' @param scale_factors A numeric vector.
+#' @return A torch_tensor.
 #' @export
 torch_upsample_bilinear2d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_bilinear2d(input, output_size, as.logical(align_corners), scale_factors)
 }
 
+#' Upsample trilinear3d
+#'
+#' Wrapper for \code{at::upsample_trilinear3d}.
+#' @param input A torch_tensor.
+#' @param output_size An integer vector.
+#' @param align_corners A logical value.
+#' @param scale_factors A numeric vector.
+#' @return A torch_tensor.
 #' @export
 torch_upsample_trilinear3d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_trilinear3d(input, output_size, as.logical(align_corners), scale_factors)
 }
 
+#' Upsample bicubic2d
+#'
+#' Wrapper for \code{at::upsample_bicubic2d}.
+#' @param input A torch_tensor.
+#' @param output_size An integer vector.
+#' @param align_corners A logical value.
+#' @param scale_factors A numeric vector.
+#' @return A torch_tensor.
 #' @export
 torch_upsample_bicubic2d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_bicubic2d(input, output_size, as.logical(align_corners), scale_factors)
 }
 
+#' Upsample nearest1d
+#'
+#' Wrapper for \code{at::upsample_nearest1d}.
+#' @param input A torch_tensor.
+#' @param output_size An integer vector.
+#' @param scale_factors A numeric vector.
+#' @return A torch_tensor.
 #' @export
 torch_upsample_nearest1d <- function(input, output_size, scale_factors) {
     C_torch_upsample_nearest1d(input, output_size, scale_factors)
 }
 
+#' Upsample nearest2d
+#'
+#' Wrapper for \code{at::upsample_nearest2d}.
+#' @param input A torch_tensor.
+#' @param output_size An integer vector.
+#' @param scale_factors A numeric vector.
+#' @return A torch_tensor.
 #' @export
 torch_upsample_nearest2d <- function(input, output_size, scale_factors) {
     C_torch_upsample_nearest2d(input, output_size, scale_factors)
 }
 
+#' Upsample nearest3d
+#'
+#' Wrapper for \code{at::upsample_nearest3d}.
+#' @param input A torch_tensor.
+#' @param output_size An integer vector.
+#' @param scale_factors A numeric vector.
+#' @return A torch_tensor.
 #' @export
 torch_upsample_nearest3d <- function(input, output_size, scale_factors) {
     C_torch_upsample_nearest3d(input, output_size, scale_factors)
 }
 
+#' Slow conv transpose2d
+#'
+#' Wrapper for \code{at::slow_conv_transpose2d}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @param output_padding (int[2]).
+#' @param dilation (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_slow_conv_transpose2d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, output_padding = 0, dilation = 1) {
     C_torch_slow_conv_transpose2d(self, weight, kernel_size, bias, stride, padding, output_padding, dilation)
 }
 
+#' Slow conv transpose3d
+#'
+#' Wrapper for \code{at::slow_conv_transpose3d}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param output_padding (int[3]).
+#' @param dilation (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_slow_conv_transpose3d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, output_padding = 0, dilation = 1) {
     C_torch_slow_conv_transpose3d(self, weight, kernel_size, bias, stride, padding, output_padding, dilation)
 }
 
+#' Thnn conv2d
+#'
+#' Wrapper for \code{at::thnn_conv2d}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_thnn_conv2d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0) {
     C_torch_thnn_conv2d(self, weight, kernel_size, bias, stride, padding)
 }
 
+#' Conv depthwise3d
+#'
+#' Wrapper for \code{at::conv_depthwise3d}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param bias A torch_tensor.
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param dilation (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_conv_depthwise3d <- function(self, weight, kernel_size, bias, stride, padding, dilation) {
     C_torch_conv_depthwise3d(self, weight, kernel_size, bias, stride, padding, dilation)
 }
 
+#' Slow conv3d
+#'
+#' Wrapper for \code{at::slow_conv3d}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_slow_conv3d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0) {
     C_torch_slow_conv3d(self, weight, kernel_size, bias, stride, padding)
 }
 
+#' Slow conv3d forward
+#'
+#' Wrapper for \code{at::slow_conv3d_forward}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param bias A torch_tensor.
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_slow_conv3d_forward <- function(self, weight, kernel_size, bias, stride, padding) {
     C_torch_slow_conv3d_forward(self, weight, kernel_size, bias, stride, padding)
 }
 
+#' Slow conv dilated2d
+#'
+#' Wrapper for \code{at::slow_conv_dilated2d}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[2]).
+#' @param padding (int[2]).
+#' @param dilation (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_slow_conv_dilated2d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, dilation = 1) {
     C_torch_slow_conv_dilated2d(self, weight, kernel_size, bias, stride, padding, dilation)
 }
 
+#' Slow conv dilated3d
+#'
+#' Wrapper for \code{at::slow_conv_dilated3d}.
+#' @param self A torch_tensor.
+#' @param weight A torch_tensor.
+#' @param kernel_size (int[3]).
+#' @param bias A torch_tensor. Optional.
+#' @param stride (int[3]).
+#' @param padding (int[3]).
+#' @param dilation (int[3]).
+#' @return A torch_tensor.
 #' @export
 torch_slow_conv_dilated3d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, dilation = 1) {
     C_torch_slow_conv_dilated3d(self, weight, kernel_size, bias, stride, padding, dilation)
 }
 
+#' Col2im
+#'
+#' Wrapper for \code{at::col2im}.
+#' @param self A torch_tensor.
+#' @param output_size (int[2]).
+#' @param kernel_size (int[2]).
+#' @param dilation (int[2]).
+#' @param padding (int[2]).
+#' @param stride (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_col2im <- function(self, output_size, kernel_size, dilation, padding, stride) {
     C_torch_col2im(self, output_size, kernel_size, dilation, padding, stride)
 }
 
+#' Column stack
+#'
+#' Wrapper for \code{at::column_stack}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_column_stack <- function(tensors) {
     C_torch_column_stack(tensors)
 }
 
+#' Im2col
+#'
+#' Wrapper for \code{at::im2col}.
+#' @param self A torch_tensor.
+#' @param kernel_size (int[2]).
+#' @param dilation (int[2]).
+#' @param padding (int[2]).
+#' @param stride (int[2]).
+#' @return A torch_tensor.
 #' @export
 torch_im2col <- function(self, kernel_size, dilation, padding, stride) {
     C_torch_im2col(self, kernel_size, dilation, padding, stride)
 }
 
+#' Isfinite
+#'
+#' Wrapper for \code{at::isfinite}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_isfinite <- function(self) {
     C_torch_isfinite(self)
 }
 
+#' Isinf
+#'
+#' Wrapper for \code{at::isinf}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_isinf <- function(self) {
     C_torch_isinf(self)
 }
 
+#' Isposinf
+#'
+#' Wrapper for \code{at::isposinf}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_isposinf <- function(self) {
     C_torch_isposinf(self)
 }
 
+#' Isneginf
+#'
+#' Wrapper for \code{at::isneginf}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_isneginf <- function(self) {
     C_torch_isneginf(self)
 }
 
+#' Special entr
+#'
+#' Wrapper for \code{at::special_entr}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_entr <- function(self) {
     C_torch_special_entr(self)
 }
 
+#' Special ndtri
+#'
+#' Wrapper for \code{at::special_ndtri}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_ndtri <- function(self) {
     C_torch_special_ndtri(self)
 }
 
+#' Special log ndtr
+#'
+#' Wrapper for \code{at::special_log_ndtr}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_log_ndtr <- function(self) {
     C_torch_special_log_ndtr(self)
 }
 
+#' Special expm1
+#'
+#' Wrapper for \code{at::special_expm1}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_expm1 <- function(self) {
     C_torch_special_expm1(self)
 }
 
+#' Special exp2
+#'
+#' Wrapper for \code{at::special_exp2}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_exp2 <- function(self) {
     C_torch_special_exp2(self)
 }
 
+#' Special psi
+#'
+#' Wrapper for \code{at::special_psi}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_psi <- function(self) {
     C_torch_special_psi(self)
 }
 
+#' Special digamma
+#'
+#' Wrapper for \code{at::special_digamma}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_digamma <- function(self) {
     C_torch_special_digamma(self)
 }
 
+#' Special gammaln
+#'
+#' Wrapper for \code{at::special_gammaln}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_gammaln <- function(self) {
     C_torch_special_gammaln(self)
 }
 
+#' Special erf
+#'
+#' Wrapper for \code{at::special_erf}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_erf <- function(self) {
     C_torch_special_erf(self)
 }
 
+#' Special erfc
+#'
+#' Wrapper for \code{at::special_erfc}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_erfc <- function(self) {
     C_torch_special_erfc(self)
 }
 
+#' Special erfcx
+#'
+#' Wrapper for \code{at::special_erfcx}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_erfcx <- function(self) {
     C_torch_special_erfcx(self)
 }
 
+#' Special erfinv
+#'
+#' Wrapper for \code{at::special_erfinv}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_erfinv <- function(self) {
     C_torch_special_erfinv(self)
 }
 
+#' Special ndtr
+#'
+#' Wrapper for \code{at::special_ndtr}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_ndtr <- function(self) {
     C_torch_special_ndtr(self)
 }
 
+#' Special xlog1py
+#'
+#' Wrapper for \code{at::special_xlog1py}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_xlog1py <- function(self, other) {
     C_torch_special_xlog1py(self, other)
 }
 
+#' Special xlogy
+#'
+#' Wrapper for \code{at::special_xlogy}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_xlogy <- function(self, other) {
     C_torch_special_xlogy(self, other)
 }
 
+#' Special zeta
+#'
+#' Wrapper for \code{at::special_zeta}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_zeta <- function(self, other) {
     C_torch_special_zeta(self, other)
 }
 
+#' Special i0
+#'
+#' Wrapper for \code{at::special_i0}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_i0 <- function(self) {
     C_torch_special_i0(self)
 }
 
+#' Special i0e
+#'
+#' Wrapper for \code{at::special_i0e}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_i0e <- function(self) {
     C_torch_special_i0e(self)
 }
 
+#' Special i1
+#'
+#' Wrapper for \code{at::special_i1}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_i1 <- function(self) {
     C_torch_special_i1(self)
 }
 
+#' Special i1e
+#'
+#' Wrapper for \code{at::special_i1e}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_i1e <- function(self) {
     C_torch_special_i1e(self)
 }
 
+#' Special logit
+#'
+#' Wrapper for \code{at::special_logit}.
+#' @param self A torch_tensor.
+#' @param eps A numeric value. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_special_logit <- function(self, eps = NULL) {
     C_torch_special_logit(self, eps)
 }
 
+#' Special polygamma
+#'
+#' Wrapper for \code{at::special_polygamma}.
+#' @param n An integer.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_polygamma <- function(n, self) {
     C_torch_special_polygamma(as.integer(n), self)
 }
 
+#' Special logsumexp
+#'
+#' Wrapper for \code{at::special_logsumexp}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]).
+#' @param keepdim A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_special_logsumexp <- function(self, dim, keepdim = FALSE) {
     C_torch_special_logsumexp(self, dim, as.logical(keepdim))
 }
 
+#' Special expit
+#'
+#' Wrapper for \code{at::special_expit}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_expit <- function(self) {
     C_torch_special_expit(self)
 }
 
+#' Special sinc
+#'
+#' Wrapper for \code{at::special_sinc}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_sinc <- function(self) {
     C_torch_special_sinc(self)
 }
 
+#' Special round
+#'
+#' Wrapper for \code{at::special_round}.
+#' @param self A torch_tensor.
+#' @param decimals An integer.
+#' @return A torch_tensor.
 #' @export
 torch_special_round <- function(self, decimals = 0) {
     C_torch_special_round(self, as.integer(decimals))
 }
 
+#' Special log1p
+#'
+#' Wrapper for \code{at::special_log1p}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_log1p <- function(self) {
     C_torch_special_log1p(self)
 }
 
+#' Special log softmax
+#'
+#' Wrapper for \code{at::special_log_softmax}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_special_log_softmax <- function(self, dim, dtype = NULL) {
     C_torch_special_log_softmax(self, as.integer(dim), dtype)
 }
 
+#' Special gammainc
+#'
+#' Wrapper for \code{at::special_gammainc}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_gammainc <- function(self, other) {
     C_torch_special_gammainc(self, other)
 }
 
+#' Special gammaincc
+#'
+#' Wrapper for \code{at::special_gammaincc}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_gammaincc <- function(self, other) {
     C_torch_special_gammaincc(self, other)
 }
 
+#' Special multigammaln
+#'
+#' Wrapper for \code{at::special_multigammaln}.
+#' @param self A torch_tensor.
+#' @param p An integer.
+#' @return A torch_tensor.
 #' @export
 torch_special_multigammaln <- function(self, p) {
     C_torch_special_multigammaln(self, as.integer(p))
 }
 
+#' Special softmax
+#'
+#' Wrapper for \code{at::special_softmax}.
+#' @param self A torch_tensor.
+#' @param dim An integer.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_special_softmax <- function(self, dim, dtype = NULL) {
     C_torch_special_softmax(self, as.integer(dim), dtype)
 }
 
+#' Fft fft
+#'
+#' Wrapper for \code{at::fft_fft}.
+#' @param self A torch_tensor.
+#' @param n An integer. Optional.
+#' @param dim An integer.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_fft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_fft(self, n, as.integer(dim), norm)
 }
 
+#' Fft ifft
+#'
+#' Wrapper for \code{at::fft_ifft}.
+#' @param self A torch_tensor.
+#' @param n An integer. Optional.
+#' @param dim An integer.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_ifft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_ifft(self, n, as.integer(dim), norm)
 }
 
+#' Fft rfft
+#'
+#' Wrapper for \code{at::fft_rfft}.
+#' @param self A torch_tensor.
+#' @param n An integer. Optional.
+#' @param dim An integer.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_rfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_rfft(self, n, as.integer(dim), norm)
 }
 
+#' Fft irfft
+#'
+#' Wrapper for \code{at::fft_irfft}.
+#' @param self A torch_tensor.
+#' @param n An integer. Optional.
+#' @param dim An integer.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_irfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_irfft(self, n, as.integer(dim), norm)
 }
 
+#' Fft hfft
+#'
+#' Wrapper for \code{at::fft_hfft}.
+#' @param self A torch_tensor.
+#' @param n An integer. Optional.
+#' @param dim An integer.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_hfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_hfft(self, n, as.integer(dim), norm)
 }
 
+#' Fft ihfft
+#'
+#' Wrapper for \code{at::fft_ihfft}.
+#' @param self A torch_tensor.
+#' @param n An integer. Optional.
+#' @param dim An integer.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_ihfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_ihfft(self, n, as.integer(dim), norm)
 }
 
+#' Fft fft2
+#'
+#' Wrapper for \code{at::fft_fft2}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]).
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_fft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_fft2(self, s, dim, norm)
 }
 
+#' Fft ifft2
+#'
+#' Wrapper for \code{at::fft_ifft2}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]).
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_ifft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ifft2(self, s, dim, norm)
 }
 
+#' Fft rfft2
+#'
+#' Wrapper for \code{at::fft_rfft2}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]).
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_rfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_rfft2(self, s, dim, norm)
 }
 
+#' Fft irfft2
+#'
+#' Wrapper for \code{at::fft_irfft2}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]).
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_irfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_irfft2(self, s, dim, norm)
 }
 
+#' Fft hfft2
+#'
+#' Wrapper for \code{at::fft_hfft2}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]).
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_hfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_hfft2(self, s, dim, norm)
 }
 
+#' Fft ihfft2
+#'
+#' Wrapper for \code{at::fft_ihfft2}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]).
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_ihfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ihfft2(self, s, dim, norm)
 }
 
+#' Fft fftn
+#'
+#' Wrapper for \code{at::fft_fftn}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]). Optional.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_fftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_fftn(self, s, dim, norm)
 }
 
+#' Fft ifftn
+#'
+#' Wrapper for \code{at::fft_ifftn}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]). Optional.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_ifftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ifftn(self, s, dim, norm)
 }
 
+#' Fft rfftn
+#'
+#' Wrapper for \code{at::fft_rfftn}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]). Optional.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_rfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_rfftn(self, s, dim, norm)
 }
 
+#' Fft irfftn
+#'
+#' Wrapper for \code{at::fft_irfftn}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]). Optional.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_irfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_irfftn(self, s, dim, norm)
 }
 
+#' Fft hfftn
+#'
+#' Wrapper for \code{at::fft_hfftn}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]). Optional.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_hfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_hfftn(self, s, dim, norm)
 }
 
+#' Fft ihfftn
+#'
+#' Wrapper for \code{at::fft_ihfftn}.
+#' @param self A torch_tensor.
+#' @param s (int[1]). Optional.
+#' @param dim (int[1]). Optional.
+#' @param norm A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_ihfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ihfftn(self, s, dim, norm)
 }
 
+#' Fft fftfreq
+#'
+#' Wrapper for \code{at::fft_fftfreq}.
+#' @param n An integer.
+#' @param d A numeric value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_fftfreq <- function(n, d = 1.0, dtype = NULL, device = NULL) {
     C_torch_fft_fftfreq(as.integer(n), as.double(d), dtype, device)
 }
 
+#' Fft rfftfreq
+#'
+#' Wrapper for \code{at::fft_rfftfreq}.
+#' @param n An integer.
+#' @param d A numeric value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @param device A device string (e.g., "cpu"). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_rfftfreq <- function(n, d = 1.0, dtype = NULL, device = NULL) {
     C_torch_fft_rfftfreq(as.integer(n), as.double(d), dtype, device)
 }
 
+#' Fft fftshift
+#'
+#' Wrapper for \code{at::fft_fftshift}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_fftshift <- function(self, dim = NULL) {
     C_torch_fft_fftshift(self, dim)
 }
 
+#' Fft ifftshift
+#'
+#' Wrapper for \code{at::fft_ifftshift}.
+#' @param self A torch_tensor.
+#' @param dim (int[1]). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_fft_ifftshift <- function(self, dim = NULL) {
     C_torch_fft_ifftshift(self, dim)
 }
 
+#' Linalg cholesky ex
+#'
+#' Wrapper for \code{at::linalg_cholesky_ex}.
+#' @param self A torch_tensor.
+#' @param upper A logical value.
+#' @param check_errors A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_cholesky_ex <- function(self, upper = FALSE, check_errors = FALSE) {
     C_torch_linalg_cholesky_ex(self, as.logical(upper), as.logical(check_errors))
 }
 
+#' Linalg cholesky
+#'
+#' Wrapper for \code{at::linalg_cholesky}.
+#' @param self A torch_tensor.
+#' @param upper A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_cholesky <- function(self, upper = FALSE) {
     C_torch_linalg_cholesky(self, as.logical(upper))
 }
 
+#' Linalg cross
+#'
+#' Wrapper for \code{at::linalg_cross}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_cross <- function(self, other, dim = -1) {
     C_torch_linalg_cross(self, other, as.integer(dim))
 }
 
+#' Linalg lu factor
+#'
+#' Wrapper for \code{at::linalg_lu_factor}.
+#' @param A A torch_tensor.
+#' @param pivot A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_lu_factor <- function(A, pivot = TRUE) {
     C_torch_linalg_lu_factor(A, as.logical(pivot))
 }
 
+#' Linalg lu factor ex
+#'
+#' Wrapper for \code{at::linalg_lu_factor_ex}.
+#' @param A A torch_tensor.
+#' @param pivot A logical value.
+#' @param check_errors A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_lu_factor_ex <- function(A, pivot = TRUE, check_errors = FALSE) {
     C_torch_linalg_lu_factor_ex(A, as.logical(pivot), as.logical(check_errors))
 }
 
+#' Linalg lu
+#'
+#' Wrapper for \code{at::linalg_lu}.
+#' @param A A torch_tensor.
+#' @param pivot A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_lu <- function(A, pivot = TRUE) {
     C_torch_linalg_lu(A, as.logical(pivot))
 }
 
+#' Linalg lu solve
+#'
+#' Wrapper for \code{at::linalg_lu_solve}.
+#' @param LU A torch_tensor.
+#' @param pivots A torch_tensor.
+#' @param B A torch_tensor.
+#' @param left A logical value.
+#' @param adjoint A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_lu_solve <- function(LU, pivots, B, left = TRUE, adjoint = FALSE) {
     C_torch_linalg_lu_solve(LU, pivots, B, as.logical(left), as.logical(adjoint))
 }
 
+#' Linalg det
+#'
+#' Wrapper for \code{at::linalg_det}.
+#' @param A A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_det <- function(A) {
     C_torch_linalg_det(A)
 }
 
+#' Det
+#'
+#' Wrapper for \code{at::det}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_det <- function(self) {
     C_torch_det(self)
 }
 
+#' Linalg ldl factor ex
+#'
+#' Wrapper for \code{at::linalg_ldl_factor_ex}.
+#' @param self A torch_tensor.
+#' @param hermitian A logical value.
+#' @param check_errors A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_ldl_factor_ex <- function(self, hermitian = FALSE, check_errors = FALSE) {
     C_torch_linalg_ldl_factor_ex(self, as.logical(hermitian), as.logical(check_errors))
 }
 
+#' Linalg ldl factor
+#'
+#' Wrapper for \code{at::linalg_ldl_factor}.
+#' @param self A torch_tensor.
+#' @param hermitian A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_ldl_factor <- function(self, hermitian = FALSE) {
     C_torch_linalg_ldl_factor(self, as.logical(hermitian))
 }
 
+#' Linalg ldl solve
+#'
+#' Wrapper for \code{at::linalg_ldl_solve}.
+#' @param LD A torch_tensor.
+#' @param pivots A torch_tensor.
+#' @param B A torch_tensor.
+#' @param hermitian A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_ldl_solve <- function(LD, pivots, B, hermitian = FALSE) {
     C_torch_linalg_ldl_solve(LD, pivots, B, as.logical(hermitian))
 }
 
+#' Linalg lstsq
+#'
+#' Wrapper for \code{at::linalg_lstsq}.
+#' @param self A torch_tensor.
+#' @param b A torch_tensor.
+#' @param rcond A numeric value. Optional.
+#' @param driver A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_lstsq <- function(self, b, rcond = NULL, driver = NULL) {
     C_torch_linalg_lstsq(self, b, rcond, driver)
 }
 
+#' Linalg matmul
+#'
+#' Wrapper for \code{at::linalg_matmul}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_matmul <- function(self, other) {
     C_torch_linalg_matmul(self, other)
 }
 
+#' Linalg vecdot
+#'
+#' Wrapper for \code{at::linalg_vecdot}.
+#' @param x A torch_tensor.
+#' @param y A torch_tensor.
+#' @param dim An integer.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_vecdot <- function(x, y, dim = -1) {
     C_torch_linalg_vecdot(x, y, as.integer(dim))
 }
 
+#' Linalg matrix exp
+#'
+#' Wrapper for \code{at::linalg_matrix_exp}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_matrix_exp <- function(self) {
     C_torch_linalg_matrix_exp(self)
 }
 
+#' Linalg slogdet
+#'
+#' Wrapper for \code{at::linalg_slogdet}.
+#' @param A A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_slogdet <- function(A) {
     C_torch_linalg_slogdet(A)
 }
 
+#' Slogdet
+#'
+#' Wrapper for \code{at::slogdet}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_slogdet <- function(self) {
     C_torch_slogdet(self)
 }
 
+#' Logdet
+#'
+#' Wrapper for \code{at::logdet}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_logdet <- function(self) {
     C_torch_logdet(self)
 }
 
+#' Linalg eig
+#'
+#' Wrapper for \code{at::linalg_eig}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_eig <- function(self) {
     C_torch_linalg_eig(self)
 }
 
+#' Linalg eigvals
+#'
+#' Wrapper for \code{at::linalg_eigvals}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_eigvals <- function(self) {
     C_torch_linalg_eigvals(self)
 }
 
+#' Linalg eigh
+#'
+#' Wrapper for \code{at::linalg_eigh}.
+#' @param self A torch_tensor.
+#' @param UPLO A character string.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_eigh <- function(self, UPLO = "L") {
     C_torch_linalg_eigh(self, UPLO)
 }
 
+#' Linalg eigvalsh
+#'
+#' Wrapper for \code{at::linalg_eigvalsh}.
+#' @param self A torch_tensor.
+#' @param UPLO A character string.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_eigvalsh <- function(self, UPLO = "L") {
     C_torch_linalg_eigvalsh(self, UPLO)
 }
 
+#' Linalg householder product
+#'
+#' Wrapper for \code{at::linalg_householder_product}.
+#' @param input A torch_tensor.
+#' @param tau A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_householder_product <- function(input, tau) {
     C_torch_linalg_householder_product(input, tau)
 }
 
+#' Linalg inv ex
+#'
+#' Wrapper for \code{at::linalg_inv_ex}.
+#' @param A A torch_tensor.
+#' @param check_errors A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_inv_ex <- function(A, check_errors = FALSE) {
     C_torch_linalg_inv_ex(A, as.logical(check_errors))
 }
 
+#' Linalg inv
+#'
+#' Wrapper for \code{at::linalg_inv}.
+#' @param A A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_inv <- function(A) {
     C_torch_linalg_inv(A)
 }
 
+#' Inverse
+#'
+#' Wrapper for \code{at::inverse}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_inverse <- function(self) {
     C_torch_inverse(self)
 }
 
+#' Inner
+#'
+#' Wrapper for \code{at::inner}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_inner <- function(self, other) {
     C_torch_inner(self, other)
 }
 
+#' Ger
+#'
+#' Wrapper for \code{at::ger}.
+#' @param self A torch_tensor.
+#' @param vec2 A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_ger <- function(self, vec2) {
     C_torch_ger(self, vec2)
 }
 
+#' Linalg norm
+#'
+#' Wrapper for \code{at::linalg_norm}.
+#' @param self A torch_tensor.
+#' @param ord A numeric scalar. Optional.
+#' @param dim (int[1]). Optional.
+#' @param keepdim A logical value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_norm <- function(self, ord = NULL, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_linalg_norm(self, ord, dim, as.logical(keepdim), dtype)
 }
 
+#' Linalg vector norm
+#'
+#' Wrapper for \code{at::linalg_vector_norm}.
+#' @param self A torch_tensor.
+#' @param ord A numeric scalar.
+#' @param dim (int[1]). Optional.
+#' @param keepdim A logical value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_vector_norm <- function(self, ord = 2, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_linalg_vector_norm(self, ord, dim, as.logical(keepdim), dtype)
 }
 
+#' Linalg matrix norm
+#'
+#' Wrapper for \code{at::linalg_matrix_norm}.
+#' @param self A torch_tensor.
+#' @param ord A numeric scalar.
+#' @param dim An integer vector.
+#' @param keepdim A logical value.
+#' @param dtype A torch dtype (e.g., torch_float32). Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_matrix_norm <- function(self, ord, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_linalg_matrix_norm(self, ord, dim, as.logical(keepdim), dtype)
 }
 
+#' Linalg svd
+#'
+#' Wrapper for \code{at::linalg_svd}.
+#' @param A A torch_tensor.
+#' @param full_matrices A logical value.
+#' @param driver A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_svd <- function(A, full_matrices = TRUE, driver = NULL) {
     C_torch_linalg_svd(A, as.logical(full_matrices), driver)
 }
 
+#' Linalg svdvals
+#'
+#' Wrapper for \code{at::linalg_svdvals}.
+#' @param A A torch_tensor.
+#' @param driver A character string. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_svdvals <- function(A, driver = NULL) {
     C_torch_linalg_svdvals(A, driver)
 }
 
+#' Linalg cond
+#'
+#' Wrapper for \code{at::linalg_cond}.
+#' @param self A torch_tensor.
+#' @param p A numeric scalar. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_cond <- function(self, p = NULL) {
     C_torch_linalg_cond(self, p)
 }
 
+#' Linalg pinv
+#'
+#' Wrapper for \code{at::linalg_pinv}.
+#' @param self A torch_tensor.
+#' @param atol A torch_tensor. Optional.
+#' @param rtol A torch_tensor. Optional.
+#' @param hermitian A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_pinv <- function(self, atol = NULL, rtol = NULL, hermitian = FALSE) {
     C_torch_linalg_pinv(self, atol, rtol, as.logical(hermitian))
 }
 
+#' Linalg solve ex
+#'
+#' Wrapper for \code{at::linalg_solve_ex}.
+#' @param A A torch_tensor.
+#' @param B A torch_tensor.
+#' @param left A logical value.
+#' @param check_errors A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_solve_ex <- function(A, B, left = TRUE, check_errors = FALSE) {
     C_torch_linalg_solve_ex(A, B, as.logical(left), as.logical(check_errors))
 }
 
+#' Linalg solve
+#'
+#' Wrapper for \code{at::linalg_solve}.
+#' @param A A torch_tensor.
+#' @param B A torch_tensor.
+#' @param left A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_solve <- function(A, B, left = TRUE) {
     C_torch_linalg_solve(A, B, as.logical(left))
 }
 
+#' Linalg tensorinv
+#'
+#' Wrapper for \code{at::linalg_tensorinv}.
+#' @param self A torch_tensor.
+#' @param ind An integer.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_tensorinv <- function(self, ind = 2) {
     C_torch_linalg_tensorinv(self, as.integer(ind))
 }
 
+#' Linalg tensorsolve
+#'
+#' Wrapper for \code{at::linalg_tensorsolve}.
+#' @param self A torch_tensor.
+#' @param other A torch_tensor.
+#' @param dims An integer vector. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_tensorsolve <- function(self, other, dims = NULL) {
     C_torch_linalg_tensorsolve(self, other, dims)
 }
 
+#' Linalg qr
+#'
+#' Wrapper for \code{at::linalg_qr}.
+#' @param A A torch_tensor.
+#' @param mode A character string.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_qr <- function(A, mode = 'reduced') {
     C_torch_linalg_qr(A, mode)
 }
 
+#' Linalg matrix power
+#'
+#' Wrapper for \code{at::linalg_matrix_power}.
+#' @param self A torch_tensor.
+#' @param n An integer.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_matrix_power <- function(self, n) {
     C_torch_linalg_matrix_power(self, as.integer(n))
 }
 
+#' Linalg matrix rank
+#'
+#' Wrapper for \code{at::linalg_matrix_rank}.
+#' @param input A torch_tensor.
+#' @param atol A torch_tensor. Optional.
+#' @param rtol A torch_tensor. Optional.
+#' @param hermitian A logical value.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_matrix_rank <- function(input, atol = NULL, rtol = NULL, hermitian = FALSE) {
     C_torch_linalg_matrix_rank(input, atol, rtol, as.logical(hermitian))
 }
 
+#' Linalg multi dot
+#'
+#' Wrapper for \code{at::linalg_multi_dot}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_linalg_multi_dot <- function(tensors) {
     C_torch_linalg_multi_dot(tensors)
 }
 
+#' Nested to padded tensor
+#'
+#' Wrapper for \code{at::nested_to_padded_tensor}.
+#' @param self A torch_tensor.
+#' @param padding A numeric value.
+#' @param output_size An integer vector. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_nested_to_padded_tensor <- function(self, padding, output_size = NULL) {
     C_torch_nested_to_padded_tensor(self, as.double(padding), output_size)
 }
 
+#' Segment reduce
+#'
+#' Wrapper for \code{at::segment_reduce}.
+#' @param data A torch_tensor.
+#' @param reduce A character string.
+#' @param lengths A torch_tensor. Optional.
+#' @param indices A torch_tensor. Optional.
+#' @param offsets A torch_tensor. Optional.
+#' @param axis An integer.
+#' @param unsafe A logical value.
+#' @param initial A numeric scalar. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_segment_reduce <- function(data, reduce, lengths = NULL, indices = NULL, offsets = NULL, axis = 0, unsafe = FALSE, initial = NULL) {
     C_torch_segment_reduce(data, reduce, lengths, indices, offsets, as.integer(axis), as.logical(unsafe), initial)
 }
 
+#' Pad sequence
+#'
+#' Wrapper for \code{at::pad_sequence}.
+#' @param sequences A list of torch_tensors.
+#' @param batch_first A logical value.
+#' @param padding_value A numeric value.
+#' @param padding_side A character string.
+#' @return A torch_tensor.
 #' @export
 torch_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0.0, padding_side = "right") {
     C_torch_pad_sequence(sequences, as.logical(batch_first), as.double(padding_value), padding_side)
 }
 
+#' Flatten dense tensors
+#'
+#' Wrapper for \code{at::flatten_dense_tensors}.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_flatten_dense_tensors <- function(tensors) {
     C_torch_flatten_dense_tensors(tensors)
 }
 
+#' Unflatten dense tensors
+#'
+#' Wrapper for \code{at::unflatten_dense_tensors}.
+#' @param flat A torch_tensor.
+#' @param tensors A list of torch_tensors.
+#' @return A torch_tensor.
 #' @export
 torch_unflatten_dense_tensors <- function(flat, tensors) {
     C_torch_unflatten_dense_tensors(flat, tensors)
 }
 
+#' To padded tensor
+#'
+#' Wrapper for \code{at::to_padded_tensor}.
+#' @param self A torch_tensor.
+#' @param padding A numeric value.
+#' @param output_size An integer vector. Optional.
+#' @return A torch_tensor.
 #' @export
 torch_to_padded_tensor <- function(self, padding, output_size = NULL) {
     C_torch_to_padded_tensor(self, as.double(padding), output_size)
 }
 
+#' Special airy ai
+#'
+#' Wrapper for \code{at::special_airy_ai}.
+#' @param x A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_airy_ai <- function(x) {
     C_torch_special_airy_ai(x)
 }
 
+#' Special bessel j0
+#'
+#' Wrapper for \code{at::special_bessel_j0}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_bessel_j0 <- function(self) {
     C_torch_special_bessel_j0(self)
 }
 
+#' Special bessel j1
+#'
+#' Wrapper for \code{at::special_bessel_j1}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_bessel_j1 <- function(self) {
     C_torch_special_bessel_j1(self)
 }
 
+#' Special bessel y0
+#'
+#' Wrapper for \code{at::special_bessel_y0}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_bessel_y0 <- function(self) {
     C_torch_special_bessel_y0(self)
 }
 
+#' Special bessel y1
+#'
+#' Wrapper for \code{at::special_bessel_y1}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_bessel_y1 <- function(self) {
     C_torch_special_bessel_y1(self)
 }
 
+#' Special chebyshev polynomial t
+#'
+#' Wrapper for \code{at::special_chebyshev_polynomial_t}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_chebyshev_polynomial_t <- function(x, n) {
     C_torch_special_chebyshev_polynomial_t(x, n)
 }
 
+#' Special chebyshev polynomial u
+#'
+#' Wrapper for \code{at::special_chebyshev_polynomial_u}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_chebyshev_polynomial_u <- function(x, n) {
     C_torch_special_chebyshev_polynomial_u(x, n)
 }
 
+#' Special chebyshev polynomial v
+#'
+#' Wrapper for \code{at::special_chebyshev_polynomial_v}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_chebyshev_polynomial_v <- function(x, n) {
     C_torch_special_chebyshev_polynomial_v(x, n)
 }
 
+#' Special chebyshev polynomial w
+#'
+#' Wrapper for \code{at::special_chebyshev_polynomial_w}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_chebyshev_polynomial_w <- function(x, n) {
     C_torch_special_chebyshev_polynomial_w(x, n)
 }
 
+#' Special hermite polynomial h
+#'
+#' Wrapper for \code{at::special_hermite_polynomial_h}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_hermite_polynomial_h <- function(x, n) {
     C_torch_special_hermite_polynomial_h(x, n)
 }
 
+#' Special hermite polynomial he
+#'
+#' Wrapper for \code{at::special_hermite_polynomial_he}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_hermite_polynomial_he <- function(x, n) {
     C_torch_special_hermite_polynomial_he(x, n)
 }
 
+#' Special laguerre polynomial l
+#'
+#' Wrapper for \code{at::special_laguerre_polynomial_l}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_laguerre_polynomial_l <- function(x, n) {
     C_torch_special_laguerre_polynomial_l(x, n)
 }
 
+#' Special legendre polynomial p
+#'
+#' Wrapper for \code{at::special_legendre_polynomial_p}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_legendre_polynomial_p <- function(x, n) {
     C_torch_special_legendre_polynomial_p(x, n)
 }
 
+#' Special modified bessel i0
+#'
+#' Wrapper for \code{at::special_modified_bessel_i0}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_modified_bessel_i0 <- function(self) {
     C_torch_special_modified_bessel_i0(self)
 }
 
+#' Special modified bessel i1
+#'
+#' Wrapper for \code{at::special_modified_bessel_i1}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_modified_bessel_i1 <- function(self) {
     C_torch_special_modified_bessel_i1(self)
 }
 
+#' Special modified bessel k0
+#'
+#' Wrapper for \code{at::special_modified_bessel_k0}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_modified_bessel_k0 <- function(self) {
     C_torch_special_modified_bessel_k0(self)
 }
 
+#' Special modified bessel k1
+#'
+#' Wrapper for \code{at::special_modified_bessel_k1}.
+#' @param self A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_modified_bessel_k1 <- function(self) {
     C_torch_special_modified_bessel_k1(self)
 }
 
+#' Special scaled modified bessel k0
+#'
+#' Wrapper for \code{at::special_scaled_modified_bessel_k0}.
+#' @param x A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_scaled_modified_bessel_k0 <- function(x) {
     C_torch_special_scaled_modified_bessel_k0(x)
 }
 
+#' Special scaled modified bessel k1
+#'
+#' Wrapper for \code{at::special_scaled_modified_bessel_k1}.
+#' @param x A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_scaled_modified_bessel_k1 <- function(x) {
     C_torch_special_scaled_modified_bessel_k1(x)
 }
 
+#' Special shifted chebyshev polynomial t
+#'
+#' Wrapper for \code{at::special_shifted_chebyshev_polynomial_t}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_shifted_chebyshev_polynomial_t <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_t(x, n)
 }
 
+#' Special shifted chebyshev polynomial u
+#'
+#' Wrapper for \code{at::special_shifted_chebyshev_polynomial_u}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_shifted_chebyshev_polynomial_u <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_u(x, n)
 }
 
+#' Special shifted chebyshev polynomial v
+#'
+#' Wrapper for \code{at::special_shifted_chebyshev_polynomial_v}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_shifted_chebyshev_polynomial_v <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_v(x, n)
 }
 
+#' Special shifted chebyshev polynomial w
+#'
+#' Wrapper for \code{at::special_shifted_chebyshev_polynomial_w}.
+#' @param x A torch_tensor.
+#' @param n A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_shifted_chebyshev_polynomial_w <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_w(x, n)
 }
 
+#' Special spherical bessel j0
+#'
+#' Wrapper for \code{at::special_spherical_bessel_j0}.
+#' @param x A torch_tensor.
+#' @return A torch_tensor.
 #' @export
 torch_special_spherical_bessel_j0 <- function(x) {
     C_torch_special_spherical_bessel_j0(x)

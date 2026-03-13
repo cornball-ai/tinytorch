@@ -1,0 +1,16 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_relu6_}
+\alias{torch_relu6_}
+\title{Relu6}
+\usage{
+torch_relu6_(self)
+}
+\arguments{
+\item{self}{A torch_tensor.}
+}
+\value{
+A torch_tensor.
+}
+\description{
+Wrapper for \code{at::relu6_}.
+}

@@ -1,10 +1,10 @@
-// GPU kernel launch for Rtorch
-// Loads compiled PTX, extracts device pointers from Rtorch tensors,
+// GPU kernel launch for tinytorch
+// Loads compiled PTX, extracts device pointers from tinytorch tensors,
 // and launches kernels via CUDA driver API.
 
-#include "Rtorch.h"
+#include "tinytorch.h"
 
-#ifdef RTORCH_CUDA
+#ifdef TINYTORCH_CUDA
 #include <cuda.h>
 #include <string>
 #include <vector>
@@ -54,7 +54,7 @@ static CUfunction get_cached_kernel(const std::string& ptx,
     return func;
 }
 
-// Extract CUDA device pointer from Rtorch tensor (at::Tensor*)
+// Extract CUDA device pointer from tinytorch tensor (at::Tensor*)
 static CUdeviceptr get_device_ptr(SEXP tensor_sexp) {
     at::Tensor* t = get_tensor_ptr(tensor_sexp);
     if (!t->is_cuda()) {
@@ -78,7 +78,7 @@ SEXP C_gpu_launch(
     SEXP block_sexp,        // integer(3): block dimensions
     SEXP shared_mem_sexp)   // integer: shared memory bytes
 {
-#ifdef RTORCH_CUDA
+#ifdef TINYTORCH_CUDA
     ensure_gpu_initialized();
 
     std::string ptx(CHAR(STRING_ELT(ptx_sexp, 0)));
@@ -148,7 +148,7 @@ SEXP C_gpu_launch_reduction(
     SEXP block_sexp,
     SEXP shared_mem_sexp)
 {
-#ifdef RTORCH_CUDA
+#ifdef TINYTORCH_CUDA
     ensure_gpu_initialized();
 
     std::string ptx(CHAR(STRING_ELT(ptx_sexp, 0)));
@@ -201,7 +201,7 @@ SEXP C_gpu_launch_generic(
     SEXP block_sexp,
     SEXP shared_mem_sexp)
 {
-#ifdef RTORCH_CUDA
+#ifdef TINYTORCH_CUDA
     ensure_gpu_initialized();
 
     std::string ptx(CHAR(STRING_ELT(ptx_sexp, 0)));
@@ -281,7 +281,7 @@ SEXP C_gpu_launch_generic(
 
 // [[Rcpp::export]]
 SEXP C_gpu_kernel_cache_clear() {
-#ifdef RTORCH_CUDA
+#ifdef TINYTORCH_CUDA
     int n = static_cast<int>(kernel_cache.size());
     for (auto& kv : kernel_cache) {
         cuModuleUnload(kv.second.module);
@@ -295,7 +295,7 @@ SEXP C_gpu_kernel_cache_clear() {
 
 // [[Rcpp::export]]
 SEXP C_gpu_kernel_cache_stats() {
-#ifdef RTORCH_CUDA
+#ifdef TINYTORCH_CUDA
     int n = static_cast<int>(kernel_cache.size());
     SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
     int i = 0;

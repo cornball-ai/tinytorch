@@ -1,4 +1,4 @@
-if (!Rtorch::is_available()) exit_file("LibTorch not available")
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
 
 # ===== diffuseR (CLIP) Module Tracing =====
 #
@@ -6,8 +6,8 @@ if (!Rtorch::is_available()) exit_file("LibTorch not available")
 # Uses inline module definitions at tiny dimensions.
 # Sources ~/diffuseR/R/text_encoder.R for the actual module code.
 
-# diffuseR uses torch R6 modules — skip until ported to Rtorch
-exit_file("diffuseR not yet ported to Rtorch")
+# diffuseR uses torch R6 modules — skip until ported to tinytorch
+exit_file("diffuseR not yet ported to tinytorch")
 
 # Tiny dimensions for fast testing
 embed_dim <- 64L

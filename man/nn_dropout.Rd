@@ -1,7 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{nn_dropout}
 \alias{nn_dropout}
-\title{Dropout module (no-op in eval mode, Rtorch has no autograd)}
+\title{Dropout module (no-op in eval mode, tinytorch has no autograd)}
 \usage{
 nn_dropout(p = 0.5, inplace = FALSE)
 }
@@ -14,5 +14,5 @@ nn_dropout(p = 0.5, inplace = FALSE)
 An nn_module instance.
 }
 \description{
-Dropout module (no-op in eval mode, Rtorch has no autograd)
+Dropout module (no-op in eval mode, tinytorch has no autograd)
 }

@@ -1,4 +1,4 @@
-if (!Rtorch::is_available()) exit_file("LibTorch not available")
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
 
 # ===== Module Discovery =====
 
@@ -108,14 +108,14 @@ expect_true(all(report$correct, na.rm = TRUE),
 pkgs <- find_torch_packages()
 expect_true(is.character(pkgs),
             info = "find_torch_packages returns character vector")
-# Rtorch itself depends on torch
-expect_true("Rtorch" %in% pkgs,
-            info = "Rtorch found as torch-dependent package")
+# tinytorch itself depends on torch
+expect_true("tinytorch" %in% pkgs,
+            info = "tinytorch found as torch-dependent package")
 
 # ===== find_modules_in_package (installed package) =====
 
-# Test on Rtorch itself (no nn_modules in R/)
-tl_mods <- find_modules_in_package("Rtorch")
+# Test on tinytorch itself (no nn_modules in R/)
+tl_mods <- find_modules_in_package("tinytorch")
 expect_true(is.data.frame(tl_mods),
             info = "find_modules_in_package returns data.frame")
 

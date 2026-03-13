@@ -1,5 +1,5 @@
-#ifndef RTORCH_H
-#define RTORCH_H
+#ifndef TINYTORCH_H
+#define TINYTORCH_H
 
 #define R_NO_REMAP
 
@@ -87,4 +87,4 @@ at::Dimname sexp_to_dimname(SEXP x);
 std::vector<at::Dimname> sexp_to_dimname_vec(SEXP x);
 c10::optional<std::vector<at::Dimname>> sexp_to_optional_dimname_vec(SEXP x);
 
-#endif // RTORCH_H
+#endif // TINYTORCH_H

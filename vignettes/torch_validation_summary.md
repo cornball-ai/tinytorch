@@ -18,7 +18,7 @@ numerical equivalence checks, and performance benchmarks across three packages:
 
 **Branch**: `rtorch-port` (current default)
 **Python reference**: chatterbox-tts 0.1.4 (PyPI), `chatterbox-tts:blackwell` Docker container
-**R tensor library**: Rtorch 0.1.0 (raw `.Call()` to libtorch, no Rcpp/lantern)
+**R tensor library**: tinytorch 0.1.0 (raw `.Call()` to libtorch, no Rcpp/lantern)
 
 ### 1.1 Component-Level Numerical Validation
 
@@ -85,7 +85,7 @@ Test text: "The quick brown fox jumps over the lazy dog." (~10 words, ~3.2s audi
 | Backend | Cold Start | Warm Start | Audio Length | RT Factor | VRAM |
 |---------|-----------|------------|-------------|-----------|------|
 | Python container | 1.4s | 1.3s | 3.2s | **2.5x** | 3,205 MB |
-| Native R (Rtorch) | 4.3s | 3.6s | 4.8s | **1.3x** | 3,114 MB |
+| Native R (tinytorch) | 4.3s | 3.6s | 4.8s | **1.3x** | 3,114 MB |
 | Native R + compile | 3.9s | 4.0s | 4.5s | **1.1x** | 4,575 MB |
 
 **Key finding**: Python container is ~2.8x faster than native R (warm start).
@@ -116,13 +116,13 @@ These were found during the chatterbox port and documented in the package CLAUDE
 
 ## 2. whisper (Speech-to-Text)
 
-**Branch**: `main` (CRAN release); `rtorch-migration` (WIP Rtorch port)
+**Branch**: `main` (CRAN release); `rtorch-migration` (WIP tinytorch port)
 **Python reference**: openai-whisper (PyPI)
-**R tensor library**: torch (CRAN, R package) on main; Rtorch on migration branch
+**R tensor library**: torch (CRAN, R package) on main; tinytorch on migration branch
 
 ### 2.1 Current State
 
-The whisper package on `main` uses the standard `torch` R package (not Rtorch).
+The whisper package on `main` uses the standard `torch` R package (not tinytorch).
 It is on CRAN. There are **no Python-vs-R numerical comparison scripts** --
 validation was done against OpenAI's published model specifications and
 pre-exported reference data.
@@ -169,17 +169,17 @@ Peak VRAM includes ~364 MiB torch CUDA context overhead.
 run on main. The `rtorch-migration` branch has benchmark scripts for this
 (see below) but they haven't been merged or run to completion.
 
-### 2.5 Rtorch Migration Branch (WIP)
+### 2.5 tinytorch Migration Branch (WIP)
 
 The `rtorch-migration` branch (commit `0a7e2ad`) replaces `torch::` with
-`Rtorch::` and adds:
+`tinytorch::` and adds:
 
-- **Fused C++ decoder step** via Rtorch for incremental decoding
-- **Module compilation** (`Rtorch::compile()`) for encoder/decoder layers
+- **Fused C++ decoder step** via tinytorch for incremental decoding
+- **Module compilation** (`tinytorch::compile()`) for encoder/decoder layers
 - **Pure R safetensors reader** (`R/safetensors.R`)
 - **Two benchmark scripts**:
-  - `scripts/benchmark.R`: Rtorch vs PyTorch on CPU (tiny model)
-  - `scripts/benchmark_gpu.R`: 4-way comparison (torch vs Rtorch vs Rtorch+compile vs PyTorch) on CPU and CUDA, with VRAM tracking
+  - `scripts/benchmark.R`: tinytorch vs PyTorch on CPU (tiny model)
+  - `scripts/benchmark_gpu.R`: 4-way comparison (torch vs tinytorch vs tinytorch+compile vs PyTorch) on CPU and CUDA, with VRAM tracking
 
 **Status**: Not merged. The branch has a stashed WIP state. The benchmark
 scripts exist but no published results are available.

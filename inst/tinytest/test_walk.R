@@ -1,4 +1,4 @@
-if (!Rtorch::is_available()) exit_file("LibTorch not available")
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
 
 # test_walk.R - Tests for AST walker
 

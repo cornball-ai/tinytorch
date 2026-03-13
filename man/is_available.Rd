@@ -1,7 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{is_available}
 \alias{is_available}
-\title{Check if Rtorch backend is available}
+\title{Check if tinytorch backend is available}
 \usage{
 is_available()
 }

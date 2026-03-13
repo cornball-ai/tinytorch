@@ -1,0 +1,20 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_special_softmax}
+\alias{torch_special_softmax}
+\title{Special softmax}
+\usage{
+torch_special_softmax(self, dim, dtype = NULL)
+}
+\arguments{
+\item{self}{A torch_tensor.}
+
+\item{dim}{An integer.}
+
+\item{dtype}{A torch dtype (e.g., torch_float32). Optional.}
+}
+\value{
+A torch_tensor.
+}
+\description{
+Wrapper for \code{at::special_softmax}.
+}

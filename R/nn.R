@@ -463,7 +463,7 @@ nn_identity <- function() {
 
 # ---- nn_dropout ----
 
-#' Dropout module (no-op in eval mode, Rtorch has no autograd)
+#' Dropout module (no-op in eval mode, tinytorch has no autograd)
 #' @param p Probability of dropping. Ignored.
 #' @param inplace Ignored.
 #' @return An nn_module instance.

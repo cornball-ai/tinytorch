@@ -1,4 +1,4 @@
-if (!Rtorch::is_available()) exit_file("LibTorch not available")
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
 
 # test_executor.R - Tests for Phase 4: Backend (generalized CPU codegen + executor)
 
@@ -8,13 +8,13 @@ if (!Rtorch::is_available()) exit_file("LibTorch not available")
 
 ir_fuse <- lower_to_ir(list(quote(x$relu()$sigmoid()$tanh())))
 ir_fuse <- fusion_annotate(ir_fuse)
-groups <- Rtorch:::get_fusion_groups(ir_fuse)
+groups <- tinytorch:::get_fusion_groups(ir_fuse)
 expect_true(length(groups) >= 1L)
 
 # No groups in single-op graph
 ir_single <- lower_to_ir(list(quote(x$relu())))
 ir_single <- fusion_annotate(ir_single)
-groups_single <- Rtorch:::get_fusion_groups(ir_single)
+groups_single <- tinytorch:::get_fusion_groups(ir_single)
 expect_equal(length(groups_single), 0L)
 
 # ============================================================
@@ -24,7 +24,7 @@ expect_equal(length(groups_single), 0L)
 # Simple unary chain: relu -> sigmoid -> tanh
 ir_chain <- lower_to_ir(list(quote(x$relu()$sigmoid()$tanh())))
 ir_chain <- optimize_graph(ir_chain)
-chain_groups <- Rtorch:::get_fusion_groups(ir_chain)
+chain_groups <- tinytorch:::get_fusion_groups(ir_chain)
 
 if (length(chain_groups) > 0L) {
   kernel_info <- emit_fused_cpu_kernel(ir_chain, chain_groups[1])
@@ -74,7 +74,7 @@ ir_bin <- lower_to_ir(list(
   quote(a + y)
 ))
 ir_bin <- optimize_graph(ir_bin)
-bin_groups <- Rtorch:::get_fusion_groups(ir_bin)
+bin_groups <- tinytorch:::get_fusion_groups(ir_bin)
 
 # May or may not form a group (depends on single-consumer check)
 # Just verify the function runs without error
@@ -91,12 +91,12 @@ if (length(bin_groups) > 0L) {
 # ============================================================
 
 # Create a graph with a made-up op in a fusion group
-fake_ir <- Rtorch:::ir_graph(
+fake_ir <- tinytorch:::ir_graph(
   nodes = list(
-    "1" = Rtorch:::ir_node(1L, "input", attrs = list(name = "x")),
-    "2" = Rtorch:::ir_node(2L, "imaginary_op", inputs = 1L,
+    "1" = tinytorch:::ir_node(1L, "input", attrs = list(name = "x")),
+    "2" = tinytorch:::ir_node(2L, "imaginary_op", inputs = 1L,
                               attrs = list(fusion_group = 99L)),
-    "3" = Rtorch:::ir_node(3L, "relu", inputs = 2L,
+    "3" = tinytorch:::ir_node(3L, "relu", inputs = 2L,
                               attrs = list(fusion_group = 99L))
   ),
   input_ids = 1L,
@@ -112,27 +112,27 @@ expect_true(is.null(unsupported_result))
 x <- torch_randn(100)
 
 # relu
-r_relu <- Rtorch:::dispatch_torch_op("relu", list(x))
+r_relu <- tinytorch:::dispatch_torch_op("relu", list(x))
 expect_equal(as.numeric(r_relu), as.numeric(x$relu()), tolerance = 1e-6)
 
 # sigmoid
-r_sig <- Rtorch:::dispatch_torch_op("sigmoid", list(x))
+r_sig <- tinytorch:::dispatch_torch_op("sigmoid", list(x))
 expect_equal(as.numeric(r_sig), as.numeric(x$sigmoid()), tolerance = 1e-6)
 
 # tanh
-r_tanh <- Rtorch:::dispatch_torch_op("tanh", list(x))
+r_tanh <- tinytorch:::dispatch_torch_op("tanh", list(x))
 expect_equal(as.numeric(r_tanh), as.numeric(x$tanh()), tolerance = 1e-6)
 
 # exp
-r_exp <- Rtorch:::dispatch_torch_op("exp", list(x))
+r_exp <- tinytorch:::dispatch_torch_op("exp", list(x))
 expect_equal(as.numeric(r_exp), as.numeric(x$exp()), tolerance = 1e-5)
 
 # neg
-r_neg <- Rtorch:::dispatch_torch_op("neg", list(x))
+r_neg <- tinytorch:::dispatch_torch_op("neg", list(x))
 expect_equal(as.numeric(r_neg), as.numeric(-x), tolerance = 1e-6)
 
 # silu
-r_silu <- Rtorch:::dispatch_torch_op("silu", list(x))
+r_silu <- tinytorch:::dispatch_torch_op("silu", list(x))
 expected_silu <- as.numeric(nnf_silu(x))
 expect_equal(as.numeric(r_silu), expected_silu, tolerance = 1e-6)
 
@@ -142,13 +142,13 @@ expect_equal(as.numeric(r_silu), expected_silu, tolerance = 1e-6)
 
 y <- torch_randn(100)
 
-r_add <- Rtorch:::dispatch_torch_op("add", list(x, y))
+r_add <- tinytorch:::dispatch_torch_op("add", list(x, y))
 expect_equal(as.numeric(r_add), as.numeric(x + y), tolerance = 1e-6)
 
-r_mul <- Rtorch:::dispatch_torch_op("mul", list(x, y))
+r_mul <- tinytorch:::dispatch_torch_op("mul", list(x, y))
 expect_equal(as.numeric(r_mul), as.numeric(x * y), tolerance = 1e-6)
 
-r_sub <- Rtorch:::dispatch_torch_op("sub", list(x, y))
+r_sub <- tinytorch:::dispatch_torch_op("sub", list(x, y))
 expect_equal(as.numeric(r_sub), as.numeric(x - y), tolerance = 1e-6)
 
 # ============================================================
@@ -157,17 +157,17 @@ expect_equal(as.numeric(r_sub), as.numeric(x - y), tolerance = 1e-6)
 
 a <- torch_randn(10, 20)
 b <- torch_randn(20, 5)
-r_mm <- Rtorch:::dispatch_torch_op("matmul", list(a, b))
+r_mm <- tinytorch:::dispatch_torch_op("matmul", list(a, b))
 expect_equal(as.numeric(r_mm), as.numeric(a$matmul(b)), tolerance = 1e-5)
 
 # ============================================================
 # dispatch_torch_op: reduction
 # ============================================================
 
-r_sum <- Rtorch:::dispatch_torch_op("sum", list(x))
+r_sum <- tinytorch:::dispatch_torch_op("sum", list(x))
 expect_equal(as.numeric(r_sum), as.numeric(x$sum()), tolerance = 1e-4)
 
-r_mean <- Rtorch:::dispatch_torch_op("mean", list(x))
+r_mean <- tinytorch:::dispatch_torch_op("mean", list(x))
 expect_equal(as.numeric(r_mean), as.numeric(x$mean()), tolerance = 1e-5)
 
 # ============================================================
@@ -272,7 +272,7 @@ expect_true(is.list(stats))
 expect_true("n_memory" %in% names(stats))
 expect_true("n_disk" %in% names(stats))
 expect_true("cache_dir" %in% names(stats))
-expect_true(grepl("Rtorch", stats$cache_dir))
+expect_true(grepl("tinytorch", stats$cache_dir))
 
 # ============================================================
 # clear_kernel_cache
@@ -288,10 +288,10 @@ expect_equal(stats_after$n_memory, 0L)
 # ============================================================
 
 # Verify silu can be generated
-silu_vec <- Rtorch:::gen_op_expr("silu", "vx", vectorized = TRUE)
+silu_vec <- tinytorch:::gen_op_expr("silu", "vx", vectorized = TRUE)
 expect_true(grepl("exp", silu_vec))
 
-silu_scalar <- Rtorch:::gen_op_expr("silu", "sx", vectorized = FALSE)
+silu_scalar <- tinytorch:::gen_op_expr("silu", "sx", vectorized = FALSE)
 expect_true(grepl("exp", silu_scalar))
 
 # ============================================================
@@ -439,13 +439,13 @@ expect_equal(stats_shapes$n_cached, 2L)
 
 ir_key <- lower_to_ir(list(quote(x$relu()$sigmoid())))
 x_key <- torch_randn(10)
-key1 <- Rtorch:::.make_exec_cache_key(ir_key, list(x = x_key))
-key2 <- Rtorch:::.make_exec_cache_key(ir_key, list(x = x_key))
+key1 <- tinytorch:::.make_exec_cache_key(ir_key, list(x = x_key))
+key2 <- tinytorch:::.make_exec_cache_key(ir_key, list(x = x_key))
 expect_equal(key1, key2)
 
 # Different graph -> different key
 ir_key2 <- lower_to_ir(list(quote(x$relu()$tanh())))
-key3 <- Rtorch:::.make_exec_cache_key(ir_key2, list(x = x_key))
+key3 <- tinytorch:::.make_exec_cache_key(ir_key2, list(x = x_key))
 expect_true(key1 != key3)
 
 # ============================================================

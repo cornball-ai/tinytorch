@@ -1,4 +1,4 @@
-#include "Rtorch.h"
+#include "tinytorch.h"
 
 // [[Rcpp::export]]
 SEXP C_tensor_requires_grad_(SEXP self_sexp, bool requires_grad) {

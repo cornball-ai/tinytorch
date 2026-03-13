@@ -1,0 +1,16 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_isneginf}
+\alias{torch_isneginf}
+\title{Isneginf}
+\usage{
+torch_isneginf(self)
+}
+\arguments{
+\item{self}{A torch_tensor.}
+}
+\value{
+A torch_tensor.
+}
+\description{
+Wrapper for \code{at::isneginf}.
+}

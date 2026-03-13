@@ -292,14 +292,14 @@ trace_report <- function(module, example_inputs = NULL,
 find_torch_packages <- function() {
   db <- utils::installed.packages()
   pkgs <- character(0)
-  for (pkg in c("torch", "Rtorch")) {
+  for (pkg in c("torch", "tinytorch")) {
     deps <- tools::package_dependencies(pkg, db = db,
               reverse = TRUE, which = c("Depends", "Imports", "Suggests"))
     found <- deps[[pkg]]
     if (!is.null(found)) pkgs <- c(pkgs, found)
   }
-  # Always include Rtorch itself
-  pkgs <- unique(c(pkgs, "Rtorch"))
+  # Always include tinytorch itself
+  pkgs <- unique(c(pkgs, "tinytorch"))
   sort(pkgs)
 }
 
@@ -313,7 +313,7 @@ find_torch_packages <- function() {
 #' @return A data.frame with columns: name, file, exported
 #' @examples
 #' \dontrun{
-#' find_modules_in_package("Rtorch")
+#' find_modules_in_package("tinytorch")
 #' }
 #' @export
 find_modules_in_package <- function(pkg) {
@@ -343,7 +343,7 @@ find_modules_in_package <- function(pkg) {
 
   # Search for nn_module definitions
   # Pattern: name <- nn_module(
-  pattern <- "^\\s*([a-zA-Z_.][a-zA-Z0-9_.]*)(\\s*<-\\s*)(Rtorch::)?nn_module\\("
+  pattern <- "^\\s*([a-zA-Z_.][a-zA-Z0-9_.]*)(\\s*<-\\s*)(tinytorch::)?nn_module\\("
 
   results <- list()
   for (f in r_files) {

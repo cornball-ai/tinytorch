@@ -116,7 +116,7 @@ fi
 
 # ---- Generate Makevars (real backend) ----
 
-REAL_OBJECTS="RcppExports.o gen-ops.o tensor.o ops.o nn_functions.o transformer.o fused_kernels.o gpu_launch.o indexing.o autograd.o optimizer.o convert.o"
+REAL_OBJECTS="RcppExports.o init.o gen-ops.o tensor.o ops.o nn_functions.o transformer.o fused_kernels.o gpu_launch.o indexing.o autograd.o optimizer.o convert.o"
 
 cat > src/Makevars <<EOF
 CXX_STD = CXX17

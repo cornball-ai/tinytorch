@@ -25,7 +25,7 @@
 #'   (default TRUE).
 #' @param .fuse Logical, compile fusion groups to kernels (default TRUE).
 #' @param .backend Character: "auto", "gpu", or "cpu". "auto" detects
-#'   from input tensors and ariel availability.
+#'   from input tensors.
 #'
 #' @return A \code{compiled_module} object (invisibly if \code{path}
 #'   is non-NULL).
@@ -329,7 +329,7 @@ print.compiled_module <- function(x, ...) {
     graph_breaks = expanded$graph_breaks,
     expanded = expanded$statements,
     backend = backend,
-    pkg_version = as.character(utils::packageVersion("Rtorch"))
+    pkg_version = as.character(utils::packageVersion("tinytorch"))
   )
 
   structure(list(
@@ -415,7 +415,7 @@ print.compiled_module <- function(x, ...) {
     graph_breaks = list(),
     expanded = statements,
     backend = backend,
-    pkg_version = as.character(utils::packageVersion("Rtorch"))
+    pkg_version = as.character(utils::packageVersion("tinytorch"))
   )
 
   structure(list(
@@ -474,17 +474,9 @@ print.compiled_module <- function(x, ...) {
 #' Build an artifact fingerprint for cache invalidation
 #' @noRd
 .artifact_fingerprint <- function(ir) {
-  rtorch_ver <- as.character(utils::packageVersion("Rtorch"))
-  ariel_ver <- tryCatch(
-    as.character(utils::packageVersion("ariel")),
-    error = function(e) "none"
-  )
-  sm <- tryCatch(
-    as.character(ariel::cuda_sm()),
-    error = function(e) "cpu"
-  )
+  pkg_ver <- as.character(utils::packageVersion("tinytorch"))
   ir_hash <- if (!is.null(ir)) compute_ir_hash(ir) else "none"
-  paste(rtorch_ver, ariel_ver, sm, ir_hash, sep = "|")
+  paste(pkg_ver, ir_hash, sep = "|")
 }
 
 

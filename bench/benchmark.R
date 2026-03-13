@@ -1,4 +1,4 @@
-# 4-way benchmark: Python torch vs R torch vs Rcpp vs Rtorch
+# 4-way benchmark: Python torch vs R torch vs Rcpp vs tinytorch
 # All using libtorch 2.8.0. Saves results to bench/results.csv
 
 timeit <- function(expr, n = 10000L, envir = parent.frame()) {
@@ -55,7 +55,7 @@ Sys.setenv(
 Rcpp::sourceCpp("~/torch.cpp")
 
 # ---- R setup ----
-x_tiny  <- Rtorch::torch_randn(c(10, 10))
+x_tiny  <- tinytorch::torch_randn(c(10, 10))
 x_torch <- torch::torch_randn(c(10, 10))
 x_rcpp  <- rcpp_torch_randn(c(10L, 10L))
 
@@ -78,12 +78,12 @@ r_torch <- r_rcpp <- r_tiny <- numeric(6)
 # 1: namespace add
 r_torch[1] <- timeit(torch::torch_add(x_torch, x_torch))
 r_rcpp[1]  <- timeit(rcpp_torch_add(x_rcpp, x_rcpp))
-r_tiny[1]  <- timeit(Rtorch::torch_add(x_tiny, x_tiny))
+r_tiny[1]  <- timeit(tinytorch::torch_add(x_tiny, x_tiny))
 
 # 2: method $add (subprocess)
 r_torch[2] <- timeit_subprocess("x <- torch::torch_randn(c(10, 10))", "x$add(x)")
 r_rcpp[2]  <- NA  # no $ dispatch
-r_tiny[2]  <- timeit_subprocess("x <- Rtorch::torch_randn(c(10, 10))", "x$add(x)")
+r_tiny[2]  <- timeit_subprocess("x <- tinytorch::torch_randn(c(10, 10))", "x$add(x)")
 
 # 3: chained matmul
 r_torch[3] <- timeit({
@@ -95,27 +95,27 @@ r_rcpp[3] <- timeit({
   rcpp_torch_matmul(tmp, x_rcpp)
 })
 r_tiny[3] <- timeit({
-  tmp <- Rtorch::torch_matmul(x_tiny, x_tiny)
-  Rtorch::torch_matmul(tmp, x_tiny)
+  tmp <- tinytorch::torch_matmul(x_tiny, x_tiny)
+  tinytorch::torch_matmul(tmp, x_tiny)
 })
 
 # 4: method chain (subprocess)
 r_torch[4] <- timeit_subprocess("x <- torch::torch_randn(c(10, 10))", "x$add(x)$mul(x)")
 r_rcpp[4]  <- NA
-r_tiny[4]  <- timeit_subprocess("x <- Rtorch::torch_randn(c(10, 10))", "x$add(x)$mul(x)")
+r_tiny[4]  <- timeit_subprocess("x <- tinytorch::torch_randn(c(10, 10))", "x$add(x)$mul(x)")
 
 # 5: creation
 r_torch[5] <- timeit(torch::torch_randn(c(10, 10)))
 r_rcpp[5]  <- timeit(rcpp_torch_randn(c(10L, 10L)))
-r_tiny[5]  <- timeit(Rtorch::torch_randn(c(10, 10)))
+r_tiny[5]  <- timeit(tinytorch::torch_randn(c(10, 10)))
 
 # 6: large matmul
 big_torch <- torch::torch_randn(c(1000, 1000))
-big_tiny  <- Rtorch::torch_randn(c(1000, 1000))
+big_tiny  <- tinytorch::torch_randn(c(1000, 1000))
 big_rcpp  <- rcpp_torch_randn(c(1000L, 1000L))
 r_torch[6] <- timeit(torch::torch_matmul(big_torch, big_torch), n = 200L)
 r_rcpp[6]  <- timeit(rcpp_torch_matmul(big_rcpp, big_rcpp), n = 200L)
-r_tiny[6]  <- timeit(Rtorch::torch_matmul(big_tiny, big_tiny), n = 200L)
+r_tiny[6]  <- timeit(tinytorch::torch_matmul(big_tiny, big_tiny), n = 200L)
 
 # ---- Build matrix ----
 py_vals <- vapply(tests, function(t) py[[t]], numeric(1))

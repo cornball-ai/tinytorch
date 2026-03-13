@@ -1,4 +1,4 @@
-# Rtorch TODO
+# tinytorch TODO
 
 ## High Priority
 

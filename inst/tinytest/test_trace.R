@@ -1,13 +1,13 @@
-if (!Rtorch::is_available()) exit_file("LibTorch not available")
+if (!tinytorch::is_available()) exit_file("LibTorch not available")
 
 # ===== Helper utilities =====
 
-is_nn_module_callable <- Rtorch:::is_nn_module_callable
-get_module_instance <- Rtorch:::get_module_instance
-resolve_self_access <- Rtorch:::resolve_self_access
-get_private <- Rtorch:::get_private
-expand_nnf <- Rtorch:::expand_nnf
-is_sequential_body <- Rtorch:::is_sequential_body
+is_nn_module_callable <- tinytorch:::is_nn_module_callable
+get_module_instance <- tinytorch:::get_module_instance
+resolve_self_access <- tinytorch:::resolve_self_access
+get_private <- tinytorch:::get_private
+expand_nnf <- tinytorch:::expand_nnf
+is_sequential_body <- tinytorch:::is_sequential_body
 
 # ===== Step 1: Helper functions =====
 

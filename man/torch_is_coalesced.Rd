@@ -1,0 +1,16 @@
+% tinyrox says don't edit this manually, but it can't stop you!
+\name{torch_is_coalesced}
+\alias{torch_is_coalesced}
+\title{Is coalesced}
+\usage{
+torch_is_coalesced(self)
+}
+\arguments{
+\item{self}{A torch_tensor.}
+}
+\value{
+A torch_tensor.
+}
+\description{
+Wrapper for \code{at::is_coalesced}.
+}

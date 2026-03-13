@@ -16,7 +16,7 @@ trace_module(module, ..., .optimize = TRUE, .fuse = FALSE, .backend = "auto",
 \item{.fuse}{Logical, compile fusion groups to kernels}
 
 \item{.backend}{Character: "auto", "gpu", or "cpu". "auto" detects
-from input tensors at call time and ariel availability.}
+from input tensors at call time.}
 
 \item{.verbose}{Logical, print tracing info}
 }
