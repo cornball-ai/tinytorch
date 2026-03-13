@@ -17,7 +17,7 @@ On non-Linux systems, tinytorch builds in stub mode: the package loads but `is_a
 ### Installing libtorch
 
 ```r
-tinytorch::tinytorch_install_libtorch()
+tinytorch::install_libtorch()
 # Then reinstall tinytorch to pick up the backend
 install.packages("tinytorch")
 ```

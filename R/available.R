@@ -23,9 +23,9 @@ is_available <- function() {
 #' @export
 #' @examples
 #' \dontrun{
-#' tinytorch_install_libtorch()
+#' install_libtorch()
 #' }
-tinytorch_install_libtorch <- function(path = "~/.local/lib/libtorch",
+install_libtorch <- function(path = "~/.local/lib/libtorch",
                                        version = "2.8.0") {
   path <- normalizePath(path, mustWork = FALSE)
   parent <- dirname(path)

@@ -1,14 +1,14 @@
 #!/bin/sh
 
-# Rtorch configure script
+# tinytorch configure script
 # Detects libtorch and generates src/Makevars for real or stub backend.
 
 # ---- Force stub mode (for testing) ----
 
-if [ "$RTORCH_STUB" = "1" ]; then
-  echo "* RTORCH_STUB=1: forcing stub backend"
+if [ "$TINYTORCH_STUB" = "1" ]; then
+  echo "* TINYTORCH_STUB=1: forcing stub backend"
   cat > src/Makevars <<EOF
-PKG_CPPFLAGS = -DRTORCH_HAVE_LIBTORCH=0
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
 OBJECTS = stubs.o
 EOF
   echo "Generated src/Makevars (stub mode)"
@@ -22,9 +22,9 @@ case "$PLATFORM" in
   Linux) ;;
   *)
     echo "* Non-Linux platform ($PLATFORM): using stub backend"
-    echo "  Rtorch will install but is_available() will return FALSE"
+    echo "  tinytorch will install but is_available() will return FALSE"
     cat > src/Makevars <<EOF
-PKG_CPPFLAGS = -DRTORCH_HAVE_LIBTORCH=0
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
 OBJECTS = stubs.o
 EOF
     echo "Generated src/Makevars (stub mode)"
@@ -62,9 +62,9 @@ fi
 if [ -z "$TORCH_HOME" ]; then
   echo "* libtorch not found: using stub backend"
   echo "  Searched: LIBTORCH_HOME, ~/.local/lib/libtorch, torch R package"
-  echo "  Install libtorch with rtorch::rtorch_install_libtorch() and reinstall"
+  echo "  Install libtorch with tinytorch::install_libtorch() and reinstall"
   cat > src/Makevars <<EOF
-PKG_CPPFLAGS = -DRTORCH_HAVE_LIBTORCH=0
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
 OBJECTS = stubs.o
 EOF
   echo "Generated src/Makevars (stub mode)"
@@ -80,7 +80,7 @@ if [ ! -f "$TORCH_LIB/libtorch.so" ] && [ ! -f "$TORCH_LIB/libtorch_cpu.so" ]; t
   echo "WARNING: libtorch shared library not found in $TORCH_LIB"
   echo "  Falling back to stub backend"
   cat > src/Makevars <<EOF
-PKG_CPPFLAGS = -DRTORCH_HAVE_LIBTORCH=0
+PKG_CPPFLAGS = -DTINYTORCH_HAVE_LIBTORCH=0
 OBJECTS = stubs.o
 EOF
   echo "Generated src/Makevars (stub mode)"
@@ -100,13 +100,13 @@ if [ -f "$TORCH_LIB/libtorch_cuda.so" ]; then
 
   for cuda_dir in /usr/local/cuda /usr/local/cuda-12 /usr/local/cuda-12.8; do
     if [ -f "$cuda_dir/include/cuda_runtime_api.h" ]; then
-      CUDA_CPPFLAGS="-I${cuda_dir}/include -DRTORCH_CUDA"
+      CUDA_CPPFLAGS="-I${cuda_dir}/include -DTINYTORCH_CUDA"
       echo "  CUDA SDK: $cuda_dir/include"
       break
     fi
   done
   if [ -z "$CUDA_CPPFLAGS" ]; then
-    CUDA_CPPFLAGS="-DRTORCH_CUDA -DRTORCH_CUDA_NO_SDK"
+    CUDA_CPPFLAGS="-DTINYTORCH_CUDA -DTINYTORCH_CUDA_NO_SDK"
     echo "  CUDA SDK: not found (using dlsym fallback)"
   fi
   echo "  CUDA: enabled"
@@ -121,7 +121,7 @@ REAL_OBJECTS="RcppExports.o gen-ops.o tensor.o ops.o nn_functions.o transformer.
 cat > src/Makevars <<EOF
 CXX_STD = CXX17
 
-PKG_CPPFLAGS = -I${TORCH_INCLUDE} -I${TORCH_INCLUDE}/torch/csrc/api/include ${CUDA_CPPFLAGS} -DRTORCH_HAVE_LIBTORCH=1
+PKG_CPPFLAGS = -I${TORCH_INCLUDE} -I${TORCH_INCLUDE}/torch/csrc/api/include ${CUDA_CPPFLAGS} -DTINYTORCH_HAVE_LIBTORCH=1
 PKG_CXXFLAGS = \$(CXX17STD) -D_GLIBCXX_USE_CXX11_ABI=1
 
 PKG_LIBS = -L${TORCH_LIB} -ltorch -ltorch_cpu -lc10 ${CUDA_LIBS} \\
