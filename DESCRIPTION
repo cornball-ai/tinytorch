@@ -1,7 +1,7 @@
 Package: tinytorch
 Type: Package
 Title: High-Performance R Bindings to Libtorch
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Troy", "Hernandez", role = c("aut", "cre"),
            email = "troy@cornball.ai"),
