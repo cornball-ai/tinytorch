@@ -3,7 +3,7 @@
 \alias{torch_addmm}
 \title{Addmm}
 \usage{
-torch_addmm(self, mat1, mat2, beta = 1, alpha = 1)
+torch_addmm(self, mat1, mat2, beta = 1, alpha = 1, out_dtype = NULL)
 }
 \arguments{
 \item{self}{A torch_tensor.}
