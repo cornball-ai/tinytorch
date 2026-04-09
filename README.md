@@ -22,19 +22,23 @@ See the [PyTorch install page](https://pytorch.org/get-started/locally/) for the
 mkdir -p ~/.local/lib
 
 # CUDA 12.8 (recommended)
-curl -sL "https://download.pytorch.org/libtorch/cu128/libtorch-cxx11-abi-shared-with-deps-2.8.0%2Bcu128.zip" \
+curl -sL "https://download.pytorch.org/libtorch/cu128/libtorch-shared-with-deps-2.11.0%2Bcu128.zip" \
   -o /tmp/libtorch.zip
 
-# CUDA 12.6
-curl -sL "https://download.pytorch.org/libtorch/cu126/libtorch-cxx11-abi-shared-with-deps-2.8.0%2Bcu126.zip" \
+# CUDA 12.6 (use this if you have a Volta GPU like V100 — see note below)
+curl -sL "https://download.pytorch.org/libtorch/cu126/libtorch-shared-with-deps-2.11.0%2Bcu126.zip" \
   -o /tmp/libtorch.zip
 
 # CPU only
-curl -sL "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.8.0%2Bcpu.zip" \
+curl -sL "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.11.0%2Bcpu.zip" \
   -o /tmp/libtorch.zip
 
 unzip -q /tmp/libtorch.zip -d ~/.local/lib
 ```
+
+Volta (V100, SM 7.0) was dropped from the upstream CUDA 12.8/12.9 prebuilt binaries in libtorch 2.11. Volta users should use the CUDA 12.6 build above.
+
+Don't load `torch` (mlverse) and `tinytorch` in the same R session — they each load a different libtorch into the same process and will collide.
 
 Or from R (requires tinytorch to already be installed in stub mode):
 
