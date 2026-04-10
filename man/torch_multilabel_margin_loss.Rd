@@ -3,7 +3,7 @@
 \alias{torch_multilabel_margin_loss}
 \title{Multilabel margin loss}
 \usage{
-torch_multilabel_margin_loss(self, target, reduction = Mean)
+torch_multilabel_margin_loss(self, target, reduction = 1L)
 }
 \arguments{
 \item{self}{A torch_tensor.}

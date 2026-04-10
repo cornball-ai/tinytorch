@@ -4,7 +4,7 @@
 \title{Ctc loss}
 \usage{
 torch_ctc_loss(log_probs, targets, input_lengths, target_lengths, blank = 0,
-               reduction = Mean, zero_infinity = FALSE)
+               reduction = 1L, zero_infinity = FALSE)
 }
 \arguments{
 \item{log_probs}{A torch_tensor.}

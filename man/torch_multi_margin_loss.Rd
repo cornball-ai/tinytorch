@@ -4,7 +4,7 @@
 \title{Multi margin loss}
 \usage{
 torch_multi_margin_loss(self, target, p = 1, margin = 1, weight = NULL,
-                        reduction = Mean)
+                        reduction = 1L)
 }
 \arguments{
 \item{self}{A torch_tensor.}

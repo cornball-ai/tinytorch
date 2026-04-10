@@ -3,7 +3,7 @@
 \alias{torch_randint}
 \title{Randint}
 \usage{
-torch_randint(high, size, dtype = long, device = NULL)
+torch_randint(high, size, dtype = torch_long, device = NULL)
 }
 \arguments{
 \item{high}{An integer.}

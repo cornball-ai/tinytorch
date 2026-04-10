@@ -4,6 +4,10 @@
 #' @importFrom stats setNames
 NULL
 
+# `self` is bound at runtime by nn_module()'s init machinery, not lexically.
+# Declare it so R CMD check doesn't flag the nn_* forward closures.
+utils::globalVariables("self")
+
 .onLoad <- function(libname, pkgname) {
   # In stub mode (no libtorch), nothing to do
   if (!tryCatch(.Call("_tinytorch_C_rtorch_ping") == 1L, error = function(e) FALSE)) {

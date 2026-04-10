@@ -3,7 +3,7 @@
 \alias{torch_margin_ranking_loss}
 \title{Margin ranking loss}
 \usage{
-torch_margin_ranking_loss(input1, input2, target, margin = 0, reduction = Mean)
+torch_margin_ranking_loss(input1, input2, target, margin = 0, reduction = 1L)
 }
 \arguments{
 \item{input1}{A torch_tensor.}

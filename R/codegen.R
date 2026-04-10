@@ -760,7 +760,8 @@ compile_fusion_group <- function(graph, group_id) {
   if (file.exists(cached_so)) {
     tryCatch({
       dyn.load(cached_so)
-      call_fn <- function(...) .Call(getNativeSymbolInfo(func_name), ...)
+      sym <- getNativeSymbolInfo(func_name)
+      call_fn <- function(...) .Call(sym, ...)
       info <- list(call_fn = call_fn, func_name = func_name,
                    n_inputs = kernel_info$n_inputs)
       assign(reg_key, info, envir = .kernel_registry)
@@ -786,7 +787,8 @@ compile_fusion_group <- function(graph, group_id) {
   # Load and register
   tryCatch({
     dyn.load(so_path)
-    call_fn <- function(...) .Call(getNativeSymbolInfo(func_name), ...)
+    sym <- getNativeSymbolInfo(func_name)
+    call_fn <- function(...) .Call(sym, ...)
     info <- list(call_fn = call_fn, func_name = func_name,
                  n_inputs = kernel_info$n_inputs)
     assign(reg_key, info, envir = .kernel_registry)

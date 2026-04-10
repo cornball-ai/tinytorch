@@ -3,7 +3,7 @@
 \alias{torch_cross_entropy_loss}
 \title{Cross entropy loss}
 \usage{
-torch_cross_entropy_loss(self, target, weight = NULL, reduction = Mean,
+torch_cross_entropy_loss(self, target, weight = NULL, reduction = 1L,
                          ignore_index = -100, label_smoothing = 0)
 }
 \arguments{

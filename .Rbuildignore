@@ -11,3 +11,4 @@
 ^WhisperNote\.txt$
 ^tools$
 ^src/Makevars$
+^run\.sh$

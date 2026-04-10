@@ -4,7 +4,7 @@
 \title{Triplet margin loss}
 \usage{
 torch_triplet_margin_loss(anchor, positive, negative, margin = 1, p = 2,
-                          eps = 1e-06, swap = FALSE, reduction = Mean)
+                          eps = 1e-06, swap = FALSE, reduction = 1L)
 }
 \arguments{
 \item{anchor}{A torch_tensor.}

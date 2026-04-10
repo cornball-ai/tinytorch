@@ -4,7 +4,7 @@
 \title{Binary cross entropy with logits}
 \usage{
 torch_binary_cross_entropy_with_logits(self, target, weight = NULL,
-                                       pos_weight = NULL, reduction = Mean)
+                                       pos_weight = NULL, reduction = 1L)
 }
 \arguments{
 \item{self}{A torch_tensor.}

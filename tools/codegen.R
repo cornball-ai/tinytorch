@@ -849,6 +849,11 @@ translate_default <- function(d) {
   d <- gsub("None", "NULL", d)
   # Handle list defaults like [0, 1] or []
   if (grepl("^\\[", d)) d <- "NULL"
+  # ATen Reduction enum -> integer (None=0, Mean=1, Sum=2)
+  if (d == "Mean") d <- "1L"
+  if (d == "Sum") d <- "2L"
+  # ATen ScalarType enum -> R dtype constant
+  if (d == "long") d <- "torch_long"
   d
 }
 

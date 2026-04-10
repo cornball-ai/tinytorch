@@ -3,7 +3,7 @@
 \alias{torch_soft_margin_loss}
 \title{Soft margin loss}
 \usage{
-torch_soft_margin_loss(self, target, reduction = Mean)
+torch_soft_margin_loss(self, target, reduction = 1L)
 }
 \arguments{
 \item{self}{A torch_tensor.}

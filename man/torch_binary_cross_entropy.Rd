@@ -3,7 +3,7 @@
 \alias{torch_binary_cross_entropy}
 \title{Binary cross entropy}
 \usage{
-torch_binary_cross_entropy(self, target, weight = NULL, reduction = Mean)
+torch_binary_cross_entropy(self, target, weight = NULL, reduction = 1L)
 }
 \arguments{
 \item{self}{A torch_tensor.}

@@ -3,7 +3,7 @@
 \alias{torch_hinge_embedding_loss}
 \title{Hinge embedding loss}
 \usage{
-torch_hinge_embedding_loss(self, target, margin = 1, reduction = Mean)
+torch_hinge_embedding_loss(self, target, margin = 1, reduction = 1L)
 }
 \arguments{
 \item{self}{A torch_tensor.}
