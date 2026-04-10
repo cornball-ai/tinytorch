@@ -62,6 +62,26 @@ torch_long <- torch_int64
 #' @export
 torch_bool <- structure(11L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
+#' @export
+torch_bfloat16 <- structure(15L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e5m2 <- structure(23L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e4m3fn <- structure(24L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e5m2fnuz <- structure(25L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e4m3fnuz <- structure(26L, class = "torch_dtype")
+
 #' Print a torch_dtype
 #' @param x A torch_dtype.
 #' @param ... Ignored.
@@ -72,7 +92,12 @@ print.torch_dtype <- function(x, ...) {
   names <- c(
     "torch_uint8", "torch_int8", "torch_int16", "torch_int32",
     "torch_int64", "torch_float16", "torch_float32", "torch_float64",
-    "torch_complex32", "torch_complex64", "torch_complex128", "torch_bool"
+    "torch_complex32", "torch_complex64", "torch_complex128", "torch_bool",
+    "torch_qint8", "torch_quint8", "torch_qint32", "torch_bfloat16",
+    "torch_quint4x2", "torch_quint2x4",
+    "torch_bits1x8", "torch_bits2x4", "torch_bits4x2", "torch_bits8", "torch_bits16",
+    "torch_float8_e5m2", "torch_float8_e4m3fn",
+    "torch_float8_e5m2fnuz", "torch_float8_e4m3fnuz"
   )
   idx <- unclass(x) + 1L
   cat(names[idx], "\n")
@@ -87,7 +112,12 @@ as.character.torch_dtype <- function(x, ...) {
   names <- c(
     "Byte", "Char", "Short", "Int", "Long",
     "Half", "Float", "Double",
-    "ComplexHalf", "ComplexFloat", "ComplexDouble", "Bool"
+    "ComplexHalf", "ComplexFloat", "ComplexDouble", "Bool",
+    "QInt8", "QUInt8", "QInt32", "BFloat16",
+    "QUInt4x2", "QUInt2x4",
+    "Bits1x8", "Bits2x4", "Bits4x2", "Bits8", "Bits16",
+    "Float8_e5m2", "Float8_e4m3fn",
+    "Float8_e5m2fnuz", "Float8_e4m3fnuz"
   )
   idx <- unclass(x) + 1L
   if (idx >= 1L && idx <= length(names)) names[idx] else sprintf("Unknown(%d)", unclass(x))
@@ -98,7 +128,12 @@ as.character.torch_dtype <- function(x, ...) {
   names <- c(
     "UInt8", "Int8", "Int16", "Int32", "Int64",
     "Float16", "Float32", "Float64",
-    "ComplexHalf", "ComplexFloat", "ComplexDouble", "Bool"
+    "ComplexHalf", "ComplexFloat", "ComplexDouble", "Bool",
+    "QInt8", "QUInt8", "QInt32", "BFloat16",
+    "QUInt4x2", "QUInt2x4",
+    "Bits1x8", "Bits2x4", "Bits4x2", "Bits8", "Bits16",
+    "Float8_e5m2", "Float8_e4m3fn",
+    "Float8_e5m2fnuz", "Float8_e4m3fnuz"
   )
   idx <- code + 1L
   if (idx >= 1L && idx <= length(names)) names[idx] else sprintf("Unknown(%d)", code)

@@ -10898,3 +10898,29 @@ torch_special_spherical_bessel_j0 <- function(x) {
 .tensor_methods$to_padded_tensor <- function(self, padding, output_size = NULL) {
     C_torch_to_padded_tensor(self, as.double(padding), output_size)
 }
+
+# ---- FP8 scaled matmul (libtorch 2.8+) ----
+
+#' Scaled matrix multiplication (FP8)
+#'
+#' Performs matrix multiplication with separate per-tensor scaling factors,
+#' designed for FP8 (float8) training and inference. Inputs are typically
+#' float8_e4m3fn or float8_e5m2 tensors; output is cast to \code{out_dtype}.
+#'
+#' @param self First matrix (float8 tensor).
+#' @param mat2 Second matrix (float8 tensor).
+#' @param scale_a Scale factor for \code{self} (scalar tensor).
+#' @param scale_b Scale factor for \code{mat2} (scalar tensor).
+#' @param bias Optional bias tensor.
+#' @param scale_result Optional scale factor for the output.
+#' @param out_dtype Output dtype (e.g., \code{torch_bfloat16}). Default NULL uses input dtype.
+#' @param use_fast_accum Use fast accumulation (less precise, faster). Default FALSE.
+#' @return A torch_tensor.
+#' @export
+torch_scaled_mm <- function(self, mat2, scale_a, scale_b,
+                            bias = NULL, scale_result = NULL,
+                            out_dtype = NULL, use_fast_accum = FALSE) {
+    C_torch_scaled_mm(self, mat2, scale_a, scale_b,
+                      bias, scale_result, out_dtype,
+                      as.logical(use_fast_accum))
+}

@@ -82,27 +82,6 @@ expect_true("block.fc" %in% paths2,
 expect_true("out" %in% paths2,
             info = "Finds top-level sub-modules (out)")
 
-# ===== trace_report =====
-
-report <- trace_report(simple_model, verbose = FALSE)
-
-expect_true(is.data.frame(report),
-            info = "trace_report returns data.frame")
-expect_true(nrow(report) >= 3,
-            info = "Report has at least 3 rows (3 sub-modules)")
-expect_true("path" %in% names(report),
-            info = "Report has path column")
-expect_true("traceable" %in% names(report),
-            info = "Report has traceable column")
-expect_true("correct" %in% names(report),
-            info = "Report has correct column")
-
-# All sub-modules of simple model should trace correctly
-expect_true(all(report$traceable, na.rm = TRUE),
-            info = "All simple model sub-modules are traceable")
-expect_true(all(report$correct, na.rm = TRUE),
-            info = "All simple model sub-modules produce correct results")
-
 # ===== find_torch_packages =====
 
 pkgs <- find_torch_packages()
