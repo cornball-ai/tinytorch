@@ -13,7 +13,7 @@ End-to-end transcription benchmarks using OpenAI Whisper (base model,
 7.5 second JFK audio clip). Four backends compared on both GPU and CPU.
 
 Hardware: AMD Ryzen 7 9800X3D, 64 GB DDR5, NVIDIA RTX 5060 Ti 16 GB.
-Software: libtorch 2.8.0, Python torch 2.8.0+cu128, R 4.5.0.
+Software: libtorch 2.11.0, Python torch 2.11.0+cu128, R 4.5.0.
 
 GPU Results (RTX 5060 Ti)
 -------------------------

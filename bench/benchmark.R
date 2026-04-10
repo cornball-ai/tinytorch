@@ -1,5 +1,5 @@
 # 4-way benchmark: Python torch vs R torch vs Rcpp vs tinytorch
-# All using libtorch 2.8.0. Saves results to bench/results.csv
+# All using libtorch 2.11.0. Saves results to bench/results.csv
 
 timeit <- function(expr, n = 10000L, envir = parent.frame()) {
   expr <- substitute(expr)
@@ -30,7 +30,7 @@ timeit_subprocess <- function(setup, expr_str, n = 10000L) {
 }
 
 # ---- Python results ----
-cat("Running Python benchmark (torch 2.8.0)...\n")
+cat("Running Python benchmark (torch 2.11.0)...\n")
 py_json <- system2(
   "/tmp/torch-bench/bin/python",
   args = file.path(getwd(), "bench/benchmark_python.py"),
@@ -132,6 +132,6 @@ mat <- data.frame(
 outfile <- file.path(getwd(), "bench/results.csv")
 write.csv(mat, outfile, row.names = FALSE)
 
-cat("\n=== Results (microseconds per call, libtorch 2.8.0) ===\n\n")
+cat("\n=== Results (microseconds per call, libtorch 2.11.0) ===\n\n")
 print(mat, right = FALSE, row.names = FALSE)
 cat(sprintf("\nSaved to %s\n", outfile))

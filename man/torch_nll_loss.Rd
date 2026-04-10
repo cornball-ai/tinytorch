@@ -3,8 +3,7 @@
 \alias{torch_nll_loss}
 \title{Nll loss}
 \usage{
-torch_nll_loss(self, target, weight = NULL, reduction = Mean,
-               ignore_index = -100)
+torch_nll_loss(self, target, weight = NULL, reduction = 1L, ignore_index = -100)
 }
 \arguments{
 \item{self}{A torch_tensor.}

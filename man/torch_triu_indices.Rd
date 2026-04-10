@@ -3,7 +3,7 @@
 \alias{torch_triu_indices}
 \title{Triu indices}
 \usage{
-torch_triu_indices(row, col, offset = 0, dtype = long, device = NULL)
+torch_triu_indices(row, col, offset = 0, dtype = torch_long, device = NULL)
 }
 \arguments{
 \item{row}{An integer.}

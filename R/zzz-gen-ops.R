@@ -767,6 +767,7 @@ torch_atleast_3d <- function(self) {
 #' @param batch2 A torch_tensor.
 #' @param beta A numeric scalar.
 #' @param alpha A numeric scalar.
+#' @param out_dtype Optional output dtype for mixed-precision (PyTorch 2.8+).
 #' @return A torch_tensor.
 #' @export
 torch_baddbmm <- function(self, batch1, batch2, beta = 1, alpha = 1, out_dtype = NULL) {
@@ -862,7 +863,7 @@ torch_bilinear <- function(input1, input2, weight, bias = NULL) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_binary_cross_entropy <- function(self, target, weight = NULL, reduction = Mean) {
+torch_binary_cross_entropy <- function(self, target, weight = NULL, reduction = 1L) {
     C_torch_binary_cross_entropy(self, target, weight, as.integer(reduction))
 }
 
@@ -876,7 +877,7 @@ torch_binary_cross_entropy <- function(self, target, weight = NULL, reduction = 
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_binary_cross_entropy_with_logits <- function(self, target, weight = NULL, pos_weight = NULL, reduction = Mean) {
+torch_binary_cross_entropy_with_logits <- function(self, target, weight = NULL, pos_weight = NULL, reduction = 1L) {
     C_torch_binary_cross_entropy_with_logits(self, target, weight, pos_weight, as.integer(reduction))
 }
 
@@ -1374,7 +1375,7 @@ torch_cosh_ <- function(self) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_cosine_embedding_loss <- function(input1, input2, target, margin = 0.0, reduction = Mean) {
+torch_cosine_embedding_loss <- function(input1, input2, target, margin = 0.0, reduction = 1L) {
     C_torch_cosine_embedding_loss(input1, input2, target, as.double(margin), as.integer(reduction))
 }
 
@@ -1494,7 +1495,7 @@ torch_cumulative_trapezoid <- function(y, x, dim = -1) {
 #' @param zero_infinity A logical value.
 #' @return A torch_tensor.
 #' @export
-torch_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank = 0, reduction = Mean, zero_infinity = FALSE) {
+torch_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank = 0, reduction = 1L, zero_infinity = FALSE) {
     C_torch_ctc_loss(log_probs, targets, input_lengths, target_lengths, as.integer(blank), as.integer(reduction), as.logical(zero_infinity))
 }
 
@@ -2159,7 +2160,7 @@ torch_kaiser_window <- function(window_length, dtype = NULL, device = NULL) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_hinge_embedding_loss <- function(self, target, margin = 1.0, reduction = Mean) {
+torch_hinge_embedding_loss <- function(self, target, margin = 1.0, reduction = 1L) {
     C_torch_hinge_embedding_loss(self, target, as.double(margin), as.integer(reduction))
 }
 
@@ -2326,7 +2327,7 @@ torch_is_same_size <- function(self, other) {
 #' @param log_target A logical value.
 #' @return A torch_tensor.
 #' @export
-torch_kl_div <- function(self, target, reduction = Mean, log_target = FALSE) {
+torch_kl_div <- function(self, target, reduction = 1L, log_target = FALSE) {
     C_torch_kl_div(self, target, as.integer(reduction), as.logical(log_target))
 }
 
@@ -2571,7 +2572,7 @@ torch_logsumexp <- function(self, dim, keepdim = FALSE) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_margin_ranking_loss <- function(input1, input2, target, margin = 0.0, reduction = Mean) {
+torch_margin_ranking_loss <- function(input1, input2, target, margin = 0.0, reduction = 1L) {
     C_torch_margin_ranking_loss(input1, input2, target, as.double(margin), as.integer(reduction))
 }
 
@@ -3251,7 +3252,7 @@ torch_rand_like <- function(self, dtype = NULL, device = NULL, memory_format = N
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
-torch_randint <- function(high, size, dtype = long, device = NULL) {
+torch_randint <- function(high, size, dtype = torch_long, device = NULL) {
     C_torch_randint(as.integer(high), size, dtype, device)
 }
 
@@ -3277,7 +3278,7 @@ torch_randint_like <- function(self, high, dtype = NULL, device = NULL, memory_f
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
-torch_randperm <- function(n, dtype = long, device = NULL) {
+torch_randperm <- function(n, dtype = torch_long, device = NULL) {
     C_torch_randperm(as.integer(n), dtype, device)
 }
 
@@ -4174,7 +4175,7 @@ torch_trapz <- function(y, x, dim = -1) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_triplet_margin_loss <- function(anchor, positive, negative, margin = 1.0, p = 2, eps = 1e-06, swap = FALSE, reduction = Mean) {
+torch_triplet_margin_loss <- function(anchor, positive, negative, margin = 1.0, p = 2, eps = 1e-06, swap = FALSE, reduction = 1L) {
     C_torch_triplet_margin_loss(anchor, positive, negative, as.double(margin), as.double(p), as.double(eps), as.logical(swap), as.integer(reduction))
 }
 
@@ -4519,6 +4520,7 @@ torch_sparse_sampled_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
 #' @param mat2 A torch_tensor.
 #' @param beta A numeric scalar.
 #' @param alpha A numeric scalar.
+#' @param out_dtype Optional output dtype for mixed-precision (PyTorch 2.8+).
 #' @return A torch_tensor.
 #' @export
 torch_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1, out_dtype = NULL) {
@@ -5989,7 +5991,7 @@ torch_tril <- function(self, diagonal = 0) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
-torch_tril_indices <- function(row, col, offset = 0, dtype = long, device = NULL) {
+torch_tril_indices <- function(row, col, offset = 0, dtype = torch_long, device = NULL) {
     C_torch_tril_indices(as.integer(row), as.integer(col), as.integer(offset), dtype, device)
 }
 
@@ -6003,7 +6005,7 @@ torch_tril_indices <- function(row, col, offset = 0, dtype = long, device = NULL
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
-torch_triu_indices <- function(row, col, offset = 0, dtype = long, device = NULL) {
+torch_triu_indices <- function(row, col, offset = 0, dtype = torch_long, device = NULL) {
     C_torch_triu_indices(as.integer(row), as.integer(col), as.integer(offset), dtype, device)
 }
 
@@ -6321,7 +6323,7 @@ torch_addcdiv_ <- function(self, tensor1, tensor2, value = 1) {
 #' @param label_smoothing A numeric value.
 #' @return A torch_tensor.
 #' @export
-torch_cross_entropy_loss <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100, label_smoothing = 0.0) {
+torch_cross_entropy_loss <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0.0) {
     C_torch_cross_entropy_loss(self, target, weight, as.integer(reduction), as.integer(ignore_index), as.double(label_smoothing))
 }
 
@@ -7121,7 +7123,7 @@ torch_searchsorted <- function(sorted_sequence, self, out_int32 = FALSE, right =
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_mse_loss <- function(self, target, reduction = Mean) {
+torch_mse_loss <- function(self, target, reduction = 1L) {
     C_torch_mse_loss(self, target, as.integer(reduction))
 }
 
@@ -7133,7 +7135,7 @@ torch_mse_loss <- function(self, target, reduction = Mean) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_l1_loss <- function(self, target, reduction = Mean) {
+torch_l1_loss <- function(self, target, reduction = 1L) {
     C_torch_l1_loss(self, target, as.integer(reduction))
 }
 
@@ -7148,7 +7150,7 @@ torch_l1_loss <- function(self, target, reduction = Mean) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_multi_margin_loss <- function(self, target, p = 1, margin = 1, weight = NULL, reduction = Mean) {
+torch_multi_margin_loss <- function(self, target, p = 1, margin = 1, weight = NULL, reduction = 1L) {
     C_torch_multi_margin_loss(self, target, p, margin, weight, as.integer(reduction))
 }
 
@@ -7160,7 +7162,7 @@ torch_multi_margin_loss <- function(self, target, p = 1, margin = 1, weight = NU
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_multilabel_margin_loss <- function(self, target, reduction = Mean) {
+torch_multilabel_margin_loss <- function(self, target, reduction = 1L) {
     C_torch_multilabel_margin_loss(self, target, as.integer(reduction))
 }
 
@@ -7186,7 +7188,7 @@ torch_multilabel_margin_loss_forward <- function(self, target, reduction) {
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
-torch_nll_loss_nd <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100) {
+torch_nll_loss_nd <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100) {
     C_torch_nll_loss_nd(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
@@ -7200,7 +7202,7 @@ torch_nll_loss_nd <- function(self, target, weight = NULL, reduction = Mean, ign
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
-torch_nll_loss <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100) {
+torch_nll_loss <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100) {
     C_torch_nll_loss(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
@@ -7228,7 +7230,7 @@ torch_nll_loss_forward <- function(self, target, weight, reduction, ignore_index
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
-torch_nll_loss2d <- function(self, target, weight = NULL, reduction = Mean, ignore_index = -100) {
+torch_nll_loss2d <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100) {
     C_torch_nll_loss2d(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
 
@@ -7255,7 +7257,7 @@ torch_nll_loss2d_forward <- function(self, target, weight, reduction, ignore_ind
 #' @param beta A numeric value.
 #' @return A torch_tensor.
 #' @export
-torch_smooth_l1_loss <- function(self, target, reduction = Mean, beta = 1.0) {
+torch_smooth_l1_loss <- function(self, target, reduction = 1L, beta = 1.0) {
     C_torch_smooth_l1_loss(self, target, as.integer(reduction), as.double(beta))
 }
 
@@ -7268,7 +7270,7 @@ torch_smooth_l1_loss <- function(self, target, reduction = Mean, beta = 1.0) {
 #' @param delta A numeric value.
 #' @return A torch_tensor.
 #' @export
-torch_huber_loss <- function(self, target, reduction = Mean, delta = 1.0) {
+torch_huber_loss <- function(self, target, reduction = 1L, delta = 1.0) {
     C_torch_huber_loss(self, target, as.integer(reduction), as.double(delta))
 }
 
@@ -7280,7 +7282,7 @@ torch_huber_loss <- function(self, target, reduction = Mean, delta = 1.0) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
-torch_soft_margin_loss <- function(self, target, reduction = Mean) {
+torch_soft_margin_loss <- function(self, target, reduction = 1L) {
     C_torch_soft_margin_loss(self, target, as.integer(reduction))
 }
 

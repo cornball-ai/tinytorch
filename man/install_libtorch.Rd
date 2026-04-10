@@ -3,7 +3,7 @@
 \alias{install_libtorch}
 \title{Install libtorch}
 \usage{
-install_libtorch(path = "~/.local/lib/libtorch", version = "2.8.0")
+install_libtorch(path = "~/.local/lib/libtorch", version = "2.11.0")
 }
 \arguments{
 \item{path}{Installation directory. Default: ~/.local/lib/libtorch}

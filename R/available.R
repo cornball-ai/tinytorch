@@ -26,13 +26,13 @@ is_available <- function() {
 #' install_libtorch()
 #' }
 install_libtorch <- function(path = "~/.local/lib/libtorch",
-                                       version = "2.8.0") {
+                                       version = "2.11.0") {
   path <- normalizePath(path, mustWork = FALSE)
   parent <- dirname(path)
   if (!dir.exists(parent)) dir.create(parent, recursive = TRUE)
 
   url <- sprintf(
-    "https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-%s%%2Bcpu.zip",
+    "https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-%s%%2Bcpu.zip",
     version
   )
 

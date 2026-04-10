@@ -1,8 +1,12 @@
 #' @useDynLib tinytorch, .registration = TRUE
-#' @importFrom Rcpp sourceCpp
+#' @importFrom Rcpp evalCpp
 #' @importFrom utils capture.output download.file getFromNamespace object.size unzip
 #' @importFrom stats setNames
 NULL
+
+# `self` is bound at runtime by nn_module()'s init machinery, not lexically.
+# Declare it so R CMD check doesn't flag the nn_* forward closures.
+utils::globalVariables("self")
 
 .onLoad <- function(libname, pkgname) {
   # In stub mode (no libtorch), nothing to do

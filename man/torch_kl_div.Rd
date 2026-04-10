@@ -3,7 +3,7 @@
 \alias{torch_kl_div}
 \title{Kl div}
 \usage{
-torch_kl_div(self, target, reduction = Mean, log_target = FALSE)
+torch_kl_div(self, target, reduction = 1L, log_target = FALSE)
 }
 \arguments{
 \item{self}{A torch_tensor.}

@@ -3,7 +3,7 @@
 \alias{torch_l1_loss}
 \title{L1 loss}
 \usage{
-torch_l1_loss(self, target, reduction = Mean)
+torch_l1_loss(self, target, reduction = 1L)
 }
 \arguments{
 \item{self}{A torch_tensor.}

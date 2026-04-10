@@ -66,7 +66,7 @@ gpu_launch_generic <- function(ptx, kernel_name, tensors, scalars,
 #' Clear the GPU kernel cache
 #'
 #' @return Number of cached kernels cleared.
-#' @export
+#' @keywords internal
 gpu_kernel_cache_clear <- function() {
   C_gpu_kernel_cache_clear()
 }
@@ -74,7 +74,7 @@ gpu_kernel_cache_clear <- function() {
 #' GPU kernel cache statistics
 #'
 #' @return List with n_cached and kernel_names.
-#' @export
+#' @keywords internal
 gpu_kernel_cache_stats <- function() {
   C_gpu_kernel_cache_stats()
 }

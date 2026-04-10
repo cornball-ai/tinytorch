@@ -3,7 +3,7 @@
 \alias{torch_smooth_l1_loss}
 \title{Smooth l1 loss}
 \usage{
-torch_smooth_l1_loss(self, target, reduction = Mean, beta = 1)
+torch_smooth_l1_loss(self, target, reduction = 1L, beta = 1)
 }
 \arguments{
 \item{self}{A torch_tensor.}

@@ -3,12 +3,14 @@
 \alias{torch_mm}
 \title{Matrix-matrix multiplication (2D only)}
 \usage{
-torch_mm(self, other)
+torch_mm(self, other, out_dtype = NULL)
 }
 \arguments{
 \item{self}{A torch_tensor.}
 
 \item{other}{A torch_tensor.}
+
+\item{out_dtype}{Optional output dtype for mixed-precision (PyTorch 2.8+).}
 }
 \description{
 Matrix-matrix multiplication (2D only)

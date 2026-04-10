@@ -3,7 +3,7 @@
 \alias{torch_huber_loss}
 \title{Huber loss}
 \usage{
-torch_huber_loss(self, target, reduction = Mean, delta = 1)
+torch_huber_loss(self, target, reduction = 1L, delta = 1)
 }
 \arguments{
 \item{self}{A torch_tensor.}

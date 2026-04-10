@@ -3,7 +3,7 @@
 \alias{torch_cosine_embedding_loss}
 \title{Cosine embedding loss}
 \usage{
-torch_cosine_embedding_loss(input1, input2, target, margin = 0, reduction = Mean)
+torch_cosine_embedding_loss(input1, input2, target, margin = 0, reduction = 1L)
 }
 \arguments{
 \item{input1}{A torch_tensor.}

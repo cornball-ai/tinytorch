@@ -3,7 +3,7 @@
 \alias{torch_addmm}
 \title{Addmm}
 \usage{
-torch_addmm(self, mat1, mat2, beta = 1, alpha = 1)
+torch_addmm(self, mat1, mat2, beta = 1, alpha = 1, out_dtype = NULL)
 }
 \arguments{
 \item{self}{A torch_tensor.}
@@ -15,6 +15,8 @@ torch_addmm(self, mat1, mat2, beta = 1, alpha = 1)
 \item{beta}{A numeric scalar.}
 
 \item{alpha}{A numeric scalar.}
+
+\item{out_dtype}{Optional output dtype for mixed-precision (PyTorch 2.8+).}
 }
 \value{
 A torch_tensor.

@@ -9,12 +9,12 @@ title: "Benchmarks: tinytorch vs torch vs Python"
 Benchmarks
 ----------
 
-All benchmarks use libtorch 2.8.0 on CPU. Times are microseconds per call,
+All benchmarks use libtorch 2.11.0 on CPU. Times are microseconds per call,
 averaged over 10,000 iterations (200 for large matmul). Lower is better.
 
 Four implementations compared:
 
-- **Python** -- `torch 2.8.0+cpu` via pip (CPython 3.10)
+- **Python** -- `torch 2.11.0+cpu` via pip (CPython 3.10)
 - **R torch** -- `torch 0.16.3.9000` (Rcpp + lantern + R7 dispatch)
 - **Rcpp** -- minimal `Rcpp::sourceCpp` wrapper, direct to libtorch (no lantern, no R7)
 - **tinytorch** -- raw R C API + S3, direct to libtorch (no Rcpp, no lantern, no R7)
@@ -65,4 +65,4 @@ source("bench/benchmark.R")
 ```
 
 Requires: `torch`, `tinytorch`, `Rcpp`, `jsonlite` R packages, plus Python torch
-2.8.0 in a venv at `/tmp/torch-bench/`.
+2.11.0 in a venv at `/tmp/torch-bench/`.

@@ -3,7 +3,7 @@
 \alias{torch_nll_loss_nd}
 \title{Nll loss nd}
 \usage{
-torch_nll_loss_nd(self, target, weight = NULL, reduction = Mean,
+torch_nll_loss_nd(self, target, weight = NULL, reduction = 1L,
                   ignore_index = -100)
 }
 \arguments{

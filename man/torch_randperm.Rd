@@ -3,7 +3,7 @@
 \alias{torch_randperm}
 \title{Randperm}
 \usage{
-torch_randperm(n, dtype = long, device = NULL)
+torch_randperm(n, dtype = torch_long, device = NULL)
 }
 \arguments{
 \item{n}{An integer.}
