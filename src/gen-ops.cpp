@@ -4642,6 +4642,13 @@ at::Tensor C_torch_special_shifted_chebyshev_polynomial_w(at::Tensor x, at::Tens
 // [[Rcpp::export]]
 at::Tensor C_torch_special_spherical_bessel_j0(at::Tensor x) { return at::special_spherical_bessel_j0(x); }
 
+// ---- RNG ----
+
+// [[Rcpp::export]]
+void C_torch_manual_seed(int64_t seed) {
+    at::manual_seed(seed);
+}
+
 // ---- FP8 scaled matmul (new in libtorch 2.8+) ----
 
 // [[Rcpp::export]]

@@ -3266,8 +3266,8 @@ torch_randint <- function(high, size, dtype = torch_long, device = NULL) {
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
-torch_randint_like <- function(self, high, dtype = NULL, device = NULL, memory_format = NULL) {
-    C_torch_randint_like(self, as.integer(high), dtype, device, memory_format)
+torch_randint_like <- function(input, high, dtype = NULL, device = NULL, memory_format = NULL) {
+    C_torch_randint_like(input, as.integer(high), dtype, device, memory_format)
 }
 
 #' Randperm
@@ -5121,8 +5121,8 @@ torch_combinations <- function(self, r = 2, with_replacement = FALSE) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
-torch_result_type <- function(tensor, other) {
-    C_torch_result_type(tensor, other)
+torch_result_type <- function(tensor1, other) {
+    C_torch_result_type(tensor1, other)
 }
 
 #' Can cast
@@ -11143,3 +11143,195 @@ torch_reduction_mean <- 1L
 #' @rdname torch_dtype_constants
 #' @export
 torch_reduction_sum <- 2L
+
+# ---- Memory format constants ----
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_contiguous_format <- 0L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_channels_last_format <- 2L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_preserve_format <- 4L
+
+# ---- Layout constants ----
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_strided <- 0L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_sparse_coo <- 1L
+
+# ---- Quantization scheme constants ----
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_per_tensor_affine <- 0L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_per_channel_affine <- 1L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_per_tensor_symmetric <- 2L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_per_channel_symmetric <- 3L
+
+# ---- Additional ops ----
+
+#' @rdname torch_conj
+#' @export
+torch_conj <- function(self) C_torch_conj_physical(self)
+
+#' @rdname torch_index
+#' @export
+torch_index <- function(self, indices) C_torch_index(self, indices, FALSE)
+
+#' @rdname torch_index_put
+#' @export
+torch_index_put <- function(self, indices, values) {
+    C_torch_index_put(self, indices, values)
+}
+
+#' @rdname torch_lu
+#' @export
+torch_lu <- function(A, pivot = TRUE) torch_linalg_lu(A, pivot)
+
+#' Dtype query: is the tensor complex?
+#'
+#' @param self A torch_tensor.
+#' @return Logical.
+#' @export
+torch_is_complex <- function(self) {
+    self$dtype %in% c(8L, 9L, 10L)
+}
+
+#' Dtype query: is the tensor floating point?
+#'
+#' @param self A torch_tensor.
+#' @return Logical.
+#' @export
+torch_is_floating_point <- function(self) {
+    self$dtype %in% c(5L, 6L, 7L, 15L, 23L, 24L, 25L, 26L)
+}
+
+# ---- RNG functions ----
+
+#' Set the random seed for torch operations
+#'
+#' @param seed Integer seed value.
+#' @return Invisible NULL.
+#' @export
+torch_manual_seed <- function(seed) {
+    C_torch_manual_seed(as.integer(seed))
+    invisible(NULL)
+}
+
+# ---- Serialization / device (stubs for torch compatibility) ----
+
+#' Create a torch device specification
+#'
+#' @param type Device type string ("cpu" or "cuda").
+#' @param index Device index (default 0).
+#' @return A device string.
+#' @export
+torch_device <- function(type = "cpu", index = NULL) {
+    if (is.null(index)) type else paste0(type, ":", index)
+}
+
+#' Check if tinytorch backend is installed
+#'
+#' @return Logical.
+#' @export
+torch_is_installed <- function() is_available()
+
+#' @rdname torch_is_installed
+#' @export
+torch_install_path <- function() {
+    libtorch_home <- Sys.getenv("LIBTORCH_HOME", "")
+    if (nzchar(libtorch_home)) libtorch_home else "~/.local/lib/libtorch"
+}
+
+#' Float dtype info (range, precision)
+#'
+#' @param dtype A torch float dtype.
+#' @return Named list with bits, eps, max, min, tiny.
+#' @export
+torch_finfo <- function(dtype = torch_float32) {
+    code <- unclass(dtype)
+    switch(as.character(code),
+      "5"  = list(bits = 16L, eps = 9.77e-04, max = 65504, min = -65504, tiny = 6.10e-05),
+      "6"  = list(bits = 32L, eps = 1.19e-07, max = 3.40e+38, min = -3.40e+38, tiny = 1.18e-38),
+      "7"  = list(bits = 64L, eps = 2.22e-16, max = 1.80e+308, min = -1.80e+308, tiny = 2.23e-308),
+      "15" = list(bits = 16L, eps = 7.81e-03, max = 3.39e+38, min = -3.39e+38, tiny = 1.18e-38),
+      "23" = list(bits = 8L, eps = 0.0625, max = 57344, min = -57344, tiny = 6.10e-05),
+      "24" = list(bits = 8L, eps = 0.0625, max = 448, min = -448, tiny = 1.95e-03),
+      stop("Not a floating point dtype", call. = FALSE)
+    )
+}
+
+#' Integer dtype info (range)
+#'
+#' @param dtype A torch integer dtype.
+#' @return Named list with bits, max, min.
+#' @export
+torch_iinfo <- function(dtype = torch_int32) {
+    code <- unclass(dtype)
+    switch(as.character(code),
+      "0"  = list(bits = 8L, max = 255L, min = 0L),
+      "1"  = list(bits = 8L, max = 127L, min = -128L),
+      "2"  = list(bits = 16L, max = 32767L, min = -32768L),
+      "3"  = list(bits = 32L, max = 2147483647L, min = -2147483648L),
+      "4"  = list(bits = 64L, max = 9223372036854775807, min = -9223372036854775808),
+      "11" = list(bits = 8L, max = 1L, min = 0L),
+      stop("Not an integer dtype", call. = FALSE)
+    )
+}
+
+#' Create a random number generator (stub)
+#'
+#' @return A generator object (currently an environment placeholder).
+#' @export
+torch_generator <- function() {
+    structure(new.env(parent = emptyenv()), class = "torch_generator")
+}
+
+#' Get/set default dtype
+#'
+#' @param dtype A torch_dtype to set as default.
+#' @return For get, the current default dtype. For set, invisible NULL.
+#' @export
+torch_get_default_dtype <- function() torch_float32
+
+#' @rdname torch_get_default_dtype
+#' @export
+torch_set_default_dtype <- function(dtype) {
+    message("tinytorch does not support changing the default dtype globally")
+    invisible(NULL)
+}
+
+#' Get/set RNG state (stubs)
+#'
+#' @param state A raw vector of RNG state (from torch_get_rng_state).
+#' @return For get, the current RNG state as a tensor. For set, invisible NULL.
+#' @export
+torch_get_rng_state <- function() {
+    message("tinytorch RNG state management not yet implemented")
+    invisible(NULL)
+}
+
+#' @rdname torch_get_rng_state
+#' @export
+torch_set_rng_state <- function(state) {
+    message("tinytorch RNG state management not yet implemented")
+    invisible(NULL)
+}

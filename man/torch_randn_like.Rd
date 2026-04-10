@@ -3,12 +3,12 @@
 \alias{torch_randn_like}
 \title{Create a tensor of random normal values with same shape/dtype as input}
 \usage{
-torch_randn_like(self, dtype = NULL)
+torch_randn_like(input, dtype = NULL)
 }
 \arguments{
-\item{self}{A torch_tensor.}
-
 \item{dtype}{Optional dtype override.}
+
+\item{self}{A torch_tensor.}
 }
 \value{
 A torch_tensor.

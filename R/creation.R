@@ -165,8 +165,8 @@ torch_ones_like <- function(self, dtype = NULL) {
 #' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
-torch_zeros_like <- function(self, dtype = NULL) {
-  C_torch_zeros_like(self, if (!is.null(dtype)) unclass(dtype) else NULL)
+torch_zeros_like <- function(input, dtype = NULL) {
+  C_torch_zeros_like(input, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Create a tensor of random normal values with same shape/dtype as input
@@ -174,8 +174,8 @@ torch_zeros_like <- function(self, dtype = NULL) {
 #' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
-torch_randn_like <- function(self, dtype = NULL) {
-  C_torch_randn_like(self, if (!is.null(dtype)) unclass(dtype) else NULL)
+torch_randn_like <- function(input, dtype = NULL) {
+  C_torch_randn_like(input, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Concatenate tensors along a dimension
@@ -417,8 +417,8 @@ torch_hann_window <- function(window_length, periodic = TRUE,
 #' torch_allclose(a, b)
 #' }
 #' @export
-torch_allclose <- function(input, other, rtol = 1e-05, atol = 1e-08) {
-  diff <- (input - other)$abs()
+torch_allclose <- function(self, other, rtol = 1e-05, atol = 1e-08) {
+  diff <- (self - other)$abs()
   max_diff <- diff$max()$item()
   max_other <- other$abs()$max()$item()
   max_diff <= atol + rtol * max_other

@@ -19,9 +19,28 @@
 \alias{torch_float8_e4m3fn}
 \alias{torch_float8_e5m2fnuz}
 \alias{torch_float8_e4m3fnuz}
+\alias{torch_half}
+\alias{torch_short}
+\alias{torch_cfloat}
+\alias{torch_cfloat32}
+\alias{torch_cdouble}
+\alias{torch_cfloat64}
+\alias{torch_cfloat128}
+\alias{torch_qint8}
+\alias{torch_quint8}
+\alias{torch_qint32}
 \alias{torch_reduction_none}
 \alias{torch_reduction_mean}
 \alias{torch_reduction_sum}
+\alias{torch_contiguous_format}
+\alias{torch_channels_last_format}
+\alias{torch_preserve_format}
+\alias{torch_strided}
+\alias{torch_sparse_coo}
+\alias{torch_per_tensor_affine}
+\alias{torch_per_channel_affine}
+\alias{torch_per_tensor_symmetric}
+\alias{torch_per_channel_symmetric}
 \title{Torch Data Types}
 \description{
 Constants representing tensor element types, matching libtorch's
