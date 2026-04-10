@@ -14,6 +14,11 @@
 \alias{torch_int64}
 \alias{torch_long}
 \alias{torch_bool}
+\alias{torch_bfloat16}
+\alias{torch_float8_e5m2}
+\alias{torch_float8_e4m3fn}
+\alias{torch_float8_e5m2fnuz}
+\alias{torch_float8_e4m3fnuz}
 \title{Torch Data Types}
 \description{
 Constants representing tensor element types, matching libtorch's

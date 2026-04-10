@@ -4641,3 +4641,17 @@ at::Tensor C_torch_special_shifted_chebyshev_polynomial_w(at::Tensor x, at::Tens
 
 // [[Rcpp::export]]
 at::Tensor C_torch_special_spherical_bessel_j0(at::Tensor x) { return at::special_spherical_bessel_j0(x); }
+
+// ---- FP8 scaled matmul (new in libtorch 2.8+) ----
+
+// [[Rcpp::export]]
+at::Tensor C_torch_scaled_mm(at::Tensor self, at::Tensor mat2,
+                              at::Tensor scale_a, at::Tensor scale_b,
+                              SEXP bias, SEXP scale_result,
+                              SEXP out_dtype, bool use_fast_accum) {
+    return at::_scaled_mm(self, mat2, scale_a, scale_b,
+                          sexp_to_optional_tensor(bias),
+                          sexp_to_optional_tensor(scale_result),
+                          sexp_to_dtype(out_dtype),
+                          use_fast_accum);
+}
