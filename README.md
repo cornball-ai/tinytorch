@@ -97,15 +97,6 @@ model <- nn_sequential(
 )
 ```
 
-## Expression compiler
-
-tinytorch includes a compiler that fuses R torch expressions into optimized SIMD kernels:
-
-```r
-f <- compile(function(x, y) (x + y) * torch_exp(-x))
-f(torch_randn(1000), torch_randn(1000))
-```
-
 ## License
 
 MIT

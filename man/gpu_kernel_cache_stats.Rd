@@ -11,3 +11,4 @@ List with n_cached and kernel_names.
 \description{
 GPU kernel cache statistics
 }
+\keyword{internal}

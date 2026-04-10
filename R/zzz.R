@@ -1,5 +1,5 @@
 #' @useDynLib tinytorch, .registration = TRUE
-#' @importFrom Rcpp sourceCpp
+#' @importFrom Rcpp evalCpp
 #' @importFrom utils capture.output download.file getFromNamespace object.size unzip
 #' @importFrom stats setNames
 NULL

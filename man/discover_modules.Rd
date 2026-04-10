@@ -1,7 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{discover_modules}
 \alias{discover_modules}
-\title{Module Discovery and Automatic Tracing}
+\title{Module Discovery}
 \usage{
 discover_modules(module, max_depth = 10L)
 }
@@ -19,9 +19,7 @@ A list of module descriptors, each with:
   \item{module}{Live reference to the nn_module}
 }
 \description{
-Walks an nn_module's sub-module tree and reports which modules
-can be traced by torchlang. Works on any torch-dependent package
-without the user needing to know the model's internals.
+Walks an nn_module's sub-module tree and reports structure.
 Walk an nn_module's Sub-module Tree
 Recursively discovers all sub-modules in an nn_module instance.
 Returns a flat list of module info: path, class, parameter count,

@@ -11,3 +11,4 @@ Number of cached kernels cleared.
 \description{
 Clear the GPU kernel cache
 }
+\keyword{internal}
