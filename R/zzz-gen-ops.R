@@ -12404,3 +12404,222 @@ nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity
 #' @export
 nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = 2) { tensor$normal_(mean, std)$clamp_(a, b); invisible(tensor) }
 
+# ---- Additional nn_* modules and ops ----
+
+#' @export
+nn_conv3d <- function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, dilation = 1L, groups = 1L, bias = TRUE) {
+  nn_module("nn_conv3d",
+    initialize = function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, dilation = 1L, groups = 1L, bias = TRUE) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+      self$dilation <- dilation
+      self$groups <- groups
+w <- torch_randn(c(out_channels, as.integer(in_channels / groups), kernel_size, kernel_size, kernel_size))
+      self$register_parameter("weight", w)
+      if (bias) self$register_parameter("bias", torch_zeros(out_channels))
+    },
+    forward = function(input) C_torch_conv3d(input, self$weight, self$bias, as.integer(self$stride), as.integer(self$padding), as.integer(self$dilation), as.integer(self$groups))
+  )(in_channels, out_channels, kernel_size, stride, padding, dilation, groups, bias)
+}
+
+#' @export
+nn_conv_transpose2d <- function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
+  nn_module("nn_conv_transpose2d",
+    initialize = function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+      self$output_padding <- output_padding
+      self$groups <- groups
+      self$dilation <- dilation
+w <- torch_randn(c(in_channels, as.integer(out_channels / groups), kernel_size, kernel_size))
+      self$register_parameter("weight", w)
+      if (bias) self$register_parameter("bias", torch_zeros(out_channels))
+    },
+    forward = function(input) C_torch_conv_transpose2d(input, self$weight, self$bias, as.integer(self$stride), as.integer(self$padding), as.integer(self$output_padding), as.integer(self$groups), as.integer(self$dilation))
+  )(in_channels, out_channels, kernel_size, stride, padding, output_padding, groups, bias, dilation)
+}
+
+#' @export
+nn_conv_transpose3d <- function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
+  nn_module("nn_conv_transpose3d",
+    initialize = function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+      self$output_padding <- output_padding
+      self$groups <- groups
+      self$dilation <- dilation
+w <- torch_randn(c(in_channels, as.integer(out_channels / groups), kernel_size, kernel_size, kernel_size))
+      self$register_parameter("weight", w)
+      if (bias) self$register_parameter("bias", torch_zeros(out_channels))
+    },
+    forward = function(input) C_torch_conv_transpose3d(input, self$weight, self$bias, as.integer(self$stride), as.integer(self$padding), as.integer(self$output_padding), as.integer(self$groups), as.integer(self$dilation))
+  )(in_channels, out_channels, kernel_size, stride, padding, output_padding, groups, bias, dilation)
+}
+
+#' @export
+nn_threshold <- function(threshold, value) {
+  nn_module("nn_threshold",
+    initialize = function(threshold, value) {
+      self$threshold <- threshold
+      self$value <- value
+    },
+    forward = function(input) C_torch_threshold(input, self$threshold, self$value)
+  )(threshold, value)
+}
+
+#' @export
+nn_unflatten <- function(dim, unflattened_size) {
+  nn_module("nn_unflatten",
+    initialize = function(dim, unflattened_size) {
+      self$dim <- dim
+      self$unflattened_size <- unflattened_size
+    },
+    forward = function(input) C_torch_unflatten(input, as.integer(self$dim), self$unflattened_size)
+  )(dim, unflattened_size)
+}
+
+#' @export
+nn_pairwise_distance <- function(p = 2, eps = 1e-6, keepdim = FALSE) {
+  nn_module("nn_pairwise_distance",
+    initialize = function(p, eps, keepdim) {
+      self$p <- p; self$eps <- eps; self$keepdim <- keepdim
+    },
+    forward = function(x1, x2) C_torch_pairwise_distance(x1, x2, self$p, self$eps, self$keepdim)
+  )(p, eps, keepdim)
+}
+
+#' @export
+nn_softmax2d <- function() {
+  nn_module("nn_softmax2d",
+    initialize = function() {},
+    forward = function(input) nnf_softmax(input, -3L)
+  )()
+}
+
+#' @export
+nnf_cross_entropy <- function(input, target, weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0) {
+  torch_cross_entropy_loss(input, target, weight, reduction, ignore_index, label_smoothing)
+}
+
+#' @export
+nnf_logsigmoid <- function(input) torch_log(torch_sigmoid(input))
+
+#' @export
+nnf_softmin <- function(input, dim = -1L) nnf_softmax(torch_neg(input), dim)
+
+#' @export
+nnf_softsign <- function(input) input / (1 + torch_abs(input))
+
+#' @export
+nnf_tanhshrink <- function(input) input - torch_tanh(input)
+
+#' @export
+nnf_dropout2d <- function(input, p = 0.5, training = TRUE) {
+  if (!training || p == 0) return(input)
+  mask <- torch_ones(input$size()[1:2])$bernoulli_(1 - p) / (1 - p)
+  input * mask$unsqueeze(-1L)$unsqueeze(-1L)
+}
+
+#' @export
+nnf_dropout3d <- function(input, p = 0.5, training = TRUE) {
+  if (!training || p == 0) return(input)
+  mask <- torch_ones(input$size()[1:2])$bernoulli_(1 - p) / (1 - p)
+  input * mask$unsqueeze(-1L)$unsqueeze(-1L)$unsqueeze(-1L)
+}
+
+#' @export
+nn_init_zeros_ <- function(tensor) { tensor$zero_(); invisible(tensor) }
+
+#' @export
+nn_init_xavier_uniform_ <- function(tensor, gain = 1) {
+  fan_in <- tensor$size()[2]; fan_out <- tensor$size()[1]
+  std <- gain * sqrt(2.0 / (fan_in + fan_out))
+  a <- sqrt(3.0) * std
+  tensor$uniform_(-a, a); invisible(tensor)
+}
+
+#' @export
+nn_init_xavier_normal_ <- function(tensor, gain = 1) {
+  fan_in <- tensor$size()[2]; fan_out <- tensor$size()[1]
+  std <- gain * sqrt(2.0 / (fan_in + fan_out))
+  tensor$normal_(0, std); invisible(tensor)
+}
+
+#' @export
+lr_step <- function(optimizer, step_size, gamma = 0.1) {
+  structure(list(optimizer = optimizer, step_size = step_size, gamma = gamma, last_epoch = 0L), class = "lr_scheduler")
+}
+
+#' @export
+lr_lambda <- function(optimizer, lr_lambda) {
+  structure(list(optimizer = optimizer, lr_lambda = lr_lambda, last_epoch = 0L), class = "lr_scheduler")
+}
+
+#' @export
+lr_multiplicative <- function(optimizer, lr_lambda) lr_lambda(optimizer, lr_lambda)
+
+#' @export
+lr_reduce_on_plateau <- function(optimizer, mode = 'min', factor = 0.1, patience = 10) {
+  structure(list(optimizer = optimizer, mode = mode, factor = factor, patience = patience, best = Inf, wait = 0L), class = "lr_scheduler")
+}
+
+#' @export
+lr_cosine_annealing <- function(optimizer, T_max, eta_min = 0) {
+  structure(list(optimizer = optimizer, T_max = T_max, eta_min = eta_min, last_epoch = 0L), class = "lr_scheduler")
+}
+
+#' @export
+lr_one_cycle <- function(optimizer, max_lr, total_steps) {
+  structure(list(optimizer = optimizer, max_lr = max_lr, total_steps = total_steps, last_epoch = 0L), class = "lr_scheduler")
+}
+
+#' @export
+lr_scheduler <- function(optimizer, ...) structure(list(optimizer = optimizer, ...), class = "lr_scheduler")
+
+#' @export
+cuda_synchronize <- function(device = NULL) {
+  if (cuda_is_available()) C_cuda_synchronize()
+  invisible(NULL)
+}
+
+#' @export
+cuda_current_device <- function() {
+  if (cuda_is_available()) 0L else -1L
+}
+
+#' @export
+cuda_get_device_capability <- function(device = 0L) list(major = 0L, minor = 0L)
+
+#' @export
+cuda_runtime_version <- function() 0L
+
+#' @export
+cuda_get_rng_state <- function(device = 0L) NULL
+
+#' @export
+cuda_set_rng_state <- function(state, device = 0L) invisible(NULL)
+
+#' @export
+autograd_set_grad_mode <- function(enabled) invisible(NULL)
+
+#' @export
+autograd_backward <- function(tensors, grad_tensors = NULL) {
+  if (inherits(tensors, 'torch_tensor')) tensors <- list(tensors)
+  for (t in tensors) t$backward()
+  invisible(NULL)
+}
+
+#' @export
+load_state_dict <- function(module, state_dict) {
+  for (nm in names(state_dict)) {
+    param <- tryCatch(module[[nm]], error = function(e) NULL)
+    if (!is.null(param) && inherits(param, 'torch_tensor')) {
+      param$copy_(state_dict[[nm]])
+    }
+  }
+  invisible(module)
+}
+
