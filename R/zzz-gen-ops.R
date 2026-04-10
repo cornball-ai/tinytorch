@@ -11335,3 +11335,1072 @@ torch_set_rng_state <- function(state) {
     message("tinytorch RNG state management not yet implemented")
     invisible(NULL)
 }
+#' @export
+nnf_adaptive_avg_pool1d <- function(self, output_size) C_torch_adaptive_avg_pool1d(self, output_size)
+
+#' @export
+nnf_adaptive_avg_pool2d <- function(self, output_size) C_torch_adaptive_avg_pool2d(self, output_size)
+
+#' @export
+nnf_adaptive_avg_pool3d <- function(self, output_size) C_torch_adaptive_avg_pool3d(self, output_size)
+
+#' @export
+nnf_adaptive_max_pool1d <- function(self, output_size) C_torch_adaptive_max_pool1d(self, output_size)
+
+#' @export
+nnf_adaptive_max_pool2d <- function(self, output_size) C_torch_adaptive_max_pool2d(self, output_size)
+
+#' @export
+nnf_adaptive_max_pool3d <- function(self, output_size) C_torch_adaptive_max_pool3d(self, output_size)
+
+#' @export
+nnf_alpha_dropout <- function(input, p, train) C_torch_alpha_dropout(input, p, train)
+
+#' @export
+nnf_avg_pool2d <- function(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) C_torch_avg_pool2d(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override)
+
+#' @export
+nnf_avg_pool3d <- function(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) C_torch_avg_pool3d(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override)
+
+#' @export
+nnf_batch_norm <- function(input, weight, bias, running_mean, running_var, training, momentum, eps, cudnn_enabled) C_torch_batch_norm(input, weight, bias, running_mean, running_var, training, momentum, eps, cudnn_enabled)
+
+#' @export
+nnf_bilinear <- function(input1, input2, weight, bias) C_torch_bilinear(input1, input2, weight, bias)
+
+#' @export
+nnf_binary_cross_entropy <- function(self, target, weight, reduction) C_torch_binary_cross_entropy(self, target, weight, reduction)
+
+#' @export
+nnf_binary_cross_entropy_with_logits <- function(self, target, weight, pos_weight, reduction) C_torch_binary_cross_entropy_with_logits(self, target, weight, pos_weight, reduction)
+
+#' @export
+nnf_celu <- function(self, alpha) C_torch_celu(self, alpha)
+
+#' @export
+nnf_celu_ <- function(self, alpha) C_torch_celu_(self, alpha)
+
+#' @export
+nnf_conv_tbc <- function(self, weight, bias, pad) C_torch_conv_tbc(self, weight, bias, pad)
+
+#' @export
+nnf_conv_transpose1d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) C_torch_conv_transpose1d(input, weight, bias, stride, padding, output_padding, groups, dilation)
+
+#' @export
+nnf_conv_transpose2d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) C_torch_conv_transpose2d(input, weight, bias, stride, padding, output_padding, groups, dilation)
+
+#' @export
+nnf_conv_transpose3d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) C_torch_conv_transpose3d(input, weight, bias, stride, padding, output_padding, groups, dilation)
+
+#' @export
+nnf_conv1d <- function(input, weight, bias, stride, padding, dilation, groups) C_torch_conv1d(input, weight, bias, stride, padding, dilation, groups)
+
+#' @export
+nnf_conv2d <- function(input, weight, bias, stride, padding, dilation, groups) C_torch_conv2d(input, weight, bias, stride, padding, dilation, groups)
+
+#' @export
+nnf_conv3d <- function(input, weight, bias, stride, padding, dilation, groups) C_torch_conv3d(input, weight, bias, stride, padding, dilation, groups)
+
+#' @export
+nnf_cosine_embedding_loss <- function(input1, input2, target, margin, reduction) C_torch_cosine_embedding_loss(input1, input2, target, margin, reduction)
+
+#' @export
+nnf_cosine_similarity <- function(x1, x2, dim, eps) C_torch_cosine_similarity(x1, x2, dim, eps)
+
+#' @export
+nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity) C_torch_ctc_loss(log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity)
+
+#' @export
+nnf_dropout <- function(input, p, train) C_torch_dropout(input, p, train)
+
+#' @export
+nnf_elu_ <- function(self, alpha, scale, input_scale) C_torch_elu_(self, alpha, scale, input_scale)
+
+#' @export
+nnf_embedding <- function(weight, indices) C_torch_embedding(weight, indices)
+
+#' @export
+nnf_embedding_bag <- function(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset) C_torch_embedding_bag(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset)
+
+#' @export
+nnf_fractional_max_pool2d <- function(self, kernel_size, output_size, random_samples) C_torch_fractional_max_pool2d(self, kernel_size, output_size, random_samples)
+
+#' @export
+nnf_fractional_max_pool3d <- function(self, kernel_size, output_size, random_samples) C_torch_fractional_max_pool3d(self, kernel_size, output_size, random_samples)
+
+#' @export
+nnf_glu <- function(self, dim) C_torch_glu(self, dim)
+
+#' @export
+nnf_group_norm <- function(input, num_groups, weight, bias, eps, cudnn_enabled) C_torch_group_norm(input, num_groups, weight, bias, eps, cudnn_enabled)
+
+#' @export
+nnf_hardshrink <- function(self, lambd) C_torch_hardshrink(self, lambd)
+
+#' @export
+nnf_hardsigmoid <- function(self) C_torch_hardsigmoid(self)
+
+#' @export
+nnf_hardswish <- function(self) C_torch_hardswish(self)
+
+#' @export
+nnf_hardtanh <- function(self, min_val, max_val) C_torch_hardtanh(self, min_val, max_val)
+
+#' @export
+nnf_hardtanh_ <- function(self, min_val, max_val) C_torch_hardtanh_(self, min_val, max_val)
+
+#' @export
+nnf_hinge_embedding_loss <- function(self, target, margin, reduction) C_torch_hinge_embedding_loss(self, target, margin, reduction)
+
+#' @export
+nnf_instance_norm <- function(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled) C_torch_instance_norm(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled)
+
+#' @export
+nnf_kl_div <- function(self, target, reduction, log_target) C_torch_kl_div(self, target, reduction, log_target)
+
+#' @export
+nnf_l1_loss <- function(self, target, reduction) C_torch_l1_loss(self, target, reduction)
+
+#' @export
+nnf_linear <- function(input, weight, bias) C_torch_linear(input, weight, bias)
+
+#' @export
+nnf_margin_ranking_loss <- function(input1, input2, target, margin, reduction) C_torch_margin_ranking_loss(input1, input2, target, margin, reduction)
+
+#' @export
+nnf_max_pool1d <- function(self, kernel_size, stride, padding, dilation, ceil_mode) C_torch_max_pool1d(self, kernel_size, stride, padding, dilation, ceil_mode)
+
+#' @export
+nnf_max_pool2d <- function(self, kernel_size, stride, padding, dilation, ceil_mode) C_torch_max_pool2d(self, kernel_size, stride, padding, dilation, ceil_mode)
+
+#' @export
+nnf_max_pool3d <- function(self, kernel_size, stride, padding, dilation, ceil_mode) C_torch_max_pool3d(self, kernel_size, stride, padding, dilation, ceil_mode)
+
+#' @export
+nnf_max_unpool2d <- function(self, indices, output_size) C_torch_max_unpool2d(self, indices, output_size)
+
+#' @export
+nnf_max_unpool3d <- function(self, indices, output_size, stride, padding) C_torch_max_unpool3d(self, indices, output_size, stride, padding)
+
+#' @export
+nnf_mse_loss <- function(self, target, reduction) C_torch_mse_loss(self, target, reduction)
+
+#' @export
+nnf_multi_margin_loss <- function(self, target, p, margin, weight, reduction) C_torch_multi_margin_loss(self, target, p, margin, weight, reduction)
+
+#' @export
+nnf_multilabel_margin_loss <- function(self, target, reduction) C_torch_multilabel_margin_loss(self, target, reduction)
+
+#' @export
+nnf_nll_loss <- function(self, target, weight, reduction, ignore_index) C_torch_nll_loss(self, target, weight, reduction, ignore_index)
+
+#' @export
+nnf_one_hot <- function(self, num_classes) C_torch_one_hot(self, num_classes)
+
+#' @export
+nnf_pairwise_distance <- function(x1, x2, p, eps, keepdim) C_torch_pairwise_distance(x1, x2, p, eps, keepdim)
+
+#' @export
+nnf_pdist <- function(self, p) C_torch_pdist(self, p)
+
+#' @export
+nnf_pixel_shuffle <- function(self, upscale_factor) C_torch_pixel_shuffle(self, upscale_factor)
+
+#' @export
+nnf_poisson_nll_loss <- function(input, target, log_input, full, eps, reduction) C_torch_poisson_nll_loss(input, target, log_input, full, eps, reduction)
+
+#' @export
+nnf_prelu <- function(self, weight) C_torch_prelu(self, weight)
+
+#' @export
+nnf_relu_ <- function(self) C_torch_relu_(self)
+
+#' @export
+nnf_relu6 <- function(self) C_torch_relu6(self)
+
+#' @export
+nnf_rrelu <- function(self, lower, upper, training, generator) C_torch_rrelu(self, lower, upper, training, generator)
+
+#' @export
+nnf_rrelu_ <- function(self, lower, upper, training, generator) C_torch_rrelu_(self, lower, upper, training, generator)
+
+#' @export
+nnf_selu <- function(self) C_torch_selu(self)
+
+#' @export
+nnf_selu_ <- function(self) C_torch_selu_(self)
+
+#' @export
+nnf_smooth_l1_loss <- function(self, target, reduction, beta) C_torch_smooth_l1_loss(self, target, reduction, beta)
+
+#' @export
+nnf_soft_margin_loss <- function(self, target, reduction) C_torch_soft_margin_loss(self, target, reduction)
+
+#' @export
+nnf_softshrink <- function(self, lambd) C_torch_softshrink(self, lambd)
+
+#' @export
+nnf_threshold <- function(self, threshold, value) C_torch_threshold(self, threshold, value)
+
+#' @export
+nnf_threshold_ <- function(self, threshold, value) C_torch_threshold_(self, threshold, value)
+
+#' @export
+nnf_triplet_margin_loss <- function(anchor, positive, negative, margin, p, eps, swap, reduction) C_torch_triplet_margin_loss(anchor, positive, negative, margin, p, eps, swap, reduction)
+
+#' @export
+nnf_unfold <- function(self, dimension, size, step) C_torch_unfold(self, dimension, size, step)
+
+# ---- torch:: compatibility aliases ----
+
+#' @export
+linalg_cholesky <- torch_linalg_cholesky
+
+#' @export
+linalg_cholesky_ex <- torch_linalg_cholesky_ex
+
+#' @export
+linalg_cond <- torch_linalg_cond
+
+#' @export
+linalg_cross <- torch_linalg_cross
+
+#' @export
+linalg_det <- torch_linalg_det
+
+#' @export
+linalg_diagonal <- torch_linalg_diagonal
+
+#' @export
+linalg_eig <- torch_linalg_eig
+
+#' @export
+linalg_eigh <- torch_linalg_eigh
+
+#' @export
+linalg_eigvals <- torch_linalg_eigvals
+
+#' @export
+linalg_eigvalsh <- torch_linalg_eigvalsh
+
+#' @export
+linalg_householder_product <- torch_linalg_householder_product
+
+#' @export
+linalg_inv <- torch_linalg_inv
+
+#' @export
+linalg_inv_ex <- torch_linalg_inv_ex
+
+#' @export
+linalg_ldl_factor <- torch_linalg_ldl_factor
+
+#' @export
+linalg_ldl_factor_ex <- torch_linalg_ldl_factor_ex
+
+#' @export
+linalg_ldl_solve <- torch_linalg_ldl_solve
+
+#' @export
+linalg_lstsq <- torch_linalg_lstsq
+
+#' @export
+linalg_lu <- torch_linalg_lu
+
+#' @export
+linalg_lu_factor <- torch_linalg_lu_factor
+
+#' @export
+linalg_lu_factor_ex <- torch_linalg_lu_factor_ex
+
+#' @export
+linalg_lu_solve <- torch_linalg_lu_solve
+
+#' @export
+linalg_matmul <- torch_linalg_matmul
+
+#' @export
+linalg_matrix_exp <- torch_linalg_matrix_exp
+
+#' @export
+linalg_matrix_norm <- torch_linalg_matrix_norm
+
+#' @export
+linalg_matrix_power <- torch_linalg_matrix_power
+
+#' @export
+linalg_matrix_rank <- torch_linalg_matrix_rank
+
+#' @export
+linalg_multi_dot <- torch_linalg_multi_dot
+
+#' @export
+linalg_norm <- torch_linalg_norm
+
+#' @export
+linalg_pinv <- torch_linalg_pinv
+
+#' @export
+linalg_qr <- torch_linalg_qr
+
+#' @export
+linalg_slogdet <- torch_linalg_slogdet
+
+#' @export
+linalg_solve <- torch_linalg_solve
+
+#' @export
+linalg_solve_ex <- torch_linalg_solve_ex
+
+#' @export
+linalg_solve_triangular <- torch_linalg_solve_triangular
+
+#' @export
+linalg_svd <- torch_linalg_svd
+
+#' @export
+linalg_svdvals <- torch_linalg_svdvals
+
+#' @export
+linalg_tensorinv <- torch_linalg_tensorinv
+
+#' @export
+linalg_tensorsolve <- torch_linalg_tensorsolve
+
+#' @export
+linalg_vander <- torch_linalg_vander
+
+#' @export
+linalg_vecdot <- torch_linalg_vecdot
+
+#' @export
+linalg_vector_norm <- torch_linalg_vector_norm
+
+#' @export
+is_nn_module <- function(x) inherits(x, "nn_module")
+
+#' @export
+is_nn_parameter <- function(x) inherits(x, "nn_parameter")
+
+#' @export
+is_nn_buffer <- function(x) inherits(x, "torch_tensor")
+
+#' @export
+is_torch_device <- function(x) is.character(x) && length(x) == 1L
+
+#' @export
+is_torch_dtype <- function(x) inherits(x, "torch_dtype")
+
+#' @export
+is_torch_layout <- function(x) is.integer(x) && length(x) == 1L
+
+#' @export
+is_torch_memory_format <- function(x) is.integer(x) && length(x) == 1L
+
+#' @export
+is_torch_qscheme <- function(x) is.integer(x) && length(x) == 1L
+
+#' @export
+is_undefined_tensor <- function(x) FALSE
+
+#' @export
+is_optimizer <- function(x) inherits(x, "torch_optimizer")
+
+#' @export
+is_dataloader <- function(x) inherits(x, "dataloader")
+
+#' @export
+local_no_grad <- function(.local_envir = parent.frame()) {
+    # No-op: tinytorch does not track gradients by default
+    invisible(NULL)
+  }
+
+#' @export
+local_enable_grad <- function(.local_envir = parent.frame()) invisible(NULL)
+
+#' @export
+local_autocast <- function(device_type = "cuda", dtype = torch_float16, .local_envir = parent.frame()) invisible(NULL)
+
+#' @export
+with_enable_grad <- function(code) eval.parent(substitute(code))
+
+#' @export
+with_detect_anomaly <- function(code) eval.parent(substitute(code))
+
+#' @export
+with_device <- function(device, code) eval.parent(substitute(code))
+
+#' @export
+with_torch_manual_seed <- function(seed, code) { torch_manual_seed(seed); eval.parent(substitute(code)) }
+
+#' @export
+local_torch_manual_seed <- function(seed, .local_envir = parent.frame()) torch_manual_seed(seed)
+
+#' @export
+local_device <- function(device, .local_envir = parent.frame()) invisible(NULL)
+
+#' @export
+set_autocast <- function(enabled, device_type = "cuda", dtype = torch_float16) invisible(NULL)
+
+#' @export
+unset_autocast <- function() invisible(NULL)
+
+#' @export
+clone_module <- function(module) {
+    # Deep copy via serialize/unserialize
+    unserialize(serialize(module, NULL))
+  }
+
+#' @export
+slc <- function(start = NULL, end = NULL, step = 1L) {
+    list(start = start, end = end, step = step)
+  }
+
+#' @export
+install_torch <- function(...) install_libtorch(...)
+
+#' @export
+backends_cudnn_is_available <- function() FALSE
+
+#' @export
+backends_cudnn_version <- function() NULL
+
+#' @export
+backends_mkl_is_available <- function() FALSE
+
+#' @export
+backends_mkldnn_is_available <- function() FALSE
+
+#' @export
+backends_mps_is_available <- function() FALSE
+
+#' @export
+backends_openmp_is_available <- function() TRUE
+
+# ---- nn_* module constructors ----
+
+#' @export
+nn_celu <- function(alpha = 1.0) {
+  nn_module("nn_celu",
+    initialize = function(alpha = 1.0) {
+      self$alpha <- alpha
+    },
+    forward = function(input) nnf_celu(input, self$alpha)
+  )()
+}
+
+#' @export
+nn_glu <- function(dim = -1L) {
+  nn_module("nn_glu",
+    initialize = function(dim = -1L) {
+      self$dim <- dim
+    },
+    forward = function(input) nnf_glu(input, self$dim)
+  )()
+}
+
+#' @export
+nn_hardshrink <- function(lambd = 0.5) {
+  nn_module("nn_hardshrink",
+    initialize = function(lambd = 0.5) {
+      self$lambd <- lambd
+    },
+    forward = function(input) nnf_hardshrink(input, self$lambd)
+  )()
+}
+
+#' @export
+nn_hardsigmoid <- function() {
+  nn_module("nn_hardsigmoid",
+    initialize = function() {
+    },
+    forward = function(input) nnf_hardsigmoid(input)
+  )()
+}
+
+#' @export
+nn_hardswish <- function() {
+  nn_module("nn_hardswish",
+    initialize = function() {
+    },
+    forward = function(input) nnf_hardswish(input)
+  )()
+}
+
+#' @export
+nn_hardtanh <- function(min_val = -1, max_val = 1) {
+  nn_module("nn_hardtanh",
+    initialize = function(min_val = -1, max_val = 1) {
+      self$min_val <- min_val
+      self$max_val <- max_val
+    },
+    forward = function(input) nnf_hardtanh(input, self$min_val, self$max_val)
+  )()
+}
+
+#' @export
+nn_leaky_relu <- function(negative_slope = 0.01) {
+  nn_module("nn_leaky_relu",
+    initialize = function(negative_slope = 0.01) {
+      self$negative_slope <- negative_slope
+    },
+    forward = function(input) nnf_leaky_relu(input, self$negative_slope)
+  )()
+}
+
+#' @export
+nn_log_sigmoid <- function() {
+  nn_module("nn_log_sigmoid",
+    initialize = function() {
+    },
+    forward = function(input) nnf_logsigmoid(input)
+  )()
+}
+
+#' @export
+nn_log_softmax <- function(dim = -1L) {
+  nn_module("nn_log_softmax",
+    initialize = function(dim = -1L) {
+      self$dim <- dim
+    },
+    forward = function(input) nnf_log_softmax(input, self$dim)
+  )()
+}
+
+#' @export
+nn_prelu <- function(num_parameters = 1L) {
+  nn_module("nn_prelu",
+    initialize = function(num_parameters = 1L) {
+      self$num_parameters <- num_parameters
+      self$register_parameter("weight", torch_ones(num_parameters))
+    },
+    forward = function(input) nnf_prelu(input, self$weight)
+  )()
+}
+
+#' @export
+nn_relu6 <- function() {
+  nn_module("nn_relu6",
+    initialize = function() {
+    },
+    forward = function(input) torch_clamp(torch_relu(input), max = 6)
+  )()
+}
+
+#' @export
+nn_rrelu <- function(lower = 0.125, upper = 0.333) {
+  nn_module("nn_rrelu",
+    initialize = function(lower = 0.125, upper = 0.333) {
+      self$lower <- lower
+      self$upper <- upper
+    },
+    forward = function(input) nnf_rrelu(input, self$lower, self$upper, self$training)
+  )()
+}
+
+#' @export
+nn_selu <- function() {
+  nn_module("nn_selu",
+    initialize = function() {
+    },
+    forward = function(input) nnf_selu(input)
+  )()
+}
+
+#' @export
+nn_softmax <- function(dim = -1L) {
+  nn_module("nn_softmax",
+    initialize = function(dim = -1L) {
+      self$dim <- dim
+    },
+    forward = function(input) nnf_softmax(input, self$dim)
+  )()
+}
+
+#' @export
+nn_softmin <- function(dim = -1L) {
+  nn_module("nn_softmin",
+    initialize = function(dim = -1L) {
+      self$dim <- dim
+    },
+    forward = function(input) nnf_softmin(input, self$dim)
+  )()
+}
+
+#' @export
+nn_softplus <- function(beta = 1, threshold = 20) {
+  nn_module("nn_softplus",
+    initialize = function(beta = 1, threshold = 20) {
+      self$beta <- beta
+      self$threshold <- threshold
+    },
+    forward = function(input) nnf_softplus(input, self$beta, self$threshold)
+  )()
+}
+
+#' @export
+nn_softshrink <- function(lambd = 0.5) {
+  nn_module("nn_softshrink",
+    initialize = function(lambd = 0.5) {
+      self$lambd <- lambd
+    },
+    forward = function(input) nnf_softshrink(input, self$lambd)
+  )()
+}
+
+#' @export
+nn_softsign <- function() {
+  nn_module("nn_softsign",
+    initialize = function() {
+    },
+    forward = function(input) nnf_softsign(input)
+  )()
+}
+
+#' @export
+nn_tanhshrink <- function() {
+  nn_module("nn_tanhshrink",
+    initialize = function() {
+    },
+    forward = function(input) nnf_tanhshrink(input)
+  )()
+}
+
+#' @export
+nn_bce_loss <- function(weight = NULL, reduction = 1L) {
+  nn_module("nn_bce_loss",
+    initialize = function(weight = NULL, reduction = 1L) {
+      self$weight <- weight
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_binary_cross_entropy(input, target, self$weight, self$reduction)
+  )()
+}
+
+#' @export
+nn_bce_with_logits_loss <- function(weight = NULL, pos_weight = NULL, reduction = 1L) {
+  nn_module("nn_bce_with_logits_loss",
+    initialize = function(weight = NULL, pos_weight = NULL, reduction = 1L) {
+      self$weight <- weight
+      self$pos_weight <- pos_weight
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_binary_cross_entropy_with_logits(input, target, self$weight, self$pos_weight, self$reduction)
+  )()
+}
+
+#' @export
+nn_cosine_embedding_loss <- function(margin = 0, reduction = 1L) {
+  nn_module("nn_cosine_embedding_loss",
+    initialize = function(margin = 0, reduction = 1L) {
+      self$margin <- margin
+      self$reduction <- reduction
+    },
+    forward = function(input1, input2, target) torch_cosine_embedding_loss(input1, input2, target, self$margin, self$reduction)
+  )()
+}
+
+#' @export
+nn_cross_entropy_loss <- function(weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0) {
+  nn_module("nn_cross_entropy_loss",
+    initialize = function(weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0) {
+      self$weight <- weight
+      self$reduction <- reduction
+      self$ignore_index <- ignore_index
+      self$label_smoothing <- label_smoothing
+    },
+    forward = function(input, target) torch_cross_entropy_loss(input, target, self$weight, self$reduction, self$ignore_index, self$label_smoothing)
+  )()
+}
+
+#' @export
+nn_ctc_loss <- function(blank = 0L, reduction = 1L, zero_infinity = FALSE) {
+  nn_module("nn_ctc_loss",
+    initialize = function(blank = 0L, reduction = 1L, zero_infinity = FALSE) {
+      self$blank <- blank
+      self$reduction <- reduction
+      self$zero_infinity <- zero_infinity
+    },
+    forward = function(log_probs, targets, input_lengths, target_lengths) torch_ctc_loss(log_probs, targets, input_lengths, target_lengths, self$blank, self$reduction, self$zero_infinity)
+  )()
+}
+
+#' @export
+nn_hinge_embedding_loss <- function(margin = 1, reduction = 1L) {
+  nn_module("nn_hinge_embedding_loss",
+    initialize = function(margin = 1, reduction = 1L) {
+      self$margin <- margin
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_hinge_embedding_loss(input, target, self$margin, self$reduction)
+  )()
+}
+
+#' @export
+nn_kl_div_loss <- function(reduction = 1L, log_target = FALSE) {
+  nn_module("nn_kl_div_loss",
+    initialize = function(reduction = 1L, log_target = FALSE) {
+      self$reduction <- reduction
+      self$log_target <- log_target
+    },
+    forward = function(input, target) torch_kl_div(input, target, self$reduction, self$log_target)
+  )()
+}
+
+#' @export
+nn_l1_loss <- function(reduction = 1L) {
+  nn_module("nn_l1_loss",
+    initialize = function(reduction = 1L) {
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_l1_loss(input, target, self$reduction)
+  )()
+}
+
+#' @export
+nn_margin_ranking_loss <- function(margin = 0, reduction = 1L) {
+  nn_module("nn_margin_ranking_loss",
+    initialize = function(margin = 0, reduction = 1L) {
+      self$margin <- margin
+      self$reduction <- reduction
+    },
+    forward = function(input1, input2, target) torch_margin_ranking_loss(input1, input2, target, self$margin, self$reduction)
+  )()
+}
+
+#' @export
+nn_mse_loss <- function(reduction = 1L) {
+  nn_module("nn_mse_loss",
+    initialize = function(reduction = 1L) {
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_mse_loss(input, target, self$reduction)
+  )()
+}
+
+#' @export
+nn_multi_margin_loss <- function(p = 1, margin = 1, weight = NULL, reduction = 1L) {
+  nn_module("nn_multi_margin_loss",
+    initialize = function(p = 1, margin = 1, weight = NULL, reduction = 1L) {
+      self$p <- p
+      self$margin <- margin
+      self$weight <- weight
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_multi_margin_loss(input, target, self$p, self$margin, self$weight, self$reduction)
+  )()
+}
+
+#' @export
+nn_multilabel_margin_loss <- function(reduction = 1L) {
+  nn_module("nn_multilabel_margin_loss",
+    initialize = function(reduction = 1L) {
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_multilabel_margin_loss(input, target, self$reduction)
+  )()
+}
+
+#' @export
+nn_smooth_l1_loss <- function(reduction = 1L, beta = 1.0) {
+  nn_module("nn_smooth_l1_loss",
+    initialize = function(reduction = 1L, beta = 1.0) {
+      self$reduction <- reduction
+      self$beta <- beta
+    },
+    forward = function(input, target) torch_smooth_l1_loss(input, target, self$reduction, self$beta)
+  )()
+}
+
+#' @export
+nn_soft_margin_loss <- function(reduction = 1L) {
+  nn_module("nn_soft_margin_loss",
+    initialize = function(reduction = 1L) {
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_soft_margin_loss(input, target, self$reduction)
+  )()
+}
+
+#' @export
+nn_triplet_margin_loss <- function(margin = 1, p = 2, eps = 1e-6, swap = FALSE, reduction = 1L) {
+  nn_module("nn_triplet_margin_loss",
+    initialize = function(margin = 1, p = 2, eps = 1e-6, swap = FALSE, reduction = 1L) {
+      self$margin <- margin
+      self$p <- p
+      self$eps <- eps
+      self$swap <- swap
+      self$reduction <- reduction
+    },
+    forward = function(anchor, positive, negative) torch_triplet_margin_loss(anchor, positive, negative, self$margin, self$p, self$eps, self$swap, self$reduction)
+  )()
+}
+
+#' @export
+nn_nll_loss <- function(weight = NULL, reduction = 1L, ignore_index = -100) {
+  nn_module("nn_nll_loss",
+    initialize = function(weight = NULL, reduction = 1L, ignore_index = -100) {
+      self$weight <- weight
+      self$reduction <- reduction
+      self$ignore_index <- ignore_index
+    },
+    forward = function(input, target) torch_nll_loss(input, target, self$weight, self$reduction, self$ignore_index)
+  )()
+}
+
+#' @export
+nn_poisson_nll_loss <- function(log_input = TRUE, full = FALSE, eps = 1e-8, reduction = 1L) {
+  nn_module("nn_poisson_nll_loss",
+    initialize = function(log_input = TRUE, full = FALSE, eps = 1e-8, reduction = 1L) {
+      self$log_input <- log_input
+      self$full <- full
+      self$eps <- eps
+      self$reduction <- reduction
+    },
+    forward = function(input, target) torch_poisson_nll_loss(input, target, self$log_input, self$full, self$eps, self$reduction)
+  )()
+}
+
+#' @export
+nn_huber_loss <- function(reduction = 1L, delta = 1.0) {
+  nn_module("nn_huber_loss",
+    initialize = function(reduction = 1L, delta = 1.0) {
+      self$reduction <- reduction
+      self$delta <- delta
+    },
+    forward = function(input, target) torch_huber_loss(input, target, self$reduction, self$delta)
+  )()
+}
+
+#' @export
+nn_avg_pool1d <- function(kernel_size, stride = NULL, padding = 0L) {
+  nn_module("nn_avg_pool1d",
+    initialize = function(kernel_size, stride = NULL, padding = 0L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+    },
+    forward = function(input) nnf_avg_pool1d(input, self$kernel_size, self$stride, self$padding)
+  )()
+}
+
+#' @export
+nn_avg_pool2d <- function(kernel_size, stride = NULL, padding = 0L) {
+  nn_module("nn_avg_pool2d",
+    initialize = function(kernel_size, stride = NULL, padding = 0L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+    },
+    forward = function(input) nnf_avg_pool2d(input, self$kernel_size, self$stride, self$padding)
+  )()
+}
+
+#' @export
+nn_avg_pool3d <- function(kernel_size, stride = NULL, padding = 0L) {
+  nn_module("nn_avg_pool3d",
+    initialize = function(kernel_size, stride = NULL, padding = 0L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+    },
+    forward = function(input) nnf_avg_pool3d(input, self$kernel_size, self$stride, self$padding)
+  )()
+}
+
+#' @export
+nn_max_pool1d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
+  nn_module("nn_max_pool1d",
+    initialize = function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+      self$dilation <- dilation
+    },
+    forward = function(input) nnf_max_pool1d(input, self$kernel_size, self$stride, self$padding, self$dilation, FALSE)
+  )()
+}
+
+#' @export
+nn_max_pool2d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
+  nn_module("nn_max_pool2d",
+    initialize = function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+      self$dilation <- dilation
+    },
+    forward = function(input) nnf_max_pool2d(input, self$kernel_size, self$stride, self$padding, self$dilation, FALSE)
+  )()
+}
+
+#' @export
+nn_max_pool3d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
+  nn_module("nn_max_pool3d",
+    initialize = function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
+      self$kernel_size <- kernel_size
+      self$stride <- stride
+      self$padding <- padding
+      self$dilation <- dilation
+    },
+    forward = function(input) nnf_max_pool3d(input, self$kernel_size, self$stride, self$padding, self$dilation, FALSE)
+  )()
+}
+
+#' @export
+nn_adaptive_avg_pool1d <- function(output_size) {
+  nn_module("nn_adaptive_avg_pool1d",
+    initialize = function(output_size) {
+      self$output_size <- output_size
+    },
+    forward = function(input) nnf_adaptive_avg_pool1d(input, self$output_size)
+  )()
+}
+
+#' @export
+nn_adaptive_avg_pool2d <- function(output_size) {
+  nn_module("nn_adaptive_avg_pool2d",
+    initialize = function(output_size) {
+      self$output_size <- output_size
+    },
+    forward = function(input) nnf_adaptive_avg_pool2d(input, self$output_size)
+  )()
+}
+
+#' @export
+nn_adaptive_avg_pool3d <- function(output_size) {
+  nn_module("nn_adaptive_avg_pool3d",
+    initialize = function(output_size) {
+      self$output_size <- output_size
+    },
+    forward = function(input) nnf_adaptive_avg_pool3d(input, self$output_size)
+  )()
+}
+
+#' @export
+nn_adaptive_max_pool1d <- function(output_size) {
+  nn_module("nn_adaptive_max_pool1d",
+    initialize = function(output_size) {
+      self$output_size <- output_size
+    },
+    forward = function(input) nnf_adaptive_max_pool1d(input, self$output_size)
+  )()
+}
+
+#' @export
+nn_adaptive_max_pool2d <- function(output_size) {
+  nn_module("nn_adaptive_max_pool2d",
+    initialize = function(output_size) {
+      self$output_size <- output_size
+    },
+    forward = function(input) nnf_adaptive_max_pool2d(input, self$output_size)
+  )()
+}
+
+#' @export
+nn_adaptive_max_pool3d <- function(output_size) {
+  nn_module("nn_adaptive_max_pool3d",
+    initialize = function(output_size) {
+      self$output_size <- output_size
+    },
+    forward = function(input) nnf_adaptive_max_pool3d(input, self$output_size)
+  )()
+}
+
+#' @export
+nn_flatten <- function(start_dim = 2L, end_dim = -1L) {
+  nn_module("nn_flatten",
+    initialize = function(start_dim = 2L, end_dim = -1L) {
+      self$start_dim <- start_dim
+      self$end_dim <- end_dim
+    },
+    forward = function(input) torch_flatten(input, self$start_dim, self$end_dim)
+  )()
+}
+
+#' @export
+nn_dropout2d <- function(p = 0.5) {
+  nn_module("nn_dropout2d",
+    initialize = function(p = 0.5) {
+      self$p <- p
+    },
+    forward = function(input) nnf_dropout2d(input, self$p, self$training)
+  )()
+}
+
+#' @export
+nn_dropout3d <- function(p = 0.5) {
+  nn_module("nn_dropout3d",
+    initialize = function(p = 0.5) {
+      self$p <- p
+    },
+    forward = function(input) nnf_dropout3d(input, self$p, self$training)
+  )()
+}
+
+#' @export
+nn_batch_norm3d <- function(num_features, eps = 1e-5, momentum = 0.1, affine = TRUE) {
+  nn_batch_norm1d(num_features, eps, momentum, affine)
+}
+
+#' @export
+nn_group_norm <- function(num_groups, num_channels, eps = 1e-5, affine = TRUE) {
+  nn_module("nn_group_norm",
+    initialize = function(num_groups, num_channels, eps, affine) {
+      self$num_groups <- num_groups
+      self$num_channels <- num_channels
+      self$eps <- eps
+      if (affine) {
+        self$register_parameter("weight", torch_ones(num_channels))
+        self$register_parameter("bias", torch_zeros(num_channels))
+      }
+    },
+    forward = function(input) nnf_group_norm(input, self$num_groups, self$weight, self$bias, self$eps)
+  )(num_groups, num_channels, eps, affine)
+}
+
+#' @export
+nn_init_constant_ <- function(tensor, val) { tensor$fill_(val); invisible(tensor) }
+
+#' @export
+nn_init_ones_ <- function(tensor) { tensor$fill_(1); invisible(tensor) }
+
+#' @export
+nn_init_normal_ <- function(tensor, mean = 0, std = 1) { tensor$normal_(mean, std); invisible(tensor) }
+
+#' @export
+nn_init_uniform_ <- function(tensor, a = 0, b = 1) { tensor$uniform_(a, b); invisible(tensor) }
+
+#' @export
+nn_init_eye_ <- function(tensor) { with_no_grad(function() { tensor$zero_(); n <- min(tensor$size()); for (i in seq_len(n)) tensor[i,i] <- 1 }); invisible(tensor) }
+
+#' @export
+nn_init_calculate_gain <- function(nonlinearity, param = NULL) {
+    switch(nonlinearity,
+      linear = 1, conv1d = 1, conv2d = 1, conv3d = 1, sigmoid = 1,
+      tanh = 5/3, relu = sqrt(2), leaky_relu = sqrt(2 / (1 + (if (is.null(param)) 0.01 else param)^2)),
+      selu = 3/4, 1)
+  }
+
+#' @export
+nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leaky_relu") {
+    fan <- tensor$size()[if (mode == "fan_in") 2 else 1] * prod(tensor$size()[-(1:2)])
+    gain <- nn_init_calculate_gain(nonlinearity, a)
+    std <- gain / sqrt(fan)
+    bound <- sqrt(3) * std
+    tensor$uniform_(-bound, bound)
+    invisible(tensor)
+  }
+
+#' @export
+nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leaky_relu") {
+    fan <- tensor$size()[if (mode == "fan_in") 2 else 1] * prod(tensor$size()[-(1:2)])
+    gain <- nn_init_calculate_gain(nonlinearity, a)
+    std <- gain / sqrt(fan)
+    tensor$normal_(0, std)
+    invisible(tensor)
+  }
+
+#' @export
+nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = 2) { tensor$normal_(mean, std)$clamp_(a, b); invisible(tensor) }
+
