@@ -10924,3 +10924,222 @@ torch_scaled_mm <- function(self, mat2, scale_a, scale_b,
                       bias, scale_result, out_dtype,
                       as.logical(use_fast_accum))
 }
+
+# ---- Missing torch_* namespace wrappers ----
+# These ops have C wrappers and tensor methods but were missing
+# as top-level exported functions.
+
+#' @rdname torch_argmax
+#' @export
+torch_argmax <- function(self, dim = NULL, keepdim = FALSE) {
+    C_torch_argmax(self, dim, as.logical(keepdim))
+}
+
+#' @rdname torch_argmin
+#' @export
+torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
+    C_torch_argmin(self, dim, as.logical(keepdim))
+}
+
+#' @rdname torch_bmm
+#' @export
+torch_bmm <- function(self, mat2) {
+    C_torch_bmm(self, mat2)
+}
+
+#' @rdname torch_ceil
+#' @export
+torch_ceil <- function(self) {
+    C_torch_ceil(self)
+}
+
+#' @rdname torch_clone
+#' @export
+torch_clone <- function(self) {
+    C_torch_clone(self)
+}
+
+#' @rdname torch_conv2d
+#' @export
+torch_conv2d <- function(input, weight, bias = NULL, stride = 1L,
+                         padding = 0L, dilation = 1L, groups = 1L) {
+    C_torch_conv2d(input, weight, bias, as.integer(stride),
+                   as.integer(padding), as.integer(dilation), as.integer(groups))
+}
+
+#' @rdname torch_conv_transpose1d
+#' @export
+torch_conv_transpose1d <- function(input, weight, bias = NULL, stride = 1L,
+                                    padding = 0L, output_padding = 0L,
+                                    groups = 1L, dilation = 1L) {
+    C_torch_conv_transpose1d(input, weight, bias, as.integer(stride),
+                              as.integer(padding), as.integer(output_padding),
+                              as.integer(groups), as.integer(dilation))
+}
+
+#' @rdname torch_eq
+#' @export
+torch_eq <- function(self, other) C_torch_eq(self, other)
+
+#' @rdname torch_flatten
+#' @export
+torch_flatten <- function(self, start_dim = 1L, end_dim = -1L) {
+    C_torch_flatten(self, as.integer(start_dim), as.integer(end_dim))
+}
+
+#' @rdname torch_floor_divide
+#' @export
+torch_floor_divide <- function(self, other) C_torch_floor_divide(self, other)
+
+#' @rdname torch_gather
+#' @export
+torch_gather <- function(self, dim, index) {
+    C_torch_gather(self, as.integer(dim), index)
+}
+
+#' @rdname torch_ge
+#' @export
+torch_ge <- function(self, other) C_torch_ge(self, other)
+
+#' @rdname torch_gt
+#' @export
+torch_gt <- function(self, other) C_torch_gt(self, other)
+
+#' @rdname torch_index_select
+#' @export
+torch_index_select <- function(self, dim, index) {
+    C_torch_index_select(self, as.integer(dim), index)
+}
+
+#' @rdname torch_le
+#' @export
+torch_le <- function(self, other) C_torch_le(self, other)
+
+#' @rdname torch_log10
+#' @export
+torch_log10 <- function(self) C_torch_log10(self)
+
+#' @rdname torch_log2
+#' @export
+torch_log2 <- function(self) C_torch_log2(self)
+
+#' @rdname torch_logical_not
+#' @export
+torch_logical_not <- function(self) C_torch_logical_not(self)
+
+#' @rdname torch_lt
+#' @export
+torch_lt <- function(self, other) C_torch_lt(self, other)
+
+#' @rdname torch_max
+#' @export
+torch_max <- function(self, dim = NULL) C_torch_max(self, dim)
+
+#' @rdname torch_min
+#' @export
+torch_min <- function(self, dim = NULL) C_torch_min(self, dim)
+
+#' @rdname torch_narrow
+#' @export
+torch_narrow <- function(self, dim, start, length) {
+    C_torch_narrow(self, as.integer(dim), as.integer(start), as.integer(length))
+}
+
+#' @rdname torch_ne
+#' @export
+torch_ne <- function(self, other) C_torch_ne(self, other)
+
+#' @rdname torch_neg
+#' @export
+torch_neg <- function(self) C_torch_neg(self)
+
+#' @rdname torch_remainder
+#' @export
+torch_remainder <- function(self, other) C_torch_remainder(self, other)
+
+#' @rdname torch_repeat_interleave
+#' @export
+torch_repeat_interleave <- function(self, repeats, dim = NULL) {
+    C_torch_repeat_interleave(self, repeats, dim)
+}
+
+#' @rdname torch_reshape
+#' @export
+torch_reshape <- function(self, shape) C_torch_reshape(self, shape)
+
+#' @rdname torch_round
+#' @export
+torch_round <- function(self) C_torch_round(self)
+
+#' @rdname torch_sign
+#' @export
+torch_sign <- function(self) C_torch_sign(self)
+
+#' @rdname torch_squeeze
+#' @export
+torch_squeeze <- function(self, dim = NULL) C_torch_squeeze(self, dim)
+
+#' @rdname torch_t
+#' @export
+torch_t <- function(self) C_torch_t(self)
+
+#' @rdname torch_transpose
+#' @export
+torch_transpose <- function(self, dim0, dim1) {
+    C_torch_transpose(self, as.integer(dim0), as.integer(dim1))
+}
+
+#' @rdname torch_trunc
+#' @export
+torch_trunc <- function(self) C_torch_trunc(self)
+
+#' @rdname torch_unsqueeze
+#' @export
+torch_unsqueeze <- function(self, dim) {
+    C_torch_unsqueeze(self, as.integer(dim))
+}
+
+# ---- torch_* aliases for nnf_* ops ----
+
+#' @rdname torch_softmax
+#' @export
+torch_softmax <- function(self, dim = -1L) {
+    C_nnf_softmax(self, as.integer(dim))
+}
+
+#' @rdname torch_log_softmax
+#' @export
+torch_log_softmax <- function(self, dim = -1L) {
+    C_nnf_log_softmax(self, as.integer(dim))
+}
+
+#' @rdname torch_layer_norm
+#' @export
+torch_layer_norm <- function(input, normalized_shape, weight = NULL,
+                             bias = NULL, eps = 1e-5) {
+    C_nnf_layer_norm(input, as.integer(normalized_shape), weight, bias, eps)
+}
+
+#' @rdname torch_batch_norm
+#' @export
+torch_batch_norm <- function(input, weight = NULL, bias = NULL,
+                             running_mean = NULL, running_var = NULL,
+                             training = FALSE, momentum = 0.1, eps = 1e-5,
+                             cudnn_enabled = TRUE) {
+    C_torch_batch_norm(input, weight, bias, running_mean, running_var,
+                       as.logical(training), momentum, eps, as.logical(cudnn_enabled))
+}
+
+# ---- Reduction constants (torch compatibility) ----
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_reduction_none <- 0L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_reduction_mean <- 1L
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_reduction_sum <- 2L

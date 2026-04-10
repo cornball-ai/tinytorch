@@ -19,6 +19,9 @@
 \alias{torch_float8_e4m3fn}
 \alias{torch_float8_e5m2fnuz}
 \alias{torch_float8_e4m3fnuz}
+\alias{torch_reduction_none}
+\alias{torch_reduction_mean}
+\alias{torch_reduction_sum}
 \title{Torch Data Types}
 \description{
 Constants representing tensor element types, matching libtorch's
