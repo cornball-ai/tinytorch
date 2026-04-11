@@ -31,3 +31,10 @@ Performs matrix multiplication with separate per-tensor scaling factors,
 designed for FP8 (float8) training and inference. Inputs are typically
 float8_e4m3fn or float8_e5m2 tensors; output is cast to \code{out_dtype}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

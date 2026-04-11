@@ -25,3 +25,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::slow_conv3d}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

@@ -14,3 +14,10 @@ A torch_tensor.
 \description{
 Tanh activation (functional)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+nnf_tanh(torch_randn(5))
+}
+}
+}

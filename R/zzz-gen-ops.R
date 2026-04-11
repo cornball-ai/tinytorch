@@ -11,6 +11,12 @@
 #' @param names A character vector of dimension names.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rename_ <- function(self, names) {
     C_torch_rename_(self, names)
 }
@@ -22,6 +28,12 @@ torch_rename_ <- function(self, names) {
 #' @param names A character vector of dimension names.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rename <- function(self, names) {
     C_torch_rename(self, names)
 }
@@ -33,6 +45,12 @@ torch_rename <- function(self, names) {
 #' @param names A character vector of dimension names.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_align_to <- function(self, names) {
     C_torch_align_to(self, names)
 }
@@ -44,6 +62,12 @@ torch_align_to <- function(self, names) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_align_as <- function(self, other) {
     C_torch_align_as(self, other)
 }
@@ -54,6 +78,12 @@ torch_align_as <- function(self, other) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_align_tensors <- function(tensors) {
     C_torch_align_tensors(tensors)
 }
@@ -66,6 +96,12 @@ torch_align_tensors <- function(tensors) {
 #' @param max An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sym_constrain_range <- function(size, min = NULL, max = NULL) {
     C_torch_sym_constrain_range(size, min, max)
 }
@@ -78,6 +114,12 @@ torch_sym_constrain_range <- function(size, min = NULL, max = NULL) {
 #' @param max An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sym_constrain_range_for_size <- function(size, min = NULL, max = NULL) {
     C_torch_sym_constrain_range_for_size(size, min, max)
 }
@@ -89,6 +131,12 @@ torch_sym_constrain_range_for_size <- function(size, min = NULL, max = NULL) {
 #' @param names A character vector of dimension names.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_refine_names <- function(self, names) {
     C_torch_refine_names(self, names)
 }
@@ -101,6 +149,12 @@ torch_refine_names <- function(self, names) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_native_dropout <- function(input, p, train) {
     C_torch_native_dropout(input, as.double(p), train)
 }
@@ -113,6 +167,12 @@ torch_native_dropout <- function(input, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_dropout <- function(input, p, train) {
     C_torch_dropout(input, as.double(p), as.logical(train))
 }
@@ -125,6 +185,12 @@ torch_dropout <- function(input, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_dropout_ <- function(self, p, train) {
     C_torch_dropout_(self, as.double(p), as.logical(train))
 }
@@ -137,6 +203,12 @@ torch_dropout_ <- function(self, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_feature_dropout <- function(input, p, train) {
     C_torch_feature_dropout(input, as.double(p), as.logical(train))
 }
@@ -149,6 +221,12 @@ torch_feature_dropout <- function(input, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_feature_dropout_ <- function(self, p, train) {
     C_torch_feature_dropout_(self, as.double(p), as.logical(train))
 }
@@ -161,6 +239,12 @@ torch_feature_dropout_ <- function(self, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_alpha_dropout <- function(input, p, train) {
     C_torch_alpha_dropout(input, as.double(p), as.logical(train))
 }
@@ -173,6 +257,12 @@ torch_alpha_dropout <- function(input, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_alpha_dropout_ <- function(self, p, train) {
     C_torch_alpha_dropout_(self, as.double(p), as.logical(train))
 }
@@ -185,6 +275,12 @@ torch_alpha_dropout_ <- function(self, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_feature_alpha_dropout <- function(input, p, train) {
     C_torch_feature_alpha_dropout(input, as.double(p), as.logical(train))
 }
@@ -197,6 +293,12 @@ torch_feature_alpha_dropout <- function(input, p, train) {
 #' @param train A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_feature_alpha_dropout_ <- function(self, p, train) {
     C_torch_feature_alpha_dropout_(self, as.double(p), as.logical(train))
 }
@@ -207,6 +309,12 @@ torch_feature_alpha_dropout_ <- function(self, p, train) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_abs_ <- function(self) {
     C_torch_abs_(self)
 }
@@ -217,6 +325,12 @@ torch_abs_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_absolute <- function(self) {
     C_torch_absolute(self)
 }
@@ -227,6 +341,12 @@ torch_absolute <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_absolute_ <- function(self) {
     C_torch_absolute_(self)
 }
@@ -237,6 +357,15 @@ torch_absolute_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
+#' 
+#' 
+#' }
+#' }
 torch_angle <- function(self) {
     C_torch_angle(self)
 }
@@ -247,6 +376,16 @@ torch_angle <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' if (FALSE) {
+#' x=torch_randn(c(4, 2))
+#' x
+#' torch_view_as_complex(x)
+#' }
+#' }
+#' }
 torch_view_as_complex <- function(self) {
     C_torch_view_as_complex(self)
 }
@@ -257,6 +396,16 @@ torch_view_as_complex <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' if (FALSE) {
+#' x <- torch_tensor(c(3+4i, 7-24i, 0, 1+2i))
+#' x$sgn()
+#' torch_sgn(x)
+#' }
+#' }
+#' }
 torch_sgn <- function(self) {
     C_torch_sgn(self)
 }
@@ -267,6 +416,12 @@ torch_sgn <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sgn_ <- function(self) {
     C_torch_sgn_(self)
 }
@@ -278,6 +433,12 @@ torch_sgn_ <- function(self) {
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_chalf <- function(self, memory_format = NULL) {
     C_torch_chalf(self, memory_format)
 }
@@ -288,6 +449,12 @@ torch_chalf <- function(self, memory_format = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_conj_physical <- function(self) {
     C_torch_conj_physical(self)
 }
@@ -298,6 +465,12 @@ torch_conj_physical <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_conj_physical_ <- function(self) {
     C_torch_conj_physical_(self)
 }
@@ -308,6 +481,12 @@ torch_conj_physical_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_resolve_conj <- function(self) {
     C_torch_resolve_conj(self)
 }
@@ -318,6 +497,12 @@ torch_resolve_conj <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_resolve_neg <- function(self) {
     C_torch_resolve_neg(self)
 }
@@ -328,6 +513,15 @@ torch_resolve_neg <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_acos(a)
+#' }
+#' }
 torch_acos <- function(self) {
     C_torch_acos(self)
 }
@@ -338,6 +532,12 @@ torch_acos <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_acos_ <- function(self) {
     C_torch_acos_(self)
 }
@@ -348,6 +548,12 @@ torch_acos_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arccos <- function(self) {
     C_torch_arccos(self)
 }
@@ -358,6 +564,12 @@ torch_arccos <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arccos_ <- function(self) {
     C_torch_arccos_(self)
 }
@@ -373,6 +585,12 @@ torch_arccos_ <- function(self) {
 #' @param count_include_pad A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_avg_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, count_include_pad = TRUE) {
     C_torch_avg_pool1d(self, kernel_size, stride, padding, as.logical(ceil_mode), as.logical(count_include_pad))
 }
@@ -384,6 +602,12 @@ torch_avg_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, ceil
 #' @param output_size (int[1]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_adaptive_avg_pool1d <- function(self, output_size) {
     C_torch_adaptive_avg_pool1d(self, output_size)
 }
@@ -395,6 +619,12 @@ torch_adaptive_avg_pool1d <- function(self, output_size) {
 #' @param output_size (int[1]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_adaptive_max_pool1d <- function(self, output_size) {
     C_torch_adaptive_max_pool1d(self, output_size)
 }
@@ -407,6 +637,12 @@ torch_adaptive_max_pool1d <- function(self, output_size) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_add_ <- function(self, other, alpha = 1) {
     C_torch_add_(self, other, alpha)
 }
@@ -421,6 +657,16 @@ torch_add_ <- function(self, other, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' M = torch_randn(c(2))
+#' mat = torch_randn(c(2, 3))
+#' vec = torch_randn(c(3))
+#' torch_addmv(M, mat, vec)
+#' }
+#' }
 torch_addmv <- function(self, mat, vec, beta = 1, alpha = 1) {
     C_torch_addmv(self, mat, vec, beta, alpha)
 }
@@ -435,6 +681,12 @@ torch_addmv <- function(self, mat, vec, beta = 1, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_addmv_ <- function(self, mat, vec, beta = 1, alpha = 1) {
     C_torch_addmv_(self, mat, vec, beta, alpha)
 }
@@ -449,6 +701,16 @@ torch_addmv_ <- function(self, mat, vec, beta = 1, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' vec1 = torch_arange(1, 3)
+#' vec2 = torch_arange(1, 2)
+#' M = torch_zeros(c(3, 2))
+#' torch_addr(M, vec1, vec2)
+#' }
+#' }
 torch_addr <- function(self, vec1, vec2, beta = 1, alpha = 1) {
     C_torch_addr(self, vec1, vec2, beta, alpha)
 }
@@ -463,6 +725,12 @@ torch_addr <- function(self, vec1, vec2, beta = 1, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_addr_ <- function(self, vec1, vec2, beta = 1, alpha = 1) {
     C_torch_addr_(self, vec1, vec2, beta, alpha)
 }
@@ -475,6 +743,12 @@ torch_addr_ <- function(self, vec1, vec2, beta = 1, alpha = 1) {
 #' @param align_corners A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_affine_grid_generator <- function(theta, size, align_corners) {
     C_torch_affine_grid_generator(theta, size, as.logical(align_corners))
 }
@@ -487,6 +761,12 @@ torch_affine_grid_generator <- function(theta, size, align_corners) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_all <- function(self, dim, keepdim = FALSE) {
     C_torch_all(self, as.integer(dim), as.logical(keepdim))
 }
@@ -499,6 +779,12 @@ torch_all <- function(self, dim, keepdim = FALSE) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_any <- function(self, dim, keepdim = FALSE) {
     C_torch_any(self, as.integer(dim), as.logical(keepdim))
 }
@@ -509,6 +795,15 @@ torch_any <- function(self, dim, keepdim = FALSE) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_randn(c(4))$uniform_(1, 2)
+#' a
+#' torch_acosh(a)
+#' }
+#' }
 torch_acosh <- function(self) {
     C_torch_acosh(self)
 }
@@ -519,6 +814,12 @@ torch_acosh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_acosh_ <- function(self) {
     C_torch_acosh_(self)
 }
@@ -529,6 +830,12 @@ torch_acosh_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arccosh <- function(self) {
     C_torch_arccosh(self)
 }
@@ -539,6 +846,12 @@ torch_arccosh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arccosh_ <- function(self) {
     C_torch_arccosh_(self)
 }
@@ -549,6 +862,15 @@ torch_arccosh_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_randn(c(4))
+#' a
+#' torch_asinh(a)
+#' }
+#' }
 torch_asinh <- function(self) {
     C_torch_asinh(self)
 }
@@ -559,6 +881,12 @@ torch_asinh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_asinh_ <- function(self) {
     C_torch_asinh_(self)
 }
@@ -569,6 +897,12 @@ torch_asinh_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arcsinh <- function(self) {
     C_torch_arcsinh(self)
 }
@@ -579,6 +913,12 @@ torch_arcsinh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arcsinh_ <- function(self) {
     C_torch_arcsinh_(self)
 }
@@ -589,6 +929,15 @@ torch_arcsinh_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))$uniform_(-1, 1)
+#' a
+#' torch_atanh(a)
+#' }
+#' }
 torch_atanh <- function(self) {
     C_torch_atanh(self)
 }
@@ -599,6 +948,12 @@ torch_atanh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_atanh_ <- function(self) {
     C_torch_atanh_(self)
 }
@@ -609,6 +964,12 @@ torch_atanh_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arctanh <- function(self) {
     C_torch_arctanh(self)
 }
@@ -619,6 +980,12 @@ torch_arctanh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arctanh_ <- function(self) {
     C_torch_arctanh_(self)
 }
@@ -632,6 +999,18 @@ torch_arctanh_ <- function(self) {
 #' @param storage_offset An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(3, 3))
+#' x
+#' t = torch_as_strided(x, list(2, 2), list(1, 2))
+#' t
+#' t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
+#' t
+#' }
+#' }
 torch_as_strided <- function(self, size, stride, storage_offset = NULL) {
     C_torch_as_strided(self, size, stride, storage_offset)
 }
@@ -645,6 +1024,12 @@ torch_as_strided <- function(self, size, stride, storage_offset = NULL) {
 #' @param storage_offset An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_as_strided_ <- function(self, size, stride, storage_offset = NULL) {
     C_torch_as_strided_(self, size, stride, storage_offset)
 }
@@ -655,6 +1040,15 @@ torch_as_strided_ <- function(self, size, stride, storage_offset = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_asin(a)
+#' }
+#' }
 torch_asin <- function(self) {
     C_torch_asin(self)
 }
@@ -665,6 +1059,12 @@ torch_asin <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_asin_ <- function(self) {
     C_torch_asin_(self)
 }
@@ -675,6 +1075,12 @@ torch_asin_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arcsin <- function(self) {
     C_torch_arcsin(self)
 }
@@ -685,6 +1091,12 @@ torch_arcsin <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arcsin_ <- function(self) {
     C_torch_arcsin_(self)
 }
@@ -695,6 +1107,15 @@ torch_arcsin_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_atan(a)
+#' }
+#' }
 torch_atan <- function(self) {
     C_torch_atan(self)
 }
@@ -705,6 +1126,12 @@ torch_atan <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_atan_ <- function(self) {
     C_torch_atan_(self)
 }
@@ -715,6 +1142,12 @@ torch_atan_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arctan <- function(self) {
     C_torch_arctan(self)
 }
@@ -725,6 +1158,12 @@ torch_arctan <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arctan_ <- function(self) {
     C_torch_arctan_(self)
 }
@@ -735,6 +1174,21 @@ torch_arctan_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_randn(c(2))
+#' x
+#' torch_atleast_1d(x)
+#' x <- torch_tensor(1.)
+#' x
+#' torch_atleast_1d(x)
+#' x <- torch_tensor(0.5)
+#' y <- torch_tensor(1.)
+#' torch_atleast_1d(list(x,y))
+#' }
+#' }
 torch_atleast_1d <- function(self) {
     C_torch_atleast_1d(self)
 }
@@ -745,6 +1199,21 @@ torch_atleast_1d <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_tensor(1.)
+#' x
+#' torch_atleast_2d(x)
+#' x <- torch_randn(c(2,2))
+#' x
+#' torch_atleast_2d(x)
+#' x <- torch_tensor(0.5)
+#' y <- torch_tensor(1.)
+#' torch_atleast_2d(list(x,y))
+#' }
+#' }
 torch_atleast_2d <- function(self) {
     C_torch_atleast_2d(self)
 }
@@ -755,6 +1224,12 @@ torch_atleast_2d <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_atleast_3d <- function(self) {
     C_torch_atleast_3d(self)
 }
@@ -770,6 +1245,16 @@ torch_atleast_3d <- function(self) {
 #' @param out_dtype Optional output dtype for mixed-precision (PyTorch 2.8+).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' M = torch_randn(c(10, 3, 5))
+#' batch1 = torch_randn(c(10, 3, 4))
+#' batch2 = torch_randn(c(10, 4, 5))
+#' torch_baddbmm(M, batch1, batch2)
+#' }
+#' }
 torch_baddbmm <- function(self, batch1, batch2, beta = 1, alpha = 1, out_dtype = NULL) {
     if (is.null(out_dtype)) C_torch_baddbmm(self, batch1, batch2, beta, alpha)
     else C_torch_baddbmm_dtype(self, batch1, batch2, out_dtype, beta, alpha)
@@ -785,6 +1270,12 @@ torch_baddbmm <- function(self, batch1, batch2, beta = 1, alpha = 1, out_dtype =
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_baddbmm_ <- function(self, batch1, batch2, beta = 1, alpha = 1) {
     C_torch_baddbmm_(self, batch1, batch2, beta, alpha)
 }
@@ -797,6 +1288,12 @@ torch_baddbmm_ <- function(self, batch1, batch2, beta = 1, alpha = 1) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bartlett_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_bartlett_window(as.integer(window_length), dtype, device)
 }
@@ -814,6 +1311,12 @@ torch_bartlett_window <- function(window_length, dtype = NULL, device = NULL) {
 #' @param output_zero_point An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_batch_norm <- function(input, weight, bias, mean, var, eps, output_scale, output_zero_point) {
     C_torch_quantized_batch_norm(input, weight, bias, mean, var, as.double(eps), as.double(output_scale), as.integer(output_zero_point))
 }
@@ -825,6 +1328,19 @@ torch_quantized_batch_norm <- function(input, weight, bias, mean, var, eps, outp
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_empty(c(3, 3))$uniform_(0, 1)  # generate a uniform random matrix with range c(0, 1)
+#' a
+#' torch_bernoulli(a)
+#' a = torch_ones(c(3, 3)) # probability of drawing "1" is 1
+#' torch_bernoulli(a)
+#' a = torch_zeros(c(3, 3)) # probability of drawing "1" is 0
+#' torch_bernoulli(a)
+#' }
+#' }
 torch_bernoulli <- function(self, generator = NULL) {
     C_torch_bernoulli(self, generator)
 }
@@ -837,6 +1353,12 @@ torch_bernoulli <- function(self, generator = NULL) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bernoulli_ <- function(self, p, generator = NULL) {
     C_torch_bernoulli_(self, p, generator)
 }
@@ -850,6 +1372,12 @@ torch_bernoulli_ <- function(self, p, generator = NULL) {
 #' @param bias A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bilinear <- function(input1, input2, weight, bias = NULL) {
     C_torch_bilinear(input1, input2, weight, bias)
 }
@@ -863,6 +1391,12 @@ torch_bilinear <- function(input1, input2, weight, bias = NULL) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_binary_cross_entropy <- function(self, target, weight = NULL, reduction = 1L) {
     C_torch_binary_cross_entropy(self, target, weight, as.integer(reduction))
 }
@@ -877,6 +1411,12 @@ torch_binary_cross_entropy <- function(self, target, weight = NULL, reduction = 
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_binary_cross_entropy_with_logits <- function(self, target, weight = NULL, pos_weight = NULL, reduction = 1L) {
     C_torch_binary_cross_entropy_with_logits(self, target, weight, pos_weight, as.integer(reduction))
 }
@@ -889,6 +1429,18 @@ torch_binary_cross_entropy_with_logits <- function(self, target, weight = NULL, 
 #' @param minlength An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input = torch_randint(1, 8, list(5), dtype=torch_int64())
+#' weights = torch_linspace(0, 1, steps=5)
+#' input
+#' weights
+#' torch_bincount(input, weights)
+#' input$bincount(weights)
+#' }
+#' }
 torch_bincount <- function(self, weights = NULL, minlength = 0) {
     C_torch_bincount(self, weights, as.integer(minlength))
 }
@@ -899,6 +1451,12 @@ torch_bincount <- function(self, weights = NULL, minlength = 0) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_not <- function(self) {
     C_torch_bitwise_not(self)
 }
@@ -909,6 +1467,12 @@ torch_bitwise_not <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_not_ <- function(self) {
     C_torch_bitwise_not_(self)
 }
@@ -920,6 +1484,12 @@ torch_bitwise_not_ <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_copysign <- function(self, other) {
     C_torch_copysign(self, other)
 }
@@ -931,6 +1501,12 @@ torch_copysign <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_copysign_ <- function(self, other) {
     C_torch_copysign_(self, other)
 }
@@ -941,6 +1517,12 @@ torch_copysign_ <- function(self, other) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_logical_not_ <- function(self) {
     C_torch_logical_not_(self)
 }
@@ -952,6 +1534,18 @@ torch_logical_not_ <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_logical_xor(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
+#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
+#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
+#' torch_logical_xor(a, b)
+#' torch_logical_xor(a$to(dtype=torch_double()), b$to(dtype=torch_double()))
+#' torch_logical_xor(a$to(dtype=torch_double()), b)
+#' }
+#' }
 torch_logical_xor <- function(self, other) {
     C_torch_logical_xor(self, other)
 }
@@ -963,6 +1557,12 @@ torch_logical_xor <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_logical_xor_ <- function(self, other) {
     C_torch_logical_xor_(self, other)
 }
@@ -974,6 +1574,19 @@ torch_logical_xor_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_logical_and(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
+#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
+#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
+#' torch_logical_and(a, b)
+#' 
+#' torch_logical_and(a, b, out=torch_empty(4, dtype=torch_bool()))
+#' 
+#' }
+#' }
 torch_logical_and <- function(self, other) {
     C_torch_logical_and(self, other)
 }
@@ -985,6 +1598,12 @@ torch_logical_and <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_logical_and_ <- function(self, other) {
     C_torch_logical_and_(self, other)
 }
@@ -996,6 +1615,21 @@ torch_logical_and_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_logical_or(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
+#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
+#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
+#' torch_logical_or(a, b)
+#' 
+#' torch_logical_or(a$double(), b$double())
+#' torch_logical_or(a$double(), b)
+#' torch_logical_or(a, b, out=torch_empty(4, dtype=torch_bool()))
+#' 
+#' }
+#' }
 torch_logical_or <- function(self, other) {
     C_torch_logical_or(self, other)
 }
@@ -1007,6 +1641,12 @@ torch_logical_or <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_logical_or_ <- function(self, other) {
     C_torch_logical_or_(self, other)
 }
@@ -1019,6 +1659,12 @@ torch_logical_or_ <- function(self, other) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_blackman_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_blackman_window(as.integer(window_length), dtype, device)
 }
@@ -1029,6 +1675,16 @@ torch_blackman_window <- function(window_length, dtype = NULL, device = NULL) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_arange(0, 3)$view(c(1, 4))
+#' y = torch_arange(0, 2)$view(c(3, 1))
+#' out = torch_broadcast_tensors(list(x, y))
+#' out[[1]]
+#' }
+#' }
 torch_broadcast_tensors <- function(tensors) {
     C_torch_broadcast_tensors(tensors)
 }
@@ -1040,6 +1696,12 @@ torch_broadcast_tensors <- function(tensors) {
 #' @param size An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_broadcast_to <- function(self, size) {
     C_torch_broadcast_to(self, size)
 }
@@ -1051,6 +1713,12 @@ torch_broadcast_to <- function(self, size) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_concat <- function(tensors, dim = 0) {
     C_torch_concat(tensors, as.integer(dim))
 }
@@ -1062,6 +1730,12 @@ torch_concat <- function(tensors, dim = 0) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_concatenate <- function(tensors, dim = 0) {
     C_torch_concatenate(tensors, as.integer(dim))
 }
@@ -1072,6 +1746,18 @@ torch_concatenate <- function(tensors, dim = 0) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' A <- torch_tensor(rbind(c(0, 1), c(1, 0)))
+#' B <- torch_tensor(rbind(c(3, 4, 5), c(6, 7, 8)))
+#' C <- torch_tensor(7)
+#' D <- torch_tensor(c(1, 2, 3))
+#' E <- torch_tensor(rbind(4, 5, 6))
+#' torch_block_diag(list(A, B, C, D, E))
+#' }
+#' }
 torch_block_diag <- function(tensors) {
     C_torch_block_diag(tensors)
 }
@@ -1082,6 +1768,12 @@ torch_block_diag <- function(tensors) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ceil_ <- function(self) {
     C_torch_ceil_(self)
 }
@@ -1092,6 +1784,17 @@ torch_ceil_ <- function(self) {
 #' @param matrices A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3, 4))
+#' b = torch_randn(c(4, 5))
+#' c = torch_randn(c(5, 6))
+#' d = torch_randn(c(6, 7))
+#' torch_chain_matmul(list(a, b, c, d))
+#' }
+#' }
 torch_chain_matmul <- function(matrices) {
     C_torch_chain_matmul(matrices)
 }
@@ -1104,6 +1807,12 @@ torch_chain_matmul <- function(matrices) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unsafe_chunk <- function(self, chunks, dim = 0) {
     C_torch_unsafe_chunk(self, as.integer(chunks), as.integer(dim))
 }
@@ -1116,6 +1825,12 @@ torch_unsafe_chunk <- function(self, chunks, dim = 0) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_chunk <- function(self, chunks, dim = 0) {
     C_torch_chunk(self, as.integer(chunks), as.integer(dim))
 }
@@ -1128,6 +1843,12 @@ torch_chunk <- function(self, chunks, dim = 0) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_tensor_split <- function(self, sections, dim = 0) {
     C_torch_tensor_split(self, as.integer(sections), as.integer(dim))
 }
@@ -1140,6 +1861,12 @@ torch_tensor_split <- function(self, sections, dim = 0) {
 #' @param max A numeric scalar. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clamp_ <- function(self, min = NULL, max = NULL) {
     C_torch_clamp_(self, min, max)
 }
@@ -1151,6 +1878,12 @@ torch_clamp_ <- function(self, min = NULL, max = NULL) {
 #' @param max A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clamp_max <- function(self, max) {
     C_torch_clamp_max(self, max)
 }
@@ -1162,6 +1895,12 @@ torch_clamp_max <- function(self, max) {
 #' @param max A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clamp_max_ <- function(self, max) {
     C_torch_clamp_max_(self, max)
 }
@@ -1173,6 +1912,12 @@ torch_clamp_max_ <- function(self, max) {
 #' @param min A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clamp_min <- function(self, min) {
     C_torch_clamp_min(self, min)
 }
@@ -1184,6 +1929,12 @@ torch_clamp_min <- function(self, min) {
 #' @param min A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clamp_min_ <- function(self, min) {
     C_torch_clamp_min_(self, min)
 }
@@ -1196,6 +1947,12 @@ torch_clamp_min_ <- function(self, min) {
 #' @param max A numeric scalar. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clip <- function(self, min = NULL, max = NULL) {
     C_torch_clip(self, min, max)
 }
@@ -1208,6 +1965,12 @@ torch_clip <- function(self, min = NULL, max = NULL) {
 #' @param max A numeric scalar. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clip_ <- function(self, min = NULL, max = NULL) {
     C_torch_clip_(self, min, max)
 }
@@ -1220,6 +1983,12 @@ torch_clip_ <- function(self, min = NULL, max = NULL) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_constant_pad_nd <- function(self, pad, value = 0) {
     C_torch_constant_pad_nd(self, pad, value)
 }
@@ -1238,6 +2007,12 @@ torch_constant_pad_nd <- function(self, pad, value = 0) {
 #' @param groups An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_convolution <- function(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups) {
     C_torch_convolution(input, weight, bias, stride, padding, dilation, as.logical(transposed), output_padding, as.integer(groups))
 }
@@ -1256,6 +2031,12 @@ torch_convolution <- function(input, weight, bias, stride, padding, dilation, tr
 #' @param groups An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_convolution_overrideable <- function(input, weight, bias, stride, padding, dilation, transposed, output_padding, groups) {
     C_torch_convolution_overrideable(input, weight, bias, stride, padding, dilation, as.logical(transposed), output_padding, as.integer(groups))
 }
@@ -1272,6 +2053,15 @@ torch_convolution_overrideable <- function(input, weight, bias, stride, padding,
 #' @param groups An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' # filters = torch_randn(c(33, 16, 3, 3, 3))
+#' # inputs = torch_randn(c(20, 16, 50, 10, 20))
+#' # nnf_conv3d(inputs, filters)
+#' }
+#' }
 torch_conv3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, dilation = 1, groups = 1) {
     C_torch_conv3d(input, weight, bias, stride, padding, dilation, as.integer(groups))
 }
@@ -1285,6 +2075,12 @@ torch_conv3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, di
 #' @param pad An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_conv_tbc <- function(self, weight, bias, pad = 0) {
     C_torch_conv_tbc(self, weight, bias, as.integer(pad))
 }
@@ -1302,6 +2098,16 @@ torch_conv_tbc <- function(self, weight, bias, pad = 0) {
 #' @param dilation (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' # With square kernels and equal stride
+#' inputs = torch_randn(c(1, 4, 5, 5))
+#' weights = torch_randn(c(4, 8, 3, 3))
+#' nnf_conv_transpose2d(inputs, weights, padding=1)
+#' }
+#' }
 torch_conv_transpose2d <- function(input, weight, bias = NULL, stride = 1, padding = 0, output_padding = 0, groups = 1, dilation = 1) {
     C_torch_conv_transpose2d(input, weight, bias, stride, padding, output_padding, as.integer(groups), dilation)
 }
@@ -1319,6 +2125,16 @@ torch_conv_transpose2d <- function(input, weight, bias = NULL, stride = 1, paddi
 #' @param dilation (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' inputs = torch_randn(c(20, 16, 50, 10, 20))
+#' weights = torch_randn(c(16, 33, 3, 3, 3))
+#' nnf_conv_transpose3d(inputs, weights)
+#' 
+#' }
+#' }
 torch_conv_transpose3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, output_padding = 0, groups = 1, dilation = 1) {
     C_torch_conv_transpose3d(input, weight, bias, stride, padding, output_padding, as.integer(groups), dilation)
 }
@@ -1331,6 +2147,12 @@ torch_conv_transpose3d <- function(input, weight, bias = NULL, stride = 1, paddi
 #' @param non_blocking A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_copy <- function(self, src, non_blocking = FALSE) {
     C_torch_copy(self, src, as.logical(non_blocking))
 }
@@ -1341,6 +2163,12 @@ torch_copy <- function(self, src, non_blocking = FALSE) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cos_ <- function(self) {
     C_torch_cos_(self)
 }
@@ -1351,6 +2179,15 @@ torch_cos_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_cosh(a)
+#' }
+#' }
 torch_cosh <- function(self) {
     C_torch_cosh(self)
 }
@@ -1361,6 +2198,12 @@ torch_cosh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cosh_ <- function(self) {
     C_torch_cosh_(self)
 }
@@ -1375,6 +2218,12 @@ torch_cosh_ <- function(self) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cosine_embedding_loss <- function(input1, input2, target, margin = 0.0, reduction = 1L) {
     C_torch_cosine_embedding_loss(input1, input2, target, as.double(margin), as.integer(reduction))
 }
@@ -1386,6 +2235,17 @@ torch_cosine_embedding_loss <- function(input1, input2, target, margin = 0.0, re
 #' @param dim An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_zeros(3,3)
+#' x[torch_randn(3,3) > 0.5] = 1
+#' x
+#' torch_count_nonzero(x)
+#' torch_count_nonzero(x, dim=1)
+#' }
+#' }
 torch_count_nonzero <- function(self, dim) {
     C_torch_count_nonzero(self, dim)
 }
@@ -1399,6 +2259,12 @@ torch_count_nonzero <- function(self, dim) {
 #' @param aweights A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cov <- function(self, correction = 1, fweights = NULL, aweights = NULL) {
     C_torch_cov(self, as.integer(correction), fweights, aweights)
 }
@@ -1409,6 +2275,12 @@ torch_cov <- function(self, correction = 1, fweights = NULL, aweights = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_corrcoef <- function(self) {
     C_torch_corrcoef(self)
 }
@@ -1420,6 +2292,15 @@ torch_corrcoef <- function(self) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(10))
+#' a
+#' torch_cummax(a, dim=1)
+#' }
+#' }
 torch_cummax <- function(self, dim) {
     C_torch_cummax(self, as.integer(dim))
 }
@@ -1431,6 +2312,15 @@ torch_cummax <- function(self, dim) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(10))
+#' a
+#' torch_cummin(a, dim=1)
+#' }
+#' }
 torch_cummin <- function(self, dim) {
     C_torch_cummin(self, as.integer(dim))
 }
@@ -1443,6 +2333,15 @@ torch_cummin <- function(self, dim) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(10))
+#' a
+#' torch_cumprod(a, dim=1)
+#' }
+#' }
 torch_cumprod <- function(self, dim, dtype = NULL) {
     C_torch_cumprod(self, as.integer(dim), dtype)
 }
@@ -1455,6 +2354,12 @@ torch_cumprod <- function(self, dim, dtype = NULL) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cumprod_ <- function(self, dim, dtype = NULL) {
     C_torch_cumprod_(self, as.integer(dim), dtype)
 }
@@ -1467,6 +2372,12 @@ torch_cumprod_ <- function(self, dim, dtype = NULL) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cumsum_ <- function(self, dim, dtype = NULL) {
     C_torch_cumsum_(self, as.integer(dim), dtype)
 }
@@ -1479,6 +2390,12 @@ torch_cumsum_ <- function(self, dim, dtype = NULL) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cumulative_trapezoid <- function(y, x, dim = -1) {
     C_torch_cumulative_trapezoid(y, x, as.integer(dim))
 }
@@ -1495,6 +2412,12 @@ torch_cumulative_trapezoid <- function(y, x, dim = -1) {
 #' @param zero_infinity A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank = 0, reduction = 1L, zero_infinity = FALSE) {
     C_torch_ctc_loss(log_probs, targets, input_lengths, target_lengths, as.integer(blank), as.integer(reduction), as.logical(zero_infinity))
 }
@@ -1508,6 +2431,15 @@ torch_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, bl
 #' @param dim2 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(2, 3))
+#' torch_diag_embed(a)
+#' torch_diag_embed(a, offset=1, dim1=1, dim2=3)
+#' }
+#' }
 torch_diag_embed <- function(self, offset = 0, dim1 = -2, dim2 = -1) {
     C_torch_diag_embed(self, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
@@ -1519,6 +2451,19 @@ torch_diag_embed <- function(self, offset = 0, dim1 = -2, dim2 = -1) {
 #' @param offset An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3))
+#' a
+#' torch_diagflat(a)
+#' torch_diagflat(a, 1)
+#' a = torch_randn(c(2, 2))
+#' a
+#' torch_diagflat(a)
+#' }
+#' }
 torch_diagflat <- function(self, offset = 0) {
     C_torch_diagflat(self, as.integer(offset))
 }
@@ -1532,6 +2477,18 @@ torch_diagflat <- function(self, offset = 0) {
 #' @param dim2 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3, 3))
+#' a
+#' torch_diagonal(a, offset = 0)
+#' torch_diagonal(a, offset = 1)
+#' x = torch_randn(c(2, 5, 4, 2))
+#' torch_diagonal(x, offset=-1, dim1=1, dim2=2)
+#' }
+#' }
 torch_diagonal <- function(self, offset = 0, dim1 = 0, dim2 = 1) {
     C_torch_diagonal(self, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
@@ -1545,6 +2502,12 @@ torch_diagonal <- function(self, offset = 0, dim1 = 0, dim2 = 1) {
 #' @param dim2 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_diagonal <- function(A, offset = 0, dim1 = -2, dim2 = -1) {
     C_torch_linalg_diagonal(A, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
@@ -1557,6 +2520,12 @@ torch_linalg_diagonal <- function(A, offset = 0, dim1 = -2, dim2 = -1) {
 #' @param wrap A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fill_diagonal_ <- function(self, fill_value, wrap = FALSE) {
     C_torch_fill_diagonal_(self, fill_value, as.logical(wrap))
 }
@@ -1571,6 +2540,21 @@ torch_fill_diagonal_ <- function(self, fill_value, wrap = FALSE) {
 #' @param append A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' a <- torch_tensor(c(1,2,3))
+#' torch_diff(a)
+#' 
+#' b <- torch_tensor(c(4, 5))
+#' torch_diff(a, append = b)
+#' 
+#' c <- torch_tensor(rbind(c(1,2,3), c(3,4,5)))
+#' torch_diff(c, dim = 1)
+#' torch_diff(c, dim = 2) 
+#' 
+#' }
+#' }
 torch_diff <- function(self, n = 1, dim = -1, prepend = NULL, append = NULL) {
     C_torch_diff(self, as.integer(n), as.integer(dim), prepend, append)
 }
@@ -1584,6 +2568,12 @@ torch_diff <- function(self, n = 1, dim = -1, prepend = NULL, append = NULL) {
 #' @param edge_order An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_gradient <- function(self, spacing = NULL, dim = NULL, edge_order = 1) {
     C_torch_gradient(self, spacing, dim, as.integer(edge_order))
 }
@@ -1595,6 +2585,12 @@ torch_gradient <- function(self, spacing = NULL, dim = NULL, edge_order = 1) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_div_ <- function(self, other) {
     C_torch_div_(self, other)
 }
@@ -1606,6 +2602,12 @@ torch_div_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_divide <- function(self, other) {
     C_torch_divide(self, other)
 }
@@ -1617,6 +2619,12 @@ torch_divide <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_divide_ <- function(self, other) {
     C_torch_divide_(self, other)
 }
@@ -1628,6 +2636,16 @@ torch_divide_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' dividend = torch_tensor(c(5, 3), dtype=torch_int())
+#' divisor = torch_tensor(c(3, 2), dtype=torch_int())
+#' torch_true_divide(dividend, divisor)
+#' torch_true_divide(dividend, 2)
+#' }
+#' }
 torch_true_divide <- function(self, other) {
     C_torch_true_divide(self, other)
 }
@@ -1639,6 +2657,12 @@ torch_true_divide <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_true_divide_ <- function(self, other) {
     C_torch_true_divide_(self, other)
 }
@@ -1650,6 +2674,13 @@ torch_true_divide_ <- function(self, other) {
 #' @param tensor A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_dot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
+#' }
+#' }
 torch_dot <- function(self, tensor) {
     C_torch_dot(self, tensor)
 }
@@ -1661,6 +2692,19 @@ torch_dot <- function(self, tensor) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_vdot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
+#' if (FALSE) {
+#' a <- torch_tensor(list(1 +2i, 3 - 1i))
+#' b <- torch_tensor(list(2 +1i, 4 - 0i))
+#' torch_vdot(a, b)
+#' torch_vdot(b, a)
+#' }
+#' }
+#' }
 torch_vdot <- function(self, other) {
     C_torch_vdot(self, other)
 }
@@ -1673,6 +2717,29 @@ torch_vdot <- function(self, other) {
 #' @param path An integer vector. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(5))
+#' y = torch_randn(c(4))
+#' torch_einsum('i,j->ij', list(x, y))  # outer product
+#' A = torch_randn(c(3,5,4))
+#' l = torch_randn(c(2,5))
+#' r = torch_randn(c(2,4))
+#' torch_einsum('bn,anm,bm->ba', list(l, A, r)) # compare torch_nn$functional$bilinear
+#' As = torch_randn(c(3,2,5))
+#' Bs = torch_randn(c(3,5,4))
+#' torch_einsum('bij,bjk->bik', list(As, Bs)) # batch matrix multiplication
+#' A = torch_randn(c(3, 3))
+#' torch_einsum('ii->i', list(A)) # diagonal
+#' A = torch_randn(c(4, 3, 3))
+#' torch_einsum('...ii->...i', list(A)) # batch diagonal
+#' A = torch_randn(c(2, 3, 4, 5))
+#' torch_einsum('...ij->...ji', list(A))$shape # batch permute
+#' 
+#' }
+#' }
 torch_einsum <- function(equation, tensors, path = NULL) {
     C_torch_einsum(equation, tensors, path)
 }
@@ -1686,6 +2753,12 @@ torch_einsum <- function(equation, tensors, path = NULL) {
 #' @param norm_type A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_embedding_renorm_ <- function(self, indices, max_norm, norm_type) {
     C_torch_embedding_renorm_(self, indices, as.double(max_norm), as.double(norm_type))
 }
@@ -1696,6 +2769,12 @@ torch_embedding_renorm_ <- function(self, indices, max_norm, norm_type) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_row_stack <- function(tensors) {
     C_torch_row_stack(tensors)
 }
@@ -1713,6 +2792,12 @@ torch_row_stack <- function(tensors) {
 #' @param include_last_offset A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_embedding_bag <- function(weight, indices, offsets, scale_grad_by_freq = FALSE, mode = 0, sparse = FALSE, per_sample_weights = NULL, include_last_offset = FALSE) {
     C_torch_embedding_bag(weight, indices, offsets, as.logical(scale_grad_by_freq), as.integer(mode), as.logical(sparse), per_sample_weights, as.logical(include_last_offset))
 }
@@ -1726,6 +2811,12 @@ torch_embedding_bag <- function(weight, indices, offsets, scale_grad_by_freq = F
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_empty_permuted <- function(size, physical_layout, dtype = NULL, device = NULL) {
     C_torch_empty_permuted(size, physical_layout, dtype, device)
 }
@@ -1739,6 +2830,12 @@ torch_empty_permuted <- function(size, physical_layout, dtype = NULL, device = N
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_new_empty <- function(self, size, dtype = NULL, device = NULL) {
     C_torch_new_empty(self, size, dtype, device)
 }
@@ -1753,6 +2850,12 @@ torch_new_empty <- function(self, size, dtype = NULL, device = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_new_empty_strided <- function(self, size, stride, dtype = NULL, device = NULL) {
     C_torch_new_empty_strided(self, size, stride, dtype, device)
 }
@@ -1767,6 +2870,12 @@ torch_new_empty_strided <- function(self, size, stride, dtype = NULL, device = N
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_new_full <- function(self, size, fill_value, dtype = NULL, device = NULL) {
     C_torch_new_full(self, size, fill_value, dtype, device)
 }
@@ -1780,6 +2889,12 @@ torch_new_full <- function(self, size, fill_value, dtype = NULL, device = NULL) 
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_new_zeros <- function(self, size, dtype = NULL, device = NULL) {
     C_torch_new_zeros(self, size, dtype, device)
 }
@@ -1793,6 +2908,12 @@ torch_new_zeros <- function(self, size, dtype = NULL, device = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_new_ones <- function(self, size, dtype = NULL, device = NULL) {
     C_torch_new_ones(self, size, dtype, device)
 }
@@ -1805,6 +2926,12 @@ torch_new_ones <- function(self, size, dtype = NULL, device = NULL) {
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_resize_ <- function(self, size, memory_format = NULL) {
     C_torch_resize_(self, size, memory_format)
 }
@@ -1819,6 +2946,12 @@ torch_resize_ <- function(self, size, memory_format = NULL) {
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_empty_quantized <- function(size, qtensor, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_empty_quantized(size, qtensor, dtype, device, memory_format)
 }
@@ -1832,6 +2965,16 @@ torch_empty_quantized <- function(size, qtensor, dtype = NULL, device = NULL, me
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_empty_strided(list(2, 3), list(1, 2))
+#' a
+#' a$stride(1)
+#' a$size(1)
+#' }
+#' }
 torch_empty_strided <- function(size, stride, dtype = NULL, device = NULL) {
     C_torch_empty_strided(size, stride, dtype, device)
 }
@@ -1842,6 +2985,13 @@ torch_empty_strided <- function(size, stride, dtype = NULL, device = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_erf(torch_tensor(c(0, -1., 10.)))
+#' }
+#' }
 torch_erf <- function(self) {
     C_torch_erf(self)
 }
@@ -1852,6 +3002,12 @@ torch_erf <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_erf_ <- function(self) {
     C_torch_erf_(self)
 }
@@ -1862,6 +3018,13 @@ torch_erf_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_erfc(torch_tensor(c(0, -1., 10.)))
+#' }
+#' }
 torch_erfc <- function(self) {
     C_torch_erfc(self)
 }
@@ -1872,6 +3035,12 @@ torch_erfc <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_erfc_ <- function(self) {
     C_torch_erfc_(self)
 }
@@ -1882,6 +3051,12 @@ torch_erfc_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_exp_ <- function(self) {
     C_torch_exp_(self)
 }
@@ -1892,6 +3067,13 @@ torch_exp_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_exp2(torch_tensor(c(0, log2(2.), 3, 4)))
+#' }
+#' }
 torch_exp2 <- function(self) {
     C_torch_exp2(self)
 }
@@ -1902,6 +3084,12 @@ torch_exp2 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_exp2_ <- function(self) {
     C_torch_exp2_(self)
 }
@@ -1912,6 +3100,13 @@ torch_exp2_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_expm1(torch_tensor(c(0, log(2))))
+#' }
+#' }
 torch_expm1 <- function(self) {
     C_torch_expm1(self)
 }
@@ -1922,6 +3117,12 @@ torch_expm1 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_expm1_ <- function(self) {
     C_torch_expm1_(self)
 }
@@ -1933,6 +3134,12 @@ torch_expm1_ <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_expand_as <- function(self, other) {
     C_torch_expand_as(self, other)
 }
@@ -1945,6 +3152,13 @@ torch_expand_as <- function(self, other) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_eye(3)
+#' }
+#' }
 torch_eye <- function(n, dtype = NULL, device = NULL) {
     C_torch_eye(as.integer(n), dtype, device)
 }
@@ -1957,6 +3171,12 @@ torch_eye <- function(n, dtype = NULL, device = NULL) {
 #' @param sizes An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unflatten <- function(self, dim, sizes) {
     C_torch_unflatten(self, as.integer(dim), sizes)
 }
@@ -1968,6 +3188,12 @@ torch_unflatten <- function(self, dim, sizes) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fill <- function(self, value) {
     C_torch_fill(self, value)
 }
@@ -1978,6 +3204,12 @@ torch_fill <- function(self, value) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_floor_ <- function(self) {
     C_torch_floor_(self)
 }
@@ -1989,6 +3221,12 @@ torch_floor_ <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_floor_divide_ <- function(self, other) {
     C_torch_floor_divide_(self, other)
 }
@@ -1999,6 +3237,13 @@ torch_floor_divide_ <- function(self, other) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_frac(torch_tensor(c(1, 2.5, -3.2)))
+#' }
+#' }
 torch_frac <- function(self) {
     C_torch_frac(self)
 }
@@ -2009,6 +3254,12 @@ torch_frac <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_frac_ <- function(self) {
     C_torch_frac_(self)
 }
@@ -2023,6 +3274,12 @@ torch_frac_ <- function(self) {
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_full_like <- function(self, fill_value, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_full_like(self, fill_value, dtype, device, memory_format)
 }
@@ -2037,6 +3294,12 @@ torch_full_like <- function(self, fill_value, dtype = NULL, device = NULL, memor
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_from_file <- function(filename, shared = NULL, size = 0, dtype = NULL, device = NULL) {
     C_torch_from_file(filename, shared, size, dtype, device)
 }
@@ -2048,6 +3311,19 @@ torch_from_file <- function(filename, shared = NULL, size = 0, dtype = NULL, dev
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' if (cuda_is_available()) {
+#' a <- torch_tensor(c(5, 10, 15), dtype = torch_long(), device = "cuda")
+#' b <- torch_tensor(c(3, 4, 5), dtype = torch_long(), device = "cuda")
+#' torch_gcd(a, b)
+#' c <- torch_tensor(c(3L), device = "cuda")
+#' torch_gcd(a, c)
+#' }
+#' }
+#' }
 torch_gcd <- function(self, other) {
     C_torch_gcd(self, other)
 }
@@ -2059,6 +3335,12 @@ torch_gcd <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_gcd_ <- function(self, other) {
     C_torch_gcd_(self, other)
 }
@@ -2070,6 +3352,19 @@ torch_gcd_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' if (cuda_is_available()) {
+#' a <- torch_tensor(c(5, 10, 15), dtype = torch_long(), device = "cuda")
+#' b <- torch_tensor(c(3, 4, 5), dtype = torch_long(), device = "cuda")
+#' torch_lcm(a, b)
+#' c <- torch_tensor(c(3L), device = "cuda")
+#' torch_lcm(a, c)
+#' }
+#' }
+#' }
 torch_lcm <- function(self, other) {
     C_torch_lcm(self, other)
 }
@@ -2081,6 +3376,12 @@ torch_lcm <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_lcm_ <- function(self, other) {
     C_torch_lcm_(self, other)
 }
@@ -2095,6 +3396,12 @@ torch_lcm_ <- function(self, other) {
 #' @param align_corners A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_grid_sampler <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
     C_torch_grid_sampler(input, grid, as.integer(interpolation_mode), as.integer(padding_mode), as.logical(align_corners))
 }
@@ -2109,6 +3416,12 @@ torch_grid_sampler <- function(input, grid, interpolation_mode, padding_mode, al
 #' @param align_corners A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_grid_sampler_2d <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
     C_torch_grid_sampler_2d(input, grid, as.integer(interpolation_mode), as.integer(padding_mode), as.logical(align_corners))
 }
@@ -2123,6 +3436,12 @@ torch_grid_sampler_2d <- function(input, grid, interpolation_mode, padding_mode,
 #' @param align_corners A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_grid_sampler_3d <- function(input, grid, interpolation_mode, padding_mode, align_corners) {
     C_torch_grid_sampler_3d(input, grid, as.integer(interpolation_mode), as.integer(padding_mode), as.logical(align_corners))
 }
@@ -2135,6 +3454,12 @@ torch_grid_sampler_3d <- function(input, grid, interpolation_mode, padding_mode,
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hamming_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_hamming_window(as.integer(window_length), dtype, device)
 }
@@ -2147,6 +3472,12 @@ torch_hamming_window <- function(window_length, dtype = NULL, device = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_kaiser_window <- function(window_length, dtype = NULL, device = NULL) {
     C_torch_kaiser_window(as.integer(window_length), dtype, device)
 }
@@ -2160,6 +3491,12 @@ torch_kaiser_window <- function(window_length, dtype = NULL, device = NULL) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hinge_embedding_loss <- function(self, target, margin = 1.0, reduction = 1L) {
     C_torch_hinge_embedding_loss(self, target, as.double(margin), as.integer(reduction))
 }
@@ -2175,6 +3512,12 @@ torch_hinge_embedding_loss <- function(self, target, margin = 1.0, reduction = 1
 #' @param cudnn_enabled A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_group_norm <- function(input, num_groups, weight = NULL, bias = NULL, eps = 1e-05, cudnn_enabled = TRUE) {
     C_torch_group_norm(input, as.integer(num_groups), weight, bias, as.double(eps), as.logical(cudnn_enabled))
 }
@@ -2192,6 +3535,12 @@ torch_group_norm <- function(input, num_groups, weight = NULL, bias = NULL, eps 
 #' @param eps A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_native_group_norm <- function(input, weight, bias, N, C, HxW, group, eps) {
     C_torch_native_group_norm(input, weight, bias, as.integer(N), as.integer(C), as.integer(HxW), as.integer(group), as.double(eps))
 }
@@ -2205,6 +3554,12 @@ torch_native_group_norm <- function(input, weight, bias, N, C, HxW, group, eps) 
 #' @param source A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_copy_ <- function(self, dim, index, source) {
     C_torch_index_copy_(self, as.integer(dim), index, source)
 }
@@ -2218,6 +3573,12 @@ torch_index_copy_ <- function(self, dim, index, source) {
 #' @param accumulate A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_put_ <- function(self, indices, values, accumulate = FALSE) {
     C_torch_index_put_(self, indices, values, as.logical(accumulate))
 }
@@ -2236,6 +3597,12 @@ torch_index_put_ <- function(self, indices, values, accumulate = FALSE) {
 #' @param cudnn_enabled A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_instance_norm <- function(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled) {
     C_torch_instance_norm(input, weight, bias, running_mean, running_var, as.logical(use_input_stats), as.double(momentum), as.double(eps), as.logical(cudnn_enabled))
 }
@@ -2250,6 +3617,14 @@ torch_instance_norm <- function(input, weight, bias, running_mean, running_var, 
 #' @param equal_nan A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_isclose(torch_tensor(c(1., 2, 3)), torch_tensor(c(1 + 1e-10, 3, 4)))
+#' torch_isclose(torch_tensor(c(Inf, 4)), torch_tensor(c(Inf, 6)), rtol=.5)
+#' }
+#' }
 torch_isclose <- function(self, other, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE) {
     C_torch_isclose(self, other, as.double(rtol), as.double(atol), as.logical(equal_nan))
 }
@@ -2263,6 +3638,12 @@ torch_isclose <- function(self, other, rtol = 1e-05, atol = 1e-08, equal_nan = F
 #' @param invert A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_isin <- function(elements, test_elements, assume_unique = FALSE, invert = FALSE) {
     C_torch_isin(elements, test_elements, as.logical(assume_unique), as.logical(invert))
 }
@@ -2273,6 +3654,13 @@ torch_isin <- function(elements, test_elements, assume_unique = FALSE, invert = 
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_isnan(torch_tensor(c(1, NaN, 2)))
+#' }
+#' }
 torch_isnan <- function(self) {
     C_torch_isnan(self)
 }
@@ -2283,6 +3671,12 @@ torch_isnan <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_distributed <- function(self) {
     C_torch_is_distributed(self)
 }
@@ -2293,6 +3687,14 @@ torch_is_distributed <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' if (FALSE) {
+#' torch_isreal(torch_tensor(c(1, 1+1i, 2+0i)))
+#' }
+#' }
+#' }
 torch_isreal <- function(self) {
     C_torch_isreal(self)
 }
@@ -2303,6 +3705,20 @@ torch_isreal <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_is_nonzero(torch_tensor(c(0.)))
+#' torch_is_nonzero(torch_tensor(c(1.5)))
+#' torch_is_nonzero(torch_tensor(c(FALSE)))
+#' torch_is_nonzero(torch_tensor(c(3)))
+#' if (FALSE) {
+#' torch_is_nonzero(torch_tensor(c(1, 3, 5)))
+#' torch_is_nonzero(torch_tensor(c()))
+#' }
+#' }
+#' }
 torch_is_nonzero <- function(self) {
     C_torch_is_nonzero(self)
 }
@@ -2314,6 +3730,12 @@ torch_is_nonzero <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_same_size <- function(self, other) {
     C_torch_is_same_size(self, other)
 }
@@ -2327,6 +3749,12 @@ torch_is_same_size <- function(self, other) {
 #' @param log_target A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_kl_div <- function(self, target, reduction = 1L, log_target = FALSE) {
     C_torch_kl_div(self, target, as.integer(reduction), as.logical(log_target))
 }
@@ -2338,6 +3766,12 @@ torch_kl_div <- function(self, target, reduction = 1L, log_target = FALSE) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_kron <- function(self, other) {
     C_torch_kron(self, other)
 }
@@ -2351,6 +3785,18 @@ torch_kron <- function(self, other) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_arange(1, 6)
+#' x
+#' torch_kthvalue(x, 4)
+#' x <- torch_arange(1,6)$resize_(c(2,3))
+#' x
+#' torch_kthvalue(x, 2, 1, TRUE)
+#' }
+#' }
 torch_kthvalue <- function(self, k, dim = -1, keepdim = FALSE) {
     C_torch_kthvalue(self, as.integer(k), as.integer(dim), as.logical(keepdim))
 }
@@ -2365,6 +3811,12 @@ torch_kthvalue <- function(self, k, dim = -1, keepdim = FALSE) {
 #' @param eps A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_native_layer_norm <- function(input, normalized_shape, weight, bias, eps) {
     C_torch_native_layer_norm(input, normalized_shape, weight, bias, as.double(eps))
 }
@@ -2378,6 +3830,12 @@ torch_native_layer_norm <- function(input, normalized_shape, weight, bias, eps) 
 #' @param eps A numeric value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rms_norm <- function(input, normalized_shape, weight = NULL, eps = NULL) {
     C_torch_rms_norm(input, normalized_shape, weight, eps)
 }
@@ -2391,6 +3849,12 @@ torch_rms_norm <- function(input, normalized_shape, weight = NULL, eps = NULL) {
 #' @param neginf A numeric value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nan_to_num <- function(self, nan = NULL, posinf = NULL, neginf = NULL) {
     C_torch_nan_to_num(self, nan, posinf, neginf)
 }
@@ -2404,6 +3868,12 @@ torch_nan_to_num <- function(self, nan = NULL, posinf = NULL, neginf = NULL) {
 #' @param neginf A numeric value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nan_to_num_ <- function(self, nan = NULL, posinf = NULL, neginf = NULL) {
     C_torch_nan_to_num_(self, nan, posinf, neginf)
 }
@@ -2415,6 +3885,12 @@ torch_nan_to_num_ <- function(self, nan = NULL, posinf = NULL, neginf = NULL) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ldexp <- function(self, other) {
     C_torch_ldexp(self, other)
 }
@@ -2426,6 +3902,12 @@ torch_ldexp <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ldexp_ <- function(self, other) {
     C_torch_ldexp_(self, other)
 }
@@ -2436,6 +3918,12 @@ torch_ldexp_ <- function(self, other) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log_ <- function(self) {
     C_torch_log_(self)
 }
@@ -2446,6 +3934,12 @@ torch_log_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log10_ <- function(self) {
     C_torch_log10_(self)
 }
@@ -2456,6 +3950,15 @@ torch_log10_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(5))
+#' a
+#' torch_log1p(a)
+#' }
+#' }
 torch_log1p <- function(self) {
     C_torch_log1p(self)
 }
@@ -2466,6 +3969,12 @@ torch_log1p <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log1p_ <- function(self) {
     C_torch_log1p_(self)
 }
@@ -2476,6 +3985,12 @@ torch_log1p_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log2_ <- function(self) {
     C_torch_log2_(self)
 }
@@ -2487,6 +4002,15 @@ torch_log2_ <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_logaddexp(torch_tensor(c(-1.0)), torch_tensor(c(-1.0, -2, -3)))
+#' torch_logaddexp(torch_tensor(c(-100.0, -200, -300)), torch_tensor(c(-1.0, -2, -3)))
+#' torch_logaddexp(torch_tensor(c(1.0, 2000, 30000)), torch_tensor(c(-1.0, -2, -3)))
+#' }
+#' }
 torch_logaddexp <- function(self, other) {
     C_torch_logaddexp(self, other)
 }
@@ -2498,6 +4022,12 @@ torch_logaddexp <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_logaddexp2 <- function(self, other) {
     C_torch_logaddexp2(self, other)
 }
@@ -2509,6 +4039,12 @@ torch_logaddexp2 <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_xlogy <- function(self, other) {
     C_torch_xlogy(self, other)
 }
@@ -2520,6 +4056,12 @@ torch_xlogy <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_xlogy_ <- function(self, other) {
     C_torch_xlogy_(self, other)
 }
@@ -2535,6 +4077,16 @@ torch_xlogy_ <- function(self, other) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_logspace(start=-10, end=10, steps=5)
+#' torch_logspace(start=0.1, end=1.0, steps=5)
+#' torch_logspace(start=0.1, end=1.0, steps=1)
+#' torch_logspace(start=2, end=2, steps=1, base=2)
+#' }
+#' }
 torch_logspace <- function(start, end, steps, base = 10.0, dtype = NULL, device = NULL) {
     C_torch_logspace(start, end, as.integer(steps), as.double(base), dtype, device)
 }
@@ -2546,6 +4098,14 @@ torch_logspace <- function(start, end, steps, base = 10.0, dtype = NULL, device 
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_randn(c(10))
+#' torch_logcumsumexp(a, dim=1)
+#' }
+#' }
 torch_logcumsumexp <- function(self, dim) {
     C_torch_logcumsumexp(self, as.integer(dim))
 }
@@ -2558,6 +4118,14 @@ torch_logcumsumexp <- function(self, dim) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3, 3))
+#' torch_logsumexp(a, 1)
+#' }
+#' }
 torch_logsumexp <- function(self, dim, keepdim = FALSE) {
     C_torch_logsumexp(self, dim, as.logical(keepdim))
 }
@@ -2572,6 +4140,12 @@ torch_logsumexp <- function(self, dim, keepdim = FALSE) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_margin_ranking_loss <- function(input1, input2, target, margin = 0.0, reduction = 1L) {
     C_torch_margin_ranking_loss(input1, input2, target, as.double(margin), as.integer(reduction))
 }
@@ -2583,6 +4157,15 @@ torch_margin_ranking_loss <- function(input1, input2, target, margin = 0.0, redu
 #' @param n An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(2, 2, 2))
+#' a
+#' torch_matrix_power(a, 3)
+#' }
+#' }
 torch_matrix_power <- function(self, n) {
     C_torch_matrix_power(self, as.integer(n))
 }
@@ -2593,6 +4176,20 @@ torch_matrix_power <- function(self, n) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_randn(c(2, 2, 2))
+#' a[1, , ] <- torch_eye(2, 2)
+#' a[2, , ] <- 2 * torch_eye(2, 2)
+#' a
+#' torch_matrix_exp(a)
+#' 
+#' x <- torch_tensor(rbind(c(0, pi/3), c(-pi/3, 0)))
+#' x$matrix_exp() # should be [[cos(pi/3), sin(pi/3)], [-sin(pi/3), cos(pi/3)]]
+#' }
+#' }
 torch_matrix_exp <- function(self) {
     C_torch_matrix_exp(self)
 }
@@ -2605,6 +4202,12 @@ torch_matrix_exp <- function(self) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_aminmax <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_aminmax(self, dim, as.logical(keepdim))
 }
@@ -2617,6 +4220,15 @@ torch_aminmax <- function(self, dim = NULL, keepdim = FALSE) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_randn(c(4, 4))
+#' a
+#' torch_amax(a, 1)
+#' }
+#' }
 torch_amax <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_amax(self, dim, as.logical(keepdim))
 }
@@ -2632,6 +4244,12 @@ torch_amax <- function(self, dim = NULL, keepdim = FALSE) {
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_pool1d_with_indices <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool1d_with_indices(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -2647,6 +4265,12 @@ torch_max_pool1d_with_indices <- function(self, kernel_size, stride = NULL, padd
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool1d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -2662,6 +4286,12 @@ torch_max_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, dila
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool2d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -2677,6 +4307,12 @@ torch_max_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, dila
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_max_pool1d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_quantized_max_pool1d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -2692,6 +4328,12 @@ torch_quantized_max_pool1d <- function(self, kernel_size, stride = NULL, padding
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_max_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_quantized_max_pool2d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -2707,6 +4349,12 @@ torch_quantized_max_pool2d <- function(self, kernel_size, stride = NULL, padding
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_max_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_quantized_max_pool3d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -2722,6 +4370,12 @@ torch_quantized_max_pool3d <- function(self, kernel_size, stride = NULL, padding
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool3d(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -2735,6 +4389,12 @@ torch_max_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, dila
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nanmean <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_nanmean(self, dim, as.logical(keepdim), dtype)
 }
@@ -2745,6 +4405,20 @@ torch_nanmean <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_median(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 5))
+#' a
+#' torch_median(a, 1)
+#' }
+#' }
 torch_median <- function(self) {
     C_torch_median(self)
 }
@@ -2755,6 +4429,12 @@ torch_median <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nanmedian <- function(self) {
     C_torch_nanmedian(self)
 }
@@ -2767,6 +4447,15 @@ torch_nanmedian <- function(self) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_randn(c(4, 4))
+#' a
+#' torch_amin(a, 1)
+#' }
+#' }
 torch_amin <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_amin(self, dim, as.logical(keepdim))
 }
@@ -2779,6 +4468,15 @@ torch_amin <- function(self, dim = NULL, keepdim = FALSE) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randint(0, 50, size = list(5))
+#' a
+#' torch_mode(a, 1)
+#' }
+#' }
 torch_mode <- function(self, dim = -1, keepdim = FALSE) {
     C_torch_mode(self, as.integer(dim), as.logical(keepdim))
 }
@@ -2790,6 +4488,12 @@ torch_mode <- function(self, dim = -1, keepdim = FALSE) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_mul_ <- function(self, other) {
     C_torch_mul_(self, other)
 }
@@ -2801,6 +4505,12 @@ torch_mul_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_multiply <- function(self, other) {
     C_torch_multiply(self, other)
 }
@@ -2812,6 +4522,12 @@ torch_multiply <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_multiply_ <- function(self, other) {
     C_torch_multiply_(self, other)
 }
@@ -2823,6 +4539,15 @@ torch_multiply_ <- function(self, other) {
 #' @param vec A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' mat = torch_randn(c(2, 3))
+#' vec = torch_randn(c(3))
+#' torch_mv(mat, vec)
+#' }
+#' }
 torch_mv <- function(self, vec) {
     C_torch_mv(self, vec)
 }
@@ -2834,6 +4559,15 @@ torch_mv <- function(self, vec) {
 #' @param p An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_empty(c(2, 3))$uniform_(1, 2)
+#' a
+#' torch_mvlgamma(a, 2)
+#' }
+#' }
 torch_mvlgamma <- function(self, p) {
     C_torch_mvlgamma(self, as.integer(p))
 }
@@ -2845,6 +4579,12 @@ torch_mvlgamma <- function(self, p) {
 #' @param p An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_mvlgamma_ <- function(self, p) {
     C_torch_mvlgamma_(self, as.integer(p))
 }
@@ -2862,6 +4602,12 @@ torch_mvlgamma_ <- function(self, p) {
 #' @param eps A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_native_batch_norm <- function(input, weight, bias, running_mean, running_var, training, momentum, eps) {
     C_torch_native_batch_norm(input, weight, bias, running_mean, running_var, as.logical(training), as.double(momentum), as.double(eps))
 }
@@ -2873,6 +4619,12 @@ torch_native_batch_norm <- function(input, weight, bias, running_mean, running_v
 #' @param eps A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_batch_norm_stats <- function(input, eps) {
     C_torch_batch_norm_stats(input, as.double(eps))
 }
@@ -2888,6 +4640,12 @@ torch_batch_norm_stats <- function(input, eps) {
 #' @param eps A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_batch_norm_elemt <- function(input, weight, bias, mean, invstd, eps) {
     C_torch_batch_norm_elemt(input, weight, bias, mean, invstd, as.double(eps))
 }
@@ -2905,6 +4663,12 @@ torch_batch_norm_elemt <- function(input, weight, bias, mean, invstd, eps) {
 #' @param count An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_batch_norm_gather_stats <- function(input, mean, invstd, running_mean, running_var, momentum, eps, count) {
     C_torch_batch_norm_gather_stats(input, mean, invstd, running_mean, running_var, as.double(momentum), as.double(eps), as.integer(count))
 }
@@ -2922,6 +4686,12 @@ torch_batch_norm_gather_stats <- function(input, mean, invstd, running_mean, run
 #' @param counts A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_batch_norm_gather_stats_with_counts <- function(input, mean, invstd, running_mean, running_var, momentum, eps, counts) {
     C_torch_batch_norm_gather_stats_with_counts(input, mean, invstd, running_mean, running_var, as.double(momentum), as.double(eps), counts)
 }
@@ -2935,6 +4705,12 @@ torch_batch_norm_gather_stats_with_counts <- function(input, mean, invstd, runni
 #' @param momentum A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_batch_norm_update_stats <- function(input, running_mean, running_var, momentum) {
     C_torch_batch_norm_update_stats(input, running_mean, running_var, as.double(momentum))
 }
@@ -2944,6 +4720,12 @@ torch_batch_norm_update_stats <- function(input, running_mean, running_var, mome
 #' Wrapper for \code{at::is_vulkan_available}.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_vulkan_available <- function() {
     C_torch_is_vulkan_available()
 }
@@ -2958,6 +4740,12 @@ torch_is_vulkan_available <- function() {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_pairwise_distance <- function(x1, x2, p = 2, eps = 1e-06, keepdim = FALSE) {
     C_torch_pairwise_distance(x1, x2, as.double(p), as.double(eps), as.logical(keepdim))
 }
@@ -2971,6 +4759,12 @@ torch_pairwise_distance <- function(x1, x2, p = 2, eps = 1e-06, keepdim = FALSE)
 #' @param compute_mode An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cdist <- function(x1, x2, p = 2, compute_mode = NULL) {
     C_torch_cdist(x1, x2, as.double(p), compute_mode)
 }
@@ -2982,6 +4776,12 @@ torch_cdist <- function(x1, x2, p = 2, compute_mode = NULL) {
 #' @param p A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_pdist <- function(self, p = 2) {
     C_torch_pdist(self, as.double(p))
 }
@@ -2995,6 +4795,16 @@ torch_pdist <- function(self, p = 2) {
 #' @param eps A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input1 = torch_randn(c(100, 128))
+#' input2 = torch_randn(c(100, 128))
+#' output = torch_cosine_similarity(input1, input2)
+#' output
+#' }
+#' }
 torch_cosine_similarity <- function(x1, x2, dim = 1, eps = 1e-08) {
     C_torch_cosine_similarity(x1, x2, as.integer(dim), as.double(eps))
 }
@@ -3007,6 +4817,18 @@ torch_cosine_similarity <- function(x1, x2, dim = 1, eps = 1e-08) {
 #' @param destination An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' t <- torch_randn(c(3,2,1))
+#' t
+#' torch_movedim(t, 2, 1)$shape
+#' torch_movedim(t, 2, 1)
+#' torch_movedim(t, c(2, 3), c(1, 2))$shape
+#' torch_movedim(t, c(2, 3), c(1, 2))
+#' }
+#' }
 torch_movedim <- function(self, source, destination) {
     C_torch_movedim(self, source, destination)
 }
@@ -3019,6 +4841,12 @@ torch_movedim <- function(self, source, destination) {
 #' @param destination An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_moveaxis <- function(self, source, destination) {
     C_torch_moveaxis(self, source, destination)
 }
@@ -3029,6 +4857,12 @@ torch_moveaxis <- function(self, source, destination) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_numpy_T <- function(self) {
     C_torch_numpy_T(self)
 }
@@ -3039,6 +4873,12 @@ torch_numpy_T <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_matrix_H <- function(self) {
     C_torch_matrix_H(self)
 }
@@ -3049,6 +4889,12 @@ torch_matrix_H <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_mT <- function(self) {
     C_torch_mT(self)
 }
@@ -3059,6 +4905,12 @@ torch_mT <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_mH <- function(self) {
     C_torch_mH(self)
 }
@@ -3069,6 +4921,12 @@ torch_mH <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_adjoint <- function(self) {
     C_torch_adjoint(self)
 }
@@ -3080,6 +4938,15 @@ torch_adjoint <- function(self) {
 #' @param upscale_factor An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input = torch_randn(c(1, 9, 4, 4))
+#' output = nnf_pixel_shuffle(input, 3)
+#' print(output$size())
+#' }
+#' }
 torch_pixel_shuffle <- function(self, upscale_factor) {
     C_torch_pixel_shuffle(self, as.integer(upscale_factor))
 }
@@ -3091,6 +4958,12 @@ torch_pixel_shuffle <- function(self, upscale_factor) {
 #' @param downscale_factor An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_pixel_unshuffle <- function(self, downscale_factor) {
     C_torch_pixel_unshuffle(self, as.integer(downscale_factor))
 }
@@ -3102,6 +4975,16 @@ torch_pixel_unshuffle <- function(self, downscale_factor) {
 #' @param groups An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input <- torch_randn(c(1, 4, 2, 2))
+#' print(input)
+#' output <- torch_channel_shuffle(input, 2)
+#' print(output)
+#' }
+#' }
 torch_channel_shuffle <- function(self, groups) {
     C_torch_channel_shuffle(self, as.integer(groups))
 }
@@ -3113,6 +4996,12 @@ torch_channel_shuffle <- function(self, groups) {
 #' @param groups An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_native_channel_shuffle <- function(self, groups) {
     C_torch_native_channel_shuffle(self, as.integer(groups))
 }
@@ -3124,6 +5013,12 @@ torch_native_channel_shuffle <- function(self, groups) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_pinned <- function(self, device = NULL) {
     C_torch_is_pinned(self, device)
 }
@@ -3135,6 +5030,12 @@ torch_is_pinned <- function(self, device = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_pin_memory <- function(self, device = NULL) {
     C_torch_pin_memory(self, device)
 }
@@ -3146,6 +5047,19 @@ torch_pin_memory <- function(self, device = NULL) {
 #' @param rcond A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input = torch_randn(c(3, 5))
+#' input
+#' torch_pinverse(input)
+#' # Batched pinverse example
+#' a = torch_randn(c(2,6,3))
+#' b = torch_pinverse(a)
+#' torch_matmul(b, a)
+#' }
+#' }
 torch_pinverse <- function(self, rcond = 1e-15) {
     C_torch_pinverse(self, as.double(rcond))
 }
@@ -3161,6 +5075,12 @@ torch_pinverse <- function(self, rcond = 1e-15) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_poisson_nll_loss <- function(input, target, log_input, full, eps, reduction) {
     C_torch_poisson_nll_loss(input, target, as.logical(log_input), as.logical(full), as.double(eps), as.integer(reduction))
 }
@@ -3171,6 +5091,14 @@ torch_poisson_nll_loss <- function(input, target, log_input, full, eps, reductio
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(rbind(c(3.142, -3.142), c(6.283, -6.283), c(1.570, -1.570)))
+#' torch_rad2deg(a)
+#' }
+#' }
 torch_rad2deg <- function(self) {
     C_torch_rad2deg(self)
 }
@@ -3181,6 +5109,12 @@ torch_rad2deg <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rad2deg_ <- function(self) {
     C_torch_rad2deg_(self)
 }
@@ -3191,6 +5125,14 @@ torch_rad2deg_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(rbind(c(180.0, -180.0), c(360.0, -360.0), c(90.0, -90.0)))
+#' torch_deg2rad(a)
+#' }
+#' }
 torch_deg2rad <- function(self) {
     C_torch_deg2rad(self)
 }
@@ -3201,6 +5143,12 @@ torch_deg2rad <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_deg2rad_ <- function(self) {
     C_torch_deg2rad_(self)
 }
@@ -3213,6 +5161,12 @@ torch_deg2rad_ <- function(self) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_scalar_tensor <- function(s, dtype = NULL, device = NULL) {
     C_torch_scalar_tensor(s, dtype, device)
 }
@@ -3226,6 +5180,14 @@ torch_scalar_tensor <- function(s, dtype = NULL, device = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_rand(4)
+#' torch_rand(c(2, 3))
+#' }
+#' }
 torch_rand <- function(size, names, dtype = NULL, device = NULL) {
     C_torch_rand(size, names, dtype, device)
 }
@@ -3239,6 +5201,12 @@ torch_rand <- function(size, names, dtype = NULL, device = NULL) {
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rand_like <- function(self, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_rand_like(self, dtype, device, memory_format)
 }
@@ -3252,6 +5220,15 @@ torch_rand_like <- function(self, dtype = NULL, device = NULL, memory_format = N
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_randint(3, 5, list(3))
+#' torch_randint(0, 10, size = list(2, 2))
+#' torch_randint(3, 10, list(2, 2))
+#' }
+#' }
 torch_randint <- function(high, size, dtype = torch_long, device = NULL) {
     C_torch_randint(as.integer(high), size, dtype, device)
 }
@@ -3259,13 +5236,19 @@ torch_randint <- function(high, size, dtype = torch_long, device = NULL) {
 #' Randint like
 #'
 #' Wrapper for \code{at::randint_like}.
-#' @param self A torch_tensor.
+#' @param input A `torch_tensor`.
 #' @param high An integer.
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_randint_like <- function(input, high, dtype = NULL, device = NULL, memory_format = NULL) {
     C_torch_randint_like(input, as.integer(high), dtype, device, memory_format)
 }
@@ -3278,6 +5261,13 @@ torch_randint_like <- function(input, high, dtype = NULL, device = NULL, memory_
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_randperm(4)
+#' }
+#' }
 torch_randperm <- function(n, dtype = torch_long, device = NULL) {
     C_torch_randperm(as.integer(n), dtype, device)
 }
@@ -3292,6 +5282,14 @@ torch_randperm <- function(n, dtype = torch_long, device = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_range(1, 4)
+#' torch_range(1, 4, 0.5)
+#' }
+#' }
 torch_range <- function(start, end, step = 1, dtype = NULL, device = NULL) {
     C_torch_range(start, end, step, dtype, device)
 }
@@ -3302,6 +5300,12 @@ torch_range <- function(start, end, step = 1, dtype = NULL, device = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ravel <- function(self) {
     C_torch_ravel(self)
 }
@@ -3312,6 +5316,15 @@ torch_ravel <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_reciprocal(a)
+#' }
+#' }
 torch_reciprocal <- function(self) {
     C_torch_reciprocal(self)
 }
@@ -3322,6 +5335,12 @@ torch_reciprocal <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_reciprocal_ <- function(self) {
     C_torch_reciprocal_(self)
 }
@@ -3332,6 +5351,12 @@ torch_reciprocal_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_neg_ <- function(self) {
     C_torch_neg_(self)
 }
@@ -3342,6 +5367,12 @@ torch_neg_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_negative <- function(self) {
     C_torch_negative(self)
 }
@@ -3352,6 +5383,12 @@ torch_negative <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_negative_ <- function(self) {
     C_torch_negative_(self)
 }
@@ -3363,6 +5400,12 @@ torch_negative_ <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_reshape_as <- function(self, other) {
     C_torch_reshape_as(self, other)
 }
@@ -3373,6 +5416,12 @@ torch_reshape_as <- function(self, other) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_round_ <- function(self) {
     C_torch_round_(self)
 }
@@ -3387,6 +5436,12 @@ torch_round_ <- function(self) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rrelu <- function(self, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu(self, lower, upper, as.logical(training), generator)
 }
@@ -3401,6 +5456,12 @@ torch_rrelu <- function(self, lower = 0.125, upper = 0.3333333333333333, trainin
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rrelu_ <- function(self, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu_(self, lower, upper, as.logical(training), generator)
 }
@@ -3411,6 +5472,12 @@ torch_rrelu_ <- function(self, lower = 0.125, upper = 0.3333333333333333, traini
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_relu_ <- function(self) {
     C_torch_relu_(self)
 }
@@ -3421,6 +5488,12 @@ torch_relu_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_relu6 <- function(self) {
     C_torch_relu6(self)
 }
@@ -3431,6 +5504,12 @@ torch_relu6 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_relu6_ <- function(self) {
     C_torch_relu6_(self)
 }
@@ -3442,6 +5521,12 @@ torch_relu6_ <- function(self) {
 #' @param weight A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_prelu <- function(self, weight) {
     C_torch_prelu(self, weight)
 }
@@ -3453,6 +5538,12 @@ torch_prelu <- function(self, weight) {
 #' @param approximate A character string.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_gelu_ <- function(self, approximate = 'none') {
     C_torch_gelu_(self, approximate)
 }
@@ -3464,6 +5555,12 @@ torch_gelu_ <- function(self, approximate = 'none') {
 #' @param lambd A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hardshrink <- function(self, lambd = 0.5) {
     C_torch_hardshrink(self, lambd)
 }
@@ -3474,6 +5571,12 @@ torch_hardshrink <- function(self, lambd = 0.5) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rsqrt_ <- function(self) {
     C_torch_rsqrt_(self)
 }
@@ -3486,6 +5589,12 @@ torch_rsqrt_ <- function(self) {
 #' @param index An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_select <- function(self, dim, index) {
     C_torch_select(self, dim, as.integer(index))
 }
@@ -3496,6 +5605,12 @@ torch_select <- function(self, dim, index) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_selu <- function(self) {
     C_torch_selu(self)
 }
@@ -3506,6 +5621,12 @@ torch_selu <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_selu_ <- function(self) {
     C_torch_selu_(self)
 }
@@ -3517,6 +5638,12 @@ torch_selu_ <- function(self) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_celu <- function(self, alpha = 1.0) {
     C_torch_celu(self, alpha)
 }
@@ -3528,6 +5655,12 @@ torch_celu <- function(self, alpha = 1.0) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_celu_ <- function(self, alpha = 1.0) {
     C_torch_celu_(self, alpha)
 }
@@ -3538,6 +5671,12 @@ torch_celu_ <- function(self, alpha = 1.0) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_silu_ <- function(self) {
     C_torch_silu_(self)
 }
@@ -3548,6 +5687,12 @@ torch_silu_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_mish <- function(self) {
     C_torch_mish(self)
 }
@@ -3558,6 +5703,12 @@ torch_mish <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_mish_ <- function(self) {
     C_torch_mish_(self)
 }
@@ -3568,6 +5719,12 @@ torch_mish_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sigmoid_ <- function(self) {
     C_torch_sigmoid_(self)
 }
@@ -3579,6 +5736,15 @@ torch_sigmoid_ <- function(self) {
 #' @param eps A numeric value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_rand(5)
+#' a
+#' torch_logit(a, eps=1e-6)
+#' }
+#' }
 torch_logit <- function(self, eps = NULL) {
     C_torch_logit(self, eps)
 }
@@ -3590,6 +5756,12 @@ torch_logit <- function(self, eps = NULL) {
 #' @param eps A numeric value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_logit_ <- function(self, eps = NULL) {
     C_torch_logit_(self, eps)
 }
@@ -3600,6 +5772,12 @@ torch_logit_ <- function(self, eps = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sin_ <- function(self) {
     C_torch_sin_(self)
 }
@@ -3610,6 +5788,12 @@ torch_sin_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sinc <- function(self) {
     C_torch_sinc(self)
 }
@@ -3620,6 +5804,12 @@ torch_sinc <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sinc_ <- function(self) {
     C_torch_sinc_(self)
 }
@@ -3630,6 +5820,15 @@ torch_sinc_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_sinh(a)
+#' }
+#' }
 torch_sinh <- function(self) {
     C_torch_sinh(self)
 }
@@ -3640,6 +5839,12 @@ torch_sinh <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sinh_ <- function(self) {
     C_torch_sinh_(self)
 }
@@ -3650,6 +5855,12 @@ torch_sinh_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_detach_ <- function(self) {
     C_torch_detach_(self)
 }
@@ -3664,6 +5875,12 @@ torch_detach_ <- function(self) {
 #' @param step An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slice <- function(self, dim = 0, start = NULL, end = NULL, step = 1) {
     C_torch_slice(self, as.integer(dim), start, end, as.integer(step))
 }
@@ -3679,6 +5896,12 @@ torch_slice <- function(self, dim = 0, start = NULL, end = NULL, step = 1) {
 #' @param step An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slice_inverse <- function(self, src, dim = 0, start = NULL, end = NULL, step = 1) {
     C_torch_slice_inverse(self, src, as.integer(dim), start, end, as.integer(step))
 }
@@ -3694,6 +5917,12 @@ torch_slice_inverse <- function(self, src, dim = 0, start = NULL, end = NULL, st
 #' @param step An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slice_scatter <- function(self, src, dim = 0, start = NULL, end = NULL, step = 1) {
     C_torch_slice_scatter(self, src, as.integer(dim), start, end, as.integer(step))
 }
@@ -3707,6 +5936,12 @@ torch_slice_scatter <- function(self, src, dim = 0, start = NULL, end = NULL, st
 #' @param index An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_select_scatter <- function(self, src, dim, index) {
     C_torch_select_scatter(self, src, as.integer(dim), as.integer(index))
 }
@@ -3721,6 +5956,12 @@ torch_select_scatter <- function(self, src, dim, index) {
 #' @param dim2 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_diagonal_scatter <- function(self, src, offset = 0, dim1 = 0, dim2 = 1) {
     C_torch_diagonal_scatter(self, src, as.integer(offset), as.integer(dim1), as.integer(dim2))
 }
@@ -3735,6 +5976,12 @@ torch_diagonal_scatter <- function(self, src, offset = 0, dim1 = 0, dim2 = 1) {
 #' @param storage_offset An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_as_strided_scatter <- function(self, src, size, stride, storage_offset = NULL) {
     C_torch_as_strided_scatter(self, src, size, stride, storage_offset)
 }
@@ -3746,6 +5993,12 @@ torch_as_strided_scatter <- function(self, src, size, stride, storage_offset = N
 #' @param mat2 A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_smm <- function(self, mat2) {
     C_torch_smm(self, mat2)
 }
@@ -3758,6 +6011,12 @@ torch_smm <- function(self, mat2) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unsafe_split <- function(self, split_size, dim = 0) {
     C_torch_unsafe_split(self, as.integer(split_size), as.integer(dim))
 }
@@ -3770,6 +6029,12 @@ torch_unsafe_split <- function(self, split_size, dim = 0) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_split <- function(self, split_size, dim = 0) {
     C_torch_split(self, as.integer(split_size), as.integer(dim))
 }
@@ -3782,6 +6047,12 @@ torch_split <- function(self, split_size, dim = 0) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unsafe_split_with_sizes <- function(self, split_sizes, dim = 0) {
     C_torch_unsafe_split_with_sizes(self, split_sizes, as.integer(dim))
 }
@@ -3794,6 +6065,12 @@ torch_unsafe_split_with_sizes <- function(self, split_sizes, dim = 0) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_split_with_sizes <- function(self, split_sizes, dim = 0) {
     C_torch_split_with_sizes(self, split_sizes, as.integer(dim))
 }
@@ -3805,6 +6082,12 @@ torch_split_with_sizes <- function(self, split_sizes, dim = 0) {
 #' @param sections An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hsplit <- function(self, sections) {
     C_torch_hsplit(self, as.integer(sections))
 }
@@ -3816,6 +6099,12 @@ torch_hsplit <- function(self, sections) {
 #' @param sections An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_vsplit <- function(self, sections) {
     C_torch_vsplit(self, as.integer(sections))
 }
@@ -3827,6 +6116,12 @@ torch_vsplit <- function(self, sections) {
 #' @param sections An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_dsplit <- function(self, sections) {
     C_torch_dsplit(self, as.integer(sections))
 }
@@ -3837,6 +6132,12 @@ torch_dsplit <- function(self, sections) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_squeeze_ <- function(self) {
     C_torch_squeeze_(self)
 }
@@ -3851,6 +6152,12 @@ torch_squeeze_ <- function(self) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sspaddmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
     C_torch_sspaddmm(self, mat1, mat2, beta, alpha)
 }
@@ -3862,6 +6169,12 @@ torch_sspaddmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_stack <- function(tensors, dim = 0) {
     C_torch_stack(tensors, as.integer(dim))
 }
@@ -3872,6 +6185,18 @@ torch_stack <- function(tensors, dim = 0) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(1, 2, 3))
+#' b <- torch_tensor(c(4, 5, 6))
+#' torch_hstack(list(a,b))
+#' a <- torch_tensor(rbind(1,2,3))
+#' b <- torch_tensor(rbind(4,5,6))
+#' torch_hstack(list(a,b))
+#' }
+#' }
 torch_hstack <- function(tensors) {
     C_torch_hstack(tensors)
 }
@@ -3882,6 +6207,18 @@ torch_hstack <- function(tensors) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(1, 2, 3))
+#' b <- torch_tensor(c(4, 5, 6))
+#' torch_vstack(list(a,b))
+#' a <- torch_tensor(rbind(1,2,3))
+#' b <- torch_tensor(rbind(4,5,6))
+#' torch_vstack(list(a,b))
+#' }
+#' }
 torch_vstack <- function(tensors) {
     C_torch_vstack(tensors)
 }
@@ -3892,6 +6229,18 @@ torch_vstack <- function(tensors) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(1, 2, 3))
+#' b <- torch_tensor(c(4, 5, 6))
+#' torch_dstack(list(a,b))
+#' a <- torch_tensor(rbind(1,2,3))
+#' b <- torch_tensor(rbind(4,5,6))
+#' torch_dstack(list(a,b))
+#' }
+#' }
 torch_dstack <- function(tensors) {
     C_torch_dstack(tensors)
 }
@@ -3903,6 +6252,12 @@ torch_dstack <- function(tensors) {
 #' @param dim A dimension name.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_stride <- function(self, dim) {
     C_torch_stride(self, dim)
 }
@@ -3916,6 +6271,21 @@ torch_stride <- function(self, dim) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(1., 2., NaN, 4.))
+#' torch_nansum(a)
+#' 
+#' 
+#' torch_nansum(torch_tensor(c(1., NaN)))
+#' a <- torch_tensor(rbind(c(1, 2), c(3., NaN)))
+#' torch_nansum(a)
+#' torch_nansum(a, dim=1)
+#' torch_nansum(a, dim=2)
+#' }
+#' }
 torch_nansum <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_nansum(self, dim, as.logical(keepdim), dtype)
 }
@@ -3927,6 +6297,12 @@ torch_nansum <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
 #' @param size An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sum_to_size <- function(self, size) {
     C_torch_sum_to_size(self, size)
 }
@@ -3937,6 +6313,12 @@ torch_sum_to_size <- function(self, size) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sqrt_ <- function(self) {
     C_torch_sqrt_(self)
 }
@@ -3947,6 +6329,15 @@ torch_sqrt_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_square(a)
+#' }
+#' }
 torch_square <- function(self) {
     C_torch_square(self)
 }
@@ -3957,6 +6348,12 @@ torch_square <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_square_ <- function(self) {
     C_torch_square_(self)
 }
@@ -3968,6 +6365,20 @@ torch_square_ <- function(self) {
 #' @param unbiased A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_std_mean(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_std_mean(a, 1)
+#' }
+#' }
 torch_std_mean <- function(self, unbiased = TRUE) {
     C_torch_std_mean(self, as.logical(unbiased))
 }
@@ -3979,6 +6390,20 @@ torch_std_mean <- function(self, unbiased = TRUE) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_prod(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 2))
+#' a
+#' torch_prod(a, 1)
+#' }
+#' }
 torch_prod <- function(self, dtype = NULL) {
     C_torch_prod(self, dtype)
 }
@@ -3989,6 +6414,12 @@ torch_prod <- function(self, dtype = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_t_ <- function(self) {
     C_torch_t_(self)
 }
@@ -3999,6 +6430,15 @@ torch_t_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_tan(a)
+#' }
+#' }
 torch_tan <- function(self) {
     C_torch_tan(self)
 }
@@ -4009,6 +6449,12 @@ torch_tan <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_tan_ <- function(self) {
     C_torch_tan_(self)
 }
@@ -4019,6 +6465,12 @@ torch_tan_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_tanh_ <- function(self) {
     C_torch_tanh_(self)
 }
@@ -4032,6 +6484,20 @@ torch_tanh_ <- function(self) {
 #' @param dims_other An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))
+#' b <- torch_arange(start = 1, end = 24)$reshape(c(4, 3, 2))
+#' torch_tensordot(a, b, dims = list(c(2, 1), c(1, 2)))
+#' 
+#' a = torch_randn(3, 4, 5, device='cuda')
+#' b = torch_randn(4, 5, 6, device='cuda')
+#' c = torch_tensordot(a, b, dims=2)$cpu()
+#' 
+#' }
+#' }
 torch_tensordot <- function(self, other, dims_self, dims_other) {
     C_torch_tensordot(self, other, dims_self, dims_other)
 }
@@ -4044,6 +6510,12 @@ torch_tensordot <- function(self, other, dims_self, dims_other) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_threshold <- function(self, threshold, value) {
     C_torch_threshold(self, threshold, value)
 }
@@ -4056,6 +6528,12 @@ torch_threshold <- function(self, threshold, value) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_threshold_ <- function(self, threshold, value) {
     C_torch_threshold_(self, threshold, value)
 }
@@ -4067,6 +6545,12 @@ torch_threshold_ <- function(self, threshold, value) {
 #' @param dims An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_tile <- function(self, dims) {
     C_torch_tile(self, dims)
 }
@@ -4079,6 +6563,12 @@ torch_tile <- function(self, dims) {
 #' @param dim1 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_transpose_ <- function(self, dim0, dim1) {
     C_torch_transpose_(self, as.integer(dim0), as.integer(dim1))
 }
@@ -4090,6 +6580,12 @@ torch_transpose_ <- function(self, dim0, dim1) {
 #' @param num_classes An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_one_hot <- function(self, num_classes = -1) {
     C_torch_one_hot(self, as.integer(num_classes))
 }
@@ -4100,6 +6596,15 @@ torch_one_hot <- function(self, num_classes = -1) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
+#' x
+#' torch_fliplr(x)
+#' }
+#' }
 torch_fliplr <- function(self) {
     C_torch_fliplr(self)
 }
@@ -4110,6 +6615,15 @@ torch_fliplr <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
+#' x
+#' torch_flipud(x)
+#' }
+#' }
 torch_flipud <- function(self) {
     C_torch_flipud(self)
 }
@@ -4122,6 +6636,17 @@ torch_flipud <- function(self) {
 #' @param dims (int[1]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(c(4, 2))
+#' x
+#' torch_roll(x, 1, 1)
+#' torch_roll(x, -1, 1)
+#' torch_roll(x, shifts=list(2, 1), dims=list(1, 2))
+#' }
+#' }
 torch_roll <- function(self, shifts, dims = NULL) {
     C_torch_roll(self, shifts, dims)
 }
@@ -4134,6 +6659,18 @@ torch_roll <- function(self, shifts, dims = NULL) {
 #' @param dims An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_arange(1, 4)$view(c(2, 2))
+#' x
+#' torch_rot90(x, 1, c(1, 2))
+#' x <- torch_arange(1, 8)$view(c(2, 2, 2))
+#' x
+#' torch_rot90(x, 1, c(1, 2))
+#' }
+#' }
 torch_rot90 <- function(self, k = 1, dims = NULL) {
     C_torch_rot90(self, as.integer(k), dims)
 }
@@ -4146,6 +6683,12 @@ torch_rot90 <- function(self, k = 1, dims = NULL) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_trapezoid <- function(y, x, dim = -1) {
     C_torch_trapezoid(y, x, as.integer(dim))
 }
@@ -4158,6 +6701,17 @@ torch_trapezoid <- function(y, x, dim = -1) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' y = torch_randn(list(2, 3))
+#' y
+#' x = torch_tensor(matrix(c(1, 3, 4, 1, 2, 3), ncol = 3, byrow=TRUE))
+#' torch_trapz(y, x = x)
+#' 
+#' }
+#' }
 torch_trapz <- function(y, x, dim = -1) {
     C_torch_trapz(y, x, as.integer(dim))
 }
@@ -4175,6 +6729,12 @@ torch_trapz <- function(y, x, dim = -1) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_triplet_margin_loss <- function(anchor, positive, negative, margin = 1.0, p = 2, eps = 1e-06, swap = FALSE, reduction = 1L) {
     C_torch_triplet_margin_loss(anchor, positive, negative, as.double(margin), as.double(p), as.double(eps), as.logical(swap), as.integer(reduction))
 }
@@ -4185,6 +6745,12 @@ torch_triplet_margin_loss <- function(anchor, positive, negative, margin = 1.0, 
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_trunc_ <- function(self) {
     C_torch_trunc_(self)
 }
@@ -4195,6 +6761,12 @@ torch_trunc_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fix <- function(self) {
     C_torch_fix(self)
 }
@@ -4205,6 +6777,12 @@ torch_fix <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fix_ <- function(self) {
     C_torch_fix_(self)
 }
@@ -4216,6 +6794,12 @@ torch_fix_ <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_type_as <- function(self, other) {
     C_torch_type_as(self, other)
 }
@@ -4230,6 +6814,12 @@ torch_type_as <- function(self, other) {
 #' @param return_counts A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unique_dim <- function(self, dim, sorted = TRUE, return_inverse = FALSE, return_counts = FALSE) {
     C_torch_unique_dim(self, as.integer(dim), as.logical(sorted), as.logical(return_inverse), as.logical(return_counts))
 }
@@ -4243,6 +6833,16 @@ torch_unique_dim <- function(self, dim, sorted = TRUE, return_inverse = FALSE, r
 #' @param dim An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x = torch_tensor(c(1, 1, 2, 2, 3, 1, 1, 2))
+#' output = torch_unique_consecutive(x)
+#' output
+#' torch_unique_consecutive(x, return_inverse=TRUE)
+#' torch_unique_consecutive(x, return_counts=TRUE)
+#' }
+#' }
 torch_unique_consecutive <- function(self, return_inverse = FALSE, return_counts = FALSE, dim = NULL) {
     C_torch_unique_consecutive(self, as.logical(return_inverse), as.logical(return_counts), dim)
 }
@@ -4256,6 +6856,12 @@ torch_unique_consecutive <- function(self, return_inverse = FALSE, return_counts
 #' @param return_counts A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unique_dim_consecutive <- function(self, dim, return_inverse = FALSE, return_counts = FALSE) {
     C_torch_unique_dim_consecutive(self, as.integer(dim), as.logical(return_inverse), as.logical(return_counts))
 }
@@ -4267,6 +6873,12 @@ torch_unique_dim_consecutive <- function(self, dim, return_inverse = FALSE, retu
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unsqueeze_ <- function(self, dim) {
     C_torch_unsqueeze_(self, as.integer(dim))
 }
@@ -4279,6 +6891,16 @@ torch_unsqueeze_ <- function(self, dim) {
 #' @param increasing A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_tensor(c(1, 2, 3, 5))
+#' torch_vander(x)
+#' torch_vander(x, N=3)
+#' torch_vander(x, N=3, increasing=TRUE)
+#' }
+#' }
 torch_vander <- function(x, N = NULL, increasing = FALSE) {
     C_torch_vander(x, N, as.logical(increasing))
 }
@@ -4290,6 +6912,20 @@ torch_vander <- function(x, N = NULL, increasing = FALSE) {
 #' @param unbiased A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_var(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_var(a, 1)
+#' }
+#' }
 torch_var <- function(self, unbiased = TRUE) {
     C_torch_var(self, as.logical(unbiased))
 }
@@ -4301,6 +6937,20 @@ torch_var <- function(self, unbiased = TRUE) {
 #' @param unbiased A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_var_mean(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_var_mean(a, 1)
+#' }
+#' }
 torch_var_mean <- function(self, unbiased = TRUE) {
     C_torch_var_mean(self, as.logical(unbiased))
 }
@@ -4312,6 +6962,12 @@ torch_var_mean <- function(self, unbiased = TRUE) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_view_as <- function(self, other) {
     C_torch_view_as(self, other)
 }
@@ -4324,6 +6980,12 @@ torch_view_as <- function(self, other) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_norm_except_dim <- function(v, pow = 2, dim = 0) {
     C_torch_norm_except_dim(v, as.integer(pow), as.integer(dim))
 }
@@ -4335,6 +6997,14 @@ torch_norm_except_dim <- function(v, pow = 2, dim = 0) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
+#' torch_poisson(rates)
+#' }
+#' }
 torch_poisson <- function(self, generator = NULL) {
     C_torch_poisson(self, generator)
 }
@@ -4347,6 +7017,12 @@ torch_poisson <- function(self, generator = NULL) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_binomial <- function(count, prob, generator = NULL) {
     C_torch_binomial(count, prob, generator)
 }
@@ -4358,6 +7034,12 @@ torch_binomial <- function(count, prob, generator = NULL) {
 #' @param p A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_native_norm <- function(self, p = 2) {
     C_torch_native_norm(self, p)
 }
@@ -4368,6 +7050,12 @@ torch_native_norm <- function(self, p = 2) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_frexp <- function(self) {
     C_torch_frexp(self)
 }
@@ -4380,6 +7068,12 @@ torch_frexp <- function(self) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_frobenius_norm <- function(self, dim, keepdim = FALSE) {
     C_torch_frobenius_norm(self, dim, as.logical(keepdim))
 }
@@ -4391,6 +7085,12 @@ torch_frobenius_norm <- function(self, dim, keepdim = FALSE) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nuclear_norm <- function(self, keepdim = FALSE) {
     C_torch_nuclear_norm(self, as.logical(keepdim))
 }
@@ -4401,6 +7101,12 @@ torch_nuclear_norm <- function(self, keepdim = FALSE) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_positive <- function(self) {
     C_torch_positive(self)
 }
@@ -4413,6 +7119,12 @@ torch_positive <- function(self) {
 #' @param memory_format A memory format. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_resize_as_ <- function(self, the_template, memory_format = NULL) {
     C_torch_resize_as_(self, the_template, memory_format)
 }
@@ -4424,6 +7136,12 @@ torch_resize_as_ <- function(self, the_template, memory_format = NULL) {
 #' @param the_template A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_resize_as_sparse_ <- function(self, the_template) {
     C_torch_resize_as_sparse_(self, the_template)
 }
@@ -4436,6 +7154,12 @@ torch_resize_as_sparse_ <- function(self, the_template) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sub_ <- function(self, other, alpha = 1) {
     C_torch_sub_(self, other, alpha)
 }
@@ -4448,6 +7172,12 @@ torch_sub_ <- function(self, other, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_subtract <- function(self, other, alpha = 1) {
     C_torch_subtract(self, other, alpha)
 }
@@ -4460,6 +7190,12 @@ torch_subtract <- function(self, other, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_subtract_ <- function(self, other, alpha = 1) {
     C_torch_subtract_(self, other, alpha)
 }
@@ -4472,6 +7208,12 @@ torch_subtract_ <- function(self, other, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rsub <- function(self, other, alpha = 1) {
     C_torch_rsub(self, other, alpha)
 }
@@ -4483,6 +7225,17 @@ torch_rsub <- function(self, other, alpha = 1) {
 #' @param values A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input <- torch_tensor(c(-1.5, 0, 2.0))
+#' values <- torch_tensor(c(0.5))
+#' torch_heaviside(input, values)
+#' values <- torch_tensor(c(1.2, -2.0, 3.5))
+#' torch_heaviside(input, values)
+#' }
+#' }
 torch_heaviside <- function(self, values) {
     C_torch_heaviside(self, values)
 }
@@ -4494,6 +7247,12 @@ torch_heaviside <- function(self, values) {
 #' @param values A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_heaviside_ <- function(self, values) {
     C_torch_heaviside_(self, values)
 }
@@ -4508,6 +7267,12 @@ torch_heaviside_ <- function(self, values) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_sampled_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
     C_torch_sparse_sampled_addmm(self, mat1, mat2, beta, alpha)
 }
@@ -4523,6 +7288,16 @@ torch_sparse_sampled_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1) {
 #' @param out_dtype Optional output dtype for mixed-precision (PyTorch 2.8+).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' M = torch_randn(c(2, 3))
+#' mat1 = torch_randn(c(2, 3))
+#' mat2 = torch_randn(c(3, 3))
+#' torch_addmm(M, mat1, mat2)
+#' }
+#' }
 torch_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1, out_dtype = NULL) {
     if (is.null(out_dtype)) C_torch_addmm(self, mat1, mat2, beta, alpha)
     else C_torch_addmm_dtype(self, mat1, mat2, out_dtype, beta, alpha)
@@ -4538,6 +7313,12 @@ torch_addmm <- function(self, mat1, mat2, beta = 1, alpha = 1, out_dtype = NULL)
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_addmm_ <- function(self, mat1, mat2, beta = 1, alpha = 1) {
     C_torch_addmm_(self, mat1, mat2, beta, alpha)
 }
@@ -4553,6 +7334,12 @@ torch_addmm_ <- function(self, mat1, mat2, beta = 1, alpha = 1) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_compressed_tensor <- function(compressed_indices, plain_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_compressed_tensor(compressed_indices, plain_indices, values, size, dtype, device)
 }
@@ -4568,6 +7355,12 @@ torch_sparse_compressed_tensor <- function(compressed_indices, plain_indices, va
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_csr_tensor <- function(crow_indices, col_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_csr_tensor(crow_indices, col_indices, values, size, dtype, device)
 }
@@ -4583,6 +7376,12 @@ torch_sparse_csr_tensor <- function(crow_indices, col_indices, values, size, dty
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_csc_tensor <- function(ccol_indices, row_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_csc_tensor(ccol_indices, row_indices, values, size, dtype, device)
 }
@@ -4598,6 +7397,12 @@ torch_sparse_csc_tensor <- function(ccol_indices, row_indices, values, size, dty
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_bsr_tensor <- function(crow_indices, col_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_bsr_tensor(crow_indices, col_indices, values, size, dtype, device)
 }
@@ -4613,6 +7418,12 @@ torch_sparse_bsr_tensor <- function(crow_indices, col_indices, values, size, dty
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_bsc_tensor <- function(ccol_indices, row_indices, values, size, dtype = NULL, device = NULL) {
     C_torch_sparse_bsc_tensor(ccol_indices, row_indices, values, size, dtype, device)
 }
@@ -4625,6 +7436,28 @@ torch_sparse_bsc_tensor <- function(ccol_indices, row_indices, values, size, dty
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' i = torch_tensor(matrix(c(1, 2, 2, 3, 1, 3), ncol = 3, byrow = TRUE), dtype=torch_int64())
+#' v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
+#' torch_sparse_coo_tensor(i, v)
+#' torch_sparse_coo_tensor(i, v, c(2, 4))
+#' 
+#' # create empty sparse tensors
+#' S = torch_sparse_coo_tensor(
+#'   torch_empty(c(1, 0), dtype = torch_int64()), 
+#'   torch_tensor(numeric(), dtype = torch_float32()), 
+#'   c(1)
+#' )
+#' S = torch_sparse_coo_tensor(
+#'   torch_empty(c(1, 0), dtype = torch_int64()), 
+#'   torch_empty(c(0, 2)), 
+#'   c(1, 2)
+#' )
+#' }
+#' }
 torch_sparse_coo_tensor <- function(size, dtype = NULL, device = NULL) {
     C_torch_sparse_coo_tensor(size, dtype, device)
 }
@@ -4638,6 +7471,12 @@ torch_sparse_coo_tensor <- function(size, dtype = NULL, device = NULL) {
 #' @param dense_dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_resize_ <- function(self, size, sparse_dim, dense_dim) {
     C_torch_sparse_resize_(self, size, as.integer(sparse_dim), as.integer(dense_dim))
 }
@@ -4651,6 +7490,12 @@ torch_sparse_resize_ <- function(self, size, sparse_dim, dense_dim) {
 #' @param dense_dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_resize_and_clear_ <- function(self, size, sparse_dim, dense_dim) {
     C_torch_sparse_resize_and_clear_(self, size, as.integer(sparse_dim), as.integer(dense_dim))
 }
@@ -4662,6 +7507,12 @@ torch_sparse_resize_and_clear_ <- function(self, size, sparse_dim, dense_dim) {
 #' @param mask A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_mask <- function(self, mask) {
     C_torch_sparse_mask(self, mask)
 }
@@ -4674,6 +7525,12 @@ torch_sparse_mask <- function(self, mask) {
 #' @param masked_grad A logical value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_to_dense <- function(self, dtype = NULL, masked_grad = NULL) {
     C_torch_to_dense(self, dtype, masked_grad)
 }
@@ -4684,6 +7541,12 @@ torch_to_dense <- function(self, dtype = NULL, masked_grad = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sparse_dim <- function(self) {
     C_torch_sparse_dim(self)
 }
@@ -4694,6 +7557,12 @@ torch_sparse_dim <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_dense_dim <- function(self) {
     C_torch_dense_dim(self)
 }
@@ -4704,6 +7573,12 @@ torch_dense_dim <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_coalesce <- function(self) {
     C_torch_coalesce(self)
 }
@@ -4714,6 +7589,12 @@ torch_coalesce <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_coalesced <- function(self) {
     C_torch_is_coalesced(self)
 }
@@ -4724,6 +7605,12 @@ torch_is_coalesced <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_indices <- function(self) {
     C_torch_indices(self)
 }
@@ -4734,6 +7621,12 @@ torch_indices <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_values <- function(self) {
     C_torch_values(self)
 }
@@ -4744,6 +7637,12 @@ torch_values <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_crow_indices <- function(self) {
     C_torch_crow_indices(self)
 }
@@ -4754,6 +7653,12 @@ torch_crow_indices <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_col_indices <- function(self) {
     C_torch_col_indices(self)
 }
@@ -4764,6 +7669,12 @@ torch_col_indices <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ccol_indices <- function(self) {
     C_torch_ccol_indices(self)
 }
@@ -4774,6 +7685,12 @@ torch_ccol_indices <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_row_indices <- function(self) {
     C_torch_row_indices(self)
 }
@@ -4785,6 +7702,12 @@ torch_row_indices <- function(self) {
 #' @param mat2 A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hspmm <- function(mat1, mat2) {
     C_torch_hspmm(mat1, mat2)
 }
@@ -4797,6 +7720,12 @@ torch_hspmm <- function(mat1, mat2) {
 #' @param non_blocking A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_copy_sparse_to_sparse_ <- function(self, src, non_blocking = FALSE) {
     C_torch_copy_sparse_to_sparse_(self, src, as.logical(non_blocking))
 }
@@ -4808,6 +7737,13 @@ torch_copy_sparse_to_sparse_ <- function(self, src, non_blocking = FALSE) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_unbind(torch_tensor(matrix(1:9, ncol = 3, byrow=TRUE)))
+#' }
+#' }
 torch_unbind <- function(self, dim = 0) {
     C_torch_unbind(self, as.integer(dim))
 }
@@ -4819,6 +7755,12 @@ torch_unbind <- function(self, dim = 0) {
 #' @param sparse_dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_to_sparse <- function(self, sparse_dim) {
     C_torch_to_sparse(self, as.integer(sparse_dim))
 }
@@ -4830,6 +7772,12 @@ torch_to_sparse <- function(self, sparse_dim) {
 #' @param dense_dim An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_to_sparse_csr <- function(self, dense_dim = NULL) {
     C_torch_to_sparse_csr(self, dense_dim)
 }
@@ -4841,6 +7789,12 @@ torch_to_sparse_csr <- function(self, dense_dim = NULL) {
 #' @param dense_dim An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_to_sparse_csc <- function(self, dense_dim = NULL) {
     C_torch_to_sparse_csc(self, dense_dim)
 }
@@ -4853,6 +7807,12 @@ torch_to_sparse_csc <- function(self, dense_dim = NULL) {
 #' @param dense_dim An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_to_sparse_bsr <- function(self, blocksize, dense_dim = NULL) {
     C_torch_to_sparse_bsr(self, blocksize, dense_dim)
 }
@@ -4865,6 +7825,12 @@ torch_to_sparse_bsr <- function(self, blocksize, dense_dim = NULL) {
 #' @param dense_dim An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_to_sparse_bsc <- function(self, blocksize, dense_dim = NULL) {
     C_torch_to_sparse_bsc(self, blocksize, dense_dim)
 }
@@ -4877,6 +7843,12 @@ torch_to_sparse_bsc <- function(self, blocksize, dense_dim = NULL) {
 #' @param reduce_range A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantize_per_tensor_dynamic <- function(self, dtype, reduce_range) {
     C_torch_quantize_per_tensor_dynamic(self, dtype, as.logical(reduce_range))
 }
@@ -4890,6 +7862,13 @@ torch_quantize_per_tensor_dynamic <- function(self, dtype, reduce_range) {
 #' @param dtype A torch dtype (e.g., torch_float32).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())
+#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())$int_repr()
+#' }
+#' }
 torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
     C_torch_quantize_per_tensor(self, as.double(scale), as.integer(zero_point), dtype)
 }
@@ -4904,6 +7883,16 @@ torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
 #' @param dtype A torch dtype (e.g., torch_float32).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x = torch_tensor(matrix(c(-1.0, 0.0, 1.0, 2.0), ncol = 2, byrow = TRUE))
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
+#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())
+#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
+#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
+#' }
+#' }
 torch_quantize_per_channel <- function(self, scales, zero_points, axis, dtype) {
     C_torch_quantize_per_channel(self, scales, zero_points, as.integer(axis), dtype)
 }
@@ -4914,6 +7903,12 @@ torch_quantize_per_channel <- function(self, scales, zero_points, axis, dtype) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_dequantize <- function(self) {
     C_torch_dequantize(self)
 }
@@ -4924,6 +7919,12 @@ torch_dequantize <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_q_scale <- function(self) {
     C_torch_q_scale(self)
 }
@@ -4934,6 +7935,12 @@ torch_q_scale <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_q_zero_point <- function(self) {
     C_torch_q_zero_point(self)
 }
@@ -4944,6 +7951,12 @@ torch_q_zero_point <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_q_per_channel_scales <- function(self) {
     C_torch_q_per_channel_scales(self)
 }
@@ -4954,6 +7967,12 @@ torch_q_per_channel_scales <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_q_per_channel_zero_points <- function(self) {
     C_torch_q_per_channel_zero_points(self)
 }
@@ -4964,6 +7983,12 @@ torch_q_per_channel_zero_points <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_q_per_channel_axis <- function(self) {
     C_torch_q_per_channel_axis(self)
 }
@@ -4974,6 +7999,12 @@ torch_q_per_channel_axis <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_int_repr <- function(self) {
     C_torch_int_repr(self)
 }
@@ -4984,6 +8015,12 @@ torch_int_repr <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_qscheme <- function(self) {
     C_torch_qscheme(self)
 }
@@ -4998,6 +8035,12 @@ torch_qscheme <- function(self) {
 #' @param quant_max An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fake_quantize_per_tensor_affine <- function(self, scale, zero_point, quant_min, quant_max) {
     C_torch_fake_quantize_per_tensor_affine(self, as.double(scale), as.integer(zero_point), as.integer(quant_min), as.integer(quant_max))
 }
@@ -5012,6 +8055,12 @@ torch_fake_quantize_per_tensor_affine <- function(self, scale, zero_point, quant
 #' @param quant_max An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fake_quantize_per_tensor_affine_cachemask <- function(self, scale, zero_point, quant_min, quant_max) {
     C_torch_fake_quantize_per_tensor_affine_cachemask(self, as.double(scale), as.integer(zero_point), as.integer(quant_min), as.integer(quant_max))
 }
@@ -5027,6 +8076,12 @@ torch_fake_quantize_per_tensor_affine_cachemask <- function(self, scale, zero_po
 #' @param quant_max An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fake_quantize_per_channel_affine <- function(self, scale, zero_point, axis, quant_min, quant_max) {
     C_torch_fake_quantize_per_channel_affine(self, scale, zero_point, as.integer(axis), as.integer(quant_min), as.integer(quant_max))
 }
@@ -5042,6 +8097,12 @@ torch_fake_quantize_per_channel_affine <- function(self, scale, zero_point, axis
 #' @param quant_max An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fake_quantize_per_channel_affine_cachemask <- function(self, scale, zero_point, axis, quant_min, quant_max) {
     C_torch_fake_quantize_per_channel_affine_cachemask(self, scale, zero_point, as.integer(axis), as.integer(quant_min), as.integer(quant_max))
 }
@@ -5064,6 +8125,12 @@ torch_fake_quantize_per_channel_affine_cachemask <- function(self, scale, zero_p
 #' @param symmetric_quant A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fused_moving_avg_obs_fake_quant <- function(self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, averaging_const, quant_min, quant_max, ch_axis, per_row_fake_quant = FALSE, symmetric_quant = FALSE) {
     C_torch_fused_moving_avg_obs_fake_quant(self, observer_on, fake_quant_on, running_min, running_max, scale, zero_point, as.double(averaging_const), as.integer(quant_min), as.integer(quant_max), as.integer(ch_axis), as.logical(per_row_fake_quant), as.logical(symmetric_quant))
 }
@@ -5078,6 +8145,12 @@ torch_fused_moving_avg_obs_fake_quant <- function(self, observer_on, fake_quant_
 #' @param bit_width An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_choose_qparams_optimized <- function(input, numel, n_bins, ratio, bit_width) {
     C_torch_choose_qparams_optimized(input, as.integer(numel), as.integer(n_bins), as.double(ratio), as.integer(bit_width))
 }
@@ -5088,6 +8161,16 @@ torch_choose_qparams_optimized <- function(input, numel, n_bins, ratio, bit_widt
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_tensor(c(1, 2, 3))
+#' y = torch_tensor(c(4, 5, 6))
+#' out = torch_meshgrid(list(x, y))
+#' out
+#' }
+#' }
 torch_meshgrid <- function(tensors) {
     C_torch_meshgrid(tensors)
 }
@@ -5098,6 +8181,17 @@ torch_meshgrid <- function(tensors) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = c(1, 2, 3)
+#' b = c(4, 5)
+#' tensor_a = torch_tensor(a)
+#' tensor_b = torch_tensor(b)
+#' torch_cartesian_prod(list(tensor_a, tensor_b))
+#' }
+#' }
 torch_cartesian_prod <- function(tensors) {
     C_torch_cartesian_prod(tensors)
 }
@@ -5110,6 +8204,17 @@ torch_cartesian_prod <- function(tensors) {
 #' @param with_replacement A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = c(1, 2, 3)
+#' tensor_a = torch_tensor(a)
+#' torch_combinations(tensor_a)
+#' torch_combinations(tensor_a, r=3)
+#' torch_combinations(tensor_a, with_replacement=TRUE)
+#' }
+#' }
 torch_combinations <- function(self, r = 2, with_replacement = FALSE) {
     C_torch_combinations(self, as.integer(r), as.logical(with_replacement))
 }
@@ -5117,10 +8222,17 @@ torch_combinations <- function(self, r = 2, with_replacement = FALSE) {
 #' Result type
 #'
 #' Wrapper for \code{at::result_type}.
-#' @param tensor A torch_tensor.
-#' @param other A torch_tensor.
+#' @param tensor1 A `torch_tensor`.
+#' @param other A `torch_tensor`.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_result_type(tensor1 = torch_tensor(c(1, 2), dtype=torch_int()), tensor2 = 1)
+#' }
+#' }
 torch_result_type <- function(tensor1, other) {
     C_torch_result_type(tensor1, other)
 }
@@ -5132,6 +8244,14 @@ torch_result_type <- function(tensor1, other) {
 #' @param to A torch dtype (e.g., torch_float32).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_can_cast(torch_double(), torch_float())
+#' torch_can_cast(torch_float(), torch_int())
+#' }
+#' }
 torch_can_cast <- function(from_, to) {
     C_torch_can_cast(from_, to)
 }
@@ -5143,6 +8263,14 @@ torch_can_cast <- function(from_, to) {
 #' @param type2 A torch dtype (e.g., torch_float32).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_promote_types(torch_int32(), torch_float32())
+#' torch_promote_types(torch_uint8(), torch_long())
+#' }
+#' }
 torch_promote_types <- function(type1, type2) {
     C_torch_promote_types(type1, type2)
 }
@@ -5161,6 +8289,12 @@ torch_promote_types <- function(type1, type2) {
 #' @param batch_first A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_gru <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
     C_torch_gru(input, hx, params, as.logical(has_biases), as.integer(num_layers), as.double(dropout), as.logical(train), as.logical(bidirectional), as.logical(batch_first))
 }
@@ -5179,6 +8313,12 @@ torch_gru <- function(input, hx, params, has_biases, num_layers, dropout, train,
 #' @param batch_first A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rnn_tanh <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
     C_torch_rnn_tanh(input, hx, params, as.logical(has_biases), as.integer(num_layers), as.double(dropout), as.logical(train), as.logical(bidirectional), as.logical(batch_first))
 }
@@ -5197,6 +8337,12 @@ torch_rnn_tanh <- function(input, hx, params, has_biases, num_layers, dropout, t
 #' @param batch_first A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rnn_relu <- function(input, hx, params, has_biases, num_layers, dropout, train, bidirectional, batch_first) {
     C_torch_rnn_relu(input, hx, params, as.logical(has_biases), as.integer(num_layers), as.double(dropout), as.logical(train), as.logical(bidirectional), as.logical(batch_first))
 }
@@ -5212,6 +8358,12 @@ torch_rnn_relu <- function(input, hx, params, has_biases, num_layers, dropout, t
 #' @param b_hh A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_lstm_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_lstm_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
@@ -5227,6 +8379,12 @@ torch_lstm_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
 #' @param b_hh A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_gru_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_gru_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
@@ -5242,6 +8400,12 @@ torch_gru_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
 #' @param b_hh A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rnn_tanh_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_rnn_tanh_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
@@ -5257,6 +8421,12 @@ torch_rnn_tanh_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL)
 #' @param b_hh A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rnn_relu_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL) {
     C_torch_rnn_relu_cell(input, hx, w_ih, w_hh, b_ih, b_hh)
 }
@@ -5280,6 +8450,12 @@ torch_rnn_relu_cell <- function(input, hx, w_ih, w_hh, b_ih = NULL, b_hh = NULL)
 #' @param zero_point_hh A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_lstm_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_lstm_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
@@ -5303,6 +8479,12 @@ torch_quantized_lstm_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_
 #' @param zero_point_hh A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_gru_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_gru_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
@@ -5326,6 +8508,12 @@ torch_quantized_gru_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_i
 #' @param zero_point_hh A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_rnn_relu_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_rnn_relu_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
@@ -5349,6 +8537,12 @@ torch_quantized_rnn_relu_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, pac
 #' @param zero_point_hh A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_quantized_rnn_tanh_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh) {
     C_torch_quantized_rnn_tanh_cell(input, hx, w_ih, w_hh, b_ih, b_hh, packed_ih, packed_hh, col_offsets_ih, col_offsets_hh, scale_ih, scale_hh, zero_point_ih, zero_point_hh)
 }
@@ -5363,6 +8557,12 @@ torch_quantized_rnn_tanh_cell <- function(input, hx, w_ih, w_hh, b_ih, b_hh, pac
 #' @param stride An integer vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_set_ <- function(self, source, storage_offset, size, stride = NULL) {
     C_torch_set_(self, source, as.integer(storage_offset), size, stride)
 }
@@ -5374,6 +8574,12 @@ torch_set_ <- function(self, source, storage_offset, size, stride = NULL) {
 #' @param tensor A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_set_to <- function(self, tensor) {
     C_torch_is_set_to(self, tensor)
 }
@@ -5386,6 +8592,12 @@ torch_is_set_to <- function(self, tensor) {
 #' @param source A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_masked_scatter_ <- function(self, mask, source) {
     C_torch_masked_scatter_(self, mask, source)
 }
@@ -5398,6 +8610,12 @@ torch_masked_scatter_ <- function(self, mask, source) {
 #' @param source A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_masked_scatter <- function(self, mask, source) {
     C_torch_masked_scatter(self, mask, source)
 }
@@ -5411,6 +8629,12 @@ torch_masked_scatter <- function(self, mask, source) {
 #' @param accumulate A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_put_ <- function(self, index, source, accumulate = FALSE) {
     C_torch_put_(self, index, source, as.logical(accumulate))
 }
@@ -5424,6 +8648,12 @@ torch_put_ <- function(self, index, source, accumulate = FALSE) {
 #' @param accumulate A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_put <- function(self, index, source, accumulate = FALSE) {
     C_torch_put(self, index, source, as.logical(accumulate))
 }
@@ -5438,6 +8668,12 @@ torch_put <- function(self, index, source, accumulate = FALSE) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_add_ <- function(self, dim, index, source, alpha = 1) {
     C_torch_index_add_(self, as.integer(dim), index, source, alpha)
 }
@@ -5452,6 +8688,12 @@ torch_index_add_ <- function(self, dim, index, source, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_add <- function(self, dim, index, source, alpha = 1) {
     C_torch_index_add(self, as.integer(dim), index, source, alpha)
 }
@@ -5467,6 +8709,12 @@ torch_index_add <- function(self, dim, index, source, alpha = 1) {
 #' @param include_self A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_reduce_ <- function(self, dim, index, source, reduce, include_self = TRUE) {
     C_torch_index_reduce_(self, as.integer(dim), index, source, reduce, as.logical(include_self))
 }
@@ -5482,6 +8730,12 @@ torch_index_reduce_ <- function(self, dim, index, source, reduce, include_self =
 #' @param include_self A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_reduce <- function(self, dim, index, source, reduce, include_self = TRUE) {
     C_torch_index_reduce(self, as.integer(dim), index, source, reduce, as.logical(include_self))
 }
@@ -5495,6 +8749,12 @@ torch_index_reduce <- function(self, dim, index, source, reduce, include_self = 
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_fill_ <- function(self, dim, index, value) {
     C_torch_index_fill_(self, as.integer(dim), index, value)
 }
@@ -5508,6 +8768,12 @@ torch_index_fill_ <- function(self, dim, index, value) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_fill <- function(self, dim, index, value) {
     C_torch_index_fill(self, as.integer(dim), index, value)
 }
@@ -5521,6 +8787,12 @@ torch_index_fill <- function(self, dim, index, value) {
 #' @param src A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_scatter <- function(self, dim, index, src) {
     C_torch_scatter(self, as.integer(dim), index, src)
 }
@@ -5534,6 +8806,12 @@ torch_scatter <- function(self, dim, index, src) {
 #' @param src A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_scatter_add <- function(self, dim, index, src) {
     C_torch_scatter_add(self, as.integer(dim), index, src)
 }
@@ -5547,6 +8825,12 @@ torch_scatter_add <- function(self, dim, index, src) {
 #' @param src A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_scatter_add_ <- function(self, dim, index, src) {
     C_torch_scatter_add_(self, as.integer(dim), index, src)
 }
@@ -5562,6 +8846,12 @@ torch_scatter_add_ <- function(self, dim, index, src) {
 #' @param include_self A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_scatter_reduce <- function(self, dim, index, src, reduce, include_self = TRUE) {
     C_torch_scatter_reduce(self, as.integer(dim), index, src, reduce, as.logical(include_self))
 }
@@ -5577,6 +8867,12 @@ torch_scatter_reduce <- function(self, dim, index, src, reduce, include_self = T
 #' @param include_self A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_scatter_reduce_ <- function(self, dim, index, src, reduce, include_self = TRUE) {
     C_torch_scatter_reduce_(self, as.integer(dim), index, src, reduce, as.logical(include_self))
 }
@@ -5588,6 +8884,12 @@ torch_scatter_reduce_ <- function(self, dim, index, src, reduce, include_self = 
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_eq_ <- function(self, other) {
     C_torch_eq_(self, other)
 }
@@ -5599,6 +8901,12 @@ torch_eq_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_and <- function(self, other) {
     C_torch_bitwise_and(self, other)
 }
@@ -5610,6 +8918,12 @@ torch_bitwise_and <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_and_ <- function(self, other) {
     C_torch_bitwise_and_(self, other)
 }
@@ -5621,6 +8935,12 @@ torch_bitwise_and_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___and__ <- function(self, other) {
     C_torch___and__(self, other)
 }
@@ -5632,6 +8952,12 @@ torch___and__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___iand__ <- function(self, other) {
     C_torch___iand__(self, other)
 }
@@ -5643,6 +8969,12 @@ torch___iand__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_or <- function(self, other) {
     C_torch_bitwise_or(self, other)
 }
@@ -5654,6 +8986,12 @@ torch_bitwise_or <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_or_ <- function(self, other) {
     C_torch_bitwise_or_(self, other)
 }
@@ -5665,6 +9003,12 @@ torch_bitwise_or_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___or__ <- function(self, other) {
     C_torch___or__(self, other)
 }
@@ -5676,6 +9020,12 @@ torch___or__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___ior__ <- function(self, other) {
     C_torch___ior__(self, other)
 }
@@ -5687,6 +9037,12 @@ torch___ior__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_xor <- function(self, other) {
     C_torch_bitwise_xor(self, other)
 }
@@ -5698,6 +9054,12 @@ torch_bitwise_xor <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_xor_ <- function(self, other) {
     C_torch_bitwise_xor_(self, other)
 }
@@ -5709,6 +9071,12 @@ torch_bitwise_xor_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___xor__ <- function(self, other) {
     C_torch___xor__(self, other)
 }
@@ -5720,6 +9088,12 @@ torch___xor__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___ixor__ <- function(self, other) {
     C_torch___ixor__(self, other)
 }
@@ -5731,6 +9105,12 @@ torch___ixor__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___lshift__ <- function(self, other) {
     C_torch___lshift__(self, other)
 }
@@ -5742,6 +9122,12 @@ torch___lshift__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___ilshift__ <- function(self, other) {
     C_torch___ilshift__(self, other)
 }
@@ -5753,6 +9139,12 @@ torch___ilshift__ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_left_shift <- function(self, other) {
     C_torch_bitwise_left_shift(self, other)
 }
@@ -5764,6 +9156,12 @@ torch_bitwise_left_shift <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_left_shift_ <- function(self, other) {
     C_torch_bitwise_left_shift_(self, other)
 }
@@ -5775,6 +9173,12 @@ torch_bitwise_left_shift_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___rshift__ <- function(self, other) {
     C_torch___rshift__(self, other)
 }
@@ -5786,6 +9190,12 @@ torch___rshift__ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch___irshift__ <- function(self, other) {
     C_torch___irshift__(self, other)
 }
@@ -5797,6 +9207,12 @@ torch___irshift__ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_right_shift <- function(self, other) {
     C_torch_bitwise_right_shift(self, other)
 }
@@ -5808,6 +9224,12 @@ torch_bitwise_right_shift <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_bitwise_right_shift_ <- function(self, other) {
     C_torch_bitwise_right_shift_(self, other)
 }
@@ -5819,6 +9241,12 @@ torch_bitwise_right_shift_ <- function(self, other) {
 #' @param diagonal An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_tril_ <- function(self, diagonal = 0) {
     C_torch_tril_(self, as.integer(diagonal))
 }
@@ -5830,6 +9258,12 @@ torch_tril_ <- function(self, diagonal = 0) {
 #' @param diagonal An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_triu_ <- function(self, diagonal = 0) {
     C_torch_triu_(self, as.integer(diagonal))
 }
@@ -5840,6 +9274,12 @@ torch_triu_ <- function(self, diagonal = 0) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_digamma_ <- function(self) {
     C_torch_digamma_(self)
 }
@@ -5852,6 +9292,12 @@ torch_digamma_ <- function(self) {
 #' @param weight A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_lerp_ <- function(self, end, weight) {
     C_torch_lerp_(self, end, weight)
 }
@@ -5866,6 +9312,12 @@ torch_lerp_ <- function(self, end, weight) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_addbmm_ <- function(self, batch1, batch2, beta = 1, alpha = 1) {
     C_torch_addbmm_(self, batch1, batch2, beta, alpha)
 }
@@ -5880,6 +9332,16 @@ torch_addbmm_ <- function(self, batch1, batch2, beta = 1, alpha = 1) {
 #' @param alpha A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' M = torch_randn(c(3, 5))
+#' batch1 = torch_randn(c(10, 3, 4))
+#' batch2 = torch_randn(c(10, 4, 5))
+#' torch_addbmm(M, batch1, batch2)
+#' }
+#' }
 torch_addbmm <- function(self, batch1, batch2, beta = 1, alpha = 1) {
     C_torch_addbmm(self, batch1, batch2, beta, alpha)
 }
@@ -5893,6 +9355,12 @@ torch_addbmm <- function(self, batch1, batch2, beta = 1, alpha = 1) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_random_ <- function(self, from, to, generator = NULL) {
     C_torch_random_(self, as.integer(from), to, generator)
 }
@@ -5906,6 +9374,12 @@ torch_random_ <- function(self, from, to, generator = NULL) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cauchy_ <- function(self, median = 0, sigma = 1, generator = NULL) {
     C_torch_cauchy_(self, as.double(median), as.double(sigma), generator)
 }
@@ -5919,6 +9393,12 @@ torch_cauchy_ <- function(self, median = 0, sigma = 1, generator = NULL) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log_normal_ <- function(self, mean = 1, std = 2, generator = NULL) {
     C_torch_log_normal_(self, as.double(mean), as.double(std), generator)
 }
@@ -5931,6 +9411,12 @@ torch_log_normal_ <- function(self, mean = 1, std = 2, generator = NULL) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_exponential_ <- function(self, lambd = 1, generator = NULL) {
     C_torch_exponential_(self, as.double(lambd), generator)
 }
@@ -5943,6 +9429,12 @@ torch_exponential_ <- function(self, lambd = 1, generator = NULL) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_geometric_ <- function(self, p, generator = NULL) {
     C_torch_geometric_(self, as.double(p), generator)
 }
@@ -5954,6 +9446,12 @@ torch_geometric_ <- function(self, p, generator = NULL) {
 #' @param diagonal An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_diag <- function(self, diagonal = 0) {
     C_torch_diag(self, as.integer(diagonal))
 }
@@ -5966,6 +9464,18 @@ torch_diag <- function(self, diagonal = 0) {
 #' @param dim An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4, 3))
+#' a
+#' b = torch_randn(c(4, 3))
+#' b
+#' torch_cross(a, b, dim=2)
+#' torch_cross(a, b)
+#' }
+#' }
 torch_cross <- function(self, other, dim = NULL) {
     C_torch_cross(self, other, dim)
 }
@@ -5977,6 +9487,19 @@ torch_cross <- function(self, other, dim = NULL) {
 #' @param diagonal An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3, 3))
+#' a
+#' torch_tril(a)
+#' b = torch_randn(c(4, 6))
+#' b
+#' torch_tril(b, diagonal=1)
+#' torch_tril(b, diagonal=-1)
+#' }
+#' }
 torch_tril <- function(self, diagonal = 0) {
     C_torch_tril(self, as.integer(diagonal))
 }
@@ -5991,6 +9514,19 @@ torch_tril <- function(self, diagonal = 0) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_tril_indices(3, 3)
+#' a
+#' a = torch_tril_indices(4, 3, -1)
+#' a
+#' a = torch_tril_indices(4, 3, 1)
+#' a
+#' 
+#' }
+#' }
 torch_tril_indices <- function(row, col, offset = 0, dtype = torch_long, device = NULL) {
     C_torch_tril_indices(as.integer(row), as.integer(col), as.integer(offset), dtype, device)
 }
@@ -6005,6 +9541,19 @@ torch_tril_indices <- function(row, col, offset = 0, dtype = torch_long, device 
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_triu_indices(3, 3)
+#' a
+#' a = torch_triu_indices(4, 3, -1)
+#' a
+#' a = torch_triu_indices(4, 3, 1)
+#' a
+#' 
+#' }
+#' }
 torch_triu_indices <- function(row, col, offset = 0, dtype = torch_long, device = NULL) {
     C_torch_triu_indices(as.integer(row), as.integer(col), as.integer(offset), dtype, device)
 }
@@ -6015,6 +9564,15 @@ torch_triu_indices <- function(row, col, offset = 0, dtype = torch_long, device 
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_arange(1, 9)$view(c(3, 3))
+#' x
+#' torch_trace(x)
+#' }
+#' }
 torch_trace <- function(self) {
     C_torch_trace(self)
 }
@@ -6026,6 +9584,12 @@ torch_trace <- function(self) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ne_ <- function(self, other) {
     C_torch_ne_(self, other)
 }
@@ -6037,6 +9601,12 @@ torch_ne_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_not_equal <- function(self, other) {
     C_torch_not_equal(self, other)
 }
@@ -6048,6 +9618,12 @@ torch_not_equal <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_not_equal_ <- function(self, other) {
     C_torch_not_equal_(self, other)
 }
@@ -6059,6 +9635,12 @@ torch_not_equal_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ge_ <- function(self, other) {
     C_torch_ge_(self, other)
 }
@@ -6070,6 +9652,12 @@ torch_ge_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_greater_equal <- function(self, other) {
     C_torch_greater_equal(self, other)
 }
@@ -6081,6 +9669,12 @@ torch_greater_equal <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_greater_equal_ <- function(self, other) {
     C_torch_greater_equal_(self, other)
 }
@@ -6092,6 +9686,12 @@ torch_greater_equal_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_le_ <- function(self, other) {
     C_torch_le_(self, other)
 }
@@ -6103,6 +9703,12 @@ torch_le_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_less_equal <- function(self, other) {
     C_torch_less_equal(self, other)
 }
@@ -6114,6 +9720,12 @@ torch_less_equal <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_less_equal_ <- function(self, other) {
     C_torch_less_equal_(self, other)
 }
@@ -6125,6 +9737,12 @@ torch_less_equal_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_gt_ <- function(self, other) {
     C_torch_gt_(self, other)
 }
@@ -6136,6 +9754,12 @@ torch_gt_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_greater <- function(self, other) {
     C_torch_greater(self, other)
 }
@@ -6147,6 +9771,12 @@ torch_greater <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_greater_ <- function(self, other) {
     C_torch_greater_(self, other)
 }
@@ -6158,6 +9788,12 @@ torch_greater_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_lt_ <- function(self, other) {
     C_torch_lt_(self, other)
 }
@@ -6169,6 +9805,12 @@ torch_lt_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_less <- function(self, other) {
     C_torch_less(self, other)
 }
@@ -6180,6 +9822,12 @@ torch_less <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_less_ <- function(self, other) {
     C_torch_less_(self, other)
 }
@@ -6191,6 +9839,14 @@ torch_less_ <- function(self, other) {
 #' @param index A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' src = torch_tensor(matrix(c(4,3,5,6,7,8), ncol = 3, byrow = TRUE))
+#' torch_take(src, torch_tensor(c(1, 2, 5), dtype = torch_int64()))
+#' }
+#' }
 torch_take <- function(self, index) {
     C_torch_take(self, index)
 }
@@ -6203,6 +9859,18 @@ torch_take <- function(self, index) {
 #' @param dim An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' t <- torch_tensor(matrix(c(10, 30, 20, 60, 40, 50), nrow = 2))
+#' max_idx <- torch_argmax(t)
+#' torch_take_along_dim(t, max_idx)
+#' 
+#' sorted_idx <- torch_argsort(t, dim=2)
+#' torch_take_along_dim(t, sorted_idx, dim=2)
+#' 
+#' }
+#' }
 torch_take_along_dim <- function(self, indices, dim = NULL) {
     C_torch_take_along_dim(self, indices, dim)
 }
@@ -6214,6 +9882,17 @@ torch_take_along_dim <- function(self, indices, dim = NULL) {
 #' @param mask A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(3, 4))
+#' x
+#' mask = x$ge(0.5)
+#' mask
+#' torch_masked_select(x, mask)
+#' }
+#' }
 torch_masked_select <- function(self, mask) {
     C_torch_masked_select(self, mask)
 }
@@ -6224,6 +9903,13 @@ torch_masked_select <- function(self, mask) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
+#' }
+#' }
 torch_nonzero <- function(self) {
     C_torch_nonzero(self)
 }
@@ -6236,6 +9922,12 @@ torch_nonzero <- function(self) {
 #' @param fill_value An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nonzero_static <- function(self, size, fill_value = -1) {
     C_torch_nonzero_static(self, as.integer(size), as.integer(fill_value))
 }
@@ -6246,6 +9938,12 @@ torch_nonzero_static <- function(self, size, fill_value = -1) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nonzero_numpy <- function(self) {
     C_torch_nonzero_numpy(self)
 }
@@ -6256,6 +9954,12 @@ torch_nonzero_numpy <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_argwhere <- function(self) {
     C_torch_argwhere(self)
 }
@@ -6269,6 +9973,16 @@ torch_argwhere <- function(self) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' t = torch_randn(c(1, 3))
+#' t1 = torch_randn(c(3, 1))
+#' t2 = torch_randn(c(1, 3))
+#' torch_addcmul(t, t1, t2, 0.1)
+#' }
+#' }
 torch_addcmul <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcmul(self, tensor1, tensor2, value)
 }
@@ -6282,6 +9996,12 @@ torch_addcmul <- function(self, tensor1, tensor2, value = 1) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_addcmul_ <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcmul_(self, tensor1, tensor2, value)
 }
@@ -6295,6 +10015,16 @@ torch_addcmul_ <- function(self, tensor1, tensor2, value = 1) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' t = torch_randn(c(1, 3))
+#' t1 = torch_randn(c(3, 1))
+#' t2 = torch_randn(c(1, 3))
+#' torch_addcdiv(t, t1, t2, 0.1)
+#' }
+#' }
 torch_addcdiv <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcdiv(self, tensor1, tensor2, value)
 }
@@ -6308,6 +10038,12 @@ torch_addcdiv <- function(self, tensor1, tensor2, value = 1) {
 #' @param value A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_addcdiv_ <- function(self, tensor1, tensor2, value = 1) {
     C_torch_addcdiv_(self, tensor1, tensor2, value)
 }
@@ -6323,6 +10059,12 @@ torch_addcdiv_ <- function(self, tensor1, tensor2, value = 1) {
 #' @param label_smoothing A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_cross_entropy_loss <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0.0) {
     C_torch_cross_entropy_loss(self, target, weight, as.integer(reduction), as.integer(ignore_index), as.double(label_smoothing))
 }
@@ -6337,6 +10079,17 @@ torch_cross_entropy_loss <- function(self, target, weight = NULL, reduction = 1L
 #' @param unitriangular A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' A = torch_randn(c(2, 2))$triu()
+#' A
+#' b = torch_randn(c(2, 3))
+#' b
+#' torch_triangular_solve(b, A)
+#' }
+#' }
 torch_triangular_solve <- function(self, A, upper = TRUE, transpose = FALSE, unitriangular = FALSE) {
     C_torch_triangular_solve(self, A, as.logical(upper), as.logical(transpose), as.logical(unitriangular))
 }
@@ -6351,6 +10104,12 @@ torch_triangular_solve <- function(self, A, upper = TRUE, transpose = FALSE, uni
 #' @param unitriangular A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_solve_triangular <- function(self, B, upper, left = TRUE, unitriangular = FALSE) {
     C_torch_linalg_solve_triangular(self, B, as.logical(upper), as.logical(left), as.logical(unitriangular))
 }
@@ -6362,6 +10121,12 @@ torch_linalg_solve_triangular <- function(self, B, upper, left = TRUE, unitriang
 #' @param N An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_vander <- function(x, N = NULL) {
     C_torch_linalg_vander(x, N)
 }
@@ -6374,6 +10139,25 @@ torch_linalg_vander <- function(x, N = NULL) {
 #' @param compute_uv A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(5, 3))
+#' a
+#' out = torch_svd(a)
+#' u = out[[1]]
+#' s = out[[2]]
+#' v = out[[3]]
+#' torch_dist(a, torch_mm(torch_mm(u, torch_diag(s)), v$t()))
+#' a_big = torch_randn(c(7, 5, 3))
+#' out = torch_svd(a_big)
+#' u = out[[1]]
+#' s = out[[2]]
+#' v = out[[3]]
+#' torch_dist(a_big, torch_matmul(torch_matmul(u, torch_diag_embed(s)), v$transpose(-2, -1)))
+#' }
+#' }
 torch_svd <- function(self, some = TRUE, compute_uv = TRUE) {
     C_torch_svd(self, as.logical(some), as.logical(compute_uv))
 }
@@ -6386,6 +10170,12 @@ torch_svd <- function(self, some = TRUE, compute_uv = TRUE) {
 #' @param axis1 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_swapaxes <- function(self, axis0, axis1) {
     C_torch_swapaxes(self, as.integer(axis0), as.integer(axis1))
 }
@@ -6398,6 +10188,12 @@ torch_swapaxes <- function(self, axis0, axis1) {
 #' @param axis1 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_swapaxes_ <- function(self, axis0, axis1) {
     C_torch_swapaxes_(self, as.integer(axis0), as.integer(axis1))
 }
@@ -6410,6 +10206,12 @@ torch_swapaxes_ <- function(self, axis0, axis1) {
 #' @param dim1 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_swapdims <- function(self, dim0, dim1) {
     C_torch_swapdims(self, as.integer(dim0), as.integer(dim1))
 }
@@ -6422,6 +10224,12 @@ torch_swapdims <- function(self, dim0, dim1) {
 #' @param dim1 An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_swapdims_ <- function(self, dim0, dim1) {
     C_torch_swapdims_(self, as.integer(dim0), as.integer(dim1))
 }
@@ -6433,6 +10241,25 @@ torch_swapdims_ <- function(self, dim0, dim1) {
 #' @param upper A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3, 3))
+#' a = torch_mm(a, a$t()) # make symmetric positive-definite
+#' l = torch_cholesky(a)
+#' a
+#' l
+#' torch_mm(l, l$t())
+#' a = torch_randn(c(3, 2, 2))
+#' 
+#' a = torch_matmul(a, a$transpose(-1, -2)) + 1e-03 # make symmetric positive-definite
+#' l = torch_cholesky(a)
+#' z = torch_matmul(l, l$transpose(-1, -2))
+#' torch_max(torch_abs(z - a)) # Max non-zero
+#' 
+#' }
+#' }
 torch_cholesky <- function(self, upper = FALSE) {
     C_torch_cholesky(self, as.logical(upper))
 }
@@ -6445,6 +10272,20 @@ torch_cholesky <- function(self, upper = FALSE) {
 #' @param upper A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3, 3))
+#' a = torch_mm(a, a$t()) # make symmetric positive definite
+#' u = torch_cholesky(a)
+#' a
+#' b = torch_randn(c(3, 2))
+#' b
+#' torch_cholesky_solve(b, u)
+#' torch_mm(a$inverse(), b)
+#' }
+#' }
 torch_cholesky_solve <- function(self, input2, upper = FALSE) {
     C_torch_cholesky_solve(self, input2, as.logical(upper))
 }
@@ -6456,6 +10297,20 @@ torch_cholesky_solve <- function(self, input2, upper = FALSE) {
 #' @param upper A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' 
+#' a = torch_randn(c(3, 3))
+#' a = torch_mm(a, a$t()) + 1e-05 * torch_eye(3) # make symmetric positive definite
+#' u = torch_cholesky(a)
+#' a
+#' torch_cholesky_inverse(u)
+#' a$inverse()
+#' 
+#' }
+#' }
 torch_cholesky_inverse <- function(self, upper = FALSE) {
     C_torch_cholesky_inverse(self, as.logical(upper))
 }
@@ -6467,6 +10322,18 @@ torch_cholesky_inverse <- function(self, upper = FALSE) {
 #' @param some A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_tensor(matrix(c(12., -51, 4, 6, 167, -68, -4, 24, -41), ncol = 3, byrow = TRUE))
+#' out = torch_qr(a)
+#' q = out[[1]]
+#' r = out[[2]]
+#' torch_mm(q, r)$round()
+#' torch_mm(q$t(), q)$round()
+#' }
+#' }
 torch_qr <- function(self, some = TRUE) {
     C_torch_qr(self, as.logical(some))
 }
@@ -6477,6 +10344,12 @@ torch_qr <- function(self, some = TRUE) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_geqrf <- function(self) {
     C_torch_geqrf(self)
 }
@@ -6488,6 +10361,12 @@ torch_geqrf <- function(self) {
 #' @param input2 A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_orgqr <- function(self, input2) {
     C_torch_orgqr(self, input2)
 }
@@ -6502,6 +10381,12 @@ torch_orgqr <- function(self, input2) {
 #' @param transpose A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_ormqr <- function(self, input2, input3, left = TRUE, transpose = FALSE) {
     C_torch_ormqr(self, input2, input3, as.logical(left), as.logical(transpose))
 }
@@ -6514,6 +10399,16 @@ torch_ormqr <- function(self, input2, input3, left = TRUE, transpose = FALSE) {
 #' @param LU_pivots A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' A = torch_randn(c(2, 3, 3))
+#' b = torch_randn(c(2, 3, 1))
+#' out = torch_lu(A)
+#' x = torch_lu_solve(b, out[[1]], out[[2]])
+#' torch_norm(torch_bmm(A, x) - b)
+#' }
+#' }
 torch_lu_solve <- function(self, LU_data, LU_pivots) {
     C_torch_lu_solve(self, LU_data, LU_pivots)
 }
@@ -6527,6 +10422,12 @@ torch_lu_solve <- function(self, LU_data, LU_pivots) {
 #' @param unpack_pivots A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_lu_unpack <- function(LU_data, LU_pivots, unpack_data = TRUE, unpack_pivots = TRUE) {
     C_torch_lu_unpack(LU_data, LU_pivots, as.logical(unpack_data), as.logical(unpack_pivots))
 }
@@ -6537,6 +10438,12 @@ torch_lu_unpack <- function(LU_data, LU_pivots, unpack_data = TRUE, unpack_pivot
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_lgamma_ <- function(self) {
     C_torch_lgamma_(self)
 }
@@ -6547,6 +10454,14 @@ torch_lgamma_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_arange(0.5, 2, 0.5)
+#' torch_lgamma(a)
+#' }
+#' }
 torch_lgamma <- function(self) {
     C_torch_lgamma(self)
 }
@@ -6557,6 +10472,14 @@ torch_lgamma <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_tensor(c(1, 0.5))
+#' torch_digamma(a)
+#' }
+#' }
 torch_digamma <- function(self) {
     C_torch_digamma(self)
 }
@@ -6568,6 +10491,15 @@ torch_digamma <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_tensor(c(1, 0.5))
+#' torch_polygamma(1, a)
+#' 
+#' }
+#' }
 torch_polygamma <- function(n, self) {
     C_torch_polygamma(as.integer(n), self)
 }
@@ -6579,6 +10511,12 @@ torch_polygamma <- function(n, self) {
 #' @param n An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_polygamma_ <- function(self, n) {
     C_torch_polygamma_(self, as.integer(n))
 }
@@ -6589,6 +10527,13 @@ torch_polygamma_ <- function(self, n) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
+#' }
+#' }
 torch_erfinv <- function(self) {
     C_torch_erfinv(self)
 }
@@ -6599,6 +10544,12 @@ torch_erfinv <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_erfinv_ <- function(self) {
     C_torch_erfinv_(self)
 }
@@ -6609,6 +10560,13 @@ torch_erfinv_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_i0(torch_arange(start = 0, end = 5, dtype=torch_float32()))
+#' }
+#' }
 torch_i0 <- function(self) {
     C_torch_i0(self)
 }
@@ -6619,6 +10577,12 @@ torch_i0 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_i0_ <- function(self) {
     C_torch_i0_(self)
 }
@@ -6629,6 +10593,12 @@ torch_i0_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_sign_ <- function(self) {
     C_torch_sign_(self)
 }
@@ -6639,6 +10609,14 @@ torch_sign_ <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(0.7, -1.2, 0., 2.3))
+#' torch_signbit(a)
+#' }
+#' }
 torch_signbit <- function(self) {
     C_torch_signbit(self)
 }
@@ -6651,6 +10629,20 @@ torch_signbit <- function(self) {
 #' @param p A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(4))
+#' x
+#' y = torch_randn(c(4))
+#' y
+#' torch_dist(x, y, 3.5)
+#' torch_dist(x, y, 3)
+#' torch_dist(x, y, 0)
+#' torch_dist(x, y, 1)
+#' }
+#' }
 torch_dist <- function(self, other, p = 2) {
     C_torch_dist(self, other, p)
 }
@@ -6662,6 +10654,12 @@ torch_dist <- function(self, other, p = 2) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_atan2_ <- function(self, other) {
     C_torch_atan2_(self, other)
 }
@@ -6673,6 +10671,15 @@ torch_atan2_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_atan2(a, torch_randn(c(4)))
+#' }
+#' }
 torch_atan2 <- function(self, other) {
     C_torch_atan2(self, other)
 }
@@ -6684,6 +10691,12 @@ torch_atan2 <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arctan2 <- function(self, other) {
     C_torch_arctan2(self, other)
 }
@@ -6695,6 +10708,12 @@ torch_arctan2 <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_arctan2_ <- function(self, other) {
     C_torch_arctan2_(self, other)
 }
@@ -6707,6 +10726,18 @@ torch_arctan2_ <- function(self, other) {
 #' @param weight A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' start = torch_arange(1, 4)
+#' end = torch_empty(4)$fill_(10)
+#' start
+#' end
+#' torch_lerp(start, end, 0.5)
+#' torch_lerp(start, end, torch_full_like(start, 0.5))
+#' }
+#' }
 torch_lerp <- function(self, end, weight) {
     C_torch_lerp(self, end, weight)
 }
@@ -6720,6 +10751,13 @@ torch_lerp <- function(self, end, weight) {
 #' @param max A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_histc(torch_tensor(c(1., 2, 1)), bins=4, min=0, max=3)
+#' }
+#' }
 torch_histc <- function(self, bins = 100, min = 0, max = 0) {
     C_torch_histc(self, as.integer(bins), min, max)
 }
@@ -6733,6 +10771,12 @@ torch_histc <- function(self, bins = 100, min = 0, max = 0) {
 #' @param density A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_histogram <- function(self, bins, weight = NULL, density = FALSE) {
     C_torch_histogram(self, bins, weight, as.logical(density))
 }
@@ -6747,6 +10791,12 @@ torch_histogram <- function(self, bins, weight = NULL, density = FALSE) {
 #' @param density A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_histogramdd <- function(self, bins, range = NULL, weight = NULL, density = FALSE) {
     C_torch_histogramdd(self, bins, range, weight, as.logical(density))
 }
@@ -6758,6 +10808,14 @@ torch_histogramdd <- function(self, bins, range = NULL, weight = NULL, density =
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_fmod(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
+#' torch_fmod(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
+#' }
+#' }
 torch_fmod <- function(self, other) {
     C_torch_fmod(self, other)
 }
@@ -6769,6 +10827,12 @@ torch_fmod <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fmod_ <- function(self, other) {
     C_torch_fmod_(self, other)
 }
@@ -6780,6 +10844,13 @@ torch_fmod_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_hypot(torch_tensor(c(4.0)), torch_tensor(c(3.0, 4.0, 5.0)))
+#' }
+#' }
 torch_hypot <- function(self, other) {
     C_torch_hypot(self, other)
 }
@@ -6791,6 +10862,12 @@ torch_hypot <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hypot_ <- function(self, other) {
     C_torch_hypot_(self, other)
 }
@@ -6802,6 +10879,12 @@ torch_hypot_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_igamma <- function(self, other) {
     C_torch_igamma(self, other)
 }
@@ -6813,6 +10896,12 @@ torch_igamma <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_igamma_ <- function(self, other) {
     C_torch_igamma_(self, other)
 }
@@ -6824,6 +10913,12 @@ torch_igamma_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_igammac <- function(self, other) {
     C_torch_igammac(self, other)
 }
@@ -6835,6 +10930,12 @@ torch_igammac <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_igammac_ <- function(self, other) {
     C_torch_igammac_(self, other)
 }
@@ -6846,6 +10947,14 @@ torch_igammac_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' eps <- torch_finfo(torch_float32())$eps
+#' torch_nextafter(torch_tensor(c(1, 2)), torch_tensor(c(2, 1))) == torch_tensor(c(eps + 1, 2 - eps))
+#' }
+#' }
 torch_nextafter <- function(self, other) {
     C_torch_nextafter(self, other)
 }
@@ -6857,6 +10966,12 @@ torch_nextafter <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nextafter_ <- function(self, other) {
     C_torch_nextafter_(self, other)
 }
@@ -6868,6 +10983,12 @@ torch_nextafter_ <- function(self, other) {
 #' @param other A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_remainder_ <- function(self, other) {
     C_torch_remainder_(self, other)
 }
@@ -6879,6 +11000,12 @@ torch_remainder_ <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fmin <- function(self, other) {
     C_torch_fmin(self, other)
 }
@@ -6890,6 +11017,12 @@ torch_fmin <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fmax <- function(self, other) {
     C_torch_fmax(self, other)
 }
@@ -6901,6 +11034,15 @@ torch_fmax <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(1, 2, -1))
+#' b <- torch_tensor(c(3, 0, 4))
+#' torch_minimum(a, b)
+#' }
+#' }
 torch_minimum <- function(self, other) {
     C_torch_minimum(self, other)
 }
@@ -6915,6 +11057,23 @@ torch_minimum <- function(self, other) {
 #' @param interpolation A character string.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_randn(c(1, 3))
+#' a
+#' q <- torch_tensor(c(0, 0.5, 1))
+#' torch_quantile(a, q)
+#' 
+#' 
+#' a <- torch_randn(c(2, 3))
+#' a
+#' q <- torch_tensor(c(0.25, 0.5, 0.75))
+#' torch_quantile(a, q, dim=1, keepdim=TRUE)
+#' torch_quantile(a, q, dim=1, keepdim=TRUE)$shape
+#' }
+#' }
 torch_quantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = 'linear') {
     C_torch_quantile(self, q, dim, as.logical(keepdim), interpolation)
 }
@@ -6929,6 +11088,21 @@ torch_quantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation =
 #' @param interpolation A character string.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' t <- torch_tensor(c(NaN, 1, 2))
+#' t$quantile(0.5)
+#' t$nanquantile(0.5)
+#' t <- torch_tensor(rbind(c(NaN, NaN), c(1, 2)))
+#' t
+#' t$nanquantile(0.5, dim=1)
+#' t$nanquantile(0.5, dim=2)
+#' torch_nanquantile(t, 0.5, dim = 1)
+#' torch_nanquantile(t, 0.5, dim = 2)
+#' }
+#' }
 torch_nanquantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = 'linear') {
     C_torch_nanquantile(self, q, dim, as.logical(keepdim), interpolation)
 }
@@ -6939,6 +11113,12 @@ torch_nanquantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolatio
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_msort <- function(self) {
     C_torch_msort(self)
 }
@@ -6951,6 +11131,15 @@ torch_msort <- function(self) {
 #' @param descending A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_argsort(a, dim=1)
+#' }
+#' }
 torch_argsort <- function(self, dim = -1, descending = FALSE) {
     C_torch_argsort(self, as.integer(dim), as.logical(descending))
 }
@@ -6965,6 +11154,15 @@ torch_argsort <- function(self, dim = -1, descending = FALSE) {
 #' @param sorted A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_arange(1., 6.)
+#' x
+#' torch_topk(x, 3)
+#' }
+#' }
 torch_topk <- function(self, k, dim = -1, largest = TRUE, sorted = TRUE) {
     C_torch_topk(self, as.integer(k), as.integer(dim), as.logical(largest), as.logical(sorted))
 }
@@ -6978,6 +11176,16 @@ torch_topk <- function(self, k, dim = -1, largest = TRUE, sorted = TRUE) {
 #' @param maxnorm A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x = torch_ones(c(3, 3))
+#' x[2,]$fill_(2)
+#' x[3,]$fill_(3)
+#' x
+#' torch_renorm(x, 1, 1, 5)
+#' }
+#' }
 torch_renorm <- function(self, p, dim, maxnorm) {
     C_torch_renorm(self, p, as.integer(dim), maxnorm)
 }
@@ -6991,6 +11199,12 @@ torch_renorm <- function(self, p, dim, maxnorm) {
 #' @param maxnorm A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_renorm_ <- function(self, p, dim, maxnorm) {
     C_torch_renorm_(self, p, as.integer(dim), maxnorm)
 }
@@ -7004,6 +11218,12 @@ torch_renorm_ <- function(self, p, dim, maxnorm) {
 #' @param step An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unfold <- function(self, dimension, size, step) {
     C_torch_unfold(self, as.integer(dimension), as.integer(size), as.integer(step))
 }
@@ -7015,6 +11235,13 @@ torch_unfold <- function(self, dimension, size, step) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_equal(torch_tensor(c(1, 2)), torch_tensor(c(1, 2)))
+#' }
+#' }
 torch_equal <- function(self, other) {
     C_torch_equal(self, other)
 }
@@ -7026,6 +11253,12 @@ torch_equal <- function(self, other) {
 #' @param exponent A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_pow_ <- function(self, exponent) {
     C_torch_pow_(self, exponent)
 }
@@ -7037,6 +11270,12 @@ torch_pow_ <- function(self, exponent) {
 #' @param exponent A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_float_power <- function(self, exponent) {
     C_torch_float_power(self, exponent)
 }
@@ -7048,6 +11287,12 @@ torch_float_power <- function(self, exponent) {
 #' @param exponent A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_float_power_ <- function(self, exponent) {
     C_torch_float_power_(self, exponent)
 }
@@ -7061,6 +11306,12 @@ torch_float_power_ <- function(self, exponent) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_normal_functional <- function(self, mean = 0, std = 1, generator = NULL) {
     C_torch_normal_functional(self, as.double(mean), as.double(std), generator)
 }
@@ -7073,6 +11324,17 @@ torch_normal_functional <- function(self, mean = 0, std = 1, generator = NULL) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_normal(mean=0, std=torch_arange(1, 0, -0.1) + 1e-6)
+#' torch_normal(mean=0.5, std=torch_arange(1., 6.))
+#' torch_normal(mean=torch_arange(1., 6.))
+#' torch_normal(2, 3, size=c(1, 4))
+#' 
+#' }
+#' }
 torch_normal <- function(mean, std = 1, generator = NULL) {
     C_torch_normal(mean, as.double(std), generator)
 }
@@ -7083,6 +11345,12 @@ torch_normal <- function(mean, std = 1, generator = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_alias <- function(self) {
     C_torch_alias(self)
 }
@@ -7096,6 +11364,18 @@ torch_alias <- function(self) {
 #' @param right A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' boundaries <- torch_tensor(c(1, 3, 5, 7, 9))
+#' boundaries
+#' v <- torch_tensor(rbind(c(3, 6, 9), c(3, 6, 9)))
+#' v
+#' torch_bucketize(v, boundaries)
+#' torch_bucketize(v, boundaries, right=TRUE)
+#' }
+#' }
 torch_bucketize <- function(self, boundaries, out_int32 = FALSE, right = FALSE) {
     C_torch_bucketize(self, boundaries, as.logical(out_int32), as.logical(right))
 }
@@ -7111,6 +11391,21 @@ torch_bucketize <- function(self, boundaries, out_int32 = FALSE, right = FALSE) 
 #' @param sorter A torch_tensor. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' sorted_sequence <- torch_tensor(rbind(c(1, 3, 5, 7, 9), c(2, 4, 6, 8, 10)))
+#' sorted_sequence
+#' values <- torch_tensor(rbind(c(3, 6, 9), c(3, 6, 9)))
+#' values
+#' torch_searchsorted(sorted_sequence, values)
+#' torch_searchsorted(sorted_sequence, values, right=TRUE)
+#' sorted_sequence_1d <- torch_tensor(c(1, 3, 5, 7, 9))
+#' sorted_sequence_1d
+#' torch_searchsorted(sorted_sequence_1d, values)
+#' }
+#' }
 torch_searchsorted <- function(sorted_sequence, self, out_int32 = FALSE, right = FALSE, side = NULL, sorter = NULL) {
     C_torch_searchsorted(sorted_sequence, self, as.logical(out_int32), as.logical(right), side, sorter)
 }
@@ -7123,6 +11418,12 @@ torch_searchsorted <- function(sorted_sequence, self, out_int32 = FALSE, right =
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_mse_loss <- function(self, target, reduction = 1L) {
     C_torch_mse_loss(self, target, as.integer(reduction))
 }
@@ -7135,6 +11436,12 @@ torch_mse_loss <- function(self, target, reduction = 1L) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_l1_loss <- function(self, target, reduction = 1L) {
     C_torch_l1_loss(self, target, as.integer(reduction))
 }
@@ -7150,6 +11457,12 @@ torch_l1_loss <- function(self, target, reduction = 1L) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_multi_margin_loss <- function(self, target, p = 1, margin = 1, weight = NULL, reduction = 1L) {
     C_torch_multi_margin_loss(self, target, p, margin, weight, as.integer(reduction))
 }
@@ -7162,6 +11475,12 @@ torch_multi_margin_loss <- function(self, target, p = 1, margin = 1, weight = NU
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_multilabel_margin_loss <- function(self, target, reduction = 1L) {
     C_torch_multilabel_margin_loss(self, target, as.integer(reduction))
 }
@@ -7174,6 +11493,12 @@ torch_multilabel_margin_loss <- function(self, target, reduction = 1L) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_multilabel_margin_loss_forward <- function(self, target, reduction) {
     C_torch_multilabel_margin_loss_forward(self, target, as.integer(reduction))
 }
@@ -7188,6 +11513,12 @@ torch_multilabel_margin_loss_forward <- function(self, target, reduction) {
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nll_loss_nd <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100) {
     C_torch_nll_loss_nd(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
@@ -7202,6 +11533,12 @@ torch_nll_loss_nd <- function(self, target, weight = NULL, reduction = 1L, ignor
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nll_loss <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100) {
     C_torch_nll_loss(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
@@ -7216,6 +11553,12 @@ torch_nll_loss <- function(self, target, weight = NULL, reduction = 1L, ignore_i
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nll_loss_forward <- function(self, target, weight, reduction, ignore_index) {
     C_torch_nll_loss_forward(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
@@ -7230,6 +11573,12 @@ torch_nll_loss_forward <- function(self, target, weight, reduction, ignore_index
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nll_loss2d <- function(self, target, weight = NULL, reduction = 1L, ignore_index = -100) {
     C_torch_nll_loss2d(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
@@ -7244,6 +11593,12 @@ torch_nll_loss2d <- function(self, target, weight = NULL, reduction = 1L, ignore
 #' @param ignore_index An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nll_loss2d_forward <- function(self, target, weight, reduction, ignore_index) {
     C_torch_nll_loss2d_forward(self, target, weight, as.integer(reduction), as.integer(ignore_index))
 }
@@ -7257,6 +11612,12 @@ torch_nll_loss2d_forward <- function(self, target, weight, reduction, ignore_ind
 #' @param beta A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_smooth_l1_loss <- function(self, target, reduction = 1L, beta = 1.0) {
     C_torch_smooth_l1_loss(self, target, as.integer(reduction), as.double(beta))
 }
@@ -7270,6 +11631,12 @@ torch_smooth_l1_loss <- function(self, target, reduction = 1L, beta = 1.0) {
 #' @param delta A numeric value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_huber_loss <- function(self, target, reduction = 1L, delta = 1.0) {
     C_torch_huber_loss(self, target, as.integer(reduction), as.double(delta))
 }
@@ -7282,6 +11649,12 @@ torch_huber_loss <- function(self, target, reduction = 1L, delta = 1.0) {
 #' @param reduction An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_soft_margin_loss <- function(self, target, reduction = 1L) {
     C_torch_soft_margin_loss(self, target, as.integer(reduction))
 }
@@ -7295,6 +11668,12 @@ torch_soft_margin_loss <- function(self, target, reduction = 1L) {
 #' @param input_scale A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_elu <- function(self, alpha = 1, scale = 1, input_scale = 1) {
     C_torch_elu(self, alpha, scale, input_scale)
 }
@@ -7308,6 +11687,12 @@ torch_elu <- function(self, alpha = 1, scale = 1, input_scale = 1) {
 #' @param input_scale A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_elu_ <- function(self, alpha = 1, scale = 1, input_scale = 1) {
     C_torch_elu_(self, alpha, scale, input_scale)
 }
@@ -7319,6 +11704,12 @@ torch_elu_ <- function(self, alpha = 1, scale = 1, input_scale = 1) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_glu <- function(self, dim = -1) {
     C_torch_glu(self, as.integer(dim))
 }
@@ -7332,6 +11723,12 @@ torch_glu <- function(self, dim = -1) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_glu_jvp <- function(glu, x, dx, dim) {
     C_torch_glu_jvp(glu, x, dx, as.integer(dim))
 }
@@ -7342,6 +11739,12 @@ torch_glu_jvp <- function(glu, x, dx, dim) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hardsigmoid <- function(self) {
     C_torch_hardsigmoid(self)
 }
@@ -7352,6 +11755,12 @@ torch_hardsigmoid <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hardsigmoid_ <- function(self) {
     C_torch_hardsigmoid_(self)
 }
@@ -7364,6 +11773,12 @@ torch_hardsigmoid_ <- function(self) {
 #' @param max_val A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hardtanh <- function(self, min_val = -1, max_val = 1) {
     C_torch_hardtanh(self, min_val, max_val)
 }
@@ -7376,6 +11791,12 @@ torch_hardtanh <- function(self, min_val = -1, max_val = 1) {
 #' @param max_val A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hardtanh_ <- function(self, min_val = -1, max_val = 1) {
     C_torch_hardtanh_(self, min_val, max_val)
 }
@@ -7386,6 +11807,12 @@ torch_hardtanh_ <- function(self, min_val = -1, max_val = 1) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hardswish <- function(self) {
     C_torch_hardswish(self)
 }
@@ -7396,6 +11823,12 @@ torch_hardswish <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_hardswish_ <- function(self) {
     C_torch_hardswish_(self)
 }
@@ -7407,6 +11840,12 @@ torch_hardswish_ <- function(self) {
 #' @param negative_slope A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_leaky_relu <- function(self, negative_slope = 0.01) {
     C_torch_leaky_relu(self, negative_slope)
 }
@@ -7418,6 +11857,12 @@ torch_leaky_relu <- function(self, negative_slope = 0.01) {
 #' @param negative_slope A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_leaky_relu_ <- function(self, negative_slope = 0.01) {
     C_torch_leaky_relu_(self, negative_slope)
 }
@@ -7428,6 +11873,12 @@ torch_leaky_relu_ <- function(self, negative_slope = 0.01) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log_sigmoid <- function(self) {
     C_torch_log_sigmoid(self)
 }
@@ -7438,6 +11889,12 @@ torch_log_sigmoid <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log_sigmoid_forward <- function(self) {
     C_torch_log_sigmoid_forward(self)
 }
@@ -7453,6 +11910,12 @@ torch_log_sigmoid_forward <- function(self) {
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rrelu_with_noise <- function(self, noise, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu_with_noise(self, noise, lower, upper, as.logical(training), generator)
 }
@@ -7468,6 +11931,12 @@ torch_rrelu_with_noise <- function(self, noise, lower = 0.125, upper = 0.3333333
 #' @param generator A random number generator. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_rrelu_with_noise_ <- function(self, noise, lower = 0.125, upper = 0.3333333333333333, training = FALSE, generator = NULL) {
     C_torch_rrelu_with_noise_(self, noise, lower, upper, as.logical(training), generator)
 }
@@ -7480,6 +11949,12 @@ torch_rrelu_with_noise_ <- function(self, noise, lower = 0.125, upper = 0.333333
 #' @param threshold A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_softplus <- function(self, beta = 1, threshold = 20) {
     C_torch_softplus(self, beta, threshold)
 }
@@ -7491,6 +11966,12 @@ torch_softplus <- function(self, beta = 1, threshold = 20) {
 #' @param lambd A numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_softshrink <- function(self, lambd = 0.5) {
     C_torch_softshrink(self, lambd)
 }
@@ -7502,6 +11983,12 @@ torch_softshrink <- function(self, lambd = 0.5) {
 #' @param output_size (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_adaptive_avg_pool2d <- function(self, output_size) {
     C_torch_adaptive_avg_pool2d(self, output_size)
 }
@@ -7513,6 +12000,12 @@ torch_adaptive_avg_pool2d <- function(self, output_size) {
 #' @param output_size (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_adaptive_avg_pool3d <- function(self, output_size) {
     C_torch_adaptive_avg_pool3d(self, output_size)
 }
@@ -7524,6 +12017,12 @@ torch_adaptive_avg_pool3d <- function(self, output_size) {
 #' @param output_size (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_adaptive_max_pool2d <- function(self, output_size) {
     C_torch_adaptive_max_pool2d(self, output_size)
 }
@@ -7535,6 +12034,12 @@ torch_adaptive_max_pool2d <- function(self, output_size) {
 #' @param output_size (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_adaptive_max_pool3d <- function(self, output_size) {
     C_torch_adaptive_max_pool3d(self, output_size)
 }
@@ -7551,6 +12056,12 @@ torch_adaptive_max_pool3d <- function(self, output_size) {
 #' @param divisor_override An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_avg_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, count_include_pad = TRUE, divisor_override = NULL) {
     C_torch_avg_pool2d(self, kernel_size, stride, padding, as.logical(ceil_mode), as.logical(count_include_pad), divisor_override)
 }
@@ -7567,6 +12078,12 @@ torch_avg_pool2d <- function(self, kernel_size, stride = NULL, padding = 0, ceil
 #' @param divisor_override An integer. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_avg_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, ceil_mode = FALSE, count_include_pad = TRUE, divisor_override = NULL) {
     C_torch_avg_pool3d(self, kernel_size, stride, padding, as.logical(ceil_mode), as.logical(count_include_pad), divisor_override)
 }
@@ -7580,6 +12097,12 @@ torch_avg_pool3d <- function(self, kernel_size, stride = NULL, padding = 0, ceil
 #' @param random_samples A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fractional_max_pool2d <- function(self, kernel_size, output_size, random_samples) {
     C_torch_fractional_max_pool2d(self, kernel_size, output_size, random_samples)
 }
@@ -7593,6 +12116,12 @@ torch_fractional_max_pool2d <- function(self, kernel_size, output_size, random_s
 #' @param random_samples A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fractional_max_pool3d <- function(self, kernel_size, output_size, random_samples) {
     C_torch_fractional_max_pool3d(self, kernel_size, output_size, random_samples)
 }
@@ -7608,6 +12137,12 @@ torch_fractional_max_pool3d <- function(self, kernel_size, output_size, random_s
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_pool2d_with_indices <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool2d_with_indices(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -7623,6 +12158,12 @@ torch_max_pool2d_with_indices <- function(self, kernel_size, stride = NULL, padd
 #' @param ceil_mode A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_pool3d_with_indices <- function(self, kernel_size, stride = NULL, padding = 0, dilation = 1, ceil_mode = FALSE) {
     C_torch_max_pool3d_with_indices(self, kernel_size, stride, padding, dilation, as.logical(ceil_mode))
 }
@@ -7635,6 +12176,12 @@ torch_max_pool3d_with_indices <- function(self, kernel_size, stride = NULL, padd
 #' @param output_size (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_unpool2d <- function(self, indices, output_size) {
     C_torch_max_unpool2d(self, indices, output_size)
 }
@@ -7649,6 +12196,12 @@ torch_max_unpool2d <- function(self, indices, output_size) {
 #' @param padding (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_max_unpool3d <- function(self, indices, output_size, stride, padding) {
     C_torch_max_unpool3d(self, indices, output_size, stride, padding)
 }
@@ -7660,6 +12213,12 @@ torch_max_unpool3d <- function(self, indices, output_size, stride, padding) {
 #' @param padding (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_reflection_pad1d <- function(self, padding) {
     C_torch_reflection_pad1d(self, padding)
 }
@@ -7671,6 +12230,12 @@ torch_reflection_pad1d <- function(self, padding) {
 #' @param padding (int[4]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_reflection_pad2d <- function(self, padding) {
     C_torch_reflection_pad2d(self, padding)
 }
@@ -7682,6 +12247,12 @@ torch_reflection_pad2d <- function(self, padding) {
 #' @param padding (int[6]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_reflection_pad3d <- function(self, padding) {
     C_torch_reflection_pad3d(self, padding)
 }
@@ -7693,6 +12264,12 @@ torch_reflection_pad3d <- function(self, padding) {
 #' @param padding (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_replication_pad1d <- function(self, padding) {
     C_torch_replication_pad1d(self, padding)
 }
@@ -7704,6 +12281,12 @@ torch_replication_pad1d <- function(self, padding) {
 #' @param padding (int[4]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_replication_pad2d <- function(self, padding) {
     C_torch_replication_pad2d(self, padding)
 }
@@ -7715,6 +12298,12 @@ torch_replication_pad2d <- function(self, padding) {
 #' @param padding (int[6]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_replication_pad3d <- function(self, padding) {
     C_torch_replication_pad3d(self, padding)
 }
@@ -7728,6 +12317,12 @@ torch_replication_pad3d <- function(self, padding) {
 #' @param value A numeric value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_pad <- function(self, pad, mode = "constant", value = NULL) {
     C_torch_pad(self, pad, mode, value)
 }
@@ -7741,6 +12336,12 @@ torch_pad <- function(self, pad, mode = "constant", value = NULL) {
 #' @param scale_factors A numeric vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_upsample_linear1d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_linear1d(input, output_size, as.logical(align_corners), scale_factors)
 }
@@ -7754,6 +12355,12 @@ torch_upsample_linear1d <- function(input, output_size, align_corners, scale_fac
 #' @param scale_factors A numeric vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_upsample_bilinear2d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_bilinear2d(input, output_size, as.logical(align_corners), scale_factors)
 }
@@ -7767,6 +12374,12 @@ torch_upsample_bilinear2d <- function(input, output_size, align_corners, scale_f
 #' @param scale_factors A numeric vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_upsample_trilinear3d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_trilinear3d(input, output_size, as.logical(align_corners), scale_factors)
 }
@@ -7780,6 +12393,12 @@ torch_upsample_trilinear3d <- function(input, output_size, align_corners, scale_
 #' @param scale_factors A numeric vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_upsample_bicubic2d <- function(input, output_size, align_corners, scale_factors) {
     C_torch_upsample_bicubic2d(input, output_size, as.logical(align_corners), scale_factors)
 }
@@ -7792,6 +12411,12 @@ torch_upsample_bicubic2d <- function(input, output_size, align_corners, scale_fa
 #' @param scale_factors A numeric vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_upsample_nearest1d <- function(input, output_size, scale_factors) {
     C_torch_upsample_nearest1d(input, output_size, scale_factors)
 }
@@ -7804,6 +12429,12 @@ torch_upsample_nearest1d <- function(input, output_size, scale_factors) {
 #' @param scale_factors A numeric vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_upsample_nearest2d <- function(input, output_size, scale_factors) {
     C_torch_upsample_nearest2d(input, output_size, scale_factors)
 }
@@ -7816,6 +12447,12 @@ torch_upsample_nearest2d <- function(input, output_size, scale_factors) {
 #' @param scale_factors A numeric vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_upsample_nearest3d <- function(input, output_size, scale_factors) {
     C_torch_upsample_nearest3d(input, output_size, scale_factors)
 }
@@ -7833,6 +12470,12 @@ torch_upsample_nearest3d <- function(input, output_size, scale_factors) {
 #' @param dilation (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slow_conv_transpose2d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, output_padding = 0, dilation = 1) {
     C_torch_slow_conv_transpose2d(self, weight, kernel_size, bias, stride, padding, output_padding, dilation)
 }
@@ -7850,6 +12493,12 @@ torch_slow_conv_transpose2d <- function(self, weight, kernel_size, bias = NULL, 
 #' @param dilation (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slow_conv_transpose3d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, output_padding = 0, dilation = 1) {
     C_torch_slow_conv_transpose3d(self, weight, kernel_size, bias, stride, padding, output_padding, dilation)
 }
@@ -7865,6 +12514,12 @@ torch_slow_conv_transpose3d <- function(self, weight, kernel_size, bias = NULL, 
 #' @param padding (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_thnn_conv2d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0) {
     C_torch_thnn_conv2d(self, weight, kernel_size, bias, stride, padding)
 }
@@ -7881,6 +12536,12 @@ torch_thnn_conv2d <- function(self, weight, kernel_size, bias = NULL, stride = 1
 #' @param dilation (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_conv_depthwise3d <- function(self, weight, kernel_size, bias, stride, padding, dilation) {
     C_torch_conv_depthwise3d(self, weight, kernel_size, bias, stride, padding, dilation)
 }
@@ -7896,6 +12557,12 @@ torch_conv_depthwise3d <- function(self, weight, kernel_size, bias, stride, padd
 #' @param padding (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slow_conv3d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0) {
     C_torch_slow_conv3d(self, weight, kernel_size, bias, stride, padding)
 }
@@ -7911,6 +12578,12 @@ torch_slow_conv3d <- function(self, weight, kernel_size, bias = NULL, stride = 1
 #' @param padding (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slow_conv3d_forward <- function(self, weight, kernel_size, bias, stride, padding) {
     C_torch_slow_conv3d_forward(self, weight, kernel_size, bias, stride, padding)
 }
@@ -7927,6 +12600,12 @@ torch_slow_conv3d_forward <- function(self, weight, kernel_size, bias, stride, p
 #' @param dilation (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slow_conv_dilated2d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, dilation = 1) {
     C_torch_slow_conv_dilated2d(self, weight, kernel_size, bias, stride, padding, dilation)
 }
@@ -7943,6 +12622,12 @@ torch_slow_conv_dilated2d <- function(self, weight, kernel_size, bias = NULL, st
 #' @param dilation (int[3]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_slow_conv_dilated3d <- function(self, weight, kernel_size, bias = NULL, stride = 1, padding = 0, dilation = 1) {
     C_torch_slow_conv_dilated3d(self, weight, kernel_size, bias, stride, padding, dilation)
 }
@@ -7958,6 +12643,12 @@ torch_slow_conv_dilated3d <- function(self, weight, kernel_size, bias = NULL, st
 #' @param stride (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_col2im <- function(self, output_size, kernel_size, dilation, padding, stride) {
     C_torch_col2im(self, output_size, kernel_size, dilation, padding, stride)
 }
@@ -7968,6 +12659,12 @@ torch_col2im <- function(self, output_size, kernel_size, dilation, padding, stri
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_column_stack <- function(tensors) {
     C_torch_column_stack(tensors)
 }
@@ -7982,6 +12679,12 @@ torch_column_stack <- function(tensors) {
 #' @param stride (int[2]).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_im2col <- function(self, kernel_size, dilation, padding, stride) {
     C_torch_im2col(self, kernel_size, dilation, padding, stride)
 }
@@ -7992,6 +12695,13 @@ torch_im2col <- function(self, kernel_size, dilation, padding, stride) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_isfinite(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
+#' }
+#' }
 torch_isfinite <- function(self) {
     C_torch_isfinite(self)
 }
@@ -8002,6 +12712,13 @@ torch_isfinite <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_isinf(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
+#' }
+#' }
 torch_isinf <- function(self) {
     C_torch_isinf(self)
 }
@@ -8012,6 +12729,14 @@ torch_isinf <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(-Inf, Inf, 1.2))
+#' torch_isposinf(a)
+#' }
+#' }
 torch_isposinf <- function(self) {
     C_torch_isposinf(self)
 }
@@ -8022,6 +12747,14 @@ torch_isposinf <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(-Inf, Inf, 1.2))
+#' torch_isneginf(a)
+#' }
+#' }
 torch_isneginf <- function(self) {
     C_torch_isneginf(self)
 }
@@ -8032,6 +12765,12 @@ torch_isneginf <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_entr <- function(self) {
     C_torch_special_entr(self)
 }
@@ -8042,6 +12781,12 @@ torch_special_entr <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_ndtri <- function(self) {
     C_torch_special_ndtri(self)
 }
@@ -8052,6 +12797,12 @@ torch_special_ndtri <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_log_ndtr <- function(self) {
     C_torch_special_log_ndtr(self)
 }
@@ -8062,6 +12813,12 @@ torch_special_log_ndtr <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_expm1 <- function(self) {
     C_torch_special_expm1(self)
 }
@@ -8072,6 +12829,12 @@ torch_special_expm1 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_exp2 <- function(self) {
     C_torch_special_exp2(self)
 }
@@ -8082,6 +12845,12 @@ torch_special_exp2 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_psi <- function(self) {
     C_torch_special_psi(self)
 }
@@ -8092,6 +12861,12 @@ torch_special_psi <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_digamma <- function(self) {
     C_torch_special_digamma(self)
 }
@@ -8102,6 +12877,12 @@ torch_special_digamma <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_gammaln <- function(self) {
     C_torch_special_gammaln(self)
 }
@@ -8112,6 +12893,12 @@ torch_special_gammaln <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_erf <- function(self) {
     C_torch_special_erf(self)
 }
@@ -8122,6 +12909,12 @@ torch_special_erf <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_erfc <- function(self) {
     C_torch_special_erfc(self)
 }
@@ -8132,6 +12925,12 @@ torch_special_erfc <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_erfcx <- function(self) {
     C_torch_special_erfcx(self)
 }
@@ -8142,6 +12941,12 @@ torch_special_erfcx <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_erfinv <- function(self) {
     C_torch_special_erfinv(self)
 }
@@ -8152,6 +12957,12 @@ torch_special_erfinv <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_ndtr <- function(self) {
     C_torch_special_ndtr(self)
 }
@@ -8163,6 +12974,12 @@ torch_special_ndtr <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_xlog1py <- function(self, other) {
     C_torch_special_xlog1py(self, other)
 }
@@ -8174,6 +12991,12 @@ torch_special_xlog1py <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_xlogy <- function(self, other) {
     C_torch_special_xlogy(self, other)
 }
@@ -8185,6 +13008,12 @@ torch_special_xlogy <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_zeta <- function(self, other) {
     C_torch_special_zeta(self, other)
 }
@@ -8195,6 +13024,12 @@ torch_special_zeta <- function(self, other) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_i0 <- function(self) {
     C_torch_special_i0(self)
 }
@@ -8205,6 +13040,12 @@ torch_special_i0 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_i0e <- function(self) {
     C_torch_special_i0e(self)
 }
@@ -8215,6 +13056,12 @@ torch_special_i0e <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_i1 <- function(self) {
     C_torch_special_i1(self)
 }
@@ -8225,6 +13072,12 @@ torch_special_i1 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_i1e <- function(self) {
     C_torch_special_i1e(self)
 }
@@ -8236,6 +13089,12 @@ torch_special_i1e <- function(self) {
 #' @param eps A numeric value. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_logit <- function(self, eps = NULL) {
     C_torch_special_logit(self, eps)
 }
@@ -8247,6 +13106,12 @@ torch_special_logit <- function(self, eps = NULL) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_polygamma <- function(n, self) {
     C_torch_special_polygamma(as.integer(n), self)
 }
@@ -8259,6 +13124,12 @@ torch_special_polygamma <- function(n, self) {
 #' @param keepdim A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_logsumexp <- function(self, dim, keepdim = FALSE) {
     C_torch_special_logsumexp(self, dim, as.logical(keepdim))
 }
@@ -8269,6 +13140,12 @@ torch_special_logsumexp <- function(self, dim, keepdim = FALSE) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_expit <- function(self) {
     C_torch_special_expit(self)
 }
@@ -8279,6 +13156,12 @@ torch_special_expit <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_sinc <- function(self) {
     C_torch_special_sinc(self)
 }
@@ -8290,6 +13173,12 @@ torch_special_sinc <- function(self) {
 #' @param decimals An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_round <- function(self, decimals = 0) {
     C_torch_special_round(self, as.integer(decimals))
 }
@@ -8300,6 +13189,12 @@ torch_special_round <- function(self, decimals = 0) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_log1p <- function(self) {
     C_torch_special_log1p(self)
 }
@@ -8312,6 +13207,12 @@ torch_special_log1p <- function(self) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_log_softmax <- function(self, dim, dtype = NULL) {
     C_torch_special_log_softmax(self, as.integer(dim), dtype)
 }
@@ -8323,6 +13224,12 @@ torch_special_log_softmax <- function(self, dim, dtype = NULL) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_gammainc <- function(self, other) {
     C_torch_special_gammainc(self, other)
 }
@@ -8334,6 +13241,12 @@ torch_special_gammainc <- function(self, other) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_gammaincc <- function(self, other) {
     C_torch_special_gammaincc(self, other)
 }
@@ -8345,6 +13258,12 @@ torch_special_gammaincc <- function(self, other) {
 #' @param p An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_multigammaln <- function(self, p) {
     C_torch_special_multigammaln(self, as.integer(p))
 }
@@ -8357,6 +13276,12 @@ torch_special_multigammaln <- function(self, p) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_softmax <- function(self, dim, dtype = NULL) {
     C_torch_special_softmax(self, as.integer(dim), dtype)
 }
@@ -8370,6 +13295,15 @@ torch_special_softmax <- function(self, dim, dtype = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' t <- torch_arange(start = 0, end = 3)
+#' t
+#' torch_fft_fft(t, norm = "backward")
+#' 
+#' }
+#' }
 torch_fft_fft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_fft(self, n, as.integer(dim), norm)
 }
@@ -8383,6 +13317,17 @@ torch_fft_fft <- function(self, n = NULL, dim = -1, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' t <- torch_arange(start = 0, end = 3)
+#' t
+#' x <- torch_fft_fft(t, norm = "backward")
+#' torch_fft_ifft(x)
+#' 
+#' 
+#' }
+#' }
 torch_fft_ifft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_ifft(self, n, as.integer(dim), norm)
 }
@@ -8396,6 +13341,14 @@ torch_fft_ifft <- function(self, n = NULL, dim = -1, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' t <- torch_arange(start = 0, end = 3)
+#' torch_fft_rfft(t)
+#' 
+#' }
+#' }
 torch_fft_rfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_rfft(self, n, as.integer(dim), norm)
 }
@@ -8409,6 +13362,16 @@ torch_fft_rfft <- function(self, n = NULL, dim = -1, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' t <- torch_arange(start = 0, end = 4)
+#' x <- torch_fft_rfft(t)
+#' torch_fft_irfft(x)
+#' torch_fft_irfft(x, n = t$numel())
+#' 
+#' }
+#' }
 torch_fft_irfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_irfft(self, n, as.integer(dim), norm)
 }
@@ -8422,6 +13385,12 @@ torch_fft_irfft <- function(self, n = NULL, dim = -1, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_hfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_hfft(self, n, as.integer(dim), norm)
 }
@@ -8435,6 +13404,12 @@ torch_fft_hfft <- function(self, n = NULL, dim = -1, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_ihfft <- function(self, n = NULL, dim = -1, norm = NULL) {
     C_torch_fft_ihfft(self, n, as.integer(dim), norm)
 }
@@ -8448,6 +13423,12 @@ torch_fft_ihfft <- function(self, n = NULL, dim = -1, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_fft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_fft2(self, s, dim, norm)
 }
@@ -8461,6 +13442,12 @@ torch_fft_fft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_ifft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ifft2(self, s, dim, norm)
 }
@@ -8474,6 +13461,12 @@ torch_fft_ifft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_rfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_rfft2(self, s, dim, norm)
 }
@@ -8487,6 +13480,12 @@ torch_fft_rfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_irfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_irfft2(self, s, dim, norm)
 }
@@ -8500,6 +13499,12 @@ torch_fft_irfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_hfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_hfft2(self, s, dim, norm)
 }
@@ -8513,6 +13518,12 @@ torch_fft_hfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_ihfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ihfft2(self, s, dim, norm)
 }
@@ -8526,6 +13537,12 @@ torch_fft_ihfft2 <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_fftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_fftn(self, s, dim, norm)
 }
@@ -8539,6 +13556,12 @@ torch_fft_fftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_ifftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ifftn(self, s, dim, norm)
 }
@@ -8552,6 +13575,12 @@ torch_fft_ifftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_rfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_rfftn(self, s, dim, norm)
 }
@@ -8565,6 +13594,12 @@ torch_fft_rfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_irfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_irfftn(self, s, dim, norm)
 }
@@ -8578,6 +13613,12 @@ torch_fft_irfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_hfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_hfftn(self, s, dim, norm)
 }
@@ -8591,6 +13632,12 @@ torch_fft_hfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param norm A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_ihfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
     C_torch_fft_ihfftn(self, s, dim, norm)
 }
@@ -8604,6 +13651,14 @@ torch_fft_ihfftn <- function(self, s = NULL, dim = NULL, norm = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' torch_fft_fftfreq(5) # Nyquist frequency at f[3] is positive
+#' torch_fft_fftfreq(4) # Nyquist frequency at f[3] is given as negative
+#' 
+#' }
+#' }
 torch_fft_fftfreq <- function(n, d = 1.0, dtype = NULL, device = NULL) {
     C_torch_fft_fftfreq(as.integer(n), as.double(d), dtype, device)
 }
@@ -8617,6 +13672,12 @@ torch_fft_fftfreq <- function(n, d = 1.0, dtype = NULL, device = NULL) {
 #' @param device A device string (e.g., "cpu"). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_rfftfreq <- function(n, d = 1.0, dtype = NULL, device = NULL) {
     C_torch_fft_rfftfreq(as.integer(n), as.double(d), dtype, device)
 }
@@ -8628,6 +13689,12 @@ torch_fft_rfftfreq <- function(n, d = 1.0, dtype = NULL, device = NULL) {
 #' @param dim (int[1]). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_fftshift <- function(self, dim = NULL) {
     C_torch_fft_fftshift(self, dim)
 }
@@ -8639,6 +13706,12 @@ torch_fft_fftshift <- function(self, dim = NULL) {
 #' @param dim (int[1]). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_fft_ifftshift <- function(self, dim = NULL) {
     C_torch_fft_ifftshift(self, dim)
 }
@@ -8651,6 +13724,12 @@ torch_fft_ifftshift <- function(self, dim = NULL) {
 #' @param check_errors A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_cholesky_ex <- function(self, upper = FALSE, check_errors = FALSE) {
     C_torch_linalg_cholesky_ex(self, as.logical(upper), as.logical(check_errors))
 }
@@ -8662,6 +13741,12 @@ torch_linalg_cholesky_ex <- function(self, upper = FALSE, check_errors = FALSE) 
 #' @param upper A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_cholesky <- function(self, upper = FALSE) {
     C_torch_linalg_cholesky(self, as.logical(upper))
 }
@@ -8674,6 +13759,12 @@ torch_linalg_cholesky <- function(self, upper = FALSE) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_cross <- function(self, other, dim = -1) {
     C_torch_linalg_cross(self, other, as.integer(dim))
 }
@@ -8685,6 +13776,12 @@ torch_linalg_cross <- function(self, other, dim = -1) {
 #' @param pivot A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_lu_factor <- function(A, pivot = TRUE) {
     C_torch_linalg_lu_factor(A, as.logical(pivot))
 }
@@ -8697,6 +13794,12 @@ torch_linalg_lu_factor <- function(A, pivot = TRUE) {
 #' @param check_errors A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_lu_factor_ex <- function(A, pivot = TRUE, check_errors = FALSE) {
     C_torch_linalg_lu_factor_ex(A, as.logical(pivot), as.logical(check_errors))
 }
@@ -8708,6 +13811,12 @@ torch_linalg_lu_factor_ex <- function(A, pivot = TRUE, check_errors = FALSE) {
 #' @param pivot A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_lu <- function(A, pivot = TRUE) {
     C_torch_linalg_lu(A, as.logical(pivot))
 }
@@ -8722,6 +13831,12 @@ torch_linalg_lu <- function(A, pivot = TRUE) {
 #' @param adjoint A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_lu_solve <- function(LU, pivots, B, left = TRUE, adjoint = FALSE) {
     C_torch_linalg_lu_solve(LU, pivots, B, as.logical(left), as.logical(adjoint))
 }
@@ -8732,6 +13847,12 @@ torch_linalg_lu_solve <- function(LU, pivots, B, left = TRUE, adjoint = FALSE) {
 #' @param A A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_det <- function(A) {
     C_torch_linalg_det(A)
 }
@@ -8742,6 +13863,17 @@ torch_linalg_det <- function(A) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' A = torch_randn(c(3, 3))
+#' torch_det(A)
+#' A = torch_randn(c(3, 2, 2))
+#' A
+#' A$det()
+#' }
+#' }
 torch_det <- function(self) {
     C_torch_det(self)
 }
@@ -8754,6 +13886,12 @@ torch_det <- function(self) {
 #' @param check_errors A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_ldl_factor_ex <- function(self, hermitian = FALSE, check_errors = FALSE) {
     C_torch_linalg_ldl_factor_ex(self, as.logical(hermitian), as.logical(check_errors))
 }
@@ -8765,6 +13903,12 @@ torch_linalg_ldl_factor_ex <- function(self, hermitian = FALSE, check_errors = F
 #' @param hermitian A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_ldl_factor <- function(self, hermitian = FALSE) {
     C_torch_linalg_ldl_factor(self, as.logical(hermitian))
 }
@@ -8778,6 +13922,12 @@ torch_linalg_ldl_factor <- function(self, hermitian = FALSE) {
 #' @param hermitian A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_ldl_solve <- function(LD, pivots, B, hermitian = FALSE) {
     C_torch_linalg_ldl_solve(LD, pivots, B, as.logical(hermitian))
 }
@@ -8791,6 +13941,12 @@ torch_linalg_ldl_solve <- function(LD, pivots, B, hermitian = FALSE) {
 #' @param driver A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_lstsq <- function(self, b, rcond = NULL, driver = NULL) {
     C_torch_linalg_lstsq(self, b, rcond, driver)
 }
@@ -8802,6 +13958,12 @@ torch_linalg_lstsq <- function(self, b, rcond = NULL, driver = NULL) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_matmul <- function(self, other) {
     C_torch_linalg_matmul(self, other)
 }
@@ -8814,6 +13976,12 @@ torch_linalg_matmul <- function(self, other) {
 #' @param dim An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_vecdot <- function(x, y, dim = -1) {
     C_torch_linalg_vecdot(x, y, as.integer(dim))
 }
@@ -8824,6 +13992,12 @@ torch_linalg_vecdot <- function(x, y, dim = -1) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_matrix_exp <- function(self) {
     C_torch_linalg_matrix_exp(self)
 }
@@ -8834,6 +14008,12 @@ torch_linalg_matrix_exp <- function(self) {
 #' @param A A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_slogdet <- function(A) {
     C_torch_linalg_slogdet(A)
 }
@@ -8844,6 +14024,17 @@ torch_linalg_slogdet <- function(A) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' A = torch_randn(c(3, 3))
+#' A
+#' torch_det(A)
+#' torch_logdet(A)
+#' torch_slogdet(A)
+#' }
+#' }
 torch_slogdet <- function(self) {
     C_torch_slogdet(self)
 }
@@ -8854,6 +14045,18 @@ torch_slogdet <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' A = torch_randn(c(3, 3))
+#' torch_det(A)
+#' torch_logdet(A)
+#' A
+#' A$det()
+#' A$det()$log()
+#' }
+#' }
 torch_logdet <- function(self) {
     C_torch_logdet(self)
 }
@@ -8864,6 +14067,12 @@ torch_logdet <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_eig <- function(self) {
     C_torch_linalg_eig(self)
 }
@@ -8874,6 +14083,12 @@ torch_linalg_eig <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_eigvals <- function(self) {
     C_torch_linalg_eigvals(self)
 }
@@ -8885,6 +14100,12 @@ torch_linalg_eigvals <- function(self) {
 #' @param UPLO A character string.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_eigh <- function(self, UPLO = "L") {
     C_torch_linalg_eigh(self, UPLO)
 }
@@ -8896,6 +14117,12 @@ torch_linalg_eigh <- function(self, UPLO = "L") {
 #' @param UPLO A character string.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_eigvalsh <- function(self, UPLO = "L") {
     C_torch_linalg_eigvalsh(self, UPLO)
 }
@@ -8907,6 +14134,12 @@ torch_linalg_eigvalsh <- function(self, UPLO = "L") {
 #' @param tau A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_householder_product <- function(input, tau) {
     C_torch_linalg_householder_product(input, tau)
 }
@@ -8918,6 +14151,12 @@ torch_linalg_householder_product <- function(input, tau) {
 #' @param check_errors A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_inv_ex <- function(A, check_errors = FALSE) {
     C_torch_linalg_inv_ex(A, as.logical(check_errors))
 }
@@ -8928,6 +14167,12 @@ torch_linalg_inv_ex <- function(A, check_errors = FALSE) {
 #' @param A A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_inv <- function(A) {
     C_torch_linalg_inv(A)
 }
@@ -8938,6 +14183,23 @@ torch_linalg_inv <- function(A) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_rand(c(4, 4))
+#' y = torch_inverse(x)
+#' z = torch_mm(x, y)
+#' z
+#' torch_max(torch_abs(z - torch_eye(4))) # Max non-zero
+#' # Batched inverse example
+#' x = torch_randn(c(2, 3, 4, 4))
+#' y = torch_inverse(x)
+#' z = torch_matmul(x, y)
+#' torch_max(torch_abs(z - torch_eye(4)$expand_as(x))) # Max non-zero
+#' 
+#' }
+#' }
 torch_inverse <- function(self) {
     C_torch_inverse(self)
 }
@@ -8949,6 +14211,12 @@ torch_inverse <- function(self) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_inner <- function(self, other) {
     C_torch_inner(self, other)
 }
@@ -8960,6 +14228,15 @@ torch_inner <- function(self, other) {
 #' @param vec2 A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' v1 = torch_arange(1., 5.)
+#' v2 = torch_arange(1., 4.)
+#' torch_ger(v1, v2)
+#' }
+#' }
 torch_ger <- function(self, vec2) {
     C_torch_ger(self, vec2)
 }
@@ -8974,6 +14251,12 @@ torch_ger <- function(self, vec2) {
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_norm <- function(self, ord = NULL, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_linalg_norm(self, ord, dim, as.logical(keepdim), dtype)
 }
@@ -8988,6 +14271,12 @@ torch_linalg_norm <- function(self, ord = NULL, dim = NULL, keepdim = FALSE, dty
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_vector_norm <- function(self, ord = 2, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_linalg_vector_norm(self, ord, dim, as.logical(keepdim), dtype)
 }
@@ -9002,6 +14291,12 @@ torch_linalg_vector_norm <- function(self, ord = 2, dim = NULL, keepdim = FALSE,
 #' @param dtype A torch dtype (e.g., torch_float32). Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_matrix_norm <- function(self, ord, dim = NULL, keepdim = FALSE, dtype = NULL) {
     C_torch_linalg_matrix_norm(self, ord, dim, as.logical(keepdim), dtype)
 }
@@ -9014,6 +14309,12 @@ torch_linalg_matrix_norm <- function(self, ord, dim = NULL, keepdim = FALSE, dty
 #' @param driver A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_svd <- function(A, full_matrices = TRUE, driver = NULL) {
     C_torch_linalg_svd(A, as.logical(full_matrices), driver)
 }
@@ -9025,6 +14326,12 @@ torch_linalg_svd <- function(A, full_matrices = TRUE, driver = NULL) {
 #' @param driver A character string. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_svdvals <- function(A, driver = NULL) {
     C_torch_linalg_svdvals(A, driver)
 }
@@ -9036,6 +14343,12 @@ torch_linalg_svdvals <- function(A, driver = NULL) {
 #' @param p A numeric scalar. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_cond <- function(self, p = NULL) {
     C_torch_linalg_cond(self, p)
 }
@@ -9049,6 +14362,12 @@ torch_linalg_cond <- function(self, p = NULL) {
 #' @param hermitian A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_pinv <- function(self, atol = NULL, rtol = NULL, hermitian = FALSE) {
     C_torch_linalg_pinv(self, atol, rtol, as.logical(hermitian))
 }
@@ -9062,6 +14381,12 @@ torch_linalg_pinv <- function(self, atol = NULL, rtol = NULL, hermitian = FALSE)
 #' @param check_errors A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_solve_ex <- function(A, B, left = TRUE, check_errors = FALSE) {
     C_torch_linalg_solve_ex(A, B, as.logical(left), as.logical(check_errors))
 }
@@ -9074,6 +14399,12 @@ torch_linalg_solve_ex <- function(A, B, left = TRUE, check_errors = FALSE) {
 #' @param left A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_solve <- function(A, B, left = TRUE) {
     C_torch_linalg_solve(A, B, as.logical(left))
 }
@@ -9085,6 +14416,12 @@ torch_linalg_solve <- function(A, B, left = TRUE) {
 #' @param ind An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_tensorinv <- function(self, ind = 2) {
     C_torch_linalg_tensorinv(self, as.integer(ind))
 }
@@ -9097,6 +14434,12 @@ torch_linalg_tensorinv <- function(self, ind = 2) {
 #' @param dims An integer vector. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_tensorsolve <- function(self, other, dims = NULL) {
     C_torch_linalg_tensorsolve(self, other, dims)
 }
@@ -9108,6 +14451,12 @@ torch_linalg_tensorsolve <- function(self, other, dims = NULL) {
 #' @param mode A character string.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_qr <- function(A, mode = 'reduced') {
     C_torch_linalg_qr(A, mode)
 }
@@ -9119,6 +14468,12 @@ torch_linalg_qr <- function(A, mode = 'reduced') {
 #' @param n An integer.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_matrix_power <- function(self, n) {
     C_torch_linalg_matrix_power(self, as.integer(n))
 }
@@ -9132,6 +14487,12 @@ torch_linalg_matrix_power <- function(self, n) {
 #' @param hermitian A logical value.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_matrix_rank <- function(input, atol = NULL, rtol = NULL, hermitian = FALSE) {
     C_torch_linalg_matrix_rank(input, atol, rtol, as.logical(hermitian))
 }
@@ -9142,6 +14503,12 @@ torch_linalg_matrix_rank <- function(input, atol = NULL, rtol = NULL, hermitian 
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_linalg_multi_dot <- function(tensors) {
     C_torch_linalg_multi_dot(tensors)
 }
@@ -9154,6 +14521,12 @@ torch_linalg_multi_dot <- function(tensors) {
 #' @param output_size An integer vector. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_nested_to_padded_tensor <- function(self, padding, output_size = NULL) {
     C_torch_nested_to_padded_tensor(self, as.double(padding), output_size)
 }
@@ -9171,6 +14544,12 @@ torch_nested_to_padded_tensor <- function(self, padding, output_size = NULL) {
 #' @param initial A numeric scalar. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_segment_reduce <- function(data, reduce, lengths = NULL, indices = NULL, offsets = NULL, axis = 0, unsafe = FALSE, initial = NULL) {
     C_torch_segment_reduce(data, reduce, lengths, indices, offsets, as.integer(axis), as.logical(unsafe), initial)
 }
@@ -9184,6 +14563,12 @@ torch_segment_reduce <- function(data, reduce, lengths = NULL, indices = NULL, o
 #' @param padding_side A character string.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0.0, padding_side = "right") {
     C_torch_pad_sequence(sequences, as.logical(batch_first), as.double(padding_value), padding_side)
 }
@@ -9194,6 +14579,12 @@ torch_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_flatten_dense_tensors <- function(tensors) {
     C_torch_flatten_dense_tensors(tensors)
 }
@@ -9205,6 +14596,12 @@ torch_flatten_dense_tensors <- function(tensors) {
 #' @param tensors A list of torch_tensors.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_unflatten_dense_tensors <- function(flat, tensors) {
     C_torch_unflatten_dense_tensors(flat, tensors)
 }
@@ -9217,6 +14614,12 @@ torch_unflatten_dense_tensors <- function(flat, tensors) {
 #' @param output_size An integer vector. Optional.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_to_padded_tensor <- function(self, padding, output_size = NULL) {
     C_torch_to_padded_tensor(self, as.double(padding), output_size)
 }
@@ -9227,6 +14630,12 @@ torch_to_padded_tensor <- function(self, padding, output_size = NULL) {
 #' @param x A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_airy_ai <- function(x) {
     C_torch_special_airy_ai(x)
 }
@@ -9237,6 +14646,12 @@ torch_special_airy_ai <- function(x) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_bessel_j0 <- function(self) {
     C_torch_special_bessel_j0(self)
 }
@@ -9247,6 +14662,12 @@ torch_special_bessel_j0 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_bessel_j1 <- function(self) {
     C_torch_special_bessel_j1(self)
 }
@@ -9257,6 +14678,12 @@ torch_special_bessel_j1 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_bessel_y0 <- function(self) {
     C_torch_special_bessel_y0(self)
 }
@@ -9267,6 +14694,12 @@ torch_special_bessel_y0 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_bessel_y1 <- function(self) {
     C_torch_special_bessel_y1(self)
 }
@@ -9278,6 +14711,12 @@ torch_special_bessel_y1 <- function(self) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_chebyshev_polynomial_t <- function(x, n) {
     C_torch_special_chebyshev_polynomial_t(x, n)
 }
@@ -9289,6 +14728,12 @@ torch_special_chebyshev_polynomial_t <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_chebyshev_polynomial_u <- function(x, n) {
     C_torch_special_chebyshev_polynomial_u(x, n)
 }
@@ -9300,6 +14745,12 @@ torch_special_chebyshev_polynomial_u <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_chebyshev_polynomial_v <- function(x, n) {
     C_torch_special_chebyshev_polynomial_v(x, n)
 }
@@ -9311,6 +14762,12 @@ torch_special_chebyshev_polynomial_v <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_chebyshev_polynomial_w <- function(x, n) {
     C_torch_special_chebyshev_polynomial_w(x, n)
 }
@@ -9322,6 +14779,12 @@ torch_special_chebyshev_polynomial_w <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_hermite_polynomial_h <- function(x, n) {
     C_torch_special_hermite_polynomial_h(x, n)
 }
@@ -9333,6 +14796,12 @@ torch_special_hermite_polynomial_h <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_hermite_polynomial_he <- function(x, n) {
     C_torch_special_hermite_polynomial_he(x, n)
 }
@@ -9344,6 +14813,12 @@ torch_special_hermite_polynomial_he <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_laguerre_polynomial_l <- function(x, n) {
     C_torch_special_laguerre_polynomial_l(x, n)
 }
@@ -9355,6 +14830,12 @@ torch_special_laguerre_polynomial_l <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_legendre_polynomial_p <- function(x, n) {
     C_torch_special_legendre_polynomial_p(x, n)
 }
@@ -9365,6 +14846,12 @@ torch_special_legendre_polynomial_p <- function(x, n) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_modified_bessel_i0 <- function(self) {
     C_torch_special_modified_bessel_i0(self)
 }
@@ -9375,6 +14862,12 @@ torch_special_modified_bessel_i0 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_modified_bessel_i1 <- function(self) {
     C_torch_special_modified_bessel_i1(self)
 }
@@ -9385,6 +14878,12 @@ torch_special_modified_bessel_i1 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_modified_bessel_k0 <- function(self) {
     C_torch_special_modified_bessel_k0(self)
 }
@@ -9395,6 +14894,12 @@ torch_special_modified_bessel_k0 <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_modified_bessel_k1 <- function(self) {
     C_torch_special_modified_bessel_k1(self)
 }
@@ -9405,6 +14910,12 @@ torch_special_modified_bessel_k1 <- function(self) {
 #' @param x A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_scaled_modified_bessel_k0 <- function(x) {
     C_torch_special_scaled_modified_bessel_k0(x)
 }
@@ -9415,6 +14926,12 @@ torch_special_scaled_modified_bessel_k0 <- function(x) {
 #' @param x A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_scaled_modified_bessel_k1 <- function(x) {
     C_torch_special_scaled_modified_bessel_k1(x)
 }
@@ -9426,6 +14943,12 @@ torch_special_scaled_modified_bessel_k1 <- function(x) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_shifted_chebyshev_polynomial_t <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_t(x, n)
 }
@@ -9437,6 +14960,12 @@ torch_special_shifted_chebyshev_polynomial_t <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_shifted_chebyshev_polynomial_u <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_u(x, n)
 }
@@ -9448,6 +14977,12 @@ torch_special_shifted_chebyshev_polynomial_u <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_shifted_chebyshev_polynomial_v <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_v(x, n)
 }
@@ -9459,6 +14994,12 @@ torch_special_shifted_chebyshev_polynomial_v <- function(x, n) {
 #' @param n A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_shifted_chebyshev_polynomial_w <- function(x, n) {
     C_torch_special_shifted_chebyshev_polynomial_w(x, n)
 }
@@ -9469,6 +15010,12 @@ torch_special_shifted_chebyshev_polynomial_w <- function(x, n) {
 #' @param x A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_special_spherical_bessel_j0 <- function(x) {
     C_torch_special_spherical_bessel_j0(x)
 }
@@ -10917,6 +16464,12 @@ torch_special_spherical_bessel_j0 <- function(x) {
 #' @param use_fast_accum Use fast accumulation (less precise, faster). Default FALSE.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_scaled_mm <- function(self, mat2, scale_a, scale_b,
                             bias = NULL, scale_result = NULL,
                             out_dtype = NULL, use_fast_accum = FALSE) {
@@ -10929,46 +16482,145 @@ torch_scaled_mm <- function(self, mat2, scale_a, scale_b,
 # These ops have C wrappers and tensor methods but were missing
 # as top-level exported functions.
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
+#' @param keepdim Logical; keep reduced dimensions.
 #' @rdname torch_argmax
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_argmax(a)
+#' 
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_argmax(a, dim=1)
+#' }
+#' }
 torch_argmax <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_argmax(self, dim, as.logical(keepdim))
 }
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
+#' @param keepdim Logical; keep reduced dimensions.
 #' @rdname torch_argmin
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_argmin(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_argmin(a, dim=1)
+#' }
+#' }
 torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
     C_torch_argmin(self, dim, as.logical(keepdim))
 }
 
+#' @param self A `torch_tensor`.
+#' @param mat2 A `torch_tensor` (matrix).
 #' @rdname torch_bmm
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input = torch_randn(c(10, 3, 4))
+#' mat2 = torch_randn(c(10, 4, 5))
+#' res = torch_bmm(input, mat2)
+#' res
+#' }
+#' }
 torch_bmm <- function(self, mat2) {
     C_torch_bmm(self, mat2)
 }
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_ceil
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_ceil(a)
+#' }
+#' }
 torch_ceil <- function(self) {
     C_torch_ceil(self)
 }
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_clone
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_clone <- function(self) {
     C_torch_clone(self)
 }
 
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param groups Integer number of groups.
 #' @rdname torch_conv2d
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' # With square kernels and equal stride
+#' filters = torch_randn(c(8,4,3,3))
+#' inputs = torch_randn(c(1,4,5,5))
+#' nnf_conv2d(inputs, filters, padding=1)
+#' }
+#' }
 torch_conv2d <- function(input, weight, bias = NULL, stride = 1L,
                          padding = 0L, dilation = 1L, groups = 1L) {
     C_torch_conv2d(input, weight, bias, as.integer(stride),
                    as.integer(padding), as.integer(dilation), as.integer(groups))
 }
 
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param output_padding Integer vector output padding.
+#' @param groups Integer number of groups.
+#' @param dilation Integer vector dilation.
 #' @rdname torch_conv_transpose1d
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' inputs = torch_randn(c(20, 16, 50))
+#' weights = torch_randn(c(16, 33, 5))
+#' nnf_conv_transpose1d(inputs, weights)
+#' }
+#' }
 torch_conv_transpose1d <- function(input, weight, bias = NULL, stride = 1L,
                                     padding = 0L, output_padding = 0L,
                                     groups = 1L, dilation = 1L) {
@@ -10977,151 +16629,523 @@ torch_conv_transpose1d <- function(input, weight, bias = NULL, stride = 1L,
                               as.integer(groups), as.integer(dilation))
 }
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_eq
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_eq(torch_tensor(c(1,2,3,4)), torch_tensor(c(1, 3, 2, 4)))
+#' }
+#' }
 torch_eq <- function(self, other) C_torch_eq(self, other)
 
+#' @param self A `torch_tensor`.
+#' @param start_dim Integer starting dimension.
+#' @param end_dim Integer ending dimension.
 #' @rdname torch_flatten
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' t = torch_tensor(matrix(c(1, 2), ncol = 2))
+#' torch_flatten(t)
+#' torch_flatten(t, start_dim=2)
+#' }
+#' }
 torch_flatten <- function(self, start_dim = 1L, end_dim = -1L) {
     C_torch_flatten(self, as.integer(start_dim), as.integer(end_dim))
 }
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_floor_divide
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_tensor(c(4.0, 3.0))
+#' b = torch_tensor(c(2.0, 2.0))
+#' torch_floor_divide(a, b)
+#' torch_floor_divide(a, 1.4)
+#' }
+#' }
 torch_floor_divide <- function(self, other) C_torch_floor_divide(self, other)
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
+#' @param index A `torch_tensor` of indices.
 #' @rdname torch_gather
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' t = torch_tensor(matrix(c(1,2,3,4), ncol = 2, byrow = TRUE))
+#' torch_gather(t, 2, torch_tensor(matrix(c(1,1,2,1), ncol = 2, byrow=TRUE), dtype = torch_int64()))
+#' }
+#' }
 torch_gather <- function(self, dim, index) {
     C_torch_gather(self, as.integer(dim), index)
 }
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_ge
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_ge(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' }
+#' }
 torch_ge <- function(self, other) C_torch_ge(self, other)
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_gt
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_gt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' }
+#' }
 torch_gt <- function(self, other) C_torch_gt(self, other)
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
+#' @param index A `torch_tensor` of indices.
 #' @rdname torch_index_select
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(3, 4))
+#' x
+#' indices = torch_tensor(c(1, 3), dtype = torch_int64())
+#' torch_index_select(x, 1, indices)
+#' torch_index_select(x, 2, indices)
+#' }
+#' }
 torch_index_select <- function(self, dim, index) {
     C_torch_index_select(self, as.integer(dim), index)
 }
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_le
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_le(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' }
+#' }
 torch_le <- function(self, other) C_torch_le(self, other)
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_log10
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_rand(5)
+#' a
+#' torch_log10(a)
+#' }
+#' }
 torch_log10 <- function(self) C_torch_log10(self)
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_log2
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_rand(5)
+#' a
+#' torch_log2(a)
+#' }
+#' }
 torch_log2 <- function(self) C_torch_log2(self)
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_logical_not
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_logical_not(torch_tensor(c(TRUE, FALSE)))
+#' torch_logical_not(torch_tensor(c(0, 1, -10), dtype=torch_int8()))
+#' torch_logical_not(torch_tensor(c(0., 1.5, -10.), dtype=torch_double()))
+#' }
+#' }
 torch_logical_not <- function(self) C_torch_logical_not(self)
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_lt
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_lt(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(c(1,1,4,4), ncol = 2, byrow=TRUE)))
+#' }
+#' }
 torch_lt <- function(self, other) C_torch_lt(self, other)
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @rdname torch_max
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_max(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_max(a, dim = 1)
+#' 
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' b = torch_randn(c(4))
+#' b
+#' torch_max(a, other = b)
+#' }
+#' }
 torch_max <- function(self, dim = NULL) C_torch_max(self, dim)
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @rdname torch_min
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_min(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_min(a, dim = 1)
+#' 
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' b = torch_randn(c(4))
+#' b
+#' torch_min(a, other = b)
+#' }
+#' }
 torch_min <- function(self, dim = NULL) C_torch_min(self, dim)
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
+#' @param start Integer start index.
+#' @param length Integer length.
 #' @rdname torch_narrow
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_tensor(matrix(c(1:9), ncol = 3, byrow= TRUE))
+#' torch_narrow(x, 1, 1, 2)
+#' torch_narrow(x, 2, 2, 2)
+#' }
+#' }
 torch_narrow <- function(self, dim, start, length) {
     C_torch_narrow(self, as.integer(dim), as.integer(start), as.integer(length))
 }
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_ne
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_ne(torch_tensor(matrix(1:4, ncol = 2, byrow=TRUE)), 
+#'          torch_tensor(matrix(rep(c(1,4), each = 2), ncol = 2, byrow=TRUE)))
+#' }
+#' }
 torch_ne <- function(self, other) C_torch_ne(self, other)
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_neg
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(5))
+#' a
+#' torch_neg(a)
+#' }
+#' }
 torch_neg <- function(self) C_torch_neg(self)
 
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor` or scalar.
 #' @rdname torch_remainder
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_remainder(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
+#' torch_remainder(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
+#' }
+#' }
 torch_remainder <- function(self, other) C_torch_remainder(self, other)
 
+#' @param self A `torch_tensor`.
+#' @param repeats Integer or `torch_tensor` of repeat counts.
+#' @param dim Integer dimension.
 #' @rdname torch_repeat_interleave
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_tensor(c(1, 2, 3))
+#' x$repeat_interleave(2)
+#' y = torch_tensor(matrix(c(1, 2, 3, 4), ncol = 2, byrow=TRUE))
+#' torch_repeat_interleave(y, 2)
+#' torch_repeat_interleave(y, 3, dim=1)
+#' torch_repeat_interleave(y, torch_tensor(c(1, 2)), dim=1)
+#' 
+#' }
+#' }
 torch_repeat_interleave <- function(self, repeats, dim = NULL) {
     C_torch_repeat_interleave(self, repeats, dim)
 }
 
+#' @param self A `torch_tensor`.
+#' @param shape Integer vector shape.
 #' @rdname torch_reshape
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_arange(0, 3)
+#' torch_reshape(a, list(2, 2))
+#' b <- torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
+#' torch_reshape(b, list(-1))
+#' }
+#' }
 torch_reshape <- function(self, shape) C_torch_reshape(self, shape)
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_round
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_round(a)
+#' }
+#' }
 torch_round <- function(self) C_torch_round(self)
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_sign
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_tensor(c(0.7, -1.2, 0., 2.3))
+#' a
+#' torch_sign(a)
+#' }
+#' }
 torch_sign <- function(self) C_torch_sign(self)
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @rdname torch_squeeze
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_zeros(c(2, 1, 2, 1, 2))
+#' x
+#' y = torch_squeeze(x)
+#' y
+#' y = torch_squeeze(x, 1)
+#' y
+#' y = torch_squeeze(x, 2)
+#' y
+#' }
+#' }
 torch_squeeze <- function(self, dim = NULL) C_torch_squeeze(self, dim)
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_t
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(2,3))
+#' x
+#' torch_t(x)
+#' x = torch_randn(c(3))
+#' x
+#' torch_t(x)
+#' x = torch_randn(c(2, 3))
+#' x
+#' torch_t(x)
+#' }
+#' }
 torch_t <- function(self) C_torch_t(self)
 
+#' @param self A `torch_tensor`.
+#' @param dim0 Integer dimension.
+#' @param dim1 Integer dimension.
 #' @rdname torch_transpose
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(2, 3))
+#' x
+#' torch_transpose(x, 1, 2)
+#' }
+#' }
 torch_transpose <- function(self, dim0, dim1) {
     C_torch_transpose(self, as.integer(dim0), as.integer(dim1))
 }
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_trunc
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_trunc(a)
+#' }
+#' }
 torch_trunc <- function(self) C_torch_trunc(self)
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @rdname torch_unsqueeze
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_tensor(c(1, 2, 3, 4))
+#' torch_unsqueeze(x, 1)
+#' torch_unsqueeze(x, 2)
+#' }
+#' }
 torch_unsqueeze <- function(self, dim) {
     C_torch_unsqueeze(self, as.integer(dim))
 }
 
 # ---- torch_* aliases for nnf_* ops ----
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @rdname torch_softmax
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_softmax <- function(self, dim = -1L) {
     C_nnf_softmax(self, as.integer(dim))
 }
 
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @rdname torch_log_softmax
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log_softmax <- function(self, dim = -1L) {
     C_nnf_log_softmax(self, as.integer(dim))
 }
 
+#' @param input A `torch_tensor`.
+#' @param normalized_shape Integer vector of normalized shape.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param eps Numeric; small constant for numerical stability.
 #' @rdname torch_layer_norm
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_layer_norm <- function(input, normalized_shape, weight = NULL,
                              bias = NULL, eps = 1e-5) {
     C_nnf_layer_norm(input, as.integer(normalized_shape), weight, bias, eps)
 }
 
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param running_mean A `torch_tensor` of running means.
+#' @param running_var A `torch_tensor` of running variances.
+#' @param training Logical.
+#' @param momentum Numeric; momentum value.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param cudnn_enabled Logical.
 #' @rdname torch_batch_norm
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_batch_norm <- function(input, weight = NULL, bias = NULL,
                              running_mean = NULL, running_var = NULL,
                              training = FALSE, momentum = 0.1, eps = 1e-5,
@@ -11188,22 +17212,58 @@ torch_per_channel_symmetric <- 3L
 
 # ---- Additional ops ----
 
+#' @param self A `torch_tensor`.
 #' @rdname torch_conj
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+#' 
+#' }
+#' }
 torch_conj <- function(self) C_torch_conj_physical(self)
 
+#' @param self A `torch_tensor`.
+#' @param indices A `torch_tensor` of indices.
 #' @rdname torch_index
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index <- function(self, indices) C_torch_index(self, indices, FALSE)
 
+#' @param self A `torch_tensor`.
+#' @param indices A `torch_tensor` of indices.
+#' @param values A `torch_tensor` of values.
 #' @rdname torch_index_put
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_index_put <- function(self, indices, values) {
     C_torch_index_put(self, indices, values)
 }
 
+#' @param A A `torch_tensor` (matrix).
+#' @param pivot Logical; enable pivoting.
 #' @rdname torch_lu
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' A <- torch_randn(c(2, 3, 3))
+#' torch_lu(A)
+#' }
+#' }
 torch_lu <- function(A, pivot = TRUE) torch_linalg_lu(A, pivot)
 
 #' Dtype query: is the tensor complex?
@@ -11211,6 +17271,12 @@ torch_lu <- function(A, pivot = TRUE) torch_linalg_lu(A, pivot)
 #' @param self A torch_tensor.
 #' @return Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_complex <- function(self) {
     self$dtype %in% c(8L, 9L, 10L)
 }
@@ -11220,6 +17286,12 @@ torch_is_complex <- function(self) {
 #' @param self A torch_tensor.
 #' @return Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_floating_point <- function(self) {
     self$dtype %in% c(5L, 6L, 7L, 15L, 23L, 24L, 25L, 26L)
 }
@@ -11231,6 +17303,12 @@ torch_is_floating_point <- function(self) {
 #' @param seed Integer seed value.
 #' @return Invisible NULL.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_manual_seed <- function(seed) {
     C_torch_manual_seed(as.integer(seed))
     invisible(NULL)
@@ -11244,6 +17322,20 @@ torch_manual_seed <- function(seed) {
 #' @param index Device index (default 0).
 #' @return A device string.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' # Via string
+#' torch_device("cuda:1")
+#' torch_device("cpu")
+#' torch_device("cuda") # current cuda device
+#' 
+#' # Via string and device ordinal
+#' torch_device("cuda", 0)
+#' torch_device("cpu", 0)
+#' }
+#' }
 torch_device <- function(type = "cpu", index = NULL) {
     if (is.null(index)) type else paste0(type, ":", index)
 }
@@ -11252,10 +17344,22 @@ torch_device <- function(type = "cpu", index = NULL) {
 #'
 #' @return Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_is_installed <- function() is_available()
 
 #' @rdname torch_is_installed
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_install_path <- function() {
     libtorch_home <- Sys.getenv("LIBTORCH_HOME", "")
     if (nzchar(libtorch_home)) libtorch_home else "~/.local/lib/libtorch"
@@ -11266,6 +17370,12 @@ torch_install_path <- function() {
 #' @param dtype A torch float dtype.
 #' @return Named list with bits, eps, max, min, tiny.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_finfo <- function(dtype = torch_float32) {
     code <- unclass(dtype)
     switch(as.character(code),
@@ -11284,13 +17394,19 @@ torch_finfo <- function(dtype = torch_float32) {
 #' @param dtype A torch integer dtype.
 #' @return Named list with bits, max, min.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_iinfo <- function(dtype = torch_int32) {
     code <- unclass(dtype)
     switch(as.character(code),
       "0"  = list(bits = 8L, max = 255L, min = 0L),
       "1"  = list(bits = 8L, max = 127L, min = -128L),
       "2"  = list(bits = 16L, max = 32767L, min = -32768L),
-      "3"  = list(bits = 32L, max = 2147483647L, min = -2147483648L),
+      "3"  = list(bits = 32L, max = 2147483647L, min = -2147483647L - 1L),
       "4"  = list(bits = 64L, max = 9223372036854775807, min = -9223372036854775808),
       "11" = list(bits = 8L, max = 1L, min = 0L),
       stop("Not an integer dtype", call. = FALSE)
@@ -11301,6 +17417,18 @@ torch_iinfo <- function(dtype = torch_int32) {
 #'
 #' @return A generator object (currently an environment placeholder).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' # Via string
+#' generator <- torch_generator()
+#' generator$current_seed()
+#' generator$set_current_seed(1234567L)
+#' generator$current_seed()
+#' 
+#' }
+#' }
 torch_generator <- function() {
     structure(new.env(parent = emptyenv()), class = "torch_generator")
 }
@@ -11310,10 +17438,23 @@ torch_generator <- function() {
 #' @param dtype A torch_dtype to set as default.
 #' @return For get, the current default dtype. For set, invisible NULL.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_get_default_dtype <- function() torch_float32
 
+#' @param dtype A `torch_dtype`.
 #' @rdname torch_get_default_dtype
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_set_default_dtype <- function(dtype) {
     message("tinytorch does not support changing the default dtype globally")
     invisible(NULL)
@@ -11324,462 +17465,1573 @@ torch_set_default_dtype <- function(dtype) {
 #' @param state A raw vector of RNG state (from torch_get_rng_state).
 #' @return For get, the current RNG state as a tensor. For set, invisible NULL.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_get_rng_state <- function() {
     message("tinytorch RNG state management not yet implemented")
     invisible(NULL)
 }
 
+#' @param state RNG state.
 #' @rdname torch_get_rng_state
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_set_rng_state <- function(state) {
     message("tinytorch RNG state management not yet implemented")
     invisible(NULL)
 }
+#' Nnf adaptive avg pool1d
+#' @param self A `torch_tensor`.
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_adaptive_avg_pool1d <- function(self, output_size) C_torch_adaptive_avg_pool1d(self, output_size)
 
+#' Nnf adaptive avg pool2d
+#' @param self A `torch_tensor`.
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_adaptive_avg_pool2d <- function(self, output_size) C_torch_adaptive_avg_pool2d(self, output_size)
 
+#' Nnf adaptive avg pool3d
+#' @param self A `torch_tensor`.
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_adaptive_avg_pool3d <- function(self, output_size) C_torch_adaptive_avg_pool3d(self, output_size)
 
+#' Nnf adaptive max pool1d
+#' @param self A `torch_tensor`.
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_adaptive_max_pool1d <- function(self, output_size) C_torch_adaptive_max_pool1d(self, output_size)
 
+#' Nnf adaptive max pool2d
+#' @param self A `torch_tensor`.
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_adaptive_max_pool2d <- function(self, output_size) C_torch_adaptive_max_pool2d(self, output_size)
 
+#' Nnf adaptive max pool3d
+#' @param self A `torch_tensor`.
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_adaptive_max_pool3d <- function(self, output_size) C_torch_adaptive_max_pool3d(self, output_size)
 
+#' Nnf alpha dropout
+#' @param input A `torch_tensor`.
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param train Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_alpha_dropout <- function(input, p, train) C_torch_alpha_dropout(input, p, train)
 
+#' Nnf avg pool2d
+#' @param self A `torch_tensor`.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param ceil_mode Parameter passed to the underlying ATen operator.
+#' @param count_include_pad Parameter passed to the underlying ATen operator.
+#' @param divisor_override Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_avg_pool2d <- function(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) C_torch_avg_pool2d(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override)
 
+#' Nnf avg pool3d
+#' @param self A `torch_tensor`.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param ceil_mode Parameter passed to the underlying ATen operator.
+#' @param count_include_pad Parameter passed to the underlying ATen operator.
+#' @param divisor_override Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_avg_pool3d <- function(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override) C_torch_avg_pool3d(self, kernel_size, stride, padding, ceil_mode, count_include_pad, divisor_override)
 
+#' Nnf batch norm
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param running_mean A `torch_tensor` of running means.
+#' @param running_var A `torch_tensor` of running variances.
+#' @param training Logical.
+#' @param momentum Numeric; momentum value.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param cudnn_enabled Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_batch_norm <- function(input, weight, bias, running_mean, running_var, training, momentum, eps, cudnn_enabled) C_torch_batch_norm(input, weight, bias, running_mean, running_var, training, momentum, eps, cudnn_enabled)
 
+#' Nnf bilinear
+#' @param input1 Parameter passed to the underlying ATen operator.
+#' @param input2 Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_bilinear <- function(input1, input2, weight, bias) C_torch_bilinear(input1, input2, weight, bias)
 
+#' Nnf binary cross entropy
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_binary_cross_entropy <- function(self, target, weight, reduction) C_torch_binary_cross_entropy(self, target, weight, reduction)
 
+#' Nnf binary cross entropy with logits
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param pos_weight Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_binary_cross_entropy_with_logits <- function(self, target, weight, pos_weight, reduction) C_torch_binary_cross_entropy_with_logits(self, target, weight, pos_weight, reduction)
 
+#' Nnf celu
+#' @param self A `torch_tensor`.
+#' @param alpha Numeric scalar multiplier.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_celu <- function(self, alpha) C_torch_celu(self, alpha)
 
+#' Nnf celu
+#' @param self A `torch_tensor`.
+#' @param alpha Numeric scalar multiplier.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_celu_ <- function(self, alpha) C_torch_celu_(self, alpha)
 
+#' Nnf conv tbc
+#' @param self A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param pad Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_conv_tbc <- function(self, weight, bias, pad) C_torch_conv_tbc(self, weight, bias, pad)
 
+#' Nnf conv transpose1d
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param output_padding Integer vector output padding.
+#' @param groups Integer number of groups.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_conv_transpose1d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) C_torch_conv_transpose1d(input, weight, bias, stride, padding, output_padding, groups, dilation)
 
+#' Nnf conv transpose2d
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param output_padding Integer vector output padding.
+#' @param groups Integer number of groups.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_conv_transpose2d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) C_torch_conv_transpose2d(input, weight, bias, stride, padding, output_padding, groups, dilation)
 
+#' Nnf conv transpose3d
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param output_padding Integer vector output padding.
+#' @param groups Integer number of groups.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_conv_transpose3d <- function(input, weight, bias, stride, padding, output_padding, groups, dilation) C_torch_conv_transpose3d(input, weight, bias, stride, padding, output_padding, groups, dilation)
 
+#' Nnf conv1d
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param groups Integer number of groups.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_conv1d <- function(input, weight, bias, stride, padding, dilation, groups) C_torch_conv1d(input, weight, bias, stride, padding, dilation, groups)
 
+#' Nnf conv2d
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param groups Integer number of groups.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_conv2d <- function(input, weight, bias, stride, padding, dilation, groups) C_torch_conv2d(input, weight, bias, stride, padding, dilation, groups)
 
+#' Nnf conv3d
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param groups Integer number of groups.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_conv3d <- function(input, weight, bias, stride, padding, dilation, groups) C_torch_conv3d(input, weight, bias, stride, padding, dilation, groups)
 
+#' Nnf cosine embedding loss
+#' @param input1 Parameter passed to the underlying ATen operator.
+#' @param input2 Parameter passed to the underlying ATen operator.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_cosine_embedding_loss <- function(input1, input2, target, margin, reduction) C_torch_cosine_embedding_loss(input1, input2, target, margin, reduction)
 
+#' Nnf cosine similarity
+#' @param x1 Parameter passed to the underlying ATen operator.
+#' @param x2 Parameter passed to the underlying ATen operator.
+#' @param dim Integer dimension.
+#' @param eps Numeric; small constant for numerical stability.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_cosine_similarity <- function(x1, x2, dim, eps) C_torch_cosine_similarity(x1, x2, dim, eps)
 
+#' Nnf ctc loss
+#' @param log_probs Parameter passed to the underlying ATen operator.
+#' @param targets Parameter passed to the underlying ATen operator.
+#' @param input_lengths Parameter passed to the underlying ATen operator.
+#' @param target_lengths Parameter passed to the underlying ATen operator.
+#' @param blank Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param zero_infinity Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity) C_torch_ctc_loss(log_probs, targets, input_lengths, target_lengths, blank, reduction, zero_infinity)
 
+#' Nnf dropout
+#' @param input A `torch_tensor`.
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param train Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_dropout <- function(input, p, train) C_torch_dropout(input, p, train)
 
+#' Nnf elu
+#' @param self A `torch_tensor`.
+#' @param alpha Numeric scalar multiplier.
+#' @param scale Parameter passed to the underlying ATen operator.
+#' @param input_scale Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_elu_ <- function(self, alpha, scale, input_scale) C_torch_elu_(self, alpha, scale, input_scale)
 
+#' Nnf embedding
+#' @param weight A `torch_tensor` of weights.
+#' @param indices A `torch_tensor` of indices.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_embedding <- function(weight, indices) C_torch_embedding(weight, indices)
 
+#' Nnf embedding bag
+#' @param weight A `torch_tensor` of weights.
+#' @param indices A `torch_tensor` of indices.
+#' @param offsets Parameter passed to the underlying ATen operator.
+#' @param scale_grad_by_freq Parameter passed to the underlying ATen operator.
+#' @param mode Parameter passed to the underlying ATen operator.
+#' @param sparse Parameter passed to the underlying ATen operator.
+#' @param per_sample_weights Parameter passed to the underlying ATen operator.
+#' @param include_last_offset Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_embedding_bag <- function(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset) C_torch_embedding_bag(weight, indices, offsets, scale_grad_by_freq, mode, sparse, per_sample_weights, include_last_offset)
 
+#' Nnf fractional max pool2d
+#' @param self A `torch_tensor`.
+#' @param kernel_size Integer vector kernel size.
+#' @param output_size Parameter passed to the underlying ATen operator.
+#' @param random_samples Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_fractional_max_pool2d <- function(self, kernel_size, output_size, random_samples) C_torch_fractional_max_pool2d(self, kernel_size, output_size, random_samples)
 
+#' Nnf fractional max pool3d
+#' @param self A `torch_tensor`.
+#' @param kernel_size Integer vector kernel size.
+#' @param output_size Parameter passed to the underlying ATen operator.
+#' @param random_samples Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_fractional_max_pool3d <- function(self, kernel_size, output_size, random_samples) C_torch_fractional_max_pool3d(self, kernel_size, output_size, random_samples)
 
+#' Nnf glu
+#' @param self A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_glu <- function(self, dim) C_torch_glu(self, dim)
 
+#' Nnf group norm
+#' @param input A `torch_tensor`.
+#' @param num_groups Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param cudnn_enabled Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_group_norm <- function(input, num_groups, weight, bias, eps, cudnn_enabled) C_torch_group_norm(input, num_groups, weight, bias, eps, cudnn_enabled)
 
+#' Nnf hardshrink
+#' @param self A `torch_tensor`.
+#' @param lambd Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_hardshrink <- function(self, lambd) C_torch_hardshrink(self, lambd)
 
+#' Nnf hardsigmoid
+#' @param self A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_hardsigmoid <- function(self) C_torch_hardsigmoid(self)
 
+#' Nnf hardswish
+#' @param self A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_hardswish <- function(self) C_torch_hardswish(self)
 
+#' Nnf hardtanh
+#' @param self A `torch_tensor`.
+#' @param min_val Parameter passed to the underlying ATen operator.
+#' @param max_val Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_hardtanh <- function(self, min_val, max_val) C_torch_hardtanh(self, min_val, max_val)
 
+#' Nnf hardtanh
+#' @param self A `torch_tensor`.
+#' @param min_val Parameter passed to the underlying ATen operator.
+#' @param max_val Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_hardtanh_ <- function(self, min_val, max_val) C_torch_hardtanh_(self, min_val, max_val)
 
+#' Nnf hinge embedding loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_hinge_embedding_loss <- function(self, target, margin, reduction) C_torch_hinge_embedding_loss(self, target, margin, reduction)
 
+#' Nnf instance norm
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param running_mean A `torch_tensor` of running means.
+#' @param running_var A `torch_tensor` of running variances.
+#' @param use_input_stats Parameter passed to the underlying ATen operator.
+#' @param momentum Numeric; momentum value.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param cudnn_enabled Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_instance_norm <- function(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled) C_torch_instance_norm(input, weight, bias, running_mean, running_var, use_input_stats, momentum, eps, cudnn_enabled)
 
+#' Nnf kl div
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param log_target Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_kl_div <- function(self, target, reduction, log_target) C_torch_kl_div(self, target, reduction, log_target)
 
+#' Nnf l1 loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_l1_loss <- function(self, target, reduction) C_torch_l1_loss(self, target, reduction)
 
+#' Nnf linear
+#' @param input A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_linear <- function(input, weight, bias) C_torch_linear(input, weight, bias)
 
+#' Nnf margin ranking loss
+#' @param input1 Parameter passed to the underlying ATen operator.
+#' @param input2 Parameter passed to the underlying ATen operator.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_margin_ranking_loss <- function(input1, input2, target, margin, reduction) C_torch_margin_ranking_loss(input1, input2, target, margin, reduction)
 
+#' Nnf max pool1d
+#' @param self A `torch_tensor`.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param ceil_mode Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_max_pool1d <- function(self, kernel_size, stride, padding, dilation, ceil_mode) C_torch_max_pool1d(self, kernel_size, stride, padding, dilation, ceil_mode)
 
+#' Nnf max pool2d
+#' @param self A `torch_tensor`.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param ceil_mode Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_max_pool2d <- function(self, kernel_size, stride, padding, dilation, ceil_mode) C_torch_max_pool2d(self, kernel_size, stride, padding, dilation, ceil_mode)
 
+#' Nnf max pool3d
+#' @param self A `torch_tensor`.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param ceil_mode Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_max_pool3d <- function(self, kernel_size, stride, padding, dilation, ceil_mode) C_torch_max_pool3d(self, kernel_size, stride, padding, dilation, ceil_mode)
 
+#' Nnf max unpool2d
+#' @param self A `torch_tensor`.
+#' @param indices A `torch_tensor` of indices.
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_max_unpool2d <- function(self, indices, output_size) C_torch_max_unpool2d(self, indices, output_size)
 
+#' Nnf max unpool3d
+#' @param self A `torch_tensor`.
+#' @param indices A `torch_tensor` of indices.
+#' @param output_size Parameter passed to the underlying ATen operator.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_max_unpool3d <- function(self, indices, output_size, stride, padding) C_torch_max_unpool3d(self, indices, output_size, stride, padding)
 
+#' Nnf mse loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_mse_loss <- function(self, target, reduction) C_torch_mse_loss(self, target, reduction)
 
+#' Nnf multi margin loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_multi_margin_loss <- function(self, target, p, margin, weight, reduction) C_torch_multi_margin_loss(self, target, p, margin, weight, reduction)
 
+#' Nnf multilabel margin loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_multilabel_margin_loss <- function(self, target, reduction) C_torch_multilabel_margin_loss(self, target, reduction)
 
+#' Nnf nll loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param ignore_index Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_nll_loss <- function(self, target, weight, reduction, ignore_index) C_torch_nll_loss(self, target, weight, reduction, ignore_index)
 
+#' Nnf one hot
+#' @param self A `torch_tensor`.
+#' @param num_classes Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_one_hot <- function(self, num_classes) C_torch_one_hot(self, num_classes)
 
+#' Nnf pairwise distance
+#' @param x1 Parameter passed to the underlying ATen operator.
+#' @param x2 Parameter passed to the underlying ATen operator.
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param keepdim Logical; keep reduced dimensions.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_pairwise_distance <- function(x1, x2, p, eps, keepdim) C_torch_pairwise_distance(x1, x2, p, eps, keepdim)
 
+#' Nnf pdist
+#' @param self A `torch_tensor`.
+#' @param p Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_pdist <- function(self, p) C_torch_pdist(self, p)
 
+#' Nnf pixel shuffle
+#' @param self A `torch_tensor`.
+#' @param upscale_factor Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_pixel_shuffle <- function(self, upscale_factor) C_torch_pixel_shuffle(self, upscale_factor)
 
+#' Nnf poisson nll loss
+#' @param input A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param log_input Parameter passed to the underlying ATen operator.
+#' @param full Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_poisson_nll_loss <- function(input, target, log_input, full, eps, reduction) C_torch_poisson_nll_loss(input, target, log_input, full, eps, reduction)
 
+#' Nnf prelu
+#' @param self A `torch_tensor`.
+#' @param weight A `torch_tensor` of weights.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_prelu <- function(self, weight) C_torch_prelu(self, weight)
 
+#' Nnf relu
+#' @param self A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_relu_ <- function(self) C_torch_relu_(self)
 
+#' Nnf relu6
+#' @param self A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_relu6 <- function(self) C_torch_relu6(self)
 
+#' Nnf rrelu
+#' @param self A `torch_tensor`.
+#' @param lower Parameter passed to the underlying ATen operator.
+#' @param upper Parameter passed to the underlying ATen operator.
+#' @param training Logical.
+#' @param generator Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_rrelu <- function(self, lower, upper, training, generator) C_torch_rrelu(self, lower, upper, training, generator)
 
+#' Nnf rrelu
+#' @param self A `torch_tensor`.
+#' @param lower Parameter passed to the underlying ATen operator.
+#' @param upper Parameter passed to the underlying ATen operator.
+#' @param training Logical.
+#' @param generator Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_rrelu_ <- function(self, lower, upper, training, generator) C_torch_rrelu_(self, lower, upper, training, generator)
 
+#' Nnf selu
+#' @param self A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_selu <- function(self) C_torch_selu(self)
 
+#' Nnf selu
+#' @param self A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_selu_ <- function(self) C_torch_selu_(self)
 
+#' Nnf smooth l1 loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
+#' @param beta Numeric scalar multiplier.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_smooth_l1_loss <- function(self, target, reduction, beta) C_torch_smooth_l1_loss(self, target, reduction, beta)
 
+#' Nnf soft margin loss
+#' @param self A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_soft_margin_loss <- function(self, target, reduction) C_torch_soft_margin_loss(self, target, reduction)
 
+#' Nnf softshrink
+#' @param self A `torch_tensor`.
+#' @param lambd Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_softshrink <- function(self, lambd) C_torch_softshrink(self, lambd)
 
+#' Nnf threshold
+#' @param self A `torch_tensor`.
+#' @param threshold Parameter passed to the underlying ATen operator.
+#' @param value Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_threshold <- function(self, threshold, value) C_torch_threshold(self, threshold, value)
 
+#' Nnf threshold
+#' @param self A `torch_tensor`.
+#' @param threshold Parameter passed to the underlying ATen operator.
+#' @param value Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_threshold_ <- function(self, threshold, value) C_torch_threshold_(self, threshold, value)
 
+#' Nnf triplet margin loss
+#' @param anchor Parameter passed to the underlying ATen operator.
+#' @param positive Parameter passed to the underlying ATen operator.
+#' @param negative Parameter passed to the underlying ATen operator.
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param swap Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_triplet_margin_loss <- function(anchor, positive, negative, margin, p, eps, swap, reduction) C_torch_triplet_margin_loss(anchor, positive, negative, margin, p, eps, swap, reduction)
 
+#' Nnf unfold
+#' @param self A `torch_tensor`.
+#' @param dimension Parameter passed to the underlying ATen operator.
+#' @param size Integer vector shape.
+#' @param step Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_unfold <- function(self, dimension, size, step) C_torch_unfold(self, dimension, size, step)
 
 # ---- torch:: compatibility aliases ----
 
+#' @rdname torch_linalg_cholesky
 #' @export
 linalg_cholesky <- torch_linalg_cholesky
 
+#' @rdname torch_linalg_cholesky_ex
 #' @export
 linalg_cholesky_ex <- torch_linalg_cholesky_ex
 
+#' @rdname torch_linalg_cond
 #' @export
 linalg_cond <- torch_linalg_cond
 
+#' @rdname torch_linalg_cross
 #' @export
 linalg_cross <- torch_linalg_cross
 
+#' @rdname torch_linalg_det
 #' @export
 linalg_det <- torch_linalg_det
 
+#' @rdname torch_linalg_diagonal
 #' @export
 linalg_diagonal <- torch_linalg_diagonal
 
+#' @rdname torch_linalg_eig
 #' @export
 linalg_eig <- torch_linalg_eig
 
+#' @rdname torch_linalg_eigh
 #' @export
 linalg_eigh <- torch_linalg_eigh
 
+#' @rdname torch_linalg_eigvals
 #' @export
 linalg_eigvals <- torch_linalg_eigvals
 
+#' @rdname torch_linalg_eigvalsh
 #' @export
 linalg_eigvalsh <- torch_linalg_eigvalsh
 
+#' @rdname torch_linalg_householder_product
 #' @export
 linalg_householder_product <- torch_linalg_householder_product
 
+#' @rdname torch_linalg_inv
 #' @export
 linalg_inv <- torch_linalg_inv
 
+#' @rdname torch_linalg_inv_ex
 #' @export
 linalg_inv_ex <- torch_linalg_inv_ex
 
+#' @rdname torch_linalg_ldl_factor
 #' @export
 linalg_ldl_factor <- torch_linalg_ldl_factor
 
+#' @rdname torch_linalg_ldl_factor_ex
 #' @export
 linalg_ldl_factor_ex <- torch_linalg_ldl_factor_ex
 
+#' @rdname torch_linalg_ldl_solve
 #' @export
 linalg_ldl_solve <- torch_linalg_ldl_solve
 
+#' @rdname torch_linalg_lstsq
 #' @export
 linalg_lstsq <- torch_linalg_lstsq
 
+#' @rdname torch_linalg_lu
 #' @export
 linalg_lu <- torch_linalg_lu
 
+#' @rdname torch_linalg_lu_factor
 #' @export
 linalg_lu_factor <- torch_linalg_lu_factor
 
+#' @rdname torch_linalg_lu_factor_ex
 #' @export
 linalg_lu_factor_ex <- torch_linalg_lu_factor_ex
 
+#' @rdname torch_linalg_lu_solve
 #' @export
 linalg_lu_solve <- torch_linalg_lu_solve
 
+#' @rdname torch_linalg_matmul
 #' @export
 linalg_matmul <- torch_linalg_matmul
 
+#' @rdname torch_linalg_matrix_exp
 #' @export
 linalg_matrix_exp <- torch_linalg_matrix_exp
 
+#' @rdname torch_linalg_matrix_norm
 #' @export
 linalg_matrix_norm <- torch_linalg_matrix_norm
 
+#' @rdname torch_linalg_matrix_power
 #' @export
 linalg_matrix_power <- torch_linalg_matrix_power
 
+#' @rdname torch_linalg_matrix_rank
 #' @export
 linalg_matrix_rank <- torch_linalg_matrix_rank
 
+#' @rdname torch_linalg_multi_dot
 #' @export
 linalg_multi_dot <- torch_linalg_multi_dot
 
+#' @rdname torch_linalg_norm
 #' @export
 linalg_norm <- torch_linalg_norm
 
+#' @rdname torch_linalg_pinv
 #' @export
 linalg_pinv <- torch_linalg_pinv
 
+#' @rdname torch_linalg_qr
 #' @export
 linalg_qr <- torch_linalg_qr
 
+#' @rdname torch_linalg_slogdet
 #' @export
 linalg_slogdet <- torch_linalg_slogdet
 
+#' @rdname torch_linalg_solve
 #' @export
 linalg_solve <- torch_linalg_solve
 
+#' @rdname torch_linalg_solve_ex
 #' @export
 linalg_solve_ex <- torch_linalg_solve_ex
 
+#' @rdname torch_linalg_solve_triangular
 #' @export
 linalg_solve_triangular <- torch_linalg_solve_triangular
 
+#' @rdname torch_linalg_svd
 #' @export
 linalg_svd <- torch_linalg_svd
 
+#' @rdname torch_linalg_svdvals
 #' @export
 linalg_svdvals <- torch_linalg_svdvals
 
+#' @rdname torch_linalg_tensorinv
 #' @export
 linalg_tensorinv <- torch_linalg_tensorinv
 
+#' @rdname torch_linalg_tensorsolve
 #' @export
 linalg_tensorsolve <- torch_linalg_tensorsolve
 
+#' @rdname torch_linalg_vander
 #' @export
 linalg_vander <- torch_linalg_vander
 
+#' @rdname torch_linalg_vecdot
 #' @export
 linalg_vecdot <- torch_linalg_vecdot
 
+#' @rdname torch_linalg_vector_norm
 #' @export
 linalg_vector_norm <- torch_linalg_vector_norm
 
+#' Is nn module
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_nn_module <- function(x) inherits(x, "nn_module")
 
+#' Is nn parameter
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_nn_parameter <- function(x) inherits(x, "nn_parameter")
 
+#' Is nn buffer
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_nn_buffer <- function(x) inherits(x, "torch_tensor")
 
+#' Is torch device
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_torch_device <- function(x) is.character(x) && length(x) == 1L
 
+#' Is torch dtype
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_torch_dtype <- function(x) inherits(x, "torch_dtype")
 
+#' Is torch layout
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_torch_layout <- function(x) is.integer(x) && length(x) == 1L
 
+#' Is torch memory format
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_torch_memory_format <- function(x) is.integer(x) && length(x) == 1L
 
+#' Is torch qscheme
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_torch_qscheme <- function(x) is.integer(x) && length(x) == 1L
 
+#' Is undefined tensor
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_undefined_tensor <- function(x) FALSE
 
+#' Is optimizer
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_optimizer <- function(x) inherits(x, "torch_optimizer")
 
+#' Is dataloader
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 is_dataloader <- function(x) inherits(x, "dataloader")
 
+#' Local no grad
+#' @param .local_envir Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 local_no_grad <- function(.local_envir = parent.frame()) {
     # No-op: tinytorch does not track gradients by default
     invisible(NULL)
   }
 
+#' Local enable grad
+#' @param .local_envir Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 local_enable_grad <- function(.local_envir = parent.frame()) invisible(NULL)
 
+#' Local autocast
+#' @param device_type Parameter passed to the underlying ATen operator.
+#' @param dtype A `torch_dtype`.
+#' @param .local_envir Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 local_autocast <- function(device_type = "cuda", dtype = torch_float16, .local_envir = parent.frame()) invisible(NULL)
 
+#' With enable grad
+#' @param code Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 with_enable_grad <- function(code) eval.parent(substitute(code))
 
+#' With detect anomaly
+#' @param code Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 with_detect_anomaly <- function(code) eval.parent(substitute(code))
 
+#' With device
+#' @param device Parameter passed to the underlying ATen operator.
+#' @param code Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 with_device <- function(device, code) eval.parent(substitute(code))
 
+#' With torch manual seed
+#' @param seed Parameter passed to the underlying ATen operator.
+#' @param code Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 with_torch_manual_seed <- function(seed, code) { torch_manual_seed(seed); eval.parent(substitute(code)) }
 
+#' Local torch manual seed
+#' @param seed Parameter passed to the underlying ATen operator.
+#' @param .local_envir Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 local_torch_manual_seed <- function(seed, .local_envir = parent.frame()) torch_manual_seed(seed)
 
+#' Local device
+#' @param device Parameter passed to the underlying ATen operator.
+#' @param .local_envir Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 local_device <- function(device, .local_envir = parent.frame()) invisible(NULL)
 
+#' Set autocast
+#' @param enabled Parameter passed to the underlying ATen operator.
+#' @param device_type Parameter passed to the underlying ATen operator.
+#' @param dtype A `torch_dtype`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 set_autocast <- function(enabled, device_type = "cuda", dtype = torch_float16) invisible(NULL)
 
+#' Unset autocast
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 unset_autocast <- function() invisible(NULL)
 
+#' Clone module
+#' @param module Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 clone_module <- function(module) {
     # Deep copy via serialize/unserialize
     unserialize(serialize(module, NULL))
   }
 
+#' Slc
+#' @param start Integer start index.
+#' @param end Parameter passed to the underlying ATen operator.
+#' @param step Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 slc <- function(start = NULL, end = NULL, step = 1L) {
     list(start = start, end = end, step = step)
   }
 
+#' Install torch
+#' @param ... Additional arguments passed to methods.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 install_torch <- function(...) install_libtorch(...)
 
+#' Backends cudnn is available
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 backends_cudnn_is_available <- function() FALSE
 
+#' Backends cudnn version
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 backends_cudnn_version <- function() NULL
 
+#' Backends mkl is available
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 backends_mkl_is_available <- function() FALSE
 
+#' Backends mkldnn is available
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 backends_mkldnn_is_available <- function() FALSE
 
+#' Backends mps is available
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 backends_mps_is_available <- function() FALSE
 
+#' Backends openmp is available
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 backends_openmp_is_available <- function() TRUE
 
 # ---- nn_* module constructors ----
 
+#' Nn celu
+#' @param alpha Numeric scalar multiplier.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_celu <- function(alpha = 1.0) {
   nn_module("nn_celu",
     initialize = function(alpha = 1.0) {
@@ -11789,7 +19041,15 @@ nn_celu <- function(alpha = 1.0) {
   )()
 }
 
+#' Nn glu
+#' @param dim Integer dimension.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_glu <- function(dim = -1L) {
   nn_module("nn_glu",
     initialize = function(dim = -1L) {
@@ -11799,7 +19059,15 @@ nn_glu <- function(dim = -1L) {
   )()
 }
 
+#' Nn hardshrink
+#' @param lambd Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_hardshrink <- function(lambd = 0.5) {
   nn_module("nn_hardshrink",
     initialize = function(lambd = 0.5) {
@@ -11809,7 +19077,14 @@ nn_hardshrink <- function(lambd = 0.5) {
   )()
 }
 
+#' Nn hardsigmoid
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_hardsigmoid <- function() {
   nn_module("nn_hardsigmoid",
     initialize = function() {
@@ -11818,7 +19093,14 @@ nn_hardsigmoid <- function() {
   )()
 }
 
+#' Nn hardswish
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_hardswish <- function() {
   nn_module("nn_hardswish",
     initialize = function() {
@@ -11827,7 +19109,16 @@ nn_hardswish <- function() {
   )()
 }
 
+#' Nn hardtanh
+#' @param min_val Parameter passed to the underlying ATen operator.
+#' @param max_val Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_hardtanh <- function(min_val = -1, max_val = 1) {
   nn_module("nn_hardtanh",
     initialize = function(min_val = -1, max_val = 1) {
@@ -11838,7 +19129,15 @@ nn_hardtanh <- function(min_val = -1, max_val = 1) {
   )()
 }
 
+#' Nn leaky relu
+#' @param negative_slope Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_leaky_relu <- function(negative_slope = 0.01) {
   nn_module("nn_leaky_relu",
     initialize = function(negative_slope = 0.01) {
@@ -11848,7 +19147,14 @@ nn_leaky_relu <- function(negative_slope = 0.01) {
   )()
 }
 
+#' Nn log sigmoid
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_log_sigmoid <- function() {
   nn_module("nn_log_sigmoid",
     initialize = function() {
@@ -11857,7 +19163,15 @@ nn_log_sigmoid <- function() {
   )()
 }
 
+#' Nn log softmax
+#' @param dim Integer dimension.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_log_softmax <- function(dim = -1L) {
   nn_module("nn_log_softmax",
     initialize = function(dim = -1L) {
@@ -11867,7 +19181,15 @@ nn_log_softmax <- function(dim = -1L) {
   )()
 }
 
+#' Nn prelu
+#' @param num_parameters Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_prelu <- function(num_parameters = 1L) {
   nn_module("nn_prelu",
     initialize = function(num_parameters = 1L) {
@@ -11878,7 +19200,14 @@ nn_prelu <- function(num_parameters = 1L) {
   )()
 }
 
+#' Nn relu6
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_relu6 <- function() {
   nn_module("nn_relu6",
     initialize = function() {
@@ -11887,7 +19216,16 @@ nn_relu6 <- function() {
   )()
 }
 
+#' Nn rrelu
+#' @param lower Parameter passed to the underlying ATen operator.
+#' @param upper Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_rrelu <- function(lower = 0.125, upper = 0.333) {
   nn_module("nn_rrelu",
     initialize = function(lower = 0.125, upper = 0.333) {
@@ -11898,7 +19236,14 @@ nn_rrelu <- function(lower = 0.125, upper = 0.333) {
   )()
 }
 
+#' Nn selu
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_selu <- function() {
   nn_module("nn_selu",
     initialize = function() {
@@ -11907,7 +19252,15 @@ nn_selu <- function() {
   )()
 }
 
+#' Nn softmax
+#' @param dim Integer dimension.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_softmax <- function(dim = -1L) {
   nn_module("nn_softmax",
     initialize = function(dim = -1L) {
@@ -11917,7 +19270,15 @@ nn_softmax <- function(dim = -1L) {
   )()
 }
 
+#' Nn softmin
+#' @param dim Integer dimension.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_softmin <- function(dim = -1L) {
   nn_module("nn_softmin",
     initialize = function(dim = -1L) {
@@ -11927,7 +19288,16 @@ nn_softmin <- function(dim = -1L) {
   )()
 }
 
+#' Nn softplus
+#' @param beta Numeric scalar multiplier.
+#' @param threshold Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_softplus <- function(beta = 1, threshold = 20) {
   nn_module("nn_softplus",
     initialize = function(beta = 1, threshold = 20) {
@@ -11938,7 +19308,15 @@ nn_softplus <- function(beta = 1, threshold = 20) {
   )()
 }
 
+#' Nn softshrink
+#' @param lambd Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_softshrink <- function(lambd = 0.5) {
   nn_module("nn_softshrink",
     initialize = function(lambd = 0.5) {
@@ -11948,7 +19326,14 @@ nn_softshrink <- function(lambd = 0.5) {
   )()
 }
 
+#' Nn softsign
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_softsign <- function() {
   nn_module("nn_softsign",
     initialize = function() {
@@ -11957,7 +19342,14 @@ nn_softsign <- function() {
   )()
 }
 
+#' Nn tanhshrink
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_tanhshrink <- function() {
   nn_module("nn_tanhshrink",
     initialize = function() {
@@ -11966,7 +19358,16 @@ nn_tanhshrink <- function() {
   )()
 }
 
+#' Nn bce loss
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_bce_loss <- function(weight = NULL, reduction = 1L) {
   nn_module("nn_bce_loss",
     initialize = function(weight = NULL, reduction = 1L) {
@@ -11977,7 +19378,17 @@ nn_bce_loss <- function(weight = NULL, reduction = 1L) {
   )()
 }
 
+#' Nn bce with logits loss
+#' @param weight A `torch_tensor` of weights.
+#' @param pos_weight Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_bce_with_logits_loss <- function(weight = NULL, pos_weight = NULL, reduction = 1L) {
   nn_module("nn_bce_with_logits_loss",
     initialize = function(weight = NULL, pos_weight = NULL, reduction = 1L) {
@@ -11989,7 +19400,16 @@ nn_bce_with_logits_loss <- function(weight = NULL, pos_weight = NULL, reduction 
   )()
 }
 
+#' Nn cosine embedding loss
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_cosine_embedding_loss <- function(margin = 0, reduction = 1L) {
   nn_module("nn_cosine_embedding_loss",
     initialize = function(margin = 0, reduction = 1L) {
@@ -12000,7 +19420,18 @@ nn_cosine_embedding_loss <- function(margin = 0, reduction = 1L) {
   )()
 }
 
+#' Nn cross entropy loss
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param ignore_index Parameter passed to the underlying ATen operator.
+#' @param label_smoothing Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_cross_entropy_loss <- function(weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0) {
   nn_module("nn_cross_entropy_loss",
     initialize = function(weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0) {
@@ -12013,7 +19444,17 @@ nn_cross_entropy_loss <- function(weight = NULL, reduction = 1L, ignore_index = 
   )()
 }
 
+#' Nn ctc loss
+#' @param blank Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param zero_infinity Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_ctc_loss <- function(blank = 0L, reduction = 1L, zero_infinity = FALSE) {
   nn_module("nn_ctc_loss",
     initialize = function(blank = 0L, reduction = 1L, zero_infinity = FALSE) {
@@ -12025,7 +19466,16 @@ nn_ctc_loss <- function(blank = 0L, reduction = 1L, zero_infinity = FALSE) {
   )()
 }
 
+#' Nn hinge embedding loss
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_hinge_embedding_loss <- function(margin = 1, reduction = 1L) {
   nn_module("nn_hinge_embedding_loss",
     initialize = function(margin = 1, reduction = 1L) {
@@ -12036,7 +19486,16 @@ nn_hinge_embedding_loss <- function(margin = 1, reduction = 1L) {
   )()
 }
 
+#' Nn kl div loss
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param log_target Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_kl_div_loss <- function(reduction = 1L, log_target = FALSE) {
   nn_module("nn_kl_div_loss",
     initialize = function(reduction = 1L, log_target = FALSE) {
@@ -12047,7 +19506,15 @@ nn_kl_div_loss <- function(reduction = 1L, log_target = FALSE) {
   )()
 }
 
+#' Nn l1 loss
+#' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_l1_loss <- function(reduction = 1L) {
   nn_module("nn_l1_loss",
     initialize = function(reduction = 1L) {
@@ -12057,7 +19524,16 @@ nn_l1_loss <- function(reduction = 1L) {
   )()
 }
 
+#' Nn margin ranking loss
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_margin_ranking_loss <- function(margin = 0, reduction = 1L) {
   nn_module("nn_margin_ranking_loss",
     initialize = function(margin = 0, reduction = 1L) {
@@ -12068,7 +19544,15 @@ nn_margin_ranking_loss <- function(margin = 0, reduction = 1L) {
   )()
 }
 
+#' Nn mse loss
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_mse_loss <- function(reduction = 1L) {
   nn_module("nn_mse_loss",
     initialize = function(reduction = 1L) {
@@ -12078,7 +19562,18 @@ nn_mse_loss <- function(reduction = 1L) {
   )()
 }
 
+#' Nn multi margin loss
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_multi_margin_loss <- function(p = 1, margin = 1, weight = NULL, reduction = 1L) {
   nn_module("nn_multi_margin_loss",
     initialize = function(p = 1, margin = 1, weight = NULL, reduction = 1L) {
@@ -12091,7 +19586,15 @@ nn_multi_margin_loss <- function(p = 1, margin = 1, weight = NULL, reduction = 1
   )()
 }
 
+#' Nn multilabel margin loss
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_multilabel_margin_loss <- function(reduction = 1L) {
   nn_module("nn_multilabel_margin_loss",
     initialize = function(reduction = 1L) {
@@ -12101,7 +19604,16 @@ nn_multilabel_margin_loss <- function(reduction = 1L) {
   )()
 }
 
+#' Nn smooth l1 loss
+#' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
+#' @param beta Numeric scalar multiplier.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_smooth_l1_loss <- function(reduction = 1L, beta = 1.0) {
   nn_module("nn_smooth_l1_loss",
     initialize = function(reduction = 1L, beta = 1.0) {
@@ -12112,7 +19624,15 @@ nn_smooth_l1_loss <- function(reduction = 1L, beta = 1.0) {
   )()
 }
 
+#' Nn soft margin loss
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_soft_margin_loss <- function(reduction = 1L) {
   nn_module("nn_soft_margin_loss",
     initialize = function(reduction = 1L) {
@@ -12122,7 +19642,19 @@ nn_soft_margin_loss <- function(reduction = 1L) {
   )()
 }
 
+#' Nn triplet margin loss
+#' @param margin Parameter passed to the underlying ATen operator.
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param swap Parameter passed to the underlying ATen operator.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_triplet_margin_loss <- function(margin = 1, p = 2, eps = 1e-6, swap = FALSE, reduction = 1L) {
   nn_module("nn_triplet_margin_loss",
     initialize = function(margin = 1, p = 2, eps = 1e-6, swap = FALSE, reduction = 1L) {
@@ -12136,7 +19668,17 @@ nn_triplet_margin_loss <- function(margin = 1, p = 2, eps = 1e-6, swap = FALSE, 
   )()
 }
 
+#' Nn nll loss
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param ignore_index Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_nll_loss <- function(weight = NULL, reduction = 1L, ignore_index = -100) {
   nn_module("nn_nll_loss",
     initialize = function(weight = NULL, reduction = 1L, ignore_index = -100) {
@@ -12148,7 +19690,18 @@ nn_nll_loss <- function(weight = NULL, reduction = 1L, ignore_index = -100) {
   )()
 }
 
+#' Nn poisson nll loss
+#' @param log_input Parameter passed to the underlying ATen operator.
+#' @param full Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param reduction Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_poisson_nll_loss <- function(log_input = TRUE, full = FALSE, eps = 1e-8, reduction = 1L) {
   nn_module("nn_poisson_nll_loss",
     initialize = function(log_input = TRUE, full = FALSE, eps = 1e-8, reduction = 1L) {
@@ -12161,7 +19714,16 @@ nn_poisson_nll_loss <- function(log_input = TRUE, full = FALSE, eps = 1e-8, redu
   )()
 }
 
+#' Nn huber loss
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param delta Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_huber_loss <- function(reduction = 1L, delta = 1.0) {
   nn_module("nn_huber_loss",
     initialize = function(reduction = 1L, delta = 1.0) {
@@ -12172,7 +19734,17 @@ nn_huber_loss <- function(reduction = 1L, delta = 1.0) {
   )()
 }
 
+#' Nn avg pool1d
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_avg_pool1d <- function(kernel_size, stride = NULL, padding = 0L) {
   nn_module("nn_avg_pool1d",
     initialize = function(kernel_size, stride = NULL, padding = 0L) {
@@ -12184,7 +19756,17 @@ nn_avg_pool1d <- function(kernel_size, stride = NULL, padding = 0L) {
   )()
 }
 
+#' Nn avg pool2d
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_avg_pool2d <- function(kernel_size, stride = NULL, padding = 0L) {
   nn_module("nn_avg_pool2d",
     initialize = function(kernel_size, stride = NULL, padding = 0L) {
@@ -12196,7 +19778,17 @@ nn_avg_pool2d <- function(kernel_size, stride = NULL, padding = 0L) {
   )()
 }
 
+#' Nn avg pool3d
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_avg_pool3d <- function(kernel_size, stride = NULL, padding = 0L) {
   nn_module("nn_avg_pool3d",
     initialize = function(kernel_size, stride = NULL, padding = 0L) {
@@ -12208,7 +19800,18 @@ nn_avg_pool3d <- function(kernel_size, stride = NULL, padding = 0L) {
   )()
 }
 
+#' Nn max pool1d
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_max_pool1d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
   nn_module("nn_max_pool1d",
     initialize = function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
@@ -12221,7 +19824,18 @@ nn_max_pool1d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1
   )()
 }
 
+#' Nn max pool2d
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_max_pool2d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
   nn_module("nn_max_pool2d",
     initialize = function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
@@ -12234,7 +19848,18 @@ nn_max_pool2d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1
   )()
 }
 
+#' Nn max pool3d
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_max_pool3d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
   nn_module("nn_max_pool3d",
     initialize = function(kernel_size, stride = NULL, padding = 0L, dilation = 1L) {
@@ -12247,7 +19872,15 @@ nn_max_pool3d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1
   )()
 }
 
+#' Nn adaptive avg pool1d
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_adaptive_avg_pool1d <- function(output_size) {
   nn_module("nn_adaptive_avg_pool1d",
     initialize = function(output_size) {
@@ -12257,7 +19890,15 @@ nn_adaptive_avg_pool1d <- function(output_size) {
   )()
 }
 
+#' Nn adaptive avg pool2d
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_adaptive_avg_pool2d <- function(output_size) {
   nn_module("nn_adaptive_avg_pool2d",
     initialize = function(output_size) {
@@ -12267,7 +19908,15 @@ nn_adaptive_avg_pool2d <- function(output_size) {
   )()
 }
 
+#' Nn adaptive avg pool3d
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_adaptive_avg_pool3d <- function(output_size) {
   nn_module("nn_adaptive_avg_pool3d",
     initialize = function(output_size) {
@@ -12277,7 +19926,15 @@ nn_adaptive_avg_pool3d <- function(output_size) {
   )()
 }
 
+#' Nn adaptive max pool1d
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_adaptive_max_pool1d <- function(output_size) {
   nn_module("nn_adaptive_max_pool1d",
     initialize = function(output_size) {
@@ -12287,7 +19944,15 @@ nn_adaptive_max_pool1d <- function(output_size) {
   )()
 }
 
+#' Nn adaptive max pool2d
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_adaptive_max_pool2d <- function(output_size) {
   nn_module("nn_adaptive_max_pool2d",
     initialize = function(output_size) {
@@ -12297,7 +19962,15 @@ nn_adaptive_max_pool2d <- function(output_size) {
   )()
 }
 
+#' Nn adaptive max pool3d
+#' @param output_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_adaptive_max_pool3d <- function(output_size) {
   nn_module("nn_adaptive_max_pool3d",
     initialize = function(output_size) {
@@ -12307,7 +19980,16 @@ nn_adaptive_max_pool3d <- function(output_size) {
   )()
 }
 
+#' Nn flatten
+#' @param start_dim Integer starting dimension.
+#' @param end_dim Integer ending dimension.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_flatten <- function(start_dim = 2L, end_dim = -1L) {
   nn_module("nn_flatten",
     initialize = function(start_dim = 2L, end_dim = -1L) {
@@ -12318,7 +20000,15 @@ nn_flatten <- function(start_dim = 2L, end_dim = -1L) {
   )()
 }
 
+#' Nn dropout2d
+#' @param p Numeric norm exponent.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_dropout2d <- function(p = 0.5) {
   nn_module("nn_dropout2d",
     initialize = function(p = 0.5) {
@@ -12328,7 +20018,15 @@ nn_dropout2d <- function(p = 0.5) {
   )()
 }
 
+#' Nn dropout3d
+#' @param p Numeric norm exponent.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_dropout3d <- function(p = 0.5) {
   nn_module("nn_dropout3d",
     initialize = function(p = 0.5) {
@@ -12338,12 +20036,34 @@ nn_dropout3d <- function(p = 0.5) {
   )()
 }
 
+#' Nn batch norm3d
+#' @param num_features Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param momentum Numeric; momentum value.
+#' @param affine Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_batch_norm3d <- function(num_features, eps = 1e-5, momentum = 0.1, affine = TRUE) {
   nn_batch_norm1d(num_features, eps, momentum, affine)
 }
 
+#' Nn group norm
+#' @param num_groups Parameter passed to the underlying ATen operator.
+#' @param num_channels Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param affine Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_group_norm <- function(num_groups, num_channels, eps = 1e-5, affine = TRUE) {
   nn_module("nn_group_norm",
     initialize = function(num_groups, num_channels, eps, affine) {
@@ -12359,22 +20079,76 @@ nn_group_norm <- function(num_groups, num_channels, eps = 1e-5, affine = TRUE) {
   )(num_groups, num_channels, eps, affine)
 }
 
+#' Nn init constant
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param val Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_constant_ <- function(tensor, val) { tensor$fill_(val); invisible(tensor) }
 
+#' Nn init ones
+#' @param tensor Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_ones_ <- function(tensor) { tensor$fill_(1); invisible(tensor) }
 
+#' Nn init normal
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param mean Parameter passed to the underlying ATen operator.
+#' @param std Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_normal_ <- function(tensor, mean = 0, std = 1) { tensor$normal_(mean, std); invisible(tensor) }
 
+#' Nn init uniform
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param a Parameter passed to the underlying ATen operator.
+#' @param b Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_uniform_ <- function(tensor, a = 0, b = 1) { tensor$uniform_(a, b); invisible(tensor) }
 
+#' Nn init eye
+#' @param tensor A `torch_tensor` to be filled in-place with an identity matrix.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_eye_ <- function(tensor) { with_no_grad(function() { tensor$zero_(); n <- min(tensor$size()); for (i in seq_len(n)) tensor[i,i] <- 1 }); invisible(tensor) }
 
+#' Nn init calculate gain
+#' @param nonlinearity Parameter passed to the underlying ATen operator.
+#' @param param Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_calculate_gain <- function(nonlinearity, param = NULL) {
     switch(nonlinearity,
       linear = 1, conv1d = 1, conv2d = 1, conv3d = 1, sigmoid = 1,
@@ -12382,7 +20156,18 @@ nn_init_calculate_gain <- function(nonlinearity, param = NULL) {
       selu = 3/4, 1)
   }
 
+#' Nn init kaiming uniform
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param a Parameter passed to the underlying ATen operator.
+#' @param mode Parameter passed to the underlying ATen operator.
+#' @param nonlinearity Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leaky_relu") {
     fan <- tensor$size()[if (mode == "fan_in") 2 else 1] * prod(tensor$size()[-(1:2)])
     gain <- nn_init_calculate_gain(nonlinearity, a)
@@ -12392,7 +20177,18 @@ nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearit
     invisible(tensor)
   }
 
+#' Nn init kaiming normal
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param a Parameter passed to the underlying ATen operator.
+#' @param mode Parameter passed to the underlying ATen operator.
+#' @param nonlinearity Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity = "leaky_relu") {
     fan <- tensor$size()[if (mode == "fan_in") 2 else 1] * prod(tensor$size()[-(1:2)])
     gain <- nn_init_calculate_gain(nonlinearity, a)
@@ -12401,12 +20197,39 @@ nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity
     invisible(tensor)
   }
 
+#' Nn init trunc normal
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param mean Parameter passed to the underlying ATen operator.
+#' @param std Parameter passed to the underlying ATen operator.
+#' @param a Parameter passed to the underlying ATen operator.
+#' @param b Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = 2) { tensor$normal_(mean, std)$clamp_(a, b); invisible(tensor) }
 
 # ---- Additional nn_* modules and ops ----
 
+#' Nn conv3d
+#' @param in_channels Parameter passed to the underlying ATen operator.
+#' @param out_channels Parameter passed to the underlying ATen operator.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param dilation Integer vector dilation.
+#' @param groups Integer number of groups.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_conv3d <- function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, dilation = 1L, groups = 1L, bias = TRUE) {
   nn_module("nn_conv3d",
     initialize = function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, dilation = 1L, groups = 1L, bias = TRUE) {
@@ -12423,7 +20246,23 @@ w <- torch_randn(c(out_channels, as.integer(in_channels / groups), kernel_size, 
   )(in_channels, out_channels, kernel_size, stride, padding, dilation, groups, bias)
 }
 
+#' Nn conv transpose2d
+#' @param in_channels Parameter passed to the underlying ATen operator.
+#' @param out_channels Parameter passed to the underlying ATen operator.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param output_padding Integer vector output padding.
+#' @param groups Integer number of groups.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_conv_transpose2d <- function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
   nn_module("nn_conv_transpose2d",
     initialize = function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
@@ -12441,7 +20280,23 @@ w <- torch_randn(c(in_channels, as.integer(out_channels / groups), kernel_size, 
   )(in_channels, out_channels, kernel_size, stride, padding, output_padding, groups, bias, dilation)
 }
 
+#' Nn conv transpose3d
+#' @param in_channels Parameter passed to the underlying ATen operator.
+#' @param out_channels Parameter passed to the underlying ATen operator.
+#' @param kernel_size Integer vector kernel size.
+#' @param stride Integer vector stride.
+#' @param padding Integer vector padding.
+#' @param output_padding Integer vector output padding.
+#' @param groups Integer number of groups.
+#' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @param dilation Integer vector dilation.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_conv_transpose3d <- function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
   nn_module("nn_conv_transpose3d",
     initialize = function(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L, output_padding = 0L, groups = 1L, bias = TRUE, dilation = 1L) {
@@ -12459,7 +20314,16 @@ w <- torch_randn(c(in_channels, as.integer(out_channels / groups), kernel_size, 
   )(in_channels, out_channels, kernel_size, stride, padding, output_padding, groups, bias, dilation)
 }
 
+#' Nn threshold
+#' @param threshold Parameter passed to the underlying ATen operator.
+#' @param value Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_threshold <- function(threshold, value) {
   nn_module("nn_threshold",
     initialize = function(threshold, value) {
@@ -12470,7 +20334,16 @@ nn_threshold <- function(threshold, value) {
   )(threshold, value)
 }
 
+#' Nn unflatten
+#' @param dim Integer dimension.
+#' @param unflattened_size Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_unflatten <- function(dim, unflattened_size) {
   nn_module("nn_unflatten",
     initialize = function(dim, unflattened_size) {
@@ -12481,7 +20354,17 @@ nn_unflatten <- function(dim, unflattened_size) {
   )(dim, unflattened_size)
 }
 
+#' Nn pairwise distance
+#' @param p Parameter passed to the underlying ATen operator.
+#' @param eps Numeric; small constant for numerical stability.
+#' @param keepdim Logical; keep reduced dimensions.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_pairwise_distance <- function(p = 2, eps = 1e-6, keepdim = FALSE) {
   nn_module("nn_pairwise_distance",
     initialize = function(p, eps, keepdim) {
@@ -12491,7 +20374,14 @@ nn_pairwise_distance <- function(p = 2, eps = 1e-6, keepdim = FALSE) {
   )(p, eps, keepdim)
 }
 
+#' Nn softmax2d
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_softmax2d <- function() {
   nn_module("nn_softmax2d",
     initialize = function() {},
@@ -12499,41 +20389,124 @@ nn_softmax2d <- function() {
   )()
 }
 
+#' Nnf cross entropy
+#' @param input A `torch_tensor`.
+#' @param target Parameter passed to the underlying ATen operator.
+#' @param weight A `torch_tensor` of weights.
+#' @param reduction Parameter passed to the underlying ATen operator.
+#' @param ignore_index Parameter passed to the underlying ATen operator.
+#' @param label_smoothing Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_cross_entropy <- function(input, target, weight = NULL, reduction = 1L, ignore_index = -100, label_smoothing = 0) {
   torch_cross_entropy_loss(input, target, weight, reduction, ignore_index, label_smoothing)
 }
 
+#' Nnf logsigmoid
+#' @param input A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_logsigmoid <- function(input) torch_log(torch_sigmoid(input))
 
+#' Nnf softmin
+#' @param input A `torch_tensor`.
+#' @param dim Integer dimension.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_softmin <- function(input, dim = -1L) nnf_softmax(torch_neg(input), dim)
 
+#' Nnf softsign
+#' @param input A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_softsign <- function(input) input / (1 + torch_abs(input))
 
+#' Nnf tanhshrink
+#' @param input A `torch_tensor`.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_tanhshrink <- function(input) input - torch_tanh(input)
 
+#' Nnf dropout2d
+#' @param input A `torch_tensor`.
+#' @param p Numeric norm exponent.
+#' @param training Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_dropout2d <- function(input, p = 0.5, training = TRUE) {
   if (!training || p == 0) return(input)
   mask <- torch_ones(input$size()[1:2])$bernoulli_(1 - p) / (1 - p)
   input * mask$unsqueeze(-1L)$unsqueeze(-1L)
 }
 
+#' Nnf dropout3d
+#' @param input A `torch_tensor`.
+#' @param p Numeric norm exponent.
+#' @param training Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nnf_dropout3d <- function(input, p = 0.5, training = TRUE) {
   if (!training || p == 0) return(input)
   mask <- torch_ones(input$size()[1:2])$bernoulli_(1 - p) / (1 - p)
   input * mask$unsqueeze(-1L)$unsqueeze(-1L)$unsqueeze(-1L)
 }
 
+#' Nn init zeros
+#' @param tensor Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_zeros_ <- function(tensor) { tensor$zero_(); invisible(tensor) }
 
+#' Nn init xavier uniform
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param gain Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_xavier_uniform_ <- function(tensor, gain = 1) {
   fan_in <- tensor$size()[2]; fan_out <- tensor$size()[1]
   std <- gain * sqrt(2.0 / (fan_in + fan_out))
@@ -12541,78 +20514,228 @@ nn_init_xavier_uniform_ <- function(tensor, gain = 1) {
   tensor$uniform_(-a, a); invisible(tensor)
 }
 
+#' Nn init xavier normal
+#' @param tensor Parameter passed to the underlying ATen operator.
+#' @param gain Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_init_xavier_normal_ <- function(tensor, gain = 1) {
   fan_in <- tensor$size()[2]; fan_out <- tensor$size()[1]
   std <- gain * sqrt(2.0 / (fan_in + fan_out))
   tensor$normal_(0, std); invisible(tensor)
 }
 
+#' Lr step
+#' @param optimizer Parameter passed to the underlying ATen operator.
+#' @param step_size Parameter passed to the underlying ATen operator.
+#' @param gamma Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 lr_step <- function(optimizer, step_size, gamma = 0.1) {
   structure(list(optimizer = optimizer, step_size = step_size, gamma = gamma, last_epoch = 0L), class = "lr_scheduler")
 }
 
+#' Lr lambda
+#' @param optimizer Parameter passed to the underlying ATen operator.
+#' @param lr_lambda Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 lr_lambda <- function(optimizer, lr_lambda) {
   structure(list(optimizer = optimizer, lr_lambda = lr_lambda, last_epoch = 0L), class = "lr_scheduler")
 }
 
+#' Lr multiplicative
+#' @param optimizer Parameter passed to the underlying ATen operator.
+#' @param lr_lambda Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 lr_multiplicative <- function(optimizer, lr_lambda) lr_lambda(optimizer, lr_lambda)
 
+#' Lr reduce on plateau
+#' @param optimizer Parameter passed to the underlying ATen operator.
+#' @param mode Parameter passed to the underlying ATen operator.
+#' @param factor Parameter passed to the underlying ATen operator.
+#' @param patience Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 lr_reduce_on_plateau <- function(optimizer, mode = 'min', factor = 0.1, patience = 10) {
   structure(list(optimizer = optimizer, mode = mode, factor = factor, patience = patience, best = Inf, wait = 0L), class = "lr_scheduler")
 }
 
+#' Lr cosine annealing
+#' @param optimizer Parameter passed to the underlying ATen operator.
+#' @param T_max Parameter passed to the underlying ATen operator.
+#' @param eta_min Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 lr_cosine_annealing <- function(optimizer, T_max, eta_min = 0) {
   structure(list(optimizer = optimizer, T_max = T_max, eta_min = eta_min, last_epoch = 0L), class = "lr_scheduler")
 }
 
+#' Lr one cycle
+#' @param optimizer Parameter passed to the underlying ATen operator.
+#' @param max_lr Parameter passed to the underlying ATen operator.
+#' @param total_steps Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 lr_one_cycle <- function(optimizer, max_lr, total_steps) {
   structure(list(optimizer = optimizer, max_lr = max_lr, total_steps = total_steps, last_epoch = 0L), class = "lr_scheduler")
 }
 
+#' Lr scheduler
+#' @param optimizer Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 lr_scheduler <- function(optimizer, ...) structure(list(optimizer = optimizer, ...), class = "lr_scheduler")
 
+#' Cuda synchronize
+#' @param device Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 cuda_synchronize <- function(device = NULL) {
   if (cuda_is_available()) C_cuda_synchronize()
   invisible(NULL)
 }
 
+#' Cuda current device
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 cuda_current_device <- function() {
   if (cuda_is_available()) 0L else -1L
 }
 
+#' Cuda get device capability
+#' @param device Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 cuda_get_device_capability <- function(device = 0L) list(major = 0L, minor = 0L)
 
+#' Cuda runtime version
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 cuda_runtime_version <- function() 0L
 
+#' Cuda get rng state
+#' @param device Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 cuda_get_rng_state <- function(device = 0L) NULL
 
+#' Cuda set rng state
+#' @param state RNG state.
+#' @param device Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 cuda_set_rng_state <- function(state, device = 0L) invisible(NULL)
 
+#' Autograd set grad mode
+#' @param enabled Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 autograd_set_grad_mode <- function(enabled) invisible(NULL)
 
+#' Autograd backward
+#' @param tensors Parameter passed to the underlying ATen operator.
+#' @param grad_tensors Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 autograd_backward <- function(tensors, grad_tensors = NULL) {
   if (inherits(tensors, 'torch_tensor')) tensors <- list(tensors)
   for (t in tensors) t$backward()
   invisible(NULL)
 }
 
+#' Load state dict
+#' @param module Parameter passed to the underlying ATen operator.
+#' @param state_dict Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 load_state_dict <- function(module, state_dict) {
   for (nm in names(state_dict)) {
     param <- tryCatch(module[[nm]], error = function(e) NULL)
@@ -12633,6 +20756,12 @@ load_state_dict <- function(module, state_dict) {
 #' @param norm_type Type of norm. Default 2.
 #' @return Total norm (numeric).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_utils_clip_grad_norm_ <- function(parameters, max_norm, norm_type = 2) {
   if (inherits(parameters, "nn_module")) {
     parameters <- parameters$parameters()
@@ -12655,6 +20784,12 @@ nn_utils_clip_grad_norm_ <- function(parameters, max_norm, norm_type = 2) {
 #' @param parameters List of tensors or an nn_module.
 #' @param clip_value Maximum absolute value.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_utils_clip_grad_value_ <- function(parameters, clip_value) {
   if (inherits(parameters, "nn_module")) {
     parameters <- parameters$parameters()
@@ -12670,6 +20805,23 @@ nn_utils_clip_grad_value_ <- function(parameters, clip_value) {
 #' @param modules Named list of nn_module instances.
 #' @return An nn_module that stores sub-modules by name.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' nn_module <- nn_module(
+#'   initialize = function() {
+#'     self$dict <- nn_module_dict(list(
+#'       l1 = nn_linear(10, 20),
+#'       l2 = nn_linear(20, 10)
+#'     ))
+#'   },
+#'   forward = function(x) {
+#'     x <- self$dict$l1(x)
+#'     self$dict$l2(x)
+#'   }
+#' )
+#' }
+#' }
 nn_module_dict <- function(modules = list()) {
   nn_module("nn_module_dict",
     initialize = function(modules) {
@@ -12688,6 +20840,22 @@ nn_module_dict <- function(modules = list()) {
 #' @param dim Dimension. Default 0.
 #' @return The module (unmodified stub).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x = nn_linear(in_features = 20, out_features = 40)
+#' weight_norm = nn_utils_weight_norm$new(name = 'weight', dim = 2)
+#' weight_norm$apply(x)
+#' x$weight_g$size()
+#' x$weight_v$size()
+#' x$weight
+#' 
+#' # the recompute() method recomputes the weight using g and v. It must be called
+#' # explicitly inside `forward()`.
+#' weight_norm$recompute(x)
+#' 
+#' }
+#' }
 nn_utils_weight_norm <- function(module, name = "weight", dim = 0L) {
   message("nn_utils_weight_norm is not yet fully implemented in tinytorch")
   module
@@ -12697,30 +20865,81 @@ nn_utils_weight_norm <- function(module, name = "weight", dim = 0L) {
 #' @name rnn_utils
 #' @param input Input tensor or list.
 #' @param lengths Sequence lengths.
-#' @param ... Additional arguments.
-#' @return Packed/padded data.
+#' @param sequences List of tensors to pack or pad.
+#' @param sequence A packed or padded sequence produced by the pack/pad
+#'   helpers.
+#' @param batch_first Logical; treat the first dim as batch.
+#' @param enforce_sorted Logical; require sequences pre-sorted by length.
+#' @param padding_value Scalar padding value.
+#' @param total_length Optional target padded length.
+#' @return Packed/padded data. Currently raises an error because
+#'   `PackedSequence` is not implemented in tinytorch.
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Not yet implemented; will signal an error.
+#' try(nn_utils_rnn_pack_sequence(list(torch_tensor(1:3))), silent = TRUE)
+#' }
+#' }
 NULL
 
+#' @param input A `torch_tensor`.
+#' @param lengths Integer vector of sequence lengths.
+#' @param batch_first Logical.
+#' @param enforce_sorted Logical.
 #' @rdname rnn_utils
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first = FALSE, enforce_sorted = TRUE) {
   stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
 }
 
+#' @param sequences List of `torch_tensor`s.
+#' @param enforce_sorted Logical.
 #' @rdname rnn_utils
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
   stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
 }
 
+#' @param sequence Packed or padded sequence.
+#' @param batch_first Logical.
+#' @param padding_value Numeric padding value.
+#' @param total_length Optional integer target length.
 #' @rdname rnn_utils
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, padding_value = 0, total_length = NULL) {
   stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
 }
 
+#' @param sequences List of `torch_tensor`s.
+#' @param batch_first Logical.
+#' @param padding_value Numeric padding value.
 #' @rdname rnn_utils
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_utils_rnn_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0) {
   stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
 }
@@ -12737,6 +20956,16 @@ nn_utils_rnn_pad_sequence <- function(sequences, batch_first = FALSE, padding_va
 #' @param bidirectional Bidirectional. Default FALSE.
 #' @return An nn_module.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' rnn <- nn_gru(10, 20, 2)
+#' input <- torch_randn(5, 3, 10)
+#' h0 <- torch_randn(2, 3, 20)
+#' output <- rnn(input, h0)
+#' }
+#' }
 nn_gru <- function(input_size, hidden_size, num_layers = 1L, bias = TRUE,
                     batch_first = FALSE, dropout = 0, bidirectional = FALSE) {
   nn_module("nn_gru",
@@ -12794,6 +21023,15 @@ nn_gru <- function(input_size, hidden_size, num_layers = 1L, bias = TRUE,
 #' @param bidirectional Bidirectional. Default FALSE.
 #' @return An nn_module.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' rnn <- nn_rnn(10, 20, 2)
+#' input <- torch_randn(5, 3, 10)
+#' h0 <- torch_randn(2, 3, 20)
+#' rnn(input, h0)
+#' }
+#' }
 nn_rnn <- function(input_size, hidden_size, num_layers = 1L,
                     nonlinearity = "tanh", bias = TRUE, batch_first = FALSE,
                     dropout = 0, bidirectional = FALSE) {
@@ -12841,13 +21079,31 @@ nn_rnn <- function(input_size, hidden_size, num_layers = 1L,
 
 # ---- Remaining missing stubs ----
 
+#' Optimizer
+#' @param name Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 optimizer <- function(name = NULL, ...) {
   methods <- list(...)
   function(params, ...) make_optimizer(params, list(...), methods$step)
 }
 
+#' Nn prune head
+#' @param module Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_prune_head <- function(module, ...) {
   stop("nn_prune_head not yet implemented", call. = FALSE)
 }
@@ -12863,6 +21119,36 @@ nn_prune_head <- function(module, ...) {
 #' @param line_search_fn Line search function.
 #' @return A torch_optimizer.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' a <- 1
+#' b <- 5
+#' rosenbrock <- function(x) {
+#'   x1 <- x[1]
+#'   x2 <- x[2]
+#'   (a - x1)^2 + b * (x2 - x1^2)^2
+#' }
+#' 
+#' x <- torch_tensor(c(-1, 1), requires_grad = TRUE)
+#' 
+#' optimizer <- optim_lbfgs(x)
+#' calc_loss <- function() {
+#'   optimizer$zero_grad()
+#'   value <- rosenbrock(x)
+#'   value$backward()
+#'   value
+#' }
+#' 
+#' num_iterations <- 2
+#' for (i in 1:num_iterations) {
+#'   optimizer$step(calc_loss)
+#' }
+#' 
+#' rosenbrock(x)
+#' 
+#' }
+#' }
 optim_lbfgs <- function(params, lr = 1, max_iter = 20L, max_eval = NULL,
                          tolerance_grad = 1e-7, tolerance_change = 1e-9,
                          history_size = 100L, line_search_fn = NULL) {
@@ -12877,6 +21163,13 @@ optim_lbfgs <- function(params, lr = 1, max_iter = 20L, max_eval = NULL,
 #' @param gain Scaling factor. Default 1.
 #' @return tensor (modified in place).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' w <- torch_empty(3, 5)
+#' nn_init_orthogonal_(w)
+#' }
+#' }
 nn_init_orthogonal_ <- function(tensor, gain = 1) {
   dims <- tensor$size()
   rows <- dims[1]
@@ -12904,6 +21197,16 @@ nn_init_orthogonal_ <- function(tensor, gain = 1) {
 #' @param groups Number of groups. Default 1.
 #' @return tensor (modified in place).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' w <- torch_empty(3, 16, 5, 5)
+#' nn_init_dirac_(w)
+#' 
+#' 
+#' }
+#' }
 nn_init_dirac_ <- function(tensor, groups = 1L) {
   dims <- tensor$size()
   if (length(dims) < 3 || length(dims) > 5)
@@ -12932,6 +21235,15 @@ nn_init_dirac_ <- function(tensor, groups = 1L) {
 #' @param std Standard deviation of the normal distribution. Default 0.01.
 #' @return tensor (modified in place).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' w <- torch_empty(3, 5)
+#' nn_init_sparse_(w, sparsity = 0.1)
+#' 
+#' }
+#' }
 nn_init_sparse_ <- function(tensor, sparsity, std = 0.01) {
   dims <- tensor$size()
   if (length(dims) != 2)
@@ -12955,6 +21267,22 @@ nn_init_sparse_ <- function(tensor, sparsity, std = 0.01) {
 #' @param backward Backward function.
 #' @return An autograd function class.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' exp2 <- autograd_function(
+#'   forward = function(ctx, i) {
+#'     result <- i$exp()
+#'     ctx$save_for_backward(result = result)
+#'     result
+#'   },
+#'   backward = function(ctx, grad_output) {
+#'     list(i = grad_output * ctx$saved_variable$result)
+#'   }
+#' )
+#' }
+#' }
 autograd_function <- function(forward, backward) {
   structure(list(forward = forward, backward = backward),
             class = "torch_autograd_function")
@@ -12969,6 +21297,20 @@ autograd_function <- function(forward, backward) {
 #' @param create_graph Create graph for higher-order gradients.
 #' @return List of gradient tensors.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' w <- torch_tensor(0.5, requires_grad = TRUE)
+#' b <- torch_tensor(0.9, requires_grad = TRUE)
+#' x <- torch_tensor(runif(100))
+#' y <- 2 * x + 1
+#' loss <- (y - (w * x + b))^2
+#' loss <- loss$mean()
+#' 
+#' o <- autograd_grad(loss, list(w, b))
+#' o
+#' }
+#' }
 autograd_grad <- function(outputs, inputs, grad_outputs = NULL,
                            retain_graph = FALSE, create_graph = FALSE) {
   stop("autograd_grad not yet implemented in tinytorch (requires C++ autograd engine)", call. = FALSE)
@@ -12983,6 +21325,12 @@ autograd_grad <- function(outputs, inputs, grad_outputs = NULL,
 #' @param head_bias Use bias in head. Default FALSE.
 #' @return An nn_module.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 nn_adaptive_log_softmax_with_loss <- function(in_features, n_classes, cutoffs,
                                                 div_value = 4, head_bias = FALSE) {
   stop("nn_adaptive_log_softmax_with_loss not yet implemented in tinytorch", call. = FALSE)

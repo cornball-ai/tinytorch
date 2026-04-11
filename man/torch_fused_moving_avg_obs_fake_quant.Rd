@@ -43,3 +43,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::fused_moving_avg_obs_fake_quant}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

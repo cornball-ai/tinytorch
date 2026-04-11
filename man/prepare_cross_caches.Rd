@@ -21,3 +21,10 @@ Named list with k and v, each a list of N tensors
 Projects encoder output through each decoder layer's cross-attention
 K/V weights in a single C++ call.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Specialized Whisper helper; see package vignettes
+}
+}
+}

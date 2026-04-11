@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::logit}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a <- torch_rand(5)
+a
+torch_logit(a, eps=1e-6)
+}
+}
+}

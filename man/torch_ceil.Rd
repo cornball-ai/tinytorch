@@ -5,6 +5,19 @@
 \usage{
 torch_ceil(self)
 }
+\arguments{
+\item{self}{A `torch_tensor`.}
+}
 \description{
 torch_ceil
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4))
+a
+torch_ceil(a)
+}
+}
 }

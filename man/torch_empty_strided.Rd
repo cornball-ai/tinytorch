@@ -20,3 +20,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::empty_strided}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_empty_strided(list(2, 3), list(1, 2))
+a
+a$stride(1)
+a$size(1)
+}
+}
+}

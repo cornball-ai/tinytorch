@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::polygamma}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_tensor(c(1, 0.5))
+torch_polygamma(1, a)
+
+}
+}
+}

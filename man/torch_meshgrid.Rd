@@ -14,3 +14,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::meshgrid}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x = torch_tensor(c(1, 2, 3))
+y = torch_tensor(c(4, 5, 6))
+out = torch_meshgrid(list(x, y))
+out
+}
+}
+}

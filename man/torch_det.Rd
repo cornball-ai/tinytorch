@@ -14,3 +14,15 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::det}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+A = torch_randn(c(3, 3))
+torch_det(A)
+A = torch_randn(c(3, 2, 2))
+A
+A$det()
+}
+}
+}

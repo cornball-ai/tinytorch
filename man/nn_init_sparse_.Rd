@@ -18,3 +18,13 @@ tensor (modified in place).
 \description{
 Sparse initialization
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+w <- torch_empty(3, 5)
+nn_init_sparse_(w, sparsity = 0.1)
+
+}
+}
+}

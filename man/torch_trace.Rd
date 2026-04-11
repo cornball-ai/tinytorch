@@ -14,3 +14,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::trace}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x <- torch_arange(1, 9)$view(c(3, 3))
+x
+torch_trace(x)
+}
+}
+}

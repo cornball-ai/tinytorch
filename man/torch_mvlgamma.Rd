@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::mvlgamma}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_empty(c(2, 3))$uniform_(1, 2)
+a
+torch_mvlgamma(a, 2)
+}
+}
+}

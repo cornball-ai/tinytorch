@@ -16,9 +16,11 @@ torch_sum(self, dim = NULL, keepdim = FALSE)
 Sum of tensor elements
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 x <- torch_randn(c(2, 3))
 torch_sum(x)
 torch_sum(x, dim = 1)
+}
 }
 }

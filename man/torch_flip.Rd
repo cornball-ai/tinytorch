@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Flip tensor along given dimensions
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x <- torch_arange(1, 8)$view(c(2, 2, 2))
+x
+torch_flip(x, c(1, 2))
+}
+}
+}

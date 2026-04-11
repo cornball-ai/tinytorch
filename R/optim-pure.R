@@ -10,6 +10,7 @@
 #'
 #' @param params List of tensors to optimize (must have requires_grad).
 #' @param defaults Named list of default hyperparameters.
+#' @param step_fn Function; optimizer step callback.
 #' @return An optimizer environment with step() and zero_grad() methods.
 #' @keywords internal
 make_optimizer <- function(params, defaults, step_fn) {
@@ -44,6 +45,14 @@ make_optimizer <- function(params, defaults, step_fn) {
 #' @param centered If TRUE, compute centered RMSprop. Default FALSE.
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' params <- list(nn_parameter(torch_randn(3)))
+#' opt <- optim_rmsprop(params, lr = 0.01)
+#' opt$step()
+#' }
+#' }
 optim_rmsprop <- function(params, lr = 0.01, alpha = 0.99, eps = 1e-8,
                            weight_decay = 0, momentum = 0, centered = FALSE) {
   defaults <- list(lr = lr, alpha = alpha, eps = eps,
@@ -104,6 +113,14 @@ optim_rmsprop <- function(params, lr = 0.01, alpha = 0.99, eps = 1e-8,
 #' @param eps Term for numerical stability. Default 1e-10.
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' params <- list(nn_parameter(torch_randn(3)))
+#' opt <- optim_adagrad(params, lr = 0.01)
+#' opt$step()
+#' }
+#' }
 optim_adagrad <- function(params, lr = 0.01, lr_decay = 0,
                            weight_decay = 0, eps = 1e-10) {
   defaults <- list(lr = lr, lr_decay = lr_decay,
@@ -144,6 +161,17 @@ optim_adagrad <- function(params, lr = 0.01, lr_decay = 0,
 #' @param weight_decay Weight decay (L2 penalty). Default 0.
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' optimizer <- optim_adadelta(model$parameters, lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' 
+#' }
+#' }
 optim_adadelta <- function(params, lr = 1.0, rho = 0.9, eps = 1e-6,
                             weight_decay = 0) {
   defaults <- list(lr = lr, rho = rho, eps = eps, weight_decay = weight_decay)
@@ -188,6 +216,18 @@ optim_adadelta <- function(params, lr = 1.0, rho = 0.9, eps = 1e-6,
 #' @param weight_decay Weight decay (L2 penalty). Default 0.
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' optimizer <- optim_asgd(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' 
+#' 
+#' }
+#' }
 optim_asgd <- function(params, lr = 0.01, lambd = 1e-4, alpha = 0.75,
                         t0 = 1e6, weight_decay = 0) {
   defaults <- list(lr = lr, lambd = lambd, alpha = alpha,
@@ -240,6 +280,17 @@ optim_asgd <- function(params, lr = 0.01, lambd = 1e-4, alpha = 0.75,
 #' @param step_sizes Min/max step sizes. Default c(1e-6, 50).
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' optimizer <- optim_rprop(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' 
+#' }
+#' }
 optim_rprop <- function(params, lr = 0.01, etas = c(0.5, 1.2),
                          step_sizes = c(1e-6, 50)) {
   defaults <- list(lr = lr, eta_minus = etas[1], eta_plus = etas[2],
@@ -289,5 +340,9 @@ optim_rprop <- function(params, lr = 0.01, etas = c(0.5, 1.2),
 # ---- Sentinel ----
 
 #' Required optimizer parameter sentinel
+#' @return An object of class `optim_required`, used as a default to mark
+#'   that an optimizer argument must be supplied by the caller.
+#' @examples
+#' identical(class(optim_required), "optim_required")
 #' @export
 optim_required <- structure(list(), class = "optim_required")

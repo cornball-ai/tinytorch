@@ -19,8 +19,10 @@ An nn_module instance.
 Linear layer
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 m <- nn_linear(3, 2)
 m(torch_randn(c(1, 3)))
+}
 }
 }

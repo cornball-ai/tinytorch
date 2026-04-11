@@ -16,3 +16,13 @@ Invisible NULL.
 \description{
 Save a torch object to a file
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x <- torch_randn(c(2, 3))
+f <- tempfile(fileext = ".pt")
+torch_save(x, f)
+unlink(f)
+}
+}
+}

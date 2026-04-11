@@ -5,6 +5,19 @@
 \usage{
 torch_round(self)
 }
+\arguments{
+\item{self}{A `torch_tensor`.}
+}
 \description{
 torch_round
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4))
+a
+torch_round(a)
+}
+}
 }

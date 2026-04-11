@@ -9,7 +9,8 @@
 #' @param ... Named functions: initialize, forward, and any other methods.
 #' @return A constructor function that creates module instances.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' Linear <- nn_module("Linear",
 #'   initialize = function(in_f, out_f) {
 #'     self$register_parameter("weight", torch_randn(c(out_f, in_f)))
@@ -18,6 +19,7 @@
 #' )
 #' m <- Linear(3, 2)
 #' m(torch_randn(c(1, 3)))
+#' }
 #' }
 #' @export
 nn_module <- function(classname = NULL, ...) {
@@ -248,7 +250,15 @@ nn_module <- function(classname = NULL, ...) {
   }
 }
 
+#' Length.nn module
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' length(nn_linear(10, 5))
+#' }
+#' }
 length.nn_module <- function(x) {
   env <- attr(x, ".module_env")
   if (exists(".modules", envir = env, inherits = FALSE)) {
@@ -266,9 +276,11 @@ length.nn_module <- function(x) {
 #' @param bias Logical, whether to include a bias term.
 #' @return An nn_module instance.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' m <- nn_linear(3, 2)
 #' m(torch_randn(c(1, 3)))
+#' }
 #' }
 #' @export
 nn_linear <- function(in_features, out_features, bias = TRUE) {
@@ -295,9 +307,11 @@ nn_linear <- function(in_features, out_features, bias = TRUE) {
 #'
 #' @return An nn_module instance.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' m <- nn_relu()
 #' m(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 nn_relu <- function() {
@@ -314,9 +328,11 @@ nn_relu <- function() {
 #'
 #' @return An nn_module instance.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' m <- nn_gelu()
 #' m(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 nn_gelu <- function() {
@@ -334,9 +350,11 @@ nn_gelu <- function() {
 #' @param ... nn_module instances to chain sequentially.
 #' @return An nn_module instance.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' m <- nn_sequential(nn_linear(3, 4), nn_relu(), nn_linear(4, 2))
 #' m(torch_randn(c(1, 3)))
+#' }
 #' }
 #' @export
 nn_sequential <- function(...) {
@@ -369,9 +387,11 @@ nn_sequential <- function(...) {
 #' @param eps Small constant for numerical stability.
 #' @return An nn_module instance.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' m <- nn_layer_norm(4)
 #' m(torch_randn(c(2, 4)))
+#' }
 #' }
 #' @export
 nn_layer_norm <- function(normalized_shape, eps = 1e-5) {
@@ -400,6 +420,13 @@ nn_layer_norm <- function(normalized_shape, eps = 1e-5) {
 #' @param requires_grad Whether this parameter requires gradients.
 #' @return The tensor with additional class tag.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' p <- nn_parameter(torch_randn(c(3, 4)))
+#' p$requires_grad
+#' }
+#' }
 nn_parameter <- function(data, requires_grad = TRUE) {
   if (requires_grad) C_tensor_requires_grad_(data, TRUE)
   class(data) <- c("nn_parameter", class(data))
@@ -411,6 +438,13 @@ nn_parameter <- function(data, requires_grad = TRUE) {
 #' @param persistent Ignored.
 #' @return The tensor with additional class tag.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' b <- nn_buffer(torch_zeros(3))
+#' b
+#' }
+#' }
 nn_buffer <- function(data, persistent = TRUE) {
   class(data) <- c("nn_buffer", class(data))
   data
@@ -422,6 +456,23 @@ nn_buffer <- function(data, persistent = TRUE) {
 #' @param modules A list of nn_module instances.
 #' @return An nn_module containing the sub-modules.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' my_module <- nn_module(
+#'   initialize = function() {
+#'     self$linears <- nn_module_list(lapply(1:10, function(x) nn_linear(10, 10)))
+#'   },
+#'   forward = function(x) {
+#'     for (i in 1:length(self$linears)) {
+#'       x <- self$linears[[i]](x)
+#'     }
+#'     x
+#'   }
+#' )
+#' }
+#' }
 nn_module_list <- function(modules = list()) {
   mod <- nn_module("nn_module_list",
     initialize = function(modules) {
@@ -454,6 +505,15 @@ nn_module_list <- function(modules = list()) {
 #' Identity module (pass-through)
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_identity(54, unused_argument1 = 0.1, unused_argument2 = FALSE)
+#' input <- torch_randn(128, 20)
+#' output <- m(input)
+#' print(output$size())
+#' }
+#' }
 nn_identity <- function() {
   nn_module("nn_identity",
     forward = function(input) input
@@ -468,6 +528,14 @@ nn_identity <- function() {
 #' @param inplace Ignored.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_dropout(p = 0.2)
+#' input <- torch_randn(20, 16)
+#' output <- m(input)
+#' }
+#' }
 nn_dropout <- function(p = 0.5, inplace = FALSE) {
   nn_module("nn_dropout",
     initialize = function(p) {
@@ -483,6 +551,14 @@ nn_dropout <- function(p = 0.5, inplace = FALSE) {
 #' Sigmoid activation module
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_sigmoid()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' }
+#' }
 nn_sigmoid <- function() {
   nn_module("nn_sigmoid",
     forward = function(input) C_torch_sigmoid(input)
@@ -492,6 +568,13 @@ nn_sigmoid <- function() {
 #' SiLU (Swish) activation module
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_silu()
+#' m(torch_randn(5))
+#' }
+#' }
 nn_silu <- function() {
   nn_module("nn_silu",
     forward = function(input) nnf_silu(input)
@@ -501,6 +584,14 @@ nn_silu <- function() {
 #' Tanh activation module
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_tanh()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' }
+#' }
 nn_tanh <- function() {
   nn_module("nn_tanh",
     forward = function(input) C_torch_tanh(input)
@@ -511,6 +602,14 @@ nn_tanh <- function() {
 #' @param alpha Scale for the negative factor. Default 1.0.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_elu()
+#' input <- torch_randn(2)
+#' output <- m(input)
+#' }
+#' }
 nn_elu <- function(alpha = 1.0) {
   nn_module("nn_elu",
     initialize = function(alpha) {
@@ -529,6 +628,20 @@ nn_elu <- function(alpha = 1.0) {
 #' @param padding_idx Optional integer. If given, pads output at this index.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # an Embedding module containing 10 tensors of size 3
+#' embedding <- nn_embedding(10, 3)
+#' # a batch of 2 samples of 4 indices each
+#' input <- torch_tensor(rbind(c(1, 2, 4, 5), c(4, 3, 2, 9)), dtype = torch_long())
+#' embedding(input)
+#' # example with padding_idx
+#' embedding <- nn_embedding(10, 3, padding_idx = 1)
+#' input <- torch_tensor(matrix(c(1, 3, 1, 6), nrow = 1), dtype = torch_long())
+#' embedding(input)
+#' }
+#' }
 nn_embedding <- function(num_embeddings, embedding_dim, padding_idx = NULL) {
   mod <- nn_module("nn_embedding",
     initialize = function(num_embeddings, embedding_dim, padding_idx) {
@@ -559,6 +672,14 @@ nn_embedding <- function(num_embeddings, embedding_dim, padding_idx = NULL) {
 #' @param bias Logical. Default TRUE.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_conv1d(16, 33, 3, stride = 2)
+#' input <- torch_randn(20, 16, 50)
+#' output <- m(input)
+#' }
+#' }
 nn_conv1d <- function(in_channels, out_channels, kernel_size,
                       stride = 1L, padding = 0L, dilation = 1L,
                       groups = 1L, bias = TRUE) {
@@ -603,6 +724,14 @@ nn_conv1d <- function(in_channels, out_channels, kernel_size,
 #' @param dilation Integer. Default 1.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- nn_conv_transpose1d(32, 16, 2)
+#' input <- torch_randn(10, 32, 2)
+#' output <- m(input)
+#' }
+#' }
 nn_conv_transpose1d <- function(in_channels, out_channels, kernel_size,
                                 stride = 1L, padding = 0L, output_padding = 0L,
                                 groups = 1L, bias = TRUE, dilation = 1L) {
@@ -648,6 +777,20 @@ nn_conv_transpose1d <- function(in_channels, out_channels, kernel_size,
 #' @param bias Logical. Default TRUE.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' # With square kernels and equal stride
+#' m <- nn_conv2d(16, 33, 3, stride = 2)
+#' # non-square kernels and unequal stride and with padding
+#' m <- nn_conv2d(16, 33, c(3, 5), stride = c(2, 1), padding = c(4, 2))
+#' # non-square kernels and unequal stride and with padding and dilation
+#' m <- nn_conv2d(16, 33, c(3, 5), stride = c(2, 1), padding = c(4, 2), dilation = c(3, 1))
+#' input <- torch_randn(20, 16, 50, 100)
+#' output <- m(input)
+#' }
+#' }
 nn_conv2d <- function(in_channels, out_channels, kernel_size,
                       stride = 1L, padding = 0L, dilation = 1L,
                       groups = 1L, bias = TRUE) {
@@ -689,6 +832,17 @@ nn_conv2d <- function(in_channels, out_channels, kernel_size,
 #' @param track_running_stats Logical. Default TRUE.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # With Learnable Parameters
+#' m <- nn_batch_norm1d(100)
+#' # Without Learnable Parameters
+#' m <- nn_batch_norm1d(100, affine = FALSE)
+#' input <- torch_randn(20, 100)
+#' output <- m(input)
+#' }
+#' }
 nn_batch_norm1d <- function(num_features, eps = 1e-5, momentum = 0.1,
                             affine = TRUE, track_running_stats = TRUE) {
   mod <- nn_module("nn_batch_norm1d",
@@ -728,6 +882,17 @@ nn_batch_norm1d <- function(num_features, eps = 1e-5, momentum = 0.1,
 #' @param track_running_stats Logical. Default TRUE.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # With Learnable Parameters
+#' m <- nn_batch_norm2d(100)
+#' # Without Learnable Parameters
+#' m <- nn_batch_norm2d(100, affine = FALSE)
+#' input <- torch_randn(20, 100, 35, 45)
+#' output <- m(input)
+#' }
+#' }
 nn_batch_norm2d <- function(num_features, eps = 1e-5, momentum = 0.1,
                             affine = TRUE, track_running_stats = TRUE) {
   # Same as batch_norm1d — at::batch_norm handles both
@@ -747,6 +912,16 @@ nn_batch_norm2d <- function(num_features, eps = 1e-5, momentum = 0.1,
 #' @param bias Logical. Default TRUE.
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' rnn <- nn_lstm(10, 20, 2)
+#' input <- torch_randn(5, 3, 10)
+#' h0 <- torch_randn(2, 3, 20)
+#' c0 <- torch_randn(2, 3, 20)
+#' output <- rnn(input, list(h0, c0))
+#' }
+#' }
 nn_lstm <- function(input_size, hidden_size, num_layers = 1L,
                     batch_first = TRUE, dropout = 0, bidirectional = FALSE,
                     bias = TRUE) {
@@ -819,6 +994,14 @@ nn_lstm <- function(input_size, hidden_size, num_layers = 1L,
 #' @param mode Upsampling mode. Default "nearest".
 #' @return An nn_module instance.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' input <- torch_arange(start = 1, end = 4, dtype = torch_float())$view(c(1, 1, 2, 2))
+#' nn_upsample(scale_factor = c(2), mode = "nearest")(input)
+#' nn_upsample(scale_factor = c(2, 2), mode = "nearest")(input)
+#' }
+#' }
 nn_upsample <- function(size = NULL, scale_factor = NULL, mode = "nearest") {
   mod <- nn_module("nn_upsample",
     initialize = function(size, scale_factor, mode) {

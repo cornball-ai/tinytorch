@@ -18,3 +18,10 @@ A torch_tensor.
 \description{
 Applies the softplus function element-wise.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+nnf_softplus(torch_randn(5))
+}
+}
+}

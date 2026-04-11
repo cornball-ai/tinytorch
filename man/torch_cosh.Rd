@@ -14,3 +14,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::cosh}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4))
+a
+torch_cosh(a)
+}
+}
+}

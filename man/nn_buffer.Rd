@@ -16,3 +16,11 @@ The tensor with additional class tag.
 \description{
 Tag a tensor as a buffer (not a parameter)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+b <- nn_buffer(torch_zeros(3))
+b
+}
+}
+}

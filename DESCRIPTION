@@ -1,17 +1,21 @@
 Package: tinytorch
 Type: Package
-Title: High-Performance R Bindings to Libtorch
+Title: Minimal R Bindings to 'libtorch' (Linux)
 Version: 0.2.0
 Authors@R: c(
     person("Troy", "Hernandez", role = c("aut", "cre"),
-           email = "troy@cornball.ai"),
+           email = "troy@cornball.ai",
+           comment = c(ORCID = "0009-0005-4248-604X")),
+    person("Cornball AI", role = "cph"),
     person("Daniel", "Falbel", role = "ctb",
-           comment = "torch R package (optimizer, distribution, data loading, and nn module designs adapted under MIT license)")
+           comment = "portions adapted from the 'torch' R package under MIT license")
     )
-Description: Direct R bindings to 'libtorch' (PyTorch C++ distribution) with
-    minimal overhead. Installs on all platforms; full functionality requires
-    'libtorch' on Linux (see README). Provides a 'torch'-compatible API that
-    eliminates intermediate layers for maximum performance on tensor operations.
+Description: Direct R bindings to 'libtorch', the C++ distribution of
+    'PyTorch' <https://docs.pytorch.org/cppdocs/>. Links against a system
+    'libtorch' shared library on Linux and exposes tensor operations,
+    autograd, and neural network building blocks through a 'torch'-compatible
+    API. On other platforms the package installs with a stub backend and
+    'is_available()' returns 'FALSE'. The only hard dependency is 'Rcpp'.
 Encoding: UTF-8
 License: MIT + file LICENSE
 URL: https://github.com/cornball-ai/tinytorch
@@ -21,5 +25,6 @@ Imports: Rcpp
 LinkingTo: Rcpp
 Suggests: tinytest, simplermarkdown
 VignetteBuilder: simplermarkdown
+OS_type: unix
 NeedsCompilation: yes
-SystemRequirements: LibTorch (PyTorch C++ distribution, optional); see README
+SystemRequirements: libtorch (C++ distribution of 'PyTorch'); see README

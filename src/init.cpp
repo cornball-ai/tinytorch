@@ -990,8 +990,11 @@ extern "C" SEXP _tinytorch_C_torch_get_num_interop_threads();
 extern "C" SEXP _tinytorch_C_cuda_is_available();
 extern "C" SEXP _tinytorch_C_cuda_device_count();
 extern "C" SEXP _tinytorch_C_cuda_empty_cache();
+extern "C" SEXP _tinytorch_C_cuda_synchronize();
 extern "C" SEXP _tinytorch_C_cuda_mem_info();
 extern "C" SEXP _tinytorch_C_cuda_memory_stats();
+extern "C" SEXP _tinytorch_C_torch_manual_seed(SEXP seed_sexpSEXP);
+extern "C" SEXP _tinytorch_C_torch_scaled_mm(SEXP selfSEXP, SEXP mat2SEXP, SEXP scale_aSEXP, SEXP scale_bSEXP, SEXP biasSEXP, SEXP scale_resultSEXP, SEXP out_dtypeSEXP, SEXP use_fast_accumSEXP);
 extern "C" SEXP _tinytorch_C_transformer_decoder_layer_step(SEXP x_sexpSEXP, SEXP weights_sexpSEXP, SEXP self_cache_k_sexpSEXP, SEXP self_cache_v_sexpSEXP, SEXP cross_cache_k_sexpSEXP, SEXP cross_cache_v_sexpSEXP, SEXP n_head_sexpSEXP);
 extern "C" SEXP _tinytorch_C_transformer_encoder_layer(SEXP x_sexpSEXP, SEXP weights_sexpSEXP, SEXP n_head_sexpSEXP);
 extern "C" SEXP _tinytorch_C_prepare_cross_caches(SEXP encoder_output_sexpSEXP, SEXP cross_kv_weightsSEXP, SEXP n_head_sexpSEXP);
@@ -1987,8 +1990,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tinytorch_C_cuda_is_available", (DL_FUNC) &_tinytorch_C_cuda_is_available, 0},
     {"_tinytorch_C_cuda_device_count", (DL_FUNC) &_tinytorch_C_cuda_device_count, 0},
     {"_tinytorch_C_cuda_empty_cache", (DL_FUNC) &_tinytorch_C_cuda_empty_cache, 0},
+    {"_tinytorch_C_cuda_synchronize", (DL_FUNC) &_tinytorch_C_cuda_synchronize, 0},
     {"_tinytorch_C_cuda_mem_info", (DL_FUNC) &_tinytorch_C_cuda_mem_info, 0},
     {"_tinytorch_C_cuda_memory_stats", (DL_FUNC) &_tinytorch_C_cuda_memory_stats, 0},
+    {"_tinytorch_C_torch_manual_seed", (DL_FUNC) &_tinytorch_C_torch_manual_seed, 1},
+    {"_tinytorch_C_torch_scaled_mm", (DL_FUNC) &_tinytorch_C_torch_scaled_mm, 8},
     {"_tinytorch_C_transformer_decoder_layer_step", (DL_FUNC) &_tinytorch_C_transformer_decoder_layer_step, 7},
     {"_tinytorch_C_transformer_encoder_layer", (DL_FUNC) &_tinytorch_C_transformer_encoder_layer, 3},
     {"_tinytorch_C_prepare_cross_caches", (DL_FUNC) &_tinytorch_C_prepare_cross_caches, 3},

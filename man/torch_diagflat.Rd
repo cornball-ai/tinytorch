@@ -16,3 +16,17 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::diagflat}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(3))
+a
+torch_diagflat(a)
+torch_diagflat(a, 1)
+a = torch_randn(c(2, 2))
+a
+torch_diagflat(a)
+}
+}
+}

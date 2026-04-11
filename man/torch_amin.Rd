@@ -18,3 +18,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::amin}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a <- torch_randn(c(4, 4))
+a
+torch_amin(a, 1)
+}
+}
+}

@@ -6,9 +6,11 @@
 #' @param requires_grad Logical. Track gradients for this tensor. Default FALSE.
 #' @return A torch_tensor object.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_tensor(c(1, 2, 3))
 #' torch_tensor(matrix(1:6, 2, 3))
+#' }
 #' }
 #' @export
 torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALSE) {
@@ -25,8 +27,10 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_zeros(c(2, 3))
+#' }
 #' }
 #' @export
 torch_zeros <- function(..., dtype = NULL, device = NULL) {
@@ -41,8 +45,10 @@ torch_zeros <- function(..., dtype = NULL, device = NULL) {
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_ones(c(2, 3))
+#' }
 #' }
 #' @export
 torch_ones <- function(..., dtype = NULL, device = NULL) {
@@ -57,8 +63,10 @@ torch_ones <- function(..., dtype = NULL, device = NULL) {
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_randn(c(2, 3))
+#' }
 #' }
 #' @export
 torch_randn <- function(..., dtype = NULL, device = NULL) {
@@ -71,9 +79,11 @@ torch_randn <- function(..., dtype = NULL, device = NULL) {
 #' Create an uninitialized tensor with same shape/dtype as input
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 3))
 #' torch_empty_like(x)
+#' }
 #' }
 #' @export
 torch_empty_like <- function(self) {
@@ -85,8 +95,10 @@ torch_empty_like <- function(self) {
 #' @param dtype Optional torch dtype.
 #' @param device Ignored (CPU only).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_empty(c(2, 3))
+#' }
 #' }
 #' @export
 torch_empty <- function(..., dtype = NULL, device = NULL) {
@@ -103,6 +115,12 @@ torch_empty <- function(..., dtype = NULL, device = NULL) {
 #' @param device Ignored (CPU only).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Construct a tensor from a raw buffer (advanced; see as_array() for the inverse)
+#' }
+#' }
 torch_tensor_from_buffer <- function(raw, shape, dtype, device = NULL) {
   device_str <- if (!is.null(device)) as.character(device) else NULL
   C_torch_tensor_from_buffer(raw, as.integer(shape), unclass(dtype), device_str)
@@ -116,6 +134,15 @@ torch_tensor_from_buffer <- function(raw, shape, dtype, device = NULL) {
 #' @param device Ignored (CPU only).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_arange(start = 0, end = 5)
+#' torch_arange(1, 4)
+#' torch_arange(1, 2.5, 0.5)
+#' }
+#' }
 torch_arange <- function(start, end, step = 1L, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
@@ -130,6 +157,13 @@ torch_arange <- function(start, end, step = 1L, dtype = NULL, device = NULL) {
 #' @param device Ignored (CPU only).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_full(list(2, 3), 3.141592)
+#' }
+#' }
 torch_full <- function(size, fill_value, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
@@ -144,6 +178,16 @@ torch_full <- function(size, fill_value, dtype = NULL, device = NULL) {
 #' @param device Ignored (CPU only).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_linspace(3, 10, steps=5)
+#' torch_linspace(-10, 10, steps=5)
+#' torch_linspace(start=-10, end=10, steps=5)
+#' torch_linspace(start=-10, end=10, steps=1)
+#' }
+#' }
 torch_linspace <- function(start, end, steps = 100L, dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
   device_str <- if (!is.null(device)) as.character(device) else NULL
@@ -156,24 +200,47 @@ torch_linspace <- function(start, end, steps = 100L, dtype = NULL, device = NULL
 #' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input = torch_empty(c(2, 3))
+#' torch_ones_like(input)
+#' }
+#' }
 torch_ones_like <- function(self, dtype = NULL) {
   C_torch_ones_like(self, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Create a tensor of zeros with same shape/dtype as input
-#' @param self A torch_tensor.
+#' @param input A `torch_tensor`.
 #' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' input = torch_empty(c(2, 3))
+#' torch_zeros_like(input)
+#' }
+#' }
 torch_zeros_like <- function(input, dtype = NULL) {
   C_torch_zeros_like(input, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
 
 #' Create a tensor of random normal values with same shape/dtype as input
-#' @param self A torch_tensor.
+#' @param input A `torch_tensor`.
 #' @param dtype Optional dtype override.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x <- torch_randn(c(2, 3))
+#' torch_randn_like(x)
+#' }
+#' }
 torch_randn_like <- function(input, dtype = NULL) {
   C_torch_randn_like(input, if (!is.null(dtype)) unclass(dtype) else NULL)
 }
@@ -183,6 +250,16 @@ torch_randn_like <- function(input, dtype = NULL) {
 #' @param dim Dimension to concatenate along.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(2, 3))
+#' x
+#' torch_cat(list(x, x, x), 1)
+#' torch_cat(list(x, x, x), 2)
+#' }
+#' }
 torch_cat <- function(tensors, dim = 1L) {
   C_torch_cat(tensors, as.integer(dim))
 }
@@ -193,6 +270,25 @@ torch_cat <- function(tensors, dim = 1L) {
 #' @param max Maximum value (optional).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_clamp(a, min=-0.5, max=0.5)
+#' 
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_clamp(a, min=0.5)
+#' 
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_clamp(a, max=0.5)
+#' }
+#' }
 torch_clamp <- function(self, min = NULL, max = NULL) {
   min_val <- if (!is.null(min)) as.double(min) else NULL
   max_val <- if (!is.null(max)) as.double(max) else NULL
@@ -205,6 +301,21 @@ torch_clamp <- function(self, min = NULL, max = NULL) {
 #' @param other Tensor for FALSE elements.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' 
+#' x = torch_randn(c(3, 2))
+#' y = torch_ones(c(3, 2))
+#' x
+#' torch_where(x > 0, x, y)
+#' 
+#' 
+#' 
+#' 
+#' }
+#' }
 torch_where <- function(condition, self, other) {
   C_torch_where(condition, self, other)
 }
@@ -215,6 +326,17 @@ torch_where <- function(condition, self, other) {
 #' @param descending Whether to sort in descending order. Default FALSE.
 #' @return A list with values and indices tensors.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x = torch_randn(c(3, 4))
+#' out = torch_sort(x)
+#' out
+#' out = torch_sort(x, 1)
+#' out
+#' }
+#' }
 torch_sort <- function(self, dim = -1L, descending = FALSE) {
   C_torch_sort(self, as.integer(dim), as.logical(descending))
 }
@@ -224,6 +346,15 @@ torch_sort <- function(self, dim = -1L, descending = FALSE) {
 #' @param dims Integer vector of dimensions to flip.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' x <- torch_arange(1, 8)$view(c(2, 2, 2))
+#' x
+#' torch_flip(x, c(1, 2))
+#' }
+#' }
 torch_flip <- function(self, dims) {
   C_torch_flip(self, as.integer(dims))
 }
@@ -233,6 +364,15 @@ torch_flip <- function(self, dims) {
 #' @param dim Dimension to compute cumsum along.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(10))
+#' a
+#' torch_cumsum(a, dim=1)
+#' }
+#' }
 torch_cumsum <- function(self, dim) {
   C_torch_cumsum(self, as.integer(dim))
 }
@@ -242,6 +382,15 @@ torch_cumsum <- function(self, dim) {
 #' @param other A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_tensor(c(1, 2, -1))
+#' b <- torch_tensor(c(3, 0, 4))
+#' torch_maximum(a, b)
+#' }
+#' }
 torch_maximum <- function(self, other) {
   C_torch_maximum(self, other)
 }
@@ -252,6 +401,15 @@ torch_maximum <- function(self, other) {
 #' @param replacement Whether to sample with replacement. Default FALSE.
 #' @return A torch_tensor of indices.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' weights = torch_tensor(c(0, 10, 3, 0), dtype=torch_float()) # create a tensor of weights
+#' torch_multinomial(weights, 2)
+#' torch_multinomial(weights, 4, replacement=TRUE)
+#' }
+#' }
 torch_multinomial <- function(self, num_samples, replacement = FALSE) {
   C_torch_multinomial(self, as.integer(num_samples), as.logical(replacement))
 }
@@ -261,6 +419,15 @@ torch_multinomial <- function(self, num_samples, replacement = FALSE) {
 #' @param vec2 Second vector.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' v1 <- torch_arange(1., 5.)
+#' v2 <- torch_arange(1., 4.)
+#' torch_outer(v1, v2)
+#' }
+#' }
 torch_outer <- function(self, vec2) {
   C_torch_outer(self, vec2)
 }
@@ -270,6 +437,21 @@ torch_outer <- function(self, vec2) {
 #' @param diagonal Offset from the main diagonal. Default 0.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(3, 3))
+#' a
+#' torch_triu(a)
+#' torch_triu(a, diagonal=1)
+#' torch_triu(a, diagonal=-1)
+#' b = torch_randn(c(4, 6))
+#' b
+#' torch_triu(b, diagonal=1)
+#' torch_triu(b, diagonal=-1)
+#' }
+#' }
 torch_triu <- function(self, diagonal = 0L) {
   C_torch_triu(self, as.integer(diagonal))
 }
@@ -281,6 +463,19 @@ torch_triu <- function(self, diagonal = 0L) {
 #' @param keepdim Whether to keep the reduced dimension.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a <- torch_arange(1, 9, dtype = torch_float())
+#' b <- a$reshape(list(3, 3))
+#' torch_norm(a)
+#' torch_norm(b)
+#' torch_norm(a, Inf)
+#' torch_norm(b, Inf)
+#' 
+#' }
+#' }
 torch_norm <- function(self, p = 2, dim = NULL, keepdim = FALSE) {
   C_torch_norm(self, as.double(p), dim, as.logical(keepdim))
 }
@@ -292,6 +487,20 @@ torch_norm <- function(self, p = 2, dim = NULL, keepdim = FALSE) {
 #' @param unbiased Logical. Use Bessel's correction. Default TRUE.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(1, 3))
+#' a
+#' torch_std(a)
+#' 
+#' 
+#' a = torch_randn(c(4, 4))
+#' a
+#' torch_std(a, dim=1)
+#' }
+#' }
 torch_std <- function(self, dim = NULL, keepdim = FALSE, unbiased = TRUE) {
   C_torch_std(self, dim, as.logical(keepdim), as.logical(unbiased))
 }
@@ -303,6 +512,17 @@ torch_std <- function(self, dim = NULL, keepdim = FALSE, unbiased = TRUE) {
 #' @param imag Imaginary part tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' real <- torch_tensor(c(1, 2), dtype=torch_float32())
+#' imag <- torch_tensor(c(3, 4), dtype=torch_float32())
+#' z <- torch_complex(real, imag)
+#' z
+#' z$dtype
+#' }
+#' }
 torch_complex <- function(real, imag) {
   C_torch_complex(real, imag)
 }
@@ -311,6 +531,14 @@ torch_complex <- function(real, imag) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+#' 
+#' }
+#' }
 torch_real <- function(self) {
   C_torch_real(self)
 }
@@ -319,6 +547,14 @@ torch_real <- function(self) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_imag(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+#' 
+#' }
+#' }
 torch_imag <- function(self) {
   C_torch_imag(self)
 }
@@ -328,6 +564,16 @@ torch_imag <- function(self) {
 #' @param angle Angle tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' abs <- torch_tensor(c(1, 2), dtype=torch_float64())
+#' angle <- torch_tensor(c(pi / 2, 5 * pi / 4), dtype=torch_float64())
+#' z <- torch_polar(abs, angle)
+#' z
+#' }
+#' }
 torch_polar <- function(abs, angle) {
   C_torch_polar(abs, angle)
 }
@@ -336,6 +582,17 @@ torch_polar <- function(abs, angle) {
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' if (FALSE) {
+#' x <- torch_randn(4, dtype=torch_cfloat())
+#' x
+#' torch_view_as_real(x)
+#' }
+#' }
+#' }
 torch_view_as_real <- function(self) {
   C_torch_view_as_real(self)
 }
@@ -352,6 +609,14 @@ torch_view_as_real <- function(self) {
 #' @param return_complex Whether to return complex output. Default TRUE.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x <- torch_randn(512)
+#' torch_stft(x, n_fft = 64L, hop_length = 16L,
+#'            window = torch_hann_window(64L), return_complex = TRUE)
+#' }
+#' }
 torch_stft <- function(input, n_fft, hop_length = NULL, win_length = NULL,
                        window = NULL, center = TRUE, normalized = FALSE,
                        onesided = NULL, return_complex = TRUE) {
@@ -376,6 +641,16 @@ torch_stft <- function(input, n_fft, hop_length = NULL, win_length = NULL,
 #' @param return_complex Whether to return complex output. Default FALSE.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x <- torch_randn(512)
+#' win <- torch_hann_window(64L)
+#' y <- torch_stft(x, n_fft = 64L, hop_length = 16L,
+#'                 window = win, return_complex = TRUE)
+#' torch_istft(y, n_fft = 64L, hop_length = 16L, window = win)
+#' }
+#' }
 torch_istft <- function(input, n_fft, hop_length = NULL, win_length = NULL,
                         window = NULL, center = TRUE, normalized = FALSE,
                         onesided = TRUE, length = NULL,
@@ -395,6 +670,12 @@ torch_istft <- function(input, n_fft, hop_length = NULL, win_length = NULL,
 #' @param device Ignored (CPU only).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' torch_hann_window(16L)
+#' }
+#' }
 torch_hann_window <- function(window_length, periodic = TRUE,
                               dtype = NULL, device = NULL) {
   dtype_code <- if (!is.null(dtype)) unclass(dtype) else NULL
@@ -405,16 +686,18 @@ torch_hann_window <- function(window_length, periodic = TRUE,
 
 #' Check if two tensors are element-wise close
 #'
-#' @param input A torch_tensor.
-#' @param other A torch_tensor.
+#' @param self A `torch_tensor`.
+#' @param other A `torch_tensor`.
 #' @param rtol Relative tolerance (default 1e-05).
 #' @param atol Absolute tolerance (default 1e-08).
 #' @return Logical scalar.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' a <- torch_ones(c(2, 3))
 #' b <- torch_ones(c(2, 3))
 #' torch_allclose(a, b)
+#' }
 #' }
 #' @export
 torch_allclose <- function(self, other, rtol = 1e-05, atol = 1e-08) {

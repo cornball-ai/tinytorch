@@ -20,3 +20,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::cosine_similarity}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+input1 = torch_randn(c(100, 128))
+input2 = torch_randn(c(100, 128))
+output = torch_cosine_similarity(input1, input2)
+output
+}
+}
+}

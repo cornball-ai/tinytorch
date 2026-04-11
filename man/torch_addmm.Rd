@@ -24,3 +24,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::addmm}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+M = torch_randn(c(2, 3))
+mat1 = torch_randn(c(2, 3))
+mat2 = torch_randn(c(3, 3))
+torch_addmm(M, mat1, mat2)
+}
+}
+}

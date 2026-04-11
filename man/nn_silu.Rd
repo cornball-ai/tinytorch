@@ -11,3 +11,11 @@ An nn_module instance.
 \description{
 SiLU (Swish) activation module
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- nn_silu()
+m(torch_randn(5))
+}
+}
+}

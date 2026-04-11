@@ -12,7 +12,9 @@ torch_sin(self)
 Compute sin of tensor
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 torch_sin(torch_tensor(c(0, 3.14159 / 2)))
+}
 }
 }

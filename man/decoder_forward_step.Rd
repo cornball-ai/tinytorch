@@ -39,3 +39,10 @@ token embedding, positional embedding, all N decoder layers
 (self-attn + cross-attn + MLP with KV cache), final layer norm,
 logits projection, and argmax.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Specialized Whisper decoder step; see package vignettes
+}
+}
+}

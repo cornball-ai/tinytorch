@@ -32,3 +32,12 @@ A torch_tensor.
 \description{
 Short-time Fourier Transform
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x <- torch_randn(512)
+torch_stft(x, n_fft = 64L, hop_length = 16L,
+           window = torch_hann_window(64L), return_complex = TRUE)
+}
+}
+}

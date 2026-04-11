@@ -12,4 +12,7 @@ optim_required
 \description{
 Required optimizer parameter sentinel
 }
+\examples{
+identical(class(optim_required), "optim_required")
+}
 \keyword{datasets}

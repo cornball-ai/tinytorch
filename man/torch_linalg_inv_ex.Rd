@@ -1,6 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{torch_linalg_inv_ex}
 \alias{torch_linalg_inv_ex}
+\alias{linalg_inv_ex}
 \title{Linalg inv ex}
 \usage{
 torch_linalg_inv_ex(A, check_errors = FALSE)
@@ -15,4 +16,11 @@ A torch_tensor.
 }
 \description{
 Wrapper for \code{at::linalg_inv_ex}.
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
 }

@@ -14,3 +14,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::flipud}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x <- torch_arange(start = 1, end = 4)$view(c(2, 2))
+x
+torch_flipud(x)
+}
+}
+}

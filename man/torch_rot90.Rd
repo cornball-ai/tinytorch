@@ -18,3 +18,16 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::rot90}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x <- torch_arange(1, 4)$view(c(2, 2))
+x
+torch_rot90(x, 1, c(1, 2))
+x <- torch_arange(1, 8)$view(c(2, 2, 2))
+x
+torch_rot90(x, 1, c(1, 2))
+}
+}
+}

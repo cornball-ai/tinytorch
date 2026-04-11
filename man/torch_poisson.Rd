@@ -16,3 +16,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::poisson}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+rates = torch_rand(c(4, 4)) * 5  # rate parameter between 0 and 5
+torch_poisson(rates)
+}
+}
+}

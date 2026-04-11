@@ -16,3 +16,12 @@ A dataset object.
 \description{
 Subset of a dataset
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+ds <- tensor_dataset(torch_randn(c(10, 3)))
+sub <- dataset_subset(ds, indices = 1:5)
+length(sub)
+}
+}
+}

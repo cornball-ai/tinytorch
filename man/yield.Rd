@@ -14,4 +14,11 @@ x
 \description{
 Yield placeholder (for compatibility)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Used inside iterable_dataset definitions; see dataset() docs
+}
+}
+}
 \keyword{internal}

@@ -14,3 +14,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::view_as_complex}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+if (FALSE) {
+x=torch_randn(c(4, 2))
+x
+torch_view_as_complex(x)
+}
+}
+}
+}

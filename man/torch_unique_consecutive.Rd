@@ -21,3 +21,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::unique_consecutive}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x = torch_tensor(c(1, 1, 2, 2, 3, 1, 1, 2))
+output = torch_unique_consecutive(x)
+output
+torch_unique_consecutive(x, return_inverse=TRUE)
+torch_unique_consecutive(x, return_counts=TRUE)
+}
+}
+}

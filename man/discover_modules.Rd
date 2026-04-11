@@ -26,8 +26,10 @@ Returns a flat list of module info: path, class, parameter count,
 forward() argument names, and the live module reference.
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 m <- nn_sequential(nn_linear(10, 5), nn_relu())
 discover_modules(m)
+}
 }
 }

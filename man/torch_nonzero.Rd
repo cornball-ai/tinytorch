@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::nonzero}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_nonzero(torch_tensor(c(1, 1, 1, 0, 1)))
+}
+}
+}

@@ -11,3 +11,12 @@ An nn_module instance.
 \description{
 Tanh activation module
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- nn_tanh()
+input <- torch_randn(2)
+output <- m(input)
+}
+}
+}

@@ -19,9 +19,11 @@ A new torch tensor (float32).
 Fused RMSNorm: x * rsqrt(mean(x^2) + eps) * weight
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 x <- torch_randn(c(2, 4))
 w <- torch_ones(c(4))
 fused_rmsnorm(x, w)
+}
 }
 }

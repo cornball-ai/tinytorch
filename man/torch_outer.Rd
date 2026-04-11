@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Outer product of two vectors
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+v1 <- torch_arange(1., 5.)
+v2 <- torch_arange(1., 4.)
+torch_outer(v1, v2)
+}
+}
+}

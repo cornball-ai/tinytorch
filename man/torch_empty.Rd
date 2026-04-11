@@ -16,7 +16,9 @@ torch_empty(..., dtype = NULL, device = NULL)
 Create an uninitialized tensor
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 torch_empty(c(2, 3))
+}
 }
 }

@@ -17,3 +17,12 @@ with_autocast(device_type = "cpu", dtype = NULL, enabled = TRUE, code)
 \description{
 Since tinytorch is CPU-only, autocast is a no-op.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+with_autocast(device_type = "cpu", dtype = torch_float32(), {
+  torch_randn(c(2, 3)) + torch_randn(c(2, 3))
+})
+}
+}
+}

@@ -16,3 +16,15 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::masked_select}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x = torch_randn(c(3, 4))
+x
+mask = x$ge(0.5)
+mask
+torch_masked_select(x, mask)
+}
+}
+}

@@ -5,6 +5,25 @@
 \usage{
 torch_t(self)
 }
+\arguments{
+\item{self}{A `torch_tensor`.}
+}
 \description{
 torch_t
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x = torch_randn(c(2,3))
+x
+torch_t(x)
+x = torch_randn(c(3))
+x
+torch_t(x)
+x = torch_randn(c(2, 3))
+x
+torch_t(x)
+}
+}
 }

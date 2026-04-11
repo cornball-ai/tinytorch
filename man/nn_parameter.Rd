@@ -16,3 +16,11 @@ The tensor with additional class tag.
 \description{
 Tag a tensor as an nn parameter
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+p <- nn_parameter(torch_randn(c(3, 4)))
+p$requires_grad
+}
+}
+}

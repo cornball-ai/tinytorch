@@ -18,7 +18,9 @@ Downloads and installs a pinned release of libtorch (PyTorch C++ distribution).
 After installation, set LIBTORCH_HOME and reinstall tinytorch to enable the backend.
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 install_libtorch()
+}
 }
 }

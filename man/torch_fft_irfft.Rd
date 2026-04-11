@@ -20,3 +20,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::fft_irfft}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+t <- torch_arange(start = 0, end = 4)
+x <- torch_fft_rfft(t)
+torch_fft_irfft(x)
+torch_fft_irfft(x, n = t$numel())
+
+}
+}
+}

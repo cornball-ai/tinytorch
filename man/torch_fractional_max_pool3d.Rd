@@ -20,3 +20,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::fractional_max_pool3d}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

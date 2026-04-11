@@ -16,3 +16,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::promote_types}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_promote_types(torch_int32(), torch_float32())
+torch_promote_types(torch_uint8(), torch_long())
+}
+}
+}

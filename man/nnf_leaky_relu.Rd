@@ -14,7 +14,9 @@ nnf_leaky_relu(self, negative_slope = 0.01)
 Leaky ReLU activation
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 nnf_leaky_relu(torch_tensor(c(-1, 0, 1)))
+}
 }
 }

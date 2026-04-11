@@ -15,7 +15,9 @@ A new torch tensor (float32).
 Fused relu + sigmoid
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 fused_relu_sigmoid(torch_randn(c(2, 3)))
+}
 }
 }

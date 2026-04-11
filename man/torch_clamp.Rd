@@ -18,3 +18,23 @@ A torch_tensor.
 \description{
 Clamp tensor values to a range
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4))
+a
+torch_clamp(a, min=-0.5, max=0.5)
+
+
+a = torch_randn(c(4))
+a
+torch_clamp(a, min=0.5)
+
+
+a = torch_randn(c(4))
+a
+torch_clamp(a, max=0.5)
+}
+}
+}

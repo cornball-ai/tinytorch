@@ -20,3 +20,15 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::fft_ifft}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+t <- torch_arange(start = 0, end = 3)
+t
+x <- torch_fft_fft(t, norm = "backward")
+torch_fft_ifft(x)
+
+
+}
+}
+}

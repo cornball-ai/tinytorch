@@ -14,3 +14,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::isposinf}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a <- torch_tensor(c(-Inf, Inf, 1.2))
+torch_isposinf(a)
+}
+}
+}

@@ -20,3 +20,10 @@ A torch_tensor.
 \description{
 Performs Lp normalization along the given dimension.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+nnf_normalize(torch_randn(c(2, 3)))
+}
+}
+}

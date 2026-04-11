@@ -12,3 +12,12 @@ torch_set_num_threads(n)
 Controls the number of threads used for intraop parallelism
 (MKL, OpenBLAS, etc.) in libtorch operations.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+old <- torch_get_num_threads()
+torch_set_num_threads(2L)
+torch_set_num_threads(old)
+}
+}
+}

@@ -16,3 +16,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::hypot}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_hypot(torch_tensor(c(4.0)), torch_tensor(c(3.0, 4.0, 5.0)))
+}
+}
+}

@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::ger}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+v1 = torch_arange(1., 5.)
+v2 = torch_arange(1., 4.)
+torch_ger(v1, v2)
+}
+}
+}

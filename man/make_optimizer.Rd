@@ -9,6 +9,8 @@ make_optimizer(params, defaults, step_fn)
 \item{params}{List of tensors to optimize (must have requires_grad).}
 
 \item{defaults}{Named list of default hyperparameters.}
+
+\item{step_fn}{Function; optimizer step callback.}
 }
 \value{
 An optimizer environment with step() and zero_grad() methods.

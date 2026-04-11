@@ -2,59 +2,86 @@
 #' @param x A torch_tensor.
 #' @return An R numeric vector, matrix, or array.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_tensor(c(1, 2, 3))
 #' as_array(x)
+#' }
 #' }
 #' @export
 as_array <- function(x) {
   C_as_array(x)
 }
 
+#' As.array.torch tensor
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_tensor(matrix(1:6, 2, 3))
 #' as.array(x)
+#' }
 #' }
 #' @export
 as.array.torch_tensor <- function(x, ...) {
   C_as_array(x)
 }
 
+#' As.numeric.torch tensor
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_tensor(c(1, 2, 3))
 #' as.numeric(x)
+#' }
 #' }
 #' @export
 as.numeric.torch_tensor <- function(x, ...) {
   as.numeric(C_as_array(x))
 }
 
+#' As.double.torch tensor
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_tensor(c(1, 2, 3))
 #' as.double(x)
+#' }
 #' }
 #' @export
 as.double.torch_tensor <- function(x, ...) {
   as.double(C_as_array(x))
 }
 
+#' As.integer.torch tensor
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_tensor(c(1, 2, 3))
 #' as.integer(x)
+#' }
 #' }
 #' @export
 as.integer.torch_tensor <- function(x, ...) {
   as.integer(C_as_array(x))
 }
 
+#' As.matrix.torch tensor
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_tensor(matrix(1:6, 2, 3))
 #' as.matrix(x)
+#' }
 #' }
 #' @export
 as.matrix.torch_tensor <- function(x, ...) {

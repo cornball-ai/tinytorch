@@ -16,3 +16,14 @@ A distribution object.
 \description{
 Mixture of same-family distributions
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Construct Gaussian Mixture Model in 1D consisting of 5 equally
+# weighted normal distributions
+mix <- distr_categorical(torch_ones(5))
+comp <- distr_normal(torch_randn(5), torch_rand(5))
+gmm <- distr_mixture_same_family(mix, comp)
+}
+}
+}

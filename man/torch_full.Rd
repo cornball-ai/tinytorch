@@ -20,3 +20,11 @@ A torch_tensor.
 \description{
 Create a tensor filled with a scalar value
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_full(list(2, 3), 3.141592)
+}
+}
+}

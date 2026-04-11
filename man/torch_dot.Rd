@@ -16,3 +16,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::dot}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_dot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
+}
+}
+}

@@ -22,3 +22,11 @@ A distribution object.
 \description{
 Multivariate normal distribution
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- distr_multivariate_normal(torch_zeros(2), torch_eye(2))
+m$sample() # normally distributed with mean=`[0,0]` and covariance_matrix=`I`
+}
+}
+}

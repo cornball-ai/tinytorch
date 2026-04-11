@@ -16,3 +16,14 @@ tensor (modified in place).
 \description{
 Dirac initialization
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+w <- torch_empty(3, 16, 5, 5)
+nn_init_dirac_(w)
+
+
+}
+}
+}

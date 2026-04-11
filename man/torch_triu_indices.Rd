@@ -22,3 +22,17 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::triu_indices}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_triu_indices(3, 3)
+a
+a = torch_triu_indices(4, 3, -1)
+a
+a = torch_triu_indices(4, 3, 1)
+a
+
+}
+}
+}

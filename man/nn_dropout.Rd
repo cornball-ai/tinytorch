@@ -16,3 +16,12 @@ An nn_module instance.
 \description{
 Dropout module (no-op in eval mode, tinytorch has no autograd)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- nn_dropout(p = 0.2)
+input <- torch_randn(20, 16)
+output <- m(input)
+}
+}
+}

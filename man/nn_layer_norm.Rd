@@ -18,8 +18,10 @@ An nn_module instance.
 Layer normalization module
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 m <- nn_layer_norm(4)
 m(torch_randn(c(2, 4)))
+}
 }
 }

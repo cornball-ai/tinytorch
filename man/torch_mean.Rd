@@ -16,9 +16,11 @@ torch_mean(self, dim = NULL, keepdim = FALSE)
 Mean of tensor elements
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 x <- torch_randn(c(2, 3))
 torch_mean(x)
 torch_mean(x, dim = 1)
+}
 }
 }

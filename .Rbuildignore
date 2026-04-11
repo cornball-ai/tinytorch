@@ -12,3 +12,8 @@
 ^tools$
 ^src/Makevars$
 ^run\.sh$
+^tinytorch\.Rcheck$
+^tinytorch_.*\.tar\.gz$
+^cran-comments\.md$
+^tinyrox.*\.log$
+^\.Rhistory$

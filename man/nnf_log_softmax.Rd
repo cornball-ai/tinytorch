@@ -14,7 +14,9 @@ nnf_log_softmax(self, dim = -1L)
 Log-softmax
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 nnf_log_softmax(torch_randn(c(2, 3)), dim = 2)
+}
 }
 }

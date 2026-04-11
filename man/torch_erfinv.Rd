@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::erfinv}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_erfinv(torch_tensor(c(0, 0.5, -1.)))
+}
+}
+}

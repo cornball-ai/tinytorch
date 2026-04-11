@@ -1,6 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{torch_linalg_diagonal}
 \alias{torch_linalg_diagonal}
+\alias{linalg_diagonal}
 \title{Linalg diagonal}
 \usage{
 torch_linalg_diagonal(A, offset = 0, dim1 = -2, dim2 = -1)
@@ -19,4 +20,11 @@ A torch_tensor.
 }
 \description{
 Wrapper for \code{at::linalg_diagonal}.
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
 }

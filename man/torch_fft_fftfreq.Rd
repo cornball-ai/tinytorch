@@ -20,3 +20,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::fft_fftfreq}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+torch_fft_fftfreq(5) # Nyquist frequency at f[3] is positive
+torch_fft_fftfreq(4) # Nyquist frequency at f[3] is given as negative
+
+}
+}
+}

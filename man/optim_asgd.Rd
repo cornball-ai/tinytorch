@@ -25,3 +25,16 @@ A torch_optimizer object.
 \description{
 Averaged SGD optimizer
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+optimizer <- optim_asgd(model$parameters(), lr = 0.1)
+optimizer$zero_grad()
+loss_fn(model(input), target)$backward()
+optimizer$step()
+
+
+}
+}
+}

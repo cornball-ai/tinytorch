@@ -13,3 +13,10 @@ nn_utils_clip_grad_value_(parameters, clip_value)
 \description{
 Clip gradient values
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

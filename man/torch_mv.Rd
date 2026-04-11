@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::mv}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+mat = torch_randn(c(2, 3))
+vec = torch_randn(c(3))
+torch_mv(mat, vec)
+}
+}
+}

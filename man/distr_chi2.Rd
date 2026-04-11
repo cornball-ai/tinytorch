@@ -14,3 +14,12 @@ A distribution object.
 \description{
 Chi-squared distribution
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- distr_chi2(torch_tensor(1.0))
+m$sample() # Chi2 distributed with shape df=1
+torch_tensor(0.1046)
+}
+}
+}

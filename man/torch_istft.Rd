@@ -34,3 +34,14 @@ A torch_tensor.
 \description{
 Inverse Short-time Fourier Transform
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x <- torch_randn(512)
+win <- torch_hann_window(64L)
+y <- torch_stft(x, n_fft = 64L, hop_length = 16L,
+                window = win, return_complex = TRUE)
+torch_istft(y, n_fft = 64L, hop_length = 16L, window = win)
+}
+}
+}

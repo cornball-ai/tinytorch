@@ -1,6 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{torch_linalg_tensorsolve}
 \alias{torch_linalg_tensorsolve}
+\alias{linalg_tensorsolve}
 \title{Linalg tensorsolve}
 \usage{
 torch_linalg_tensorsolve(self, other, dims = NULL)
@@ -17,4 +18,11 @@ A torch_tensor.
 }
 \description{
 Wrapper for \code{at::linalg_tensorsolve}.
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
 }

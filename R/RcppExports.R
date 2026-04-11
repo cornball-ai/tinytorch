@@ -3949,12 +3949,24 @@ C_cuda_empty_cache <- function() {
     .Call(`_tinytorch_C_cuda_empty_cache`)
 }
 
+C_cuda_synchronize <- function() {
+    .Call(`_tinytorch_C_cuda_synchronize`)
+}
+
 C_cuda_mem_info <- function() {
     .Call(`_tinytorch_C_cuda_mem_info`)
 }
 
 C_cuda_memory_stats <- function() {
     .Call(`_tinytorch_C_cuda_memory_stats`)
+}
+
+C_torch_manual_seed <- function(seed) {
+    invisible(.Call(`_tinytorch_C_torch_manual_seed`, seed))
+}
+
+C_torch_scaled_mm <- function(self, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_fast_accum) {
+    .Call(`_tinytorch_C_torch_scaled_mm`, self, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_fast_accum)
 }
 
 C_transformer_decoder_layer_step <- function(x_sexp, weights_sexp, self_cache_k_sexp, self_cache_v_sexp, cross_cache_k_sexp, cross_cache_v_sexp, n_head_sexp) {

@@ -5,6 +5,28 @@
 \usage{
 torch_argmin(self, dim = NULL, keepdim = FALSE)
 }
+\arguments{
+\item{self}{A `torch_tensor`.}
+
+\item{dim}{Integer dimension.}
+
+\item{keepdim}{Logical; keep reduced dimensions.}
+}
 \description{
 torch_argmin
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4, 4))
+a
+torch_argmin(a)
+
+
+a = torch_randn(c(4, 4))
+a
+torch_argmin(a, dim=1)
+}
+}
 }

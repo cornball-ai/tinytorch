@@ -14,3 +14,15 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::cartesian_prod}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = c(1, 2, 3)
+b = c(4, 5)
+tensor_a = torch_tensor(a)
+tensor_b = torch_tensor(b)
+torch_cartesian_prod(list(tensor_a, tensor_b))
+}
+}
+}

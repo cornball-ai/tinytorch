@@ -32,3 +32,12 @@ An nn_module instance.
 \description{
 1D transposed convolution module
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- nn_conv_transpose1d(32, 16, 2)
+input <- torch_randn(10, 32, 2)
+output <- m(input)
+}
+}
+}

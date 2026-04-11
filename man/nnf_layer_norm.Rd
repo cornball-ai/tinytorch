@@ -20,8 +20,10 @@ nnf_layer_norm(input, normalized_shape, weight = NULL, bias = NULL, eps = 1e-05)
 Layer normalization
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 x <- torch_randn(c(2, 4))
 nnf_layer_norm(x, 4L)
+}
 }
 }

@@ -16,3 +16,18 @@ A device string.
 \description{
 Create a torch device specification
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+# Via string
+torch_device("cuda:1")
+torch_device("cpu")
+torch_device("cuda") # current cuda device
+
+# Via string and device ordinal
+torch_device("cuda", 0)
+torch_device("cpu", 0)
+}
+}
+}

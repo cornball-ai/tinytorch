@@ -6679,11 +6679,26 @@ SEXP _tinytorch_C_cuda_empty_cache(void) {
     return stub_error();
 }
 
+SEXP _tinytorch_C_cuda_synchronize(void) {
+    return stub_error();
+}
+
 SEXP _tinytorch_C_cuda_mem_info(void) {
     return stub_error();
 }
 
 SEXP _tinytorch_C_cuda_memory_stats(void) {
+    return stub_error();
+}
+
+SEXP _tinytorch_C_torch_manual_seed(SEXP a1) {
+    (void)a1;
+    return stub_error();
+}
+
+SEXP _tinytorch_C_torch_scaled_mm(SEXP a1, SEXP a2, SEXP a3, SEXP a4, SEXP a5, SEXP a6, SEXP a7, SEXP a8) {
+    (void)a1; (void)a2; (void)a3; (void)a4;
+    (void)a5; (void)a6; (void)a7; (void)a8;
     return stub_error();
 }
 
@@ -7736,8 +7751,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tinytorch_C_cuda_is_available", (DL_FUNC) &_tinytorch_C_cuda_is_available, 0},
     {"_tinytorch_C_cuda_device_count", (DL_FUNC) &_tinytorch_C_cuda_device_count, 0},
     {"_tinytorch_C_cuda_empty_cache", (DL_FUNC) &_tinytorch_C_cuda_empty_cache, 0},
+    {"_tinytorch_C_cuda_synchronize", (DL_FUNC) &_tinytorch_C_cuda_synchronize, 0},
     {"_tinytorch_C_cuda_mem_info", (DL_FUNC) &_tinytorch_C_cuda_mem_info, 0},
     {"_tinytorch_C_cuda_memory_stats", (DL_FUNC) &_tinytorch_C_cuda_memory_stats, 0},
+    {"_tinytorch_C_torch_manual_seed", (DL_FUNC) &_tinytorch_C_torch_manual_seed, 1},
+    {"_tinytorch_C_torch_scaled_mm", (DL_FUNC) &_tinytorch_C_torch_scaled_mm, 8},
     {"_tinytorch_C_transformer_decoder_layer_step", (DL_FUNC) &_tinytorch_C_transformer_decoder_layer_step, 7},
     {"_tinytorch_C_transformer_encoder_layer", (DL_FUNC) &_tinytorch_C_transformer_encoder_layer, 3},
     {"_tinytorch_C_prepare_cross_caches", (DL_FUNC) &_tinytorch_C_prepare_cross_caches, 3},

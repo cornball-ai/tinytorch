@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::isfinite}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_isfinite(torch_tensor(c(1, Inf, 2, -Inf, NaN)))
+}
+}
+}

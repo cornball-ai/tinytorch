@@ -17,9 +17,11 @@
 #'   \item{forward_args}{Formal argument names of forward()}
 #'   \item{module}{Live reference to the nn_module}
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' m <- nn_sequential(nn_linear(10, 5), nn_relu())
 #' discover_modules(m)
+#' }
 #' }
 #' @export
 discover_modules <- function(module, max_depth = 10L) {
@@ -100,10 +102,12 @@ discover_modules <- function(module, max_depth = 10L) {
 #' @param x A module_tree from discover_modules()
 #' @param ... Ignored
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' m <- nn_sequential(nn_linear(10, 5), nn_relu())
 #' tree <- discover_modules(m)
 #' print(tree)
+#' }
 #' }
 #' @export
 print.module_tree <- function(x, ...) {
@@ -128,8 +132,10 @@ print.module_tree <- function(x, ...) {
 #'
 #' @return Character vector of package names
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' find_torch_packages()
+#' }
 #' }
 #' @export
 find_torch_packages <- function() {
@@ -155,8 +161,10 @@ find_torch_packages <- function() {
 #' @param pkg Package name (string) or path to package source directory
 #' @return A data.frame with columns: name, file, exported
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' find_modules_in_package("tinytorch")
+#' }
 #' }
 #' @export
 find_modules_in_package <- function(pkg) {

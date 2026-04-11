@@ -12,7 +12,9 @@ torch_tanh(self)
 Compute tanh of tensor
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 torch_tanh(torch_randn(c(2, 3)))
+}
 }
 }

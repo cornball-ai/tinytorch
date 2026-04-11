@@ -18,3 +18,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::mode}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randint(0, 50, size = list(5))
+a
+torch_mode(a, 1)
+}
+}
+}

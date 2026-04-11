@@ -12,7 +12,9 @@ nnf_relu(input)
 ReLU activation (functional)
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 nnf_relu(torch_tensor(c(-1, 0, 1)))
+}
 }
 }

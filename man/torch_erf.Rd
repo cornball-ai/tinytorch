@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::erf}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_erf(torch_tensor(c(0, -1., 10.)))
+}
+}
+}

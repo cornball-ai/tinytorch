@@ -5,6 +5,21 @@
 \usage{
 torch_unsqueeze(self, dim)
 }
+\arguments{
+\item{self}{A `torch_tensor`.}
+
+\item{dim}{Integer dimension.}
+}
 \description{
 torch_unsqueeze
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x = torch_tensor(c(1, 2, 3, 4))
+torch_unsqueeze(x, 1)
+torch_unsqueeze(x, 2)
+}
+}
 }

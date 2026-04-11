@@ -16,7 +16,9 @@ torch_ones(..., dtype = NULL, device = NULL)
 Create a tensor of ones
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 torch_ones(c(2, 3))
+}
 }
 }

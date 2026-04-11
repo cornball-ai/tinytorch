@@ -20,3 +20,10 @@ A torch_tensor.
 \description{
 Create a tensor from raw bytes buffer
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Construct a tensor from a raw buffer (advanced; see as_array() for the inverse)
+}
+}
+}

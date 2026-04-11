@@ -17,7 +17,9 @@ torch_gelu(self)
 GELU activation
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 nnf_gelu(torch_randn(c(2, 3)))
+}
 }
 }

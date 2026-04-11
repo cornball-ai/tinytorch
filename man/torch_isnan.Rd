@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::isnan}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_isnan(torch_tensor(c(1, NaN, 2)))
+}
+}
+}

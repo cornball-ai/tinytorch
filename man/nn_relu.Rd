@@ -12,8 +12,10 @@ An nn_module instance.
 ReLU activation module
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 m <- nn_relu()
 m(torch_randn(c(2, 3)))
+}
 }
 }

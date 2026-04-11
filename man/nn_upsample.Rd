@@ -18,3 +18,12 @@ An nn_module instance.
 \description{
 Upsample module
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+input <- torch_arange(start = 1, end = 4, dtype = torch_float())$view(c(1, 1, 2, 2))
+nn_upsample(scale_factor = c(2), mode = "nearest")(input)
+nn_upsample(scale_factor = c(2, 2), mode = "nearest")(input)
+}
+}
+}

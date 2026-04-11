@@ -22,3 +22,12 @@ A torch_optimizer object.
 \description{
 Adagrad optimizer
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+params <- list(nn_parameter(torch_randn(3)))
+opt <- optim_adagrad(params, lr = 0.01)
+opt$step()
+}
+}
+}

@@ -14,3 +14,10 @@ Invisible NULL.
 \description{
 Set the random seed for torch operations
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

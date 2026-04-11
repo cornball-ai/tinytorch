@@ -12,3 +12,11 @@ torch_set_num_interop_threads(n)
 Controls the number of threads used for interop parallelism
 (e.g., across independent operations) in libtorch.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# May error if inter-op pool already initialized
+try(torch_set_num_interop_threads(2L), silent = TRUE)
+}
+}
+}

@@ -11,3 +11,10 @@ Integer scalar.
 \description{
 Get number of CUDA devices
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+cuda_device_count()
+}
+}
+}

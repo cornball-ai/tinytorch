@@ -5,6 +5,19 @@
 \usage{
 torch_neg(self)
 }
+\arguments{
+\item{self}{A `torch_tensor`.}
+}
 \description{
 torch_neg
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(5))
+a
+torch_neg(a)
+}
+}
 }

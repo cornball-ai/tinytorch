@@ -12,7 +12,9 @@ Character vector of package names
 Searches installed R packages for those that import or depend on torch.
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 find_torch_packages()
+}
 }
 }

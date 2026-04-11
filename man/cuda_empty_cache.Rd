@@ -9,3 +9,10 @@ cuda_empty_cache()
 Releases all unoccupied cached memory held by the CUDA allocator
 so that it can be used by other GPU applications.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+cuda_empty_cache()
+}
+}
+}

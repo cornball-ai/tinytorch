@@ -9,6 +9,18 @@
 #' @param nesterov Whether to use Nesterov momentum. Default FALSE.
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' optimizer <- optim_sgd(model$parameters(), lr = 0.1, momentum = 0.9)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' 
+#' 
+#' }
+#' }
 optim_sgd <- function(params, lr, momentum = 0, dampening = 0,
                        weight_decay = 0, nesterov = FALSE) {
   if (is.list(params)) {
@@ -27,6 +39,18 @@ optim_sgd <- function(params, lr, momentum = 0, dampening = 0,
 #' @param amsgrad Whether to use AMSGrad variant. Default FALSE.
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' optimizer <- optim_adam(model$parameters(), lr = 0.1)
+#' optimizer$zero_grad()
+#' loss_fn(model(input), target)$backward()
+#' optimizer$step()
+#' 
+#' 
+#' }
+#' }
 optim_adam <- function(params, lr = 0.001, betas = c(0.9, 0.999),
                         eps = 1e-8, weight_decay = 0, amsgrad = FALSE) {
   if (is.list(params)) {
@@ -45,6 +69,14 @@ optim_adam <- function(params, lr = 0.001, betas = c(0.9, 0.999),
 #' @param amsgrad Whether to use AMSGrad variant. Default FALSE.
 #' @return A torch_optimizer object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' params <- list(nn_parameter(torch_randn(3)))
+#' opt <- optim_adamw(params, lr = 0.001)
+#' opt$step()
+#' }
+#' }
 optim_adamw <- function(params, lr = 0.001, betas = c(0.9, 0.999),
                          eps = 1e-8, weight_decay = 0.01, amsgrad = FALSE) {
   if (is.list(params)) {

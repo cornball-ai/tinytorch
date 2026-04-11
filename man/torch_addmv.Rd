@@ -22,3 +22,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::addmv}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+M = torch_randn(c(2))
+mat = torch_randn(c(2, 3))
+vec = torch_randn(c(3))
+torch_addmv(M, mat, vec)
+}
+}
+}

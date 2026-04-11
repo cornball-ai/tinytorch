@@ -16,3 +16,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::special_hermite_polynomial_h}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}
