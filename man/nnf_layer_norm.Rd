@@ -1,13 +1,9 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{nnf_layer_norm}
 \alias{nnf_layer_norm}
-\alias{torch_layer_norm}
 \title{Layer normalization}
 \usage{
 nnf_layer_norm(input, normalized_shape, weight = NULL, bias = NULL, eps = 1e-05)
-
-torch_layer_norm(input, normalized_shape, weight = NULL, bias = NULL,
-                 eps = 1e-05)
 }
 \arguments{
 \item{input}{A torch_tensor.}

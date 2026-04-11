@@ -56,6 +56,28 @@ optim_adamw <- function(params, lr = 0.001, betas = c(0.9, 0.999),
 
 #' @export
 `$.torch_optimizer` <- function(x, name) {
+  # Pure-R optimizers (no ptr, have .step_fn)
+  if (is.null(x[["ptr"]])) {
+    if (name == "zero_grad") {
+      return(function(set_to_none = TRUE) {
+        for (p in x$param_list) {
+          if (!is.null(p$grad)) {
+            if (set_to_none) p$grad <- NULL
+            else p$grad$zero_()
+          }
+        }
+        invisible(x)
+      })
+    }
+    if (name == "step") {
+      return(function(closure = NULL) {
+        x$.step_fn(x)
+        invisible(x)
+      })
+    }
+    return(x[[name]])
+  }
+  # C++-backed optimizers (SGD, Adam, AdamW)
   if (name == "zero_grad") {
     return(function(set_to_none = TRUE) {
       C_optim_zero_grad(x$ptr, set_to_none)

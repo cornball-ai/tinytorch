@@ -6,7 +6,7 @@ Authors@R: c(
     person("Troy", "Hernandez", role = c("aut", "cre"),
            email = "troy@cornball.ai"),
     person("Daniel", "Falbel", role = "ctb",
-           comment = "torch R package API design")
+           comment = "torch R package (optimizer, distribution, data loading, and nn module designs adapted under MIT license)")
     )
 Description: Direct R bindings to 'libtorch' (PyTorch C++ distribution) with
     minimal overhead. Installs on all platforms; full functionality requires

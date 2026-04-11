@@ -3,12 +3,12 @@
 \alias{torch_result_type}
 \title{Result type}
 \usage{
-torch_result_type(tensor, other)
+torch_result_type(tensor1, other)
 }
 \arguments{
-\item{tensor}{A torch_tensor.}
-
 \item{other}{A torch_tensor.}
+
+\item{tensor}{A torch_tensor.}
 }
 \value{
 A torch_tensor.

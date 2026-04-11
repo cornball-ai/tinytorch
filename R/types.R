@@ -82,6 +82,46 @@ torch_float8_e5m2fnuz <- structure(25L, class = "torch_dtype")
 #' @export
 torch_float8_e4m3fnuz <- structure(26L, class = "torch_dtype")
 
+#' @rdname torch_dtype_constants
+#' @export
+torch_half <- torch_float16
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_short <- torch_int16
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_cfloat <- structure(9L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_cfloat32 <- torch_cfloat
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_cdouble <- structure(10L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_cfloat64 <- torch_cdouble
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_cfloat128 <- torch_cdouble
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_qint8 <- structure(12L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_quint8 <- structure(13L, class = "torch_dtype")
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_qint32 <- structure(14L, class = "torch_dtype")
+
 #' Print a torch_dtype
 #' @param x A torch_dtype.
 #' @param ... Ignored.

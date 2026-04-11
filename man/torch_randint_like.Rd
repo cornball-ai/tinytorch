@@ -3,11 +3,10 @@
 \alias{torch_randint_like}
 \title{Randint like}
 \usage{
-torch_randint_like(self, high, dtype = NULL, device = NULL, memory_format = NULL)
+torch_randint_like(input, high, dtype = NULL, device = NULL,
+                   memory_format = NULL)
 }
 \arguments{
-\item{self}{A torch_tensor.}
-
 \item{high}{An integer.}
 
 \item{dtype}{A torch dtype (e.g., torch_float32). Optional.}
@@ -15,6 +14,8 @@ torch_randint_like(self, high, dtype = NULL, device = NULL, memory_format = NULL
 \item{device}{A device string (e.g., "cpu"). Optional.}
 
 \item{memory_format}{A memory format. Optional.}
+
+\item{self}{A torch_tensor.}
 }
 \value{
 A torch_tensor.
