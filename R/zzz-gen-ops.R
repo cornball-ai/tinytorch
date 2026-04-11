@@ -12868,3 +12868,122 @@ optim_lbfgs <- function(params, lr = 1, max_iter = 20L, max_eval = NULL,
                          history_size = 100L, line_search_fn = NULL) {
   stop("optim_lbfgs not yet implemented in tinytorch (complex line search)", call. = FALSE)
 }
+
+# ---- Final 6 gaps ----
+
+#' Orthogonal initialization
+#'
+#' @param tensor A 2D+ tensor.
+#' @param gain Scaling factor. Default 1.
+#' @return tensor (modified in place).
+#' @export
+nn_init_orthogonal_ <- function(tensor, gain = 1) {
+  dims <- tensor$size()
+  rows <- dims[1]
+  cols <- prod(dims[-1])
+  flat <- torch_randn(c(rows, cols))
+  # QR decomposition for orthogonal matrix
+  qr_result <- torch_linalg_qr(flat)
+  q <- qr_result[[1]]
+  r <- qr_result[[2]]
+  # Fix sign to make deterministic
+  d <- torch_diag(r)
+  ph <- torch_sign(d)
+  q <- q * ph$unsqueeze(1L)
+  if (rows < cols) q <- q$t()
+  with_no_grad(function() {
+    tensor$view(c(rows, cols))$copy_(q$view(c(rows, cols)))
+  })
+  tensor$mul_(gain)
+  invisible(tensor)
+}
+
+#' Dirac initialization
+#'
+#' @param tensor A 3D, 4D, or 5D tensor.
+#' @param groups Number of groups. Default 1.
+#' @return tensor (modified in place).
+#' @export
+nn_init_dirac_ <- function(tensor, groups = 1L) {
+  dims <- tensor$size()
+  if (length(dims) < 3 || length(dims) > 5)
+    stop("Dirac init only supports 3D, 4D, and 5D tensors", call. = FALSE)
+  with_no_grad(function() {
+    tensor$zero_()
+    min_dim <- min(dims[1] / groups, dims[2])
+    for (g in seq_len(groups)) {
+      for (d in seq_len(min_dim)) {
+        idx <- switch(as.character(length(dims)),
+          "3" = list(d + (g-1L) * (dims[1] / groups), d, dims[3] %/% 2L + 1L),
+          "4" = list(d + (g-1L) * (dims[1] / groups), d, dims[3] %/% 2L + 1L, dims[4] %/% 2L + 1L),
+          "5" = list(d + (g-1L) * (dims[1] / groups), d, dims[3] %/% 2L + 1L, dims[4] %/% 2L + 1L, dims[5] %/% 2L + 1L)
+        )
+        do.call(`[<-`, c(list(tensor), idx, list(1)))
+      }
+    }
+  })
+  invisible(tensor)
+}
+
+#' Sparse initialization
+#'
+#' @param tensor A 2D tensor.
+#' @param sparsity Fraction of elements to be zero in each column.
+#' @param std Standard deviation of the normal distribution. Default 0.01.
+#' @return tensor (modified in place).
+#' @export
+nn_init_sparse_ <- function(tensor, sparsity, std = 0.01) {
+  dims <- tensor$size()
+  if (length(dims) != 2)
+    stop("Sparse init only supports 2D tensors", call. = FALSE)
+  rows <- dims[1]
+  cols <- dims[2]
+  n_zeros <- ceiling(sparsity * rows)
+  with_no_grad(function() {
+    tensor$normal_(0, std)
+    for (col in seq_len(cols)) {
+      zero_idx <- sample.int(rows, n_zeros)
+      for (zi in zero_idx) tensor[zi, col] <- 0
+    }
+  })
+  invisible(tensor)
+}
+
+#' Define a custom autograd function
+#'
+#' @param forward Forward function.
+#' @param backward Backward function.
+#' @return An autograd function class.
+#' @export
+autograd_function <- function(forward, backward) {
+  structure(list(forward = forward, backward = backward),
+            class = "torch_autograd_function")
+}
+
+#' Compute gradients
+#'
+#' @param outputs Tensor(s) to differentiate.
+#' @param inputs Tensor(s) to differentiate with respect to.
+#' @param grad_outputs Gradient of outputs.
+#' @param retain_graph Keep computation graph.
+#' @param create_graph Create graph for higher-order gradients.
+#' @return List of gradient tensors.
+#' @export
+autograd_grad <- function(outputs, inputs, grad_outputs = NULL,
+                           retain_graph = FALSE, create_graph = FALSE) {
+  stop("autograd_grad not yet implemented in tinytorch (requires C++ autograd engine)", call. = FALSE)
+}
+
+#' Adaptive log-softmax with loss
+#'
+#' @param in_features Input feature size.
+#' @param n_classes Number of classes.
+#' @param cutoffs Cutoff values for adaptive softmax.
+#' @param div_value Division value. Default 4.
+#' @param head_bias Use bias in head. Default FALSE.
+#' @return An nn_module.
+#' @export
+nn_adaptive_log_softmax_with_loss <- function(in_features, n_classes, cutoffs,
+                                                div_value = 4, head_bias = FALSE) {
+  stop("nn_adaptive_log_softmax_with_loss not yet implemented in tinytorch", call. = FALSE)
+}
