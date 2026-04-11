@@ -14,8 +14,10 @@ torch_div(self, other)
 Divide two tensors element-wise
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 a <- torch_randn(c(2, 3))
 torch_div(a, 2.0)
+}
 }
 }

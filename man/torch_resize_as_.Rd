@@ -18,3 +18,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::resize_as_}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

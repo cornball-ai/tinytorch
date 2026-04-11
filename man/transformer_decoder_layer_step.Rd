@@ -44,3 +44,10 @@ Weight list order (21 tensors):
   \item fc2.weight, fc2.bias
 }
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Low-level transformer op; see decoder_forward_step() for usage
+}
+}
+}

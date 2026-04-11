@@ -16,3 +16,10 @@ Invisible NULL.
 \description{
 Loop over a dataloader (convenience)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# See dataloader() for iteration examples
+}
+}
+}

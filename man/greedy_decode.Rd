@@ -31,3 +31,10 @@ Integer vector of generated token IDs (0-indexed).
 Runs the entire autoregressive decode loop in C++.
 One boundary crossing for the full sequence -- no per-token R overhead.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Specialized Whisper greedy decoder; see package vignettes
+}
+}
+}

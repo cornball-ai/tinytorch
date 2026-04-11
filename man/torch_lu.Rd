@@ -5,6 +5,20 @@
 \usage{
 torch_lu(A, pivot = TRUE)
 }
+\arguments{
+\item{A}{A `torch_tensor` (matrix).}
+
+\item{pivot}{Logical; enable pivoting.}
+}
 \description{
 torch_lu
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+A <- torch_randn(c(2, 3, 3))
+torch_lu(A)
+}
+}
 }

@@ -14,8 +14,10 @@ torch_mul(self, other)
 Multiply two tensors element-wise
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 a <- torch_randn(c(2, 3))
 torch_mul(a, 2.0)
+}
 }
 }

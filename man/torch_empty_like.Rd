@@ -12,8 +12,10 @@ torch_empty_like(self)
 Create an uninitialized tensor with same shape/dtype as input
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 x <- torch_randn(c(2, 3))
 torch_empty_like(x)
+}
 }
 }

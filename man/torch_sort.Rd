@@ -18,3 +18,15 @@ A list with values and indices tensors.
 \description{
 Sort tensor along a dimension
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x = torch_randn(c(3, 4))
+out = torch_sort(x)
+out
+out = torch_sort(x, 1)
+out
+}
+}
+}

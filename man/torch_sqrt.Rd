@@ -14,3 +14,13 @@ A torch_tensor.
 \description{
 Square root
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4))
+a
+torch_sqrt(a)
+}
+}
+}

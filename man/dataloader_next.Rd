@@ -14,3 +14,13 @@ A batch (list of tensors), or NULL if exhausted.
 \description{
 Get next batch from a dataloader iterator
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+ds <- tensor_dataset(torch_randn(c(10, 3)))
+dl <- dataloader(ds, batch_size = 2L)
+it <- dataloader_make_iter(dl)
+batch <- dataloader_next(it)
+}
+}
+}

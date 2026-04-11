@@ -18,3 +18,16 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::cross}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4, 3))
+a
+b = torch_randn(c(4, 3))
+b
+torch_cross(a, b, dim=2)
+torch_cross(a, b)
+}
+}
+}

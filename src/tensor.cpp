@@ -681,6 +681,25 @@ SEXP C_cuda_empty_cache() {
     return R_NilValue;
 }
 
+// Block until all queued CUDA work on all devices completes.
+// No-op when CUDA is unavailable.
+// [[Rcpp::export]]
+SEXP C_cuda_synchronize() {
+    if (!torch::cuda::is_available()) return R_NilValue;
+#if defined(TINYTORCH_CUDA) && !defined(TINYTORCH_CUDA_NO_SDK)
+    int n_devices = 0;
+    if (cudaGetDeviceCount(&n_devices) != cudaSuccess) return R_NilValue;
+    int saved = 0;
+    cudaGetDevice(&saved);
+    for (int i = 0; i < n_devices; ++i) {
+        cudaSetDevice(i);
+        cudaDeviceSynchronize();
+    }
+    cudaSetDevice(saved);
+#endif
+    return R_NilValue;
+}
+
 // Return c(free, total) in bytes for the current CUDA device
 // [[Rcpp::export]]
 SEXP C_cuda_mem_info() {

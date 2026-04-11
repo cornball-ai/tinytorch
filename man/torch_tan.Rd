@@ -14,3 +14,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::tan}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4))
+a
+torch_tan(a)
+}
+}
+}

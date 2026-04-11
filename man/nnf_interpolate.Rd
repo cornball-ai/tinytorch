@@ -26,3 +26,11 @@ A torch_tensor.
 \description{
 Down/up samples the input to the given size or scale_factor.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x <- torch_randn(c(1, 1, 4, 4))
+nnf_interpolate(x, size = c(8L, 8L), mode = "nearest")
+}
+}
+}

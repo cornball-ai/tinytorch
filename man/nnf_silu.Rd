@@ -15,7 +15,9 @@ torch_silu(self)
 SiLU activation (swish)
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 nnf_silu(torch_randn(c(2, 3)))
+}
 }
 }

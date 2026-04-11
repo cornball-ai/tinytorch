@@ -14,3 +14,13 @@ A torch_tensor.
 \description{
 Natural logarithm
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(5))
+a
+torch_log(a)
+}
+}
+}

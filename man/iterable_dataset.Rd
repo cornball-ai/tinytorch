@@ -12,4 +12,11 @@ iterable_dataset
 \description{
 Iterable dataset (stub)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# See ?dataset for usage; iterable_dataset is currently an alias
+}
+}
+}
 \keyword{datasets}

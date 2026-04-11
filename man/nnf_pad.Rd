@@ -21,3 +21,11 @@ A torch_tensor.
 \description{
 Pads the input tensor using the specified padding mode.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x <- torch_randn(c(2, 3))
+nnf_pad(x, c(1L, 1L))
+}
+}
+}

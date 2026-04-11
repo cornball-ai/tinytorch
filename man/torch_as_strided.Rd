@@ -20,3 +20,16 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::as_strided}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x = torch_randn(c(3, 3))
+x
+t = torch_as_strided(x, list(2, 2), list(1, 2))
+t
+t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
+t
+}
+}
+}

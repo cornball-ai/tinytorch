@@ -14,3 +14,10 @@ Returns allocated and reserved memory in bytes. "Allocated" is memory
 actively used by tensors. "Reserved" is total memory held by the
 caching allocator (allocated + cached free blocks).
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+if (cuda_is_available()) cuda_memory_stats()
+}
+}
+}

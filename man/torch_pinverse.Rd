@@ -16,3 +16,17 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::pinverse}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+input = torch_randn(c(3, 5))
+input
+torch_pinverse(input)
+# Batched pinverse example
+a = torch_randn(c(2,6,3))
+b = torch_pinverse(a)
+torch_matmul(b, a)
+}
+}
+}

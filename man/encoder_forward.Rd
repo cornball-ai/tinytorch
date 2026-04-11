@@ -26,3 +26,10 @@ Executes the entire encoder forward pass in a single C++ call:
 conv1+gelu, conv2+gelu, permute, positional embedding, all N
 encoder layers (self-attention + MLP), and final layer norm.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Specialized Whisper encoder pipeline; see package vignettes
+}
+}
+}

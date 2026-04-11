@@ -18,3 +18,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::logsumexp}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(3, 3))
+torch_logsumexp(a, 1)
+}
+}
+}

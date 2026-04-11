@@ -20,3 +20,10 @@ A torch_tensor.
 \description{
 Create a Hann window tensor
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+torch_hann_window(16L)
+}
+}
+}

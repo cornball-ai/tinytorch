@@ -11,3 +11,10 @@ Integer number of threads used for intraop parallelism.
 \description{
 Get Number of CPU Threads
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+torch_get_num_threads()
+}
+}
+}

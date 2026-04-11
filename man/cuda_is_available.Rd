@@ -11,3 +11,10 @@ Logical scalar.
 \description{
 Check if CUDA is available
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+cuda_is_available()
+}
+}
+}

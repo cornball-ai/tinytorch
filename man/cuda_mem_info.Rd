@@ -12,3 +12,10 @@ Named numeric vector with elements "free" and "total".
 Returns free and total GPU memory in bytes for the current device,
 as reported by the CUDA runtime (cudaMemGetInfo).
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+if (cuda_is_available()) cuda_mem_info()
+}
+}
+}

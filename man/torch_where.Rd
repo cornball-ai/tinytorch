@@ -18,3 +18,19 @@ A torch_tensor.
 \description{
 Element-wise selection based on condition
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+
+x = torch_randn(c(3, 2))
+y = torch_ones(c(3, 2))
+x
+torch_where(x > 0, x, y)
+
+
+
+
+}
+}
+}

@@ -14,3 +14,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::signbit}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a <- torch_tensor(c(0.7, -1.2, 0., 2.3))
+torch_signbit(a)
+}
+}
+}

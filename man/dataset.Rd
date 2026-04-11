@@ -16,3 +16,10 @@ A dataset generator function.
 \description{
 Create a dataset
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# See vignette("datasets") for full dataset/dataloader usage
+}
+}
+}

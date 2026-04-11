@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Absolute value
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_abs(torch_tensor(c(-1, -2, 3)))
+}
+}
+}

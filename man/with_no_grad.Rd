@@ -12,10 +12,12 @@ with_no_grad(code)
 Evaluates the expression with gradient computation disabled.
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 with_no_grad({
   x <- torch_randn(c(2, 3))
   torch_relu(x)
 })
+}
 }
 }

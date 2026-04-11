@@ -14,3 +14,18 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::median}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(1, 3))
+a
+torch_median(a)
+
+
+a = torch_randn(c(4, 5))
+a
+torch_median(a, 1)
+}
+}
+}

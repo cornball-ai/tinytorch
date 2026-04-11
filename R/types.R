@@ -144,6 +144,9 @@ print.torch_dtype <- function(x, ...) {
   invisible(x)
 }
 
+#' As.character.torch dtype
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @examples
 #' as.character(torch_float32)
 #' @export

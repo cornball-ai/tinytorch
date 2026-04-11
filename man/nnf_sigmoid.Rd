@@ -14,3 +14,10 @@ A torch_tensor.
 \description{
 Sigmoid activation (functional)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+nnf_sigmoid(torch_randn(5))
+}
+}
+}

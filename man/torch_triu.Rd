@@ -16,3 +16,19 @@ A torch_tensor.
 \description{
 Upper triangular part of a matrix
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(3, 3))
+a
+torch_triu(a)
+torch_triu(a, diagonal=1)
+torch_triu(a, diagonal=-1)
+b = torch_randn(c(4, 6))
+b
+torch_triu(b, diagonal=1)
+torch_triu(b, diagonal=-1)
+}
+}
+}

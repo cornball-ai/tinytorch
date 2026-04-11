@@ -14,3 +14,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::angle}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
+
+
+}
+}
+}

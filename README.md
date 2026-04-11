@@ -1,6 +1,6 @@
 # tinytorch
 
-Linux-only R bindings to [libtorch](https://pytorch.org/cppdocs/) (the PyTorch C++ distribution). Provides a `torch`-compatible API with minimal R-side dependencies (just Rcpp). Much of the simplicity comes from targeting a single platform: no cross-platform build machinery, no download-at-install-time dance, just a configure script that finds libtorch and links against it.
+Linux-only R bindings to [libtorch](https://docs.pytorch.org/cppdocs/) (the PyTorch C++ distribution). Provides a `torch`-compatible API with minimal R-side dependencies (just Rcpp). Much of the simplicity comes from targeting a single platform: no cross-platform build machinery, no download-at-install-time dance, just a configure script that finds libtorch and links against it.
 
 ## Installation
 

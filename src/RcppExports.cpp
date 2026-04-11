@@ -12589,6 +12589,44 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// C_cuda_synchronize
+SEXP C_cuda_synchronize();
+RcppExport SEXP _tinytorch_C_cuda_synchronize() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(C_cuda_synchronize());
+    return rcpp_result_gen;
+END_RCPP
+}
+// C_torch_manual_seed
+void C_torch_manual_seed(int64_t seed);
+RcppExport SEXP _tinytorch_C_torch_manual_seed(SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int64_t >::type seed(seedSEXP);
+    C_torch_manual_seed(seed);
+    return R_NilValue;
+END_RCPP
+}
+// C_torch_scaled_mm
+at::Tensor C_torch_scaled_mm(at::Tensor self, at::Tensor mat2, at::Tensor scale_a, at::Tensor scale_b, SEXP bias, SEXP scale_result, SEXP out_dtype, bool use_fast_accum);
+RcppExport SEXP _tinytorch_C_torch_scaled_mm(SEXP selfSEXP, SEXP mat2SEXP, SEXP scale_aSEXP, SEXP scale_bSEXP, SEXP biasSEXP, SEXP scale_resultSEXP, SEXP out_dtypeSEXP, SEXP use_fast_accumSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< at::Tensor >::type self(selfSEXP);
+    Rcpp::traits::input_parameter< at::Tensor >::type mat2(mat2SEXP);
+    Rcpp::traits::input_parameter< at::Tensor >::type scale_a(scale_aSEXP);
+    Rcpp::traits::input_parameter< at::Tensor >::type scale_b(scale_bSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type bias(biasSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type scale_result(scale_resultSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type out_dtype(out_dtypeSEXP);
+    Rcpp::traits::input_parameter< bool >::type use_fast_accum(use_fast_accumSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_torch_scaled_mm(self, mat2, scale_a, scale_b, bias, scale_result, out_dtype, use_fast_accum));
+    return rcpp_result_gen;
+END_RCPP
+}
 // C_cuda_mem_info
 SEXP C_cuda_mem_info();
 RcppExport SEXP _tinytorch_C_cuda_mem_info() {

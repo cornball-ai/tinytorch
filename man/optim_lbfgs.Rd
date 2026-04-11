@@ -30,3 +30,34 @@ A torch_optimizer.
 \description{
 L-BFGS optimizer (stub)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+a <- 1
+b <- 5
+rosenbrock <- function(x) {
+  x1 <- x[1]
+  x2 <- x[2]
+  (a - x1)^2 + b * (x2 - x1^2)^2
+}
+
+x <- torch_tensor(c(-1, 1), requires_grad = TRUE)
+
+optimizer <- optim_lbfgs(x)
+calc_loss <- function() {
+  optimizer$zero_grad()
+  value <- rosenbrock(x)
+  value$backward()
+  value
+}
+
+num_iterations <- 2
+for (i in 1:num_iterations) {
+  optimizer$step(calc_loss)
+}
+
+rosenbrock(x)
+
+}
+}
+}

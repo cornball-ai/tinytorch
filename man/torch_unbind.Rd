@@ -16,3 +16,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::unbind}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_unbind(torch_tensor(matrix(1:9, ncol = 3, byrow=TRUE)))
+}
+}
+}

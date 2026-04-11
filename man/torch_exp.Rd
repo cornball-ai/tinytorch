@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Exponential
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_exp(torch_tensor(c(0, log(2))))
+}
+}
+}

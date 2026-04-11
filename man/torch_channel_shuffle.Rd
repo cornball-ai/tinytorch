@@ -16,3 +16,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::channel_shuffle}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+input <- torch_randn(c(1, 4, 2, 2))
+print(input)
+output <- torch_channel_shuffle(input, 2)
+print(output)
+}
+}
+}

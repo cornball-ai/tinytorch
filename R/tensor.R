@@ -5,10 +5,12 @@
 #' @param other A torch_tensor.
 #' @param alpha Scalar multiplier for other (default 1).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' a <- torch_ones(c(2, 3))
 #' b <- torch_ones(c(2, 3))
 #' torch_add(a, b)
+#' }
 #' }
 #' @export
 torch_add <- function(self, other, alpha = 1) {
@@ -20,10 +22,12 @@ torch_add <- function(self, other, alpha = 1) {
 #' @param other A torch_tensor.
 #' @param alpha Scalar multiplier for other (default 1).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' a <- torch_ones(c(2, 3))
 #' b <- torch_ones(c(2, 3))
 #' torch_sub(a, b)
+#' }
 #' }
 #' @export
 torch_sub <- function(self, other, alpha = 1) {
@@ -34,9 +38,11 @@ torch_sub <- function(self, other, alpha = 1) {
 #' @param self A torch_tensor.
 #' @param other A torch_tensor or scalar.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' a <- torch_randn(c(2, 3))
 #' torch_mul(a, 2.0)
+#' }
 #' }
 #' @export
 torch_mul <- function(self, other) {
@@ -47,9 +53,11 @@ torch_mul <- function(self, other) {
 #' @param self A torch_tensor.
 #' @param other A torch_tensor or scalar.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' a <- torch_randn(c(2, 3))
 #' torch_div(a, 2.0)
+#' }
 #' }
 #' @export
 torch_div <- function(self, other) {
@@ -60,10 +68,12 @@ torch_div <- function(self, other) {
 #' @param self A torch_tensor.
 #' @param other A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' a <- torch_randn(c(2, 3))
 #' b <- torch_randn(c(3, 4))
 #' torch_matmul(a, b)
+#' }
 #' }
 #' @export
 torch_matmul <- function(self, other) {
@@ -75,10 +85,12 @@ torch_matmul <- function(self, other) {
 #' @param other A torch_tensor.
 #' @param out_dtype Optional output dtype for mixed-precision (PyTorch 2.8+).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' a <- torch_randn(c(2, 3))
 #' b <- torch_randn(c(3, 4))
 #' torch_mm(a, b)
+#' }
 #' }
 #' @export
 torch_mm <- function(self, other, out_dtype = NULL) {
@@ -91,10 +103,12 @@ torch_mm <- function(self, other, out_dtype = NULL) {
 #' @param dim Optional dimension to reduce (1-based).
 #' @param keepdim Whether to keep the reduced dimension.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 3))
 #' torch_sum(x)
 #' torch_sum(x, dim = 1)
+#' }
 #' }
 #' @export
 torch_sum <- function(self, dim = NULL, keepdim = FALSE) {
@@ -106,10 +120,12 @@ torch_sum <- function(self, dim = NULL, keepdim = FALSE) {
 #' @param dim Optional dimension to reduce (1-based).
 #' @param keepdim Whether to keep the reduced dimension.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 3))
 #' torch_mean(x)
 #' torch_mean(x, dim = 1)
+#' }
 #' }
 #' @export
 torch_mean <- function(self, dim = NULL, keepdim = FALSE) {
@@ -119,9 +135,11 @@ torch_mean <- function(self, dim = NULL, keepdim = FALSE) {
 #' Sigmoid activation (namespace-level)
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 3))
 #' torch_sigmoid(x)
+#' }
 #' }
 #' @export
 torch_sigmoid <- function(self) {
@@ -596,10 +614,15 @@ torch_sigmoid <- function(self) {
 
 # ---- print ----
 
+#' Print.torch tensor
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 3))
 #' print(x)
+#' }
 #' }
 #' @export
 print.torch_tensor <- function(x, ...) {
@@ -631,17 +654,41 @@ print.torch_tensor <- function(x, ...) {
   C_torch_logical_not(x)
 }
 
+#' Length.nn buffer
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' length(nn_buffer(torch_randn(5)))
+#' }
+#' }
 length.nn_buffer <- function(x) {
   C_tensor_numel(x)
 }
 
+#' Length.nn parameter
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' length(nn_parameter(torch_randn(5)))
+#' }
+#' }
 length.nn_parameter <- function(x) {
   C_tensor_numel(x)
 }
 
+#' Length.torch tensor
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' length(torch_randn(c(2, 3)))
+#' }
+#' }
 length.torch_tensor <- function(x) {
   C_tensor_numel(x)
 }

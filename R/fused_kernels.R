@@ -13,8 +13,10 @@
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' fused_relu(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 fused_relu <- function(x) {
@@ -26,8 +28,10 @@ fused_relu <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' fused_relu_sigmoid(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 fused_relu_sigmoid <- function(x) {
@@ -39,8 +43,10 @@ fused_relu_sigmoid <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' fused_relu_sigmoid_tanh(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 fused_relu_sigmoid_tanh <- function(x) {
@@ -52,8 +58,10 @@ fused_relu_sigmoid_tanh <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' fused_silu(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 fused_silu <- function(x) {
@@ -65,8 +73,10 @@ fused_silu <- function(x) {
 #' @param x A torch tensor.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' fused_gelu(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 fused_gelu <- function(x) {
@@ -78,8 +88,10 @@ fused_gelu <- function(x) {
 #' @param x A torch tensor.
 #' @return A list with sin and cos tensors (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' fused_sincos(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 fused_sincos <- function(x) {
@@ -96,8 +108,10 @@ fused_sincos <- function(x) {
 #' @param cap Scalar capping value.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' fused_softcap(torch_randn(c(2, 3)), 30.0)
+#' }
 #' }
 #' @export
 fused_softcap <- function(x, cap) {
@@ -111,10 +125,12 @@ fused_softcap <- function(x, cap) {
 #' @param eps Small constant for numerical stability.
 #' @return A new torch tensor (float32).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 4))
 #' w <- torch_ones(c(4))
 #' fused_rmsnorm(x, w)
+#' }
 #' }
 #' @export
 fused_rmsnorm <- function(x, weight, eps = 1e-6) {

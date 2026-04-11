@@ -29,3 +29,13 @@ An nn_module.
 \description{
 RNN module
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+rnn <- nn_rnn(10, 20, 2)
+input <- torch_randn(5, 3, 10)
+h0 <- torch_randn(2, 3, 20)
+rnn(input, h0)
+}
+}
+}

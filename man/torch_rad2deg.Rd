@@ -14,3 +14,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::rad2deg}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a <- torch_tensor(rbind(c(3.142, -3.142), c(6.283, -6.283), c(1.570, -1.570)))
+torch_rad2deg(a)
+}
+}
+}

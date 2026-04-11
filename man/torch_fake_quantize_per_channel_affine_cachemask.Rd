@@ -25,3 +25,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::fake_quantize_per_channel_affine_cachemask}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

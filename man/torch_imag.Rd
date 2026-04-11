@@ -14,3 +14,12 @@ A torch_tensor.
 \description{
 Extract imaginary part of a complex tensor
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_imag(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
+
+}
+}
+}

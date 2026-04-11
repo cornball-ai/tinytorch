@@ -12,7 +12,9 @@ torch_cos(self)
 Compute cos of tensor
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 torch_cos(torch_tensor(c(0, 3.14159)))
+}
 }
 }

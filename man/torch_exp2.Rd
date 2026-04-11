@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::exp2}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_exp2(torch_tensor(c(0, log2(2.), 3, 4)))
+}
+}
+}

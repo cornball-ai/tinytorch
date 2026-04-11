@@ -14,3 +14,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::lgamma}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_arange(0.5, 2, 0.5)
+torch_lgamma(a)
+}
+}
+}

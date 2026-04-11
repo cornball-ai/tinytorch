@@ -14,9 +14,11 @@ torch_matmul(self, other)
 Matrix multiplication
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 a <- torch_randn(c(2, 3))
 b <- torch_randn(c(3, 4))
 torch_matmul(a, b)
+}
 }
 }

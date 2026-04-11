@@ -18,3 +18,15 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::trapz}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+y = torch_randn(list(2, 3))
+y
+x = torch_tensor(matrix(c(1, 3, 4, 1, 2, 3), ncol = 3, byrow=TRUE))
+torch_trapz(y, x = x)
+
+}
+}
+}

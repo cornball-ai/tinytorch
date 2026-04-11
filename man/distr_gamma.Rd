@@ -16,3 +16,11 @@ A distribution object.
 \description{
 Gamma distribution
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- distr_gamma(torch_tensor(1.0), torch_tensor(1.0))
+m$sample() # Gamma distributed with concentration=1 and rate=1
+}
+}
+}

@@ -16,3 +16,23 @@ A torch_tensor.
 \description{
 Power
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(4))
+a
+torch_pow(a, 2)
+exp <- torch_arange(1, 5)
+a <- torch_arange(1, 5)
+a
+exp
+torch_pow(a, exp)
+
+
+exp <- torch_arange(1, 5)
+base <- 2
+torch_pow(base, exp)
+}
+}
+}

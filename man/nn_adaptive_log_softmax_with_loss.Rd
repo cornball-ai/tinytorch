@@ -23,3 +23,10 @@ An nn_module.
 \description{
 Adaptive log-softmax with loss
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

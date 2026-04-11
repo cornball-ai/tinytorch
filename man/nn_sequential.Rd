@@ -15,8 +15,10 @@ An nn_module instance.
 Sequential container
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 m <- nn_sequential(nn_linear(3, 4), nn_relu(), nn_linear(4, 2))
 m(torch_randn(c(1, 3)))
+}
 }
 }

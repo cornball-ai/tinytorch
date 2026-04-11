@@ -14,3 +14,11 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::frac}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_frac(torch_tensor(c(1, 2.5, -3.2)))
+}
+}
+}

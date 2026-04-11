@@ -14,3 +14,15 @@ A torch_tensor.
 \description{
 View a complex tensor as a real tensor with extra dimension
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+if (FALSE) {
+x <- torch_randn(4, dtype=torch_cfloat())
+x
+torch_view_as_real(x)
+}
+}
+}
+}

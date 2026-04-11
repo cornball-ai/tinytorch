@@ -18,3 +18,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::copy_sparse_to_sparse_}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

@@ -14,3 +14,11 @@ A distribution object.
 \description{
 Poisson distribution
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- distr_poisson(torch_tensor(4))
+m$sample()
+}
+}
+}

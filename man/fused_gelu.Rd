@@ -15,7 +15,9 @@ A new torch tensor (float32).
 Fused GELU activation
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 fused_gelu(torch_randn(c(2, 3)))
+}
 }
 }

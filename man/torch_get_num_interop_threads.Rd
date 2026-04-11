@@ -11,3 +11,10 @@ Integer number of interop threads.
 \description{
 Get Number of Interop Threads
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+torch_get_num_interop_threads()
+}
+}
+}

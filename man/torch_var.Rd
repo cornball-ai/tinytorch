@@ -16,3 +16,18 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::var}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(1, 3))
+a
+torch_var(a)
+
+
+a = torch_randn(c(4, 4))
+a
+torch_var(a, 1)
+}
+}
+}

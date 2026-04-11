@@ -23,3 +23,15 @@ An nn_module instance.
 \description{
 2D batch normalization module
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# With Learnable Parameters
+m <- nn_batch_norm2d(100)
+# Without Learnable Parameters
+m <- nn_batch_norm2d(100, affine = FALSE)
+input <- torch_randn(20, 100, 35, 45)
+output <- m(input)
+}
+}
+}

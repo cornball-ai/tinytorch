@@ -18,3 +18,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::cumprod}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a = torch_randn(c(10))
+a
+torch_cumprod(a, dim=1)
+}
+}
+}

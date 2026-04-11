@@ -20,3 +20,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::renorm}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x = torch_ones(c(3, 3))
+x[2,]$fill_(2)
+x[3,]$fill_(3)
+x
+torch_renorm(x, 1, 1, 5)
+}
+}
+}

@@ -12,7 +12,9 @@ torch_relu(self)
 ReLU activation (namespace-level)
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 torch_relu(torch_tensor(c(-1, 0, 1)))
+}
 }
 }

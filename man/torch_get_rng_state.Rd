@@ -17,3 +17,16 @@ For get, the current RNG state as a tensor. For set, invisible NULL.
 \description{
 Get/set RNG state (stubs)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

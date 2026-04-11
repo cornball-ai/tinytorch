@@ -20,3 +20,12 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::rand}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+torch_rand(4)
+torch_rand(c(2, 3))
+}
+}
+}

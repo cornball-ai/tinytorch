@@ -16,3 +16,11 @@ A distribution object.
 \description{
 Bernoulli distribution
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+m <- distr_bernoulli(0.3)
+m$sample() # 30\% chance 1; 70\% chance 0
+}
+}
+}

@@ -16,3 +16,12 @@ A torch_tensor.
 \description{
 Create a tensor of ones with same shape/dtype as input
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+input = torch_empty(c(2, 3))
+torch_ones_like(input)
+}
+}
+}

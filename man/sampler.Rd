@@ -14,3 +14,10 @@ A sampler object.
 \description{
 Create a data sampler
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+# Base sampler class; see dataloader() for usage
+}
+}
+}

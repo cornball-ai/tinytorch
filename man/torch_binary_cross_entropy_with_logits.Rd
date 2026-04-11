@@ -23,3 +23,10 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::binary_cross_entropy_with_logits}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

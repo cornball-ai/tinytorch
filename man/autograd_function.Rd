@@ -16,3 +16,20 @@ An autograd function class.
 \description{
 Define a custom autograd function
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+exp2 <- autograd_function(
+  forward = function(ctx, i) {
+    result <- i$exp()
+    ctx$save_for_backward(result = result)
+    result
+  },
+  backward = function(ctx, grad_output) {
+    list(i = grad_output * ctx$saved_variable$result)
+  }
+)
+}
+}
+}

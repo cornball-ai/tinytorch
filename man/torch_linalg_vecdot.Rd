@@ -1,6 +1,7 @@
 % tinyrox says don't edit this manually, but it can't stop you!
 \name{torch_linalg_vecdot}
 \alias{torch_linalg_vecdot}
+\alias{linalg_vecdot}
 \title{Linalg vecdot}
 \usage{
 torch_linalg_vecdot(x, y, dim = -1)
@@ -17,4 +18,11 @@ A torch_tensor.
 }
 \description{
 Wrapper for \code{at::linalg_vecdot}.
+}
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
 }

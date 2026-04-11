@@ -20,3 +20,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::addcdiv}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+t = torch_randn(c(1, 3))
+t1 = torch_randn(c(3, 1))
+t2 = torch_randn(c(1, 3))
+torch_addcdiv(t, t1, t2, 0.1)
+}
+}
+}

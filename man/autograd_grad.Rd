@@ -23,3 +23,18 @@ List of gradient tensors.
 \description{
 Compute gradients
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+w <- torch_tensor(0.5, requires_grad = TRUE)
+b <- torch_tensor(0.9, requires_grad = TRUE)
+x <- torch_tensor(runif(100))
+y <- 2 * x + 1
+loss <- (y - (w * x + b))^2
+loss <- loss$mean()
+
+o <- autograd_grad(loss, list(w, b))
+o
+}
+}
+}

@@ -22,8 +22,10 @@ is_available <- function() {
 #' @return The installation path (invisibly).
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' install_libtorch()
+#' }
 #' }
 install_libtorch <- function(path = "~/.local/lib/libtorch",
                                        version = "2.11.0") {

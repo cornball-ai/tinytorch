@@ -15,7 +15,17 @@ make_distribution <- function(class, ...) {
   self
 }
 
+#' Print.torch distribution
+#' @param x Parameter passed to the underlying ATen operator.
+#' @param ... Additional arguments passed to methods.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' d <- distr_normal(0, 1)
+#' print(d)
+#' }
+#' }
 print.torch_distribution <- function(x, ...) {
   cat(x$.class, "distribution\n")
   invisible(x)
@@ -29,6 +39,13 @@ print.torch_distribution <- function(x, ...) {
 #' @param scale Standard deviation (tensor or numeric).
 #' @return A distribution object with sample(), log_prob(), entropy() methods.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- distr_normal(loc = 0, scale = 1)
+#' m$sample() # normally distributed with loc=0 and scale=1
+#' }
+#' }
 distr_normal <- function(loc, scale) {
   if (!inherits(loc, "torch_tensor")) loc <- torch_tensor(loc)
   if (!inherits(scale, "torch_tensor")) scale <- torch_tensor(scale)
@@ -57,6 +74,13 @@ distr_normal <- function(loc, scale) {
 #' @param logits Log-odds (tensor or numeric).
 #' @return A distribution object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- distr_bernoulli(0.3)
+#' m$sample() # 30% chance 1; 70% chance 0
+#' }
+#' }
 distr_bernoulli <- function(probs = NULL, logits = NULL) {
   if (is.null(probs) && is.null(logits)) stop("One of probs or logits required")
   if (!is.null(probs) && !inherits(probs, "torch_tensor")) probs <- torch_tensor(probs)
@@ -87,6 +111,13 @@ distr_bernoulli <- function(probs = NULL, logits = NULL) {
 #' @param logits Unnormalized log probabilities (tensor).
 #' @return A distribution object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- distr_categorical(torch_tensor(c(0.25, 0.25, 0.25, 0.25)))
+#' m$sample() # equal probability of 1,2,3,4
+#' }
+#' }
 distr_categorical <- function(probs = NULL, logits = NULL) {
   if (is.null(probs) && is.null(logits)) stop("One of probs or logits required")
   if (!is.null(probs) && !inherits(probs, "torch_tensor")) probs <- torch_tensor(probs)
@@ -116,6 +147,13 @@ distr_categorical <- function(probs = NULL, logits = NULL) {
 #' @param rate Rate parameter (tensor or numeric).
 #' @return A distribution object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- distr_poisson(torch_tensor(4))
+#' m$sample()
+#' }
+#' }
 distr_poisson <- function(rate) {
   if (!inherits(rate, "torch_tensor")) rate <- torch_tensor(rate)
   d <- make_distribution("Poisson", rate = rate)
@@ -138,6 +176,13 @@ distr_poisson <- function(rate) {
 #' @param rate Rate parameter (tensor or numeric).
 #' @return A distribution object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- distr_gamma(torch_tensor(1.0), torch_tensor(1.0))
+#' m$sample() # Gamma distributed with concentration=1 and rate=1
+#' }
+#' }
 distr_gamma <- function(concentration, rate) {
   if (!inherits(concentration, "torch_tensor")) concentration <- torch_tensor(concentration)
   if (!inherits(rate, "torch_tensor")) rate <- torch_tensor(rate)
@@ -165,6 +210,14 @@ distr_gamma <- function(concentration, rate) {
 #' @param df Degrees of freedom (tensor or numeric).
 #' @return A distribution object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- distr_chi2(torch_tensor(1.0))
+#' m$sample() # Chi2 distributed with shape df=1
+#' torch_tensor(0.1046)
+#' }
+#' }
 distr_chi2 <- function(df) {
   distr_gamma(concentration = df / 2, rate = 0.5)
 }
@@ -180,6 +233,13 @@ distr_chi2 <- function(df) {
 #' @param scale_tril Lower-triangular scale matrix (tensor).
 #' @return A distribution object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' m <- distr_multivariate_normal(torch_zeros(2), torch_eye(2))
+#' m$sample() # normally distributed with mean=`[0,0]` and covariance_matrix=`I`
+#' }
+#' }
 distr_multivariate_normal <- function(loc, covariance_matrix = NULL,
                                        precision_matrix = NULL,
                                        scale_tril = NULL) {
@@ -221,6 +281,16 @@ distr_multivariate_normal <- function(loc, covariance_matrix = NULL,
 #' @param component_distribution Batch of component distributions.
 #' @return A distribution object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Construct Gaussian Mixture Model in 1D consisting of 5 equally
+#' # weighted normal distributions
+#' mix <- distr_categorical(torch_ones(5))
+#' comp <- distr_normal(torch_randn(5), torch_rand(5))
+#' gmm <- distr_mixture_same_family(mix, comp)
+#' }
+#' }
 distr_mixture_same_family <- function(mixture_distribution, component_distribution) {
   d <- make_distribution("MixtureSameFamily",
     mixture_distribution = mixture_distribution,

@@ -14,3 +14,10 @@ Named list with bits, eps, max, min, tiny.
 \description{
 Float dtype info (range, precision)
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}

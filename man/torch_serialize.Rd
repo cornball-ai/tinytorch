@@ -14,3 +14,10 @@ Raw vector.
 \description{
 Serialize a torch object to a raw vector
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+bytes <- torch_serialize(torch_randn(c(2, 3)))
+}
+}
+}

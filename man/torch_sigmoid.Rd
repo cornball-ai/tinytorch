@@ -12,8 +12,10 @@ torch_sigmoid(self)
 Sigmoid activation (namespace-level)
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 x <- torch_randn(c(2, 3))
 torch_sigmoid(x)
+}
 }
 }

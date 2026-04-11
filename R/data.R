@@ -11,6 +11,12 @@
 #' @param ... Named methods: initialize, .getitem, .length.
 #' @return A dataset generator function.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # See vignette("datasets") for full dataset/dataloader usage
+#' }
+#' }
 dataset <- function(name = NULL, ...) {
   methods <- list(...)
   function(...) {
@@ -33,6 +39,13 @@ dataset <- function(name = NULL, ...) {
 #' @param ... Tensors. Each must have the same first dimension.
 #' @return A dataset object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(10, 3)), torch_randint(0L, 2L, 10L))
+#' length(ds)
+#' }
+#' }
 tensor_dataset <- function(...) {
   tensors <- list(...)
   n <- tensors[[1]]$size()[1]
@@ -50,6 +63,14 @@ tensor_dataset <- function(...) {
 #' @param indices Integer vector of indices.
 #' @return A dataset object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(10, 3)))
+#' sub <- dataset_subset(ds, indices = 1:5)
+#' length(sub)
+#' }
+#' }
 dataset_subset <- function(dataset, indices) {
   ds <- new.env(parent = emptyenv())
   ds$.parent <- dataset
@@ -60,7 +81,15 @@ dataset_subset <- function(dataset, indices) {
   ds
 }
 
+#' Length.torch dataset
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # See ?dataset for dataloader usage
+#' }
+#' }
 length.torch_dataset <- function(x) x$.length()
 
 #' @export
@@ -73,6 +102,12 @@ length.torch_dataset <- function(x) x$.length()
 #' @param data_source A dataset (used for length).
 #' @return A sampler object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Base sampler class; see dataloader() for usage
+#' }
+#' }
 sampler <- function(data_source) {
   n <- if (inherits(data_source, "torch_dataset")) data_source$.length()
        else length(data_source)
@@ -89,6 +124,14 @@ sampler <- function(data_source) {
 #' @param drop_last Drop the last incomplete batch. Default FALSE.
 #' @return A dataloader object.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(10, 3)))
+#' dl <- dataloader(ds, batch_size = 2L)
+#' length(dl)
+#' }
+#' }
 dataloader <- function(dataset, batch_size = 1L, shuffle = FALSE,
                         drop_last = FALSE) {
   dl <- new.env(parent = emptyenv())
@@ -105,7 +148,15 @@ dataloader <- function(dataset, batch_size = 1L, shuffle = FALSE,
   dl
 }
 
+#' Length.dataloader
+#' @param x Parameter passed to the underlying ATen operator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # See ?dataloader for examples
+#' }
+#' }
 length.dataloader <- function(x) x$.length()
 
 #' Create an iterator from a dataloader
@@ -113,6 +164,14 @@ length.dataloader <- function(x) x$.length()
 #' @param dl A dataloader object.
 #' @return An iterator environment with .next() method.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(10, 3)))
+#' dl <- dataloader(ds, batch_size = 2L)
+#' it <- dataloader_make_iter(dl)
+#' }
+#' }
 dataloader_make_iter <- function(dl) {
   n <- dl$dataset$.length()
   indices <- if (dl$shuffle) sample.int(n) else seq_len(n)
@@ -137,6 +196,15 @@ dataloader_make_iter <- function(dl) {
 #' @param iter A dataloader_iterator.
 #' @return A batch (list of tensors), or NULL if exhausted.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(10, 3)))
+#' dl <- dataloader(ds, batch_size = 2L)
+#' it <- dataloader_make_iter(dl)
+#' batch <- dataloader_next(it)
+#' }
+#' }
 dataloader_next <- function(iter) {
   iter$.next()
 }
@@ -148,6 +216,14 @@ dataloader_next <- function(iter) {
 #' @param x An iterable (list, vector, or iterator).
 #' @return A list of (index, value) pairs.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(4, 2)))
+#' dl <- dataloader(ds, batch_size = 2L)
+#' for (b in enumerate(dl)) { }
+#' }
+#' }
 enumerate <- function(x) {
   if (is.list(x)) {
     lapply(seq_along(x), function(i) list(i, x[[i]]))
@@ -161,6 +237,14 @@ enumerate <- function(x) {
 #' @param x A dataloader.
 #' @return An iterator.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(4, 2)))
+#' dl <- dataloader(ds, batch_size = 2L)
+#' it <- as_iterator(dl)
+#' }
+#' }
 as_iterator <- function(x) {
   if (inherits(x, "dataloader")) dataloader_make_iter(x)
   else stop("Cannot create iterator from ", class(x)[1])
@@ -172,6 +256,12 @@ as_iterator <- function(x) {
 #' @param fn Function to call with each batch.
 #' @return Invisible NULL.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # See dataloader() for iteration examples
+#' }
+#' }
 loop <- function(dl, fn) {
   iter <- dataloader_make_iter(dl)
   repeat {
@@ -187,17 +277,36 @@ loop <- function(dl, fn) {
 #' @return x
 #' @keywords internal
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Used inside iterable_dataset definitions; see dataset() docs
+#' }
+#' }
 yield <- function(x) x
 
 #' Check if object is a dataloader
 #' @param x Object to check.
 #' @return Logical.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' ds <- tensor_dataset(torch_randn(c(10, 3)))
+#' is_dataloader(dataloader(ds, batch_size = 2L))
+#' }
+#' }
 is_dataloader <- function(x) inherits(x, "dataloader")
 
 #' Iterable dataset (stub)
 #' @param name Dataset name.
 #' @param ... Methods.
 #' @return A dataset generator.
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # See ?dataset for usage; iterable_dataset is currently an alias
+#' }
+#' }
 #' @export
 iterable_dataset <- dataset

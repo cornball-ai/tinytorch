@@ -15,7 +15,9 @@ A list with sin and cos tensors (float32).
 Fused sin and cos
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 fused_sincos(torch_randn(c(2, 3)))
+}
 }
 }

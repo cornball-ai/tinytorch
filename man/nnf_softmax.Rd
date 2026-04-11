@@ -14,7 +14,9 @@ nnf_softmax(self, dim = -1L)
 Softmax
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 nnf_softmax(torch_randn(c(2, 3)), dim = 2)
+}
 }
 }

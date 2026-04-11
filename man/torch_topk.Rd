@@ -22,3 +22,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::topk}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x = torch_arange(1., 6.)
+x
+torch_topk(x, 3)
+}
+}
+}

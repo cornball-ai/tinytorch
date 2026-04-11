@@ -17,7 +17,9 @@ A new torch tensor (float32).
 Fused softcap: tanh(x/cap) * cap
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 fused_softcap(torch_randn(c(2, 3)), 30.0)
+}
 }
 }

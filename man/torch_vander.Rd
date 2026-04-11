@@ -18,3 +18,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::vander}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+x <- torch_tensor(c(1, 2, 3, 5))
+torch_vander(x)
+torch_vander(x, N=3)
+torch_vander(x, N=3, increasing=TRUE)
+}
+}
+}

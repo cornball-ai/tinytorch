@@ -3,8 +3,10 @@
 #' Compute sin of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_sin(torch_tensor(c(0, 3.14159 / 2)))
+#' }
 #' }
 #' @export
 torch_sin <- function(self) C_torch_sin(self)
@@ -12,8 +14,10 @@ torch_sin <- function(self) C_torch_sin(self)
 #' Compute cos of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_cos(torch_tensor(c(0, 3.14159)))
+#' }
 #' }
 #' @export
 torch_cos <- function(self) C_torch_cos(self)
@@ -21,8 +25,10 @@ torch_cos <- function(self) C_torch_cos(self)
 #' Compute tanh of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_tanh(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 torch_tanh <- function(self) C_torch_tanh(self)
@@ -30,8 +36,10 @@ torch_tanh <- function(self) C_torch_tanh(self)
 #' Compute reciprocal square root of tensor
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_rsqrt(torch_tensor(c(1, 4, 9)))
+#' }
 #' }
 #' @export
 torch_rsqrt <- function(self) C_torch_rsqrt(self)
@@ -39,8 +47,10 @@ torch_rsqrt <- function(self) C_torch_rsqrt(self)
 #' ReLU activation (namespace-level)
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' torch_relu(torch_tensor(c(-1, 0, 1)))
+#' }
 #' }
 #' @export
 torch_relu <- function(self) C_torch_relu(self)
@@ -50,8 +60,10 @@ torch_relu <- function(self) C_torch_relu(self)
 #' ReLU activation (functional)
 #' @param input A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' nnf_relu(torch_tensor(c(-1, 0, 1)))
+#' }
 #' }
 #' @export
 nnf_relu <- function(input) C_torch_relu(input)
@@ -59,8 +71,10 @@ nnf_relu <- function(input) C_torch_relu(input)
 #' SiLU activation (swish)
 #' @param self A torch_tensor.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' nnf_silu(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 nnf_silu <- function(self) {
@@ -71,8 +85,10 @@ nnf_silu <- function(self) {
 #' @param self A torch_tensor.
 #' @param approximate Character, "none" or "tanh". Default "none".
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' nnf_gelu(torch_randn(c(2, 3)))
+#' }
 #' }
 #' @export
 nnf_gelu <- function(self, approximate = "none") {
@@ -83,8 +99,10 @@ nnf_gelu <- function(self, approximate = "none") {
 #' @param self A torch_tensor.
 #' @param negative_slope Negative slope coefficient. Default 0.01.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' nnf_leaky_relu(torch_tensor(c(-1, 0, 1)))
+#' }
 #' }
 #' @export
 nnf_leaky_relu <- function(self, negative_slope = 0.01) {
@@ -95,8 +113,10 @@ nnf_leaky_relu <- function(self, negative_slope = 0.01) {
 #' @param self A torch_tensor.
 #' @param alpha Scale for the negative factor. Default 1.0.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' nnf_elu(torch_tensor(c(-1, 0, 1)))
+#' }
 #' }
 #' @export
 nnf_elu <- function(self, alpha = 1.0) {
@@ -107,8 +127,10 @@ nnf_elu <- function(self, alpha = 1.0) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply softmax over (1-based).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' nnf_softmax(torch_randn(c(2, 3)), dim = 2)
+#' }
 #' }
 #' @export
 nnf_softmax <- function(self, dim = -1L) {
@@ -119,8 +141,10 @@ nnf_softmax <- function(self, dim = -1L) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply log-softmax over (1-based).
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' nnf_log_softmax(torch_randn(c(2, 3)), dim = 2)
+#' }
 #' }
 #' @export
 nnf_log_softmax <- function(self, dim = -1L) {
@@ -134,9 +158,11 @@ nnf_log_softmax <- function(self, dim = -1L) {
 #' @param bias Optional bias tensor.
 #' @param eps Small constant for numerical stability.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 4))
 #' nnf_layer_norm(x, 4L)
+#' }
 #' }
 #' @export
 nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
@@ -152,10 +178,12 @@ nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
 #' @param weight Weight matrix.
 #' @param bias Optional bias vector.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(2, 3))
 #' w <- torch_randn(c(4, 3))
 #' torch_linear(x, w)
+#' }
 #' }
 #' @export
 torch_linear <- function(input, weight, bias = NULL) {
@@ -171,10 +199,12 @@ torch_linear <- function(input, weight, bias = NULL) {
 #' @param dilation Spacing between kernel elements. Default 1.
 #' @param groups Number of blocked connections. Default 1.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' x <- torch_randn(c(1, 1, 10))
 #' w <- torch_randn(c(1, 1, 3))
 #' torch_conv1d(x, w)
+#' }
 #' }
 #' @export
 torch_conv1d <- function(input, weight, bias = NULL,
@@ -189,10 +219,12 @@ torch_conv1d <- function(input, weight, bias = NULL,
 #' @param weight Embedding matrix tensor.
 #' @param indices Integer tensor of indices.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' emb <- torch_randn(c(10, 4))
 #' idx <- torch_tensor(c(1L, 3L, 5L))
 #' torch_embedding(emb, idx)
+#' }
 #' }
 #' @export
 torch_embedding <- function(weight, indices) {
@@ -213,6 +245,12 @@ torch_silu <- function(self) C_nnf_silu(self)
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply softmax over (1-based).
 #' @param dtype Ignored; for API compatibility.
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_softmax <- function(self, dim = -1L, dtype = NULL) {
   C_nnf_softmax(self, as.integer(dim))
 }
@@ -221,6 +259,12 @@ torch_softmax <- function(self, dim = -1L, dtype = NULL) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply log-softmax over (1-based).
 #' @param dtype Ignored; for API compatibility.
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_log_softmax <- function(self, dim = -1L, dtype = NULL) {
   C_nnf_log_softmax(self, as.integer(dim))
 }
@@ -231,6 +275,12 @@ torch_log_softmax <- function(self, dim = -1L, dtype = NULL) {
 #' @param weight Optional weight tensor.
 #' @param bias Optional bias tensor.
 #' @param eps Small constant for numerical stability.
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+#' }
+#' }
 torch_layer_norm <- function(input, normalized_shape, weight = NULL,
                              bias = NULL, eps = 1e-5) {
   C_nnf_layer_norm(input, as.integer(normalized_shape),
@@ -243,30 +293,71 @@ torch_layer_norm <- function(input, normalized_shape, weight = NULL,
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_abs(torch_tensor(c(-1, -2, 3)))
+#' }
+#' }
 torch_abs <- function(self) C_torch_abs(self)
 
 #' Exponential
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' torch_exp(torch_tensor(c(0, log(2))))
+#' }
+#' }
 torch_exp <- function(self) C_torch_exp(self)
 
 #' Natural logarithm
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(5))
+#' a
+#' torch_log(a)
+#' }
+#' }
 torch_log <- function(self) C_torch_log(self)
 
 #' Square root
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_sqrt(a)
+#' }
+#' }
 torch_sqrt <- function(self) C_torch_sqrt(self)
 
 #' Floor
 #' @param self A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_floor(a)
+#' }
+#' }
 torch_floor <- function(self) C_torch_floor(self)
 
 #' Power
@@ -274,6 +365,25 @@ torch_floor <- function(self) C_torch_floor(self)
 #' @param exponent A torch_tensor or numeric scalar.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' 
+#' a = torch_randn(c(4))
+#' a
+#' torch_pow(a, 2)
+#' exp <- torch_arange(1, 5)
+#' a <- torch_arange(1, 5)
+#' a
+#' exp
+#' torch_pow(a, exp)
+#' 
+#' 
+#' exp <- torch_arange(1, 5)
+#' base <- 2
+#' torch_pow(base, exp)
+#' }
+#' }
 torch_pow <- function(self, exponent) {
   if (!inherits(self, "torch_tensor") && inherits(exponent, "torch_tensor")) {
     # scalar ^ tensor
@@ -300,6 +410,13 @@ torch_pow <- function(self, exponent) {
 #' @param value Fill value for constant padding. Default 0.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x <- torch_randn(c(2, 3))
+#' nnf_pad(x, c(1L, 1L))
+#' }
+#' }
 nnf_pad <- function(input, pad, mode = "constant", value = 0) {
   C_nnf_pad(input, as.integer(pad), mode, as.double(value))
 }
@@ -319,6 +436,13 @@ nnf_pad <- function(input, pad, mode = "constant", value = 0) {
 #' @param recompute_scale_factor Logical. Ignored (for API compatibility).
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x <- torch_randn(c(1, 1, 4, 4))
+#' nnf_interpolate(x, size = c(8L, 8L), mode = "nearest")
+#' }
+#' }
 nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
                             mode = "nearest", align_corners = NULL,
                             recompute_scale_factor = NULL) {
@@ -342,6 +466,13 @@ nnf_interpolate <- function(input, size = NULL, scale_factor = NULL,
 #' @param count_include_pad Logical. Include padding in average. Default TRUE.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' x <- torch_randn(c(1, 1, 8))
+#' nnf_avg_pool1d(x, kernel_size = 2L)
+#' }
+#' }
 nnf_avg_pool1d <- function(input, kernel_size, stride = kernel_size,
                            padding = 0L, ceil_mode = FALSE,
                            count_include_pad = TRUE) {
@@ -361,6 +492,12 @@ nnf_avg_pool1d <- function(input, kernel_size, stride = kernel_size,
 #' @param threshold Values above this revert to linear. Default 20.0.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' nnf_softplus(torch_randn(5))
+#' }
+#' }
 nnf_softplus <- function(input, beta = 1.0, threshold = 20.0) {
   C_nnf_softplus(input, as.double(beta), as.double(threshold))
 }
@@ -377,6 +514,12 @@ nnf_softplus <- function(input, beta = 1.0, threshold = 20.0) {
 #' @param eps Small constant for numerical stability. Default 1e-12.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' nnf_normalize(torch_randn(c(2, 3)))
+#' }
+#' }
 nnf_normalize <- function(input, p = 2, dim = -1L, eps = 1e-12) {
   C_nnf_normalize(input, as.double(p), as.integer(dim), as.double(eps))
 }
@@ -387,6 +530,12 @@ nnf_normalize <- function(input, p = 2, dim = -1L, eps = 1e-12) {
 #' @param input A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' nnf_sigmoid(torch_randn(5))
+#' }
+#' }
 nnf_sigmoid <- function(input) C_torch_sigmoid(input)
 
 # ---- NN functional: tanh ----
@@ -395,6 +544,12 @@ nnf_sigmoid <- function(input) C_torch_sigmoid(input)
 #' @param input A torch_tensor.
 #' @return A torch_tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' nnf_tanh(torch_randn(5))
+#' }
+#' }
 nnf_tanh <- function(input) C_torch_tanh(input)
 
 # ---- Utilities ----
@@ -404,11 +559,13 @@ nnf_tanh <- function(input) C_torch_tanh(input)
 #' Evaluates the expression with gradient computation disabled.
 #' @param code Expression to evaluate.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' if (torch_is_installed()) {
 #' with_no_grad({
 #'   x <- torch_randn(c(2, 3))
 #'   torch_relu(x)
 #' })
+#' }
 #' }
 #' @export
 with_no_grad <- function(code) {
@@ -426,6 +583,14 @@ with_no_grad <- function(code) {
 #'
 #' @param n Integer number of threads.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' old <- torch_get_num_threads()
+#' torch_set_num_threads(2L)
+#' torch_set_num_threads(old)
+#' }
+#' }
 torch_set_num_threads <- function(n) {
   invisible(C_torch_set_num_threads(as.integer(n)))
 }
@@ -434,6 +599,12 @@ torch_set_num_threads <- function(n) {
 #'
 #' @return Integer number of threads used for intraop parallelism.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' torch_get_num_threads()
+#' }
+#' }
 torch_get_num_threads <- function() C_torch_get_num_threads()
 
 #' Set Number of Interop Threads
@@ -443,6 +614,13 @@ torch_get_num_threads <- function() C_torch_get_num_threads()
 #'
 #' @param n Integer number of threads.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # May error if inter-op pool already initialized
+#' try(torch_set_num_interop_threads(2L), silent = TRUE)
+#' }
+#' }
 torch_set_num_interop_threads <- function(n) {
   invisible(C_torch_set_num_interop_threads(as.integer(n)))
 }
@@ -451,16 +629,34 @@ torch_set_num_interop_threads <- function(n) {
 #'
 #' @return Integer number of interop threads.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' torch_get_num_interop_threads()
+#' }
+#' }
 torch_get_num_interop_threads <- function() C_torch_get_num_interop_threads()
 
 #' Check if CUDA is available
 #' @return Logical scalar.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' cuda_is_available()
+#' }
+#' }
 cuda_is_available <- function() C_cuda_is_available()
 
 #' Get number of CUDA devices
 #' @return Integer scalar.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' cuda_device_count()
+#' }
+#' }
 cuda_device_count <- function() C_cuda_device_count()
 
 #' Release cached CUDA memory
@@ -468,6 +664,12 @@ cuda_device_count <- function() C_cuda_device_count()
 #' Releases all unoccupied cached memory held by the CUDA allocator
 #' so that it can be used by other GPU applications.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' cuda_empty_cache()
+#' }
+#' }
 cuda_empty_cache <- function() invisible(C_cuda_empty_cache())
 
 #' CUDA memory info
@@ -476,6 +678,12 @@ cuda_empty_cache <- function() invisible(C_cuda_empty_cache())
 #' as reported by the CUDA runtime (cudaMemGetInfo).
 #' @return Named numeric vector with elements "free" and "total".
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' if (cuda_is_available()) cuda_mem_info()
+#' }
+#' }
 cuda_mem_info <- function() {
     x <- C_cuda_mem_info()
     if (length(x) == 0) return(c(free = 0, total = 0))
@@ -490,6 +698,12 @@ cuda_mem_info <- function() {
 #' @return Named numeric vector: allocated_current, allocated_peak,
 #'   reserved_current, reserved_peak.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' if (cuda_is_available()) cuda_memory_stats()
+#' }
+#' }
 cuda_memory_stats <- function() {
     x <- C_cuda_memory_stats()
     if (length(x) == 0) return(c(allocated_current = 0, allocated_peak = 0,
@@ -506,6 +720,14 @@ cuda_memory_stats <- function() {
 #' @param enabled Ignored.
 #' @param code Expression to evaluate.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' with_autocast(device_type = "cpu", dtype = torch_float32(), {
+#'   torch_randn(c(2, 3)) + torch_randn(c(2, 3))
+#' })
+#' }
+#' }
 with_autocast <- function(device_type = "cpu", dtype = NULL,
                           enabled = TRUE, code) {
   code
@@ -520,6 +742,35 @@ with_autocast <- function(device_type = "cpu", dtype = NULL,
 #' @param is_causal Whether to apply causal masking (default FALSE).
 #' @return Output tensor.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' if (torch_is_installed()) {
+#'   # Basic usage
+#'   query <- torch_randn(2, 8, 10, 64)  # (batch, heads, seq_len, dim)
+#'   key <- torch_randn(2, 8, 10, 64)
+#'   value <- torch_randn(2, 8, 10, 64)
+#' 
+#'   output <- torch_scaled_dot_product_attention(query, key, value)
+#' 
+#'   # With causal masking (for autoregressive models)
+#'   output <- torch_scaled_dot_product_attention(
+#'     query, key, value,
+#'     is_causal = TRUE
+#'   )
+#' 
+#'   # With attention mask
+#'   seq_len <- 10
+#'   attn_mask <- torch_ones(seq_len, seq_len)
+#'   attn_mask <- torch_tril(attn_mask)  # Lower triangular mask
+#'   output <- torch_scaled_dot_product_attention(
+#'     query, key, value,
+#'     attn_mask = attn_mask
+#'   )
+#' }
+#' 
+#' }
+#' }
 torch_scaled_dot_product_attention <- function(query, key, value,
                                                attn_mask = NULL,
                                                dropout_p = 0.0,
@@ -559,6 +810,12 @@ torch_scaled_dot_product_attention <- function(query, key, value,
 #'   \item fc2.weight, fc2.bias
 #' }
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Low-level transformer op; see decoder_forward_step() for usage
+#' }
+#' }
 transformer_decoder_layer_step <- function(x, weights, self_cache_k, self_cache_v,
                                            cross_cache_k, cross_cache_v, n_head) {
   stopifnot(is.list(weights), length(weights) == 21L)
@@ -590,6 +847,12 @@ transformer_decoder_layer_step <- function(x, weights, self_cache_k, self_cache_
 #' @return Named list: token_id (integer), self_cache_k, self_cache_v,
 #'   cross_cache_k, cross_cache_v.
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Specialized Whisper decoder step; see package vignettes
+#' }
+#' }
 decoder_forward_step <- function(token_ids, global_weights, layer_weights,
                                  self_cache_k, self_cache_v,
                                  cross_cache_k, cross_cache_v,
@@ -611,6 +874,12 @@ decoder_forward_step <- function(token_ids, global_weights, layer_weights,
 #' @return Named list with k and v, each a list of N tensors
 #'   shaped (batch, n_head, src_len, head_dim).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Specialized Whisper helper; see package vignettes
+#' }
+#' }
 prepare_cross_caches <- function(encoder_output, cross_kv_weights, n_head) {
   C_prepare_cross_caches(encoder_output, cross_kv_weights, as.integer(n_head))
 }
@@ -630,6 +899,12 @@ prepare_cross_caches <- function(encoder_output, cross_kv_weights, n_head) {
 #' @param n_ctx Integer maximum context length for sequence truncation.
 #' @return Output tensor (batch, seq_len, n_state).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Specialized Whisper encoder pipeline; see package vignettes
+#' }
+#' }
 encoder_forward <- function(mel, global_weights, layer_weights, n_head, n_ctx) {
   C_encoder_forward(mel, global_weights, layer_weights,
     as.integer(n_head), as.integer(n_ctx))
@@ -651,6 +926,12 @@ encoder_forward <- function(mel, global_weights, layer_weights, n_head, n_ctx) {
 #' @param eot_token End-of-text token ID (0-indexed).
 #' @return Integer vector of generated token IDs (0-indexed).
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Specialized Whisper greedy decoder; see package vignettes
+#' }
+#' }
 greedy_decode <- function(initial_tokens, global_weights, layer_weights,
                           cross_cache_k, cross_cache_v,
                           n_head, max_length, eot_token) {
@@ -681,6 +962,12 @@ greedy_decode <- function(initial_tokens, global_weights, layer_weights,
 #'   \item fc2.weight, fc2.bias
 #' }
 #' @export
+#' @examples
+#' \donttest{
+#' if (torch_is_installed()) {
+#' # Low-level transformer op; see encoder_forward() for full pipeline
+#' }
+#' }
 transformer_encoder_layer <- function(x, weights, n_head) {
   stopifnot(is.list(weights), length(weights) == 15L)
   C_transformer_encoder_layer(x, weights, as.integer(n_head))

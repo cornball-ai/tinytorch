@@ -18,7 +18,8 @@ A constructor function that creates module instances.
 Create an nn_module class
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 Linear <- nn_module("Linear",
   initialize = function(in_f, out_f) {
     self$register_parameter("weight", torch_randn(c(out_f, in_f)))
@@ -27,5 +28,6 @@ Linear <- nn_module("Linear",
 )
 m <- Linear(3, 2)
 m(torch_randn(c(1, 3)))
+}
 }
 }

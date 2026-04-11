@@ -24,3 +24,14 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::baddbmm}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+M = torch_randn(c(10, 3, 5))
+batch1 = torch_randn(c(10, 3, 4))
+batch2 = torch_randn(c(10, 4, 5))
+torch_baddbmm(M, batch1, batch2)
+}
+}
+}

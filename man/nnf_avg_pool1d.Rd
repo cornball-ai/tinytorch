@@ -25,3 +25,11 @@ A torch_tensor.
 \description{
 Applies 1D average pooling over an input signal.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+x <- torch_randn(c(1, 1, 8))
+nnf_avg_pool1d(x, kernel_size = 2L)
+}
+}
+}

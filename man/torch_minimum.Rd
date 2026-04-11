@@ -16,3 +16,13 @@ A torch_tensor.
 \description{
 Wrapper for \code{at::minimum}.
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+
+a <- torch_tensor(c(1, 2, -1))
+b <- torch_tensor(c(3, 0, 4))
+torch_minimum(a, b)
+}
+}
+}

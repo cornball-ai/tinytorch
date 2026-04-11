@@ -16,7 +16,9 @@ torch_randn(..., dtype = NULL, device = NULL)
 Create a tensor with random normal values
 }
 \examples{
-\dontrun{
+\donttest{
+if (torch_is_installed()) {
 torch_randn(c(2, 3))
+}
 }
 }

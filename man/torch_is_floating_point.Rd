@@ -14,3 +14,10 @@ Logical.
 \description{
 Dtype query: is the tensor floating point?
 }
+\examples{
+\donttest{
+if (torch_is_installed()) {
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
+}
+}
+}
