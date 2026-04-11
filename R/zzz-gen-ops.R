@@ -12623,3 +12623,248 @@ load_state_dict <- function(module, state_dict) {
   invisible(module)
 }
 
+
+# ---- nn_utils ----
+
+#' Clip gradient norm
+#'
+#' @param parameters List of tensors or an nn_module.
+#' @param max_norm Maximum norm value.
+#' @param norm_type Type of norm. Default 2.
+#' @return Total norm (numeric).
+#' @export
+nn_utils_clip_grad_norm_ <- function(parameters, max_norm, norm_type = 2) {
+  if (inherits(parameters, "nn_module")) {
+    parameters <- parameters$parameters()
+  }
+  grads <- Filter(function(p) !is.null(p$grad), parameters)
+  if (length(grads) == 0) return(0)
+  norms <- vapply(grads, function(p) {
+    as.numeric(torch_norm(p$grad, norm_type)$item())
+  }, numeric(1))
+  total_norm <- sum(norms^norm_type)^(1/norm_type)
+  clip_coef <- max_norm / (total_norm + 1e-6)
+  if (clip_coef < 1) {
+    for (p in grads) p$grad$mul_(clip_coef)
+  }
+  total_norm
+}
+
+#' Clip gradient values
+#'
+#' @param parameters List of tensors or an nn_module.
+#' @param clip_value Maximum absolute value.
+#' @export
+nn_utils_clip_grad_value_ <- function(parameters, clip_value) {
+  if (inherits(parameters, "nn_module")) {
+    parameters <- parameters$parameters()
+  }
+  for (p in parameters) {
+    if (!is.null(p$grad)) p$grad$clamp_(-clip_value, clip_value)
+  }
+  invisible(NULL)
+}
+
+#' Module dictionary
+#'
+#' @param modules Named list of nn_module instances.
+#' @return An nn_module that stores sub-modules by name.
+#' @export
+nn_module_dict <- function(modules = list()) {
+  nn_module("nn_module_dict",
+    initialize = function(modules) {
+      for (nm in names(modules)) {
+        self$register_module(nm, modules[[nm]])
+      }
+      self$.keys <- names(modules)
+    },
+    forward = function(...) stop("nn_module_dict has no forward()")
+  )(modules)
+}
+
+#' Weight norm (stub)
+#' @param module An nn_module.
+#' @param name Parameter name. Default "weight".
+#' @param dim Dimension. Default 0.
+#' @return The module (unmodified stub).
+#' @export
+nn_utils_weight_norm <- function(module, name = "weight", dim = 0L) {
+  message("nn_utils_weight_norm is not yet fully implemented in tinytorch")
+  module
+}
+
+#' RNN packing/padding stubs
+#' @name rnn_utils
+#' @param input Input tensor or list.
+#' @param lengths Sequence lengths.
+#' @param ... Additional arguments.
+#' @return Packed/padded data.
+NULL
+
+#' @rdname rnn_utils
+#' @export
+nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first = FALSE, enforce_sorted = TRUE) {
+  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
+}
+
+#' @rdname rnn_utils
+#' @export
+nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
+  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
+}
+
+#' @rdname rnn_utils
+#' @export
+nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, padding_value = 0, total_length = NULL) {
+  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
+}
+
+#' @rdname rnn_utils
+#' @export
+nn_utils_rnn_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0) {
+  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
+}
+
+# ---- Remaining nn modules ----
+
+#' GRU module
+#' @param input_size Input feature size.
+#' @param hidden_size Hidden state size.
+#' @param num_layers Number of layers. Default 1.
+#' @param bias Use bias. Default TRUE.
+#' @param batch_first Batch-first input. Default FALSE.
+#' @param dropout Dropout rate. Default 0.
+#' @param bidirectional Bidirectional. Default FALSE.
+#' @return An nn_module.
+#' @export
+nn_gru <- function(input_size, hidden_size, num_layers = 1L, bias = TRUE,
+                    batch_first = FALSE, dropout = 0, bidirectional = FALSE) {
+  nn_module("nn_gru",
+    initialize = function(input_size, hidden_size, num_layers, bias,
+                          batch_first, dropout, bidirectional) {
+      self$input_size <- input_size
+      self$hidden_size <- hidden_size
+      self$num_layers <- as.integer(num_layers)
+      self$bias <- bias
+      self$batch_first <- batch_first
+      self$dropout <- dropout
+      self$bidirectional <- bidirectional
+      num_directions <- if (bidirectional) 2L else 1L
+      # Register flat parameter list (libtorch expects this)
+      for (layer in seq_len(num_layers)) {
+        for (direction in seq_len(num_directions)) {
+          suffix <- if (layer == 1L && direction == 1L) "" else paste0("_l", layer - 1L)
+          if (direction == 2L) suffix <- paste0(suffix, "_reverse")
+          gate_size <- 3L * hidden_size
+          in_size <- if (layer == 1L) input_size else hidden_size * num_directions
+          self$register_parameter(paste0("weight_ih", suffix),
+            torch_randn(c(gate_size, in_size)))
+          self$register_parameter(paste0("weight_hh", suffix),
+            torch_randn(c(gate_size, hidden_size)))
+          if (bias) {
+            self$register_parameter(paste0("bias_ih", suffix),
+              torch_zeros(gate_size))
+            self$register_parameter(paste0("bias_hh", suffix),
+              torch_zeros(gate_size))
+          }
+        }
+      }
+    },
+    forward = function(input, hx = NULL) {
+      params <- unname(self$parameters())
+      if (is.null(hx)) {
+        num_directions <- if (self$bidirectional) 2L else 1L
+        batch <- if (self$batch_first) input$size()[1] else input$size()[2]
+        hx <- torch_zeros(c(self$num_layers * num_directions, batch, self$hidden_size))
+      }
+      C_torch_gru(input, hx, params, self$bias, self$num_layers,
+                  self$dropout, self$training, self$bidirectional, self$batch_first)
+    }
+  )(input_size, hidden_size, num_layers, bias, batch_first, dropout, bidirectional)
+}
+
+#' RNN module
+#' @param input_size Input feature size.
+#' @param hidden_size Hidden state size.
+#' @param num_layers Number of layers. Default 1.
+#' @param nonlinearity Activation: "tanh" or "relu". Default "tanh".
+#' @param bias Use bias. Default TRUE.
+#' @param batch_first Batch-first input. Default FALSE.
+#' @param dropout Dropout rate. Default 0.
+#' @param bidirectional Bidirectional. Default FALSE.
+#' @return An nn_module.
+#' @export
+nn_rnn <- function(input_size, hidden_size, num_layers = 1L,
+                    nonlinearity = "tanh", bias = TRUE, batch_first = FALSE,
+                    dropout = 0, bidirectional = FALSE) {
+  nn_module("nn_rnn",
+    initialize = function(input_size, hidden_size, num_layers, nonlinearity,
+                          bias, batch_first, dropout, bidirectional) {
+      self$input_size <- input_size
+      self$hidden_size <- hidden_size
+      self$num_layers <- as.integer(num_layers)
+      self$nonlinearity <- nonlinearity
+      self$bias <- bias
+      self$batch_first <- batch_first
+      self$dropout <- dropout
+      self$bidirectional <- bidirectional
+      num_directions <- if (bidirectional) 2L else 1L
+      for (layer in seq_len(num_layers)) {
+        for (direction in seq_len(num_directions)) {
+          suffix <- if (layer == 1L && direction == 1L) "" else paste0("_l", layer - 1L)
+          if (direction == 2L) suffix <- paste0(suffix, "_reverse")
+          in_size <- if (layer == 1L) input_size else hidden_size * num_directions
+          self$register_parameter(paste0("weight_ih", suffix),
+            torch_randn(c(hidden_size, in_size)))
+          self$register_parameter(paste0("weight_hh", suffix),
+            torch_randn(c(hidden_size, hidden_size)))
+          if (bias) {
+            self$register_parameter(paste0("bias_ih", suffix), torch_zeros(hidden_size))
+            self$register_parameter(paste0("bias_hh", suffix), torch_zeros(hidden_size))
+          }
+        }
+      }
+    },
+    forward = function(input, hx = NULL) {
+      params <- unname(self$parameters())
+      if (is.null(hx)) {
+        num_directions <- if (self$bidirectional) 2L else 1L
+        batch <- if (self$batch_first) input$size()[1] else input$size()[2]
+        hx <- torch_zeros(c(self$num_layers * num_directions, batch, self$hidden_size))
+      }
+      c_fn <- if (self$nonlinearity == "relu") C_torch_rnn_relu else C_torch_rnn_tanh
+      c_fn(input, hx, params, self$bias, self$num_layers,
+           self$dropout, self$training, self$bidirectional, self$batch_first)
+    }
+  )(input_size, hidden_size, num_layers, nonlinearity, bias, batch_first, dropout, bidirectional)
+}
+
+# ---- Remaining missing stubs ----
+
+#' @export
+optimizer <- function(name = NULL, ...) {
+  methods <- list(...)
+  function(params, ...) make_optimizer(params, list(...), methods$step)
+}
+
+#' @export
+nn_prune_head <- function(module, ...) {
+  stop("nn_prune_head not yet implemented", call. = FALSE)
+}
+
+#' L-BFGS optimizer (stub)
+#' @param params Parameters.
+#' @param lr Learning rate.
+#' @param max_iter Max iterations. Default 20.
+#' @param max_eval Max evaluations.
+#' @param tolerance_grad Gradient tolerance.
+#' @param tolerance_change Parameter change tolerance.
+#' @param history_size History size. Default 100.
+#' @param line_search_fn Line search function.
+#' @return A torch_optimizer.
+#' @export
+optim_lbfgs <- function(params, lr = 1, max_iter = 20L, max_eval = NULL,
+                         tolerance_grad = 1e-7, tolerance_change = 1e-9,
+                         history_size = 100L, line_search_fn = NULL) {
+  stop("optim_lbfgs not yet implemented in tinytorch (complex line search)", call. = FALSE)
+}
