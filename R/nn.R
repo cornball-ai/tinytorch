@@ -503,6 +503,8 @@ nn_module_list <- function(modules = list()) {
 # ---- nn_identity ----
 
 #' Identity module (pass-through)
+#' @param ... Ignored. Accepted for compatibility so `nn_identity` can be
+#'   dropped in wherever a module with real hyperparameters used to sit.
 #' @return An nn_module instance.
 #' @export
 #' @examples
