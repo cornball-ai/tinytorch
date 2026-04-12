@@ -15189,6 +15189,7 @@ torch_special_spherical_bessel_j0 <- function(x) {
     C_torch_copysign_(self, other)
 }
 
+.tensor_methods$`logical_not` <- function(self) C_torch_logical_not(self)
 .tensor_methods$`logical_not_` <- function(self) C_torch_logical_not_(self)
 
 .tensor_methods$logical_xor <- function(self, other) {
