@@ -17,7 +17,7 @@ Create a dataset from tensors
 \examples{
 \donttest{
 if (torch_is_installed()) {
-ds <- tensor_dataset(torch_randn(c(10, 3)), torch_randint(0L, 2L, 10L))
+ds <- tensor_dataset(torch_randn(c(10, 3)), torch_randint(2L, 10L))
 length(ds)
 }
 }
