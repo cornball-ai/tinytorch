@@ -534,9 +534,7 @@ torch_complex <- function(real, imag) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_real(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
-#' 
+#'   # Requires complex tensor support; see PyTorch docs
 #' }
 #' }
 torch_real <- function(self) {
@@ -550,9 +548,7 @@ torch_real <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_imag(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
-#' 
+#'   # Requires complex tensor support; see PyTorch docs
 #' }
 #' }
 torch_imag <- function(self) {

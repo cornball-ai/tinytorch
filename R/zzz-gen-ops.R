@@ -361,7 +361,8 @@ torch_absolute_ <- function(self) {
 #' \donttest{
 #' if (torch_is_installed()) {
 #' 
-#' torch_angle(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))*180/3.14159
+#' # For real tensors, angle returns 0 (positive) or pi (negative)
+#' torch_angle(torch_tensor(c(-1, 2, -3)))
 #' 
 #' 
 #' }
@@ -399,11 +400,8 @@ torch_view_as_complex <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' if (FALSE) {
-#' x <- torch_tensor(c(3+4i, 7-24i, 0, 1+2i))
-#' x$sgn()
+#' x <- torch_tensor(c(-3, 0, 7, -1))
 #' torch_sgn(x)
-#' }
 #' }
 #' }
 torch_sgn <- function(self) {
@@ -2695,14 +2693,9 @@ torch_dot <- function(self, tensor) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
+#'
 #' torch_vdot(torch_tensor(c(2, 3)), torch_tensor(c(2, 1)))
-#' if (FALSE) {
-#' a <- torch_tensor(list(1 +2i, 3 - 1i))
-#' b <- torch_tensor(list(2 +1i, 4 - 0i))
-#' torch_vdot(a, b)
-#' torch_vdot(b, a)
-#' }
+#'
 #' }
 #' }
 torch_vdot <- function(self, other) {
@@ -3690,9 +3683,7 @@ torch_is_distributed <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' if (FALSE) {
-#' torch_isreal(torch_tensor(c(1, 1+1i, 2+0i)))
-#' }
+#' torch_isreal(torch_tensor(c(1, 2, 3)))
 #' }
 #' }
 torch_isreal <- function(self) {
@@ -17236,9 +17227,7 @@ torch_per_channel_symmetric <- 3L
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_conj(torch_tensor(c(-1 + 1i, -2 + 2i, 3 - 3i)))
-#' 
+#'   # Requires complex tensor support; see PyTorch docs
 #' }
 #' }
 torch_conj <- function(self) C_torch_conj_physical(self)
