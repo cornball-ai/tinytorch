@@ -1,90 +1,33 @@
 #' Torch Data Types
 #'
-#' Constants representing tensor element types, matching libtorch's
-#' \code{c10::ScalarType} enum. Pass these to \code{dtype} arguments
-#' in tensor creation functions.
+#' Factory functions that return tensor element type objects matching
+#' libtorch's \code{c10::ScalarType} enum. These can be called with no
+#' arguments (e.g. \code{torch_float32()}) or passed without parens
+#' (e.g. \code{dtype = torch_float32}); tensor creation functions accept
+#' either form.
 #'
 #' @name torch_dtype_constants
 #' @examples
-#' torch_float32
-#' torch_int64
+#' torch_float32()
+#' torch_int64()
 NULL
 
-#' @rdname torch_dtype_constants
-#' @export
-torch_uint8 <- structure(0L, class = "torch_dtype")
+.make_dtype <- function(code) {
+  code <- as.integer(code)
+  function() structure(code, class = "torch_dtype")
+}
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_float16 <- structure(5L, class = "torch_dtype")
+torch_uint8 <- .make_dtype(0L)
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_float <- structure(6L, class = "torch_dtype")
+torch_int8 <- .make_dtype(1L)
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_float32 <- torch_float
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_float64 <- structure(7L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_double <- torch_float64
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_int8 <- structure(1L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_int16 <- structure(2L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_int <- structure(3L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_int32 <- torch_int
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_int64 <- structure(4L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_long <- torch_int64
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_bool <- structure(11L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_bfloat16 <- structure(15L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_float8_e5m2 <- structure(23L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_float8_e4m3fn <- structure(24L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_float8_e5m2fnuz <- structure(25L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_float8_e4m3fnuz <- structure(26L, class = "torch_dtype")
-
-#' @rdname torch_dtype_constants
-#' @export
-torch_half <- torch_float16
+torch_int16 <- .make_dtype(2L)
 
 #' @rdname torch_dtype_constants
 #' @export
@@ -92,7 +35,47 @@ torch_short <- torch_int16
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_cfloat <- structure(9L, class = "torch_dtype")
+torch_int <- .make_dtype(3L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_int32 <- torch_int
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_int64 <- .make_dtype(4L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_long <- torch_int64
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float16 <- .make_dtype(5L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_half <- torch_float16
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float <- .make_dtype(6L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float32 <- torch_float
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float64 <- .make_dtype(7L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_double <- torch_float64
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_cfloat <- .make_dtype(9L)
 
 #' @rdname torch_dtype_constants
 #' @export
@@ -100,7 +83,7 @@ torch_cfloat32 <- torch_cfloat
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_cdouble <- structure(10L, class = "torch_dtype")
+torch_cdouble <- .make_dtype(10L)
 
 #' @rdname torch_dtype_constants
 #' @export
@@ -112,21 +95,55 @@ torch_cfloat128 <- torch_cdouble
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_qint8 <- structure(12L, class = "torch_dtype")
+torch_bool <- .make_dtype(11L)
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_quint8 <- structure(13L, class = "torch_dtype")
+torch_qint8 <- .make_dtype(12L)
 
 #' @rdname torch_dtype_constants
 #' @export
-torch_qint32 <- structure(14L, class = "torch_dtype")
+torch_quint8 <- .make_dtype(13L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_qint32 <- .make_dtype(14L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_bfloat16 <- .make_dtype(15L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e5m2 <- .make_dtype(23L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e4m3fn <- .make_dtype(24L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e5m2fnuz <- .make_dtype(25L)
+
+#' @rdname torch_dtype_constants
+#' @export
+torch_float8_e4m3fnuz <- .make_dtype(26L)
+
+# Resolve a dtype argument to a raw integer code, accepting:
+# - NULL                 (returns NULL)
+# - a torch_dtype object (returns its underlying code)
+# - a dtype factory      (calls it, then unclasses)
+.dtype_code <- function(d) {
+  if (is.null(d)) return(NULL)
+  if (is.function(d)) d <- d()
+  unclass(d)
+}
 
 #' Print a torch_dtype
 #' @param x A torch_dtype.
 #' @param ... Ignored.
 #' @examples
-#' print(torch_float32)
+#' print(torch_float32())
 #' @export
 print.torch_dtype <- function(x, ...) {
   names <- c(
@@ -148,7 +165,7 @@ print.torch_dtype <- function(x, ...) {
 #' @param x Parameter passed to the underlying ATen operator.
 #' @param ... Additional arguments passed to methods.
 #' @examples
-#' as.character(torch_float32)
+#' as.character(torch_float32())
 #' @export
 as.character.torch_dtype <- function(x, ...) {
   # Match torch R package convention

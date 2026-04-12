@@ -3,7 +3,7 @@
 \alias{nn_identity}
 \title{Identity module (pass-through)}
 \usage{
-nn_identity()
+nn_identity(...)
 }
 \value{
 An nn_module instance.

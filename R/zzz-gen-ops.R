@@ -5188,7 +5188,7 @@ torch_scalar_tensor <- function(s, dtype = NULL, device = NULL) {
 #' torch_rand(c(2, 3))
 #' }
 #' }
-torch_rand <- function(size, names, dtype = NULL, device = NULL) {
+torch_rand <- function(size, names = NULL, dtype = NULL, device = NULL) {
     C_torch_rand(size, names, dtype, device)
 }
 
@@ -15077,7 +15077,12 @@ torch_special_spherical_bessel_j0 <- function(x) {
 .tensor_methods$`arccos_` <- function(self) C_torch_arccos_(self)
 
 .tensor_methods$`add_` <- function(self, other, alpha = 1) {
-    C_torch_add_(self, other, alpha)
+    if (is.numeric(other) && !inherits(other, "torch_tensor")) {
+        # in-place scalar add: copy (self + scalar * alpha) back into self
+        C_torch_copy_(self, C_torch_add_scalar(self, other * alpha))
+    } else {
+        C_torch_add_(self, other, alpha)
+    }
 }
 
 .tensor_methods$addmv <- function(self, mat, vec, beta = 1, alpha = 1) {
@@ -15313,7 +15318,11 @@ torch_special_spherical_bessel_j0 <- function(x) {
 }
 
 .tensor_methods$`div_` <- function(self, other) {
-    C_torch_div_(self, other)
+    if (is.numeric(other) && !inherits(other, "torch_tensor")) {
+        C_torch_copy_(self, C_torch_div_scalar(self, other))
+    } else {
+        C_torch_div_(self, other)
+    }
 }
 
 .tensor_methods$divide <- function(self, other) {
@@ -15529,7 +15538,11 @@ torch_special_spherical_bessel_j0 <- function(x) {
 }
 
 .tensor_methods$`mul_` <- function(self, other) {
-    C_torch_mul_(self, other)
+    if (is.numeric(other) && !inherits(other, "torch_tensor")) {
+        C_torch_copy_(self, C_torch_mul_scalar(self, other))
+    } else {
+        C_torch_mul_(self, other)
+    }
 }
 
 .tensor_methods$multiply <- function(self, other) {
@@ -15793,7 +15806,11 @@ torch_special_spherical_bessel_j0 <- function(x) {
 }
 
 .tensor_methods$`sub_` <- function(self, other, alpha = 1) {
-    C_torch_sub_(self, other, alpha)
+    if (is.numeric(other) && !inherits(other, "torch_tensor")) {
+        C_torch_copy_(self, C_torch_sub_scalar(self, other * alpha))
+    } else {
+        C_torch_sub_(self, other, alpha)
+    }
 }
 
 .tensor_methods$subtract <- function(self, other, alpha = 1) {
@@ -17377,7 +17394,7 @@ torch_install_path <- function() {
 #' }
 #' }
 torch_finfo <- function(dtype = torch_float32) {
-    code <- unclass(dtype)
+    code <- .dtype_code(dtype)
     switch(as.character(code),
       "5"  = list(bits = 16L, eps = 9.77e-04, max = 65504, min = -65504, tiny = 6.10e-05),
       "6"  = list(bits = 32L, eps = 1.19e-07, max = 3.40e+38, min = -3.40e+38, tiny = 1.18e-38),
@@ -17401,7 +17418,7 @@ torch_finfo <- function(dtype = torch_float32) {
 #' }
 #' }
 torch_iinfo <- function(dtype = torch_int32) {
-    code <- unclass(dtype)
+    code <- .dtype_code(dtype)
     switch(as.character(code),
       "0"  = list(bits = 8L, max = 255L, min = 0L),
       "1"  = list(bits = 8L, max = 127L, min = -128L),
@@ -17460,35 +17477,6 @@ torch_set_default_dtype <- function(dtype) {
     invisible(NULL)
 }
 
-#' Get/set RNG state (stubs)
-#'
-#' @param state A raw vector of RNG state (from torch_get_rng_state).
-#' @return For get, the current RNG state as a tensor. For set, invisible NULL.
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-torch_get_rng_state <- function() {
-    message("tinytorch RNG state management not yet implemented")
-    invisible(NULL)
-}
-
-#' @param state RNG state.
-#' @rdname torch_get_rng_state
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-torch_set_rng_state <- function(state) {
-    message("tinytorch RNG state management not yet implemented")
-    invisible(NULL)
-}
 #' Nnf adaptive avg pool1d
 #' @param self A `torch_tensor`.
 #' @param output_size Parameter passed to the underlying ATen operator.
@@ -20834,116 +20822,6 @@ nn_module_dict <- function(modules = list()) {
   )(modules)
 }
 
-#' Weight norm (stub)
-#' @param module An nn_module.
-#' @param name Parameter name. Default "weight".
-#' @param dim Dimension. Default 0.
-#' @return The module (unmodified stub).
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#' x = nn_linear(in_features = 20, out_features = 40)
-#' weight_norm = nn_utils_weight_norm$new(name = 'weight', dim = 2)
-#' weight_norm$apply(x)
-#' x$weight_g$size()
-#' x$weight_v$size()
-#' x$weight
-#' 
-#' # the recompute() method recomputes the weight using g and v. It must be called
-#' # explicitly inside `forward()`.
-#' weight_norm$recompute(x)
-#' 
-#' }
-#' }
-nn_utils_weight_norm <- function(module, name = "weight", dim = 0L) {
-  message("nn_utils_weight_norm is not yet fully implemented in tinytorch")
-  module
-}
-
-#' RNN packing/padding stubs
-#' @name rnn_utils
-#' @param input Input tensor or list.
-#' @param lengths Sequence lengths.
-#' @param sequences List of tensors to pack or pad.
-#' @param sequence A packed or padded sequence produced by the pack/pad
-#'   helpers.
-#' @param batch_first Logical; treat the first dim as batch.
-#' @param enforce_sorted Logical; require sequences pre-sorted by length.
-#' @param padding_value Scalar padding value.
-#' @param total_length Optional target padded length.
-#' @return Packed/padded data. Currently raises an error because
-#'   `PackedSequence` is not implemented in tinytorch.
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#' # Not yet implemented; will signal an error.
-#' try(nn_utils_rnn_pack_sequence(list(torch_tensor(1:3))), silent = TRUE)
-#' }
-#' }
-NULL
-
-#' @param input A `torch_tensor`.
-#' @param lengths Integer vector of sequence lengths.
-#' @param batch_first Logical.
-#' @param enforce_sorted Logical.
-#' @rdname rnn_utils
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-nn_utils_rnn_pack_padded_sequence <- function(input, lengths, batch_first = FALSE, enforce_sorted = TRUE) {
-  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
-}
-
-#' @param sequences List of `torch_tensor`s.
-#' @param enforce_sorted Logical.
-#' @rdname rnn_utils
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-nn_utils_rnn_pack_sequence <- function(sequences, enforce_sorted = TRUE) {
-  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
-}
-
-#' @param sequence Packed or padded sequence.
-#' @param batch_first Logical.
-#' @param padding_value Numeric padding value.
-#' @param total_length Optional integer target length.
-#' @rdname rnn_utils
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-nn_utils_rnn_pad_packed_sequence <- function(sequence, batch_first = FALSE, padding_value = 0, total_length = NULL) {
-  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
-}
-
-#' @param sequences List of `torch_tensor`s.
-#' @param batch_first Logical.
-#' @param padding_value Numeric padding value.
-#' @rdname rnn_utils
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-nn_utils_rnn_pad_sequence <- function(sequences, batch_first = FALSE, padding_value = 0) {
-  stop("RNN packing not yet implemented in tinytorch", call. = FALSE)
-}
-
 # ---- Remaining nn modules ----
 
 #' GRU module
@@ -21094,67 +20972,6 @@ optimizer <- function(name = NULL, ...) {
   function(params, ...) make_optimizer(params, list(...), methods$step)
 }
 
-#' Nn prune head
-#' @param module Parameter passed to the underlying ATen operator.
-#' @param ... Additional arguments passed to methods.
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-nn_prune_head <- function(module, ...) {
-  stop("nn_prune_head not yet implemented", call. = FALSE)
-}
-
-#' L-BFGS optimizer (stub)
-#' @param params Parameters.
-#' @param lr Learning rate.
-#' @param max_iter Max iterations. Default 20.
-#' @param max_eval Max evaluations.
-#' @param tolerance_grad Gradient tolerance.
-#' @param tolerance_change Parameter change tolerance.
-#' @param history_size History size. Default 100.
-#' @param line_search_fn Line search function.
-#' @return A torch_optimizer.
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#' a <- 1
-#' b <- 5
-#' rosenbrock <- function(x) {
-#'   x1 <- x[1]
-#'   x2 <- x[2]
-#'   (a - x1)^2 + b * (x2 - x1^2)^2
-#' }
-#' 
-#' x <- torch_tensor(c(-1, 1), requires_grad = TRUE)
-#' 
-#' optimizer <- optim_lbfgs(x)
-#' calc_loss <- function() {
-#'   optimizer$zero_grad()
-#'   value <- rosenbrock(x)
-#'   value$backward()
-#'   value
-#' }
-#' 
-#' num_iterations <- 2
-#' for (i in 1:num_iterations) {
-#'   optimizer$step(calc_loss)
-#' }
-#' 
-#' rosenbrock(x)
-#' 
-#' }
-#' }
-optim_lbfgs <- function(params, lr = 1, max_iter = 20L, max_eval = NULL,
-                         tolerance_grad = 1e-7, tolerance_change = 1e-9,
-                         history_size = 100L, line_search_fn = NULL) {
-  stop("optim_lbfgs not yet implemented in tinytorch (complex line search)", call. = FALSE)
-}
-
 # ---- Final 6 gaps ----
 
 #' Orthogonal initialization
@@ -21290,12 +21107,18 @@ autograd_function <- function(forward, backward) {
 
 #' Compute gradients
 #'
-#' @param outputs Tensor(s) to differentiate.
-#' @param inputs Tensor(s) to differentiate with respect to.
-#' @param grad_outputs Gradient of outputs.
-#' @param retain_graph Keep computation graph.
-#' @param create_graph Create graph for higher-order gradients.
-#' @return List of gradient tensors.
+#' @param outputs A `torch_tensor` or list of tensors to differentiate.
+#' @param inputs A `torch_tensor` or list of tensors to differentiate with
+#'   respect to.
+#' @param grad_outputs Optional list of gradients of outputs; defaults to
+#'   ones for scalar outputs.
+#' @param retain_graph Logical; if `TRUE` the computation graph is retained
+#'   for a subsequent backward pass.
+#' @param create_graph Logical; if `TRUE` construct a graph over the
+#'   gradients themselves so higher-order derivatives can be taken.
+#' @param allow_unused Logical; if `TRUE` inputs that do not contribute to
+#'   outputs get `NULL` gradients instead of raising.
+#' @return A list of gradient tensors, one per input.
 #' @export
 #' @examples
 #' \donttest{
@@ -21304,34 +21127,23 @@ autograd_function <- function(forward, backward) {
 #' b <- torch_tensor(0.9, requires_grad = TRUE)
 #' x <- torch_tensor(runif(100))
 #' y <- 2 * x + 1
-#' loss <- (y - (w * x + b))^2
-#' loss <- loss$mean()
-#' 
+#' loss <- ((y - (w * x + b))^2)$mean()
+#'
 #' o <- autograd_grad(loss, list(w, b))
 #' o
 #' }
 #' }
 autograd_grad <- function(outputs, inputs, grad_outputs = NULL,
-                           retain_graph = FALSE, create_graph = FALSE) {
-  stop("autograd_grad not yet implemented in tinytorch (requires C++ autograd engine)", call. = FALSE)
+                          retain_graph = FALSE, create_graph = FALSE,
+                          allow_unused = FALSE) {
+  if (!is.list(outputs)) outputs <- list(outputs)
+  if (!is.list(inputs)) inputs <- list(inputs)
+  if (!is.null(grad_outputs) && !is.list(grad_outputs)) {
+    grad_outputs <- list(grad_outputs)
+  }
+  C_autograd_grad(outputs, inputs, grad_outputs,
+                  as.logical(retain_graph),
+                  as.logical(create_graph),
+                  as.logical(allow_unused))
 }
 
-#' Adaptive log-softmax with loss
-#'
-#' @param in_features Input feature size.
-#' @param n_classes Number of classes.
-#' @param cutoffs Cutoff values for adaptive softmax.
-#' @param div_value Division value. Default 4.
-#' @param head_bias Use bias in head. Default FALSE.
-#' @return An nn_module.
-#' @export
-#' @examples
-#' \donttest{
-#' if (torch_is_installed()) {
-#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
-#' }
-#' }
-nn_adaptive_log_softmax_with_loss <- function(in_features, n_classes, cutoffs,
-                                                div_value = 4, head_bias = FALSE) {
-  stop("nn_adaptive_log_softmax_with_loss not yet implemented in tinytorch", call. = FALSE)
-}

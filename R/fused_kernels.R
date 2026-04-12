@@ -6,7 +6,7 @@
 
 # Ensure tensor is float32 for fused SIMD kernels
 .ensure_float <- function(x) {
-  if (unclass(x$dtype) != 6L) x$to(torch_float) else x
+  if (.dtype_code(x$dtype) != 6L) x$to(torch_float) else x
 }
 
 #' Fused relu

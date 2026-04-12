@@ -1,6 +1,5 @@
-# Minimal serialization stubs
-# torch_save/torch_load use RDS serialization for now.
-# jit_trace is not yet supported.
+# Minimal serialization helpers.
+# torch_save / torch_load use RDS serialization for now.
 
 #' Save a torch object to a file
 #'
@@ -56,8 +55,3 @@ torch_serialize <- function(obj) {
   serialize(obj, NULL)
 }
 
-#' @keywords internal
-jit_trace <- function(fn, ...) {
-  stop("jit_trace is not yet supported in tinytorch. Use compile = FALSE.",
-       call. = FALSE)
-}

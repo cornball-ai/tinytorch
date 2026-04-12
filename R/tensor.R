@@ -254,9 +254,9 @@ torch_sigmoid <- function(self) {
   has_device <- !is.null(device)
   if (has_dtype && has_device) {
     device_str <- as.character(device)
-    C_tensor_to_dtype_device(self, unclass(dtype), device_str)
+    C_tensor_to_dtype_device(self, .dtype_code(dtype), device_str)
   } else if (has_dtype) {
-    C_torch_to_dtype(self, unclass(dtype))
+    C_torch_to_dtype(self, .dtype_code(dtype))
   } else if (has_device) {
     device_str <- as.character(device)
     C_tensor_to_device(self, device_str)

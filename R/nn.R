@@ -74,11 +74,11 @@ nn_module <- function(classname = NULL, ...) {
         if (inherits(p, "torch_tensor")) {
           p_new <- p
           if (!is.null(dtype) && !is.null(device)) {
-            p_new <- C_tensor_to_dtype_device(p, unclass(dtype), as.character(device))
+            p_new <- C_tensor_to_dtype_device(p, .dtype_code(dtype), as.character(device))
           } else if (!is.null(device)) {
             p_new <- C_tensor_to_device(p, as.character(device))
           } else if (!is.null(dtype)) {
-            p_new <- C_torch_to_dtype(p, unclass(dtype))
+            p_new <- C_torch_to_dtype(p, .dtype_code(dtype))
           }
           cls <- class(p)
           class(p_new) <- cls
@@ -92,11 +92,11 @@ nn_module <- function(classname = NULL, ...) {
         if (inherits(b, "torch_tensor")) {
           b_new <- b
           if (!is.null(dtype) && !is.null(device)) {
-            b_new <- C_tensor_to_dtype_device(b, unclass(dtype), as.character(device))
+            b_new <- C_tensor_to_dtype_device(b, .dtype_code(dtype), as.character(device))
           } else if (!is.null(device)) {
             b_new <- C_tensor_to_device(b, as.character(device))
           } else if (!is.null(dtype)) {
-            b_new <- C_torch_to_dtype(b, unclass(dtype))
+            b_new <- C_torch_to_dtype(b, .dtype_code(dtype))
           }
           cls <- class(b)
           class(b_new) <- cls
@@ -514,7 +514,10 @@ nn_module_list <- function(modules = list()) {
 #' print(output$size())
 #' }
 #' }
-nn_identity <- function() {
+nn_identity <- function(...) {
+  # Match torch's signature: nn_identity accepts and ignores any positional
+  # or named arguments so it can be dropped in wherever a layer with real
+  # hyperparameters used to sit.
   nn_module("nn_identity",
     forward = function(input) input
   )()
@@ -923,7 +926,7 @@ nn_batch_norm2d <- function(num_features, eps = 1e-5, momentum = 0.1,
 #' }
 #' }
 nn_lstm <- function(input_size, hidden_size, num_layers = 1L,
-                    batch_first = TRUE, dropout = 0, bidirectional = FALSE,
+                    batch_first = FALSE, dropout = 0, bidirectional = FALSE,
                     bias = TRUE) {
   mod <- nn_module("nn_lstm",
     initialize = function(input_size, hidden_size, num_layers,

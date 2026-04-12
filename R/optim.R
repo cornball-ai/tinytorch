@@ -12,13 +12,12 @@
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' optimizer <- optim_sgd(model$parameters(), lr = 0.1, momentum = 0.9)
-#' optimizer$zero_grad()
-#' loss_fn(model(input), target)$backward()
-#' optimizer$step()
-#' 
-#' 
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_sgd(list(p), lr = 0.01)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
+#' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_sgd <- function(params, lr, momentum = 0, dampening = 0,
@@ -42,13 +41,12 @@ optim_sgd <- function(params, lr, momentum = 0, dampening = 0,
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' optimizer <- optim_adam(model$parameters(), lr = 0.1)
-#' optimizer$zero_grad()
-#' loss_fn(model(input), target)$backward()
-#' optimizer$step()
-#' 
-#' 
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_adam(list(p), lr = 0.001)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
+#' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_adam <- function(params, lr = 0.001, betas = c(0.9, 0.999),
@@ -72,9 +70,12 @@ optim_adam <- function(params, lr = 0.001, betas = c(0.9, 0.999),
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' params <- list(nn_parameter(torch_randn(3)))
-#' opt <- optim_adamw(params, lr = 0.001)
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_adamw(list(p), lr = 0.001)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
 #' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_adamw <- function(params, lr = 0.001, betas = c(0.9, 0.999),
@@ -93,17 +94,17 @@ optim_adamw <- function(params, lr = 0.001, betas = c(0.9, 0.999),
     if (name == "zero_grad") {
       return(function(set_to_none = TRUE) {
         for (p in x$param_list) {
-          if (!is.null(p$grad)) {
-            if (set_to_none) p$grad <- NULL
-            else p$grad$zero_()
-          }
+          g <- p$grad
+          if (!is.null(g)) g$zero_()
         }
         invisible(x)
       })
     }
     if (name == "step") {
       return(function(closure = NULL) {
-        x$.step_fn(x)
+        # In-place updates on leaf parameters require autograd to be off,
+        # exactly like torch.optim does inside torch.no_grad().
+        with_no_grad(x$.step_fn(x))
         invisible(x)
       })
     }

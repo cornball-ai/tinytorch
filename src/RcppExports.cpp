@@ -67,6 +67,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// C_autograd_grad
+SEXP C_autograd_grad(SEXP outputs_sexp, SEXP inputs_sexp, SEXP grad_outputs_sexp, bool retain_graph, bool create_graph, bool allow_unused);
+RcppExport SEXP _tinytorch_C_autograd_grad(SEXP outputs_sexpSEXP, SEXP inputs_sexpSEXP, SEXP grad_outputs_sexpSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP, SEXP allow_unusedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type outputs_sexp(outputs_sexpSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type inputs_sexp(inputs_sexpSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type grad_outputs_sexp(grad_outputs_sexpSEXP);
+    Rcpp::traits::input_parameter< bool >::type retain_graph(retain_graphSEXP);
+    Rcpp::traits::input_parameter< bool >::type create_graph(create_graphSEXP);
+    Rcpp::traits::input_parameter< bool >::type allow_unused(allow_unusedSEXP);
+    rcpp_result_gen = Rcpp::wrap(C_autograd_grad(outputs_sexp, inputs_sexp, grad_outputs_sexp, retain_graph, create_graph, allow_unused));
+    return rcpp_result_gen;
+END_RCPP
+}
 // C_tensor_is_leaf
 bool C_tensor_is_leaf(SEXP self_sexp);
 RcppExport SEXP _tinytorch_C_tensor_is_leaf(SEXP self_sexpSEXP) {

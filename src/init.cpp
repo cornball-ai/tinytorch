@@ -8,6 +8,7 @@ extern "C" SEXP _tinytorch_C_tensor_grad(SEXP self_sexpSEXP);
 extern "C" SEXP _tinytorch_C_tensor_backward(SEXP self_sexpSEXP, SEXP gradient_sexpSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP);
 extern "C" SEXP _tinytorch_C_autograd_set_grad_mode(SEXP enabledSEXP);
 extern "C" SEXP _tinytorch_C_autograd_is_enabled();
+extern "C" SEXP _tinytorch_C_autograd_grad(SEXP outputs_sexpSEXP, SEXP inputs_sexpSEXP, SEXP grad_outputs_sexpSEXP, SEXP retain_graphSEXP, SEXP create_graphSEXP, SEXP allow_unusedSEXP);
 extern "C" SEXP _tinytorch_C_tensor_is_leaf(SEXP self_sexpSEXP);
 extern "C" SEXP _tinytorch_C_tensor_retain_grad(SEXP self_sexpSEXP);
 extern "C" SEXP _tinytorch_C_as_array(SEXP selfSEXP);
@@ -1008,6 +1009,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tinytorch_C_tensor_backward", (DL_FUNC) &_tinytorch_C_tensor_backward, 4},
     {"_tinytorch_C_autograd_set_grad_mode", (DL_FUNC) &_tinytorch_C_autograd_set_grad_mode, 1},
     {"_tinytorch_C_autograd_is_enabled", (DL_FUNC) &_tinytorch_C_autograd_is_enabled, 0},
+    {"_tinytorch_C_autograd_grad", (DL_FUNC) &_tinytorch_C_autograd_grad, 6},
     {"_tinytorch_C_tensor_is_leaf", (DL_FUNC) &_tinytorch_C_tensor_is_leaf, 1},
     {"_tinytorch_C_tensor_retain_grad", (DL_FUNC) &_tinytorch_C_tensor_retain_grad, 1},
     {"_tinytorch_C_as_array", (DL_FUNC) &_tinytorch_C_as_array, 1},

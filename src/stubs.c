@@ -50,6 +50,11 @@ SEXP _tinytorch_C_autograd_is_enabled(void) {
     return stub_error();
 }
 
+SEXP _tinytorch_C_autograd_grad(SEXP a1, SEXP a2, SEXP a3, SEXP a4, SEXP a5, SEXP a6) {
+    (void)a1; (void)a2; (void)a3; (void)a4; (void)a5; (void)a6;
+    return stub_error();
+}
+
 SEXP _tinytorch_C_tensor_is_leaf(SEXP a1) {
     (void)a1;
     return stub_error();
@@ -6769,6 +6774,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_tinytorch_C_tensor_backward", (DL_FUNC) &_tinytorch_C_tensor_backward, 4},
     {"_tinytorch_C_autograd_set_grad_mode", (DL_FUNC) &_tinytorch_C_autograd_set_grad_mode, 1},
     {"_tinytorch_C_autograd_is_enabled", (DL_FUNC) &_tinytorch_C_autograd_is_enabled, 0},
+    {"_tinytorch_C_autograd_grad", (DL_FUNC) &_tinytorch_C_autograd_grad, 6},
     {"_tinytorch_C_tensor_is_leaf", (DL_FUNC) &_tinytorch_C_tensor_is_leaf, 1},
     {"_tinytorch_C_tensor_retain_grad", (DL_FUNC) &_tinytorch_C_tensor_retain_grad, 1},
     {"_tinytorch_C_as_array", (DL_FUNC) &_tinytorch_C_as_array, 1},

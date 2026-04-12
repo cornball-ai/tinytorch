@@ -48,9 +48,12 @@ make_optimizer <- function(params, defaults, step_fn) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' params <- list(nn_parameter(torch_randn(3)))
-#' opt <- optim_rmsprop(params, lr = 0.01)
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_rmsprop(list(p), lr = 0.01)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
 #' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_rmsprop <- function(params, lr = 0.01, alpha = 0.99, eps = 1e-8,
@@ -116,9 +119,12 @@ optim_rmsprop <- function(params, lr = 0.01, alpha = 0.99, eps = 1e-8,
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' params <- list(nn_parameter(torch_randn(3)))
-#' opt <- optim_adagrad(params, lr = 0.01)
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_adagrad(list(p), lr = 0.01)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
 #' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_adagrad <- function(params, lr = 0.01, lr_decay = 0,
@@ -164,12 +170,12 @@ optim_adagrad <- function(params, lr = 0.01, lr_decay = 0,
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' optimizer <- optim_adadelta(model$parameters, lr = 0.1)
-#' optimizer$zero_grad()
-#' loss_fn(model(input), target)$backward()
-#' optimizer$step()
-#' 
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_adadelta(list(p), lr = 1.0)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
+#' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_adadelta <- function(params, lr = 1.0, rho = 0.9, eps = 1e-6,
@@ -219,13 +225,12 @@ optim_adadelta <- function(params, lr = 1.0, rho = 0.9, eps = 1e-6,
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' optimizer <- optim_asgd(model$parameters(), lr = 0.1)
-#' optimizer$zero_grad()
-#' loss_fn(model(input), target)$backward()
-#' optimizer$step()
-#' 
-#' 
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_asgd(list(p), lr = 0.01)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
+#' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_asgd <- function(params, lr = 0.01, lambd = 1e-4, alpha = 0.75,
@@ -283,12 +288,12 @@ optim_asgd <- function(params, lr = 0.01, lambd = 1e-4, alpha = 0.75,
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' optimizer <- optim_rprop(model$parameters(), lr = 0.1)
-#' optimizer$zero_grad()
-#' loss_fn(model(input), target)$backward()
-#' optimizer$step()
-#' 
+#' p <- nn_parameter(torch_randn(5))
+#' opt <- optim_rprop(list(p), lr = 0.01)
+#' loss <- (p ^ 2)$sum()
+#' loss$backward()
+#' opt$step()
+#' opt$zero_grad()
 #' }
 #' }
 optim_rprop <- function(params, lr = 0.01, etas = c(0.5, 1.2),
