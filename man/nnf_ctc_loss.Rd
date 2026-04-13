@@ -21,6 +21,9 @@ nnf_ctc_loss(log_probs, targets, input_lengths, target_lengths, blank,
 
 \item{zero_infinity}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf ctc loss
 }

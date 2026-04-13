@@ -8,6 +8,9 @@ nnf_softsign(input)
 \arguments{
 \item{input}{A `torch_tensor`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf softsign
 }

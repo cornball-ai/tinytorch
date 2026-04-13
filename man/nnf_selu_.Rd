@@ -8,6 +8,9 @@ nnf_selu_(self)
 \arguments{
 \item{self}{A `torch_tensor`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf selu
 }

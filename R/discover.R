@@ -109,6 +109,7 @@ discover_modules <- function(module, max_depth = 10L) {
 #' print(tree)
 #' }
 #' }
+#' @return Invisible `x`.
 #' @export
 print.module_tree <- function(x, ...) {
   cat(sprintf("Module tree: %d modules\n\n", length(x)))

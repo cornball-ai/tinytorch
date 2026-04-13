@@ -8,6 +8,9 @@ is_undefined_tensor(x)
 \arguments{
 \item{x}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+Logical scalar.
+}
 \description{
 Is undefined tensor
 }

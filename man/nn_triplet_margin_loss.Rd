@@ -17,6 +17,9 @@ nn_triplet_margin_loss(margin = 1, p = 2, eps = 1e-06, swap = FALSE,
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn triplet margin loss
 }

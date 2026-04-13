@@ -26,6 +26,9 @@ torch_batch_norm(input, weight = NULL, bias = NULL, running_mean = NULL,
 
 \item{cudnn_enabled}{Logical.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_batch_norm
 }

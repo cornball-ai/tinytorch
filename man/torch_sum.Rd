@@ -12,6 +12,9 @@ torch_sum(self, dim = NULL, keepdim = FALSE)
 
 \item{keepdim}{Whether to keep the reduced dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Sum of tensor elements
 }

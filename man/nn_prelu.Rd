@@ -8,6 +8,9 @@ nn_prelu(num_parameters = 1L)
 \arguments{
 \item{num_parameters}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn prelu
 }

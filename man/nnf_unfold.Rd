@@ -14,6 +14,9 @@ nnf_unfold(self, dimension, size, step)
 
 \item{step}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf unfold
 }

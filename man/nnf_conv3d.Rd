@@ -20,6 +20,9 @@ nnf_conv3d(input, weight, bias, stride, padding, dilation, groups)
 
 \item{groups}{Integer number of groups.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf conv3d
 }

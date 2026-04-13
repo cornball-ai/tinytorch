@@ -8,6 +8,9 @@ torch_tanh(self)
 \arguments{
 \item{self}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Compute tanh of tensor
 }

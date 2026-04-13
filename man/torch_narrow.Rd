@@ -14,6 +14,9 @@ torch_narrow(self, dim, start, length)
 
 \item{length}{Integer length.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_narrow
 }

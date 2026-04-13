@@ -14,6 +14,9 @@ nnf_kl_div(self, target, reduction, log_target)
 
 \item{log_target}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf kl div
 }

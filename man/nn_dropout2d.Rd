@@ -8,6 +8,9 @@ nn_dropout2d(p = 0.5)
 \arguments{
 \item{p}{Numeric norm exponent.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn dropout2d
 }

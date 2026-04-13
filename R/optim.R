@@ -88,6 +88,9 @@ optim_adamw <- function(params, lr = 0.001, betas = c(0.9, 0.999),
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `$.torch_optimizer` <- function(x, name) {
   # Pure-R optimizers (no ptr, have .step_fn)
   if (is.null(x[["ptr"]])) {

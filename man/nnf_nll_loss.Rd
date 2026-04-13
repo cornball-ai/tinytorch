@@ -16,6 +16,9 @@ nnf_nll_loss(self, target, weight, reduction, ignore_index)
 
 \item{ignore_index}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf nll loss
 }

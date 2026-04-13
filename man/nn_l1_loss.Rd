@@ -8,6 +8,9 @@ nn_l1_loss(reduction = 1L)
 \arguments{
 \item{reduction}{Reduction string: `"none"`, `"mean"`, or `"sum"`.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn l1 loss
 }

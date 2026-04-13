@@ -18,6 +18,9 @@ nnf_poisson_nll_loss(input, target, log_input, full, eps, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf poisson nll loss
 }

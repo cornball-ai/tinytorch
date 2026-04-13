@@ -83,6 +83,7 @@ dataset_subset <- function(dataset, indices) {
 
 #' Length.torch dataset
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Integer scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -92,6 +93,9 @@ dataset_subset <- function(dataset, indices) {
 #' }
 length.torch_dataset <- function(x) x$.length()
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `[.torch_dataset` <- function(x, i) x$.getitem(i)
 
@@ -150,6 +154,7 @@ dataloader <- function(dataset, batch_size = 1L, shuffle = FALSE,
 
 #' Length.dataloader
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Integer scalar.
 #' @export
 #' @examples
 #' \donttest{

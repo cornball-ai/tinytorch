@@ -10,6 +10,9 @@ nn_smooth_l1_loss(reduction = 1L, beta = 1)
 
 \item{beta}{Numeric scalar multiplier.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn smooth l1 loss
 }

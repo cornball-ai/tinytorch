@@ -14,6 +14,9 @@ nnf_fractional_max_pool3d(self, kernel_size, output_size, random_samples)
 
 \item{random_samples}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf fractional max pool3d
 }

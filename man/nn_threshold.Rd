@@ -10,6 +10,9 @@ nn_threshold(threshold, value)
 
 \item{value}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn threshold
 }

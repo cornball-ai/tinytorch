@@ -23,6 +23,7 @@ as_array <- function(x) {
 #' as.array(x)
 #' }
 #' }
+#' @return An R object.
 #' @export
 as.array.torch_tensor <- function(x, ...) {
   C_as_array(x)
@@ -38,6 +39,7 @@ as.array.torch_tensor <- function(x, ...) {
 #' as.numeric(x)
 #' }
 #' }
+#' @return An R object.
 #' @export
 as.numeric.torch_tensor <- function(x, ...) {
   as.numeric(C_as_array(x))
@@ -53,6 +55,7 @@ as.numeric.torch_tensor <- function(x, ...) {
 #' as.double(x)
 #' }
 #' }
+#' @return An R object.
 #' @export
 as.double.torch_tensor <- function(x, ...) {
   as.double(C_as_array(x))
@@ -68,6 +71,7 @@ as.double.torch_tensor <- function(x, ...) {
 #' as.integer(x)
 #' }
 #' }
+#' @return An R object.
 #' @export
 as.integer.torch_tensor <- function(x, ...) {
   as.integer(C_as_array(x))
@@ -83,6 +87,7 @@ as.integer.torch_tensor <- function(x, ...) {
 #' as.matrix(x)
 #' }
 #' }
+#' @return An R object.
 #' @export
 as.matrix.torch_tensor <- function(x, ...) {
   arr <- C_as_array(x)

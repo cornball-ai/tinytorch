@@ -12,6 +12,9 @@ torch_flatten(self, start_dim = 1L, end_dim = -1L)
 
 \item{end_dim}{Integer ending dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_flatten
 }

@@ -10,6 +10,9 @@ nnf_leaky_relu(self, negative_slope = 0.01)
 
 \item{negative_slope}{Negative slope coefficient. Default 0.01.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Leaky ReLU activation
 }

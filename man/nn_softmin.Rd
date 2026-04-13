@@ -8,6 +8,9 @@ nn_softmin(dim = -1L)
 \arguments{
 \item{dim}{Integer dimension.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn softmin
 }

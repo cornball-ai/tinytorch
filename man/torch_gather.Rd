@@ -12,6 +12,9 @@ torch_gather(self, dim, index)
 
 \item{index}{A `torch_tensor` of indices.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_gather
 }

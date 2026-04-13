@@ -14,6 +14,9 @@ nn_group_norm(num_groups, num_channels, eps = 1e-05, affine = TRUE)
 
 \item{affine}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn group norm
 }

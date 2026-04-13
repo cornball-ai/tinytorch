@@ -5,6 +5,9 @@
 \usage{
 nn_hardswish()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn hardswish
 }

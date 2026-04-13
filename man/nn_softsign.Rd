@@ -5,6 +5,9 @@
 \usage{
 nn_softsign()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn softsign
 }

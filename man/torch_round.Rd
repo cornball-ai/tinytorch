@@ -8,6 +8,9 @@ torch_round(self)
 \arguments{
 \item{self}{A `torch_tensor`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_round
 }

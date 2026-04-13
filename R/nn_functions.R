@@ -8,6 +8,7 @@
 #' torch_sin(torch_tensor(c(0, 3.14159 / 2)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_sin <- function(self) C_torch_sin(self)
 
@@ -19,6 +20,7 @@ torch_sin <- function(self) C_torch_sin(self)
 #' torch_cos(torch_tensor(c(0, 3.14159)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_cos <- function(self) C_torch_cos(self)
 
@@ -30,6 +32,7 @@ torch_cos <- function(self) C_torch_cos(self)
 #' torch_tanh(torch_randn(c(2, 3)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_tanh <- function(self) C_torch_tanh(self)
 
@@ -41,6 +44,7 @@ torch_tanh <- function(self) C_torch_tanh(self)
 #' torch_rsqrt(torch_tensor(c(1, 4, 9)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_rsqrt <- function(self) C_torch_rsqrt(self)
 
@@ -52,6 +56,7 @@ torch_rsqrt <- function(self) C_torch_rsqrt(self)
 #' torch_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_relu <- function(self) C_torch_relu(self)
 
@@ -65,6 +70,7 @@ torch_relu <- function(self) C_torch_relu(self)
 #' nnf_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_relu <- function(input) C_torch_relu(input)
 
@@ -76,6 +82,7 @@ nnf_relu <- function(input) C_torch_relu(input)
 #' nnf_silu(torch_randn(c(2, 3)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_silu <- function(self) {
   C_nnf_silu(self)
@@ -90,6 +97,7 @@ nnf_silu <- function(self) {
 #' nnf_gelu(torch_randn(c(2, 3)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_gelu <- function(self, approximate = "none") {
   C_nnf_gelu(self, approximate)
@@ -104,6 +112,7 @@ nnf_gelu <- function(self, approximate = "none") {
 #' nnf_leaky_relu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_leaky_relu <- function(self, negative_slope = 0.01) {
   C_nnf_leaky_relu(self, negative_slope)
@@ -118,6 +127,7 @@ nnf_leaky_relu <- function(self, negative_slope = 0.01) {
 #' nnf_elu(torch_tensor(c(-1, 0, 1)))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_elu <- function(self, alpha = 1.0) {
   C_nnf_elu(self, alpha)
@@ -132,6 +142,7 @@ nnf_elu <- function(self, alpha = 1.0) {
 #' nnf_softmax(torch_randn(c(2, 3)), dim = 2)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_softmax <- function(self, dim = -1L) {
   C_nnf_softmax(self, as.integer(dim))
@@ -146,6 +157,7 @@ nnf_softmax <- function(self, dim = -1L) {
 #' nnf_log_softmax(torch_randn(c(2, 3)), dim = 2)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_log_softmax <- function(self, dim = -1L) {
   C_nnf_log_softmax(self, as.integer(dim))
@@ -164,6 +176,7 @@ nnf_log_softmax <- function(self, dim = -1L) {
 #' nnf_layer_norm(x, 4L)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
                            bias = NULL, eps = 1e-5) {
@@ -185,6 +198,7 @@ nnf_layer_norm <- function(input, normalized_shape, weight = NULL,
 #' torch_linear(x, w)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_linear <- function(input, weight, bias = NULL) {
   C_torch_linear(input, weight, bias)
@@ -206,6 +220,7 @@ torch_linear <- function(input, weight, bias = NULL) {
 #' torch_conv1d(x, w)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_conv1d <- function(input, weight, bias = NULL,
                          stride = 1L, padding = 0L,
@@ -226,6 +241,7 @@ torch_conv1d <- function(input, weight, bias = NULL,
 #' torch_embedding(emb, idx)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_embedding <- function(weight, indices) {
   C_torch_embedding(weight, indices)
@@ -245,6 +261,7 @@ torch_silu <- function(self) C_nnf_silu(self)
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply softmax over (1-based).
 #' @param dtype Ignored; for API compatibility.
+#' @return A `torch_tensor`.
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
@@ -259,6 +276,7 @@ torch_softmax <- function(self, dim = -1L, dtype = NULL) {
 #' @param self A torch_tensor.
 #' @param dim Dimension to apply log-softmax over (1-based).
 #' @param dtype Ignored; for API compatibility.
+#' @return A `torch_tensor`.
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
@@ -275,6 +293,7 @@ torch_log_softmax <- function(self, dim = -1L, dtype = NULL) {
 #' @param weight Optional weight tensor.
 #' @param bias Optional bias tensor.
 #' @param eps Small constant for numerical stability.
+#' @return A `torch_tensor`.
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
@@ -567,6 +586,7 @@ nnf_tanh <- function(input) C_torch_tanh(input)
 #' })
 #' }
 #' }
+#' @return The result of evaluating `code`.
 #' @export
 with_no_grad <- function(code) {
   C_autograd_set_grad_mode(FALSE)
@@ -582,6 +602,7 @@ with_no_grad <- function(code) {
 #' (MKL, OpenBLAS, etc.) in libtorch operations.
 #'
 #' @param n Integer number of threads.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -613,6 +634,7 @@ torch_get_num_threads <- function() C_torch_get_num_threads()
 #' (e.g., across independent operations) in libtorch.
 #'
 #' @param n Integer number of threads.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -663,6 +685,7 @@ cuda_device_count <- function() C_cuda_device_count()
 #'
 #' Releases all unoccupied cached memory held by the CUDA allocator
 #' so that it can be used by other GPU applications.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -719,6 +742,7 @@ cuda_memory_stats <- function() {
 #' @param dtype Ignored.
 #' @param enabled Ignored.
 #' @param code Expression to evaluate.
+#' @return The result of evaluating `code`.
 #' @export
 #' @examples
 #' \donttest{

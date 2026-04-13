@@ -12,6 +12,9 @@ torch_transpose(self, dim0, dim1)
 
 \item{dim1}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_transpose
 }

@@ -10,6 +10,9 @@ torch_lu(A, pivot = TRUE)
 
 \item{pivot}{Logical; enable pivoting.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_lu
 }

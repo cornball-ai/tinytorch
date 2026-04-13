@@ -12,6 +12,9 @@ slc(start = NULL, end = NULL, step = 1L)
 
 \item{step}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A slice specification list.
+}
 \description{
 Slc
 }

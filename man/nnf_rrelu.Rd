@@ -16,6 +16,9 @@ nnf_rrelu(self, lower, upper, training, generator)
 
 \item{generator}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf rrelu
 }

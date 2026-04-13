@@ -12,6 +12,9 @@ nn_pairwise_distance(p = 2, eps = 1e-06, keepdim = FALSE)
 
 \item{keepdim}{Logical; keep reduced dimensions.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn pairwise distance
 }

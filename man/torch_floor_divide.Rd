@@ -10,6 +10,9 @@ torch_floor_divide(self, other)
 
 \item{other}{A `torch_tensor` or scalar.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_floor_divide
 }

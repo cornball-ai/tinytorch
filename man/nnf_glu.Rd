@@ -10,6 +10,9 @@ nnf_glu(self, dim)
 
 \item{dim}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf glu
 }

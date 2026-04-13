@@ -10,6 +10,9 @@
 
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+An R object.
+}
 \description{
 As.double.torch tensor
 }

@@ -14,6 +14,9 @@ nnf_elu_(self, alpha, scale, input_scale)
 
 \item{input_scale}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf elu
 }

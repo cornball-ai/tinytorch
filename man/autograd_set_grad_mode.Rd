@@ -8,6 +8,9 @@ autograd_set_grad_mode(enabled)
 \arguments{
 \item{enabled}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Autograd set grad mode
 }

@@ -16,6 +16,9 @@ nnf_cosine_embedding_loss(input1, input2, target, margin, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf cosine embedding loss
 }

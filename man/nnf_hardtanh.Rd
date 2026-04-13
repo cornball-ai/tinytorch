@@ -12,6 +12,9 @@ nnf_hardtanh(self, min_val, max_val)
 
 \item{max_val}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf hardtanh
 }

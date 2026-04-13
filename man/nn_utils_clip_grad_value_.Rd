@@ -10,6 +10,9 @@ nn_utils_clip_grad_value_(parameters, clip_value)
 
 \item{clip_value}{Maximum absolute value.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Clip gradient values
 }

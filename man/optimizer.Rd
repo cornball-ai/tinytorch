@@ -10,6 +10,9 @@ optimizer(name = NULL, ...)
 
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+An optimizer generator function.
+}
 \description{
 Optimizer
 }

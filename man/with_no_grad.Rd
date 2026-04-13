@@ -8,6 +8,9 @@ with_no_grad(code)
 \arguments{
 \item{code}{Expression to evaluate.}
 }
+\value{
+The result of evaluating `code`.
+}
 \description{
 Evaluates the expression with gradient computation disabled.
 }

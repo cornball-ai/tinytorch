@@ -8,6 +8,9 @@ cuda_synchronize(device = NULL)
 \arguments{
 \item{device}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Cuda synchronize
 }

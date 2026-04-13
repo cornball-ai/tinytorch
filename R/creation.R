@@ -32,6 +32,7 @@ torch_tensor <- function(data, dtype = NULL, device = NULL, requires_grad = FALS
 #' torch_zeros(c(2, 3))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_zeros <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
@@ -50,6 +51,7 @@ torch_zeros <- function(..., dtype = NULL, device = NULL) {
 #' torch_ones(c(2, 3))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_ones <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
@@ -68,6 +70,7 @@ torch_ones <- function(..., dtype = NULL, device = NULL) {
 #' torch_randn(c(2, 3))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_randn <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))
@@ -85,6 +88,7 @@ torch_randn <- function(..., dtype = NULL, device = NULL) {
 #' torch_empty_like(x)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_empty_like <- function(self) {
   C_torch_empty_like(self)
@@ -100,6 +104,7 @@ torch_empty_like <- function(self) {
 #' torch_empty(c(2, 3))
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_empty <- function(..., dtype = NULL, device = NULL) {
   size <- as.integer(c(...))

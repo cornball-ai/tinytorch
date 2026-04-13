@@ -12,6 +12,9 @@ torch_mean(self, dim = NULL, keepdim = FALSE)
 
 \item{keepdim}{Whether to keep the reduced dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Mean of tensor elements
 }

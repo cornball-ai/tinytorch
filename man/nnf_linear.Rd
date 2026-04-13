@@ -12,6 +12,9 @@ nnf_linear(input, weight, bias)
 
 \item{bias}{A `torch_tensor` of biases, or `NULL`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf linear
 }

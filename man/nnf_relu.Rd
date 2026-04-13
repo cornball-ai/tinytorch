@@ -8,6 +8,9 @@ nnf_relu(input)
 \arguments{
 \item{input}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 ReLU activation (functional)
 }

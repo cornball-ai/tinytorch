@@ -8,6 +8,9 @@ is_torch_memory_format(x)
 \arguments{
 \item{x}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+Logical scalar.
+}
 \description{
 Is torch memory format
 }

@@ -10,6 +10,9 @@ torch_unsqueeze(self, dim)
 
 \item{dim}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_unsqueeze
 }

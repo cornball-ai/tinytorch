@@ -5,6 +5,9 @@
 \usage{
 backends_openmp_is_available()
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Backends openmp is available
 }

@@ -5,6 +5,9 @@
 \usage{
 nn_relu6()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn relu6
 }

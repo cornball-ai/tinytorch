@@ -5,6 +5,9 @@
 \usage{
 nn_selu()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn selu
 }

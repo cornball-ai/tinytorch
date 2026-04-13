@@ -14,6 +14,9 @@ nnf_bilinear(input1, input2, weight, bias)
 
 \item{bias}{A `torch_tensor` of biases, or `NULL`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf bilinear
 }

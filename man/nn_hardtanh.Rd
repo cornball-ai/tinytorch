@@ -10,6 +10,9 @@ nn_hardtanh(min_val = -1, max_val = 1)
 
 \item{max_val}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn hardtanh
 }

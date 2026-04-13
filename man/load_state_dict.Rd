@@ -10,6 +10,9 @@ load_state_dict(module, state_dict)
 
 \item{state_dict}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Load state dict
 }

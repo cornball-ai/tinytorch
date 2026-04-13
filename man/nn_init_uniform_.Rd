@@ -12,6 +12,9 @@ nn_init_uniform_(tensor, a = 0, b = 1)
 
 \item{b}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init uniform
 }

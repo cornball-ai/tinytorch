@@ -12,6 +12,9 @@ torch_argmin(self, dim = NULL, keepdim = FALSE)
 
 \item{keepdim}{Logical; keep reduced dimensions.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_argmin
 }

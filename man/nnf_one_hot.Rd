@@ -10,6 +10,9 @@ nnf_one_hot(self, num_classes)
 
 \item{num_classes}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf one hot
 }

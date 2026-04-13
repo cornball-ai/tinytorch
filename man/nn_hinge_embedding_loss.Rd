@@ -10,6 +10,9 @@ nn_hinge_embedding_loss(margin = 1, reduction = 1L)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn hinge embedding loss
 }

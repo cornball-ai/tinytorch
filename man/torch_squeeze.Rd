@@ -10,6 +10,9 @@ torch_squeeze(self, dim = NULL)
 
 \item{dim}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_squeeze
 }

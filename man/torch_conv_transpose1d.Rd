@@ -23,6 +23,9 @@ torch_conv_transpose1d(input, weight, bias = NULL, stride = 1L, padding = 0L,
 
 \item{dilation}{Integer vector dilation.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_conv_transpose1d
 }

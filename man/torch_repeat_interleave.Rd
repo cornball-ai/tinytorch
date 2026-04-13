@@ -12,6 +12,9 @@ torch_repeat_interleave(self, repeats, dim = NULL)
 
 \item{dim}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_repeat_interleave
 }

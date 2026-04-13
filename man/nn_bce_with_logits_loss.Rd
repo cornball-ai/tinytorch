@@ -12,6 +12,9 @@ nn_bce_with_logits_loss(weight = NULL, pos_weight = NULL, reduction = 1L)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn bce with logits loss
 }

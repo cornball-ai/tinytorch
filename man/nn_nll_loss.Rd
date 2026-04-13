@@ -12,6 +12,9 @@ nn_nll_loss(weight = NULL, reduction = 1L, ignore_index = -100)
 
 \item{ignore_index}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn nll loss
 }

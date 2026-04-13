@@ -5,6 +5,9 @@
 \usage{
 cuda_runtime_version()
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Cuda runtime version
 }

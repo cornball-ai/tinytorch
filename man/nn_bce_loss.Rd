@@ -10,6 +10,9 @@ nn_bce_loss(weight = NULL, reduction = 1L)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn bce loss
 }

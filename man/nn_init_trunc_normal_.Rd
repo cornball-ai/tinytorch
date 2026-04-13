@@ -16,6 +16,9 @@ nn_init_trunc_normal_(tensor, mean = 0, std = 1, a = -2, b = 2)
 
 \item{b}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init trunc normal
 }

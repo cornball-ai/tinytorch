@@ -8,6 +8,9 @@ torch_rsqrt(self)
 \arguments{
 \item{self}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Compute reciprocal square root of tensor
 }

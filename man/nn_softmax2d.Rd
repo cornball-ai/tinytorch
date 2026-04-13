@@ -5,6 +5,9 @@
 \usage{
 nn_softmax2d()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn softmax2d
 }

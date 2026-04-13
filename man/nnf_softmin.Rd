@@ -10,6 +10,9 @@ nnf_softmin(input, dim = -1L)
 
 \item{dim}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf softmin
 }

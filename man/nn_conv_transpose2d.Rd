@@ -26,6 +26,9 @@ nn_conv_transpose2d(in_channels, out_channels, kernel_size, stride = 1L,
 
 \item{dilation}{Integer vector dilation.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn conv transpose2d
 }

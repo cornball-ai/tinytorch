@@ -8,6 +8,9 @@ nn_adaptive_max_pool2d(output_size)
 \arguments{
 \item{output_size}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn adaptive max pool2d
 }

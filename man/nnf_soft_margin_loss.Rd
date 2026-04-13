@@ -12,6 +12,9 @@ nnf_soft_margin_loss(self, target, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf soft margin loss
 }

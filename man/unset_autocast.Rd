@@ -5,6 +5,9 @@
 \usage{
 unset_autocast()
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Unset autocast
 }

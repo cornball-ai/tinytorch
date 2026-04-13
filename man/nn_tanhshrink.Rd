@@ -5,6 +5,9 @@
 \usage{
 nn_tanhshrink()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn tanhshrink
 }

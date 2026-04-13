@@ -21,6 +21,9 @@ nnf_avg_pool3d(self, kernel_size, stride, padding, ceil_mode,
 
 \item{divisor_override}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf avg pool3d
 }

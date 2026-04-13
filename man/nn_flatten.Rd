@@ -10,6 +10,9 @@ nn_flatten(start_dim = 2L, end_dim = -1L)
 
 \item{end_dim}{Integer ending dimension.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn flatten
 }

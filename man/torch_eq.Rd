@@ -10,6 +10,9 @@ torch_eq(self, other)
 
 \item{other}{A `torch_tensor` or scalar.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_eq
 }

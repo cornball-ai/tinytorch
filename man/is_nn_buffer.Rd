@@ -8,6 +8,9 @@ is_nn_buffer(x)
 \arguments{
 \item{x}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+Logical scalar.
+}
 \description{
 Is nn buffer
 }

@@ -8,6 +8,9 @@ clone_module(module)
 \arguments{
 \item{module}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A cloned `nn_module`.
+}
 \description{
 Clone module
 }

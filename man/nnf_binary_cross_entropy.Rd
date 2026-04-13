@@ -14,6 +14,9 @@ nnf_binary_cross_entropy(self, target, weight, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf binary cross entropy
 }

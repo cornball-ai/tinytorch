@@ -10,6 +10,9 @@ nnf_prelu(self, weight)
 
 \item{weight}{A `torch_tensor` of weights.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf prelu
 }

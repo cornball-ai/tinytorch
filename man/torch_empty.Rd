@@ -12,6 +12,9 @@ torch_empty(..., dtype = NULL, device = NULL)
 
 \item{device}{Ignored (CPU only).}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Create an uninitialized tensor
 }

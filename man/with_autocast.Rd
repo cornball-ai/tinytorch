@@ -14,6 +14,9 @@ with_autocast(device_type = "cpu", dtype = NULL, enabled = TRUE, code)
 
 \item{code}{Expression to evaluate.}
 }
+\value{
+The result of evaluating `code`.
+}
 \description{
 Since tinytorch is CPU-only, autocast is a no-op.
 }

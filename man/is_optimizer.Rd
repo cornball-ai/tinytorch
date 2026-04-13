@@ -8,6 +8,9 @@ is_optimizer(x)
 \arguments{
 \item{x}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Is optimizer
 }

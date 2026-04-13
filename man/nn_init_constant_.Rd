@@ -10,6 +10,9 @@ nn_init_constant_(tensor, val)
 
 \item{val}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init constant
 }

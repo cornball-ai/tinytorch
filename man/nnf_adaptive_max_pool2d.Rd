@@ -10,6 +10,9 @@ nnf_adaptive_max_pool2d(self, output_size)
 
 \item{output_size}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf adaptive max pool2d
 }

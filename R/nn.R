@@ -194,6 +194,9 @@ nn_module <- function(classname = NULL, ...) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `$.nn_module` <- function(x, name) {
   env <- attr(x, ".module_env")
   if (!is.null(env) && exists(name, envir = env, inherits = FALSE)) {
@@ -203,6 +206,9 @@ nn_module <- function(classname = NULL, ...) {
   }
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `$<-.nn_module` <- function(x, name, value) {
   env <- attr(x, ".module_env")
@@ -228,6 +234,9 @@ nn_module <- function(classname = NULL, ...) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `[[.nn_module` <- function(x, i) {
   env <- attr(x, ".module_env")
   if (is.character(i)) {
@@ -252,6 +261,7 @@ nn_module <- function(classname = NULL, ...) {
 
 #' Length.nn module
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Integer scalar.
 #' @export
 #' @examples
 #' \donttest{

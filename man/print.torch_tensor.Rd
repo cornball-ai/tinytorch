@@ -10,6 +10,9 @@
 
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+Invisible `x`.
+}
 \description{
 Print.torch tensor
 }

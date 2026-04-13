@@ -8,6 +8,9 @@ nn_leaky_relu(negative_slope = 0.01)
 \arguments{
 \item{negative_slope}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn leaky relu
 }

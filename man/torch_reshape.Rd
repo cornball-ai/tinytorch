@@ -10,6 +10,9 @@ torch_reshape(self, shape)
 
 \item{shape}{Integer vector shape.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_reshape
 }

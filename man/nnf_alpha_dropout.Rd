@@ -12,6 +12,9 @@ nnf_alpha_dropout(input, p, train)
 
 \item{train}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf alpha dropout
 }
