@@ -10,6 +10,9 @@ nn_init_calculate_gain(nonlinearity, param = NULL)
 
 \item{param}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init calculate gain
 }

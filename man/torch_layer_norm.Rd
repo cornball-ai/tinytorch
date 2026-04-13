@@ -17,6 +17,9 @@ torch_layer_norm(input, normalized_shape, weight = NULL, bias = NULL,
 
 \item{eps}{Numeric; small constant for numerical stability.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_layer_norm
 }

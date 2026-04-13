@@ -16,6 +16,9 @@ nnf_margin_ranking_loss(input1, input2, target, margin, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf margin ranking loss
 }

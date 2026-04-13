@@ -8,6 +8,9 @@ torch_set_num_interop_threads(n)
 \arguments{
 \item{n}{Integer number of threads.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Controls the number of threads used for interop parallelism
 (e.g., across independent operations) in libtorch.

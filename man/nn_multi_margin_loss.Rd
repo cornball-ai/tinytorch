@@ -14,6 +14,9 @@ nn_multi_margin_loss(p = 1, margin = 1, weight = NULL, reduction = 1L)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn multi margin loss
 }

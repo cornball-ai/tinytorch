@@ -15,6 +15,9 @@ nn_init_kaiming_normal_(tensor, a = 0, mode = "fan_in",
 
 \item{nonlinearity}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init kaiming normal
 }

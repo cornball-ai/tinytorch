@@ -10,6 +10,9 @@ torch_log_softmax(self, dim = -1L)
 
 \item{dim}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_log_softmax
 }

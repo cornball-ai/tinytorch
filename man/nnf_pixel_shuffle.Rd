@@ -10,6 +10,9 @@ nnf_pixel_shuffle(self, upscale_factor)
 
 \item{upscale_factor}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf pixel shuffle
 }

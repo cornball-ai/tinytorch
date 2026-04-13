@@ -8,6 +8,9 @@ torch_log2(self)
 \arguments{
 \item{self}{A `torch_tensor`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_log2
 }

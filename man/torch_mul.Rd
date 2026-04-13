@@ -10,6 +10,9 @@ torch_mul(self, other)
 
 \item{other}{A torch_tensor or scalar.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Multiply two tensors element-wise
 }

@@ -14,6 +14,9 @@ nn_poisson_nll_loss(log_input = TRUE, full = FALSE, eps = 1e-08, reduction = 1L)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn poisson nll loss
 }

@@ -12,6 +12,9 @@ nnf_threshold(self, threshold, value)
 
 \item{value}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf threshold
 }

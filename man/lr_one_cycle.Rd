@@ -12,6 +12,9 @@ lr_one_cycle(optimizer, max_lr, total_steps)
 
 \item{total_steps}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A learning rate scheduler.
+}
 \description{
 Lr one cycle
 }

@@ -14,6 +14,9 @@ nn_max_pool3d(kernel_size, stride = NULL, padding = 0L, dilation = 1L)
 
 \item{dilation}{Integer vector dilation.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn max pool3d
 }

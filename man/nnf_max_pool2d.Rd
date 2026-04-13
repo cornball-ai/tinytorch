@@ -18,6 +18,9 @@ nnf_max_pool2d(self, kernel_size, stride, padding, dilation, ceil_mode)
 
 \item{ceil_mode}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf max pool2d
 }

@@ -8,6 +8,9 @@
 \arguments{
 \item{x}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+Integer scalar.
+}
 \description{
 Length.torch tensor
 }

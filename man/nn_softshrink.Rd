@@ -8,6 +8,9 @@ nn_softshrink(lambd = 0.5)
 \arguments{
 \item{lambd}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn softshrink
 }

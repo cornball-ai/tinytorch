@@ -8,6 +8,9 @@ nn_init_eye_(tensor)
 \arguments{
 \item{tensor}{A `torch_tensor` to be filled in-place with an identity matrix.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init eye
 }

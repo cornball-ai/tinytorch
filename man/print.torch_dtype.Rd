@@ -10,6 +10,9 @@
 
 \item{...}{Ignored.}
 }
+\value{
+Invisible `x`.
+}
 \description{
 Print a torch_dtype
 }

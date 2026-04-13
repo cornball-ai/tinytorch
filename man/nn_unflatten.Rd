@@ -10,6 +10,9 @@ nn_unflatten(dim, unflattened_size)
 
 \item{unflattened_size}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn unflatten
 }

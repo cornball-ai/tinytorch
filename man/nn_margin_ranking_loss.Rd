@@ -10,6 +10,9 @@ nn_margin_ranking_loss(margin = 0, reduction = 1L)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn margin ranking loss
 }

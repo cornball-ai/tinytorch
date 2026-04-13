@@ -16,6 +16,9 @@ nnf_max_unpool3d(self, indices, output_size, stride, padding)
 
 \item{padding}{Integer vector padding.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf max unpool3d
 }

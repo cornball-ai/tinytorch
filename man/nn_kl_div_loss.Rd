@@ -10,6 +10,9 @@ nn_kl_div_loss(reduction = 1L, log_target = FALSE)
 
 \item{log_target}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn kl div loss
 }

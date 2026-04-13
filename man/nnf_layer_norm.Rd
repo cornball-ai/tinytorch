@@ -16,6 +16,9 @@ nnf_layer_norm(input, normalized_shape, weight = NULL, bias = NULL, eps = 1e-05)
 
 \item{eps}{Small constant for numerical stability.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Layer normalization
 }

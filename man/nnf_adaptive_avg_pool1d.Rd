@@ -10,6 +10,9 @@ nnf_adaptive_avg_pool1d(self, output_size)
 
 \item{output_size}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf adaptive avg pool1d
 }

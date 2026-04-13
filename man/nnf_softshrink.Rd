@@ -10,6 +10,9 @@ nnf_softshrink(self, lambd)
 
 \item{lambd}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf softshrink
 }

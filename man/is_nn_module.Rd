@@ -8,6 +8,9 @@ is_nn_module(x)
 \arguments{
 \item{x}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+Logical scalar.
+}
 \description{
 Is nn module
 }

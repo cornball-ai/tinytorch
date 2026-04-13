@@ -12,6 +12,9 @@ lr_cosine_annealing(optimizer, T_max, eta_min = 0)
 
 \item{eta_min}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A learning rate scheduler.
+}
 \description{
 Lr cosine annealing
 }

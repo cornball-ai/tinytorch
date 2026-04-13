@@ -19,6 +19,9 @@ nnf_cross_entropy(input, target, weight = NULL, reduction = 1L,
 
 \item{label_smoothing}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf cross entropy
 }

@@ -10,6 +10,9 @@ torch_max(self, dim = NULL)
 
 \item{dim}{Integer dimension.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_max
 }

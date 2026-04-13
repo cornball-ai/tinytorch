@@ -23,6 +23,9 @@ nnf_triplet_margin_loss(anchor, positive, negative, margin, p, eps, swap,
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf triplet margin loss
 }

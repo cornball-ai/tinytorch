@@ -12,6 +12,9 @@ torch_linear(input, weight, bias = NULL)
 
 \item{bias}{Optional bias vector.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Linear transformation
 }

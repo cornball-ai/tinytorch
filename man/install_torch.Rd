@@ -8,6 +8,9 @@ install_torch(...)
 \arguments{
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Install torch
 }

@@ -10,6 +10,9 @@ nn_softplus(beta = 1, threshold = 20)
 
 \item{threshold}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn softplus
 }

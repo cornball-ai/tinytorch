@@ -10,6 +10,9 @@ lr_scheduler(optimizer, ...)
 
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+A learning rate scheduler.
+}
 \description{
 Lr scheduler
 }

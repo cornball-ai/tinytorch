@@ -8,6 +8,9 @@ nnf_relu6(self)
 \arguments{
 \item{self}{A `torch_tensor`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf relu6
 }

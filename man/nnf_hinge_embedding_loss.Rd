@@ -14,6 +14,9 @@ nnf_hinge_embedding_loss(self, target, margin, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf hinge embedding loss
 }

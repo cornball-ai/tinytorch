@@ -8,6 +8,9 @@ nn_init_ones_(tensor)
 \arguments{
 \item{tensor}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init ones
 }

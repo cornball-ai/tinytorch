@@ -8,6 +8,9 @@ torch_sin(self)
 \arguments{
 \item{self}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Compute sin of tensor
 }

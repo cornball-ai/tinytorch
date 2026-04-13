@@ -12,6 +12,9 @@ torch_index_put(self, indices, values)
 
 \item{values}{A `torch_tensor` of values.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_index_put
 }

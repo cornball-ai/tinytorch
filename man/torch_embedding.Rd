@@ -10,6 +10,9 @@ torch_embedding(weight, indices)
 
 \item{indices}{Integer tensor of indices.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Embedding lookup
 }

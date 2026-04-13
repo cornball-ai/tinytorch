@@ -12,6 +12,9 @@ set_autocast(enabled, device_type = "cuda", dtype = torch_float16)
 
 \item{dtype}{A `torch_dtype`.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Set autocast
 }

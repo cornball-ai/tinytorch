@@ -23,6 +23,9 @@ nnf_conv_transpose1d(input, weight, bias, stride, padding, output_padding,
 
 \item{dilation}{Integer vector dilation.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf conv transpose1d
 }

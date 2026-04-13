@@ -25,6 +25,9 @@ nnf_batch_norm(input, weight, bias, running_mean, running_var, training,
 
 \item{cudnn_enabled}{Logical.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf batch norm
 }

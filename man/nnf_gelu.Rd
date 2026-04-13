@@ -13,6 +13,9 @@ torch_gelu(self)
 
 \item{approximate}{Character, "none" or "tanh". Default "none".}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 GELU activation
 }

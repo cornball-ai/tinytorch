@@ -10,6 +10,9 @@ with_torch_manual_seed(seed, code)
 
 \item{code}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+The result of evaluating `code`.
+}
 \description{
 With torch manual seed
 }

@@ -12,6 +12,9 @@ lr_step(optimizer, step_size, gamma = 0.1)
 
 \item{gamma}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A learning rate scheduler.
+}
 \description{
 Lr step
 }

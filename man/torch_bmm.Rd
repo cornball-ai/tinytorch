@@ -10,6 +10,9 @@ torch_bmm(self, mat2)
 
 \item{mat2}{A `torch_tensor` (matrix).}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_bmm
 }

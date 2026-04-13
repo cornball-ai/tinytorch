@@ -16275,6 +16275,7 @@ torch_scaled_mm <- function(self, mat2, scale_a, scale_b,
 #' @param dim Integer dimension.
 #' @param keepdim Logical; keep reduced dimensions.
 #' @rdname torch_argmax
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16300,6 +16301,7 @@ torch_argmax <- function(self, dim = NULL, keepdim = FALSE) {
 #' @param dim Integer dimension.
 #' @param keepdim Logical; keep reduced dimensions.
 #' @rdname torch_argmin
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16322,6 +16324,7 @@ torch_argmin <- function(self, dim = NULL, keepdim = FALSE) {
 #' @param self A `torch_tensor`.
 #' @param mat2 A `torch_tensor` (matrix).
 #' @rdname torch_bmm
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16339,6 +16342,7 @@ torch_bmm <- function(self, mat2) {
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_ceil
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16355,6 +16359,7 @@ torch_ceil <- function(self) {
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_clone
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16374,6 +16379,7 @@ torch_clone <- function(self) {
 #' @param dilation Integer vector dilation.
 #' @param groups Integer number of groups.
 #' @rdname torch_conv2d
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16396,6 +16402,7 @@ torch_conv2d <- function(input, weight, bias = NULL, stride = 1L,
 #' @param groups Integer number of groups.
 #' @param dilation Integer vector dilation.
 #' @rdname torch_conv_transpose1d
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16414,6 +16421,7 @@ torch_conv_transpose1d <- function(input, weight, bias = NULL, stride = 1L,
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_eq
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16428,6 +16436,7 @@ torch_eq <- function(self, other) C_torch_eq(self, other)
 #' @param start_dim Integer starting dimension.
 #' @param end_dim Integer ending dimension.
 #' @rdname torch_flatten
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16445,6 +16454,7 @@ torch_flatten <- function(self, start_dim = 1L, end_dim = -1L) {
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_floor_divide
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16458,6 +16468,7 @@ torch_floor_divide <- function(self, other) C_torch_floor_divide(self, other)
 #' @param dim Integer dimension.
 #' @param index A `torch_tensor` of indices.
 #' @rdname torch_gather
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16474,6 +16485,7 @@ torch_gather <- function(self, dim, index) {
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_ge
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16488,6 +16500,7 @@ torch_ge <- function(self, other) C_torch_ge(self, other)
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_gt
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16503,6 +16516,7 @@ torch_gt <- function(self, other) C_torch_gt(self, other)
 #' @param dim Integer dimension.
 #' @param index A `torch_tensor` of indices.
 #' @rdname torch_index_select
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16517,6 +16531,7 @@ torch_index_select <- function(self, dim, index) {
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_le
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16530,6 +16545,7 @@ torch_le <- function(self, other) C_torch_le(self, other)
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_log10
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16544,6 +16560,7 @@ torch_log10 <- function(self) C_torch_log10(self)
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_log2
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16558,6 +16575,7 @@ torch_log2 <- function(self) C_torch_log2(self)
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_logical_not
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16573,6 +16591,7 @@ torch_logical_not <- function(self) C_torch_logical_not(self)
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_lt
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16587,6 +16606,7 @@ torch_lt <- function(self, other) C_torch_lt(self, other)
 #' @param self A `torch_tensor`.
 #' @param dim Integer dimension.
 #' @rdname torch_max
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16599,6 +16619,7 @@ torch_max <- function(self, dim = NULL) C_torch_max(self, dim)
 #' @param self A `torch_tensor`.
 #' @param dim Integer dimension.
 #' @rdname torch_min
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16613,6 +16634,7 @@ torch_min <- function(self, dim = NULL) C_torch_min(self, dim)
 #' @param start Integer start index.
 #' @param length Integer length.
 #' @rdname torch_narrow
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16627,6 +16649,7 @@ torch_narrow <- function(self, dim, start, length) {
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_ne
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16640,6 +16663,7 @@ torch_ne <- function(self, other) C_torch_ne(self, other)
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_neg
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16655,6 +16679,7 @@ torch_neg <- function(self) C_torch_neg(self)
 #' @param self A `torch_tensor`.
 #' @param other A `torch_tensor` or scalar.
 #' @rdname torch_remainder
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16668,6 +16693,7 @@ torch_remainder <- function(self, other) C_torch_remainder(self, other)
 #' @param repeats Integer or `torch_tensor` of repeat counts.
 #' @param dim Integer dimension.
 #' @rdname torch_repeat_interleave
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16682,6 +16708,7 @@ torch_repeat_interleave <- function(self, repeats, dim = NULL) {
 #' @param self A `torch_tensor`.
 #' @param shape Integer vector shape.
 #' @rdname torch_reshape
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16693,6 +16720,7 @@ torch_reshape <- function(self, shape) C_torch_reshape(self, shape)
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_round
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16707,6 +16735,7 @@ torch_round <- function(self) C_torch_round(self)
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_sign
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16722,6 +16751,7 @@ torch_sign <- function(self) C_torch_sign(self)
 #' @param self A `torch_tensor`.
 #' @param dim Integer dimension.
 #' @rdname torch_squeeze
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16741,6 +16771,7 @@ torch_squeeze <- function(self, dim = NULL) C_torch_squeeze(self, dim)
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_t
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16763,6 +16794,7 @@ torch_t <- function(self) C_torch_t(self)
 #' @param dim0 Integer dimension.
 #' @param dim1 Integer dimension.
 #' @rdname torch_transpose
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16779,6 +16811,7 @@ torch_transpose <- function(self, dim0, dim1) {
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_trunc
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16794,6 +16827,7 @@ torch_trunc <- function(self) C_torch_trunc(self)
 #' @param self A `torch_tensor`.
 #' @param dim Integer dimension.
 #' @rdname torch_unsqueeze
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16812,6 +16846,7 @@ torch_unsqueeze <- function(self, dim) {
 
 #' @param self A `torch_tensor`.
 #' @param dim Integer dimension.
+#' @return A `torch_tensor`.
 #' @rdname torch_softmax
 #' @export
 #' @examples
@@ -16826,6 +16861,7 @@ torch_softmax <- function(self, dim = -1L) {
 
 #' @param self A `torch_tensor`.
 #' @param dim Integer dimension.
+#' @return A `torch_tensor`.
 #' @rdname torch_log_softmax
 #' @export
 #' @examples
@@ -16843,6 +16879,7 @@ torch_log_softmax <- function(self, dim = -1L) {
 #' @param weight A `torch_tensor` of weights.
 #' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @param eps Numeric; small constant for numerical stability.
+#' @return A `torch_tensor`.
 #' @rdname torch_layer_norm
 #' @export
 #' @examples
@@ -16866,6 +16903,7 @@ torch_layer_norm <- function(input, normalized_shape, weight = NULL,
 #' @param eps Numeric; small constant for numerical stability.
 #' @param cudnn_enabled Logical.
 #' @rdname torch_batch_norm
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16941,6 +16979,7 @@ torch_per_channel_symmetric <- 3L
 
 #' @param self A `torch_tensor`.
 #' @rdname torch_conj
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16953,6 +16992,7 @@ torch_conj <- function(self) C_torch_conj_physical(self)
 #' @param self A `torch_tensor`.
 #' @param indices A `torch_tensor` of indices.
 #' @rdname torch_index
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16966,6 +17006,7 @@ torch_index <- function(self, indices) C_torch_index(self, indices, FALSE)
 #' @param indices A `torch_tensor` of indices.
 #' @param values A `torch_tensor` of values.
 #' @rdname torch_index_put
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -16980,6 +17021,7 @@ torch_index_put <- function(self, indices, values) {
 #' @param A A `torch_tensor` (matrix).
 #' @param pivot Logical; enable pivoting.
 #' @rdname torch_lu
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17182,6 +17224,7 @@ torch_set_default_dtype <- function(dtype) {
 #' Nnf adaptive avg pool1d
 #' @param self A `torch_tensor`.
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17194,6 +17237,7 @@ nnf_adaptive_avg_pool1d <- function(self, output_size) C_torch_adaptive_avg_pool
 #' Nnf adaptive avg pool2d
 #' @param self A `torch_tensor`.
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17206,6 +17250,7 @@ nnf_adaptive_avg_pool2d <- function(self, output_size) C_torch_adaptive_avg_pool
 #' Nnf adaptive avg pool3d
 #' @param self A `torch_tensor`.
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17218,6 +17263,7 @@ nnf_adaptive_avg_pool3d <- function(self, output_size) C_torch_adaptive_avg_pool
 #' Nnf adaptive max pool1d
 #' @param self A `torch_tensor`.
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17230,6 +17276,7 @@ nnf_adaptive_max_pool1d <- function(self, output_size) C_torch_adaptive_max_pool
 #' Nnf adaptive max pool2d
 #' @param self A `torch_tensor`.
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17242,6 +17289,7 @@ nnf_adaptive_max_pool2d <- function(self, output_size) C_torch_adaptive_max_pool
 #' Nnf adaptive max pool3d
 #' @param self A `torch_tensor`.
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17255,6 +17303,7 @@ nnf_adaptive_max_pool3d <- function(self, output_size) C_torch_adaptive_max_pool
 #' @param input A `torch_tensor`.
 #' @param p Parameter passed to the underlying ATen operator.
 #' @param train Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17272,6 +17321,7 @@ nnf_alpha_dropout <- function(input, p, train) C_torch_alpha_dropout(input, p, t
 #' @param ceil_mode Parameter passed to the underlying ATen operator.
 #' @param count_include_pad Parameter passed to the underlying ATen operator.
 #' @param divisor_override Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17289,6 +17339,7 @@ nnf_avg_pool2d <- function(self, kernel_size, stride, padding, ceil_mode, count_
 #' @param ceil_mode Parameter passed to the underlying ATen operator.
 #' @param count_include_pad Parameter passed to the underlying ATen operator.
 #' @param divisor_override Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17308,6 +17359,7 @@ nnf_avg_pool3d <- function(self, kernel_size, stride, padding, ceil_mode, count_
 #' @param momentum Numeric; momentum value.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param cudnn_enabled Logical.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17322,6 +17374,7 @@ nnf_batch_norm <- function(input, weight, bias, running_mean, running_var, train
 #' @param input2 Parameter passed to the underlying ATen operator.
 #' @param weight A `torch_tensor` of weights.
 #' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17336,6 +17389,7 @@ nnf_bilinear <- function(input1, input2, weight, bias) C_torch_bilinear(input1, 
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param weight A `torch_tensor` of weights.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17351,6 +17405,7 @@ nnf_binary_cross_entropy <- function(self, target, weight, reduction) C_torch_bi
 #' @param weight A `torch_tensor` of weights.
 #' @param pos_weight Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17363,6 +17418,7 @@ nnf_binary_cross_entropy_with_logits <- function(self, target, weight, pos_weigh
 #' Nnf celu
 #' @param self A `torch_tensor`.
 #' @param alpha Numeric scalar multiplier.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17375,6 +17431,7 @@ nnf_celu <- function(self, alpha) C_torch_celu(self, alpha)
 #' Nnf celu
 #' @param self A `torch_tensor`.
 #' @param alpha Numeric scalar multiplier.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17389,6 +17446,7 @@ nnf_celu_ <- function(self, alpha) C_torch_celu_(self, alpha)
 #' @param weight A `torch_tensor` of weights.
 #' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @param pad Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17407,6 +17465,7 @@ nnf_conv_tbc <- function(self, weight, bias, pad) C_torch_conv_tbc(self, weight,
 #' @param output_padding Integer vector output padding.
 #' @param groups Integer number of groups.
 #' @param dilation Integer vector dilation.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17425,6 +17484,7 @@ nnf_conv_transpose1d <- function(input, weight, bias, stride, padding, output_pa
 #' @param output_padding Integer vector output padding.
 #' @param groups Integer number of groups.
 #' @param dilation Integer vector dilation.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17443,6 +17503,7 @@ nnf_conv_transpose2d <- function(input, weight, bias, stride, padding, output_pa
 #' @param output_padding Integer vector output padding.
 #' @param groups Integer number of groups.
 #' @param dilation Integer vector dilation.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17460,6 +17521,7 @@ nnf_conv_transpose3d <- function(input, weight, bias, stride, padding, output_pa
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
 #' @param groups Integer number of groups.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17477,6 +17539,7 @@ nnf_conv1d <- function(input, weight, bias, stride, padding, dilation, groups) C
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
 #' @param groups Integer number of groups.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17494,6 +17557,7 @@ nnf_conv2d <- function(input, weight, bias, stride, padding, dilation, groups) C
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
 #' @param groups Integer number of groups.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17509,6 +17573,7 @@ nnf_conv3d <- function(input, weight, bias, stride, padding, dilation, groups) C
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17523,6 +17588,7 @@ nnf_cosine_embedding_loss <- function(input1, input2, target, margin, reduction)
 #' @param x2 Parameter passed to the underlying ATen operator.
 #' @param dim Integer dimension.
 #' @param eps Numeric; small constant for numerical stability.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17540,6 +17606,7 @@ nnf_cosine_similarity <- function(x1, x2, dim, eps) C_torch_cosine_similarity(x1
 #' @param blank Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param zero_infinity Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17553,6 +17620,7 @@ nnf_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, blan
 #' @param input A `torch_tensor`.
 #' @param p Parameter passed to the underlying ATen operator.
 #' @param train Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17567,6 +17635,7 @@ nnf_dropout <- function(input, p, train) C_torch_dropout(input, p, train)
 #' @param alpha Numeric scalar multiplier.
 #' @param scale Parameter passed to the underlying ATen operator.
 #' @param input_scale Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17579,6 +17648,7 @@ nnf_elu_ <- function(self, alpha, scale, input_scale) C_torch_elu_(self, alpha, 
 #' Nnf embedding
 #' @param weight A `torch_tensor` of weights.
 #' @param indices A `torch_tensor` of indices.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17597,6 +17667,7 @@ nnf_embedding <- function(weight, indices) C_torch_embedding(weight, indices)
 #' @param sparse Parameter passed to the underlying ATen operator.
 #' @param per_sample_weights Parameter passed to the underlying ATen operator.
 #' @param include_last_offset Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17611,6 +17682,7 @@ nnf_embedding_bag <- function(weight, indices, offsets, scale_grad_by_freq, mode
 #' @param kernel_size Integer vector kernel size.
 #' @param output_size Parameter passed to the underlying ATen operator.
 #' @param random_samples Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17625,6 +17697,7 @@ nnf_fractional_max_pool2d <- function(self, kernel_size, output_size, random_sam
 #' @param kernel_size Integer vector kernel size.
 #' @param output_size Parameter passed to the underlying ATen operator.
 #' @param random_samples Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17637,6 +17710,7 @@ nnf_fractional_max_pool3d <- function(self, kernel_size, output_size, random_sam
 #' Nnf glu
 #' @param self A `torch_tensor`.
 #' @param dim Integer dimension.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17653,6 +17727,7 @@ nnf_glu <- function(self, dim) C_torch_glu(self, dim)
 #' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param cudnn_enabled Logical.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17665,6 +17740,7 @@ nnf_group_norm <- function(input, num_groups, weight, bias, eps, cudnn_enabled) 
 #' Nnf hardshrink
 #' @param self A `torch_tensor`.
 #' @param lambd Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17676,6 +17752,7 @@ nnf_hardshrink <- function(self, lambd) C_torch_hardshrink(self, lambd)
 
 #' Nnf hardsigmoid
 #' @param self A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17687,6 +17764,7 @@ nnf_hardsigmoid <- function(self) C_torch_hardsigmoid(self)
 
 #' Nnf hardswish
 #' @param self A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17700,6 +17778,7 @@ nnf_hardswish <- function(self) C_torch_hardswish(self)
 #' @param self A `torch_tensor`.
 #' @param min_val Parameter passed to the underlying ATen operator.
 #' @param max_val Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17713,6 +17792,7 @@ nnf_hardtanh <- function(self, min_val, max_val) C_torch_hardtanh(self, min_val,
 #' @param self A `torch_tensor`.
 #' @param min_val Parameter passed to the underlying ATen operator.
 #' @param max_val Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17727,6 +17807,7 @@ nnf_hardtanh_ <- function(self, min_val, max_val) C_torch_hardtanh_(self, min_va
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17746,6 +17827,7 @@ nnf_hinge_embedding_loss <- function(self, target, margin, reduction) C_torch_hi
 #' @param momentum Numeric; momentum value.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param cudnn_enabled Logical.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17760,6 +17842,7 @@ nnf_instance_norm <- function(input, weight, bias, running_mean, running_var, us
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param log_target Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17773,6 +17856,7 @@ nnf_kl_div <- function(self, target, reduction, log_target) C_torch_kl_div(self,
 #' @param self A `torch_tensor`.
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17786,6 +17870,7 @@ nnf_l1_loss <- function(self, target, reduction) C_torch_l1_loss(self, target, r
 #' @param input A `torch_tensor`.
 #' @param weight A `torch_tensor` of weights.
 #' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17801,6 +17886,7 @@ nnf_linear <- function(input, weight, bias) C_torch_linear(input, weight, bias)
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17817,6 +17903,7 @@ nnf_margin_ranking_loss <- function(input1, input2, target, margin, reduction) C
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
 #' @param ceil_mode Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17833,6 +17920,7 @@ nnf_max_pool1d <- function(self, kernel_size, stride, padding, dilation, ceil_mo
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
 #' @param ceil_mode Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17849,6 +17937,7 @@ nnf_max_pool2d <- function(self, kernel_size, stride, padding, dilation, ceil_mo
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
 #' @param ceil_mode Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17862,6 +17951,7 @@ nnf_max_pool3d <- function(self, kernel_size, stride, padding, dilation, ceil_mo
 #' @param self A `torch_tensor`.
 #' @param indices A `torch_tensor` of indices.
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17877,6 +17967,7 @@ nnf_max_unpool2d <- function(self, indices, output_size) C_torch_max_unpool2d(se
 #' @param output_size Parameter passed to the underlying ATen operator.
 #' @param stride Integer vector stride.
 #' @param padding Integer vector padding.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17890,6 +17981,7 @@ nnf_max_unpool3d <- function(self, indices, output_size, stride, padding) C_torc
 #' @param self A `torch_tensor`.
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17906,6 +17998,7 @@ nnf_mse_loss <- function(self, target, reduction) C_torch_mse_loss(self, target,
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param weight A `torch_tensor` of weights.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17919,6 +18012,7 @@ nnf_multi_margin_loss <- function(self, target, p, margin, weight, reduction) C_
 #' @param self A `torch_tensor`.
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17934,6 +18028,7 @@ nnf_multilabel_margin_loss <- function(self, target, reduction) C_torch_multilab
 #' @param weight A `torch_tensor` of weights.
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param ignore_index Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17946,6 +18041,7 @@ nnf_nll_loss <- function(self, target, weight, reduction, ignore_index) C_torch_
 #' Nnf one hot
 #' @param self A `torch_tensor`.
 #' @param num_classes Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17961,6 +18057,7 @@ nnf_one_hot <- function(self, num_classes) C_torch_one_hot(self, num_classes)
 #' @param p Parameter passed to the underlying ATen operator.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param keepdim Logical; keep reduced dimensions.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17973,6 +18070,7 @@ nnf_pairwise_distance <- function(x1, x2, p, eps, keepdim) C_torch_pairwise_dist
 #' Nnf pdist
 #' @param self A `torch_tensor`.
 #' @param p Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -17985,6 +18083,7 @@ nnf_pdist <- function(self, p) C_torch_pdist(self, p)
 #' Nnf pixel shuffle
 #' @param self A `torch_tensor`.
 #' @param upscale_factor Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18001,6 +18100,7 @@ nnf_pixel_shuffle <- function(self, upscale_factor) C_torch_pixel_shuffle(self, 
 #' @param full Parameter passed to the underlying ATen operator.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18013,6 +18113,7 @@ nnf_poisson_nll_loss <- function(input, target, log_input, full, eps, reduction)
 #' Nnf prelu
 #' @param self A `torch_tensor`.
 #' @param weight A `torch_tensor` of weights.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18024,6 +18125,7 @@ nnf_prelu <- function(self, weight) C_torch_prelu(self, weight)
 
 #' Nnf relu
 #' @param self A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18035,6 +18137,7 @@ nnf_relu_ <- function(self) C_torch_relu_(self)
 
 #' Nnf relu6
 #' @param self A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18050,6 +18153,7 @@ nnf_relu6 <- function(self) C_torch_relu6(self)
 #' @param upper Parameter passed to the underlying ATen operator.
 #' @param training Logical.
 #' @param generator Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18065,6 +18169,7 @@ nnf_rrelu <- function(self, lower, upper, training, generator) C_torch_rrelu(sel
 #' @param upper Parameter passed to the underlying ATen operator.
 #' @param training Logical.
 #' @param generator Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18076,6 +18181,7 @@ nnf_rrelu_ <- function(self, lower, upper, training, generator) C_torch_rrelu_(s
 
 #' Nnf selu
 #' @param self A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18087,6 +18193,7 @@ nnf_selu <- function(self) C_torch_selu(self)
 
 #' Nnf selu
 #' @param self A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18101,6 +18208,7 @@ nnf_selu_ <- function(self) C_torch_selu_(self)
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
 #' @param beta Numeric scalar multiplier.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18114,6 +18222,7 @@ nnf_smooth_l1_loss <- function(self, target, reduction, beta) C_torch_smooth_l1_
 #' @param self A `torch_tensor`.
 #' @param target Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18126,6 +18235,7 @@ nnf_soft_margin_loss <- function(self, target, reduction) C_torch_soft_margin_lo
 #' Nnf softshrink
 #' @param self A `torch_tensor`.
 #' @param lambd Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18139,6 +18249,7 @@ nnf_softshrink <- function(self, lambd) C_torch_softshrink(self, lambd)
 #' @param self A `torch_tensor`.
 #' @param threshold Parameter passed to the underlying ATen operator.
 #' @param value Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18152,6 +18263,7 @@ nnf_threshold <- function(self, threshold, value) C_torch_threshold(self, thresh
 #' @param self A `torch_tensor`.
 #' @param threshold Parameter passed to the underlying ATen operator.
 #' @param value Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18170,6 +18282,7 @@ nnf_threshold_ <- function(self, threshold, value) C_torch_threshold_(self, thre
 #' @param eps Numeric; small constant for numerical stability.
 #' @param swap Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18184,6 +18297,7 @@ nnf_triplet_margin_loss <- function(anchor, positive, negative, margin, p, eps, 
 #' @param dimension Parameter passed to the underlying ATen operator.
 #' @param size Integer vector shape.
 #' @param step Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18361,6 +18475,7 @@ linalg_vector_norm <- torch_linalg_vector_norm
 
 #' Is nn module
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18372,6 +18487,7 @@ is_nn_module <- function(x) inherits(x, "nn_module")
 
 #' Is nn parameter
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18383,6 +18499,7 @@ is_nn_parameter <- function(x) inherits(x, "nn_parameter")
 
 #' Is nn buffer
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18394,6 +18511,7 @@ is_nn_buffer <- function(x) inherits(x, "torch_tensor")
 
 #' Is torch device
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18405,6 +18523,7 @@ is_torch_device <- function(x) is.character(x) && length(x) == 1L
 
 #' Is torch dtype
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18416,6 +18535,7 @@ is_torch_dtype <- function(x) inherits(x, "torch_dtype")
 
 #' Is torch layout
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18427,6 +18547,7 @@ is_torch_layout <- function(x) is.integer(x) && length(x) == 1L
 
 #' Is torch memory format
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18438,6 +18559,7 @@ is_torch_memory_format <- function(x) is.integer(x) && length(x) == 1L
 
 #' Is torch qscheme
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18449,6 +18571,7 @@ is_torch_qscheme <- function(x) is.integer(x) && length(x) == 1L
 
 #' Is undefined tensor
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18460,6 +18583,7 @@ is_undefined_tensor <- function(x) FALSE
 
 #' Is optimizer
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18471,6 +18595,7 @@ is_optimizer <- function(x) inherits(x, "torch_optimizer")
 
 #' Is dataloader
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Logical scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -18482,6 +18607,7 @@ is_dataloader <- function(x) inherits(x, "dataloader")
 
 #' Local no grad
 #' @param .local_envir Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -18496,6 +18622,7 @@ local_no_grad <- function(.local_envir = parent.frame()) {
 
 #' Local enable grad
 #' @param .local_envir Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -18509,6 +18636,7 @@ local_enable_grad <- function(.local_envir = parent.frame()) invisible(NULL)
 #' @param device_type Parameter passed to the underlying ATen operator.
 #' @param dtype A `torch_dtype`.
 #' @param .local_envir Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -18520,6 +18648,7 @@ local_autocast <- function(device_type = "cuda", dtype = torch_float16, .local_e
 
 #' With enable grad
 #' @param code Parameter passed to the underlying ATen operator.
+#' @return The result of evaluating `code`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18531,6 +18660,7 @@ with_enable_grad <- function(code) eval.parent(substitute(code))
 
 #' With detect anomaly
 #' @param code Parameter passed to the underlying ATen operator.
+#' @return The result of evaluating `code`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18543,6 +18673,7 @@ with_detect_anomaly <- function(code) eval.parent(substitute(code))
 #' With device
 #' @param device Parameter passed to the underlying ATen operator.
 #' @param code Parameter passed to the underlying ATen operator.
+#' @return The result of evaluating `code`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18555,6 +18686,7 @@ with_device <- function(device, code) eval.parent(substitute(code))
 #' With torch manual seed
 #' @param seed Parameter passed to the underlying ATen operator.
 #' @param code Parameter passed to the underlying ATen operator.
+#' @return The result of evaluating `code`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18567,6 +18699,7 @@ with_torch_manual_seed <- function(seed, code) { torch_manual_seed(seed); eval.p
 #' Local torch manual seed
 #' @param seed Parameter passed to the underlying ATen operator.
 #' @param .local_envir Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -18579,6 +18712,7 @@ local_torch_manual_seed <- function(seed, .local_envir = parent.frame()) torch_m
 #' Local device
 #' @param device Parameter passed to the underlying ATen operator.
 #' @param .local_envir Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -18592,6 +18726,7 @@ local_device <- function(device, .local_envir = parent.frame()) invisible(NULL)
 #' @param enabled Parameter passed to the underlying ATen operator.
 #' @param device_type Parameter passed to the underlying ATen operator.
 #' @param dtype A `torch_dtype`.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -18602,6 +18737,7 @@ local_device <- function(device, .local_envir = parent.frame()) invisible(NULL)
 set_autocast <- function(enabled, device_type = "cuda", dtype = torch_float16) invisible(NULL)
 
 #' Unset autocast
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -18613,6 +18749,7 @@ unset_autocast <- function() invisible(NULL)
 
 #' Clone module
 #' @param module Parameter passed to the underlying ATen operator.
+#' @return A cloned `nn_module`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18629,6 +18766,7 @@ clone_module <- function(module) {
 #' @param start Integer start index.
 #' @param end Parameter passed to the underlying ATen operator.
 #' @param step Parameter passed to the underlying ATen operator.
+#' @return A slice specification list.
 #' @export
 #' @examples
 #' \donttest{
@@ -18642,6 +18780,7 @@ slc <- function(start = NULL, end = NULL, step = 1L) {
 
 #' Install torch
 #' @param ... Additional arguments passed to methods.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18652,6 +18791,7 @@ slc <- function(start = NULL, end = NULL, step = 1L) {
 install_torch <- function(...) install_libtorch(...)
 
 #' Backends cudnn is available
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18662,6 +18802,7 @@ install_torch <- function(...) install_libtorch(...)
 backends_cudnn_is_available <- function() FALSE
 
 #' Backends cudnn version
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18672,6 +18813,7 @@ backends_cudnn_is_available <- function() FALSE
 backends_cudnn_version <- function() NULL
 
 #' Backends mkl is available
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18682,6 +18824,7 @@ backends_cudnn_version <- function() NULL
 backends_mkl_is_available <- function() FALSE
 
 #' Backends mkldnn is available
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18692,6 +18835,7 @@ backends_mkl_is_available <- function() FALSE
 backends_mkldnn_is_available <- function() FALSE
 
 #' Backends mps is available
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18702,6 +18846,7 @@ backends_mkldnn_is_available <- function() FALSE
 backends_mps_is_available <- function() FALSE
 
 #' Backends openmp is available
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -18715,6 +18860,7 @@ backends_openmp_is_available <- function() TRUE
 
 #' Nn celu
 #' @param alpha Numeric scalar multiplier.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18733,6 +18879,7 @@ nn_celu <- function(alpha = 1.0) {
 
 #' Nn glu
 #' @param dim Integer dimension.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18751,6 +18898,7 @@ nn_glu <- function(dim = -1L) {
 
 #' Nn hardshrink
 #' @param lambd Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18768,6 +18916,7 @@ nn_hardshrink <- function(lambd = 0.5) {
 }
 
 #' Nn hardsigmoid
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18784,6 +18933,7 @@ nn_hardsigmoid <- function() {
 }
 
 #' Nn hardswish
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18802,6 +18952,7 @@ nn_hardswish <- function() {
 #' Nn hardtanh
 #' @param min_val Parameter passed to the underlying ATen operator.
 #' @param max_val Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18821,6 +18972,7 @@ nn_hardtanh <- function(min_val = -1, max_val = 1) {
 
 #' Nn leaky relu
 #' @param negative_slope Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18838,6 +18990,7 @@ nn_leaky_relu <- function(negative_slope = 0.01) {
 }
 
 #' Nn log sigmoid
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18855,6 +19008,7 @@ nn_log_sigmoid <- function() {
 
 #' Nn log softmax
 #' @param dim Integer dimension.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18873,6 +19027,7 @@ nn_log_softmax <- function(dim = -1L) {
 
 #' Nn prelu
 #' @param num_parameters Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18891,6 +19046,7 @@ nn_prelu <- function(num_parameters = 1L) {
 }
 
 #' Nn relu6
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18909,6 +19065,7 @@ nn_relu6 <- function() {
 #' Nn rrelu
 #' @param lower Parameter passed to the underlying ATen operator.
 #' @param upper Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18927,6 +19084,7 @@ nn_rrelu <- function(lower = 0.125, upper = 0.333) {
 }
 
 #' Nn selu
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18944,6 +19102,7 @@ nn_selu <- function() {
 
 #' Nn softmax
 #' @param dim Integer dimension.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18962,6 +19121,7 @@ nn_softmax <- function(dim = -1L) {
 
 #' Nn softmin
 #' @param dim Integer dimension.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -18981,6 +19141,7 @@ nn_softmin <- function(dim = -1L) {
 #' Nn softplus
 #' @param beta Numeric scalar multiplier.
 #' @param threshold Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19000,6 +19161,7 @@ nn_softplus <- function(beta = 1, threshold = 20) {
 
 #' Nn softshrink
 #' @param lambd Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19017,6 +19179,7 @@ nn_softshrink <- function(lambd = 0.5) {
 }
 
 #' Nn softsign
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19033,6 +19196,7 @@ nn_softsign <- function() {
 }
 
 #' Nn tanhshrink
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19051,6 +19215,7 @@ nn_tanhshrink <- function() {
 #' Nn bce loss
 #' @param weight A `torch_tensor` of weights.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19072,6 +19237,7 @@ nn_bce_loss <- function(weight = NULL, reduction = 1L) {
 #' @param weight A `torch_tensor` of weights.
 #' @param pos_weight Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19093,6 +19259,7 @@ nn_bce_with_logits_loss <- function(weight = NULL, pos_weight = NULL, reduction 
 #' Nn cosine embedding loss
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19115,6 +19282,7 @@ nn_cosine_embedding_loss <- function(margin = 0, reduction = 1L) {
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param ignore_index Parameter passed to the underlying ATen operator.
 #' @param label_smoothing Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19138,6 +19306,7 @@ nn_cross_entropy_loss <- function(weight = NULL, reduction = 1L, ignore_index = 
 #' @param blank Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param zero_infinity Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19159,6 +19328,7 @@ nn_ctc_loss <- function(blank = 0L, reduction = 1L, zero_infinity = FALSE) {
 #' Nn hinge embedding loss
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19179,6 +19349,7 @@ nn_hinge_embedding_loss <- function(margin = 1, reduction = 1L) {
 #' Nn kl div loss
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param log_target Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19198,6 +19369,7 @@ nn_kl_div_loss <- function(reduction = 1L, log_target = FALSE) {
 
 #' Nn l1 loss
 #' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19217,6 +19389,7 @@ nn_l1_loss <- function(reduction = 1L) {
 #' Nn margin ranking loss
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19236,6 +19409,7 @@ nn_margin_ranking_loss <- function(margin = 0, reduction = 1L) {
 
 #' Nn mse loss
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19257,6 +19431,7 @@ nn_mse_loss <- function(reduction = 1L) {
 #' @param margin Parameter passed to the underlying ATen operator.
 #' @param weight A `torch_tensor` of weights.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19278,6 +19453,7 @@ nn_multi_margin_loss <- function(p = 1, margin = 1, weight = NULL, reduction = 1
 
 #' Nn multilabel margin loss
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19297,6 +19473,7 @@ nn_multilabel_margin_loss <- function(reduction = 1L) {
 #' Nn smooth l1 loss
 #' @param reduction Reduction string: `"none"`, `"mean"`, or `"sum"`.
 #' @param beta Numeric scalar multiplier.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19316,6 +19493,7 @@ nn_smooth_l1_loss <- function(reduction = 1L, beta = 1.0) {
 
 #' Nn soft margin loss
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19338,6 +19516,7 @@ nn_soft_margin_loss <- function(reduction = 1L) {
 #' @param eps Numeric; small constant for numerical stability.
 #' @param swap Parameter passed to the underlying ATen operator.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19362,6 +19541,7 @@ nn_triplet_margin_loss <- function(margin = 1, p = 2, eps = 1e-6, swap = FALSE, 
 #' @param weight A `torch_tensor` of weights.
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param ignore_index Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19385,6 +19565,7 @@ nn_nll_loss <- function(weight = NULL, reduction = 1L, ignore_index = -100) {
 #' @param full Parameter passed to the underlying ATen operator.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param reduction Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19407,6 +19588,7 @@ nn_poisson_nll_loss <- function(log_input = TRUE, full = FALSE, eps = 1e-8, redu
 #' Nn huber loss
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param delta Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19428,6 +19610,7 @@ nn_huber_loss <- function(reduction = 1L, delta = 1.0) {
 #' @param kernel_size Integer vector kernel size.
 #' @param stride Integer vector stride.
 #' @param padding Integer vector padding.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19450,6 +19633,7 @@ nn_avg_pool1d <- function(kernel_size, stride = NULL, padding = 0L) {
 #' @param kernel_size Integer vector kernel size.
 #' @param stride Integer vector stride.
 #' @param padding Integer vector padding.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19472,6 +19656,7 @@ nn_avg_pool2d <- function(kernel_size, stride = NULL, padding = 0L) {
 #' @param kernel_size Integer vector kernel size.
 #' @param stride Integer vector stride.
 #' @param padding Integer vector padding.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19495,6 +19680,7 @@ nn_avg_pool3d <- function(kernel_size, stride = NULL, padding = 0L) {
 #' @param stride Integer vector stride.
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19519,6 +19705,7 @@ nn_max_pool1d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1
 #' @param stride Integer vector stride.
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19543,6 +19730,7 @@ nn_max_pool2d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1
 #' @param stride Integer vector stride.
 #' @param padding Integer vector padding.
 #' @param dilation Integer vector dilation.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19564,6 +19752,7 @@ nn_max_pool3d <- function(kernel_size, stride = NULL, padding = 0L, dilation = 1
 
 #' Nn adaptive avg pool1d
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19582,6 +19771,7 @@ nn_adaptive_avg_pool1d <- function(output_size) {
 
 #' Nn adaptive avg pool2d
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19600,6 +19790,7 @@ nn_adaptive_avg_pool2d <- function(output_size) {
 
 #' Nn adaptive avg pool3d
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19618,6 +19809,7 @@ nn_adaptive_avg_pool3d <- function(output_size) {
 
 #' Nn adaptive max pool1d
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19636,6 +19828,7 @@ nn_adaptive_max_pool1d <- function(output_size) {
 
 #' Nn adaptive max pool2d
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19654,6 +19847,7 @@ nn_adaptive_max_pool2d <- function(output_size) {
 
 #' Nn adaptive max pool3d
 #' @param output_size Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19673,6 +19867,7 @@ nn_adaptive_max_pool3d <- function(output_size) {
 #' Nn flatten
 #' @param start_dim Integer starting dimension.
 #' @param end_dim Integer ending dimension.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19692,6 +19887,7 @@ nn_flatten <- function(start_dim = 2L, end_dim = -1L) {
 
 #' Nn dropout2d
 #' @param p Numeric norm exponent.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19710,6 +19906,7 @@ nn_dropout2d <- function(p = 0.5) {
 
 #' Nn dropout3d
 #' @param p Numeric norm exponent.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19731,6 +19928,7 @@ nn_dropout3d <- function(p = 0.5) {
 #' @param eps Numeric; small constant for numerical stability.
 #' @param momentum Numeric; momentum value.
 #' @param affine Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19747,6 +19945,7 @@ nn_batch_norm3d <- function(num_features, eps = 1e-5, momentum = 0.1, affine = T
 #' @param num_channels Parameter passed to the underlying ATen operator.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param affine Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19772,6 +19971,7 @@ nn_group_norm <- function(num_groups, num_channels, eps = 1e-5, affine = TRUE) {
 #' Nn init constant
 #' @param tensor Parameter passed to the underlying ATen operator.
 #' @param val Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19783,6 +19983,7 @@ nn_init_constant_ <- function(tensor, val) { tensor$fill_(val); invisible(tensor
 
 #' Nn init ones
 #' @param tensor Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19796,6 +19997,7 @@ nn_init_ones_ <- function(tensor) { tensor$fill_(1); invisible(tensor) }
 #' @param tensor Parameter passed to the underlying ATen operator.
 #' @param mean Parameter passed to the underlying ATen operator.
 #' @param std Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19809,6 +20011,7 @@ nn_init_normal_ <- function(tensor, mean = 0, std = 1) { tensor$normal_(mean, st
 #' @param tensor Parameter passed to the underlying ATen operator.
 #' @param a Parameter passed to the underlying ATen operator.
 #' @param b Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19820,6 +20023,7 @@ nn_init_uniform_ <- function(tensor, a = 0, b = 1) { tensor$uniform_(a, b); invi
 
 #' Nn init eye
 #' @param tensor A `torch_tensor` to be filled in-place with an identity matrix.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19832,6 +20036,7 @@ nn_init_eye_ <- function(tensor) { with_no_grad(function() { tensor$zero_(); n <
 #' Nn init calculate gain
 #' @param nonlinearity Parameter passed to the underlying ATen operator.
 #' @param param Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19851,6 +20056,7 @@ nn_init_calculate_gain <- function(nonlinearity, param = NULL) {
 #' @param a Parameter passed to the underlying ATen operator.
 #' @param mode Parameter passed to the underlying ATen operator.
 #' @param nonlinearity Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19872,6 +20078,7 @@ nn_init_kaiming_uniform_ <- function(tensor, a = 0, mode = "fan_in", nonlinearit
 #' @param a Parameter passed to the underlying ATen operator.
 #' @param mode Parameter passed to the underlying ATen operator.
 #' @param nonlinearity Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19893,6 +20100,7 @@ nn_init_kaiming_normal_ <- function(tensor, a = 0, mode = "fan_in", nonlinearity
 #' @param std Parameter passed to the underlying ATen operator.
 #' @param a Parameter passed to the underlying ATen operator.
 #' @param b Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -19913,6 +20121,7 @@ nn_init_trunc_normal_ <- function(tensor, mean = 0, std = 1, a = -2, b = 2) { te
 #' @param dilation Integer vector dilation.
 #' @param groups Integer number of groups.
 #' @param bias A `torch_tensor` of biases, or `NULL`.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19946,6 +20155,7 @@ w <- torch_randn(c(out_channels, as.integer(in_channels / groups), kernel_size, 
 #' @param groups Integer number of groups.
 #' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @param dilation Integer vector dilation.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -19980,6 +20190,7 @@ w <- torch_randn(c(in_channels, as.integer(out_channels / groups), kernel_size, 
 #' @param groups Integer number of groups.
 #' @param bias A `torch_tensor` of biases, or `NULL`.
 #' @param dilation Integer vector dilation.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -20007,6 +20218,7 @@ w <- torch_randn(c(in_channels, as.integer(out_channels / groups), kernel_size, 
 #' Nn threshold
 #' @param threshold Parameter passed to the underlying ATen operator.
 #' @param value Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -20027,6 +20239,7 @@ nn_threshold <- function(threshold, value) {
 #' Nn unflatten
 #' @param dim Integer dimension.
 #' @param unflattened_size Parameter passed to the underlying ATen operator.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -20048,6 +20261,7 @@ nn_unflatten <- function(dim, unflattened_size) {
 #' @param p Parameter passed to the underlying ATen operator.
 #' @param eps Numeric; small constant for numerical stability.
 #' @param keepdim Logical; keep reduced dimensions.
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -20065,6 +20279,7 @@ nn_pairwise_distance <- function(p = 2, eps = 1e-6, keepdim = FALSE) {
 }
 
 #' Nn softmax2d
+#' @return An `nn_module` instance.
 #' @export
 #' @examples
 #' \donttest{
@@ -20086,6 +20301,7 @@ nn_softmax2d <- function() {
 #' @param reduction Parameter passed to the underlying ATen operator.
 #' @param ignore_index Parameter passed to the underlying ATen operator.
 #' @param label_smoothing Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20099,6 +20315,7 @@ nnf_cross_entropy <- function(input, target, weight = NULL, reduction = 1L, igno
 
 #' Nnf logsigmoid
 #' @param input A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20111,6 +20328,7 @@ nnf_logsigmoid <- function(input) torch_log(torch_sigmoid(input))
 #' Nnf softmin
 #' @param input A `torch_tensor`.
 #' @param dim Integer dimension.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20122,6 +20340,7 @@ nnf_softmin <- function(input, dim = -1L) nnf_softmax(torch_neg(input), dim)
 
 #' Nnf softsign
 #' @param input A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20133,6 +20352,7 @@ nnf_softsign <- function(input) input / (1 + torch_abs(input))
 
 #' Nnf tanhshrink
 #' @param input A `torch_tensor`.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20146,6 +20366,7 @@ nnf_tanhshrink <- function(input) input - torch_tanh(input)
 #' @param input A `torch_tensor`.
 #' @param p Numeric norm exponent.
 #' @param training Logical.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20163,6 +20384,7 @@ nnf_dropout2d <- function(input, p = 0.5, training = TRUE) {
 #' @param input A `torch_tensor`.
 #' @param p Numeric norm exponent.
 #' @param training Logical.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20178,6 +20400,7 @@ nnf_dropout3d <- function(input, p = 0.5, training = TRUE) {
 
 #' Nn init zeros
 #' @param tensor Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20190,6 +20413,7 @@ nn_init_zeros_ <- function(tensor) { tensor$zero_(); invisible(tensor) }
 #' Nn init xavier uniform
 #' @param tensor Parameter passed to the underlying ATen operator.
 #' @param gain Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20207,6 +20431,7 @@ nn_init_xavier_uniform_ <- function(tensor, gain = 1) {
 #' Nn init xavier normal
 #' @param tensor Parameter passed to the underlying ATen operator.
 #' @param gain Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20224,6 +20449,7 @@ nn_init_xavier_normal_ <- function(tensor, gain = 1) {
 #' @param optimizer Parameter passed to the underlying ATen operator.
 #' @param step_size Parameter passed to the underlying ATen operator.
 #' @param gamma Parameter passed to the underlying ATen operator.
+#' @return A learning rate scheduler.
 #' @export
 #' @examples
 #' \donttest{
@@ -20238,6 +20464,7 @@ lr_step <- function(optimizer, step_size, gamma = 0.1) {
 #' Lr lambda
 #' @param optimizer Parameter passed to the underlying ATen operator.
 #' @param lr_lambda Parameter passed to the underlying ATen operator.
+#' @return A learning rate scheduler.
 #' @export
 #' @examples
 #' \donttest{
@@ -20252,6 +20479,7 @@ lr_lambda <- function(optimizer, lr_lambda) {
 #' Lr multiplicative
 #' @param optimizer Parameter passed to the underlying ATen operator.
 #' @param lr_lambda Parameter passed to the underlying ATen operator.
+#' @return A learning rate scheduler.
 #' @export
 #' @examples
 #' \donttest{
@@ -20266,6 +20494,7 @@ lr_multiplicative <- function(optimizer, lr_lambda) lr_lambda(optimizer, lr_lamb
 #' @param mode Parameter passed to the underlying ATen operator.
 #' @param factor Parameter passed to the underlying ATen operator.
 #' @param patience Parameter passed to the underlying ATen operator.
+#' @return A learning rate scheduler.
 #' @export
 #' @examples
 #' \donttest{
@@ -20281,6 +20510,7 @@ lr_reduce_on_plateau <- function(optimizer, mode = 'min', factor = 0.1, patience
 #' @param optimizer Parameter passed to the underlying ATen operator.
 #' @param T_max Parameter passed to the underlying ATen operator.
 #' @param eta_min Parameter passed to the underlying ATen operator.
+#' @return A learning rate scheduler.
 #' @export
 #' @examples
 #' \donttest{
@@ -20296,6 +20526,7 @@ lr_cosine_annealing <- function(optimizer, T_max, eta_min = 0) {
 #' @param optimizer Parameter passed to the underlying ATen operator.
 #' @param max_lr Parameter passed to the underlying ATen operator.
 #' @param total_steps Parameter passed to the underlying ATen operator.
+#' @return A learning rate scheduler.
 #' @export
 #' @examples
 #' \donttest{
@@ -20310,6 +20541,7 @@ lr_one_cycle <- function(optimizer, max_lr, total_steps) {
 #' Lr scheduler
 #' @param optimizer Parameter passed to the underlying ATen operator.
 #' @param ... Additional arguments passed to methods.
+#' @return A learning rate scheduler.
 #' @export
 #' @examples
 #' \donttest{
@@ -20321,6 +20553,7 @@ lr_scheduler <- function(optimizer, ...) structure(list(optimizer = optimizer, .
 
 #' Cuda synchronize
 #' @param device Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -20334,6 +20567,7 @@ cuda_synchronize <- function(device = NULL) {
 }
 
 #' Cuda current device
+#' @return Integer scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -20347,6 +20581,7 @@ cuda_current_device <- function() {
 
 #' Cuda get device capability
 #' @param device Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20357,6 +20592,7 @@ cuda_current_device <- function() {
 cuda_get_device_capability <- function(device = 0L) list(major = 0L, minor = 0L)
 
 #' Cuda runtime version
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20368,6 +20604,7 @@ cuda_runtime_version <- function() 0L
 
 #' Cuda get rng state
 #' @param device Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20380,6 +20617,7 @@ cuda_get_rng_state <- function(device = 0L) NULL
 #' Cuda set rng state
 #' @param state RNG state.
 #' @param device Parameter passed to the underlying ATen operator.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20391,6 +20629,7 @@ cuda_set_rng_state <- function(state, device = 0L) invisible(NULL)
 
 #' Autograd set grad mode
 #' @param enabled Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -20403,6 +20642,7 @@ autograd_set_grad_mode <- function(enabled) invisible(NULL)
 #' Autograd backward
 #' @param tensors Parameter passed to the underlying ATen operator.
 #' @param grad_tensors Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -20419,6 +20659,7 @@ autograd_backward <- function(tensors, grad_tensors = NULL) {
 #' Load state dict
 #' @param module Parameter passed to the underlying ATen operator.
 #' @param state_dict Parameter passed to the underlying ATen operator.
+#' @return No return value, called for side effects.
 #' @export
 #' @examples
 #' \donttest{
@@ -20473,6 +20714,7 @@ nn_utils_clip_grad_norm_ <- function(parameters, max_norm, norm_type = 2) {
 #'
 #' @param parameters List of tensors or an nn_module.
 #' @param clip_value Maximum absolute value.
+#' @return A `torch_tensor`.
 #' @export
 #' @examples
 #' \donttest{
@@ -20662,6 +20904,7 @@ nn_rnn <- function(input_size, hidden_size, num_layers = 1L,
 #' Optimizer
 #' @param name Parameter passed to the underlying ATen operator.
 #' @param ... Additional arguments passed to methods.
+#' @return An optimizer generator function.
 #' @export
 #' @examples
 #' \donttest{

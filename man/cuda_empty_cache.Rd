@@ -5,6 +5,9 @@
 \usage{
 cuda_empty_cache()
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Releases all unoccupied cached memory held by the CUDA allocator
 so that it can be used by other GPU applications.

@@ -8,6 +8,9 @@ nn_celu(alpha = 1)
 \arguments{
 \item{alpha}{Numeric scalar multiplier.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn celu
 }

@@ -7,6 +7,7 @@
 #' either form.
 #'
 #' @name torch_dtype_constants
+#' @return A `torch_dtype` object.
 #' @examples
 #' torch_float32()
 #' torch_int64()
@@ -144,6 +145,7 @@ torch_float8_e4m3fnuz <- .make_dtype(26L)
 #' @param ... Ignored.
 #' @examples
 #' print(torch_float32())
+#' @return Invisible `x`.
 #' @export
 print.torch_dtype <- function(x, ...) {
   names <- c(
@@ -166,6 +168,7 @@ print.torch_dtype <- function(x, ...) {
 #' @param ... Additional arguments passed to methods.
 #' @examples
 #' as.character(torch_float32())
+#' @return An R object.
 #' @export
 as.character.torch_dtype <- function(x, ...) {
   # Match torch R package convention

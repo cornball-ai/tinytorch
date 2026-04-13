@@ -8,6 +8,9 @@ torch_empty_like(self)
 \arguments{
 \item{self}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Create an uninitialized tensor with same shape/dtype as input
 }

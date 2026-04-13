@@ -12,6 +12,9 @@ nn_ctc_loss(blank = 0L, reduction = 1L, zero_infinity = FALSE)
 
 \item{zero_infinity}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn ctc loss
 }

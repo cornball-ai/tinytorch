@@ -8,6 +8,9 @@ is_torch_device(x)
 \arguments{
 \item{x}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+Logical scalar.
+}
 \description{
 Is torch device
 }

@@ -14,6 +14,9 @@ nn_batch_norm3d(num_features, eps = 1e-05, momentum = 0.1, affine = TRUE)
 
 \item{affine}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn batch norm3d
 }

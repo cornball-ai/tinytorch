@@ -12,6 +12,9 @@ torch_index_select(self, dim, index)
 
 \item{index}{A `torch_tensor` of indices.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_index_select
 }

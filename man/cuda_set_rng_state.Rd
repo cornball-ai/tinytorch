@@ -10,6 +10,9 @@ cuda_set_rng_state(state, device = 0L)
 
 \item{device}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Cuda set rng state
 }

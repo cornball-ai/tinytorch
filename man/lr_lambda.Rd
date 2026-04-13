@@ -10,6 +10,9 @@ lr_lambda(optimizer, lr_lambda)
 
 \item{lr_lambda}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A learning rate scheduler.
+}
 \description{
 Lr lambda
 }

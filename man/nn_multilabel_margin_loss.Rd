@@ -8,6 +8,9 @@ nn_multilabel_margin_loss(reduction = 1L)
 \arguments{
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn multilabel margin loss
 }

@@ -14,6 +14,9 @@ nnf_conv_tbc(self, weight, bias, pad)
 
 \item{pad}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf conv tbc
 }

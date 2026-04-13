@@ -12,6 +12,9 @@ torch_ones(..., dtype = NULL, device = NULL)
 
 \item{device}{Ignored (CPU only).}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Create a tensor of ones
 }

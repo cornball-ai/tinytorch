@@ -18,6 +18,9 @@ nnf_multi_margin_loss(self, target, p, margin, weight, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf multi margin loss
 }

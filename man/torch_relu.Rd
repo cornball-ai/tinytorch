@@ -8,6 +8,9 @@ torch_relu(self)
 \arguments{
 \item{self}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 ReLU activation (namespace-level)
 }

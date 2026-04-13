@@ -10,6 +10,9 @@ local_device(device, .local_envir = parent.frame())
 
 \item{.local_envir}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Local device
 }

@@ -5,6 +5,9 @@
 \usage{
 backends_mps_is_available()
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Backends mps is available
 }

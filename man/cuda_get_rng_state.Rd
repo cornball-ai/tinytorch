@@ -8,6 +8,9 @@ cuda_get_rng_state(device = 0L)
 \arguments{
 \item{device}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Cuda get rng state
 }

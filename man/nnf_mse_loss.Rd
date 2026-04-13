@@ -12,6 +12,9 @@ nnf_mse_loss(self, target, reduction)
 
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf mse loss
 }

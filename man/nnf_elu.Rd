@@ -10,6 +10,9 @@ nnf_elu(self, alpha = 1)
 
 \item{alpha}{Scale for the negative factor. Default 1.0.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 ELU activation
 }

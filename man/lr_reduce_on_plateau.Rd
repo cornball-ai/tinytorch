@@ -14,6 +14,9 @@ lr_reduce_on_plateau(optimizer, mode = "min", factor = 0.1, patience = 10)
 
 \item{patience}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A learning rate scheduler.
+}
 \description{
 Lr reduce on plateau
 }

@@ -23,6 +23,9 @@ nn_conv3d(in_channels, out_channels, kernel_size, stride = 1L, padding = 0L,
 
 \item{bias}{A `torch_tensor` of biases, or `NULL`.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn conv3d
 }

@@ -18,6 +18,7 @@ make_distribution <- function(class, ...) {
 #' Print.torch distribution
 #' @param x Parameter passed to the underlying ATen operator.
 #' @param ... Additional arguments passed to methods.
+#' @return Invisible `x`.
 #' @export
 #' @examples
 #' \donttest{

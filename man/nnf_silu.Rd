@@ -11,6 +11,9 @@ torch_silu(self)
 \arguments{
 \item{self}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 SiLU activation (swish)
 }

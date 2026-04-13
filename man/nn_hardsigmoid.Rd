@@ -5,6 +5,9 @@
 \usage{
 nn_hardsigmoid()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn hardsigmoid
 }

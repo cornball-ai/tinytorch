@@ -10,6 +10,9 @@ torch_matmul(self, other)
 
 \item{other}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Matrix multiplication
 }

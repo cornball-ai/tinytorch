@@ -12,6 +12,9 @@ torch_randn(..., dtype = NULL, device = NULL)
 
 \item{device}{Ignored (CPU only).}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Create a tensor with random normal values
 }

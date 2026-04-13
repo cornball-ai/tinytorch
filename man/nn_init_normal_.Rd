@@ -12,6 +12,9 @@ nn_init_normal_(tensor, mean = 0, std = 1)
 
 \item{std}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init normal
 }

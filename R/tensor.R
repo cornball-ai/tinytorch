@@ -12,6 +12,7 @@
 #' torch_add(a, b)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_add <- function(self, other, alpha = 1) {
   C_torch_add(self, other, alpha)
@@ -29,6 +30,7 @@ torch_add <- function(self, other, alpha = 1) {
 #' torch_sub(a, b)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_sub <- function(self, other, alpha = 1) {
   C_torch_sub(self, other, alpha)
@@ -43,6 +45,7 @@ torch_sub <- function(self, other, alpha = 1) {
 #'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_mul <- function(self, other) {
   C_torch_mul(self, other)
@@ -57,6 +60,7 @@ torch_mul <- function(self, other) {
 #'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_div <- function(self, other) {
   C_torch_div(self, other)
@@ -73,6 +77,7 @@ torch_div <- function(self, other) {
 #' torch_matmul(a, b)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_matmul <- function(self, other) {
   C_torch_matmul(self, other)
@@ -90,6 +95,7 @@ torch_matmul <- function(self, other) {
 #' torch_mm(a, b)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_mm <- function(self, other, out_dtype = NULL) {
   if (is.null(out_dtype)) C_torch_mm(self, other)
@@ -108,6 +114,7 @@ torch_mm <- function(self, other, out_dtype = NULL) {
 #' torch_sum(x, dim = 1)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_sum <- function(self, dim = NULL, keepdim = FALSE) {
   C_torch_sum(self, dim, keepdim)
@@ -125,6 +132,7 @@ torch_sum <- function(self, dim = NULL, keepdim = FALSE) {
 #' torch_mean(x, dim = 1)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_mean <- function(self, dim = NULL, keepdim = FALSE) {
   C_torch_mean(self, dim, keepdim)
@@ -139,6 +147,7 @@ torch_mean <- function(self, dim = NULL, keepdim = FALSE) {
 #' torch_sigmoid(x)
 #' }
 #' }
+#' @return A `torch_tensor`.
 #' @export
 torch_sigmoid <- function(self) {
   C_torch_sigmoid(self)
@@ -597,6 +606,9 @@ torch_sigmoid <- function(self) {
 # ---- $ dispatch ----
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `$.torch_tensor` <- function(x, name) {
   fn <- .tensor_methods[[name]]
   if (!is.null(fn)) {
@@ -622,6 +634,7 @@ torch_sigmoid <- function(self) {
 #' print(x)
 #' }
 #' }
+#' @return Invisible `x`.
 #' @export
 print.torch_tensor <- function(x, ...) {
   C_tensor_print(x)
@@ -636,6 +649,9 @@ print.torch_tensor <- function(x, ...) {
 # ---- S3 operators ----
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `+.torch_tensor` <- function(e1, e2) {
   if (missing(e2)) return(e1)
   if (!inherits(e1, "torch_tensor")) {
@@ -648,12 +664,16 @@ print.torch_tensor <- function(x, ...) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `!.torch_tensor` <- function(x) {
   C_torch_logical_not(x)
 }
 
 #' Length.nn buffer
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Integer scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -667,6 +687,7 @@ length.nn_buffer <- function(x) {
 
 #' Length.nn parameter
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Integer scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -680,6 +701,7 @@ length.nn_parameter <- function(x) {
 
 #' Length.torch tensor
 #' @param x Parameter passed to the underlying ATen operator.
+#' @return Integer scalar.
 #' @export
 #' @examples
 #' \donttest{
@@ -691,6 +713,9 @@ length.torch_tensor <- function(x) {
   C_tensor_numel(x)
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `-.torch_tensor` <- function(e1, e2) {
   if (missing(e2)) return(C_torch_neg(e1))
@@ -705,6 +730,9 @@ length.torch_tensor <- function(x) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `*.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
     C_torch_mul_scalar(e2, e1)  # scalar * tensor = tensor * scalar
@@ -715,6 +743,9 @@ length.torch_tensor <- function(x) {
   }
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `/.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
@@ -729,6 +760,9 @@ length.torch_tensor <- function(x) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `^.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
     # scalar ^ tensor: convert scalar to tensor on same device
@@ -742,6 +776,9 @@ length.torch_tensor <- function(x) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `%%.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
     e1 <- torch_tensor(e1, dtype = e2$dtype, device = C_tensor_device(e2))
@@ -753,6 +790,9 @@ length.torch_tensor <- function(x) {
   }
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `%/%.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
@@ -766,6 +806,9 @@ length.torch_tensor <- function(x) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `==.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
     C_torch_eq_scalar(e2, e1)
@@ -776,6 +819,9 @@ length.torch_tensor <- function(x) {
   }
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `!=.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
@@ -788,6 +834,9 @@ length.torch_tensor <- function(x) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `<.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
     C_torch_gt_scalar(e2, e1)  # scalar < tensor = tensor > scalar
@@ -798,6 +847,9 @@ length.torch_tensor <- function(x) {
   }
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `<=.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
@@ -810,6 +862,9 @@ length.torch_tensor <- function(x) {
 }
 
 #' @export
+
+#' @return A `torch_tensor`.
+#' @export
 `>.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
     C_torch_lt_scalar(e2, e1)  # scalar > tensor = tensor < scalar
@@ -820,6 +875,9 @@ length.torch_tensor <- function(x) {
   }
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `>=.torch_tensor` <- function(e1, e2) {
   if (!inherits(e1, "torch_tensor")) {
@@ -833,6 +891,9 @@ length.torch_tensor <- function(x) {
 
 # ---- [ indexing ----
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `[.torch_tensor` <- function(x, ..., drop = TRUE) {
   cl <- match.call(expand.dots = FALSE)
@@ -851,6 +912,9 @@ length.torch_tensor <- function(x) {
   C_torch_index(x, indices, as.logical(drop))
 }
 
+#' @export
+
+#' @return A `torch_tensor`.
 #' @export
 `[<-.torch_tensor` <- function(x, ..., value) {
   cl <- match.call(expand.dots = FALSE)

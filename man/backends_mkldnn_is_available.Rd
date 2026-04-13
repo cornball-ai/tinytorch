@@ -5,6 +5,9 @@
 \usage{
 backends_mkldnn_is_available()
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Backends mkldnn is available
 }

@@ -21,6 +21,9 @@ torch_conv2d(input, weight, bias = NULL, stride = 1L, padding = 0L,
 
 \item{groups}{Integer number of groups.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_conv2d
 }

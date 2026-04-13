@@ -5,6 +5,9 @@
 \usage{
 nn_log_sigmoid()
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn log sigmoid
 }

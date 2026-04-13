@@ -10,6 +10,9 @@ nnf_softmax(self, dim = -1L)
 
 \item{dim}{Dimension to apply softmax over (1-based).}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Softmax
 }

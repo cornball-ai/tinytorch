@@ -23,6 +23,9 @@ nnf_embedding_bag(weight, indices, offsets, scale_grad_by_freq, mode, sparse,
 
 \item{include_last_offset}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf embedding bag
 }

@@ -12,6 +12,9 @@ torch_add(self, other, alpha = 1)
 
 \item{alpha}{Scalar multiplier for other (default 1).}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Add two tensors
 }

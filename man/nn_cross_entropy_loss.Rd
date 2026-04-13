@@ -15,6 +15,9 @@ nn_cross_entropy_loss(weight = NULL, reduction = 1L, ignore_index = -100,
 
 \item{label_smoothing}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn cross entropy loss
 }

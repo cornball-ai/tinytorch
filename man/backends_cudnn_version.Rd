@@ -5,6 +5,9 @@
 \usage{
 backends_cudnn_version()
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Backends cudnn version
 }

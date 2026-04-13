@@ -8,6 +8,9 @@ torch_sigmoid(self)
 \arguments{
 \item{self}{A torch_tensor.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Sigmoid activation (namespace-level)
 }

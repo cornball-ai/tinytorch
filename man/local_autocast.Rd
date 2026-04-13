@@ -13,6 +13,9 @@ local_autocast(device_type = "cuda", dtype = torch_float16,
 
 \item{.local_envir}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Local autocast
 }

@@ -10,6 +10,9 @@ nn_init_xavier_uniform_(tensor, gain = 1)
 
 \item{gain}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nn init xavier uniform
 }

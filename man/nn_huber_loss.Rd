@@ -10,6 +10,9 @@ nn_huber_loss(reduction = 1L, delta = 1)
 
 \item{delta}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn huber loss
 }

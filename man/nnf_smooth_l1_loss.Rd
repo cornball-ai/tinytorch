@@ -14,6 +14,9 @@ nnf_smooth_l1_loss(self, target, reduction, beta)
 
 \item{beta}{Numeric scalar multiplier.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf smooth l1 loss
 }

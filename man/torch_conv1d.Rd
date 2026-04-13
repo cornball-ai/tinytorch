@@ -21,6 +21,9 @@ torch_conv1d(input, weight, bias = NULL, stride = 1L, padding = 0L,
 
 \item{groups}{Number of blocked connections. Default 1.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 1D convolution
 }

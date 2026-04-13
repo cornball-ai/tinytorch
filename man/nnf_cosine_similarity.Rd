@@ -14,6 +14,9 @@ nnf_cosine_similarity(x1, x2, dim, eps)
 
 \item{eps}{Numeric; small constant for numerical stability.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf cosine similarity
 }

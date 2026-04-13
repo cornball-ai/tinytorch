@@ -18,6 +18,9 @@ nnf_group_norm(input, num_groups, weight, bias, eps, cudnn_enabled)
 
 \item{cudnn_enabled}{Logical.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf group norm
 }

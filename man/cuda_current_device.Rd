@@ -5,6 +5,9 @@
 \usage{
 cuda_current_device()
 }
+\value{
+Integer scalar.
+}
 \description{
 Cuda current device
 }

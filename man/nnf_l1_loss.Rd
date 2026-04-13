@@ -12,6 +12,9 @@ nnf_l1_loss(self, target, reduction)
 
 \item{reduction}{Reduction string: `"none"`, `"mean"`, or `"sum"`.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf l1 loss
 }

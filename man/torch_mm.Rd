@@ -12,6 +12,9 @@ torch_mm(self, other, out_dtype = NULL)
 
 \item{out_dtype}{Optional output dtype for mixed-precision (PyTorch 2.8+).}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Matrix-matrix multiplication (2D only)
 }

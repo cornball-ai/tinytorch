@@ -10,6 +10,9 @@ nnf_embedding(weight, indices)
 
 \item{indices}{A `torch_tensor` of indices.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf embedding
 }

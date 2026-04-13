@@ -10,6 +10,9 @@ autograd_backward(tensors, grad_tensors = NULL)
 
 \item{grad_tensors}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Autograd backward
 }

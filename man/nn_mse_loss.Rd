@@ -8,6 +8,9 @@ nn_mse_loss(reduction = 1L)
 \arguments{
 \item{reduction}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn mse loss
 }

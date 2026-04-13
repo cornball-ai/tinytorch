@@ -8,6 +8,9 @@ local_enable_grad(.local_envir = parent.frame())
 \arguments{
 \item{.local_envir}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Local enable grad
 }

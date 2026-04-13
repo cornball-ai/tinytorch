@@ -10,6 +10,9 @@ nnf_celu(self, alpha)
 
 \item{alpha}{Numeric scalar multiplier.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf celu
 }

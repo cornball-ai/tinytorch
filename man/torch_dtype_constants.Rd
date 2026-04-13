@@ -42,6 +42,9 @@
 \alias{torch_per_tensor_symmetric}
 \alias{torch_per_channel_symmetric}
 \title{Torch Data Types}
+\value{
+A `torch_dtype` object.
+}
 \description{
 Factory functions that return tensor element type objects matching
 libtorch's \code{c10::ScalarType} enum. These can be called with no

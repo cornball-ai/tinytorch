@@ -16,6 +16,9 @@ nnf_pairwise_distance(x1, x2, p, eps, keepdim)
 
 \item{keepdim}{Logical; keep reduced dimensions.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf pairwise distance
 }

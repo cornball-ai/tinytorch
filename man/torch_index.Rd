@@ -10,6 +10,9 @@ torch_index(self, indices)
 
 \item{indices}{A `torch_tensor` of indices.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 torch_index
 }

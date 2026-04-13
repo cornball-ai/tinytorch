@@ -10,6 +10,9 @@ nnf_pdist(self, p)
 
 \item{p}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf pdist
 }

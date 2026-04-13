@@ -12,6 +12,9 @@ nn_avg_pool3d(kernel_size, stride = NULL, padding = 0L)
 
 \item{padding}{Integer vector padding.}
 }
+\value{
+An `nn_module` instance.
+}
 \description{
 Nn avg pool3d
 }

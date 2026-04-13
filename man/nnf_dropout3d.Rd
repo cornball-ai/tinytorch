@@ -12,6 +12,9 @@ nnf_dropout3d(input, p = 0.5, training = TRUE)
 
 \item{training}{Logical.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf dropout3d
 }

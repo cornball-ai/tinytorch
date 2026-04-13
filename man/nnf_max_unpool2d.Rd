@@ -12,6 +12,9 @@ nnf_max_unpool2d(self, indices, output_size)
 
 \item{output_size}{Parameter passed to the underlying ATen operator.}
 }
+\value{
+A `torch_tensor`.
+}
 \description{
 Nnf max unpool2d
 }
