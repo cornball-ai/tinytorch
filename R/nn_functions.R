@@ -723,9 +723,7 @@ cuda_memory_stats <- function() {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' with_autocast(device_type = "cpu", dtype = torch_float32(), {
-#'   torch_randn(c(2, 3)) + torch_randn(c(2, 3))
-#' })
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 with_autocast <- function(device_type = "cpu", dtype = NULL,

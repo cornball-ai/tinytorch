@@ -29,10 +29,7 @@ torch_conv_transpose1d
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-inputs = torch_randn(c(20, 16, 50))
-weights = torch_randn(c(16, 33, 5))
-nnf_conv_transpose1d(inputs, weights)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

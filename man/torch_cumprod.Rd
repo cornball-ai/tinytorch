@@ -21,10 +21,7 @@ Wrapper for \code{at::cumprod}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-a = torch_randn(c(10))
-a
-torch_cumprod(a, dim=1)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

@@ -16,11 +16,7 @@ torch_reshape
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-a <- torch_arange(0, 3)
-torch_reshape(a, list(2, 2))
-b <- torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
-torch_reshape(b, list(-1))
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

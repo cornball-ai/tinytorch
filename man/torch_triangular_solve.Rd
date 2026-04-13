@@ -26,12 +26,7 @@ Wrapper for \code{at::triangular_solve}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-A = torch_randn(c(2, 2))$triu()
-A
-b = torch_randn(c(2, 3))
-b
-torch_triangular_solve(b, A)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

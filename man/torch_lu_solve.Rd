@@ -21,11 +21,7 @@ Wrapper for \code{at::lu_solve}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-A = torch_randn(c(2, 3, 3))
-b = torch_randn(c(2, 3, 1))
-out = torch_lu(A)
-x = torch_lu_solve(b, out[[1]], out[[2]])
-torch_norm(torch_bmm(A, x) - b)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

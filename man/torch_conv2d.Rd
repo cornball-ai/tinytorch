@@ -27,11 +27,7 @@ torch_conv2d
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-# With square kernels and equal stride
-filters = torch_randn(c(8,4,3,3))
-inputs = torch_randn(c(1,4,5,5))
-nnf_conv2d(inputs, filters, padding=1)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

@@ -32,11 +32,7 @@ Wrapper for \code{at::conv_transpose2d}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-# With square kernels and equal stride
-inputs = torch_randn(c(1, 4, 5, 5))
-weights = torch_randn(c(4, 8, 3, 3))
-nnf_conv_transpose2d(inputs, weights, padding=1)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

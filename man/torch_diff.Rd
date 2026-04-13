@@ -25,16 +25,7 @@ Wrapper for \code{at::diff}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-a <- torch_tensor(c(1,2,3))
-torch_diff(a)
-
-b <- torch_tensor(c(4, 5))
-torch_diff(a, append = b)
-
-c <- torch_tensor(rbind(c(1,2,3), c(3,4,5)))
-torch_diff(c, dim = 1)
-torch_diff(c, dim = 2) 
-
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

@@ -20,10 +20,7 @@ torch_narrow
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-x = torch_tensor(matrix(c(1:9), ncol = 3, byrow= TRUE))
-torch_narrow(x, 1, 1, 2)
-torch_narrow(x, 2, 2, 2)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

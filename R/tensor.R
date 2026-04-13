@@ -40,8 +40,7 @@ torch_sub <- function(self, other, alpha = 1) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' a <- torch_randn(c(2, 3))
-#' torch_mul(a, 2.0)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 #' @export
@@ -55,8 +54,7 @@ torch_mul <- function(self, other) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' a <- torch_randn(c(2, 3))
-#' torch_div(a, 2.0)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 #' @export

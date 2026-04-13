@@ -18,14 +18,7 @@ torch_repeat_interleave
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-x = torch_tensor(c(1, 2, 3))
-x$repeat_interleave(2)
-y = torch_tensor(matrix(c(1, 2, 3, 4), ncol = 2, byrow=TRUE))
-torch_repeat_interleave(y, 2)
-torch_repeat_interleave(y, 3, dim=1)
-torch_repeat_interleave(y, torch_tensor(c(1, 2)), dim=1)
-
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

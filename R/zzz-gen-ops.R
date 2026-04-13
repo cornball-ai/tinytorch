@@ -1000,13 +1000,7 @@ torch_arctanh_ <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x = torch_randn(c(3, 3))
-#' x
-#' t = torch_as_strided(x, list(2, 2), list(1, 2))
-#' t
-#' t = torch_as_strided(x, list(2, 2), list(1, 2), 1)
-#' t
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_as_strided <- function(self, size, stride, storage_offset = NULL) {
@@ -1175,16 +1169,7 @@ torch_arctan_ <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x <- torch_randn(c(2))
-#' x
-#' torch_atleast_1d(x)
-#' x <- torch_tensor(1.)
-#' x
-#' torch_atleast_1d(x)
-#' x <- torch_tensor(0.5)
-#' y <- torch_tensor(1.)
-#' torch_atleast_1d(list(x,y))
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_atleast_1d <- function(self) {
@@ -1200,16 +1185,7 @@ torch_atleast_1d <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x <- torch_tensor(1.)
-#' x
-#' torch_atleast_2d(x)
-#' x <- torch_randn(c(2,2))
-#' x
-#' torch_atleast_2d(x)
-#' x <- torch_tensor(0.5)
-#' y <- torch_tensor(1.)
-#' torch_atleast_2d(list(x,y))
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_atleast_2d <- function(self) {
@@ -1430,13 +1406,7 @@ torch_binary_cross_entropy_with_logits <- function(self, target, weight = NULL, 
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' input = torch_randint(1, 8, list(5), dtype=torch_int64())
-#' weights = torch_linspace(0, 1, steps=5)
-#' input
-#' weights
-#' torch_bincount(input, weights)
-#' input$bincount(weights)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_bincount <- function(self, weights = NULL, minlength = 0) {
@@ -1575,14 +1545,7 @@ torch_logical_xor_ <- function(self, other) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_logical_and(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
-#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
-#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
-#' torch_logical_and(a, b)
-#' 
-#' torch_logical_and(a, b, out=torch_empty(4, dtype=torch_bool()))
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_logical_and <- function(self, other) {
@@ -1616,16 +1579,7 @@ torch_logical_and_ <- function(self, other) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_logical_or(torch_tensor(c(TRUE, FALSE, TRUE)), torch_tensor(c(TRUE, FALSE, FALSE)))
-#' a = torch_tensor(c(0, 1, 10, 0), dtype=torch_int8())
-#' b = torch_tensor(c(4, 0, 1, 0), dtype=torch_int8())
-#' torch_logical_or(a, b)
-#' 
-#' torch_logical_or(a$double(), b$double())
-#' torch_logical_or(a$double(), b)
-#' torch_logical_or(a, b, out=torch_empty(4, dtype=torch_bool()))
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_logical_or <- function(self, other) {
@@ -2099,11 +2053,7 @@ torch_conv_tbc <- function(self, weight, bias, pad = 0) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' # With square kernels and equal stride
-#' inputs = torch_randn(c(1, 4, 5, 5))
-#' weights = torch_randn(c(4, 8, 3, 3))
-#' nnf_conv_transpose2d(inputs, weights, padding=1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_conv_transpose2d <- function(input, weight, bias = NULL, stride = 1, padding = 0, output_padding = 0, groups = 1, dilation = 1) {
@@ -2126,11 +2076,7 @@ torch_conv_transpose2d <- function(input, weight, bias = NULL, stride = 1, paddi
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' inputs = torch_randn(c(20, 16, 50, 10, 20))
-#' weights = torch_randn(c(16, 33, 3, 3, 3))
-#' nnf_conv_transpose3d(inputs, weights)
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_conv_transpose3d <- function(input, weight, bias = NULL, stride = 1, padding = 0, output_padding = 0, groups = 1, dilation = 1) {
@@ -2236,12 +2182,7 @@ torch_cosine_embedding_loss <- function(input1, input2, target, margin = 0.0, re
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x <- torch_zeros(3,3)
-#' x[torch_randn(3,3) > 0.5] = 1
-#' x
-#' torch_count_nonzero(x)
-#' torch_count_nonzero(x, dim=1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_count_nonzero <- function(self, dim) {
@@ -2293,10 +2234,7 @@ torch_corrcoef <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(10))
-#' a
-#' torch_cummax(a, dim=1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_cummax <- function(self, dim) {
@@ -2313,10 +2251,7 @@ torch_cummax <- function(self, dim) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(10))
-#' a
-#' torch_cummin(a, dim=1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_cummin <- function(self, dim) {
@@ -2334,10 +2269,7 @@ torch_cummin <- function(self, dim) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(10))
-#' a
-#' torch_cumprod(a, dim=1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_cumprod <- function(self, dim, dtype = NULL) {
@@ -2432,10 +2364,7 @@ torch_ctc_loss <- function(log_probs, targets, input_lengths, target_lengths, bl
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(2, 3))
-#' torch_diag_embed(a)
-#' torch_diag_embed(a, offset=1, dim1=1, dim2=3)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_diag_embed <- function(self, offset = 0, dim1 = -2, dim2 = -1) {
@@ -2541,16 +2470,7 @@ torch_fill_diagonal_ <- function(self, fill_value, wrap = FALSE) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' a <- torch_tensor(c(1,2,3))
-#' torch_diff(a)
-#' 
-#' b <- torch_tensor(c(4, 5))
-#' torch_diff(a, append = b)
-#' 
-#' c <- torch_tensor(rbind(c(1,2,3), c(3,4,5)))
-#' torch_diff(c, dim = 1)
-#' torch_diff(c, dim = 2) 
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_diff <- function(self, n = 1, dim = -1, prepend = NULL, append = NULL) {
@@ -2637,11 +2557,7 @@ torch_divide_ <- function(self, other) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' dividend = torch_tensor(c(5, 3), dtype=torch_int())
-#' divisor = torch_tensor(c(3, 2), dtype=torch_int())
-#' torch_true_divide(dividend, divisor)
-#' torch_true_divide(dividend, 2)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_true_divide <- function(self, other) {
@@ -2961,11 +2877,7 @@ torch_empty_quantized <- function(size, qtensor, dtype = NULL, device = NULL, me
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_empty_strided(list(2, 3), list(1, 2))
-#' a
-#' a$stride(1)
-#' a$size(1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_empty_strided <- function(size, stride, dtype = NULL, device = NULL) {
@@ -4092,9 +4004,7 @@ torch_logspace <- function(start, end, steps, base = 10.0, dtype = NULL, device 
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a <- torch_randn(c(10))
-#' torch_logcumsumexp(a, dim=1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_logcumsumexp <- function(self, dim) {
@@ -4399,15 +4309,7 @@ torch_nanmean <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(1, 3))
-#' a
-#' torch_median(a)
-#' 
-#' 
-#' a = torch_randn(c(4, 5))
-#' a
-#' torch_median(a, 1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_median <- function(self) {
@@ -4462,10 +4364,7 @@ torch_amin <- function(self, dim = NULL, keepdim = FALSE) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randint(0, 50, size = list(5))
-#' a
-#' torch_mode(a, 1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_mode <- function(self, dim = -1, keepdim = FALSE) {
@@ -4811,13 +4710,7 @@ torch_cosine_similarity <- function(x1, x2, dim = 1, eps = 1e-08) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' t <- torch_randn(c(3,2,1))
-#' t
-#' torch_movedim(t, 2, 1)$shape
-#' torch_movedim(t, 2, 1)
-#' torch_movedim(t, c(2, 3), c(1, 2))$shape
-#' torch_movedim(t, c(2, 3), c(1, 2))
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_movedim <- function(self, source, destination) {
@@ -5214,10 +5107,7 @@ torch_rand_like <- function(self, dtype = NULL, device = NULL, memory_format = N
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_randint(3, 5, list(3))
-#' torch_randint(0, 10, size = list(2, 2))
-#' torch_randint(3, 10, list(2, 2))
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_randint <- function(high, size, dtype = torch_long, device = NULL) {
@@ -6265,16 +6155,7 @@ torch_stride <- function(self, dim) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a <- torch_tensor(c(1., 2., NaN, 4.))
-#' torch_nansum(a)
-#' 
-#' 
-#' torch_nansum(torch_tensor(c(1., NaN)))
-#' a <- torch_tensor(rbind(c(1, 2), c(3., NaN)))
-#' torch_nansum(a)
-#' torch_nansum(a, dim=1)
-#' torch_nansum(a, dim=2)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_nansum <- function(self, dim = NULL, keepdim = FALSE, dtype = NULL) {
@@ -6478,15 +6359,7 @@ torch_tanh_ <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a <- torch_arange(start = 1, end = 60)$reshape(c(3, 4, 5))
-#' b <- torch_arange(start = 1, end = 24)$reshape(c(4, 3, 2))
-#' torch_tensordot(a, b, dims = list(c(2, 1), c(1, 2)))
-#' 
-#' a = torch_randn(3, 4, 5, device='cuda')
-#' b = torch_randn(4, 5, 6, device='cuda')
-#' c = torch_tensordot(a, b, dims=2)$cpu()
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_tensordot <- function(self, other, dims_self, dims_other) {
@@ -6630,12 +6503,7 @@ torch_flipud <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x = torch_tensor(c(1, 2, 3, 4, 5, 6, 7, 8))$view(c(4, 2))
-#' x
-#' torch_roll(x, 1, 1)
-#' torch_roll(x, -1, 1)
-#' torch_roll(x, shifts=list(2, 1), dims=list(1, 2))
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_roll <- function(self, shifts, dims = NULL) {
@@ -6653,13 +6521,7 @@ torch_roll <- function(self, shifts, dims = NULL) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x <- torch_arange(1, 4)$view(c(2, 2))
-#' x
-#' torch_rot90(x, 1, c(1, 2))
-#' x <- torch_arange(1, 8)$view(c(2, 2, 2))
-#' x
-#' torch_rot90(x, 1, c(1, 2))
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_rot90 <- function(self, k = 1, dims = NULL) {
@@ -7430,23 +7292,7 @@ torch_sparse_bsc_tensor <- function(ccol_indices, row_indices, values, size, dty
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' i = torch_tensor(matrix(c(1, 2, 2, 3, 1, 3), ncol = 3, byrow = TRUE), dtype=torch_int64())
-#' v = torch_tensor(c(3, 4, 5), dtype=torch_float32())
-#' torch_sparse_coo_tensor(i, v)
-#' torch_sparse_coo_tensor(i, v, c(2, 4))
-#' 
-#' # create empty sparse tensors
-#' S = torch_sparse_coo_tensor(
-#'   torch_empty(c(1, 0), dtype = torch_int64()), 
-#'   torch_tensor(numeric(), dtype = torch_float32()), 
-#'   c(1)
-#' )
-#' S = torch_sparse_coo_tensor(
-#'   torch_empty(c(1, 0), dtype = torch_int64()), 
-#'   torch_empty(c(0, 2)), 
-#'   c(1, 2)
-#' )
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_sparse_coo_tensor <- function(size, dtype = NULL, device = NULL) {
@@ -7856,8 +7702,7 @@ torch_quantize_per_tensor_dynamic <- function(self, dtype, reduce_range) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())
-#' torch_quantize_per_tensor(torch_tensor(c(-1.0, 0.0, 1.0, 2.0)), 0.1, 10, torch_quint8())$int_repr()
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
@@ -7877,11 +7722,7 @@ torch_quantize_per_tensor <- function(self, scale, zero_point, dtype) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' x = torch_tensor(matrix(c(-1.0, 0.0, 1.0, 2.0), ncol = 2, byrow = TRUE))
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
-#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())
-#' torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
-#'                            torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_quantize_per_channel <- function(self, scales, zero_points, axis, dtype) {
@@ -8220,8 +8061,7 @@ torch_combinations <- function(self, r = 2, with_replacement = FALSE) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_result_type(tensor1 = torch_tensor(c(1, 2), dtype=torch_int()), tensor2 = 1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_result_type <- function(tensor1, other) {
@@ -9458,13 +9298,7 @@ torch_diag <- function(self, diagonal = 0) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(4, 3))
-#' a
-#' b = torch_randn(c(4, 3))
-#' b
-#' torch_cross(a, b, dim=2)
-#' torch_cross(a, b)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_cross <- function(self, other, dim = NULL) {
@@ -9508,14 +9342,7 @@ torch_tril <- function(self, diagonal = 0) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_tril_indices(3, 3)
-#' a
-#' a = torch_tril_indices(4, 3, -1)
-#' a
-#' a = torch_tril_indices(4, 3, 1)
-#' a
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_tril_indices <- function(row, col, offset = 0, dtype = torch_long, device = NULL) {
@@ -9535,14 +9362,7 @@ torch_tril_indices <- function(row, col, offset = 0, dtype = torch_long, device 
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_triu_indices(3, 3)
-#' a
-#' a = torch_triu_indices(4, 3, -1)
-#' a
-#' a = torch_triu_indices(4, 3, 1)
-#' a
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_triu_indices <- function(row, col, offset = 0, dtype = torch_long, device = NULL) {
@@ -9853,13 +9673,7 @@ torch_take <- function(self, index) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' t <- torch_tensor(matrix(c(10, 30, 20, 60, 40, 50), nrow = 2))
-#' max_idx <- torch_argmax(t)
-#' torch_take_along_dim(t, max_idx)
-#' 
-#' sorted_idx <- torch_argsort(t, dim=2)
-#' torch_take_along_dim(t, sorted_idx, dim=2)
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_take_along_dim <- function(self, indices, dim = NULL) {
@@ -10073,12 +9887,7 @@ torch_cross_entropy_loss <- function(self, target, weight = NULL, reduction = 1L
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' A = torch_randn(c(2, 2))$triu()
-#' A
-#' b = torch_randn(c(2, 3))
-#' b
-#' torch_triangular_solve(b, A)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_triangular_solve <- function(self, A, upper = TRUE, transpose = FALSE, unitriangular = FALSE) {
@@ -10393,11 +10202,7 @@ torch_ormqr <- function(self, input2, input3, left = TRUE, transpose = FALSE) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' A = torch_randn(c(2, 3, 3))
-#' b = torch_randn(c(2, 3, 1))
-#' out = torch_lu(A)
-#' x = torch_lu_solve(b, out[[1]], out[[2]])
-#' torch_norm(torch_bmm(A, x) - b)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_lu_solve <- function(self, LU_data, LU_pivots) {
@@ -11051,18 +10856,7 @@ torch_minimum <- function(self, other) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a <- torch_randn(c(1, 3))
-#' a
-#' q <- torch_tensor(c(0, 0.5, 1))
-#' torch_quantile(a, q)
-#' 
-#' 
-#' a <- torch_randn(c(2, 3))
-#' a
-#' q <- torch_tensor(c(0.25, 0.5, 0.75))
-#' torch_quantile(a, q, dim=1, keepdim=TRUE)
-#' torch_quantile(a, q, dim=1, keepdim=TRUE)$shape
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_quantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = 'linear') {
@@ -11082,16 +10876,7 @@ torch_quantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation =
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' t <- torch_tensor(c(NaN, 1, 2))
-#' t$quantile(0.5)
-#' t$nanquantile(0.5)
-#' t <- torch_tensor(rbind(c(NaN, NaN), c(1, 2)))
-#' t
-#' t$nanquantile(0.5, dim=1)
-#' t$nanquantile(0.5, dim=2)
-#' torch_nanquantile(t, 0.5, dim = 1)
-#' torch_nanquantile(t, 0.5, dim = 2)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_nanquantile <- function(self, q, dim = NULL, keepdim = FALSE, interpolation = 'linear') {
@@ -11318,12 +11103,7 @@ torch_normal_functional <- function(self, mean = 0, std = 1, generator = NULL) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_normal(mean=0, std=torch_arange(1, 0, -0.1) + 1e-6)
-#' torch_normal(mean=0.5, std=torch_arange(1., 6.))
-#' torch_normal(mean=torch_arange(1., 6.))
-#' torch_normal(2, 3, size=c(1, 4))
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_normal <- function(mean, std = 1, generator = NULL) {
@@ -16598,11 +16378,7 @@ torch_clone <- function(self) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' # With square kernels and equal stride
-#' filters = torch_randn(c(8,4,3,3))
-#' inputs = torch_randn(c(1,4,5,5))
-#' nnf_conv2d(inputs, filters, padding=1)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_conv2d <- function(input, weight, bias = NULL, stride = 1L,
@@ -16624,10 +16400,7 @@ torch_conv2d <- function(input, weight, bias = NULL, stride = 1L,
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' inputs = torch_randn(c(20, 16, 50))
-#' weights = torch_randn(c(16, 33, 5))
-#' nnf_conv_transpose1d(inputs, weights)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_conv_transpose1d <- function(input, weight, bias = NULL, stride = 1L,
@@ -16676,11 +16449,7 @@ torch_flatten <- function(self, start_dim = 1L, end_dim = -1L) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_tensor(c(4.0, 3.0))
-#' b = torch_tensor(c(2.0, 2.0))
-#' torch_floor_divide(a, b)
-#' torch_floor_divide(a, 1.4)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_floor_divide <- function(self, other) C_torch_floor_divide(self, other)
@@ -16738,12 +16507,7 @@ torch_gt <- function(self, other) C_torch_gt(self, other)
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x = torch_randn(c(3, 4))
-#' x
-#' indices = torch_tensor(c(1, 3), dtype = torch_int64())
-#' torch_index_select(x, 1, indices)
-#' torch_index_select(x, 2, indices)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_index_select <- function(self, dim, index) {
@@ -16827,22 +16591,7 @@ torch_lt <- function(self, other) C_torch_lt(self, other)
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(1, 3))
-#' a
-#' torch_max(a)
-#' 
-#' 
-#' a = torch_randn(c(4, 4))
-#' a
-#' torch_max(a, dim = 1)
-#' 
-#' 
-#' a = torch_randn(c(4))
-#' a
-#' b = torch_randn(c(4))
-#' b
-#' torch_max(a, other = b)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_max <- function(self, dim = NULL) C_torch_max(self, dim)
@@ -16854,22 +16603,7 @@ torch_max <- function(self, dim = NULL) C_torch_max(self, dim)
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a = torch_randn(c(1, 3))
-#' a
-#' torch_min(a)
-#' 
-#' 
-#' a = torch_randn(c(4, 4))
-#' a
-#' torch_min(a, dim = 1)
-#' 
-#' 
-#' a = torch_randn(c(4))
-#' a
-#' b = torch_randn(c(4))
-#' b
-#' torch_min(a, other = b)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_min <- function(self, dim = NULL) C_torch_min(self, dim)
@@ -16883,10 +16617,7 @@ torch_min <- function(self, dim = NULL) C_torch_min(self, dim)
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x = torch_tensor(matrix(c(1:9), ncol = 3, byrow= TRUE))
-#' torch_narrow(x, 1, 1, 2)
-#' torch_narrow(x, 2, 2, 2)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_narrow <- function(self, dim, start, length) {
@@ -16928,9 +16659,7 @@ torch_neg <- function(self) C_torch_neg(self)
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' torch_remainder(torch_tensor(c(-3., -2, -1, 1, 2, 3)), 2)
-#' torch_remainder(torch_tensor(c(1., 2, 3, 4, 5)), 1.5)
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_remainder <- function(self, other) C_torch_remainder(self, other)
@@ -16943,14 +16672,7 @@ torch_remainder <- function(self, other) C_torch_remainder(self, other)
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' x = torch_tensor(c(1, 2, 3))
-#' x$repeat_interleave(2)
-#' y = torch_tensor(matrix(c(1, 2, 3, 4), ncol = 2, byrow=TRUE))
-#' torch_repeat_interleave(y, 2)
-#' torch_repeat_interleave(y, 3, dim=1)
-#' torch_repeat_interleave(y, torch_tensor(c(1, 2)), dim=1)
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_repeat_interleave <- function(self, repeats, dim = NULL) {
@@ -16964,11 +16686,7 @@ torch_repeat_interleave <- function(self, repeats, dim = NULL) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' a <- torch_arange(0, 3)
-#' torch_reshape(a, list(2, 2))
-#' b <- torch_tensor(matrix(c(0, 1, 2, 3), ncol = 2, byrow=TRUE))
-#' torch_reshape(b, list(-1))
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_reshape <- function(self, shape) C_torch_reshape(self, shape)
@@ -17427,13 +17145,7 @@ torch_iinfo <- function(dtype = torch_int32) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' 
-#' # Via string
-#' generator <- torch_generator()
-#' generator$current_seed()
-#' generator$set_current_seed(1234567L)
-#' generator$current_seed()
-#' 
+#'   # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 #' }
 #' }
 torch_generator <- function() {

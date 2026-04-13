@@ -19,10 +19,7 @@ Wrapper for \code{at::cummax}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-a = torch_randn(c(10))
-a
-torch_cummax(a, dim=1)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

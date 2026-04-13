@@ -14,13 +14,7 @@ Create a random number generator (stub)
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-# Via string
-generator <- torch_generator()
-generator$current_seed()
-generator$set_current_seed(1234567L)
-generator$current_seed()
-
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

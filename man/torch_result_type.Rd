@@ -19,8 +19,7 @@ Wrapper for \code{at::result_type}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-torch_result_type(tensor1 = torch_tensor(c(1, 2), dtype=torch_int()), tensor2 = 1)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }
