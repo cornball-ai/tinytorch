@@ -42,7 +42,7 @@ dataset <- function(name = NULL, ...) {
 #' @examples
 #' \donttest{
 #' if (torch_is_installed()) {
-#' ds <- tensor_dataset(torch_randn(c(10, 3)), torch_randint(0L, 2L, 10L))
+#' ds <- tensor_dataset(torch_randn(c(10, 3)), torch_randint(2L, 10L))
 #' length(ds)
 #' }
 #' }
@@ -225,10 +225,22 @@ dataloader_next <- function(iter) {
 #' }
 #' }
 enumerate <- function(x) {
-  if (is.list(x)) {
+  if (inherits(x, "dataloader")) {
+    iter <- dataloader_make_iter(x)
+    out <- list()
+    idx <- 1L
+    repeat {
+      batch <- iter$.next()
+      if (is.null(batch)) break
+      out[[idx]] <- list(idx, batch)
+      idx <- idx + 1L
+    }
+    out
+  } else if (is.list(x)) {
     lapply(seq_along(x), function(i) list(i, x[[i]]))
   } else {
-    as.list(x)
+    stop("enumerate(): don't know how to iterate over ",
+         class(x)[1], call. = FALSE)
   }
 }
 

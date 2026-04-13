@@ -23,8 +23,7 @@ BugReports: https://github.com/cornball-ai/tinytorch/issues
 Depends: R (>= 4.1.0)
 Imports: Rcpp
 LinkingTo: Rcpp
-Suggests: tinytest, simplermarkdown
-VignetteBuilder: simplermarkdown
+Suggests: tinytest
 OS_type: unix
 NeedsCompilation: yes
 SystemRequirements: libtorch (C++ distribution of 'PyTorch'); see README

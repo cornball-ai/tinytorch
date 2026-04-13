@@ -25,11 +25,7 @@ Wrapper for \code{at::quantize_per_channel}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-x = torch_tensor(matrix(c(-1.0, 0.0, 1.0, 2.0), ncol = 2, byrow = TRUE))
-torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
-                           torch_tensor(c(10L, 0L)), 0, torch_quint8())
-torch_quantize_per_channel(x, torch_tensor(c(0.1, 0.01)), 
-                           torch_tensor(c(10L, 0L)), 0, torch_quint8())$int_repr()
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

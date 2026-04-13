@@ -21,6 +21,10 @@ C_autograd_is_enabled <- function() {
     .Call(`_tinytorch_C_autograd_is_enabled`)
 }
 
+C_autograd_grad <- function(outputs_sexp, inputs_sexp, grad_outputs_sexp, retain_graph, create_graph, allow_unused) {
+    .Call(`_tinytorch_C_autograd_grad`, outputs_sexp, inputs_sexp, grad_outputs_sexp, retain_graph, create_graph, allow_unused)
+}
+
 C_tensor_is_leaf <- function(self_sexp) {
     .Call(`_tinytorch_C_tensor_is_leaf`, self_sexp)
 }

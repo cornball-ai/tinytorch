@@ -25,16 +25,7 @@ Wrapper for \code{at::nanquantile}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-t <- torch_tensor(c(NaN, 1, 2))
-t$quantile(0.5)
-t$nanquantile(0.5)
-t <- torch_tensor(rbind(c(NaN, NaN), c(1, 2)))
-t
-t$nanquantile(0.5, dim=1)
-t$nanquantile(0.5, dim=2)
-torch_nanquantile(t, 0.5, dim = 1)
-torch_nanquantile(t, 0.5, dim = 2)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

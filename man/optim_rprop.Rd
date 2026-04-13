@@ -23,12 +23,12 @@ Rprop optimizer
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-optimizer <- optim_rprop(model$parameters(), lr = 0.1)
-optimizer$zero_grad()
-loss_fn(model(input), target)$backward()
-optimizer$step()
-
+p <- nn_parameter(torch_randn(5))
+opt <- optim_rprop(list(p), lr = 0.01)
+loss <- (p ^ 2)$sum()
+loss$backward()
+opt$step()
+opt$zero_grad()
 }
 }
 }

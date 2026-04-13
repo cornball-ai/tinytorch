@@ -3,7 +3,7 @@
 \alias{nn_lstm}
 \title{LSTM module}
 \usage{
-nn_lstm(input_size, hidden_size, num_layers = 1L, batch_first = TRUE,
+nn_lstm(input_size, hidden_size, num_layers = 1L, batch_first = FALSE,
         dropout = 0, bidirectional = FALSE, bias = TRUE)
 }
 \arguments{

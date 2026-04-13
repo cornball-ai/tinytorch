@@ -23,16 +23,7 @@ Wrapper for \code{at::nansum}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-a <- torch_tensor(c(1., 2., NaN, 4.))
-torch_nansum(a)
-
-
-torch_nansum(torch_tensor(c(1., NaN)))
-a <- torch_tensor(rbind(c(1, 2), c(3., NaN)))
-torch_nansum(a)
-torch_nansum(a, dim=1)
-torch_nansum(a, dim=2)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

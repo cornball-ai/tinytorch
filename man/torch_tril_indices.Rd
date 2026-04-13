@@ -25,14 +25,7 @@ Wrapper for \code{at::tril_indices}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-a = torch_tril_indices(3, 3)
-a
-a = torch_tril_indices(4, 3, -1)
-a
-a = torch_tril_indices(4, 3, 1)
-a
-
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

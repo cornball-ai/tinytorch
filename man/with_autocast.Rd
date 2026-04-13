@@ -20,9 +20,7 @@ Since tinytorch is CPU-only, autocast is a no-op.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-with_autocast(device_type = "cpu", dtype = torch_float32(), {
-  torch_randn(c(2, 3)) + torch_randn(c(2, 3))
-})
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

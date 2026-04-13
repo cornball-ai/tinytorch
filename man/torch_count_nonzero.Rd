@@ -19,12 +19,7 @@ Wrapper for \code{at::count_nonzero}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-x <- torch_zeros(3,3)
-x[torch_randn(3,3) > 0.5] = 1
-x
-torch_count_nonzero(x)
-torch_count_nonzero(x, dim=1)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

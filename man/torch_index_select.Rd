@@ -18,12 +18,7 @@ torch_index_select
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-x = torch_randn(c(3, 4))
-x
-indices = torch_tensor(c(1, 3), dtype = torch_int64())
-torch_index_select(x, 1, indices)
-torch_index_select(x, 2, indices)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

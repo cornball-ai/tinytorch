@@ -4,21 +4,28 @@
 \title{Compute gradients}
 \usage{
 autograd_grad(outputs, inputs, grad_outputs = NULL, retain_graph = FALSE,
-              create_graph = FALSE)
+              create_graph = FALSE, allow_unused = FALSE)
 }
 \arguments{
-\item{outputs}{Tensor(s) to differentiate.}
+\item{outputs}{A `torch_tensor` or list of tensors to differentiate.}
 
-\item{inputs}{Tensor(s) to differentiate with respect to.}
+\item{inputs}{A `torch_tensor` or list of tensors to differentiate with
+respect to.}
 
-\item{grad_outputs}{Gradient of outputs.}
+\item{grad_outputs}{Optional list of gradients of outputs; defaults to
+ones for scalar outputs.}
 
-\item{retain_graph}{Keep computation graph.}
+\item{retain_graph}{Logical; if `TRUE` the computation graph is retained
+for a subsequent backward pass.}
 
-\item{create_graph}{Create graph for higher-order gradients.}
+\item{create_graph}{Logical; if `TRUE` construct a graph over the
+gradients themselves so higher-order derivatives can be taken.}
+
+\item{allow_unused}{Logical; if `TRUE` inputs that do not contribute to
+outputs get `NULL` gradients instead of raising.}
 }
 \value{
-List of gradient tensors.
+A list of gradient tensors, one per input.
 }
 \description{
 Compute gradients
@@ -30,8 +37,7 @@ w <- torch_tensor(0.5, requires_grad = TRUE)
 b <- torch_tensor(0.9, requires_grad = TRUE)
 x <- torch_tensor(runif(100))
 y <- 2 * x + 1
-loss <- (y - (w * x + b))^2
-loss <- loss$mean()
+loss <- ((y - (w * x + b))^2)$mean()
 
 o <- autograd_grad(loss, list(w, b))
 o

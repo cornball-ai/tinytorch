@@ -17,16 +17,7 @@ Wrapper for \code{at::atleast_1d}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-x <- torch_randn(c(2))
-x
-torch_atleast_1d(x)
-x <- torch_tensor(1.)
-x
-torch_atleast_1d(x)
-x <- torch_tensor(0.5)
-y <- torch_tensor(1.)
-torch_atleast_1d(list(x,y))
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

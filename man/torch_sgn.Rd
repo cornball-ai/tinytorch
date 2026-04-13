@@ -17,11 +17,8 @@ Wrapper for \code{at::sgn}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-if (FALSE) {
-x <- torch_tensor(c(3+4i, 7-24i, 0, 1+2i))
-x$sgn()
+x <- torch_tensor(c(-3, 0, 7, -1))
 torch_sgn(x)
-}
 }
 }
 }

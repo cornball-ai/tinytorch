@@ -3,7 +3,7 @@
 \alias{torch_rand}
 \title{Rand}
 \usage{
-torch_rand(size, names, dtype = NULL, device = NULL)
+torch_rand(size, names = NULL, dtype = NULL, device = NULL)
 }
 \arguments{
 \item{size}{An integer vector.}

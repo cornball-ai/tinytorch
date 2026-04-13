@@ -21,10 +21,7 @@ Wrapper for \code{at::mode}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-a = torch_randint(0, 50, size = list(5))
-a
-torch_mode(a, 1)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

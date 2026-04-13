@@ -14,5 +14,5 @@
 Print a torch_dtype
 }
 \examples{
-print(torch_float32)
+print(torch_float32())
 }

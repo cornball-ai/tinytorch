@@ -3,7 +3,11 @@
 \alias{nn_identity}
 \title{Identity module (pass-through)}
 \usage{
-nn_identity()
+nn_identity(...)
+}
+\arguments{
+\item{...}{Ignored. Accepted for compatibility so `nn_identity` can be
+dropped in wherever a module with real hyperparameters used to sit.}
 }
 \value{
 An nn_module instance.

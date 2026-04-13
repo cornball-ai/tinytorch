@@ -14,5 +14,5 @@
 As.character.torch dtype
 }
 \examples{
-as.character(torch_float32)
+as.character(torch_float32())
 }

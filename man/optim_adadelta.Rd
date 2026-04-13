@@ -25,12 +25,12 @@ Adadelta optimizer
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-optimizer <- optim_adadelta(model$parameters, lr = 0.1)
-optimizer$zero_grad()
-loss_fn(model(input), target)$backward()
-optimizer$step()
-
+p <- nn_parameter(torch_randn(5))
+opt <- optim_adadelta(list(p), lr = 1.0)
+loss <- (p ^ 2)$sum()
+loss$backward()
+opt$step()
+opt$zero_grad()
 }
 }
 }

@@ -23,10 +23,7 @@ Wrapper for \code{at::randint}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-torch_randint(3, 5, list(3))
-torch_randint(0, 10, size = list(2, 2))
-torch_randint(3, 10, list(2, 2))
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

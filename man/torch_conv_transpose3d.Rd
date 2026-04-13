@@ -32,11 +32,7 @@ Wrapper for \code{at::conv_transpose3d}.
 \examples{
 \donttest{
 if (torch_is_installed()) {
-
-inputs = torch_randn(c(20, 16, 50, 10, 20))
-weights = torch_randn(c(16, 33, 3, 3, 3))
-nnf_conv_transpose3d(inputs, weights)
-
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }

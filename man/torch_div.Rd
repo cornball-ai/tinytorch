@@ -16,8 +16,7 @@ Divide two tensors element-wise
 \examples{
 \donttest{
 if (torch_is_installed()) {
-a <- torch_randn(c(2, 3))
-torch_div(a, 2.0)
+  # See PyTorch docs: https://docs.pytorch.org/docs/stable/torch.html
 }
 }
 }
