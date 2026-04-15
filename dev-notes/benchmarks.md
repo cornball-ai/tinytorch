@@ -5,13 +5,13 @@ title: "Benchmarks: tinytorch vs torch vs Python"
 Benchmarks
 ----------
 
-All benchmarks use libtorch 2.11.0 on CPU. Lower is better.
+PyTorch and tinytorch benchmarks use libtorch 2.11.0 on CPU, torch uses 2.7.1. Lower is better.
 
 Three implementations compared:
 
 - **Python** -- `torch 2.11.0+cpu` via pip (CPython 3.10)
-- **R torch** -- `torch 0.16.3.9000` (Rcpp + lantern + R7 dispatch)
-- **tinytorch** -- Rcpp + S3, direct to libtorch (no lantern, no R7)
+- **R torch** -- `torch 0.16.3.9000` (Rcpp + lantern)
+- **tinytorch** -- Rcpp + S3, direct to libtorch
 
 
 ### Micro-ops (microseconds per call, 10k iterations)
